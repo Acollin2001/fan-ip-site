@@ -36,7 +36,17 @@
         "url": "https://fan-ip.com/",
         "logo": "https://fan-ip.com/apple-touch-icon.png",
         "slogan": "Turn fandom into impact.",
-        "description": "FAN/IP is a white-label fan activation platform for brands."
+        "description": "FAN/IP is a white-label fan engagement platform: it gives brands their own fan club, where fans complete missions, earn points and unlock rewards.",
+        "email": "contact@fan-ip.com",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Köln",
+          "addressCountry": "DE"
+        },
+        "founder": {
+          "@type": "Person",
+          "name": "Alexis Collin"
+        }
       },
       {
         "@type": "WebSite",
@@ -64,6 +74,52 @@
         "primaryImageOfPage": "https://fan-ip.com/og-image.png"
       },
       {
+        "@type": "SoftwareApplication",
+        "@id": "https://fan-ip.com/#software",
+        "name": "FAN/IP",
+        "url": "https://fan-ip.com/",
+        "applicationCategory": "BusinessApplication",
+        "operatingSystem": "Web",
+        "description": "White-label fan engagement platform. Brands create missions; fans take part, earn points, move up levels and unlock rewards; the brand reviews posts and follows the results.",
+        "publisher": {
+          "@id": "https://fan-ip.com/#organization"
+        },
+        "offers": [
+          {
+            "@type": "Offer",
+            "name": "Starter",
+            "price": "99",
+            "priceCurrency": "EUR",
+            "description": "Per month, excluding VAT. Or €990 per year. No setup fee. Up to 150 active members a month.",
+            "url": "https://fan-ip.com/#pricing"
+          },
+          {
+            "@type": "Offer",
+            "name": "Club",
+            "price": "490",
+            "priceCurrency": "EUR",
+            "description": "Per month, excluding VAT, 12-month term. Setup €2,500. Up to 2,500 active members a month.",
+            "url": "https://fan-ip.com/#pricing"
+          },
+          {
+            "@type": "Offer",
+            "name": "Season",
+            "price": "1290",
+            "priceCurrency": "EUR",
+            "description": "Per month, excluding VAT, 12-month term. Setup €5,000. Up to 15,000 active members a month.",
+            "url": "https://fan-ip.com/#pricing"
+          },
+          {
+            "@type": "Offer",
+            "name": "Signature",
+            "price": "2900",
+            "priceCurrency": "EUR",
+            "description": "From, per month, excluding VAT, 12-month term. Setup from €10,000. More than 15,000 active members a month.",
+            "url": "https://fan-ip.com/#pricing"
+          }
+        ]
+      },
+      {
         "@type": "BreadcrumbList",
         "itemListElement": [
           {
@@ -87,9 +143,9 @@
   <!-- Fonts are self-hosted (src/styles/fonts.css). Preload the two faces of the first screen: the hero word and the lead. -->
   <link rel="preload" href="./assets/ClashDisplay-600-DcA1xgJG.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="./assets/GeneralSans-400-BeAhF2WT.woff2" as="font" type="font/woff2" crossorigin>
-  <script type="module" crossorigin src="./assets/header-DQB3meYM.js"></script>
-  <script type="module" crossorigin src="./assets/main-BG16S52s.js"></script>
-  <link rel="stylesheet" crossorigin href="./assets/style-DWSW_awG.css">
+  <script type="module" crossorigin src="./assets/header-AsSSiagq.js"></script>
+  <script type="module" crossorigin src="./assets/main-B2SV242Q.js"></script>
+  <link rel="stylesheet" crossorigin href="./assets/style-DIHwFcaw.css">
 </head>
 <body>
   <a class="skip" href="#main">Skip to content</a>
@@ -528,6 +584,7 @@
         <a href="#product">Product</a>
         <a href="#white-label">White-label</a>
         <a href="#pricing">Pricing</a>
+        <a href="faq.html">FAQ</a>
         <a href="book-a-demo.html">Book a demo</a>
       </nav>
       <nav class="foot-for t-small" aria-label="Built for">
@@ -544,6 +601,7 @@
           <a href="privacy.html">Privacy</a>
           <a href="data-deletion.html">Data deletion</a>
           <a href="terms.html">Terms</a>
+          <button type="button" data-cookie-settings hidden>Cookie settings</button>
         </nav>
       </div>
     </div>

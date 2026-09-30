@@ -22,7 +22,7 @@ FAN/IP is for consumer brands, sports clubs, gaming venues and esports teams, an
 
 ## Pricing (euros, excluding VAT)
 
-- Starter: €99 a month or €990 a year, no setup fee, up to 150 active members a month, 7-day free trial, online sign-up opens soon; early access by email at contact@fan-ip.com
+- Starter: €99 a month or €990 a year, no setup fee, up to 150 active members a month, 7-day free trial, sign up online at https://app.fan-ip.com/start
 - Club: €490 a month, setup €1,250, up to 2,500 active members a month
 - Season: €1,290 a month, setup €2,500, up to 15,000 active members a month
 - Signature: from €2,900 a month, setup from €5,000, more than 15,000 active members a month

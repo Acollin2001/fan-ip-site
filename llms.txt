@@ -7,6 +7,9 @@ FAN/IP is for consumer brands, sports clubs, gaming venues and esports teams, an
 ## Main pages
 
 - [Home](https://fan-ip.com/): what FAN/IP is, how it works, white-label demo, what brands get, pricing
+- [Platform](https://fan-ip.com/platform.html): all fifty features in plain words (missions, predictions, check-ins, seasons, sprints, streaks, team battles, collection, rewards, creator tools, white-label, back office), with a playable member week
+- [Approach](https://fan-ip.com/approach.html): the ten principles behind the product
+- [Compare](https://fan-ip.com/compare.html): FAN/IP next to shop loyalty apps, community platforms, fan-token apps, group chats and building it yourself
 - [FAQ](https://fan-ip.com/faq.html): plain answers about the platform, who it is for, how it works and what it costs
 - [Book a demo](https://fan-ip.com/book-a-demo.html): one-hour video demo on demo data
 
@@ -19,10 +22,10 @@ FAN/IP is for consumer brands, sports clubs, gaming venues and esports teams, an
 
 ## Pricing (euros, excluding VAT)
 
-- Starter: €99 a month or €990 a year, no setup fee, up to 150 active members a month, self-serve
-- Club: €490 a month, setup €2,500, up to 2,500 active members a month
-- Season: €1,290 a month, setup €5,000, up to 15,000 active members a month
-- Signature: from €2,900 a month, setup from €10,000, more than 15,000 active members a month
+- Starter: €99 a month or €990 a year, no setup fee, up to 150 active members a month, 7-day free trial, online sign-up opens soon; early access by email at contact@fan-ip.com
+- Club: €490 a month, setup €1,250, up to 2,500 active members a month
+- Season: €1,290 a month, setup €2,500, up to 15,000 active members a month
+- Signature: from €2,900 a month, setup from €5,000, more than 15,000 active members a month
 - Club, Season and Signature are billed monthly on a 12-month term. An active member is someone who did something in the community this month.
 
 ## Optional

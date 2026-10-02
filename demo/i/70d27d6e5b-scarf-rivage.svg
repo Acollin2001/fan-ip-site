@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="800" viewBox="0 0 800 800">
+  <title>Collector scarf (flat illustration)</title>
+  <rect width="800" height="800" fill="#ece7df"/>
+  <ellipse cx="400" cy="628" rx="300" ry="20" fill="#1a1a1a" opacity="0.08"/>
+  <g transform="rotate(-18 400 400)">
+    <rect x="96" y="318" width="608" height="164" fill="#0b4f3c"/>
+    <rect x="96" y="318" width="608" height="18" fill="#ffffff"/>
+    <rect x="96" y="464" width="608" height="18" fill="#ffffff"/>
+    <rect x="96" y="360" width="608" height="80" fill="#e8b500"/>
+    <rect x="96" y="394" width="608" height="12" fill="#ffffff"/>
+    <rect x="96" y="318" width="64" height="164" fill="#0a3f30"/>
+    <rect x="640" y="318" width="64" height="164" fill="#0a3f30"/>
+    <g stroke="#0b4f3c" stroke-width="7" stroke-linecap="round">
+      <path d="M96 330 H62 M96 352 H66 M96 374 H60 M96 396 H64 M96 418 H60 M96 440 H66 M96 462 H62"/>
+      <path d="M704 330 H738 M704 352 H734 M704 374 H740 M704 396 H736 M704 418 H740 M704 440 H734 M704 462 H738"/>
+    </g>
+  </g>
+</svg>

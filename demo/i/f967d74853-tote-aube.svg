@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="800" viewBox="0 0 800 800">
+  <title>Organic cotton tote bag (flat illustration)</title>
+  <rect width="800" height="800" fill="#dcd7ce"/>
+  <ellipse cx="400" cy="690" rx="240" ry="20" fill="#2a2520" opacity="0.12"/>
+  <path d="M296 300 C 296 150, 504 150, 504 300" fill="none" stroke="#c9b894" stroke-width="30" stroke-linecap="round"/>
+  <path d="M332 300 C 332 196, 468 196, 468 300" fill="none" stroke="#e2d4b8" stroke-width="30" stroke-linecap="round"/>
+  <path d="M210 290 H590 L620 676 H180 Z" fill="#f4ead8"/>
+  <path d="M210 290 H590 L593 330 H207 Z" fill="#e8dbc1"/>
+  <path d="M180 676 L210 290 L236 290 L210 676 Z" fill="#ebdfc8"/>
+  <rect x="317" y="276" width="30" height="72" fill="#e2d4b8"/>
+  <rect x="453" y="276" width="30" height="72" fill="#e2d4b8"/>
+  <rect x="520" y="584" width="52" height="34" fill="#0f6b5f"/>
+</svg>

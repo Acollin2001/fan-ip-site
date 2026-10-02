@@ -3299,7 +3299,7 @@ function admBrand() {
   const head = admHead("Brand", "Set once at launch. Changes show in the member app straight away in this demo.", `<button class="adm-btn primary" data-act="gomember" data-tab="home">Open the member app</button>`) + admTabs("brand");
   if (tab === 1) return head + admModules();
   return head + `
-    <div class="acard"><h2>Style</h2><p class="sub">Every style in your colours. In this demo a style changes the surfaces, type and shapes of the member app; <a href="https://fan-ip.com/demo/" target="_blank" rel="noopener">the styles demo</a> shows each full layout.</p>
+    <div class="acard"><h2>Style</h2><p class="sub">13 styles, all in your colours. In this demo a style changes the surfaces, type and shapes of the member app; <a href="https://fan-ip.com/demo/" target="_blank" rel="noopener">the styles demo</a> shows each full layout.</p>
       <div class="styles8">${STYLES.map(([k, n, dsc]) => `<button class="style-opt" data-act="style" data-k="${k}" data-n="${n}" aria-pressed="${state.style === k}"><span class="thumb">${styleThumb(k)}</span>${state.style === k ? `<span class="tag">Live</span>` : k === "riso" ? `<span class="tag def">Default for new clubs</span>` : ""}<b>${n}</b><span class="d">${dsc}</span></button>`).join("")}</div></div>
     <div class="adm-grid">
       <div class="acard"><h2>Colours</h2><p class="sub">Type a hex code (#c9421b) or RGB values (201, 66, 27), or use the picker.</p>
@@ -3314,7 +3314,7 @@ function admBrand() {
 }
 
 const MODULES = [
-  ["Missions", "missions", "Missions, quizzes, polls and more", "missions", 0], ["Rewards", "rewards", "Digital, physical, experiences", "rewards"], ["League table", "table", "Season, month, private groups", "season", 2],
+  ["Missions", "missions", "10 mission types", "missions", 0], ["Rewards", "rewards", "Digital, physical, experiences", "rewards"], ["League table", "table", "Season, month, private groups", "season", 2],
   ["Collection", "collection", "Album, packs, your own card designs", "season", 1], ["Matchday check-in", "pin", "QR and location, time window", "missions", 2], ["Predictions", "target", "Bonus for right result and exact score", "missions", 1],
   ["Team battles", "swords", "Sides, dates, join rules", "season", 0], ["Shared goals", "users", "Whole-community targets"], ["Giveaways", "gift", "Draws with entry rules", "rewards"],
   ["The Terrace", "terrace", "Chat and club questions"], ["Badges", "star", "24 to earn"], ["Referrals", "route", "Codes and double rewards"],

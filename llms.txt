@@ -10,6 +10,7 @@ FAN/IP is for consumer brands, sports clubs, gaming venues and esports teams, an
 - [Platform](https://fan-ip.com/platform.html): all fifty features in plain words (missions, predictions, check-ins, seasons, sprints, streaks, team battles, collection, rewards, creator tools, white-label, back office), with a playable member season
 - [Approach](https://fan-ip.com/approach.html): the ten principles behind the product
 - [Compare](https://fan-ip.com/compare.html): FAN/IP next to shop loyalty apps, community platforms, fan-token apps, group chats and building it yourself
+- [Reach calculator](https://fan-ip.com/reach-calculator.html): estimate the views members' posts bring each month and their media value (views ÷ 1,000 × CPM, €2 by default, the same sum as in the FAN/IP admin)
 - [FAQ](https://fan-ip.com/faq.html): plain answers about the platform, who it is for, how it works and what it costs
 - [Book a demo](https://fan-ip.com/book-a-demo.html): one-hour video demo on demo data
 

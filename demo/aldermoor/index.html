@@ -1258,6 +1258,116 @@ img, svg { max-width: 100%; }
 .sheet-layer.open ~ .toast.show { transform: translate(-50%, 0); }
 @media (min-width: 761px) { .stage[data-device="phone"] .sheet-layer.open ~ .toast { --notch: 44px; } }
 
+/* open questions */
+.presented { margin: -6px 0 0; font-size: 0.8125rem; font-weight: 700; color: var(--ink-3); }
+.answer-box { position: relative; }
+.answer-box textarea { width: 100%; min-height: 120px; resize: vertical; border-radius: 14px; border: 1.5px solid var(--line); background: var(--paper); color: var(--ink); padding: 12px 14px 28px; font: inherit; font-size: 1rem; }
+.answer-box textarea:focus { outline: none; border-color: var(--kestrel); }
+.answer-box .count { position: absolute; right: 12px; bottom: 10px; font-size: 0.75rem; color: var(--ink-3); }
+.answers { display: grid; gap: 10px; }
+.answer { margin: 0; padding: 14px 16px; border-radius: 16px; background: var(--paper); box-shadow: var(--shadow-card); }
+.answer blockquote { margin: 0; font-size: 0.9375rem; line-height: 1.45; }
+.answer figcaption { display: flex; align-items: center; gap: 8px; margin-top: 10px; font-size: 0.8125rem; font-weight: 700; color: var(--ink-2); }
+.answer.mine { background: color-mix(in srgb, var(--kestrel) 9%, var(--paper)); box-shadow: inset 0 0 0 1.5px color-mix(in srgb, var(--kestrel) 35%, transparent); }
+/* swaps */
+.mini-st { display: block; width: 44px; flex: none; aspect-ratio: 3 / 4; border-radius: 6px; overflow: hidden; box-shadow: 0 2px 6px rgba(23,38,58,0.18); }
+.mini-st svg, .mini-st img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.swap-list, .dbl-list { display: grid; gap: 10px; margin-top: 14px; }
+.swap-row, .dbl { display: flex; align-items: center; gap: 12px; padding: 10px; border-radius: 14px; background: var(--ground); }
+.swap-txt { display: flex; flex-direction: column; gap: 1px; min-width: 0; flex: 1; font-size: 0.875rem; }
+.swap-txt b { font-size: 0.875rem; }
+.swap-row .btn, .dbl .btn { flex: none; }
+.mine-tag { flex: none; font-size: 0.75rem; font-weight: 700; color: var(--kestrel); max-width: 90px; text-align: right; }
+.swap-pair { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 10px; }
+.swap-pair figure { margin: 0; display: flex; flex-direction: column; align-items: center; gap: 8px; text-align: center; }
+.swap-pair .mini-st { width: 96px; border-radius: 10px; }
+.swap-pair figcaption { display: flex; flex-direction: column; font-size: 0.8125rem; color: var(--ink-2); }
+.swap-pair figcaption b { color: var(--ink); font-size: 0.9375rem; }
+.swap-arrow svg { width: 28px; height: 28px; color: var(--kestrel); }
+.st-pick { display: grid; grid-template-columns: repeat(auto-fill, minmax(96px, 1fr)); gap: 8px; }
+.st-pick button { display: flex; flex-direction: column; align-items: center; gap: 6px; padding: 10px 6px; border-radius: 12px; border: 1.5px solid var(--line); background: var(--paper); color: var(--ink); font: inherit; font-size: 0.75rem; font-weight: 700; cursor: pointer; text-align: center; }
+.st-pick button[aria-pressed="true"] { border-color: var(--kestrel); background: color-mix(in srgb, var(--kestrel) 10%, var(--paper)); }
+.doubles { margin-top: 4px; }
+/* my season */
+.season-tiles { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+.season-tiles div { padding: 14px 16px; border-radius: var(--r-card); background: var(--paper); box-shadow: var(--shadow-card); display: flex; flex-direction: column; gap: 4px; min-width: 0; }
+.season-tiles b { font-family: var(--f-display); font-weight: 900; font-size: 1.75rem; line-height: 1; color: var(--moor); }
+.season-tiles span { font-size: 0.8125rem; color: var(--ink-2); }
+@container dev (min-width: 700px) { .season-tiles { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+@container dev (min-width: 1100px) { .season-tiles { grid-template-columns: repeat(6, minmax(0, 1fr)); } }
+.month-bars { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; height: 150px; align-items: end; }
+.month-bars div { display: flex; flex-direction: column; align-items: center; justify-content: flex-end; gap: 6px; height: 100%; }
+.month-bars i { display: block; width: 100%; max-width: 56px; border-radius: 8px 8px 3px 3px; background: var(--kestrel); }
+.month-bars div:not(:last-child) i { background: color-mix(in srgb, var(--moor) 70%, transparent); }
+.month-bars span { font-size: 0.75rem; font-weight: 700; color: var(--ink-2); }
+.month-bars b { font-size: 0.8125rem; }
+.act-list { list-style: none; margin: 18px 0 0; padding: 0; display: grid; }
+.act-list li { display: grid; grid-template-columns: 56px 1fr auto; gap: 10px; align-items: baseline; padding: 10px 0; border-top: 1px solid var(--line); font-size: 0.875rem; }
+.act-list time { font-size: 0.75rem; color: var(--ink-3); font-weight: 700; }
+.act-list b { color: var(--good); }
+.pred-list, .my-posts { display: grid; gap: 8px; }
+.pred-row { display: grid; grid-template-columns: minmax(0, 1fr) auto auto; gap: 6px 14px; align-items: center; padding: 12px 14px; border-radius: 14px; background: var(--ground); }
+.pred-row > span:first-child { display: flex; flex-direction: column; font-size: 0.875rem; }
+.pred-sc { display: flex; flex-direction: column; align-items: center; font-size: 0.75rem; }
+.pred-sc b { font-family: var(--f-display); font-weight: 900; font-size: 1.375rem; line-height: 1; }
+.pred-out { grid-column: 1 / -1; display: flex; justify-content: space-between; font-size: 0.8125rem; padding-top: 6px; border-top: 1px dashed var(--line); }
+.pred-row.exact .pred-out b, .pred-row.result .pred-out b { color: var(--good); }
+.pred-row.miss .pred-out b { color: var(--ink-3); }
+@container dev (min-width: 620px) { .pred-row { grid-template-columns: minmax(0, 1fr) 70px 70px 150px; } .pred-out { grid-column: auto; border: 0; padding: 0; flex-direction: column; align-items: flex-end; } }
+.post-row { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 4px 12px; align-items: center; padding: 12px 14px; border-radius: 14px; background: var(--ground); font-size: 0.875rem; }
+.post-row > span:nth-child(2) { display: flex; flex-direction: column; }
+.post-row .net { font-size: 0.6875rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.04em; padding: 4px 8px; border-radius: 999px; background: var(--moor); color: #fff; }
+.post-row.pending .net { background: var(--wing); }
+.post-stats { grid-column: 1 / -1; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 6px; font-size: 0.75rem; color: var(--ink-2); }
+.post-stats:empty { display: none; }
+.post-stats span { display: flex; flex-direction: column; }
+.post-stats b { font-size: 1rem; color: var(--ink); }
+@container dev (min-width: 760px) { .post-row { grid-template-columns: auto minmax(0, 1fr) 320px; } .post-stats { grid-column: auto; } }
+/* admin: answers, results */
+.acard-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; flex-wrap: wrap; }
+
+.ans-list { display: grid; margin-top: 12px; }
+.ans { display: grid; gap: 6px; padding: 12px 0; border-top: 1px solid var(--fx-line); }
+.ans p { margin: 0; font-size: 0.875rem; line-height: 1.45; }
+.ans .who { display: flex; align-items: center; gap: 8px; font-size: 0.8125rem; }
+.ans .who i { width: 26px; height: 26px; border-radius: 50%; display: grid; place-items: center; font-style: normal; font-size: 0.6875rem; font-weight: 600; background: var(--fx-soft); flex: none; }
+.ans.hidden p { color: var(--fx-ink-2); text-decoration: line-through; }
+.ans .adm-btn { min-height: 34px; padding: 0 12px; font-size: 0.8125rem; }
+.period { display: flex; flex-wrap: wrap; align-items: flex-end; gap: 12px; }
+.period .opt[aria-pressed="true"] { background: var(--fx-ink); color: #fff; border-color: var(--fx-ink); }
+.period-dates { display: grid; grid-template-columns: repeat(2, minmax(0, 150px)); gap: 10px; }
+.more { margin: -8px 0 0; }
+.more summary { cursor: pointer; font-size: 0.8125rem; font-weight: 500; color: var(--fx-ink-2); list-style: none; display: inline-flex; padding: 6px 0; text-decoration: underline; text-underline-offset: 3px; }
+.more summary::-webkit-details-marker { display: none; }
+.mkpis { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 10px; margin-top: 10px; }
+.mkpi { padding: 12px 14px; border-radius: 12px; background: var(--fx-surface); border: 1px solid var(--fx-line); min-width: 0; }
+.mkpi span { display: block; color: var(--fx-ink-2); font-size: 0.75rem; }
+.mkpi b { display: block; margin-top: 4px; font-family: var(--fx-display); font-weight: 600; font-size: 1.25rem; font-variant-numeric: tabular-nums; }
+.mkpi small { display: block; margin-top: 2px; font-size: 0.6875rem; color: var(--fx-ink-2); }
+
+.atable tr.click { cursor: pointer; }
+.atable tr.click:hover td { background: var(--fx-soft); }
+.atable tfoot td { font-weight: 600; border-top: 1px solid var(--fx-line); border-bottom: 0; }
+.scroll-x .atable.tight { min-width: 520px; }
+.scroll-x .atable.wide { min-width: 900px; }
+.sp-mono { width: 36px; height: 36px; border-radius: 10px; display: grid; place-items: center; font-weight: 700; font-size: 0.8125rem; flex: none; }
+.sp-list { display: grid; gap: 8px; margin-top: 12px; }
+.sp-row { display: flex; align-items: center; gap: 12px; padding: 10px 12px; border-radius: 12px; border: 1px solid var(--fx-line); background: var(--fx-surface); text-align: left; font: inherit; cursor: pointer; color: var(--fx-ink); }
+.sp-row > span:nth-child(2) { display: flex; flex-direction: column; flex: 1; min-width: 0; }
+.sp-row .sub { margin: 0; }
+.sp-row .go { font-size: 0.8125rem; font-weight: 500; text-decoration: underline; text-underline-offset: 3px; }
+.sp-card { display: flex; gap: 14px; align-items: flex-start; flex-wrap: wrap; }
+.sp-card > div { flex: 1; min-width: 240px; }
+.sp-card p { margin: 4px 0 0; font-size: 0.875rem; line-height: 1.5; color: var(--fx-ink-2); }
+.sp-inline { display: flex; align-items: center; gap: 10px; padding: 10px 12px; border-radius: 12px; background: var(--fx-soft); font-size: 0.8125rem; }
+.filters { display: flex; flex-wrap: wrap; gap: 12px; }
+.filters .afield { min-width: 200px; }
+.splits { display: grid; gap: 8px; margin-top: 8px; }
+.splits div { display: grid; grid-template-columns: 90px 1fr 44px; gap: 10px; align-items: center; font-size: 0.8125rem; }
+.splits b { text-align: right; font-weight: 600; font-variant-numeric: tabular-nums; }
+.bar-a { height: 8px; border-radius: 999px; background: var(--fx-soft); overflow: hidden; }
+.bar-a i { display: block; height: 100%; background: var(--fx-ink); border-radius: inherit; }
+.pbody h3 { margin: 18px 0 0; font-size: 0.875rem; font-weight: 600; }
 </style>
 </head>
 <body>
@@ -1342,6 +1452,7 @@ const ICONS = {
   cake: '<path d="M4 21V12a1 1 0 0 1 1-1h14a1 1 0 0 1 1 1v9M3 21h18M4 15.5c1.3 1 2.7 1 4 0s2.7-1 4 0 2.7 1 4 0 2.7-1 4 0M12 11V8M12 5.5v.01"/>',
   route: '<circle cx="6" cy="18" r="2.5"/><circle cx="18" cy="6" r="2.5"/><path d="M8.5 18H16a3.5 3.5 0 0 0 0-7H8a3.5 3.5 0 0 1 0-7h7.5"/>',
   download: '<path d="M12 3.5v12M7 11l5 5 5-5M4.5 20.5h15"/>',
+  swap: '<path d="M4 8.5h15l-4-4M20 15.5H5l4 4"/>',
   upload: '<path d="M12 16V4M7 8.5l5-5 5 5M4.5 20.5h15"/>',
   qr: '<rect x="3.5" y="3.5" width="6.5" height="6.5" rx="1"/><rect x="14" y="3.5" width="6.5" height="6.5" rx="1"/><rect x="3.5" y="14" width="6.5" height="6.5" rx="1"/><path d="M14 14h2.5v2.5H14zM18 18h2.5v2.5H18zM18 14h2.5M14 18v2.5"/>',
   truck: '<path d="M2.5 6.5h11v10h-11zM13.5 10h4l3 3.5v3h-7"/><circle cx="6.5" cy="17.5" r="2"/><circle cx="17" cy="17.5" r="2"/>',
@@ -1400,6 +1511,7 @@ function missionArt(kind) {
     play: `<rect x="10" y="22" width="80" height="52" rx="6" fill="none" stroke="currentColor" stroke-width="3"/><path d="M43 36v24l20-12z" fill="currentColor"/><path d="M36 84h28" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>`,
     mates: `<g transform="translate(-14 4) scale(.9)" opacity=".55"><path d="${SHIRT}" fill="currentColor"/></g><g transform="translate(24 10) scale(.9)"><path d="${SHIRT}" fill="none" stroke="currentColor" stroke-width="3.3" stroke-linejoin="round"/></g>`,
     scorer: `<path d="M14 72V34h72v38" fill="none" stroke="currentColor" stroke-width="3"/><path d="M14 44h72M14 54h72M14 64h72M28 34v38M43 34v38M58 34v38M72 34v38" stroke="currentColor" stroke-width="1" opacity=".4"/><circle cx="62" cy="58" r="11" fill="currentColor"/><path d="M30 86q14-22 30-28" fill="none" stroke="currentColor" stroke-width="2.5" stroke-dasharray="3 5" stroke-linecap="round"/><text x="26" y="27" ${fs} font-size="20" fill="currentColor">1st</text>`,
+    speech: `<path d="M16 20h68a6 6 0 0 1 6 6v36a6 6 0 0 1-6 6H46L28 84V68H16a6 6 0 0 1-6-6V26a6 6 0 0 1 6-6z" fill="none" stroke="currentColor" stroke-width="3" stroke-linejoin="round"/><path d="M24 36h52M24 46h52M24 56h30" stroke="currentColor" stroke-width="3" stroke-linecap="round" opacity=".55"/>`,
     custom: `<circle cx="50" cy="50" r="30" fill="none" stroke="currentColor" stroke-width="3"/><path d="m50 30 5.9 12 13.1 1.9-9.5 9.3 2.2 13.1L50 60.1l-11.7 6.2 2.2-13.1-9.5-9.3 13.1-1.9z" fill="currentColor"/>`,
   };
   return `<svg class="art" viewBox="0 0 100 100" aria-hidden="true">${a[kind] || ""}</svg>`;
@@ -1523,10 +1635,13 @@ const MISSIONS = [
     brief: "Pick the first Aldermoor scorer. Playing earns 30 points, and they double to 60 if your player scores first." },
   { id: "checkin", type: "Check-in", group: "matchday", title: "Check in at The Weir", pts: 100, tone: "moor", art: "stadium", meta: "Opens 13:00 on matchday",
     brief: "Tap in when you are inside the ground. Every home check-in adds a matchday pack of three stickers to your Collection." },
-  { id: "quiz", type: "Quiz", group: "quiz", title: "The Weir history quiz", pts: 30, tone: "buff", art: "quiz", meta: "1 min",
+  { id: "quiz", type: "Quiz", group: "quiz", title: "The Weir history quiz", pts: 30, tone: "buff", art: "quiz", meta: "1 min", sponsor: "Corran Lane Bakery",
     brief: "One question about the ground we have called home for over a century." },
-  { id: "scarf", type: "Photo", group: "photo", title: "Scarves up: show us yours", pts: 80, tone: "wing", art: "photo", meta: "Checked by the club",
+  { id: "scarf", type: "Photo", group: "photo", title: "Scarves up: show us yours", pts: 80, tone: "wing", art: "photo", meta: "Checked by the club", sponsor: "Weirbank Motors",
     brief: "Send a photo of your scarf held high, home or away. The best ten go on the big screen at half-time on Saturday." },
+  { id: "first", type: "Open question", group: "community", title: "Your first match at The Weir", pts: 40, tone: "buff", art: "speech", meta: "Best answers go in the programme",
+    open: { q: "Who took you, who did we play, and what stuck with you?", feature: 100, where: "the Matchday 10 programme and on the big screen" }, bonus: ["+100 if the club features it"],
+    brief: "No right or wrong answer, just a few lines. The club picks its favourites for the Matchday 10 programme and the big screen, and each one featured earns 100 bonus points." },
   { id: "potm", type: "Vote", group: "community", title: "Vote for September's player of the month", pts: 20, tone: "kestrel", art: "vote", meta: "30 sec",
     brief: "Four players on the shortlist. The winner is presented on the pitch before kick-off." },
   { id: "preview", type: "Video", group: "community", title: "Watch the gaffer's Granby preview", pts: 40, tone: "moor", art: "play", meta: "4 min",
@@ -1591,6 +1706,158 @@ const toSt = (page) => (r) => page === "club"
 const ALBUM = { men: MEN.map(toSt("men")), women: WOMEN.map(toSt("women")), club: CLUB.map(toSt("club")), specials: [] };
 const PAGE_NAMES = { men: "Men's squad", women: "Women's squad", club: "The club", specials: "Club specials" };
 const albumTotal = () => Object.values(ALBUM).reduce((n, p) => n + p.length, 0);
+
+/* ---------------------------------------------------------------- open questions */
+const ANSWERS = [
+  { mid: "first", who: "Maggie Rourke", handle: "@weirend_mags", t: "My grandad, 1987, a 0–0 with Holbrook in the rain. He bought me a pie and told me never to leave before the final whistle. I still don't.", when: "2 h ago", status: "featured" },
+  { mid: "first", who: "Kev Lindqvist", handle: "@kestrel_kev", t: "Granby at home, 2009. Two down at half-time, won 3–2. I lost my voice and one shoe.", when: "3 h ago", status: "featured" },
+  { mid: "first", who: "Abi Okafor", handle: "@aldermoor_abi", t: "Moved here in 2015 and a colleague dragged me along. Ten years on I've more Kestrels mates than work mates.", when: "4 h ago", status: "new" },
+  { mid: "first", who: "Tom Halloran", handle: "@tomhalloran", t: "School trip, Year 6. Didn't understand offside. Came home with a scarf and a season ticket on my Christmas list.", when: "5 h ago", status: "new" },
+  { mid: "first", who: "Priya Lowe", handle: "@northstand_priya", t: "First date with my now-wife. She supports Granby. We've agreed never to talk about the score.", when: "Yesterday", status: "featured" },
+  { mid: "first", who: "Den Whitcombe", handle: "@olderthanthecrest", t: "1962, standing on a crate Dad brought from the allotment. You could see the river from the terrace back then.", when: "Yesterday", status: "new" },
+];
+const ANSWER_BASE = { first: { total: 1272, featured: 3 } };
+
+function openBody(m) {
+  const mine = state.answers[m.id];
+  const wallList = ANSWERS.filter((a) => a.mid === m.id && a.status === "featured" && !a.me).slice(0, 3);
+  const wall = wallList.length ? `<h3 class="h-sec" style="font-size:1.25rem;margin-top:6px">Featured so far</h3><div class="answers">${wallList.map((a) => `<figure class="answer"><blockquote>${esc(a.t)}</blockquote><figcaption><span class="avatar sm">${initials(a.who)}</span>${esc(a.handle)}</figcaption></figure>`).join("")}</div>` : "";
+  if (!mine) return `<p style="font-weight:700;font-size:1.0625rem">${esc(m.open.q)}</p>
+    <div class="answer-box"><label for="oaText" class="sr" style="position:absolute;left:-9999px">Your answer</label><textarea id="oaText" maxlength="280" rows="4" placeholder="Write your answer"></textarea><span class="count" id="oaCount">0 / 280</span></div>
+    <button class="btn btn-primary btn-block" data-act="sendAnswer" data-id="${m.id}">Send my answer</button>
+    <p class="note">The club reads every answer before it appears anywhere.</p>${wall}`;
+  const feat = state.featured.has(m.id);
+  return `<figure class="answer mine"><blockquote>${esc(mine)}</blockquote><figcaption><span class="avatar sm">${initials(ME.name)}</span>You, ${ME.handle}</figcaption></figure>
+    ${feat ? `<div class="outcome"><b>+${m.open.feature}</b><span>The club featured your answer. It goes in ${esc(m.open.where)}.</span></div>`
+      : `<div class="success"><span class="big num">+${m.pts}</span><p>Sent to the club.${m.open.feature ? ` If they feature it, you get ${m.open.feature} more.` : ""}</p></div>`}${wall}`;
+}
+
+/* ---------------------------------------------------------------- swapping doubles */
+const stById = (id) => (ALBUM[id.split("-")[0]] || []).find((x) => x.id === id);
+const stLabel = (id) => { const s = stById(id); return s ? `#${s.no} ${s.name}` : ""; };
+const miniSt = (id) => `<span class="mini-st" aria-hidden="true">${stickerArt(stById(id), id.split("-")[0])}</span>`;
+const OFFERS = [
+  { who: "Ola Nowak", gives: "men-14", wants: ["men-11"] },
+  { who: "Dan Whitlow", gives: "club-C8", wants: ["men-5", "women-6"] },
+  { who: "Kieran Moss", gives: "women-9", wants: ["women-8", "club-C3"] },
+  { who: "Eva Grant", gives: "men-9", wants: ["women-17", "club-C1"] },
+];
+const TAKERS = ["Rosa Pellow", "Sian Archer", "Marcus Ode"];
+const spareIds = () => Object.keys(state.spares).filter((k) => state.spares[k] > 0);
+
+function swapPanel() {
+  const rows = OFFERS.map((o, i) => {
+    let btn;
+    if (o.mine) btn = `<span class="mine-tag">Waiting for a taker</span>`;
+    else if (state.owned.has(o.gives)) btn = `<span class="meta">You have it</span>`;
+    else {
+      const give = o.wants.find((w) => state.spares[w] > 0);
+      btn = `<button class="btn btn-sm ${give ? "btn-primary" : "btn-ghost"}" data-act="swap" data-i="${i}" ${give ? "" : "disabled"}>${give ? "Swap" : "No spare"}</button>`;
+    }
+    return `<div class="swap-row">${miniSt(o.gives)}<span class="swap-txt"><b>${o.mine ? "Your offer" : esc(o.who)}</b><span>${o.mine ? "Gives" : "Has"} ${esc(stLabel(o.gives))}</span><span class="meta">Wants ${o.wants.map((w) => esc(stLabel(w))).join(" or ")}</span></span>${btn}</div>`;
+  }).join("");
+  return `<div class="panel" id="swaps"><span class="panel-kicker">Swap table</span><h3 class="panel-title">Doubles up for swapping</h3>
+    <div class="swap-list">${rows || `<p class="panel-body">No offers right now.</p>`}</div>
+    <button class="btn btn-ghost btn-block" data-act="offerSwap" ${spareIds().length ? "" : "disabled"} style="margin-top:12px">${icon("plus")}Offer one of your doubles</button>
+    <p class="note" style="margin-top:8px">Both cards move into each album the moment you swap.</p></div>`;
+}
+function doublesPanel() {
+  const ids = spareIds();
+  return `<div class="panel doubles"><div class="panel-top"><span class="panel-kicker">Your doubles</span><button class="link" data-act="goswaps">Go to the swap table</button></div>
+    ${ids.length ? `<div class="dbl-list">${ids.map((id) => `<div class="dbl">${miniSt(id)}<span class="swap-txt"><b>${esc(stLabel(id))}</b><span class="meta">${state.spares[id]} spare</span></span><button class="btn btn-ghost btn-sm" data-act="tradein" data-id="${id}">Trade in, +10</button></div>`).join("")}</div>`
+      : `<p class="panel-body">No doubles right now. They land here when a pack gives you a card you already have.</p>`}
+    <p class="note" style="margin-top:10px">Swap a double with another member for a card you're missing, or trade it in for 10 ${word()}.</p></div>`;
+}
+function swapSheet(i) {
+  const o = OFFERS[i], give = o.wants.find((w) => state.spares[w] > 0);
+  openSheet(`<h2>Swap with ${esc(o.who)}</h2><p class="note">You give one of your doubles and get a card you're missing.</p>
+    <div class="swap-pair"><figure>${miniSt(give)}<figcaption>You give<b>${esc(stLabel(give))}</b><span class="meta">You have ${state.spares[give] + 1}</span></figcaption></figure>
+      <span class="swap-arrow">${icon("swap")}</span>
+      <figure>${miniSt(o.gives)}<figcaption>You get<b>${esc(stLabel(o.gives))}</b><span class="meta">Missing from your album</span></figcaption></figure></div>
+    <button class="btn btn-primary btn-block" data-act="doSwap" data-i="${i}" data-g="${give}">Swap now</button>`);
+}
+function offerSheet() {
+  const spares = spareIds();
+  const missing = [...ALBUM.men, ...ALBUM.women, ...ALBUM.club].filter((s) => !state.owned.has(s.id) && !OFFERS.some((o) => !o.mine && o.gives === s.id));
+  state.offer = { give: spares[0], want: missing[0] && missing[0].id };
+  openSheet(`<h2>Offer a double</h2><p class="note">It goes on the swap table in The Terrace. The first member with the card you want can take it.</p>
+    <h3 class="h-sec" style="font-size:1.25rem">You give</h3><div class="st-pick" data-pick="give">${spares.map((id) => `<button data-act="opick" data-k="give" data-id="${id}" aria-pressed="${state.offer.give === id}">${miniSt(id)}<span>${esc(stLabel(id))}</span></button>`).join("")}</div>
+    <h3 class="h-sec" style="font-size:1.25rem">You want</h3><div class="st-pick">${missing.map((s) => `<button data-act="opick" data-k="want" data-id="${s.id}" aria-pressed="${state.offer.want === s.id}">${miniSt(s.id)}<span>${esc(stLabel(s.id))}</span></button>`).join("")}</div>
+    <button class="btn btn-primary btn-block" data-act="postOffer" ${missing.length ? "" : "disabled"}>Put it on the swap table</button>`);
+}
+function postOffer() {
+  const { give, want } = state.offer;
+  if (!give || !want) return;
+  const offer = { who: ME.name, mine: 1, gives: give, wants: [want] };
+  OFFERS.unshift(offer);
+  state.chat.push(`Swapping my double ${stLabel(give)} for ${stLabel(want)}. It's on the swap table.`);
+  closeSheet(); state.tab = "terrace"; renderMember(); toast("On the swap table");
+  const taker = TAKERS[state.swapsDone++ % TAKERS.length];
+  setTimeout(() => {
+    const idx = OFFERS.indexOf(offer); if (idx < 0) return;
+    OFFERS.splice(idx, 1); state.spares[give]--; state.owned.add(want); state.justIn = want;
+    state.chat.push(["", taker, `Took your swap, ${ME.handle}. Enjoy ${stLabel(want)}!`]);
+    if (state.view === "member") renderMember(false);
+    toast(`${taker} took your swap. ${stLabel(want)} is in your album`);
+  }, 3600);
+}
+
+/* ---------------------------------------------------------------- my season */
+const MY_PREDS = [
+  { md: "Matchday 8", vs: "v Tarrow Vale", mine: [2, 0], ft: [2, 0], k: "exact" },
+  { md: "Matchday 7", vs: "at Holbrook", mine: [1, 1], ft: [0, 2], k: "miss" },
+  { md: "Matchday 6", vs: "v Ashcombe Albion", mine: [3, 1], ft: [2, 0], k: "result" },
+];
+const MY_POSTS = [
+  { net: "TikTok", m: "Film your Derby Day chant", when: "Aug", views: 61200, likes: 5380, comments: 212, shares: 340 },
+  { net: "Instagram", m: "Away end at Holbrook", when: "13 Sep", views: 8940, likes: 731, comments: 38, shares: 22 },
+  { net: "Instagram", m: "Kit launch: wear it, post it", when: "Aug", views: 12400, likes: 1120, comments: 64, shares: 41 },
+];
+const MY_LOG = [
+  ["20 Sep", "Checked in at The Weir", 100], ["20 Sep", "Exact score v Tarrow Vale, 2–0", 150], ["13 Sep", "Photo: away end at Holbrook", 80],
+  ["13 Sep", "Played the score prediction at Holbrook", 50], ["11 Sep", "New home kit quiz", 30], ["6 Sep", "Right result v Ashcombe Albion", 100],
+];
+function predStats() {
+  const k = state.result && state.settled && state.settled.mine;
+  return { played: 8 + (k ? 1 : 0), right: 5 + (k === "exact" || k === "result" ? 1 : 0), exact: 2 + (k === "exact" ? 1 : 0) };
+}
+const predPts = (k) => 50 * { exact: state.mult.exact, result: state.mult.result, miss: 1 }[k];
+function seasonSection() {
+  const t = state.stab;
+  const doneNow = MISSIONS.filter((m) => state.done.has(m.id));
+  const p = predStats();
+  const views = MY_POSTS.reduce((n, x) => n + x.views, 0);
+  const tiles = [
+    [fmt(SP()), `${word()} this season`], [String(58 + doneNow.length), "missions done"],
+    [`${state.checkedIn ? 8 : 7} of 8`, "home matchdays"], [`${p.right} of ${p.played}`, `right results, ${p.exact} exact`],
+    [big(views), `views on your ${MY_POSTS.length} posts`], [`${state.owned.size} of ${albumTotal()}`, "cards collected"],
+  ];
+  let body = "";
+  if (t === "activity") {
+    const months = [["Jul", 240], ["Aug", 1180], ["Sep", 1860], ["Oct", 200 + state.earned]];
+    const max = Math.max(...months.map((m) => m[1]));
+    const log = [...doneNow.map((m) => ["Today", m.title, m.pts]), ...MY_LOG];
+    body = `<div class="month-bars" role="img" aria-label="${word()} earned each month">${months.map(([m, v]) => `<div><span class="num">${fmt(v)}</span><i style="height:${Math.max(6, Math.round((v / max) * 100))}%"></i><b>${m}</b></div>`).join("")}</div>
+      <ol class="act-list">${log.slice(0, 8).map(([d, w, v]) => `<li><time>${d}</time><span>${esc(w)}</span><b class="num">+${v}</b></li>`).join("")}</ol>`;
+  } else if (t === "predictions") {
+    const live = state.predicted ? [{ md: "Matchday 9", vs: "v Granby Rovers", mine: state.predicted, ft: state.result, k: state.result && state.settled ? state.settled.mine : null }] : [];
+    body = `<div class="pred-list">${[...live, ...MY_PREDS].map((r) => `<div class="pred-row ${r.k || "open"}"><span><b>${r.md}</b><span class="meta">${r.vs}</span></span>
+      <span class="pred-sc"><span class="meta">You</span><b class="num">${r.mine[0]}–${r.mine[1]}</b></span><span class="pred-sc"><span class="meta">Full time</span><b class="num">${r.ft ? `${r.ft[0]}–${r.ft[1]}` : "–"}</b></span>
+      <span class="pred-out">${r.k ? `<b>${{ exact: "Exact", result: "Right result", miss: "Missed" }[r.k]}</b><span class="num">+${predPts(r.k)}</span>` : `<b>Locked in</b><span>+50</span>`}</span></div>`).join("")}</div>
+      <p class="note" style="margin-top:10px">Season record: ${p.right} right results from ${p.played} matches, ${p.exact} of them exact. Members' average is 4 of 8.</p>`;
+  } else {
+    body = `<div class="my-posts">${MY_POSTS.map((x) => `<div class="post-row"><span class="net">${x.net}</span><span><b>${esc(x.m)}</b><span class="meta">${x.when}</span></span>
+      <span class="post-stats"><span><b class="num">${big(x.views)}</b>views</span><span><b class="num">${big(x.likes)}</b>likes</span><span><b class="num">${fmt(x.comments)}</b>comments</span><span><b class="num">${fmt(x.shares)}</b>shares</span></span></div>`).join("")}
+      ${state.done.has("scarf") ? `<div class="post-row pending"><span class="net">Photo</span><span><b>Scarves up: show us yours</b><span class="meta">Sent today, the club is checking it</span></span><span class="post-stats"></span></div>` : ""}</div>
+      <p class="note" style="margin-top:10px">Counted through your linked accounts. Your posts were seen ${fmt(views)} times, mostly by people who aren't members yet.</p>`;
+  }
+  return `<section class="sec" aria-labelledby="h-season"><div class="sec-head"><h2 class="h-sec" id="h-season">Your season</h2><span class="meta">2026/27 so far</span></div>
+    <div class="season-tiles">${tiles.map(([v, l]) => `<div><b class="num">${v}</b><span>${l}</span></div>`).join("")}</div>
+    <div class="chips" role="tablist">${[["activity", "Activity"], ["predictions", "Predictions"], ["posts", "Your posts"]].map(([k, l]) => `<button class="chip" role="tab" data-act="stab" data-k="${k}" aria-pressed="${t === k}">${l}</button>`).join("")}</div>
+    <div class="panel">${body}</div>
+  </section>`;
+}
+
 
 const TOP = [
   ["Priya Lowe", 14820, "same", 8, 5], ["Tom Hadley", 14355, "up", 8, 5], ["Marta Kowalczyk", 13990, "down", 8, 4],
@@ -1689,6 +1956,8 @@ const state = {
   checkinMode: "both", olist: "all", nextCard: 1, files: {},
   atab: {}, aresult: [2, 1], ascorer: "Dario Lenk", mult: { result: 2, exact: 3 }, picks: {}, scorer: null,
   ci: { opens: "13:00", closes: "ht", where: "The Weir, within 300 m of the ground" }, colours: null, mq: "", drawn: null, news: null, badgeFresh: null,
+  answers: {}, featured: new Set(), spares: { "men-11": 2, "men-5": 1, "women-8": 1, "club-C2": 1 }, offer: null, swapsDone: 0, stab: "activity",
+  rperiod: "season", rfrom: "", rto: "", rsponsor: "all", rsort: "value", psort: "views", rmore: false,
 };
 const word = () => state.word;
 const tierOf = (b) => [...TIERS].reverse().find((t) => b >= t.at);
@@ -2002,7 +2271,7 @@ function screenCollection() {
         ? `<div class="sticker has ${s.c || s.no === "C1" || s.rarity === "Foil" ? "foil" : ""} ${state.justIn === s.id ? "just-in" : ""}" style="--rot:${[-1.5, 1, -0.5, 1.5, 0, -1][i % 6]}deg" role="img" aria-label="${esc(s.name)}">${stickerArt(s, pg)}${s.rarity === "Limited" ? `<span class="limited">Limited</span>` : ""}</div>`
         : `<div class="sticker missing"><b>${esc(s.no)}</b><span>${esc(s.name)}</span></div>`).join("")}</div>
     </div>
-    <p class="meta">Got a double? Swap it with another member in The Terrace, or trade it in for 10 ${word()}.</p>
+    ${doublesPanel()}
   </div>`;
 }
 
@@ -2105,9 +2374,9 @@ function screenTerrace() {
   const msgs = [
     ["club", "Aldermoor Athletic", "Team news at 14:00 on Saturday. Lenk trained fully today after his ankle knock."],
     ["", "Kieran Moss", "If Lenk starts I'm calling 3–1."],
-    ["", "Ola Nowak", "Anyone got a spare number 9 sticker? Swapping my double Fenwick."],
+    ["", "Ola Nowak", "Anyone got a spare Fenwick? My double Marchetti is on the swap table."],
     ["", "Priya Lowe", "Coach leaves the Ferryman at 09:30 for Granby, don't be late again Tom."],
-    ...state.chat.map((t) => ["me", "You", t]),
+    ...state.chat.map((t) => (Array.isArray(t) ? t : ["me", "You", t])),
   ];
   return `<div class="view-inner">
     <header><h1 class="h-page">The Terrace</h1><p class="lede">Where members talk between matches. Moderated by the club.</p></header>
@@ -2118,6 +2387,7 @@ function screenTerrace() {
         <form class="composer" data-form="chat"><label class="sr" for="chatIn" style="position:absolute;left:-9999px">Message</label><input id="chatIn" autocomplete="off" placeholder="Say something to the Terrace"><button class="btn btn-primary btn-sm" aria-label="Send">${icon("send")}</button></form>
       </section>
       <div class="sec">
+        ${swapPanel()}
         <div class="panel"><span class="panel-kicker">Question from the club</span><h3 class="panel-title">Who should be Lenk's vice-captain this season?</h3>
           <div class="poll">${poll.map(([n, p]) => `<button data-act="poll" data-n="${n}" aria-pressed="${state.voted === n}" style="--fill:${state.voted ? p + (state.voted === n ? 1 : 0) : 0}%"><span>${n}</span>${state.voted ? `<span class="pc">${p + (state.voted === n ? 1 : 0)}%</span>` : ""}</button>`).join("")}</div>
           <p class="note" style="margin-top:10px">${state.voted ? `${fmt(3211)} members voted. The manager reads the result on Friday.` : "Vote to see what other members think."}</p>
@@ -2172,6 +2442,7 @@ function screenProfile() {
         ${myRewardsList()}</div>
       <div class="panel"><span class="panel-kicker">Gifted packages</span><h3 class="panel-title">Away kit on its way</h3><p class="panel-body">The club picked 40 members to try the new away kit before launch. Yours ships on Monday.</p></div>
     </div>
+    ${seasonSection()}
   </div>`;
 }
 const codeFor = (id) => `AAFC-${id.slice(0, 3).toUpperCase()}-7K2Q`;
@@ -2191,9 +2462,9 @@ function renderMember(scrollTop = true) {
       const src = fresh.querySelectorAll(".rail-foot .who span, .rail-points span, .points-chip span")[i]; if (src) el.textContent = src.textContent;
     });
   }
-  const view = $("#view");
+  const view = $("#view"), keep = view.scrollTop;
   view.innerHTML = SCREENS[state.tab]();
-  if (scrollTop) view.scrollTop = 0;
+  view.scrollTop = scrollTop ? 0 : keep;
   enhance(view);
   if (state.tab === "home") state.dealt = true;
   state.justIn = null;
@@ -2286,7 +2557,7 @@ function missionSheet(id) {
   const m = MISSIONS.find((x) => x.id === id);
   const done = state.done.has(id);
   let body = "";
-  if (m.options || m.quiz || m.custom) body = customBody(m);
+  if (m.options || m.quiz || m.custom || m.open) body = customBody(m);
   else if (id === "predict") body = predictBody();
   else if (id === "checkin") body = checkinBody();
   else if (id === "quiz") body = done ? doneBody(m) : `<p style="font-weight:700;font-size:1.0625rem">In which year did Aldermoor play their first match at The Weir?</p><div class="quiz">${["1911", "1923", "1937", "1958"].map((y) => `<button data-act="quiz" data-y="${y}">${y}</button>`).join("")}</div>`;
@@ -2294,13 +2565,14 @@ function missionSheet(id) {
   else if (id === "potm") body = done ? doneBody(m) : `<div class="quiz">${["Ellis Varga", "Clara Voss", "Noé Castell", "Maya Achebe"].map((n) => `<button data-act="potm" data-n="${n}" style="font-size:1rem">${n}</button>`).join("")}</div>`;
   else if (id === "preview") body = done ? doneBody(m) : `<div class="matchday" style="aspect-ratio:16/9;justify-content:center;align-items:center"><button class="btn btn-flood" data-act="watch">Play the preview</button><div class="bar" style="width:70%;background:rgba(255,255,255,.15)" id="watchBar"><span data-fill="0" style="background:var(--flood)"></span></div></div>`;
   else if (id === "mate") body = `<div class="ref-code" style="justify-content:center"><code>AAFC-JESS-17</code><button class="btn btn-ghost btn-sm" data-act="copy" data-t="AAFC-JESS-17">${icon("copy")}Copy code</button></div><p class="note" style="text-align:center">Points arrive when your mate checks in at their first home match.</p>`;
-  openSheet(`${id === "predict" || id === "checkin" ? "" : `<div class="sheet-card">${missionCard(m, 0, { still: true })}</div>`}<h2>${esc(m.title)}</h2><p class="note">${esc(m.brief)}</p>${body}`);
+  openSheet(`${id === "predict" || id === "checkin" ? "" : `<div class="sheet-card">${missionCard(m, 0, { still: true })}</div>`}<h2>${esc(m.title)}</h2>${m.sponsor ? `<p class="presented">With ${esc(m.sponsor)}</p>` : ""}<p class="note">${esc(m.brief)}</p>${body}`);
 }
 function outcomeHtml(kind, pts) {
   return kind === "miss" ? `<div class="outcome miss"><b>+${pts}</b><span>Not this time. You keep the points for playing.</span></div>`
     : `<div class="outcome"><b>+${pts}</b><span>${kind === "exact" ? `Exact score. Points multiplied by ${state.mult.exact}.` : kind === "result" ? `Right result. Points multiplied by ${state.mult.result}.` : "You called it. Points doubled."}</span></div>`;
 }
 function customBody(m) {
+  if (m.open) return openBody(m);
   const done = state.done.has(m.id);
   if (m.quiz) {
     if (done) return doneBody(m);
@@ -2558,6 +2830,53 @@ document.addEventListener("click", (e) => {
       else if (!right) setTimeout(() => el.classList.remove("wrong"), 400);
       break;
     }
+    case "sendAnswer": {
+      const m = MISSIONS.find((x) => x.id === el.dataset.id), box = $("#oaText"), v = box.value.trim();
+      if (v.length < 3) { box.focus(); toast("Write a few words first"); break; }
+      state.answers[m.id] = v; state.done.add(m.id);
+      ANSWERS.unshift({ mid: m.id, who: ME.name, handle: ME.handle, t: v, when: "Just now", status: "new", me: 1 });
+      missionSheet(m.id); award(m.pts, $("#sheet .success"), `Answer sent. +${m.pts} ${word()}`); renderMember(false);
+      break;
+    }
+    case "swap": swapSheet(+el.dataset.i); break;
+    case "doSwap": {
+      const o = OFFERS[+el.dataset.i], g = el.dataset.g;
+      state.spares[g]--; state.owned.add(o.gives); state.justIn = o.gives;
+      OFFERS.splice(+el.dataset.i, 1);
+      state.chat.push(["", o.who, `Cheers ${ME.handle}, ${stLabel(g)} was the last one I needed.`]);
+      closeSheet(); renderMember(false); toast(`Swapped. ${stLabel(o.gives)} is in your album`);
+      break;
+    }
+    case "offerSwap": offerSheet(); break;
+    case "opick": state.offer[el.dataset.k] = el.dataset.id; el.parentElement.querySelectorAll("button").forEach((b) => b.setAttribute("aria-pressed", b === el)); break;
+    case "postOffer": postOffer(); break;
+    case "tradein": {
+      const id = el.dataset.id; state.spares[id]--;
+      award(10, el, `Traded in ${stLabel(id)}. +10 ${word()}`); renderMember(false);
+      break;
+    }
+    case "goswaps": closeSheet(); state.tab = "terrace"; renderMember(); setTimeout(() => { const v = $("#view"), t = $("#swaps"); if (v && t) v.scrollTo({ top: t.getBoundingClientRect().top - v.getBoundingClientRect().top + v.scrollTop - 16, behavior: reduceMotion ? "auto" : "smooth" }); }, 60); break;
+    case "stab": {
+      state.stab = el.dataset.k;
+      const view = $("#view"), keep = view.scrollTop, sec = $("#h-season").closest("section");
+      sec.insertAdjacentHTML("afterend", seasonSection()); sec.remove();
+      view.scrollTop = keep; enhance($("#h-season").closest("section"));
+      break;
+    }
+    case "ans": setAnswer(+el.dataset.i, el.dataset.s); break;
+    case "answersCsv": {
+      const m = MISSIONS.find((x) => x.id === el.dataset.id);
+      csvDownload([["Member", "Handle", "Answer", "Status"], ...ANSWERS.filter((a) => a.mid === m.id && a.status === "featured").map((a) => [a.who, a.handle, a.t, a.status])], `aldermoor-${m.id}-featured-answers.csv`);
+      break;
+    }
+    case "rperiod":
+      state.rperiod = el.dataset.v;
+      if (state.rperiod === "custom" && !state.rfrom) { state.rfrom = isoDay(new Date(NOW.getTime() - 13 * 864e5)); state.rto = isoDay(NOW); }
+      rerenderAdminInPlace(); break;
+    case "rmore": e.preventDefault(); state.rmore = !state.rmore; rerenderAdminInPlace(); break;
+    case "rmission": missionDetail(el.dataset.id); break;
+    case "rsponsor": state.rsponsor = el.dataset.s; state.atab.results = 1; renderAdmin(); $("#adm-main").scrollTop = 0; break;
+    case "rcsv": resultsCSV(el); break;
     case "cdone": { const m = MISSIONS.find((x) => x.id === el.dataset.id); state.done.add(m.id); missionSheet(m.id); award(m.pts, $("#sheet .success")); renderMember(false); break; }
     case "enter": {
       if (state.balance < 200) return;
@@ -2655,6 +2974,12 @@ document.addEventListener("change", (e) => {
     rerenderAdminInPlace(); admToast(`${o.who}: ${t.value}${o.me ? ". Jess sees it in My club" : ""}`, o.me ? "profile" : null);
   }
   if (t.name === "ascorer") state.ascorer = t.value;
+  if (["rsponsor", "rsort", "psort"].includes(t.name)) { state[t.name] = t.value; rerenderAdminInPlace(); }
+  if ((t.name === "rfrom" || t.name === "rto") && t.value) {
+    state[t.name] = t.value;
+    if (state.rfrom > state.rto) [state.rfrom, state.rto] = [state.rto, state.rfrom];
+    rerenderAdminInPlace();
+  }
   if (t.name === "multResult" || t.name === "multExact") {
     state.mult[t.name === "multResult" ? "result" : "exact"] = +t.value;
     rerenderAdminInPlace(); admToast("Prediction cards show the new bonus", "missions");
@@ -2685,6 +3010,7 @@ document.addEventListener("input", (e) => {
     const i = $('input[name="mq"]'); i.focus(); i.setSelectionRange(i.value.length, i.value.length);
   }
   if (t.name === "ciWhere") state.ci.where = t.value;
+  if (t.id === "oaText") $("#oaCount").textContent = `${t.value.length} / 280`;
 });
 document.addEventListener("submit", (e) => {
   if (e.target.dataset.form === "chat") {
@@ -2725,7 +3051,7 @@ setInterval(() => {
 const WEEKS = [9180, 9840, 12160, 10420, 13910, 11050, 14820, 12340, 15610, 13280, 16940, 14150, 18406];
 const MATCH_WEEKS = new Set([2, 4, 6, 8, 10, 12]);
 
-function chartSVG() {
+function chartSVG(shade) {
   const W = 640, H = 220, L = 44, R = 16, T = 14, B = 30;
   const max = 20000;
   const x = (i) => L + (i * (W - L - R)) / (WEEKS.length - 1);
@@ -2736,7 +3062,7 @@ function chartSVG() {
   const xl = WEEKS.map((_, i) => (i % 2 === 0 ? `<text x="${x(i)}" y="${H - 8}" text-anchor="middle" font-size="11" fill="#5b606b">Wk ${i + 1}</text>` : "")).join("");
   const last = WEEKS.length - 1;
   return `<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Weekly active members, season weeks 1 to 13, rising from 9,180 to 18,406">
-    ${grid}${xl}
+    ${shade ? `<rect x="${x(shade[0]) - 8}" y="${T}" width="${x(shade[1]) - x(shade[0]) + 16}" height="${H - T - B}" rx="4" fill="#c9421b" fill-opacity=".08"/>` : ""}${grid}${xl}
     <path d="${area}" fill="#1d1f24" fill-opacity=".06"/>
     <path d="${line}" fill="none" stroke="#1d1f24" stroke-width="2" stroke-linejoin="round"/>
     ${[...MATCH_WEEKS].map((i) => `<circle cx="${x(i)}" cy="${y(WEEKS[i])}" r="3" fill="#1d1f24"/>`).join("")}
@@ -2830,7 +3156,7 @@ function crestImage(colour) {
 /* ---------------------------------------------------------------- Today */
 function admToday() {
   const kpis = [
-    ["Earned media value, season", "€92,240", "46.1M views on members' posts, at a €2 CPM"],
+    ["Earned media value, season", eur(rTotals(1).value), "46.1M views on members' posts, at a €2 CPM"],
     ["Active members this month", "18,406", "+16% on last month"],
     ["Home check-ins this season", "9,412", "78% of the Fill The Weir goal"],
     ["Missions completed this week", "41,280", "+9% on last week"],
@@ -2846,6 +3172,7 @@ function admToday() {
   const todo = [
     ["wins", 0, `${prep} rewards to prepare or book`, "Winners & deliveries"],
     ["missions", 0, "12 scarf photos to check", "Missions"],
+    ["missions", 3, `${38 + ANSWERS.filter((a) => a.status === "new").length} new answers to read`, "Open questions"],
     ["missions", 1, state.result ? `Result entered: ${state.result[0]}–${state.result[1]}` : "Enter Saturday's result after full time", "Predictions and results"],
     ["rewards", 0, "Draw the Matchday 11 walk-out giveaway on Friday", "Rewards"],
   ];
@@ -2865,33 +3192,35 @@ const EXTRA_ROWS = [
   { title: "Away end at Granby", type: "Photo", pts: 80, when: "Sat 18 Oct", status: "sched" },
   { title: "Christmas jumper day", type: "Photo", pts: 60, when: "Draft", status: "draft" },
 ];
-const FAKE_DONE = { predict: 6140, scorer: 4302, checkin: 0, quiz: 5233, scarf: 1420, potm: 3211, preview: 4870, mate: 212 };
+const FAKE_DONE = { predict: 6140, scorer: 4302, checkin: 0, quiz: 5233, scarf: 1420, first: 1278, potm: 3211, preview: 4870, mate: 212 };
 function admMissions() {
   const tab = state.atab.missions || 0;
   const head = admHead("Missions", "Everything members do to earn points. One button creates every type.", `<button class="adm-btn primary" data-act="newMission">${icon("plus")}New mission</button>`) + admTabs("missions");
   if (tab === 1) return head + admPredictions();
   if (tab === 2) return head + admCheckins();
+  if (tab === 3) return head + admAnswers();
   const live = MISSIONS.map((m) => ({ m, title: m.title, type: m.type, pts: m.pts, when: m.group === "matchday" ? "Matchday 9" : m.when || "This week", status: "live", n: (FAKE_DONE[m.id] ?? 0) + (state.done.has(m.id) ? 1 : 0) }));
   const rows = [...live, ...EXTRA_ROWS];
   const lab = { live: "Live", sched: "Scheduled", draft: "Draft" };
   return head + `<div class="acard scroll-x"><table class="atable"><thead><tr><th>Mission</th><th>Type</th><th class="r">Points</th><th>Bonus</th><th>When</th><th class="r">Done by</th><th>Status</th></tr></thead>
     <tbody>${rows.map((r) => `<tr class="${r.m && r.m.fresh ? "fresh" : ""}"><td class="wrap">${esc(r.title)}</td><td>${esc(r.type)}</td><td class="r">${r.pts}</td><td>${r.m && r.m.bonus ? esc(bonusOf(r.m).join(", ")) : "–"}</td><td>${esc(r.when)}</td><td class="r">${r.n != null ? fmt(r.n) : "–"}</td><td><span class="st ${r.status}">${lab[r.status]}</span></td></tr>`).join("")}</tbody></table></div>
-    <div class="acard"><h2>Mission types on this plan</h2><p class="sub">Prediction, check-in, quiz, photo, video, vote, referral, social post, survey, sponsor quest. Score predictions are created for every fixture on their own.</p></div>`;
+    <div class="acard"><h2>Mission types on this plan</h2><p class="sub">Prediction, check-in, quiz, open question, photo, video, vote, referral, social post, survey, sponsor quest. Score predictions are created for every fixture on their own.</p></div>`;
 }
 
-const MTYPES = [["Prediction", "Prediction"], ["Quiz", "Quiz"], ["Photo", "Photo"], ["Video", "Video"], ["Vote", "Vote"], ["Social post", "Social post"], ["Referral", "Referral"], ["Survey", "Survey"]];
+const MTYPES = [["Prediction", "Prediction"], ["Quiz", "Quiz"], ["Photo", "Photo"], ["Video", "Video"], ["Vote", "Vote"], ["Social post", "Social post"], ["Referral", "Referral"], ["Survey", "Survey"], ["Open question", "Open question"]];
 const TONES = [["kestrel", "Kestrel"], ["moor", "Moor"], ["wing", "Wing"], ["buff", "Buff"]];
-const ART_FOR = { Prediction: "scorer", Quiz: "quiz", Photo: "photo", Video: "play", Vote: "vote", "Social post": "custom", Referral: "mates", Survey: "vote" };
+const ART_FOR = { Prediction: "scorer", Quiz: "quiz", Photo: "photo", Video: "play", Vote: "vote", "Social post": "custom", Referral: "mates", Survey: "vote", "Open question": "speech" };
 function newMissionDraft() {
   return { type: "Prediction", title: "Who will be man of the match against Granby?", brief: "Pick your man of the match before kick-off. Get it right and your points double.", pts: 40, tone: "kestrel",
     options: "Dario Lenk\nRuben Sølvik\nKofi Brannagh\nJonah Weller", mult: 2, q: "Who scored Aldermoor's first goal at The Weir?", a1: "Arthur Penhallow", a2: "Bill Corran", a3: "Fred Ashdown", a4: "Harry Tull", right: "1",
-    check: "club", start: isoDay(NOW), end: isoDay(new Date(NOW.getTime() + 6 * 864e5)), who: "all", publish: "now" };
+    check: "club", oq: "What's the best away day you've had with Aldermoor?", feature: "100", where: "the matchday programme", start: isoDay(NOW), end: isoDay(new Date(NOW.getTime() + 6 * 864e5)), who: "all", publish: "now" };
 }
 function draftMission(d) {
   const m = { id: "pv", type: d.type, group: { Prediction: "matchday", Quiz: "quiz", Photo: "photo" }[d.type] || "community", title: d.title || "Untitled mission", pts: Math.max(0, parseInt(d.pts, 10) || 0), tone: d.tone, art: ART_FOR[d.type], meta: d.type === "Prediction" ? "Closes at kick-off" : `Until ${dayLabel(d.end)}`, brief: d.brief || "", custom: 1 };
   if (d.type === "Prediction") { m.options = lines(d.options); m.mult = +d.mult; m.bonus = [`×${d.mult} if you're right`]; }
   if (d.type === "Vote" || d.type === "Survey") m.options = lines(d.options);
   if (d.type === "Quiz") m.quiz = { q: d.q, options: [d.a1, d.a2, d.a3, d.a4].filter(Boolean), right: +d.right - 1 };
+  if (d.type === "Open question") { m.open = { q: d.oq, feature: +d.feature, where: d.where || "the club's channels" }; if (+d.feature) m.bonus = [`+${d.feature} if the club features it`]; }
   return m;
 }
 function missionForm(d) {
@@ -2900,6 +3229,8 @@ function missionForm(d) {
   if (t === "Prediction") extra = `<h3>What members predict</h3>${fld("Answers, one per line", `<textarea name="options">${esc(d.options)}</textarea>`, "Score predictions are created for each fixture on their own.")}
     ${fld("Bonus when they are right", sel("mult", [["2", "Points doubled (×2)"], ["3", "Points tripled (×3)"]], d.mult), "You set the right answer in Predictions and results after the match.")}`;
   else if (t === "Quiz") extra = `<h3>Question</h3>${fld("Question", inp("q", d.q))}<div class="adm-row">${[1, 2, 3, 4].map((i) => fld(`Answer ${i}`, inp("a" + i, d["a" + i]))).join("")}</div>${fld("Right answer", sel("right", [["1", "Answer 1"], ["2", "Answer 2"], ["3", "Answer 3"], ["4", "Answer 4"]], d.right))}`;
+  else if (t === "Open question") extra = `<h3>Question</h3>${fld("What members answer", inp("oq", d.oq, 'maxlength="120"'), "Members write up to 280 characters. You read them in Missions, Open questions.")}
+    <div class="adm-row">${fld("Bonus for answers you feature", sel("feature", [["0", "No bonus"], ["50", "+50"], ["100", "+100"], ["200", "+200"]], d.feature))}${fld("Where featured answers go", inp("where", d.where))}</div>`;
   else if (t === "Vote" || t === "Survey") extra = `<h3>Choices</h3>${fld("One per line", `<textarea name="options">${esc(d.options)}</textarea>`)}`;
   else if (t === "Photo" || t === "Social post" || t === "Video") extra = fld(t === "Video" ? "Video" : "Who checks it", t === "Video" ? `<span class="drop">${icon("upload")}<span><b>Upload a video or paste a link</b>MP4 or a YouTube link</span></span>` : sel("check", [["club", "The club checks each one"], ["auto", t === "Social post" ? "Checked on its own through members' linked accounts" : "Accepted on its own"]], d.check));
   return `${fld("Type", optRow("type", MTYPES, t))}
@@ -2922,6 +3253,7 @@ function createMission() {
   const d = state.draft, m = draftMission(d);
   if (!d.title.trim()) { admToast("Give the mission a title first"); return; }
   if ((m.options && m.options.length < 2) || (m.quiz && m.quiz.options.length < 2)) { admToast("Add at least two answers"); return; }
+  if (m.open && !m.open.q.trim()) { admToast("Write the question first"); return; }
   m.id = "c" + ++customN;
   if (d.publish === "now") {
     m.fresh = 1; m.when = `${dayLabel(d.start)} to ${dayLabel(d.end)}`;
@@ -3220,15 +3552,223 @@ function admMembers() {
     <div class="scroll-x"><table class="atable"><thead><tr><th>Member</th><th>Tier</th><th class="r">${word().replace(/^./, (c) => c.toUpperCase())}</th><th class="r">Matchdays</th><th>Last seen</th></tr></thead>
     <tbody>${rows.map((r, i) => `<tr><td><span class="who"><i>${initials(r[0])}</i>${esc(r[0])}${r[0] === ME.name ? ` <span class="sub">${ME.handle}</span>` : ""}</span></td><td>${tierOf(r[1]).name}</td><td class="r">${fmt(r[1])}</td><td class="r">${r[2]} of 8</td><td>${["Today", "Today", "Yesterday", "2 days ago"][i % 4]}</td></tr>`).join("")}</tbody></table></div></div>`;
 }
+/* Open questions: the club reads answers and features the best */
+function admAnswers() {
+  const qs = MISSIONS.filter((m) => m.open);
+  if (!qs.length) return `<div class="acard"><p class="sub">No open questions running. Create one with New mission.</p></div>`;
+  return qs.map((m) => {
+    const list = ANSWERS.filter((a) => a.mid === m.id);
+    const base = ANSWER_BASE[m.id] || { total: 0, featured: 0 };
+    const feat = base.featured + list.filter((a) => a.status === "featured").length;
+    const order = { new: 0, featured: 1, hidden: 2 };
+    const rows = [...list].sort((a, b) => (b.me ? 1 : 0) - (a.me ? 1 : 0) || order[a.status] - order[b.status]);
+    return `<div class="acard"><div class="acard-top"><div><h2>${esc(m.open.q)}</h2><p class="sub">${esc(m.title)}. ${fmt(base.total + list.length)} answers, ${feat} featured${m.open.feature ? `, +${m.open.feature} ${word()} for each one featured` : ""}.</p></div>
+        <div class="adm-actions"><button class="adm-btn" data-act="answersCsv" data-id="${m.id}">${icon("download")}Featured answers, CSV</button></div></div>
+      ${rows.length ? `<div class="ans-list">${rows.map((a) => { const i = ANSWERS.indexOf(a); return `<div class="ans ${a.status}">
+        <span class="who"><i>${initials(a.who)}</i><span><b>${esc(a.who)}</b> <span class="sub">${esc(a.handle)}, ${a.when}</span></span></span>
+        <p>${esc(a.t)}</p>
+        <div class="adm-actions">${a.status === "featured" ? `<span class="st live">Featured</span><button class="adm-btn ghost" data-act="ans" data-i="${i}" data-s="new">Undo</button>`
+          : a.status === "hidden" ? `<span class="st">Hidden</span><button class="adm-btn ghost" data-act="ans" data-i="${i}" data-s="new">Show again</button>`
+          : `<button class="adm-btn primary" data-act="ans" data-i="${i}" data-s="featured">Feature${m.open.feature ? `, +${m.open.feature}` : ""}</button><button class="adm-btn ghost" data-act="ans" data-i="${i}" data-s="hidden">Hide</button>`}</div></div>`; }).join("")}</div>
+        ${base.total ? `<p class="sub" style="margin-top:12px">Showing the latest. The other ${fmt(base.total)} are in the CSV.</p>` : ""}`
+        : `<p class="sub" style="margin-top:12px">No answers yet. They appear here as members send them.</p>`}</div>`;
+  }).join("");
+}
+function setAnswer(i, status) {
+  const a = ANSWERS[i], m = MISSIONS.find((x) => x.id === a.mid), was = a.status, bonus = m.open.feature || 0;
+  a.status = status;
+  if (a.me && bonus) {
+    if (status === "featured" && !state.featured.has(m.id)) { state.featured.add(m.id); state.balance += bonus; state.earned += bonus; state.news = `The club featured your answer to "${m.title}". +${bonus} ${word()}.`; }
+    else if (was === "featured" && status !== "featured" && state.featured.has(m.id)) { state.featured.delete(m.id); state.balance -= bonus; state.earned -= bonus; state.news = null; }
+  }
+  rerenderAdminInPlace();
+  admToast(status === "featured" ? `${a.me ? "Jess" : a.who.split(" ")[0]}'s answer is featured${bonus ? `, +${bonus} ${word()} sent` : ""}` : status === "hidden" ? "Hidden from members" : "Back with the others", a.me && status === "featured" ? "profile" : null);
+}
+function csvDownload(rows, name) {
+  const csv = rows.map((r) => r.map((c) => `"${String(c).replace(/"/g, '""')}"`).join(",")).join("\n");
+  saveBlob(new Blob([csv], { type: "text/csv" }), name);
+}
+
+/* ---------------------------------------------------------------- Results */
+const SEASON_DAYS = 91;
+const SEASON_START = new Date(NOW.getTime() - (SEASON_DAYS - 1) * 864e5);
+const big = (n) => n >= 1e6 ? (n / 1e6).toFixed(1) + "M" : n >= 1e4 ? Math.round(n / 1e3) + "k" : fmt(n);
+const eur = (n) => "€" + fmt(n);
+const pct = (a, b) => b ? (a / b * 100).toFixed(1) + "%" : "–";
+/* network, posts, views, like rate, comment rate, share rate (season so far) */
+const NETS = [["Instagram", 3150, 23.8e6, 0.074, 0.0042, 0.0051], ["TikTok", 1860, 17.6e6, 0.088, 0.0036, 0.0064], ["YouTube Shorts", 640, 3.1e6, 0.041, 0.0021, 0.0017], ["Facebook", 762, 1.6e6, 0.032, 0.0048, 0.0072]];
+const SPONSOR_LOOK = { "Weirbank Motors": ["WM", "#17263a", "#ffd24d"], "Corran Lane Bakery": ["CL", "#f0e2c4", "#a33213"] };
+/* Missions with their totals. ago = days since it started. net = share of views per network. */
+const RM = [
+  { id: "scarf", title: "Scarves up: show us yours", type: "Photo", sponsor: "Weirbank Motors", ago: 3, done: 1420, seen: 12940, posts: 1180, views: 2.94e6, nm: 214, er: 1.1, net: [0.62, 0.27, 0.04, 0.07] },
+  { id: "first", title: "Your first match at The Weir", type: "Open question", ago: 2, done: 1278, seen: 9310, posts: 0, views: 0, nm: 0, extra: () => [["Answers featured", String(ANSWER_BASE.first.featured + ANSWERS.filter((a) => a.mid === "first" && a.status === "featured").length)], ["Average answer", "38 words"]] },
+  { id: "predict", title: "Predict the score v Granby Rovers", type: "Prediction", ago: 4, done: 6140, seen: 15020, posts: 820, views: 1.12e6, nm: 61, net: [0.48, 0.38, 0.06, 0.08] },
+  { id: "quiz", title: "The Weir history quiz", type: "Quiz", sponsor: "Corran Lane Bakery", ago: 5, done: 5233, seen: 13480, posts: 0, views: 0, nm: 0, extra: [["Right first time", "64%"], ["Average time", "21 s"]] },
+  { id: "md8", title: "Matchday 8 check-in", type: "Check-in", ago: 12, done: 3804, seen: 14100, posts: 960, views: 2.31e6, nm: 88 },
+  { id: "away", title: "Away end at Holbrook", type: "Photo", ago: 19, done: 640, seen: 8820, posts: 590, views: 1.86e6, nm: 97 },
+  { id: "kit", title: "New home kit quiz", type: "Quiz", ago: 21, done: 4911, seen: 12650, posts: 0, views: 0, nm: 0, extra: [["Right first time", "71%"]] },
+  { id: "chant", title: "Film your Derby Day chant", type: "Social post", sponsor: "Weirbank Motors", ago: 36, done: 2150, seen: 11870, posts: 2150, views: 9.42e6, nm: 512, er: 1.25, net: [0.31, 0.58, 0.08, 0.03] },
+  { id: "fill", title: "Fill The Weir: bring a mate", type: "Referral", sponsor: "Corran Lane Bakery", ago: 48, done: 1305, seen: 10200, posts: 410, views: 0.88e6, nm: 1305 },
+  { id: "kitlaunch", title: "Kit launch: wear it, post it", type: "Social post", ago: 64, done: 1890, seen: 9900, posts: 1890, views: 6.71e6, nm: 340 },
+];
+const POSTERS = ["@weirend_mags", "@kestrel_kev", "@aldermoor_abi", "@scarfsup_sian", "@ola.collects", "@northstand_priya", "@tomhalloran", "@riverside_km", "@olderthanthecrest", "@holbrook_away"];
+const NET_NAMES = NETS.map((n) => n[0]);
+const rmDate = (r) => new Date(NOW.getTime() - r.ago * 864e5);
+
+function rPeriod() {
+  const p = state.rperiod;
+  if (p === "custom") {
+    const days = Math.max(1, Math.round((new Date(state.rto) - new Date(state.rfrom)) / 864e5) + 1);
+    return { days, f: Math.min(1, days / SEASON_DAYS), from: new Date(state.rfrom + "T00:00:00"), label: `${dayLabel(state.rfrom)} to ${dayLabel(state.rto)}` };
+  }
+  const days = { "7d": 7, "30d": 30, season: SEASON_DAYS }[p];
+  return { days, f: { "7d": 0.105, "30d": 0.37, season: 1 }[p], from: new Date(NOW.getTime() - (days - 1) * 864e5), label: { "7d": "Last 7 days", "30d": "Last 30 days", season: "Season so far" }[p] };
+}
+function inPeriod(r) {
+  if (state.rperiod !== "custom") return r.ago < rPeriod().days;
+  const d = isoDay(rmDate(r));
+  return d >= state.rfrom && d <= state.rto;
+}
+function rmStats(r) {
+  const er = r.er || 1, v = r.views || 0;
+  const done = r.done + (state.done.has(r.id) ? 1 : 0);
+  const likes = v * 0.077 * er, comments = v * 0.0039 * er, shares = v * 0.0055 * er;
+  return { ...r, done, likes, comments, shares, eng: likes + comments + shares, value: v / 500, reach: v * 0.58, rate: done / r.seen, logo: r.seen * 3.1 };
+}
+function rTotals(f) {
+  const nets = NETS.map(([name, posts, views, lr, cr, sr]) => { const v = views * f; return { name, posts: posts * f, views: v, likes: v * lr, comments: v * cr, shares: v * sr, value: v / 500 }; });
+  const sum = (k) => nets.reduce((a, x) => a + x[k], 0);
+  return { nets, posts: sum("posts"), views: sum("views"), likes: sum("likes"), comments: sum("comments"), shares: sum("shares"), value: sum("value") };
+}
+const kpi = (l, v, s) => `<div class="kpi"><span>${l}</span><b>${v}</b>${s ? `<small>${s}</small>` : ""}</div>`;
+const mini = (l, v, s = "") => `<div class="mkpi"><span>${l}</span><b>${v}</b>${s ? `<small>${s}</small>` : ""}</div>`;
+
+function periodBar() {
+  const opts = [["7d", "Last 7 days"], ["30d", "Last 30 days"], ["season", "Season so far"], ["custom", "Pick dates"]];
+  return `<div class="period"><div class="opt-row" role="group" aria-label="Period">${opts.map(([v, l]) => `<button type="button" class="opt" data-act="rperiod" data-v="${v}" aria-pressed="${state.rperiod === v}">${l}</button>`).join("")}</div>
+    ${state.rperiod === "custom" ? `<div class="period-dates aform">${fld("From", `<input type="date" name="rfrom" value="${state.rfrom}" min="${isoDay(SEASON_START)}" max="${isoDay(NOW)}">`)}${fld("To", `<input type="date" name="rto" value="${state.rto}" min="${isoDay(SEASON_START)}" max="${isoDay(NOW)}">`)}</div>` : ""}</div>`;
+}
+function sponsorsIn(list) {
+  const out = {};
+  list.filter((r) => r.sponsor).forEach((r) => { const s = out[r.sponsor] || (out[r.sponsor] = { name: r.sponsor, n: 0, done: 0, views: 0, eng: 0, value: 0, logo: 0, nm: 0 }); s.n++; ["done", "views", "eng", "value", "logo", "nm"].forEach((k) => (s[k] += r[k])); });
+  return Object.values(out);
+}
+const sponsorMono = (s) => { const [m, bg, fg] = SPONSOR_LOOK[s] || ["", "#eee", "#333"]; return `<span class="sp-mono" style="background:${bg};color:${fg}">${m}</span>`; };
+
 function admResults() {
-  const nets = [["Instagram", 1904, 23.8], ["TikTok", 1122, 17.6], ["YouTube Shorts", 384, 3.1], ["Facebook", 460, 1.6]];
-  return admHead("Results", "What the program brings in, ready to show the board or a sponsor.", `<button class="adm-btn">${icon("download")}Sponsor report, PDF</button>`) + `
-    <div class="kpis"><div class="kpi"><span>Earned media value, season</span><b>€92,240</b><small>At a €2 CPM</small></div><div class="kpi"><span>Views on members' posts</span><b>46.1M</b><small>+21% on last season</small></div><div class="kpi"><span>Members who posted</span><b>3,870</b><small>21% of active members</small></div><div class="kpi"><span>Home check-ins</span><b>9,412</b><small>Average 1,176 a match</small></div></div>
+  const tab = state.atab.results || 0;
+  const head = admHead("Results", "What the program brings in. The top line stays simple: open any mission or sponsor for the detail.", `<button class="adm-btn" data-act="rcsv">${icon("download")}Download, CSV</button>`) + admTabs("results") + periodBar();
+  if (tab === 1) return head + resultsMissions();
+  if (tab === 2) return head + resultsPosts();
+  return head + resultsOverview();
+}
+function resultsOverview() {
+  const P = rPeriod(), T = rTotals(P.f);
+  const eng = T.likes + T.comments + T.shares;
+  const list = RM.filter(inPeriod).map(rmStats);
+  const top = [...list].sort((a, b) => b.value - a.value || b.done - a.done).slice(0, 5);
+  const sps = sponsorsIn(list);
+  const w0 = Math.max(0, Math.min(12, Math.floor((P.from - SEASON_START) / (7 * 864e5))));
+  return `<div class="kpis">
+      ${kpi("Earned media value", eur(T.value), "Views on members' posts at a €2 CPM")}
+      ${kpi("Views on members' posts", big(T.views), `${big(T.views * 0.58)} by people who aren't members`)}
+      ${kpi("Likes, comments and shares", big(eng), `${pct(eng, T.views)} of views`)}
+      ${kpi("New members from members' posts", fmt(2310 * P.f), "Joined through a post or a member's code")}
+    </div>
+    <details class="more" ${state.rmore ? "open" : ""}><summary data-act="rmore">${state.rmore ? "Hide the detail" : "Show every number for this period"}</summary>
+      <div class="mkpis">${mini("Posts", fmt(T.posts))}${mini("Members who posted", fmt(3870 * P.f))}${mini("Average views a post", fmt(T.views / T.posts))}${mini("Likes", big(T.likes))}${mini("Comments", big(T.comments))}${mini("Shares", big(T.shares))}${mini("Missions completed", big(372400 * P.f))}${mini("Home check-ins", fmt(9412 * P.f))}${mini("Rewards redeemed", fmt(4419 * P.f))}${mini("Active members", fmt(P.f < 0.2 ? 18406 : P.f < 0.5 ? 21720 : 24180), "used the app at least once")}</div>
+    </details>
     <div class="adm-grid">
-      <div class="acard"><h2>Weekly active members</h2><p class="sub">Dots mark home matchdays</p><div class="chart">${chartSVG()}</div></div>
-      <div class="acard"><h2>Where members talk about the club</h2><p class="sub">Posts checked through linked accounts</p>
-        <table class="atable"><thead><tr><th>Network</th><th class="r">Posts</th><th class="r">Views</th><th class="r">Value</th></tr></thead><tbody>${nets.map(([n, p, v]) => `<tr><td>${n}</td><td class="r">${fmt(p)}</td><td class="r">${v}M</td><td class="r">€${fmt(v * 2000)}</td></tr>`).join("")}</tbody></table></div>
+      <div class="acard"><h2>Weekly active members</h2><p class="sub">${P.f < 1 ? "The shaded weeks are the period you picked" : "Dots mark home matchdays"}</p><div class="chart">${chartSVG(P.f < 1 ? [w0, 12] : null)}</div></div>
+      <div class="acard"><h2>Sponsors</h2><p class="sub">Their missions in this period</p>
+        ${sps.length ? `<div class="sp-list">${sps.map((s) => `<button class="sp-row" data-act="rsponsor" data-s="${esc(s.name)}">${sponsorMono(s.name)}<span><b>${esc(s.name)}</b><span class="sub">${s.n} mission${s.n > 1 ? "s" : ""}, ${fmt(s.done)} members took part, ${s.value ? eur(s.value) + " media value" : big(s.logo) + " logo views in the app"}</span></span><span class="go">Report</span></button>`).join("")}</div>` : `<p class="sub" style="margin-top:10px">No sponsored mission in this period.</p>`}</div>
+    </div>
+    <div class="acard"><h2>Where members talk about the club</h2><p class="sub">${P.label}, checked through members' linked accounts</p>
+      <div class="scroll-x"><table class="atable tight"><thead><tr><th>Network</th><th class="r">Posts</th><th class="r">Views</th><th class="r">Likes</th><th class="r">Comments</th><th class="r">Shares</th><th class="r">Engagement</th><th class="r">Media value</th></tr></thead>
+      <tbody>${T.nets.map((n) => `<tr><td>${n.name}</td><td class="r">${fmt(n.posts)}</td><td class="r">${big(n.views)}</td><td class="r">${big(n.likes)}</td><td class="r">${big(n.comments)}</td><td class="r">${big(n.shares)}</td><td class="r">${pct(n.likes + n.comments + n.shares, n.views)}</td><td class="r">${eur(n.value)}</td></tr>`).join("")}</tbody></table></div></div>
+    <div class="acard"><div class="acard-top"><div><h2>Missions that did the most</h2><p class="sub">Started in this period. Open one for its full detail.</p></div><button class="adm-btn" data-act="atab" data-p="results" data-i="1">See all missions</button></div>
+      ${top.length ? `<div class="scroll-x"><table class="atable tight"><thead><tr><th>Mission</th><th class="r">Done by</th><th class="r">Views</th><th class="r">Likes, comments, shares</th><th class="r">Media value</th></tr></thead>
+      <tbody>${top.map((r) => `<tr class="click" data-act="rmission" data-id="${r.id}"><td class="wrap"><b>${esc(r.title)}</b><br><span class="sub">${r.type}${r.sponsor ? `, with ${r.sponsor}` : ""}</span></td><td class="r">${fmt(r.done)}</td><td class="r">${r.views ? big(r.views) : "–"}</td><td class="r">${r.views ? big(r.eng) : "–"}</td><td class="r">${r.value ? eur(r.value) : "–"}</td></tr>`).join("")}</tbody></table></div>` : `<p class="sub" style="margin-top:10px">No mission started in this period.</p>`}</div>`;
+}
+function resultsMissions() {
+  const s = state.rsponsor;
+  let list = RM.filter(inPeriod).map(rmStats);
+  if (s === "none") list = list.filter((r) => !r.sponsor); else if (s !== "all") list = list.filter((r) => r.sponsor === s);
+  list.sort((a, b) => b[state.rsort] - a[state.rsort]);
+  const tot = (k) => list.reduce((a, r) => a + r[k], 0);
+  const sp = s !== "all" && s !== "none" ? sponsorsIn(list)[0] : null;
+  const sponsorNames = [...new Set(RM.filter((r) => r.sponsor).map((r) => r.sponsor))];
+  return `${sp ? `<div class="acard sp-card">${sponsorMono(sp.name)}<div><h2>${esc(sp.name)}</h2><p>${sp.n} mission${sp.n > 1 ? "s" : ""} in this period. ${fmt(sp.done)} members took part and saw the ${esc(sp.name)} name ${fmt(sp.logo)} times in the app.${sp.views ? ` Members' posts for these missions were seen ${big(sp.views)} times, with ${big(sp.eng)} likes, comments and shares: ${eur(sp.value)} in media value.` : ""}${sp.nm ? ` ${fmt(sp.nm)} new members joined through them.` : ""}</p></div>
+      <button class="adm-btn primary" data-act="rcsv" data-s="${esc(sp.name)}">${icon("download")}Sponsor report, CSV</button></div>` : ""}
+    <div class="acard">
+      <div class="filters aform">${fld("Sponsor", sel("rsponsor", [["all", "All missions"], ...sponsorNames.map((n) => [n, n]), ["none", "Missions without a sponsor"]], s))}${fld("Sort by", sel("rsort", [["value", "Media value"], ["views", "Views"], ["eng", "Likes, comments and shares"], ["done", "Members who took part"], ["nm", "New members"]], state.rsort))}</div>
+      ${list.length ? `<div class="scroll-x"><table class="atable wide"><thead><tr><th>Mission</th><th class="r">Done by</th><th class="r">Of those who saw it</th><th class="r">Posts</th><th class="r">Views</th><th class="r">Likes</th><th class="r">Comments</th><th class="r">Shares</th><th class="r">Value</th><th class="r">New members</th></tr></thead>
+      <tbody>${list.map((r) => `<tr class="click" data-act="rmission" data-id="${r.id}"><td class="wrap"><b>${esc(r.title)}</b><br><span class="sub">${r.type}, ${dayLabel(isoDay(rmDate(r)))}${r.sponsor ? `, with ${r.sponsor}` : ""}</span></td><td class="r">${fmt(r.done)}</td><td class="r">${pct(r.done, r.seen)}</td><td class="r">${r.posts ? fmt(r.posts) : "–"}</td><td class="r">${r.views ? big(r.views) : "–"}</td><td class="r">${r.views ? big(r.likes) : "–"}</td><td class="r">${r.views ? big(r.comments) : "–"}</td><td class="r">${r.views ? big(r.shares) : "–"}</td><td class="r">${r.value ? eur(r.value) : "–"}</td><td class="r">${r.nm ? fmt(r.nm) : "–"}</td></tr>`).join("")}</tbody>
+      <tfoot><tr><td>${list.length} mission${list.length > 1 ? "s" : ""}</td><td class="r">${fmt(tot("done"))}</td><td></td><td class="r">${fmt(tot("posts"))}</td><td class="r">${big(tot("views"))}</td><td class="r">${big(tot("likes"))}</td><td class="r">${big(tot("comments"))}</td><td class="r">${big(tot("shares"))}</td><td class="r">${eur(tot("value"))}</td><td class="r">${fmt(tot("nm"))}</td></tr></tfoot></table></div>`
+        : `<p class="sub" style="margin-top:12px">No mission matches. Try a longer period.</p>`}
     </div>`;
+}
+function postsFor(list) {
+  const out = [];
+  list.filter((r) => r.views).forEach((r, i) => [0.071, 0.046, 0.029].forEach((sh, j) => {
+    const v = r.views * sh * (1 - ((i + j) % 3) * 0.08), net = NET_NAMES[(r.net ? [0, 1, 0] : [1, 0, 3])[j]];
+    out.push({ who: POSTERS[(i * 3 + j) % POSTERS.length], net, r, ago: Math.max(0, r.ago - j), views: v, likes: v * (net === "TikTok" ? 0.088 : 0.074) * (r.er || 1), comments: v * 0.004, shares: v * 0.0058 });
+  }));
+  return out;
+}
+function resultsPosts() {
+  const k = state.psort;
+  const list = postsFor(RM.filter(inPeriod)).sort((a, b) => b[k] - a[k]).slice(0, 15);
+  return `<div class="acard"><div class="acard-top"><div><h2>Members' best posts</h2><p class="sub">Public posts made for a mission, checked through linked accounts</p></div>
+      <div class="filters aform">${fld("Sort by", sel("psort", [["views", "Views"], ["likes", "Likes"], ["comments", "Comments"], ["shares", "Shares"]], k))}</div></div>
+    ${list.length ? `<div class="scroll-x"><table class="atable wide"><thead><tr><th>Member</th><th>Network</th><th>Mission</th><th class="r">Views</th><th class="r">Likes</th><th class="r">Comments</th><th class="r">Shares</th><th class="r">Value</th></tr></thead>
+    <tbody>${list.map((p) => `<tr class="click" data-act="rmission" data-id="${p.r.id}"><td>${p.who}</td><td>${p.net}</td><td class="wrap">${esc(p.r.title)}${p.r.sponsor ? `<br><span class="sub">with ${p.r.sponsor}</span>` : ""}</td><td class="r">${big(p.views)}</td><td class="r">${big(p.likes)}</td><td class="r">${fmt(p.comments)}</td><td class="r">${fmt(p.shares)}</td><td class="r">${eur(p.views / 500)}</td></tr>`).join("")}</tbody></table></div>`
+      : `<p class="sub" style="margin-top:12px">No posts in this period.</p>`}</div>`;
+}
+function dayBars(r) {
+  const n = 14, W = 560, H = 150, B = 22, L = 4;
+  const w = Array.from({ length: n }, (_, d) => Math.exp(-d / 3.2) + (d % 7 === 3 ? 0.45 : 0) + 0.05);
+  const s = w.reduce((a, b) => a + b, 0), vals = w.map((x) => (r.posts * x) / s), max = Math.max(...vals);
+  const bw = (W - L * 2) / n;
+  const start = rmDate(r);
+  return `<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Posts each day for the first two weeks">${vals.map((v, d) => {
+    const h = ((H - B - 30) * v) / max, x = L + d * bw;
+    const day = new Date(start.getTime() + d * 864e5);
+    return `<rect x="${(x + 3).toFixed(1)}" y="${(H - B - h).toFixed(1)}" width="${(bw - 6).toFixed(1)}" height="${h.toFixed(1)}" rx="3" fill="#1d1f24" fill-opacity="${d % 7 === 3 ? 0.9 : 0.55}"><title>${dayLabel(isoDay(day))}: ${fmt(v)} posts</title></rect>${d % 2 === 0 ? `<text x="${(x + bw / 2).toFixed(1)}" y="${H - 6}" text-anchor="middle" font-size="11" fill="#5b606b">${dayLabel(isoDay(day))}</text>` : ""}`;
+  }).join("")}<text x="${L}" y="12" font-size="11" fill="#5b606b">Peak ${fmt(max)} posts a day</text></svg>`;
+}
+function missionDetail(id) {
+  const r = rmStats(RM.find((x) => x.id === id));
+  const tiers = [["Academy", 38], ["First team", 41], ["Captain", 17], ["Club legend", 4]].map(([t, p], i) => [t, p + ((r.ago + i * 3) % 5) - 2]);
+  const split = r.net || [0.55, 0.32, 0.06, 0.07];
+  const nets = NET_NAMES.map((n, i) => { const v = r.views * split[i]; return { n, posts: r.posts * split[i], v, likes: r.likes * split[i], comments: r.comments * split[i], shares: r.shares * split[i] }; });
+  const posts = postsFor([r]).sort((a, b) => b.views - a.views);
+  const body = `${r.sponsor ? `<div class="sp-inline">${sponsorMono(r.sponsor)}<span>With <b>${esc(r.sponsor)}</b>. Their name was seen ${fmt(r.logo)} times in the app.</span></div>` : ""}
+    <div class="mkpis">${mini("Members who took part", fmt(r.done), `${pct(r.done, r.seen)} of the ${fmt(r.seen)} who saw it`)}${r.views ? mini("Posts", fmt(r.posts)) + mini("Views", big(r.views)) + mini("Likes", big(r.likes)) + mini("Comments", fmt(r.comments)) + mini("Shares", fmt(r.shares)) + mini("Media value", eur(r.value), "at a €2 CPM") + mini("Reach outside members", big(r.reach)) : ""}${r.nm ? mini("New members", fmt(r.nm)) : ""}${(typeof r.extra === "function" ? r.extra() : r.extra || []).map(([l, v]) => mini(l, v)).join("")}</div>
+    ${r.views ? `<h3>Posts each day</h3><div class="chart">${dayBars(r)}</div>
+    <h3>By network</h3><div class="scroll-x"><table class="atable tight"><thead><tr><th>Network</th><th class="r">Posts</th><th class="r">Views</th><th class="r">Likes</th><th class="r">Comments</th><th class="r">Shares</th></tr></thead>
+      <tbody>${nets.map((x) => `<tr><td>${x.n}</td><td class="r">${fmt(x.posts)}</td><td class="r">${big(x.v)}</td><td class="r">${big(x.likes)}</td><td class="r">${fmt(x.comments)}</td><td class="r">${fmt(x.shares)}</td></tr>`).join("")}</tbody></table></div>
+    <h3>Best posts</h3><div class="scroll-x"><table class="atable tight"><thead><tr><th>Member</th><th>Network</th><th class="r">Views</th><th class="r">Likes</th><th class="r">Comments</th><th class="r">Shares</th></tr></thead>
+      <tbody>${posts.map((p) => `<tr><td>${p.who}</td><td>${p.net}</td><td class="r">${big(p.views)}</td><td class="r">${big(p.likes)}</td><td class="r">${fmt(p.comments)}</td><td class="r">${fmt(p.shares)}</td></tr>`).join("")}</tbody></table></div>`
+      : `<p class="sub" style="margin-top:14px">This type of mission doesn't ask for a public post, so what counts is who took part and how often members saw it.</p>`}
+    <h3>Who took part</h3><div class="splits">${tiers.map(([t, p]) => `<div><span>${t}</span><span class="bar-a"><i style="width:${p}%"></i></span><b>${p}%</b></div>`).join("")}</div>
+    <p class="sub" style="margin-top:8px">${18 + (r.ago % 9)}% joined this season. Members aged 18 to 34 did ${52 + (r.ago % 7)}% of it.</p>`;
+  openDrawer({ title: esc(r.title), sub: `${r.type}, started ${dayLabel(isoDay(rmDate(r)))}`, body,
+    footer: `<button class="adm-btn" data-act="dclose">Close</button><button class="adm-btn primary" data-act="rcsv" data-id="${r.id}">${icon("download")}${r.sponsor ? "Report for " + esc(r.sponsor) : "This mission"}, CSV</button>` });
+}
+const RCOLS = ["Mission", "Type", "Sponsor", "Started", "Done by", "Saw it", "Posts", "Views", "Likes", "Comments", "Shares", "Media value (EUR)", "New members"];
+const rcsvRow = (r) => [r.title, r.type, r.sponsor || "", isoDay(rmDate(r)), r.done, r.seen, r.posts, Math.round(r.views), Math.round(r.likes), Math.round(r.comments), Math.round(r.shares), Math.round(r.value), r.nm];
+function resultsCSV(el) {
+  const slug = (s) => s.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
+  if (el.dataset.id) {
+    const r = rmStats(RM.find((x) => x.id === el.dataset.id));
+    const split = r.net || [0.55, 0.32, 0.06, 0.07];
+    csvDownload([RCOLS, rcsvRow(r), [], ["Network", "Posts", "Views", "Likes", "Comments", "Shares"], ...NET_NAMES.map((n, i) => [n, Math.round(r.posts * split[i]), Math.round(r.views * split[i]), Math.round(r.likes * split[i]), Math.round(r.comments * split[i]), Math.round(r.shares * split[i])])], `aldermoor-${slug(r.title)}.csv`);
+    return;
+  }
+  let list = RM.filter(inPeriod).map(rmStats);
+  if (el.dataset.s) list = list.filter((r) => r.sponsor === el.dataset.s);
+  csvDownload([["Period", rPeriod().label], [], RCOLS, ...list.map(rcsvRow)], `aldermoor-results-${el.dataset.s ? slug(el.dataset.s) : "missions"}.csv`);
 }
 function admAccount() {
   const team = [["Megan Hale", "Head of supporter experience", "Owner"], ["Rafi Dorsey", "Content and social", "Editor"], ["Sana Iqbal", "Club shop", "Deliveries only"], ["Tom Ferris", "Matchday operations", "Check-ins and results"]];
@@ -3299,7 +3839,7 @@ function admBrand() {
   const head = admHead("Brand", "Set once at launch. Changes show in the member app straight away in this demo.", `<button class="adm-btn primary" data-act="gomember" data-tab="home">Open the member app</button>`) + admTabs("brand");
   if (tab === 1) return head + admModules();
   return head + `
-    <div class="acard"><h2>Style</h2><p class="sub">13 styles, all in your colours. In this demo a style changes the surfaces, type and shapes of the member app; <a href="https://fan-ip.com/demo/" target="_blank" rel="noopener">the styles demo</a> shows each full layout.</p>
+    <div class="acard"><h2>Style</h2><p class="sub">Every style comes in your colours. In this demo a style changes the surfaces, type and shapes of the member app; <a href="https://fan-ip.com/demo/" target="_blank" rel="noopener">the styles demo</a> shows each full layout.</p>
       <div class="styles8">${STYLES.map(([k, n, dsc]) => `<button class="style-opt" data-act="style" data-k="${k}" data-n="${n}" aria-pressed="${state.style === k}"><span class="thumb">${styleThumb(k)}</span>${state.style === k ? `<span class="tag">Live</span>` : k === "riso" ? `<span class="tag def">Default for new clubs</span>` : ""}<b>${n}</b><span class="d">${dsc}</span></button>`).join("")}</div></div>
     <div class="adm-grid">
       <div class="acard"><h2>Colours</h2><p class="sub">Type a hex code (#c9421b) or RGB values (201, 66, 27), or use the picker.</p>
@@ -3314,7 +3854,7 @@ function admBrand() {
 }
 
 const MODULES = [
-  ["Missions", "missions", "10 mission types", "missions", 0], ["Rewards", "rewards", "Digital, physical, experiences", "rewards"], ["League table", "table", "Season, month, private groups", "season", 2],
+  ["Missions", "missions", "Predictions, check-ins, quizzes and more", "missions", 0], ["Rewards", "rewards", "Digital, physical, experiences", "rewards"], ["League table", "table", "Season, month, private groups", "season", 2],
   ["Collection", "collection", "Album, packs, your own card designs", "season", 1], ["Matchday check-in", "pin", "QR and location, time window", "missions", 2], ["Predictions", "target", "Bonus for right result and exact score", "missions", 1],
   ["Team battles", "swords", "Sides, dates, join rules", "season", 0], ["Shared goals", "users", "Whole-community targets"], ["Giveaways", "gift", "Draws with entry rules", "rewards"],
   ["The Terrace", "terrace", "Chat and club questions"], ["Badges", "star", "24 to earn"], ["Referrals", "route", "Codes and double rewards"],
@@ -3327,12 +3867,12 @@ function admModules() {
 
 const ADMIN_PAGES = {
   today: ["Today", "grid", admToday],
-  missions: ["Missions", "missions", admMissions, ["All missions", "Predictions and results", "Check-ins"]],
+  missions: ["Missions", "missions", admMissions, ["All missions", "Predictions and results", "Check-ins", "Open questions"]],
   rewards: ["Rewards", "rewards", admRewards],
   wins: ["Winners & deliveries", "truck", admWins],
   season: ["Season", "calendar", admSeason, ["Team battles", "Collection cards", "League table"]],
   members: ["Members", "users", admMembers],
-  results: ["Results", "chart", admResults],
+  results: ["Results", "chart", admResults, ["Overview", "By mission", "Posts"]],
   brand: ["Brand", "palette", admBrand, ["Appearance", "Modules"]],
   account: ["Account", "shield", admAccount],
 };

@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="800" viewBox="0 0 800 800">
+  <title>Home jersey, signed (flat illustration)</title>
+  <defs>
+    <clipPath id="shirt">
+      <path d="M308 176 L226 204 L112 300 L176 410 L246 368 L246 646 Q400 672 554 646 L554 368 L624 410 L688 300 L574 204 L492 176 Q400 236 308 176 Z"/>
+    </clipPath>
+  </defs>
+  <rect width="800" height="800" fill="#e6e9ee"/>
+  <ellipse cx="400" cy="680" rx="210" ry="18" fill="#0b1726" opacity="0.10"/>
+  <g clip-path="url(#shirt)">
+    <rect width="800" height="800" fill="#0b4f3c"/>
+    <rect x="334" y="0" width="132" height="800" fill="#ffffff"/>
+    <rect x="348" y="0" width="104" height="800" fill="#e8b500"/>
+    <path d="M112 300 L176 410 L190 402 L126 292 Z" fill="#ffffff"/>
+    <path d="M688 300 L624 410 L610 402 L674 292 Z" fill="#ffffff"/>
+    <path d="M246 368 L246 646 L262 648 L262 360 Z" fill="#0a3f30"/>
+    <path d="M554 368 L554 646 L538 648 L538 360 Z" fill="#0a3f30"/>
+    <rect x="0" y="626" width="800" height="40" fill="#0a3f30" opacity="0.55"/>
+  </g>
+  <path d="M308 176 Q400 236 492 176" fill="none" stroke="#ffffff" stroke-width="16" stroke-linecap="round"/>
+  <path d="M292 466 C 318 426, 340 430, 334 462 C 328 494, 352 496, 372 452 C 384 426, 396 432, 392 458 C 388 484, 410 486, 432 448 C 444 428, 458 432, 452 456 C 448 474, 470 476, 510 440" fill="none" stroke="#ffffff" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

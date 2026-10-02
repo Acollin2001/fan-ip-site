@@ -2462,9 +2462,9 @@ function renderMember(scrollTop = true) {
       const src = fresh.querySelectorAll(".rail-foot .who span, .rail-points span, .points-chip span")[i]; if (src) el.textContent = src.textContent;
     });
   }
-  const view = $("#view");
+  const view = $("#view"), keep = view.scrollTop;
   view.innerHTML = SCREENS[state.tab]();
-  if (scrollTop) view.scrollTop = 0;
+  view.scrollTop = scrollTop ? 0 : keep;
   enhance(view);
   if (state.tab === "home") state.dealt = true;
   state.justIn = null;
@@ -2856,7 +2856,13 @@ document.addEventListener("click", (e) => {
       break;
     }
     case "goswaps": closeSheet(); state.tab = "terrace"; renderMember(); setTimeout(() => { const v = $("#view"), t = $("#swaps"); if (v && t) v.scrollTo({ top: t.getBoundingClientRect().top - v.getBoundingClientRect().top + v.scrollTop - 16, behavior: reduceMotion ? "auto" : "smooth" }); }, 60); break;
-    case "stab": state.stab = el.dataset.k; renderMember(false); break;
+    case "stab": {
+      state.stab = el.dataset.k;
+      const view = $("#view"), keep = view.scrollTop, sec = $("#h-season").closest("section");
+      sec.insertAdjacentHTML("afterend", seasonSection()); sec.remove();
+      view.scrollTop = keep; enhance($("#h-season").closest("section"));
+      break;
+    }
     case "ans": setAnswer(+el.dataset.i, el.dataset.s); break;
     case "answersCsv": {
       const m = MISSIONS.find((x) => x.id === el.dataset.id);

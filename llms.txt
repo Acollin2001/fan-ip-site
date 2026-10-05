@@ -2,7 +2,7 @@
 
 > FAN/IP gets brands talked about without an ad budget. It gives a brand its own fan club, under the brand's name: fans post about the brand on their own accounts, earn points, move up levels and unlock rewards, and the brand sees how many people those posts reached and what the same views would have cost as ads. Tagline: "Turn fandom into impact."
 
-FAN/IP is for consumer brands, sports clubs, gaming venues and esports teams, and artists, labels and festivals. It works in three steps: the brand creates missions; fans take part and earn points; the brand's team approves posts, hands out rewards and follows the results. Each brand has its own name, colours, words, missions and rewards; FAN/IP runs behind it. FAN/IP is run by Alexis Collin in Cologne, Germany. Contact: contact@fan-ip.com.
+FAN/IP is for brands, for sport and esports (clubs, teams, gaming venues) and for artists and creators (bands, labels, festivals, podcasters, video creators). At sign-up the brand says which one it is and starts with words and six ready missions for it. It works in three steps: the brand creates missions; fans take part and earn points; the brand's team approves posts, hands out rewards and follows the results. Each brand has its own name, colours, words, missions and rewards; FAN/IP runs behind it. FAN/IP is run by Alexis Collin in Cologne, Germany. Contact: contact@fan-ip.com.
 
 ## Main pages
 
@@ -17,10 +17,11 @@ FAN/IP is for consumer brands, sports clubs, gaming venues and esports teams, an
 
 ## By type of client
 
-- [Consumer brands](https://fan-ip.com/brands.html): beauty, fashion, food and lifestyle brands
-- [Sports clubs](https://fan-ip.com/sports-clubs.html): supporters take part between two matches
-- [Gaming and esports](https://fan-ip.com/gaming-esports.html): gaming venues, esports teams and game communities
-- [Music](https://fan-ip.com/music.html): artists, labels and festivals
+The home page asks "I'm…" and speaks to each of three doors; each door also has its own page.
+
+- [Brands](https://fan-ip.com/brands.html): beauty, fashion, food, coffee, sportswear and lifestyle brands, shops
+- [Sport and esports](https://fan-ip.com/sport.html): sports clubs, esports teams and gaming venues; supporters post, and sponsors see the reach
+- [Artists and creators](https://fan-ip.com/artists.html): bands, DJs, rappers, festivals, podcasters and video creators
 
 ## Pricing (euros, excluding VAT)
 

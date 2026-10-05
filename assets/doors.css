@@ -1,0 +1,51 @@
+/* The three doors (Oct 2026): the ticker of who FAN/IP is for, the "I'm…"
+   picker under the hero, the three door cards and the "see it with your name"
+   form. Works with assets/doors.js; without it the page stays generic. */
+
+.door{max-inline-size:36rem}
+/* Desktop: top left of the hero, on the empty side of the 1s, so the lead
+   block on the right keeps its height. Below 1024px the hero is one column
+   and the picker follows the buttons. */
+@media (min-width: 1024px){
+  .door{position:absolute;z-index:1;left:var(--margin);top:calc(var(--header-h) + 40px);inline-size:calc(6 * var(--col) + 5 * var(--gap));max-inline-size:none;padding:var(--s4) var(--s5) var(--s5);background:var(--ink);border:1px solid var(--rule-dark)}
+}
+@media (max-width: 1023px){
+  .door{order:3;margin-block-start:var(--s7)}
+}
+.door-ticker{position:relative;overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)}
+.door-ticker__track{display:flex;inline-size:max-content;animation:door-scroll 60s linear infinite}
+.door-ticker ul{display:flex;margin:0;padding:0;list-style:none}
+.door-ticker li{padding-inline-end:1.25em;font:500 .9375rem/1.8 var(--font-body);color:var(--ivory-muted);white-space:nowrap}
+.door-ticker li:after{content:"/";padding-inline-start:1.25em;color:var(--burnished)}
+.door:hover .door-ticker__track,.door:focus-within .door-ticker__track{animation-play-state:paused}
+@keyframes door-scroll{to{transform:translateX(-50%)}}
+@media (prefers-reduced-motion: reduce){
+  .door-ticker__track{animation:none}
+}
+
+.door-pick{display:flex;flex-wrap:wrap;align-items:center;gap:var(--s2);margin-block-start:var(--s3)}
+.door-q{margin-inline-end:var(--s1);font:500 .9375rem/1 var(--font-body);color:var(--ivory)}
+.door-chip{min-block-size:44px;padding-inline:var(--s4);border:1px solid var(--ink-muted);border-radius:999px;background:var(--ink);color:var(--ivory);font:500 .9375rem/1 var(--font-body);cursor:pointer;transition:border-color .2s,background-color .2s,color .2s}
+.door-chip:hover{border-color:var(--ivory-muted)}
+.door-chip:focus-visible{outline:2px solid var(--signal);outline-offset:3px}
+.door-chip[aria-pressed="true"]{background:var(--gold);border-color:var(--gold);color:var(--ink)}
+
+/* Three door cards instead of four. */
+.aud-grid--3{grid-template-columns:repeat(3,minmax(0,1fr))}
+.aud-eg{margin-block-start:auto;color:var(--ink-muted)}
+
+/* "See it with your name" */
+.door-try{margin-block:var(--s7) var(--s5);max-inline-size:44rem}
+.door-try__label{display:block;margin-block-end:var(--s3);font-family:var(--font-display);font-weight:500;font-size:clamp(1.375rem,2vw,1.875rem);line-height:1.1;letter-spacing:-.01em;color:var(--ink)}
+.door-try__row{display:flex;gap:var(--s3)}
+.door-try__input{flex:1;min-inline-size:0;block-size:48px;padding-inline:var(--s4);border:1px solid var(--rule-sand);border-radius:var(--r-btn);background:#fff;color:var(--ink);font:500 1rem/1 var(--font-body)}
+.door-try__input:focus-visible{outline:2px solid var(--burnished);outline-offset:2px}
+.door-try .btn{margin:0;inline-size:auto;border:0;cursor:pointer}
+.door-try__note{margin-block-start:var(--s2);color:var(--ink-muted)}
+
+@media (max-width: 767px){
+  .aud-grid--3{grid-template-columns:minmax(0,1fr)}
+  .door-try__row{flex-direction:column}
+  .door-try__input{flex:none;inline-size:100%}
+  .door-try .btn{inline-size:100%}
+}

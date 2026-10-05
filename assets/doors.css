@@ -1,0 +1,125 @@
+/* The three worlds (Oct 2026): the ticker of who FAN/IP is for in the hero,
+   "Where do your fans gather?" after "why", the three door cards and the
+   "see it with your name" form. Works with assets/doors.js; without it the
+   page stays generic. */
+
+.door{max-inline-size:36rem}
+/* Desktop: top left of the hero, on the empty side of the 1s, so the lead
+   block on the right keeps its height. Below 1024px the hero is one column
+   and the picker follows the buttons. */
+@media (min-width: 1024px){
+  .door{position:absolute;z-index:1;left:var(--margin);top:calc(var(--header-h) + 40px);inline-size:calc(6 * var(--col) + 5 * var(--gap));max-inline-size:none;padding:var(--s4) var(--s5) var(--s5);background:var(--ink);border:1px solid var(--rule-dark)}
+}
+@media (max-width: 1023px){
+  .door{order:3;margin-block-start:var(--s7)}
+}
+.door-ticker{position:relative;overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)}
+.door-ticker__track{display:flex;inline-size:max-content;animation:door-scroll 60s linear infinite}
+.door-ticker ul{display:flex;margin:0;padding:0;list-style:none}
+.door-ticker li{padding-inline-end:1.25em;font:500 .9375rem/1.8 var(--font-body);color:var(--ivory-muted);white-space:nowrap}
+.door-ticker li:after{content:"/";padding-inline-start:1.25em;color:var(--burnished)}
+.door:hover .door-ticker__track,.door:focus-within .door-ticker__track{animation-play-state:paused}
+@keyframes door-scroll{to{transform:translateX(-50%)}}
+@media (prefers-reduced-motion: reduce){
+  .door-ticker__track{animation:none}
+}
+
+.door-go{display:inline-flex;align-items:center;gap:.4em;min-block-size:44px;margin-block-start:var(--s2);font:500 .9375rem/1 var(--font-body);color:var(--ivory);text-decoration:underline;text-underline-offset:.25em}
+.door-go span{color:var(--gold)}
+.door-go:focus-visible{outline:2px solid var(--signal);outline-offset:3px}
+
+/* Where do your fans gather? */
+.world{position:relative;overflow:clip;padding-block:var(--s10) var(--s9);background:var(--bg);color:var(--fg);border-block-start:1px solid var(--rule)}
+.world-title{max-inline-size:14ch}
+.world-lead{max-inline-size:34rem;margin-block:var(--s5) var(--s8);color:var(--muted)}
+.world-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--gap)}
+.world-card{position:relative;display:flex;flex-direction:column;align-items:flex-start;gap:var(--s2);padding:var(--s5);border:1px solid var(--rule-dark);border-radius:var(--r-btn);background:var(--warm-black);color:var(--ivory);text-align:start;font:inherit;cursor:pointer;transition:border-color .3s,background-color .3s,transform .3s var(--ease-cut)}
+.world-card:hover,.world-card:focus-visible{border-color:var(--ivory-muted);transform:translateY(-4px)}
+.world-card:focus-visible{outline:2px solid var(--signal);outline-offset:3px}
+.world-card[aria-pressed="true"]{border-color:var(--gold);background:var(--plate)}
+.world-card[aria-pressed="true"]:after{content:"Your world";position:absolute;top:var(--s4);right:var(--s4);padding:.35em .7em;border-radius:999px;background:var(--gold);color:var(--ink);font:600 .75rem/1 var(--font-body);letter-spacing:.02em}
+.world-k{margin-block-start:var(--s4);color:var(--ivory-muted);text-transform:uppercase;letter-spacing:.08em;font:500 .75rem/1.2 var(--font-body)}
+.world-name{font-family:var(--font-display);font-weight:500;font-size:clamp(1.5rem,2.2vw,2.125rem);line-height:1.05;letter-spacing:-.015em}
+.world-line{color:var(--ivory-muted);font:400 .9375rem/1.4 var(--font-body)}
+.world-status{min-block-size:1.5em;margin-block-start:var(--s5);color:var(--ivory);font:500 1rem/1.5 var(--font-body)}
+.world-status a{color:var(--gold);text-underline-offset:.25em}
+
+/* The drawings: off until the card is pointed at or chosen. */
+.world-art{display:block;inline-size:100%;block-size:auto;overflow:visible}
+.world-art .line,.world-art .line-rect,.world-art .lamp-head,.world-art .sign-text{fill:none;stroke:var(--ivory-muted);stroke-width:2;stroke-linecap:round;stroke-linejoin:round;transition:stroke .4s}
+.world-art .crowd circle,.world-art .goods > *{fill:var(--ivory-muted);transition:fill .4s}
+.world-art .crowd--lit circle{fill:var(--gold);opacity:0;transition:opacity .4s .15s}
+.world-art .lamps circle{fill:var(--rule-dark);transition:fill .3s}
+.world-art .beam{fill:var(--signal);opacity:0;transition:opacity .5s}
+.world-art .glow{fill:var(--signal);opacity:0;transition:opacity .5s}
+.world-art .sign{fill:none;stroke:var(--ivory-muted);stroke-width:2;transition:fill .4s,stroke .4s}
+.world-art .knob,.world-art .mic-head{fill:var(--ivory-muted)}
+.world-art .curtain{transition:transform .8s var(--ease-cut)}
+.world-art .cloth{fill:#3a2a22;stroke:var(--ivory-muted);stroke-width:2}
+.world-art .fold{fill:none;stroke:#5a4033;stroke-width:2}
+.world-card:is(:hover,:focus-visible,[aria-pressed="true"]) .line,
+.world-card:is(:hover,:focus-visible,[aria-pressed="true"]) .line-rect,
+.world-card:is(:hover,:focus-visible,[aria-pressed="true"]) .lamp-head{stroke:var(--ivory)}
+.world-card:is(:hover,:focus-visible,[aria-pressed="true"]) .lamps circle{fill:var(--signal)}
+.world-card:is(:hover,:focus-visible,[aria-pressed="true"]) .beam{opacity:.16}
+.world-card:is(:hover,:focus-visible,[aria-pressed="true"]) .glow{opacity:.14}
+.world-card:is(:hover,:focus-visible,[aria-pressed="true"]) .crowd circle,
+.world-card:is(:hover,:focus-visible,[aria-pressed="true"]) .goods > *{fill:var(--ivory)}
+.world-card:is(:hover,:focus-visible,[aria-pressed="true"]) .crowd--lit circle{opacity:1;fill:var(--gold)}
+.world-card:is(:hover,:focus-visible,[aria-pressed="true"]) .sign{fill:var(--gold);stroke:var(--gold)}
+.world-card:is(:hover,:focus-visible,[aria-pressed="true"]) .sign-text{stroke:var(--ink)}
+.world-card:is(:hover,:focus-visible,[aria-pressed="true"]) .curtain--l{transform:translateX(-96px)}
+.world-card:is(:hover,:focus-visible,[aria-pressed="true"]) .curtain--r{transform:translateX(96px)}
+.world-card:is(:hover,:focus-visible,[aria-pressed="true"]) .mic-head{fill:var(--gold)}
+
+/* The gold slash that crosses the screen when a world is picked. */
+.world-sweep{position:fixed;inset:0;z-index:60;pointer-events:none;overflow:hidden;visibility:hidden}
+.world-sweep:before{content:"";position:absolute;top:-10%;bottom:-10%;left:0;inline-size:38vw;background:var(--blade-btn);transform:translateX(-60vw) skewX(-18deg)}
+.world-sweep.is-on{visibility:visible}
+.world-sweep.is-on:before{animation:world-sweep .8s var(--ease-cut) forwards}
+@keyframes world-sweep{to{transform:translateX(130vw) skewX(-18deg)}}
+
+/* Change world, while the picker is off screen. */
+.world-chip{position:fixed;z-index:50;left:var(--margin);bottom:20px;display:inline-flex;align-items:center;gap:.6em;min-block-size:44px;padding-inline:var(--s4);border:1px solid var(--gold);border-radius:999px;background:var(--ink);color:var(--ivory);font:500 .875rem/1 var(--font-body);text-decoration:none;box-shadow:0 6px 24px rgb(0 0 0 / .25)}
+.world-chip[hidden]{display:none}
+.world-chip b{font-weight:600;color:var(--gold)}
+.world-chip__change{text-decoration:underline;text-underline-offset:.2em;color:var(--ivory-muted)}
+.world-chip:focus-visible{outline:2px solid var(--signal);outline-offset:3px}
+
+.prod-adapt{grid-column:1 / -1;margin:0;color:var(--gold)}
+.prod-adapt[hidden]{display:none}
+
+@media (prefers-reduced-motion: reduce){
+  .world-card,.world-art *{transition:none}
+}
+@media (max-width: 1023px){
+  .world-grid{grid-template-columns:minmax(0,1fr)}
+  .world-card{display:grid;grid-template-columns:minmax(0,9rem) minmax(0,1fr);grid-template-rows:auto auto 1fr;column-gap:var(--s4);row-gap:var(--s1);align-items:start}
+  .world-art{grid-row:1 / 4}
+  .world-k{margin-block-start:0}
+  .world-card[aria-pressed="true"]:after{position:static;grid-column:2;justify-self:start;margin-block-start:var(--s2)}
+  .world{padding-block:var(--s8)}
+}
+
+/* Three door cards instead of four. */
+.aud-grid--3{grid-template-columns:repeat(3,minmax(0,1fr))}
+.aud-eg{margin-block-start:auto;color:var(--ink-muted)}
+.aud-demos{margin-block-start:var(--s5);color:var(--ink)}
+.aud-demos a{color:var(--ink);text-underline-offset:.2em}
+.aud-demos .t-small{display:block;margin-block-start:var(--s1);color:var(--ink-muted)}
+
+/* "See it with your name" */
+.door-try{margin-block:var(--s7) var(--s5);max-inline-size:44rem}
+.door-try__label{display:block;margin-block-end:var(--s3);font-family:var(--font-display);font-weight:500;font-size:clamp(1.375rem,2vw,1.875rem);line-height:1.1;letter-spacing:-.01em;color:var(--ink)}
+.door-try__row{display:flex;gap:var(--s3)}
+.door-try__input{flex:1;min-inline-size:0;block-size:48px;padding-inline:var(--s4);border:1px solid var(--rule-sand);border-radius:var(--r-btn);background:#fff;color:var(--ink);font:500 1rem/1 var(--font-body)}
+.door-try__input:focus-visible{outline:2px solid var(--burnished);outline-offset:2px}
+.door-try .btn{margin:0;inline-size:auto;border:0;cursor:pointer}
+.door-try__note{margin-block-start:var(--s2);color:var(--ink-muted)}
+
+@media (max-width: 767px){
+  .aud-grid--3{grid-template-columns:minmax(0,1fr)}
+  .door-try__row{flex-direction:column}
+  .door-try__input{flex:none;inline-size:100%}
+  .door-try .btn{inline-size:100%}
+}

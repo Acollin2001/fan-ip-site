@@ -1,15 +1,15 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-door="sport">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>FAN/IP · Get your brand talked about by your fans, without ads</title>
-  <meta name="description" content="Get your brand talked about without an ad budget. FAN/IP gives your fans a reason to post about you, rewards them for it and shows you how many people they reached.">
+  <title>FAN/IP for sport and esports · Supporters who post, reach your sponsors can see</title>
+  <meta name="description" content="Give your supporters a reason to post about the club, reward them for it and show your sponsors how many people they reached. A fan club under your name, for sports clubs, esports teams and gaming venues.">
   <meta property="og:title" content="FAN/IP · Turn fandom into impact.">
-  <meta property="og:description" content="Get your brand talked about. Without an ad budget. Your fans post about you, and you see how many people they reached.">
+  <meta property="og:description" content="Give your supporters a reason to post about the club, reward them for it and show your sponsors how many people they reached. A fan club under your name, for sports clubs, esports teams and gaming venues.">
   <meta property="og:site_name" content="FAN/IP">
-  <meta property="og:url" content="https://fan-ip.com/">
-  <link rel="canonical" href="https://fan-ip.com/">
+  <meta property="og:url" content="https://fan-ip.com/sport.html">
+  <link rel="canonical" href="https://fan-ip.com/sport.html">
   <meta property="og:type" content="website">
   <meta property="og:locale" content="en_US">
   <meta property="og:image" content="https://fan-ip.com/og-image.png">
@@ -18,7 +18,7 @@
   <meta property="og:image:alt" content="FAN/IP. Turn fandom into impact. The white-label fan activation platform for brands.">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="FAN/IP · Turn fandom into impact.">
-  <meta name="twitter:description" content="Get your brand talked about. Without an ad budget. Your fans post about you, and you see how many people they reached.">
+  <meta name="twitter:description" content="Give your supporters a reason to post about the club, reward them for it and show your sponsors how many people they reached. A fan club under your name, for sports clubs, esports teams and gaming venues.">
   <meta name="twitter:image" content="https://fan-ip.com/og-image.png">
   <meta name="twitter:image:alt" content="FAN/IP. Turn fandom into impact. The white-label fan activation platform for brands.">
   <meta name="theme-color" content="#12110E">
@@ -212,7 +212,7 @@
         <h2 id="world-title" class="world-title t-h2">Where do your fans gather?</h2>
         <p class="world-lead t-lead">Pick yours. Everything below adapts to your world, and you can still change every word, mission and reward later.</p>
         <div class="world-grid" role="group" aria-labelledby="world-title">
-          <button type="button" class="world-card" data-door-pick="sport" aria-pressed="false">
+          <button type="button" class="world-card" data-door-pick="sport" aria-pressed="true">
             <svg class="world-art" viewBox="0 0 320 200" aria-hidden="true" focusable="false">
               <polygon class="beam" points="44,44 20,190 120,190"/><polygon class="beam" points="276,44 200,190 300,190"/>
               <path class="line" d="M44 190V50M276 190V50"/>
@@ -272,18 +272,18 @@
     <section id="product" class="prod" data-surface="warm" aria-labelledby="product-title">
       <div class="container prod-grid">
         <h2 id="product-title" class="prod-title t-h2">Three steps.<br>Your fans do the rest.</h2>
-        <p class="prod-adapt t-small" data-slot="adapt" hidden></p>
+        <p class="prod-adapt t-small" data-slot="adapt">Examples for a club or team. Your challenges, words and rewards are yours to set, sponsors included.</p>
         <ol class="steps3" role="list">
-          <li><span class="steps3__n">1</span><h3 class="steps3__h">Give them a reason.</h3><p class="t-body" data-slot="step1">Set a mission: a photo from the stands, an unboxing, a friend brought along. You choose the points and the rewards.</p></li>
+          <li><span class="steps3__n">1</span><h3 class="steps3__h">Give them a reason.</h3><p class="t-body" data-slot="step1" data-generic="Set a mission: a photo from the stands, an unboxing, a friend brought along. You choose the points and the rewards.">Set a challenge: a matchday photo, a shout-out for your sponsor, a mate brought to the next home game. You choose the points and the rewards.</p></li>
           <li><span class="steps3__n">2</span><h3 class="steps3__h">They post to their own followers.</h3><p class="t-body">Fans share from their own accounts. Each approved post earns points, levels and rewards.</p></li>
           <li><span class="steps3__n">3</span><h3 class="steps3__h">You see the reach.</h3><p class="t-body">Every post, the views it earned and what the same views would have cost as ads.</p></li>
         </ol>
         <ol class="prod-journey">
           <li class="vig vig--mission">
             <p class="vig-label">Mission</p>
-            <div class="vig-value"><p class="vig-reward"><span class="vig-num" data-slot="vigPoints">+50</span> <span class="vig-unit">points</span></p></div>
-            <p class="vig-title" data-slot="vigTitle">Post your unboxing</p>
-            <p class="vig-text" data-slot="vigText">One photo on your feed. Tag the brand.</p>
+            <div class="vig-value"><p class="vig-reward"><span class="vig-num" data-slot="vigPoints" data-generic="+50">+60</span> <span class="vig-unit">points</span></p></div>
+            <p class="vig-title" data-slot="vigTitle" data-generic="Post your unboxing">Matchday photo</p>
+            <p class="vig-text" data-slot="vigText" data-generic="One photo on your feed. Tag the brand.">From the stands. Tag the club and the sponsor.</p>
           </li>
           <li class="vig vig--progress">
             <p class="vig-label">Season 2</p>
@@ -301,7 +301,7 @@
           <li class="vig vig--reward">
             <p class="vig-label">Reach</p>
             <div class="vig-value"><p class="vig-reward"><span class="vig-num">1,860</span> <span class="vig-unit">views</span></p></div>
-            <p class="vig-title" data-slot="reachTitle">One unboxing post</p>
+            <p class="vig-title" data-slot="reachTitle" data-generic="One unboxing post">One matchday post</p>
             <p class="vig-text">Seen by her own followers.</p>
           </li>
           <li class="vig vig--community">
@@ -329,15 +329,15 @@
             <tr><th scope="col" class="t-small">Example community</th><td class="val-slash" aria-hidden="true"></td><th scope="col" class="t-small">One month</th></tr>
           </thead>
           <tbody>
-            <tr><td class="t-body">Members</td><td class="val-slash" aria-hidden="true">/</td><td class="t-keyword" data-slot="members">3,000</td></tr>
+            <tr><td class="t-body">Members</td><td class="val-slash" aria-hidden="true">/</td><td class="t-keyword" data-slot="members" data-generic="3,000">8,000</td></tr>
             <tr><td class="t-body">Who post in a month</td><td class="val-slash" aria-hidden="true">/</td><td class="t-keyword">10%</td></tr>
             <tr><td class="t-body">Posts each</td><td class="val-slash" aria-hidden="true">/</td><td class="t-keyword">2</td></tr>
             <tr><td class="t-body">Views a post</td><td class="val-slash" aria-hidden="true">/</td><td class="t-keyword">400</td></tr>
-            <tr class="val-sum"><td class="t-body">Views your fans earned</td><td class="val-slash" aria-hidden="true">=</td><td class="t-keyword" data-slot="views">240,000</td></tr>
-            <tr><td class="t-body">What the same views would cost as ads, at a €2 CPM</td><td class="val-slash" aria-hidden="true">=</td><td class="t-keyword" data-slot="euros">€480</td></tr>
+            <tr class="val-sum"><td class="t-body">Views your fans earned</td><td class="val-slash" aria-hidden="true">=</td><td class="t-keyword" data-slot="views" data-generic="240,000">640,000</td></tr>
+            <tr><td class="t-body">What the same views would cost as ads, at a €2 CPM</td><td class="val-slash" aria-hidden="true">=</td><td class="t-keyword" data-slot="euros" data-generic="€480">€1,280</td></tr>
           </tbody>
         </table>
-        <p class="val-actions"><a class="btn btn--primary" href="reach-calculator.html" data-slot="calc">Work out your numbers</a> <a class="hero-link" href="book-a-demo.html">Book a demo</a></p>
+        <p class="val-actions"><a class="btn btn--primary" href="reach-calculator.html?members=8000" data-slot="calc" data-generic-href="reach-calculator.html">Work out your numbers</a> <a class="hero-link" href="book-a-demo.html">Book a demo</a></p>
         <p class="val-foot t-body">An estimate, not a promise. Views come first; the euro figure uses your own CPM, set to whatever you pay for ads. Clubs can send the report to their sponsor with a private link.</p>
         <p class="val-foot t-small">Illustrative figures. In FAN/IP, post statistics come from members’ linked accounts; Instagram and TikTok connections are waiting for the networks’ approval.</p>
       </div>

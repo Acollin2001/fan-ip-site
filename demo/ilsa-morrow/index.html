@@ -502,23 +502,32 @@ img, svg { max-width: 100%; }
 .sl-row:hover { background: rgba(18,16,22,0.04); }
 .sl-no { font-family: var(--f-mono); font-size: 0.8125rem; color: #7d7568; }
 .sl-t { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
-.sl-t b { font-family: var(--f-display); font-weight: 700; font-size: 1.02rem; line-height: 1.15; text-transform: uppercase; letter-spacing: 0.005em; }
-.sl-t span { font-family: var(--f-mono); font-size: 0.6875rem; color: #6c655a; }
-.sl-t .city { display: inline-block; margin-right: 6px; padding: 0 5px; background: var(--nuit); color: var(--sel); }
-.sl-pts { font-family: var(--f-display); font-weight: 800; font-size: 1.15rem; color: var(--rouge-d); white-space: nowrap; }
-.sl-row[data-done] .sl-t b { text-decoration: line-through; text-decoration-color: var(--rouge); text-decoration-thickness: 3px; }
+.sl-t b { font-family: var(--f-text); font-weight: 700; font-size: 1rem; line-height: 1.25; letter-spacing: -0.005em; }
+.sl-t > span { font-family: var(--f-text); font-size: 0.8125rem; line-height: 1.35; color: #5f584d; }
+.sl-t .city { display: inline-block; margin-right: 6px; padding: 0 5px; font-family: var(--f-mono); font-size: 0.625rem; vertical-align: 1px; background: var(--nuit); color: var(--sel); }
+.sl-pts { display: flex; flex-direction: column; align-items: flex-end; font-family: var(--f-display); font-weight: 800; font-size: 1.05rem; line-height: 1; color: var(--rouge-d); white-space: nowrap; }
+.sl-pts small { margin-top: 3px; font-family: var(--f-mono); font-size: 0.5625rem; font-weight: 400; color: #7d7568; }
+.sl-group { display: flex; justify-content: space-between; align-items: baseline; gap: 10px; padding: 16px 2px 4px; font-family: var(--f-mono); font-size: 0.6875rem; letter-spacing: 0.06em; text-transform: uppercase; color: #6c655a; border-bottom: 1px solid var(--sel-2); }
+.sl-group b { font-weight: 700; color: var(--nuit); }
+.sl-row.is-top { background: rgba(240, 65, 47, 0.08); box-shadow: inset 3px 0 0 var(--rouge); padding-left: 8px; }
+.sl-row.is-top .sl-t b { font-size: 1.15rem; }
+.sl-row.is-top .sl-pts { font-size: 1.35rem; }
+.sl-row[data-done] .sl-t b { font-weight: 500; color: #6c655a; text-decoration: line-through; text-decoration-color: var(--rouge); text-decoration-thickness: 2px; }
 .sl-row[data-done] .sl-pts { color: #7d7568; font-family: var(--f-mono); font-size: 0.75rem; font-weight: 400; }
-.sl-row[data-locked] { opacity: 0.55; }
-.sl-row[data-locked] .sl-pts { font-family: var(--f-mono); font-size: 0.6875rem; font-weight: 400; color: #6c655a; }
+.sl-row[data-locked] .sl-t b { font-weight: 600; color: #4d473f; }
+.sl-row[data-locked] .sl-t > span, .sl-row[data-locked] .sl-no { color: #8a8274; }
+.sl-row[data-locked] .sl-pts { font-family: var(--f-mono); font-size: 0.75rem; font-weight: 400; color: #6c655a; }
 .pv .sl-row { grid-template-columns: 20px minmax(0, 1fr); gap: 2px 8px; }
-.pv .sl-pts { grid-column: 2; font-size: 1rem; }
+.pv .sl-pts { grid-column: 2; flex-direction: row; gap: 4px; align-items: baseline; font-size: 1rem; }
 .pv .sl-t b, .pv .sl-t b:only-child { font-size: 0.875rem; }
-@container dev (min-width: 820px) { .setlist { padding: 36px 34px 26px; } .sl-t b { font-size: 1.2rem; } }
+@container dev (min-width: 820px) { .setlist { padding: 36px 34px 26px; } .sl-t b { font-size: 1.0625rem; } .sl-row.is-top .sl-t b { font-size: 1.3rem; } }
 .setlist-wrap { display: grid; gap: 26px; }
 @container dev (min-width: 1080px) { .setlist-wrap { grid-template-columns: minmax(0, 1fr) 300px; align-items: start; } }
 .rules { display: grid; gap: 10px; }
 .rules div { padding: 14px; border-radius: 10px; background: var(--scene); font-size: 0.875rem; color: var(--ink-2); }
-.rules b { display: block; font-family: var(--f-display); font-weight: 800; color: var(--ink); font-size: 1rem; text-transform: uppercase; }
+.rules b { display: block; margin-bottom: 2px; font-family: var(--f-text); font-weight: 700; color: var(--ink); font-size: 0.9375rem; }
+.rules .played { background: none; box-shadow: inset 0 0 0 1px var(--line); }
+.rules .played > span:first-child { display: block; font-family: var(--f-mono); font-size: 0.6875rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-3); }
 
 /* ---------- Tour: city tickets ---------- */
 .stubs { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
@@ -1366,12 +1375,12 @@ function routeMap(big = false) {
   return `<div class="route${big ? " big" : ""}"><svg viewBox="-6 -4 212 150" role="img" aria-label="The tour route, ${state.got.size} cities checked in">${lines}${dots}</svg>
     <div class="legend"><span><i style="background:${K.red}"></i>Checked in</span><span><i style="background:${K.sel}"></i>Next</span><span><i style="background:${K.sc3}"></i>Played</span><span><i style="border:1px solid #8a8494"></i>Coming</span></div></div>`;
 }
-function setlistRow(m, i) {
+function setlistRow(m, i, top) {
   const done = state.done.has(m.id), lk = locked(m) && !done;
-  return `<button class="sl-row" data-act="mission" data-id="${m.id}" ${done ? "data-done" : ""} ${lk ? "data-locked" : ""}>
+  return `<button class="sl-row${top ? " is-top" : ""}" data-act="mission" data-id="${m.id}" ${done ? "data-done" : ""} ${lk ? "data-locked" : ""}>
     <span class="sl-no">${String(i + 1).padStart(2, "0")}</span>
     <span class="sl-t"><b>${esc(m.title)}</b><span>${m.city ? `<span class="city">${city(m.city).city.toUpperCase()}</span>` : ""}${esc(m.meta)}</span></span>
-    <span class="sl-pts">${done ? "done" : lk ? "show day" : `+${m.pts}`}</span></button>`;
+    <span class="sl-pts">${done ? "done" : `+${m.pts}<small>${lk ? "on show day" : BRAND.word}</small>`}</span></button>`;
 }
 function tideGoal(compact) {
   const n = goalPct(), open = state.goal >= 50000;
@@ -1409,18 +1418,31 @@ function screenHome() {
     </div>
     <div class="duo"><section class="sec"><div class="sec-head"><h2 class="h-sec">The route</h2><button class="link" data-act="tab" data-tab="tour">${state.got.size} of 12 cities</button></div>${routeMap()}</section>
     <section class="sec"><div class="sec-head"><h2 class="h-sec">Tonight's setlist</h2><button class="link" data-act="tab" data-tab="setlist">All ${MISSIONS.length}</button></div>
-      <div class="setlist"><div class="sl-head"><b>Missions</b><span>${openMissions().length} to play</span></div>${MISSIONS.slice(0, 4).map(setlistRow).join("")}</div></section></div>
+      <div class="setlist"><div class="sl-head"><b>Missions</b><span>${openMissions().length} to play</span></div>${MISSIONS.slice(0, 4).map((m, i) => setlistRow(m, i, i === 0)).join("")}</div></section></div>
     ${tideGoal(true)}`;
 }
 const MFILT = [["all", "Every mission"], ["lyo", "Lyon"], ["any", "From anywhere"]];
+// Open now first (the best one leads), then what opens at the show, then done.
+function slGroups(list) {
+  let n = 0;
+  const row = (m, top) => setlistRow(m, n++, top);
+  const isDone = (m) => state.done.has(m.id);
+  const open = list.filter((m) => !isDone(m) && !locked(m)).sort((a, b) => b.pts - a.pts);
+  const show = list.filter((m) => !isDone(m) && locked(m));
+  const done = list.filter(isDone);
+  const head = (t, n) => `<div class="sl-group"><b>${t}</b><span>${n}</span></div>`;
+  return (open.length ? head("Open now", `${open.length} to play`) + open.map((m, i) => row(m, i === 0)).join("") : "")
+    + (show.length ? head("On show day", `opens in ${NEXT.city}`) + show.map((m) => row(m)).join("") : "")
+    + (done.length ? head("Played", `${done.length} done`) + done.map((m) => row(m)).join("") : "");
+}
 function screenSetlist() {
   const list = MISSIONS.filter((m) => state.filter === "all" || (state.filter === "lyo" ? m.city === "lyo" : !m.city || m.city !== "lyo"));
   return `<header><span class="kicker">THE SETLIST</span><h1 class="h-page">Play it your way, <em>post it loud.</em></h1>
       <p class="lede">Each mission is something you do and share on your own account. Paste the link, we check it, the notes land. Up to three a day, plus whatever the show brings.</p></header>
     <div class="chips" role="group" aria-label="Filter">${MFILT.map(([k, l]) => `<button class="chip" data-act="filter" data-f="${k}" aria-pressed="${state.filter === k}">${l}</button>`).join("")}</div>
     <div class="setlist-wrap">
-      <div class="setlist"><div class="sl-head"><b>Marée haute tour</b><span>${NEXT.city.toUpperCase()}, ${dayNum(NEXT.date).toUpperCase()}</span></div>${list.map((m) => setlistRow(m, MISSIONS.indexOf(m))).join("")}</div>
-      <aside class="rules"><div><b>Posts count for 30 days</b>Every view your post gets in its first 30 days is counted. Public posts only.</div><div><b>The show unlocks the rest</b>Check-in and setlist missions open on show day, at the venue.</div><div><b>Played this month</b>${PAST.map(([t, p, d]) => `<span style="display:flex;justify-content:space-between;gap:8px;font-family:var(--f-mono);font-size:.75rem;padding-top:6px"><span>${t}</span><span>+${p}</span></span>`).join("")}</div></aside>
+      <div class="setlist"><div class="sl-head"><b>Marée haute tour</b><span>${NEXT.city.toUpperCase()}, ${dayNum(NEXT.date).toUpperCase()}</span></div>${slGroups(list)}</div>
+      <aside class="rules"><div><b>Posts count for 30 days</b>Every view your post gets in its first 30 days is counted. Public posts only.</div><div><b>The show unlocks the rest</b>Check-in and setlist missions open on show day, at the venue.</div><div class="played"><span>Played this month</span>${PAST.map(([t, p, d]) => `<span style="display:flex;justify-content:space-between;gap:8px;font-size:.8125rem;padding-top:6px"><span>${t}</span><span>+${p}</span></span>`).join("")}</div></aside>
     </div>`;
 }
 function stubHtml(c, i) {
@@ -1537,7 +1559,7 @@ function singBody(m) {
     <div id="recZone" style="display:grid;gap:10px"><div class="meter" id="meter">${Array.from({ length: 28 }, () => "<i></i>").join("")}</div>
       <div class="rec-time"><span>REC</span><b id="recSec">0:20</b><span>20 s max</span></div>
       <button class="btn btn-red btn-block" data-act="sing">${icon("mic")}Start singing</button>
-      <p class="note">In this demo the mic stays off and the clock runs at triple speed.</p></div>`;
+      <p class="note">In this demo the mic stays off.</p></div>`;
 }
 function checkinBody(m) {
   return `<p>${esc(m.brief)}</p>
@@ -1611,24 +1633,31 @@ function onAction(act, el) {
     case "sing": {
       el.disabled = true; el.innerHTML = `<span class="spin"></span>Recording`;
       const bars = $$("#meter i"), lines = $$("#lyr div"); $("#meter").classList.add("live");
-      let t = 0;
+      // Real time: twenty seconds on the clock, a lyric line every five.
+      const t0 = Date.now();
       openSheet.timer = setInterval(() => {
-        t += 1; const left = Math.max(0, 20 - t / 3);
+        const t = (Date.now() - t0) / 1000, left = Math.max(0, 20 - t);
         $("#recSec").textContent = "0:" + String(Math.ceil(left)).padStart(2, "0");
         bars.forEach((b) => (b.style.height = 10 + Math.random() * 85 + "%"));
-        lines.forEach((l, i) => l.classList.toggle("on", Math.floor(t / 15) % 4 === i));
+        lines.forEach((l, i) => l.classList.toggle("on", Math.floor(t / 5) % 4 === i));
         if (left <= 0) {
           clearInterval(openSheet.timer); $("#meter").classList.remove("live"); bars.forEach((b) => (b.style.height = "6%"));
-          el.outerHTML = `<p class="note">Twenty seconds, done. Post it with <b>#MaréeHaute</b> and tag <b>@ilsamorrow</b>.</p><button class="btn btn-red btn-block" data-act="postsing">Post it and send the link</button>`;
+          el.outerHTML = `<div id="singPost" style="display:grid;gap:10px"><p class="note">Twenty seconds, done. Post it on your account with <b>#MaréeHaute</b> and tag <b>@ilsamorrow</b>, then paste the link here.</p>
+            <div class="linkbox"><label>Where did you post it?</label><div class="netpick">${["TikTok", "Instagram", "YouTube Shorts"].map((n) => `<button data-act="net" data-n="${n}" aria-pressed="${state.net === n}">${n}</button>`).join("")}</div></div>
+            <div class="linkbox"><label for="postLink">Link to your post</label><div class="row"><input id="postLink" placeholder="https://" value="" inputmode="url" autocomplete="off"><button class="btn btn-line btn-sm" data-act="samplelink">Sample</button></div></div>
+            <button class="btn btn-red btn-block" data-act="postsing">Check my post</button></div>`;
+          $("#singPost").scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth", block: "center" });
         }
-      }, reduceMotion ? 10 : 111);
+      }, 111);
       return;
     }
     case "postsing": {
+      const link = ($("#postLink").value || "").trim();
+      if (!/^https?:\/\/\S+\.\S+/.test(link)) { toast("Paste the link to your post first, or use the sample"); $("#postLink").focus(); return; }
       const m = mission("sing"), z = $("#recZone");
-      z.innerHTML = `<div class="checking"><span class="spin"></span>Looking for your video on TikTok...</div>`;
+      z.innerHTML = `<div class="checking"><span class="spin"></span>Looking for your video on ${state.net}...</div>`;
       setTimeout(() => {
-        state.posts.unshift({ title: "Sing the chorus of 'Marée haute'", net: "TikTok", city: "", ago: 0, views: 412, likes: 58, fresh: 1, kind: "stage" });
+        state.posts.unshift({ title: "Sing the chorus of 'Marée haute'", net: state.net, city: "", ago: 0, views: 412, likes: 58, fresh: 1, kind: "stage" });
         const before = complete("sing", z);
         z.outerHTML = successHtml(m, before, "Found and counted. Ilsa hears these on the bus.");
         renderMember(false);

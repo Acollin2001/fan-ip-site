@@ -775,7 +775,7 @@ img, svg { max-width: 100%; }
         <div><span style="font-family:Fraunces,serif;font-weight:300;font-size:1.75rem;line-height:1;color:#24302a">Fraunces</span><small>Headlines,<br>petals, names</small></div>
         <div><span style="font-family:Figtree,sans-serif;font-size:1rem;color:#24302a">Figtree</span><small>Everything<br>members read</small></div>
       </div></div>
-      <div class="bs-block"><h3>Words</h3><dl class="bs-words"><dt>Points</dt><dd>Petals</dd><dt>Missions</dt><dd>Rituels</dd><dt>Tiers</dt><dd>Graine to Jardin secret</dd><dt>Collection</dt><dd>The Herbier</dd></dl></div>
+      <div class="bs-block"><h3>Words</h3><dl class="bs-words"><dt>Points</dt><dd>Petals</dd><dt>Missions</dt><dd>Rituels</dd><dt>Tiers</dt><dd>Graine to Jardin secret</dd><dt>Collection</dt><dd>The Herbier</dd><dt>Community</dt><dd>Le Jardin</dd></dl></div>
     </aside>
   </div>
 </div>
@@ -1324,13 +1324,13 @@ Object.assign(ICONS, {
   garden: '<path d="M4 21V11a8 8 0 0 1 16 0v10"/><path d="M8 21v-4a4 4 0 0 1 8 0v4"/>',
 });
 function shell() {
-  const nav = [...TABS, ["jardin", "Community", "garden"]];
+  const nav = [...TABS, ["jardin", "Le Jardin", "garden"]];
   return `
   <header class="top">
     <button class="wordmark" data-act="tab" data-tab="home">${brandMark()}<span>Maison Aube<small>Le Jardin</small></span></button>
     <nav class="nav" aria-label="Le Jardin" data-shell="nav">${nav.map(([k, l]) => `<button data-act="tab" data-tab="${k}" ${state.tab === k ? 'aria-current="page"' : ""}>${l}${k === "rituels" ? `<span class="n">${openRituels().length}</span>` : ""}</button>`).join("")}</nav>
     <button class="petals" data-act="tab" data-tab="gifts" data-points-target aria-label="Your petals">${petalIcon()}<b data-balance class="num">${fmt(state.balance)}</b><span data-shell="word">${BRAND.word}</span></button>
-    <button class="me-btn" data-act="tab" data-tab="profile" aria-label="My profile">${initials(ME.name)}</button>
+    <button class="me-btn" data-act="tab" data-tab="profile" aria-label="My jardin">${initials(ME.name)}</button>
   </header>
   <main class="view" id="view" tabindex="-1"></main>
   <nav class="tabs" aria-label="Sections" data-shell="tabs">${TABS.map(([k, l, ic]) => `<button data-act="tab" data-tab="${k}" ${state.tab === k ? 'aria-current="page"' : ""}>${icon(ic)}<span>${l}</span></button>`).join("")}</nav>
@@ -1357,7 +1357,7 @@ function memberCard() {
           <span><b>${state.pressed.size}/12</b><span>plants in your Herbier</span></span>
           <span><b>${ordinal(myRank())}</b><span>on the leaderboard</span></span>
         </span>
-        <span class="lb-code"><span>Show at the boutique<br>for your member gifts</span><code>${ME.code}</code></span>
+        <span class="lb-code"><span>Show at the boutique<br>for your Jardin gifts</span><code>${ME.code}</code></span>
       </span>
     </span></span>
   </button>`;
@@ -1403,11 +1403,11 @@ function goalBlock(compact) {
   const n = goalPct(), on = Math.floor((state.goal / 10000) * 40), mine = state.goalMine || 0;
   return `<section class="goal" aria-labelledby="goalT">
     <div>
-      <span class="eyebrow">All the members, together</span>
+      <span class="eyebrow">The whole Jardin, together</span>
       <h3 id="goalT">10,000 rituals in ${MONTH} open Aube Rose</h3>
-      <p>Every ritual posted by any member counts. At 10,000, a limited edition opens to the community: 1,000 numbered compacts of Aube Rose solid perfume, 72 hours before the shop.</p>
+      <p>Every ritual posted by any member counts. At 10,000, a limited edition opens to the Jardin: 1,000 numbered compacts of Aube Rose solid perfume, 72 hours before the shop.</p>
       <div class="goal-num"><b class="num">${fmt(state.goal)}</b><span>of 10,000, ${n}%${mine ? `. ${mine} of them yours` : ""}</span></div>
-      ${compact ? `<button class="link" data-act="tab" data-tab="jardin" style="margin-top:8px">Open the community</button>` : ""}
+      ${compact ? `<button class="link" data-act="tab" data-tab="jardin" style="margin-top:8px">Open le Jardin</button>` : ""}
     </div>
     <div class="petal-field" role="img" aria-label="${n}% of the goal">${Array.from({ length: 40 }, (_, i) => `<span class="${i < on ? "on" : ""} ${i >= on - Math.min(mine, 1) && i < on && mine ? "new" : ""}">${petalShape()}</span>`).join("")}</div>
   </section>`;
@@ -1436,7 +1436,7 @@ function screenHome() {
     : `Givre opens to Fleur members on <b>${dayShort(DROP_EARLY)}</b>. You're <b>${fmt(n.at - SP())} ${BRAND.word}</b> from Fleur: two rituals would get you in early.`;
   const reach = GIFTS.filter((g) => g.cost <= state.balance + 600).slice(0, 3);
   const row = openRituels().slice(0, 4);
-  return `<header class="hello-row"><div><span class="eyebrow">Maison Aube, ${dayShort(NOW)}</span><h1 class="h-page">${greeting()}, ${ME.first}.</h1><p class="lede">${lede}</p></div></header>
+  return `<header class="hello-row"><div><span class="eyebrow">Le Jardin, ${dayShort(NOW)}</span><h1 class="h-page">${greeting()}, ${ME.first}.</h1><p class="lede">${lede}</p></div></header>
     <div class="today-grid">
       <div class="sec">${memberCard()}<span class="flip-hint">${icon("flip")}Tap the card to turn it over</span>${tierPath()}</div>
       ${dropPanel()}
@@ -1517,10 +1517,10 @@ function screenGifts() {
 function screenJardin() {
   const tot = POLL.reduce((a, p) => a + p[1], 0) + (state.poll ? 1 : 0);
   const mine = state.posts.filter((p) => p.fresh);
-  return `<header><span class="eyebrow">Community</span><h1 class="h-page">23,642 members, one garden.</h1><p class="lede">What members posted this week, the goal everyone is filling, and a word from the lab.</p></header>
+  return `<header><span class="eyebrow">Le Jardin, the community</span><h1 class="h-page">23,642 members, one garden.</h1><p class="lede">What members posted this week, the goal everyone is filling, and a word from the lab.</p></header>
     ${goalBlock(false)}
     <div class="jardin-grid">
-      <section class="sec"><div class="sec-head"><h2 class="h-sec">From the community this week</h2><span class="meta">Members' own posts</span></div>
+      <section class="sec"><div class="sec-head"><h2 class="h-sec">From the Jardin this week</h2><span class="meta">Members' own posts</span></div>
         <div class="wall">${mine.map((p, i) => `<article class="post mine"><div class="post-art">${scene(i + 2)}<span class="net">${NET_SHORT[p.net]}</span><span class="views">${icon("eye")}${fmt(p.views)}</span></div><div class="post-text"><b>${ME.handle}</b><span>${esc(p.title)}, just now</span></div></article>`).join("")}
         ${WALL.map((w, i) => `<article class="post"><div class="post-art">${scene(i)}<span class="net">${NET_SHORT[w.net]}</span>${w.video ? `<span class="play">${icon("play")}</span>` : ""}<span class="views">${icon("eye")}${big(w.views)}</span></div><div class="post-text"><b>${w.who}</b><span>${w.rit}</span></div></article>`).join("")}</div></section>
       <aside class="sec">
@@ -1579,7 +1579,7 @@ function successHtml(r, tierBefore, extra = "") {
   const plate = r.herb ? PLATES.find((p) => p.id === r.herb) : null;
   const t = tierOf(SP());
   const up = t.id !== tierBefore.id ? `<div class="tierup"><div class="flower">${botanical("rose")}</div><span class="eyebrow">New tier</span><h2 style="padding:0">You've reached ${t.name}</h2><p class="note">${t.gift}. Givre now opens to you on ${dayShort(DROP_EARLY)}.</p></div>` : "";
-  return `<div class="success"><span class="big num">+${r.pts}</span><p>${extra || `${BRAND.word[0].toUpperCase() + BRAND.word.slice(1)} added. The community is ${fmt(state.goal)} rituals closer to Aube Rose.`}</p></div>
+  return `<div class="success"><span class="big num">+${r.pts}</span><p>${extra || `${BRAND.word[0].toUpperCase() + BRAND.word.slice(1)} added. The Jardin is ${fmt(state.goal)} rituals closer to Aube Rose.`}</p></div>
     ${plate ? `<div class="pressed-row"><span class="mini">${botanical(plate.id)}</span><span><b>${plate.name}</b> is pressed into your Herbier. ${state.pressed.size} of 12.</span></div>` : ""}${up}
     <div style="display:grid;gap:8px">${plate ? `<button class="btn btn-dark" data-act="tab" data-tab="herbier">See my Herbier</button>` : ""}<button class="btn ${plate ? "btn-line" : "btn-dark"}" data-act="close">Back to my rituals</button></div>`;
 }
@@ -1722,7 +1722,7 @@ function onAction(act, el) {
     }
     case "friendjoins": {
       if (state.friendJoined) return; state.friendJoined = true; el.disabled = true;
-      award(300, el, `${state.friendName === "your friend" ? "Your friend" : state.friendName} joined the community. +300 ${BRAND.word}`);
+      award(300, el, `${state.friendName === "your friend" ? "Your friend" : state.friendName} joined le Jardin. +300 ${BRAND.word}`);
       setTimeout(() => renderMember(false), 1200);
       return;
     }
@@ -1932,7 +1932,7 @@ function admMembers() {
       <div class="acard"><h2>How they joined</h2><p class="sub">First touch, this year</p><div class="splits">${ORIGIN.map(([l, v]) => `<div><span>${l}</span><span class="bar-a"><i style="width:${(v / 31) * 100}%"></i></span><b>${v}%</b></div>`).join("")}</div></div>
       <div class="acard"><h2>Where they live</h2><p class="sub">From the delivery address</p><div class="splits">${CITIES.map(([l, v]) => `<div><span>${l}</span><span class="bar-a"><i style="width:${(v / 34) * 100}%"></i></span><b>${v}%</b></div>`).join("")}</div></div>
     </div>
-    <div class="acard"><h2>From a post to a member</h2><p class="sub">Last 30 days: what members' posts bring back</p><div class="mkpis">${mini("Views on members' posts", big(DAILY.reduce((a, b) => a + b, 0)))}${mini("Taps on a member's link", "41,200")}${mini("Visits to the shop", "33,900")}${mini("Joined the community", "2,310")}${mini("First orders", "1,174")}</div></div>`;
+    <div class="acard"><h2>From a post to a member</h2><p class="sub">Last 30 days: what members' posts bring back</p><div class="mkpis">${mini("Views on members' posts", big(DAILY.reduce((a, b) => a + b, 0)))}${mini("Taps on a member's link", "41,200")}${mini("Visits to the shop", "33,900")}${mini("Joined le Jardin", "2,310")}${mini("First orders", "1,174")}</div></div>`;
 }
 function admRituels() {
   const rows = RITUELS.map((r) => { const s = RS.find((x) => x.id === r.id) || { done: 0, posts: 0 }; return { r, s }; });
@@ -2004,12 +2004,12 @@ function admGifts() {
 }
 function admGoal() {
   const n = goalPct();
-  return admHead("Community goal", "One target for the whole community. Everyone sees the same progress.", memberLink("jardin")) + `
+  return admHead("Community goal", "One target for the whole Jardin. Everyone sees the same progress.", memberLink("jardin")) + `
     <div class="adm-grid">
       <div class="acard"><h2>Aube Rose, ${MONTH}</h2><p class="sub">Rituals posted by any member this month</p>
         <div class="goal-adm"><div class="kpis" style="grid-template-columns:repeat(3,minmax(0,1fr))">${kpi("Posted", fmt(state.goal), `${n}% of 10,000`)}${kpi("To go", fmt(10000 - state.goal), `${Math.max(1, Math.ceil((10000 - state.goal) / 310))} days at this pace`, true)}${kpi("Members who helped", "3,904", "Since the 1st", true)}</div>
           <span class="bar-a"><i style="width:${n}%"></i></span>
-          <div class="adm-actions"><button class="adm-btn" data-act="goalsim">Simulate a busy Sunday evening (+640)</button>${memberLink("jardin", "See it in the community")}</div></div></div>
+          <div class="adm-actions"><button class="adm-btn" data-act="goalsim">Simulate a busy Sunday evening (+640)</button>${memberLink("jardin", "See it in le Jardin")}</div></div></div>
       <div class="acard"><h2>Settings</h2><div class="aform" style="margin-top:12px">${fld("Target", inp("gt", "10,000", "disabled"))}${fld("What counts", inp("gc", "Rituels with a post, from any member", "disabled"))}${fld("Unlocks", inp("gu", "Aube Rose solid perfume, 1,000 numbered compacts", "disabled"))}${fld("Ends", inp("ge", `Last day of ${MONTH}`, "disabled"))}</div></div>
     </div>`;
 }
@@ -2020,7 +2020,7 @@ function admBrand() {
       <div class="acard"><h2>Identity</h2><p class="sub">Headlines in Fraunces, text in Figtree</p>
         <div class="colour-chips">${[["#24302a", "Cyprès"], ["#c26f63", "Rose d'aube"], ["#f1d5cb", "Pétale"], ["#8b9b83", "Sauge"], ["#b5843a", "Ambre"], ["#f5efe6", "Lait"]].map(([c, n]) => `<span><i style="background:${c}"></i>${n}</span>`).join("")}</div>
         <div class="aform" style="margin-top:14px"><label class="afield"><span>What members call points</span><input id="pointsWord" value="${esc(BRAND.word)}" maxlength="18"></label></div></div>
-      <div class="acard"><h2>Words</h2><dl class="bs-words" style="margin-top:12px"><dt>Missions</dt><dd>Rituels</dd><dt>Tiers</dt><dd>Graine, Bouton, Fleur, Jardin secret</dd><dt>Collection</dt><dd>The Herbier</dd><dt>Address</dt><dd>jardin.maison-aube.example</dd></dl></div>
+      <div class="acard"><h2>Words</h2><dl class="bs-words" style="margin-top:12px"><dt>Missions</dt><dd>Rituels</dd><dt>Tiers</dt><dd>Graine, Bouton, Fleur, Jardin secret</dd><dt>Collection</dt><dd>The Herbier</dd><dt>Community</dt><dd>Le Jardin</dd><dt>Address</dt><dd>jardin.maison-aube.example</dd></dl></div>
     </div>
     <div class="acard"><h2>Modules</h2><p class="sub">Signature includes every module. One switched off disappears from the member app.</p><div class="modules" style="margin-top:12px">${MODULES.map(([n, s]) => `<div class="module"><span><b>${n}</b><span>${s}</span></span><button class="toggle" role="switch" aria-checked="true" aria-label="${n}" data-act="module" data-n="${n}"></button></div>`).join("")}</div></div>`;
 }

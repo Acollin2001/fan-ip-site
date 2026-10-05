@@ -1,5 +1,5 @@
 // Writes brands.html, sport.html and artists.html from index.html: the same
-// page, already set to its door, so each door has its own address and search
+// page, already set to its world, so each door has its own address and search
 // engines read the door's words. Run after any change to index.html or to the
 // DOORS texts in assets/doors.js:  node .github/scripts/build-doors.mjs
 import { readFileSync, writeFileSync } from "node:fs";
@@ -44,7 +44,7 @@ for (const [key, page] of Object.entries(PAGES)) {
   const d = DOORS[key];
   const views = d.members * 0.1 * 2 * 400;
   const text = {
-    lead: d.lead, step1: d.step1, vigTitle: d.vigTitle, vigText: d.vigText, vigPoints: d.vigPoints,
+    step1: d.step1, vigTitle: d.vigTitle, vigText: d.vigText, vigPoints: d.vigPoints,
     reachTitle: d.reachTitle, members: nf.format(d.members), views: nf.format(views),
     euros: `€${nf.format((views / 1000) * 2)}`,
   };
@@ -61,8 +61,8 @@ for (const [key, page] of Object.entries(PAGES)) {
     h = swap(h, new RegExp(`(<[a-z0-9]+ [^>]*?)data-slot="${slot}">([^<]*)<`), (_, open, generic) =>
       `${open}data-slot="${slot}" data-generic="${esc(generic)}">${esc(value)}<`);
   }
-  h = swap(h, /<a class="btn btn--primary" href="([^"]*)" data-slot="cta">([^<]*)</, (_, href, label) =>
-    `<a class="btn btn--primary" href="${esc(d.cta[1])}" data-slot="cta" data-generic="${esc(label)}" data-generic-href="${esc(href)}">${esc(d.cta[0])}<`);
+  h = swap(h, /<p class="prod-adapt t-small" data-slot="adapt" hidden><\/p>/, () =>
+    `<p class="prod-adapt t-small" data-slot="adapt">${esc(d.adapt)}</p>`);
   h = swap(h, /<a class="btn btn--primary" href="([^"]*)" data-slot="calc">/, (_, href) =>
     `<a class="btn btn--primary" href="reach-calculator.html?members=${d.members}" data-slot="calc" data-generic-href="${esc(href)}">`);
   h = swap(h, new RegExp(`data-door-pick="${key}" aria-pressed="false"`), `data-door-pick="${key}" aria-pressed="true"`);

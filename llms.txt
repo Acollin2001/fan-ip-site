@@ -17,7 +17,7 @@ FAN/IP is for brands, for sport and esports (clubs, teams, gaming venues) and fo
 
 ## By type of client
 
-The home page asks "I'm…" and speaks to each of three doors; each door also has its own page.
+After "why", the home page asks "Where do your fans gather?" (Sport, Artists and creators, Brands) and the rest of the page speaks to the world picked; each world also has its own page.
 
 - [Brands](https://fan-ip.com/brands.html): beauty, fashion, food, coffee, sportswear and lifestyle brands, shops
 - [Sport and esports](https://fan-ip.com/sport.html): sports clubs, esports teams and gaming venues; supporters post, and sponsors see the reach

@@ -33,6 +33,9 @@
 /* Three door cards instead of four. */
 .aud-grid--3{grid-template-columns:repeat(3,minmax(0,1fr))}
 .aud-eg{margin-block-start:auto;color:var(--ink-muted)}
+.aud-demos{margin-block-start:var(--s5);color:var(--ink)}
+.aud-demos a{color:var(--ink);text-underline-offset:.2em}
+.aud-demos .t-small{display:block;margin-block-start:var(--s1);color:var(--ink-muted)}
 
 /* "See it with your name" */
 .door-try{margin-block:var(--s7) var(--s5);max-inline-size:44rem}

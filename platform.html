@@ -46,6 +46,8 @@
   <link rel="modulepreload" crossorigin href="./assets/header-AsSSiagq.js">
   <link rel="modulepreload" crossorigin href="./assets/page-CEiblalE.js">
   <link rel="stylesheet" crossorigin href="./assets/style-CsTO_O25.css">
+  <link rel="stylesheet" href="./assets/platform-play.css">
+  <script type="module" src="./assets/platform-play.js"></script>
 </head>
 <body>
   <a class="skip" href="#main">Skip to content</a>
@@ -92,117 +94,97 @@
       </div>
     </section>
 
-    <section id="try" class="pg-section jr" data-surface="warm" aria-labelledby="try-title" data-play>
+    <section id="try" class="pg-section ps" data-surface="warm" aria-labelledby="try-title" data-play>
       <div class="container">
         <div class="pg-section__head">
           <p class="pg-num">Try it</p>
           <h2 id="try-title" class="pg-section__title t-h2">Play a member's season.</h2>
-          <p class="pg-section__lead t-lead">Pick a world. Your colours, your words: FAN/IP stays behind the scenes.</p>
+          <p class="pg-section__lead t-lead">Four posts, one season. Watch what one member brings, then switch worlds: same season, their name on the door.</p>
         </div>
 
-        <fieldset class="play-worlds jr-worlds">
+        <fieldset class="ps-worlds">
           <legend>Whose fan club?</legend>
-          <input type="radio" name="play-world" id="pw-generic" value="generic" checked><label for="pw-generic">Generic</label>
-          <input type="radio" name="play-world" id="pw-club" value="club"><label for="pw-club">Sports club</label>
-          <input type="radio" name="play-world" id="pw-artist" value="artist"><label for="pw-artist">Artist</label>
-          <input type="radio" name="play-world" id="pw-brand" value="brand"><label for="pw-brand">Beauty brand</label>
+          <div class="ps-worlds__row">
+            <input type="radio" name="play-world" id="pw-aldermoor" value="aldermoor" checked>
+            <label for="pw-aldermoor" class="ps-world" data-ps-world="aldermoor"><span class="ps-world__name">Aldermoor</span><span class="ps-world__kind">Football club</span></label>
+            <input type="radio" name="play-world" id="pw-aube" value="aube">
+            <label for="pw-aube" class="ps-world" data-ps-world="aube"><span class="ps-world__name">Maison Aube</span><span class="ps-world__kind">Beauty brand</span></label>
+            <input type="radio" name="play-world" id="pw-ilsa" value="ilsa">
+            <label for="pw-ilsa" class="ps-world" data-ps-world="ilsa"><span class="ps-world__name">Ilsa Morrow</span><span class="ps-world__kind">Artist on tour</span></label>
+          </div>
         </fieldset>
 
-        <div class="jr-app" data-world="generic">
-          <p class="jr-app__bar"><span class="jr-app__logo" aria-hidden="true"></span><b data-app-name>Your brand</b><span class="jr-app__nav" aria-hidden="true"><span data-points>Points</span><span>Shop</span><span>Ranking</span></span></p>
-
-          <div class="jr-step">
-            <p class="jr-step__n">01</p>
-            <h3 class="jr-step__title">Take part</h3>
-            <p class="jr-step__text">Tap an activity.</p>
-          </div>
-          <div class="play">
-            <ul class="play-actions" aria-label="This week's activities"></ul>
-            <div class="play-card" aria-label="The member's card">
-              <div class="play-card__top">
-                <div>
-                  <p class="play-card__label">Balance</p>
-                  <p class="play-bal"><span class="play-bal__n">1,240</span> <span class="play-bal__u" data-points>Points</span></p>
-                  <p class="play-card__sub"><span data-score-name>Season score</span> <b data-score>520</b> · Rank <b data-rank>#6</b></p>
+        <div class="ps-stage" data-ps-world="aldermoor">
+          <div class="ps-app" role="group" aria-label="What the member sees, under the brand's name">
+            <p class="ps-tag"><span>Member's app</span><span data-w="name">Aldermoor Athletic</span></p>
+            <div class="ps-app__bar">
+              <span class="ps-app__logo" aria-hidden="true"></span>
+              <span class="ps-app__brand"><b data-w="brand">Aldermoor</b><small class="ps-app__sub" data-w="sub">Athletic, the Kestrels</small></span>
+              <span class="ps-app__me" aria-hidden="true" data-w="initials">JC</span>
+            </div>
+            <div class="ps-app__body">
+              <p class="ps-hello" data-w="hello">Evening, Jess.</p>
+              <div class="ps-top">
+                <div class="ps-card" aria-label="Member card"></div>
+                <div class="ps-level">
+                  <p class="ps-level__line" data-level-line></p>
+                  <span class="ps-level__bar" data-level-fill aria-hidden="true"><i></i></span>
+                  <ol class="ps-level__steps" aria-label="Levels"></ol>
                 </div>
-                <div class="play-ring">
-                  <svg viewBox="0 0 120 120" aria-hidden="true" focusable="false"><circle class="play-ring__track" cx="60" cy="60" r="52"/><circle class="play-ring__arc" cx="60" cy="60" r="52"/></svg>
-                  <p class="play-ring__n"><span class="sr-only">Level </span><span data-tier-n>2</span><small data-tier-name>Insider</small></p>
-                </div>
+                <dl class="ps-mine">
+                  <div><dt data-w="minePosts">posts this season</dt><dd data-m="posts">0</dd></div>
+                  <div><dt data-w="mineViews">views they earned</dt><dd data-m="views">0</dd></div>
+                </dl>
               </div>
-              <div class="play-row">
-                <p class="play-row__head"><span>Streak</span><span><b data-streak>3</b> days</span></p>
-                <ol class="play-days" aria-hidden="true"><li></li><li></li><li></li><li></li><li></li><li></li><li></li></ol>
-              </div>
-              <div class="play-row">
-                <p class="play-row__head"><span data-collection>Collection</span><span>Collectibles</span></p>
-                <ol class="play-collect" aria-hidden="true"><li></li><li></li><li></li><li></li><li></li></ol>
-              </div>
+              <h3 class="ps-moves__title" data-w="movesTitle">Your hand this season</h3>
+              <ol class="ps-moves" aria-label="This season's moments: tap one to post it"></ol>
             </div>
           </div>
 
-          <div class="jr-step">
-            <p class="jr-step__n">02</p>
-            <h3 class="jr-step__title">Climb</h3>
-            <p class="jr-step__text">Rank up, reach a level. Only the next perk is revealed.</p>
-          </div>
-          <div class="jr-climb">
-            <div class="jr-board">
-              <p class="jr-panel__label">Season leaderboard</p>
-              <ol aria-label="Season leaderboard"></ol>
-              <p class="jr-panel__note" data-board-note>Take part above and watch your position.</p>
-            </div>
-            <div class="jr-tiers">
-              <p class="jr-panel__label">Level path</p>
-              <ol class="jr-path" aria-label="Levels and their perks"></ol>
-            </div>
-          </div>
+          <aside class="ps-result" aria-labelledby="ps-result-title">
+            <p class="ps-tag ps-tag--you"><span>Your side</span><span>FAN/IP</span></p>
+            <h3 id="ps-result-title" class="ps-result__title">What <span data-r="first">Jess</span> brought <span data-r="brand">Aldermoor</span></h3>
+            <dl class="ps-kpis">
+              <div class="ps-kpi ps-kpi--views"><dt>Views on <span data-r="first">Jess</span>'s posts</dt><dd data-r="views">0</dd></div>
+              <div class="ps-kpi ps-kpi--value"><dt>Media value</dt><dd data-r="value">€0.00</dd></div>
+              <div class="ps-kpi"><dt>Posts</dt><dd data-r="posts">0/4</dd></div>
+              <div class="ps-kpi"><dt>Friends brought</dt><dd data-r="friends">0</dd></div>
+            </dl>
+            <p class="ps-result__cpm">Media value at a €2 CPM: the default, and yours to change.</p>
+            <ol class="ps-feed" aria-label="Posts so far"></ol>
+          </aside>
 
-          <div class="jr-step">
-            <p class="jr-step__n">03</p>
-            <h3 class="jr-step__title">Spend</h3>
-            <p class="jr-step__text">Spend points. Keep your rank.</p>
-          </div>
-          <ul class="jr-shop" aria-label="Rewards shop"></ul>
-          <p class="jr-shop__note" data-shop-note aria-live="polite"></p>
-
-          <div class="jr-step">
-            <p class="jr-step__n">04</p>
-            <h3 class="jr-step__title">Share the wrap</h3>
-            <p class="jr-step__text">Season over. Every member gets a recap made to be posted.</p>
-          </div>
-          <div class="jr-wrap">
-            <div class="wrap-card" data-wrap>
-              <p class="wrap-card__kicker">Season wrap</p>
-              <p class="wrap-card__title">Your season at <span data-app-name>Your brand</span></p>
-              <dl class="wrap-stats">
-                <div><dt data-wrap-pts-label>Points earned</dt><dd data-wrap-pts>0</dd></div>
-                <div><dt>Final rank</dt><dd data-wrap-rank>#6</dd></div>
-                <div class="is-accent"><dt>Level reached</dt><dd data-wrap-tier>Insider</dd></div>
-                <div><dt>Longest streak</dt><dd data-wrap-streak>3 days</dd></div>
-                <div><dt data-collection>Collection</dt><dd data-wrap-spots>1</dd></div>
-                <div><dt>Rewards</dt><dd data-wrap-rewards>0</dd></div>
-              </dl>
-              <p class="wrap-card__foot"><span data-wrap-line>Take part above to fill your wrap.</span></p>
-            </div>
+          <div class="ps-ticker" aria-hidden="true">
+            <span><b data-r="views">0</b> views</span><span><b data-r="value">€0.00</b></span><span><b data-r="posts">0/4</b> posts</span>
           </div>
         </div>
 
-        <div class="play-foot">
-          <p class="t-small">Illustrative brands and values. Every brand sets its own look, words, missions, levels, perks and rewards.</p>
-          <button type="button" class="play-reset">Start the season again</button>
+        <div class="ps-end" data-ps-world="aldermoor" hidden>
+          <figure class="ps-share" aria-label="The season wrap the member shares"></figure>
+          <div class="ps-sum">
+            <p class="ps-sum__kicker">Season over</p>
+            <h3 class="ps-sum__title" data-e="title"></h3>
+            <dl class="ps-sum__figs">
+              <div><dt>Posts</dt><dd data-e="posts">4</dd></div>
+              <div><dt>Views</dt><dd data-e="views">0</dd></div>
+              <div class="is-gold"><dt>Media value</dt><dd data-e="value">€0.00</dd></div>
+              <div><dt>Friends brought</dt><dd data-e="friends">0</dd></div>
+            </dl>
+            <p class="ps-sum__note">One member, one season, at a €2 CPM. Now count your members.</p>
+          </div>
+        </div>
+
+        <div class="ps-foot">
+          <p class="t-small">Illustrative figures. Aldermoor Athletic, Maison Aube and Ilsa Morrow are fictional. Every brand sets its own look, words, missions and CPM.</p>
+          <div class="ps-foot__acts">
+            <button type="button" class="ps-btn ps-btn--gold" data-play-all>Play the whole season</button>
+            <button type="button" class="ps-btn" data-reset>Start again</button>
+            <a class="ps-demo" data-demo-link href="demo/aldermoor/">Open the full Aldermoor demo</a>
+          </div>
         </div>
         <p class="sr-only" aria-live="polite" data-live></p>
       </div>
     </section>
-
-    <dialog class="jr-pop" data-world="generic" aria-labelledby="pop-title">
-      <p class="jr-pop__kicker">New level reached</p>
-      <p id="pop-title" class="jr-pop__tier" data-pop-tier>Level 3</p>
-      <p class="jr-pop__perk"><span>Perk unlocked</span><b data-pop-perk>Members-only offers</b></p>
-      <p class="jr-pop__shop" data-pop-shop></p>
-      <button type="button" class="jr-pop__btn" data-pop-close autofocus>Keep going</button>
-    </dialog>
 
     <section id="team" class="pg-section adm" data-surface="light" aria-labelledby="team-title">
       <div class="container">
@@ -213,7 +195,7 @@
         </div>
 
         <div class="jr-step">
-          <p class="jr-step__n">05</p>
+          <p class="jr-step__n">01</p>
           <h3 class="jr-step__title">Build a mission</h3>
           <p class="jr-step__text">Pick a type, change anything. The member view updates live.</p>
         </div>
@@ -257,7 +239,7 @@
             </form>
             <div class="adm-preview">
               <p class="adm-preview__label">What members see</p>
-              <div class="pv" data-mission-preview data-world="generic" aria-live="polite">
+              <div class="pv" data-mission-preview data-ps-world="aldermoor" aria-live="polite">
                 <p class="pv-list" data-pv-list>Missions</p>
                 <div class="pv-card">
                   <p class="pv-special" data-pv-special hidden>Special occasion</p>
@@ -274,7 +256,7 @@
         </div>
 
         <div class="jr-step">
-          <p class="jr-step__n">06</p>
+          <p class="jr-step__n">02</p>
           <h3 class="jr-step__title">Read the results</h3>
           <p class="jr-step__text">What members did, and what it brought in.</p>
         </div>

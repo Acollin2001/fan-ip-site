@@ -158,11 +158,26 @@
   }
 
   // A small chip to change world, while the picker is off screen.
-  var chip, worldInView = true;
+  // Hidden over the prices, the closing call and the footer, so it never
+  // covers a price or the legal links.
+  var chip, worldInView = true, covering = 0;
   function showChip() {
     if (!chip) return;
-    chip.hidden = !(root.getAttribute("data-door") && !worldInView);
+    chip.hidden = !(root.getAttribute("data-door") && !worldInView && !covering && !scrollingDown);
   }
+  // On the way down the chip steps aside; it comes back when the visitor
+  // scrolls up, which is when they look for it.
+  var scrollingDown = false, lastY = window.scrollY;
+  window.addEventListener("scroll", function () {
+    var y = window.scrollY;
+    if (Math.abs(y - lastY) < 8) return;
+    var down = y > lastY;
+    lastY = y;
+    if (down !== scrollingDown) {
+      scrollingDown = down;
+      showChip();
+    }
+  }, { passive: true });
 
   function start() {
     var fixed = root.getAttribute("data-door");
@@ -188,6 +203,19 @@
         worldInView = entries[0].isIntersecting;
         showChip();
       }).observe(band);
+      var seen = new Set();
+      var watch = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
+          if (e.isIntersecting) seen.add(e.target);
+          else seen.delete(e.target);
+        });
+        covering = seen.size;
+        showChip();
+      });
+      ["#pricing", "#closing", "footer"].forEach(function (sel) {
+        var node = document.querySelector(sel);
+        if (node) watch.observe(node);
+      });
     }
     var door = initial();
     if (door) apply(door);
@@ -202,6 +230,9 @@
         sweep(function () {
           apply(next);
           if (next) pickWorld(next);
+          // Show the change where the eye is: the steps, now in this world.
+          var to = next && document.getElementById("product");
+          if (to) to.scrollIntoView({ behavior: still ? "auto" : "smooth", block: "start" });
         });
       });
     });

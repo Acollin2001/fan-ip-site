@@ -131,6 +131,7 @@
   <link rel="stylesheet" crossorigin href="./assets/style-CsTO_O25.css">
   <link rel="stylesheet" href="./assets/home-refocus.css">
   <link rel="stylesheet" href="./assets/doors.css">
+  <link rel="stylesheet" href="./assets/site-fixes.css">
   <script src="./assets/doors.js" defer></script>
 </head>
 <body>
@@ -318,6 +319,93 @@
       </div>
     </section>
 
+    <!-- D2. What you see: one result screen from the demo of each world -->
+    <section id="result" class="rs" data-surface="dark" aria-labelledby="result-title">
+      <div class="container">
+        <h2 id="result-title" class="rs-title t-h2">What you see in your admin.</h2>
+        <ul class="rs-grid" role="list">
+          <li class="rs-card" data-for="sport">
+            <img class="rs-shot" src="assets/demo-shots/aldermoor-result.jpg" width="390" height="700" loading="lazy" alt="Aldermoor club admin, Results: the Weirbank Motors sponsor card with the private report link.">
+            <div class="rs-text">
+              <p class="rs-k t-small">A club, for its sponsor</p>
+              <p class="rs-num">€24,720</p>
+              <p class="rs-line">in media value for Weirbank Motors. 3,570 members took part and saw the sponsor’s name 76,911 times in the app; their posts were seen 12.4M times. The sponsor gets the report through a private link.</p>
+              <a class="rs-go" href="demo/aldermoor/">Open the club demo <span aria-hidden="true">→</span></a>
+            </div>
+          </li>
+          <li class="rs-card" data-for="artist">
+            <img class="rs-shot" src="assets/demo-shots/ilsa-morrow-result.jpg" width="390" height="700" loading="lazy" alt="Ilsa Morrow artist admin, Media value: value per show and per city.">
+            <div class="rs-text">
+              <p class="rs-k t-small">An artist, show by show</p>
+              <p class="rs-num">€3,103</p>
+              <p class="rs-line">in media value per show, city by city. 5.96M views came from people who don’t follow the artist yet.</p>
+              <a class="rs-go" href="demo/ilsa-morrow/">Open the artist demo <span aria-hidden="true">→</span></a>
+            </div>
+          </li>
+          <li class="rs-card" data-for="brand">
+            <img class="rs-shot" src="assets/demo-shots/maison-aube-result.jpg" width="390" height="700" loading="lazy" alt="Maison Aube brand admin, Media value: €17,049 in 30 days and gifts at cost.">
+            <div class="rs-text">
+              <p class="rs-k t-small">A brand, for its founder</p>
+              <p class="rs-num">2.7×</p>
+              <p class="rs-line">back in media value on the gifts given, at cost. €17,049 in 30 days, 5.2M views by people who don’t follow the brand.</p>
+              <a class="rs-go" href="demo/maison-aube/">Open the brand demo <span aria-hidden="true">→</span></a>
+            </div>
+          </li>
+        </ul>
+        <p class="rs-swipe t-small" aria-hidden="true">Swipe for the other worlds →</p>
+        <p class="rs-caption t-small">Screens from the live demos: fictional names, illustrative figures, a €2 CPM you can change.</p>
+      </div>
+    </section>
+
+    <!-- D3. The three live demos: the visitor's world first -->
+    <section id="white-label" class="lv" data-surface="light" aria-labelledby="white-label-title">
+      <div class="container">
+        <h2 id="white-label-title" class="wl-title t-h2">Their community. Their world.<br>Powered by FAN/IP.</h2>
+        <p class="wl-lead t-lead">Your name, your colours, your words. Fans see your brand, not ours. Open a demo and click through it like a member, then like the team behind it.</p>
+        <ul class="lv-grid" role="list">
+          <li class="lv-card" data-for="sport">
+            <a class="lv-link" href="demo/aldermoor/">
+              <span class="lv-tag">Your world</span>
+              <img class="lv-shot" src="assets/demo-shots/aldermoor-app.jpg" width="390" height="700" loading="lazy" alt="Aldermoor Athletic member app on a phone: matchday prediction, member card and the club table.">
+              <span class="lv-k t-small">Aldermoor, a football club</span>
+              <span class="lv-line">Give your sponsors more than a logo on a shirt.</span>
+              <span class="lv-go">Open the live demo <span aria-hidden="true">→</span></span>
+            </a>
+          </li>
+          <li class="lv-card" data-for="artist">
+            <a class="lv-link" href="demo/ilsa-morrow/">
+              <span class="lv-tag">Your world</span>
+              <img class="lv-shot" src="assets/demo-shots/ilsa-morrow-app.jpg" width="390" height="700" loading="lazy" alt="Ilsa Morrow fan app on a phone: next stop Lyon, the fan pass and the tour.">
+              <span class="lv-k t-small">Ilsa Morrow, an artist on tour</span>
+              <span class="lv-line">Turn every show into a week of posts.</span>
+              <span class="lv-go">Open the live demo <span aria-hidden="true">→</span></span>
+            </a>
+          </li>
+          <li class="lv-card" data-for="brand">
+            <a class="lv-link" href="demo/maison-aube/">
+              <span class="lv-tag">Your world</span>
+              <img class="lv-shot" src="assets/demo-shots/maison-aube-app.jpg" width="390" height="700" loading="lazy" alt="Maison Aube member app on a phone: the Le Jardin member card, tiers and the winter collection.">
+              <span class="lv-k t-small">Maison Aube, a beauty brand</span>
+              <span class="lv-line">Get talked about without an ad budget.</span>
+              <span class="lv-go">Open the live demo <span aria-hidden="true">→</span></span>
+            </a>
+          </li>
+        </ul>
+        <p class="lv-swipe t-small" aria-hidden="true">Swipe for the other worlds →</p>
+        <p class="lv-caption t-small">Fictional names, illustrative figures. The three demos run on Season, our recommended plan.</p>
+        <p class="wl-close t-keyword">Same code. Same database. Their name on the door.</p>
+        <form id="door-try" class="door-try" action="https://app.fan-ip.com/start" method="get">
+          <label for="door-name" class="door-try__label">Now see it with your name.</label>
+          <div class="door-try__row">
+            <input id="door-name" class="door-try__input" name="name" type="text" maxlength="80" autocomplete="organization" placeholder="Your brand, club or artist name">
+            <button type="submit" class="btn btn--primary">See it with your name</button>
+          </div>
+          <p class="door-try__note t-small">Opens the sign-up page with a live preview of your fan club. Nothing is created until you finish.</p>
+        </form>
+        <p class="wl-play"><a class="btn btn--line" href="platform.html#try">Play a member's season</a></p>
+      </div>
+    </section>
+
     <!-- C. What it's worth: the sum behind the reach calculator -->
     <section id="value" class="val" data-surface="sand" aria-labelledby="value-title">
       <div class="container">
@@ -352,148 +440,6 @@
           <li><a class="aud-card" href="sport.html"><span class="t-small aud-k">Sport and esports</span><span class="aud-line">Give your sponsors more than a logo on a shirt.</span><span class="aud-eg t-small">Football, basketball, ice hockey, cycling, esports teams, gaming venues.</span></a></li>
           <li><a class="aud-card" href="artists.html"><span class="t-small aud-k">Artists and creators</span><span class="aud-line">Turn every show into a week of posts.</span><span class="aud-eg t-small">Bands, DJs, rappers, festivals, podcasters, YouTubers.</span></a></li>
         </ul>
-        <p class="aud-demos t-body">See one live: <a href="demo/maison-aube/">Maison Aube</a>, a beauty brand · <a href="demo/aldermoor/">Aldermoor</a>, a football club · <a href="demo/ilsa-morrow/">Ilsa Morrow</a>, an artist on tour. <span class="t-small">Fictional names, illustrative figures; some features shown are on the way.</span></p>
-      </div>
-    </section>
-
-    <section id="white-label" class="wl" data-surface="light" aria-labelledby="white-label-title">
-      <div class="container">
-        <h2 id="white-label-title" class="wl-title t-h2">Their community. Their world.<br>Powered by FAN/IP.</h2>
-        <p class="wl-lead t-lead">Your name, your colours, your words. Fans see your brand, not ours.</p>
-        <fieldset class="wl-toggle">
-          <legend class="sr-only">Choose a demo brand</legend>
-          <input class="wl-radio" type="radio" name="world" id="w-aube"><label class="wl-radio-label t-small" for="w-aube">Maison Aube</label>
-          <input class="wl-radio" type="radio" name="world" id="w-az"><label class="wl-radio-label t-small" for="w-az">Arena Zero</label>
-        </fieldset>
-        <p class="sr-only" aria-live="polite" data-live-world></p>
-      </div>
-      <figure class="wl-stage-wrap">
-        <div class="wl-track">
-        <div class="wl-stage">
-          <div class="world" data-world="aube" role="group" aria-label="Demo: member missions page, Maison Aube world">
-            <div class="scr">
-              <div class="scr-nav">
-                <span class="scr-brand">Maison Aube</span>
-                <span class="scr-nav__items"><span class="is-current">Missions</span><span>Rewards Shop</span><span>Leaderboard</span><span>Season</span><span>Collection</span><span>Community</span><span>Perks</span></span>
-                <span class="scr-nav__right"><span class="ui-chip ui-chip--balance">1,240 Petals</span><span class="scr-profile">My Profile</span></span>
-              </div>
-              <div class="scr-body">
-                <p class="scr-title">Missions</p>
-                <p class="scr-rule">Pick one, post it, earn Petals. Limited to 3 missions per day.</p>
-                <p class="scr-counter"><b>1/3</b> missions submitted today · 2 left · resets 02:00</p>
-                <div class="scr-bonus">
-                  <div class="scr-bonus__top"><span class="scr-bonus__title">Weekly bonus</span><span class="ui-chip ui-chip--reward">+250</span></div>
-                  <p class="scr-bonus__desc">Complete 10 missions worth 30+ Petals this week to earn a 250 Petals bonus.</p>
-                  <div class="scr-bar" aria-hidden="true"><i class="scr-bar__fill" style="--pct:60%"></i><i class="scr-bar__tick" style="--at:10%"></i><i class="scr-bar__tick" style="--at:20%"></i><i class="scr-bar__tick" style="--at:30%"></i><i class="scr-bar__tick" style="--at:40%"></i><i class="scr-bar__tick" style="--at:50%"></i><i class="scr-bar__tick" style="--at:60%"></i><i class="scr-bar__tick" style="--at:70%"></i><i class="scr-bar__tick" style="--at:80%"></i><i class="scr-bar__tick" style="--at:90%"></i></div>
-                  <div class="scr-bonus__foot"><span>6/10 missions</span><span>4 to go</span></div>
-                </div>
-                <div class="scr-cards">
-                  <div class="scr-card">
-                    <div class="scr-card__top"><span class="ui-chip ui-chip--cat">Creative Content</span><span class="ui-chip ui-chip--reward">42</span></div>
-                    <p class="scr-card__title">Post your routine, tag us</p>
-                    <div class="scr-card__foot"><span class="scr-muted">0/1 today</span><span class="ui-btn">Submit</span></div>
-                  </div>
-                  <div class="scr-card">
-                    <div class="scr-card__top"><span class="ui-chip ui-chip--cat">Story</span><span class="ui-chip ui-chip--reward">20</span></div>
-                    <p class="scr-card__title">Share the launch story</p>
-                    <div class="scr-card__foot"><span class="scr-muted">1/1 today</span><span class="scr-muted">Daily limit reached</span></div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="world" data-world="arena" role="group" aria-label="Demo: member missions page, Arena Zero world" aria-hidden="true" inert>
-            <div class="scr">
-              <div class="scr-nav">
-                <span class="scr-brand">Arena Zero</span>
-                <span class="scr-nav__items"><span class="is-current">Challenges</span><span>Drops Shop</span><span>Leaderboard</span></span>
-                <span class="scr-nav__right"><span class="ui-chip ui-chip--balance">1,240 Credits</span><span class="scr-profile">My Profile</span></span>
-              </div>
-              <div class="scr-body">
-                <p class="scr-title">Challenges</p>
-                <p class="scr-rule">Pick one, post it, earn Credits. Limited to 3 challenges per day.</p>
-                <p class="scr-counter"><b>1/3</b> challenges submitted today · 2 left · resets 02:00</p>
-                <div class="scr-bonus">
-                  <div class="scr-bonus__top"><span class="scr-bonus__title">Weekly bonus</span><span class="ui-chip ui-chip--reward">+100</span></div>
-                  <p class="scr-bonus__desc">Complete 5 challenges worth 30+ Credits this week to earn a 100 Credits bonus.</p>
-                  <div class="scr-bar" aria-hidden="true"><i class="scr-bar__fill" style="--pct:60%"></i><i class="scr-bar__tick" style="--at:20%"></i><i class="scr-bar__tick" style="--at:40%"></i><i class="scr-bar__tick" style="--at:60%"></i><i class="scr-bar__tick" style="--at:80%"></i></div>
-                  <div class="scr-bonus__foot"><span>3/5 challenges</span><span>2 to go</span></div>
-                </div>
-                <div class="scr-cards">
-                  <div class="scr-card">
-                    <div class="scr-card__top"><span class="ui-chip ui-chip--cat">Creative Content</span><span class="ui-chip ui-chip--reward">42</span></div>
-                    <p class="scr-card__title">Clip your best round</p>
-                    <div class="scr-card__foot"><span class="scr-muted">0/1 today</span><span class="ui-btn">Submit</span></div>
-                  </div>
-                  <div class="scr-card">
-                    <div class="scr-card__top"><span class="ui-chip ui-chip--cat">Story</span><span class="ui-chip ui-chip--reward">20</span></div>
-                    <p class="scr-card__title">Share the season trailer</p>
-                    <div class="scr-card__foot"><span class="scr-muted">1/1 today</span><span class="scr-muted">Daily limit reached</span></div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="wl-blade" aria-hidden="true"></div>
-        </div>
-        </div>
-        <div class="container wl-range">
-          <span class="wl-range__end t-small" aria-hidden="true">Maison Aube</span>
-          <input class="wl-slider" type="range" id="w-range" min="0" max="100" step="1" value="50" aria-valuetext="50% Arena Zero">
-          <span class="wl-range__end t-small" aria-hidden="true">Arena Zero</span>
-          <label class="wl-range__label t-small" for="w-range">Drag the slash.</label>
-        </div>
-        <figcaption class="wl-caption t-small">Two demo brands running on FAN/IP. Fonts are simplified here.</figcaption>
-      </figure>
-      <div class="container wl-after">
-        <details class="wl-more">
-          <summary class="wl-more__summary"><span class="wl-more__label">What changes between the two brands</span><span class="wl-more__chev" aria-hidden="true"><svg viewBox="0 0 16 10" width="16" height="10" focusable="false"><path d="M1.5 1.5 8 8 14.5 1.5"/></svg></span></summary>
-          <div class="wl-legend">
-            <div class="wl-legend__col">
-              <h3 class="wl-h3">What changes</h3>
-              <dl class="wl-dl">
-                <dt>Name</dt><dd class="wl-a">Maison Aube</dd><dd class="wl-b">Arena Zero</dd>
-                <dt>Colours</dt>
-                <dd class="wl-a"><span class="wl-swatch-set"><i class="wl-swatch" role="img" aria-label="white #ffffff" style="--c:#ffffff;--b:#eaeaea"></i><i class="wl-swatch" role="img" aria-label="black #000000" style="--c:#000000"></i><i class="wl-swatch" role="img" aria-label="pale yellow #fffcb6" style="--c:#fffcb6"></i><i class="wl-swatch" role="img" aria-label="light grey #f5f5f5" style="--c:#f5f5f5;--b:#eaeaea"></i></span></dd>
-                <dd class="wl-b"><span class="wl-swatch-set"><i class="wl-swatch" role="img" aria-label="near-black #07090f" style="--c:#07090f"></i><i class="wl-swatch" role="img" aria-label="slate #111827" style="--c:#111827"></i><i class="wl-swatch" role="img" aria-label="cyan #22d3ee" style="--c:#22d3ee"></i><i class="wl-swatch" role="img" aria-label="lime #a3e635" style="--c:#a3e635"></i></span></dd>
-                <dt>Corners</dt><dd class="wl-a">1rem</dd><dd class="wl-b">0.375rem</dd>
-                <dt>Type</dt><dd class="wl-a">Trebuchet</dd><dd class="wl-b">Inter</dd>
-                <dt>Words</dt>
-                <dd class="wl-a">Missions</dd><dd class="wl-b">Challenges</dd>
-                <dd class="wl-a">Rewards</dd><dd class="wl-b">Drops</dd>
-                <dd class="wl-a">Petals</dd><dd class="wl-b">Credits</dd>
-                <dd class="wl-a">Bloom</dd><dd class="wl-b">Rating</dd>
-                <dd class="wl-a">Tiers</dd><dd class="wl-b">Ranks</dd>
-                <dd class="wl-a">Community</dd><dd class="wl-b">Squad</dd>
-                <dd class="wl-a">Creators</dd><dd class="wl-b">Players</dd>
-                <dt>Navigation</dt><dd class="wl-a">7 destinations</dd><dd class="wl-b">3 destinations</dd>
-                <dt>Weekly bonus</dt><dd class="wl-a">10 missions for 250 Petals</dd><dd class="wl-b">5 challenges for 100 Credits</dd>
-                <dt>Features</dt><dd class="wl-a">collection on, weekly question on</dd><dd class="wl-b">collection off, weekly question off</dd>
-              </dl>
-            </div>
-            <div class="wl-legend__col">
-              <h3 class="wl-h3">What stays</h3>
-              <ul class="wl-list wl-list--stays">
-                <li>Three missions a day</li>
-                <li>Post, review, reward</li>
-                <li>A balance of 1,240</li>
-                <li>One points system</li>
-                <li>One codebase</li>
-                <li>One database</li>
-              </ul>
-            </div>
-          </div>
-        </details>
-        <p class="wl-close t-keyword">Same code. Same database. Their name on the door.</p>
-        <form id="door-try" class="door-try" action="https://app.fan-ip.com/start" method="get">
-          <label for="door-name" class="door-try__label">Now see it with your name.</label>
-          <div class="door-try__row">
-            <input id="door-name" class="door-try__input" name="name" type="text" maxlength="80" autocomplete="organization" placeholder="Your brand, club or artist name">
-            <button type="submit" class="btn btn--primary">See it with your name</button>
-          </div>
-          <p class="door-try__note t-small">Opens the sign-up page with a live preview of your fan club. Nothing is created until you finish.</p>
-        </form>
-        <p class="wl-play"><a class="btn btn--line" href="platform.html#try">Play a member's season</a></p>
       </div>
     </section>
 
@@ -558,6 +504,16 @@
             <a class="btn plan-cta" href="book-a-demo.html">Talk to us</a>
           </li>
         </ul>
+        <div class="plan-pick" aria-labelledby="plan-pick-title">
+          <h3 id="plan-pick-title" class="plan-pick__title">Which plan?</h3>
+          <ul class="plan-pick__list" role="list">
+            <li data-for="sport"><b>Clubs and teams:</b> Season, for a whole season with your sponsors on board. A smaller club starts on Club.</li>
+            <li data-for="artist"><b>Artists and creators:</b> Club for a first tour, Season once more than 1,500 fans take part in a month.</li>
+            <li data-for="brand"><b>Brands:</b> Club to launch your community, Season once it passes 1,500 active members a month.</li>
+          </ul>
+          <p class="plan-pick__note t-small">The three live demos run on Season. <a href="#white-label">Open them</a></p>
+          <p class="plan-pick__note t-small">Works alongside Shopify, Klaviyo and your ticketing: codes and member exports, nothing to install. <a href="faq.html#integrations">How it works</a></p>
+        </div>
         <p class="price-pilot t-body"><strong>Founding brands.</strong> Three places for a first three-month season at €3,900 all in, then Season at 30% off for twelve months. <a href="book-a-demo.html">Ask about it</a></p>
         <p class="price-more"><a class="btn btn--line" href="pricing.html">Compare the plans</a></p>
       </div>

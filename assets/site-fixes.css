@@ -1,0 +1,84 @@
+/* Oct 2026, after the three visitor tests (club, brand, artist manager):
+   the result screens and the live demos come up right after "Three steps",
+   the visitor's world first; the world chip no longer covers prices or the
+   footer; plan lists use the slash, not a "1"; the plan table says it scrolls. */
+
+/* D2. What you see: one result screen per world. */
+.rs{padding-block:var(--s9);background:var(--bg);color:var(--fg)}
+.rs-title{max-inline-size:18ch}
+.rs-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--gap);margin:var(--s7) 0 0;padding:0;list-style:none}
+.rs-card{display:flex;flex-direction:column;gap:var(--s5);min-inline-size:0}
+.rs-shot{display:block;inline-size:100%;max-inline-size:340px;block-size:auto;border:1px solid var(--rule-dark);border-radius:14px;background:#fff}
+.rs-text{min-inline-size:0}
+.rs-k{margin:0;color:var(--ivory-muted);text-transform:uppercase;letter-spacing:.08em}
+.rs-num{margin:var(--s2) 0 0;font-family:var(--font-display);font-weight:600;font-size:clamp(2.5rem,4vw,3.5rem);line-height:1;letter-spacing:-.02em;color:var(--gold)}
+.rs-line{margin:var(--s3) 0 0;max-inline-size:34ch;color:var(--ivory);font:400 1rem/1.5 var(--font-body)}
+.rs-go,.lv-go{display:inline-flex;align-items:center;gap:.4em;min-block-size:44px;margin-block-start:var(--s2);font:600 1rem/1 var(--font-body);color:var(--gold);text-decoration:underline;text-underline-offset:.25em}
+.rs-go:focus-visible,.lv-link:focus-visible{outline:2px solid var(--signal);outline-offset:3px}
+.rs-caption{margin-block-start:var(--s6);color:var(--ivory-muted)}
+
+/* D3. The three live demos. */
+.lv{padding-block:var(--s9);background:var(--bg);color:var(--fg)}
+.lv .wl-lead{max-inline-size:40rem;margin-block:var(--s5) 0;color:var(--muted)}
+.lv-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--gap);margin:var(--s7) 0 0;padding:0;list-style:none}
+.lv-card{min-inline-size:0}
+.lv-link{position:relative;display:flex;flex-direction:column;gap:var(--s2);block-size:100%;padding:var(--s4);border:1px solid var(--rule);border-radius:var(--r-btn);color:var(--ink);text-decoration:none;transition:border-color .3s,transform .3s var(--ease-cut)}
+.lv-link:hover{border-color:var(--ink);transform:translateY(-4px)}
+.lv-shot{display:block;inline-size:100%;max-inline-size:320px;block-size:auto;margin-block-end:var(--s3);border:1px solid var(--rule);border-radius:14px}
+.lv-k{color:var(--ink-muted);text-transform:uppercase;letter-spacing:.08em}
+.lv-line{font-family:var(--font-display);font-weight:500;font-size:clamp(1.25rem,1.8vw,1.625rem);line-height:1.1;letter-spacing:-.01em}
+.lv-go{color:var(--ink);margin-block-start:auto}
+.lv-go span{color:var(--burnished)}
+.lv-tag{display:none;align-self:flex-start;padding:.35em .7em;border-radius:999px;background:var(--gold);color:var(--ink);font:600 .75rem/1 var(--font-body)}
+.lv-caption{margin-block-start:var(--s5);color:var(--ink-muted)}
+.lv .wl-close{margin-block-start:var(--s7)}
+
+/* A world is picked: its demo and its result come first, the others step back. */
+html[data-door] .rs-card,html[data-door] .lv-card{order:2}
+html[data-door="sport"] [data-for="sport"],html[data-door="artist"] [data-for="artist"],html[data-door="brand"] [data-for="brand"]{order:1}
+html[data-door="sport"] .lv-card[data-for="sport"] .lv-link,html[data-door="artist"] .lv-card[data-for="artist"] .lv-link,html[data-door="brand"] .lv-card[data-for="brand"] .lv-link{border-color:var(--burnished);border-width:2px}
+html[data-door="sport"] .lv-card[data-for="sport"] .lv-tag,html[data-door="artist"] .lv-card[data-for="artist"] .lv-tag,html[data-door="brand"] .lv-card[data-for="brand"] .lv-tag{display:block}
+/* On a world, the result band shows that world only. */
+html[data-door] .rs-grid{grid-template-columns:minmax(0,340px) minmax(0,1fr);align-items:center}
+html[data-door] .rs-card{display:contents}
+html[data-door="sport"] .rs-card:not([data-for="sport"]),html[data-door="artist"] .rs-card:not([data-for="artist"]),html[data-door="brand"] .rs-card:not([data-for="brand"]){display:none}
+html[data-door] .rs-line{max-inline-size:42ch;font-size:1.125rem}
+
+@media (max-width: 1023px){
+  /* Phones and tablets: a row to swipe, the visitor's world first. */
+  .rs-grid,.lv-grid{display:flex;gap:var(--s4);overflow-x:auto;scroll-snap-type:x mandatory;margin-inline:calc(-1 * var(--margin));padding-inline:var(--margin);padding-block-end:var(--s3);scrollbar-width:thin}
+  .rs-card,.lv-card{flex:0 0 min(78%,320px);scroll-snap-align:start}
+  html[data-door] .rs-grid{display:grid;grid-template-columns:minmax(0,1fr);overflow:visible;margin-inline:0;padding-inline:0}
+  html[data-door] .rs-shot{max-inline-size:300px}
+  .rs-swipe,.lv-swipe{display:block;margin:var(--s2) 0 0;color:var(--muted)}
+}
+@media (min-width: 1024px){ .rs-swipe,.lv-swipe{display:none} }
+html[data-door] .rs-swipe{display:none}
+
+/* Which plan? */
+.plan-pick{margin-block-start:var(--s7);padding:var(--s5);border:1px solid var(--rule-dark);border-radius:var(--r-btn)}
+.plan-pick__title{margin:0;font-family:var(--font-display);font-weight:500;font-size:1.5rem;line-height:1.1}
+.plan-pick__list{display:grid;gap:var(--s3);margin:var(--s4) 0 0;padding:0;list-style:none}
+.plan-pick__list li{max-inline-size:62ch;padding-inline-start:1.25rem;position:relative;color:var(--ivory-muted);font:400 1rem/1.5 var(--font-body)}
+.plan-pick__list li:before{content:"/";position:absolute;inset-inline-start:0;color:var(--gold);font-weight:600}
+.plan-pick__list b{color:var(--ivory);font-weight:600}
+html[data-door="sport"] .plan-pick__list [data-for="sport"],html[data-door="artist"] .plan-pick__list [data-for="artist"],html[data-door="brand"] .plan-pick__list [data-for="brand"]{color:var(--ivory)}
+html[data-door="sport"] .plan-pick__list [data-for="sport"] b,html[data-door="artist"] .plan-pick__list [data-for="artist"] b,html[data-door="brand"] .plan-pick__list [data-for="brand"] b{color:var(--gold)}
+.plan-pick__note{margin:var(--s3) 0 0;color:var(--ivory-muted)}
+.plan-pick__note a{color:var(--ivory);text-underline-offset:.2em}
+
+/* Plan lists: the slash, so the bullets don't read as "1, 1, 1". */
+.plan-list li:before{content:"/"}
+
+/* The plan table scrolls sideways on phones: say so, keep the feature column. */
+.cmp-hint{display:none;margin:var(--s4) 0 0;color:var(--ivory-muted);font:500 .875rem/1.4 var(--font-body)}
+@media (max-width: 899px){
+  .cmp-hint{display:block}
+  .cmp--plans th[scope="row"],.cmp--plans thead th:first-child{position:sticky;left:0;z-index:1;background:var(--ink);min-inline-size:9.5rem;max-inline-size:9.5rem;box-shadow:6px 0 8px -6px rgb(0 0 0 / .6)}
+  .cmp--plans .cmp-group th{position:static}
+}
+
+/* The world chip: smaller on phones, never over prices or the footer. */
+@media (max-width: 767px){
+  .world-chip{bottom:12px;min-block-size:40px;padding-inline:var(--s3);font-size:.8125rem;gap:.45em}
+}

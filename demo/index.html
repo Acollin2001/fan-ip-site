@@ -1,5 +1,5 @@
-<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#faf9f5;color:#141413}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
-<title>Styles FAN/IP</title>
+<!doctype html><html lang="en-GB"><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#faf9f5;color:#141413}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>FAN/IP styles</title>
 <meta name="robots" content="noindex, nofollow">
 <style>
   @font-face {
@@ -292,15 +292,15 @@
 <div class="mobile-bar">
   <span class="mark">FAN<span>/</span>IP</span>
   <select id="m-style" aria-label="Style"></select>
-  <select id="m-brand" aria-label="Marque"></select>
+  <select id="m-brand" aria-label="Brand"></select>
 </div>
 <aside>
   <div>
     <div class="mark">FAN<span>/</span>IP</div>
-    <h1>Un espace membre, plusieurs styles</h1>
+    <h1>One member space, many styles</h1>
     <p class="lead">
-      La même app, avec des marques fictives. Tout est cliquable : les onglets, les missions, la
-      boutique, le profil.
+      The same app, with fictional brands. Everything is clickable: the tabs, the missions, the
+      shop, the profile.
     </p>
   </div>
   <fieldset>
@@ -308,53 +308,51 @@
     <div class="styles" id="styles"></div>
   </fieldset>
   <fieldset>
-    <legend>Marque</legend>
+    <legend>Brand</legend>
     <div class="seg" id="brands"></div>
   </fieldset>
   <fieldset>
-    <legend>Écran</legend>
+    <legend>Screen</legend>
     <div class="seg" id="views">
-      <button type="button" data-view="phone" aria-pressed="true">Téléphone</button>
-      <button type="button" data-view="desk" aria-pressed="false">Ordinateur</button>
+      <button type="button" data-view="phone" aria-pressed="true">Phone</button>
+      <button type="button" data-view="desk" aria-pressed="false">Desktop</button>
     </div>
   </fieldset>
   <p class="hint">
-    <b>À essayer.</b> Dans Calendar, arrache la page du jour. Dans Metro, regarde la ligne se
-    tracer jusqu'aux correspondances. Dans Print, le nom passe sous la raclette. Dans Board, les
-    chiffres basculent. Dans Dial, tourne la molette du doigt. Dans Album, touche la carte de
-    membre.
+    <b>Try this.</b> In Calendar, tear off today's page. In Metro, watch the line draw itself
+    out to the interchanges. In Print, the name slides under the squeegee. In Board, the numbers
+    flip. In Dial, turn the wheel with your finger. In Album, tap the member card.
   </p>
   <p class="hint">
-    Couleurs, logo, polices et style se règlent par la marque elle-même dans son espace
-    d'administration.
+    Colours, logo, fonts and style are set by the brand itself in its admin space.
   </p>
 </aside>
 <main>
   <div class="device phone" id="device">
-    <iframe id="frame" title="Aperçu de l'espace membre"></iframe>
+    <iframe id="frame" title="Member space preview"></iframe>
   </div>
 </main>
 <script>
   (() => {
     const STYLES = [
-      ["reel", "Reel", "Un écran plein par information, comme des stories."],
-      ["metro", "Metro", "Un plan de métro : chaque mission est une station."],
-      ["riso", "Riso", "Une affiche riso : deux encres, de grands chiffres. Le style de départ d'une nouvelle marque."],
-      ["board", "Board", "Un tableau à volets : les chiffres basculent en place."],
-      ["calendar", "Calendar", "Une éphéméride : une page par jour, chaque jour une mission."],
-      ["album", "Album", "Une carte de membre à retourner, des cartes à collectionner."],
-      ["dial", "Dial", "Une molette à tourner pour choisir sa mission."],
-      ["print", "Print", "Un atelier de sérigraphie : le nom du membre tiré à l'encre de la marque."],
-      ["arena", "Arena", "L'énergie du jour de match."],
-      ["bold", "Poster", "L'esprit affiche : aplats, contours, lettres massives."],
-      ["editorial", "Magazine", "Grands titres et mise en page de magazine."],
-      ["direct", "Direct", "Une conversation avec la marque."],
-      ["stage", "Stage", "Ambiance de concert, la couleur éclaire la scène."],
+      ["reel", "Reel", "One full screen per update, like stories."],
+      ["metro", "Metro", "A metro map: every mission is a station."],
+      ["riso", "Riso", "A risograph poster: two inks, big numbers. The starting style for a new brand."],
+      ["board", "Board", "A split-flap board: the numbers flip into place."],
+      ["calendar", "Calendar", "A tear-off calendar: a page a day, a mission a day."],
+      ["album", "Album", "A member card to flip, cards to collect."],
+      ["dial", "Dial", "A wheel to turn to pick your mission."],
+      ["print", "Print", "A screen-printing studio: the member's name pulled in the brand's ink."],
+      ["arena", "Arena", "Matchday energy."],
+      ["bold", "Poster", "Poster spirit: flat colour, outlines, massive letters."],
+      ["editorial", "Magazine", "Big headlines and a magazine layout."],
+      ["direct", "Direct", "A conversation with the brand."],
+      ["stage", "Stage", "Concert mood: colour lights up the stage."],
     ];
     const BRANDS = [
-      ["rivage", "FC Rivage", "club de foot"],
-      ["nuits", "Ilsa Morrow", "artiste"],
-      ["aube", "Maison Aube", "soins"],
+      ["rivage", "FC Rivage", "football club"],
+      ["nuits", "Ilsa Morrow", "artist"],
+      ["aube", "Maison Aube", "skincare"],
     ];
     const state = { style: "riso", brand: "rivage", view: "phone", screen: "home" };
     // Deep link as a bare token: #album-rivage.
@@ -373,7 +371,7 @@
       const b = document.createElement("button");
       b.type = "button";
       b.dataset.style = id;
-      b.innerHTML = `<b>${name}${isNew ? '<span class="new">nouveau</span>' : ""}</b><span>${line}</span>`;
+      b.innerHTML = `<b>${name}${isNew ? '<span class="new">new</span>' : ""}</b><span>${line}</span>`;
       stylesEl.append(b);
       mStyle.append(new Option(name, id));
     }

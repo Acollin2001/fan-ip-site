@@ -199,11 +199,37 @@
     document.fonts?.ready.then(run);
     fitReel.current = run;
   }
+  // Poster's and Stage's giant figures: shrink them until the final figure
+  // (not the one counting up) fits its line.
+  function fitXs(scope) {
+    const els = scope.querySelectorAll("[data-xs-fit]");
+    if (!els.length) return;
+    const run = () =>
+      els.forEach((el) => {
+        el.style.fontSize = "";
+        const width = el.clientWidth;
+        if (!width) return;
+        const probe = document.createElement("span");
+        probe.textContent = (el.querySelector(".sr-only") || el).textContent;
+        probe.style.cssText = "position:absolute;visibility:hidden;white-space:nowrap;left:0;top:0";
+        el.append(probe);
+        const drawn = probe.getBoundingClientRect().width;
+        probe.remove();
+        if (drawn > width) {
+          const size = parseFloat(getComputedStyle(el).fontSize);
+          el.style.fontSize = `${size * (width / drawn) * 0.97}px`;
+        }
+      });
+    run();
+    document.fonts?.ready.then(run);
+    fitXs.current = run;
+  }
   let lastWidth = innerWidth;
   addEventListener("resize", () => {
     if (innerWidth === lastWidth) return;
     lastWidth = innerWidth;
     fitReel.current?.();
+    fitXs.current?.();
   });
 
   // -------------------------------------------------- Direct, arrivals
@@ -261,7 +287,7 @@
   if (direction === "stage" && !reduce) {
     document.addEventListener("pointermove", (e) => {
       if (e.pointerType !== "mouse") return;
-      const hero = e.target.closest && e.target.closest(".ds-hero");
+      const hero = e.target.closest && e.target.closest(".ds-hero, .xs-st-hero");
       if (!hero) return;
       const box = hero.getBoundingClientRect();
       hero.style.setProperty(
@@ -313,6 +339,7 @@
   function start(key) {
     const main = document.querySelector("main") || document.body;
     fitReel(document.body);
+    fitXs(document.body);
     albumCards(document.body);
     countUps(document.body);
     directArrivals(document.body, key);

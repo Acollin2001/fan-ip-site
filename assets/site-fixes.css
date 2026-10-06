@@ -42,13 +42,13 @@ html[data-door="sport"] .lv-card[data-for="sport"] .lv-tag,html[data-door="artis
 html[data-door] .rs-grid{grid-template-columns:minmax(0,340px) minmax(0,1fr);align-items:center}
 html[data-door] .rs-card{display:contents}
 html[data-door="sport"] .rs-card:not([data-for="sport"]),html[data-door="artist"] .rs-card:not([data-for="artist"]),html[data-door="brand"] .rs-card:not([data-for="brand"]){display:none}
-html[data-door] .rs-line{max-inline-size:42ch;font-size:1.125rem}
 
 @media (max-width: 1023px){
   /* Phones and tablets: a row to swipe, the visitor's world first. */
   .rs-grid,.lv-grid{display:flex;gap:var(--s4);overflow-x:auto;scroll-snap-type:x mandatory;margin-inline:calc(-1 * var(--margin));padding-inline:var(--margin);padding-block-end:var(--s3);scrollbar-width:thin}
   .rs-card,.lv-card{flex:0 0 min(78%,320px);scroll-snap-align:start}
   html[data-door] .rs-grid{display:grid;grid-template-columns:minmax(0,1fr);overflow:visible;margin-inline:0;padding-inline:0}
+  html[data-door] .rs-card{display:flex}
   html[data-door] .rs-shot{max-inline-size:300px}
   .rs-swipe,.lv-swipe{display:block;margin:var(--s2) 0 0;color:var(--muted)}
 }
@@ -81,4 +81,82 @@ html[data-door="sport"] .plan-pick__list [data-for="sport"] b,html[data-door="ar
 /* The world chip: smaller on phones, never over prices or the footer. */
 @media (max-width: 767px){
   .world-chip{bottom:12px;min-block-size:40px;padding-inline:var(--s3);font-size:.8125rem;gap:.45em}
+}
+
+/* ---- 6 Oct evening, after Alexis's own walk-through ---- */
+
+/* Hero: one strip of worlds at the top, then the promise on the left and the
+   lead on the right on one line, then the big title. Same left edge for all. */
+.hero-promise__gold{color:var(--gold);background:linear-gradient(var(--gold),var(--gold)) 0 100% / 0 .07em no-repeat;padding-block-end:.08em;animation:promise-line .9s .5s cubic-bezier(.2,0,0,1) forwards}
+@keyframes promise-line{to{background-size:100% .07em}}
+@media (prefers-reduced-motion: reduce){ .hero-promise__gold{animation:none;background-size:100% .07em} }
+.door{padding:0;background:none;border:0;border-block:1px solid var(--rule-dark);max-inline-size:none}
+.door-ticker li{line-height:2.6}
+@media (min-width: 1024px){
+  .door{top:calc(var(--header-h) + 24px);left:var(--margin);right:var(--margin);inline-size:auto;padding:0}
+  .hero-lead-block{left:var(--margin);right:var(--margin);display:grid;grid-template-columns:repeat(12,minmax(0,1fr));column-gap:var(--gap);align-items:start}
+  .hero-promise{grid-column:1 / span 7;grid-row:1 / span 2;align-self:start;margin-block-start:-.12em !important;max-inline-size:none;margin:0;font-size:clamp(2.25rem,3.5vw,3.75rem);line-height:1.02;letter-spacing:-.02em}
+  .hero-lead{grid-column:8 / -1;grid-row:1;margin:0;max-inline-size:26em}
+  .hero-actions{grid-column:8 / -1;grid-row:2;margin-block-start:var(--s5)}
+}
+@media (max-width: 1023px){
+  .hero-promise{font-size:clamp(1.875rem,6.4vw,2.75rem);line-height:1.04;max-inline-size:none}
+  .door{margin-block-start:var(--s7)}
+}
+
+/* "Where do your fans gather?": each card says it is a button. */
+.world-cta{display:flex;margin-block-start:var(--s4)}
+.world-cta__go,.world-cta__on{display:inline-flex;align-items:center;gap:.45em;min-block-size:44px;padding:0 var(--s4);border-radius:var(--r-btn);font:600 1rem/1 var(--font-body)}
+.world-cta__go{background:var(--gold);color:var(--ink);transition:transform .2s cubic-bezier(.2,0,0,1)}
+.world-card:hover .world-cta__go{transform:translateX(4px)}
+.world-cta__on{display:none;border:1px solid var(--gold);color:var(--gold)}
+.world-card[aria-pressed="true"] .world-cta__go{display:none}
+.world-card[aria-pressed="true"] .world-cta__on{display:inline-flex}
+.world-card[aria-pressed="true"]:after{display:none}
+
+/* Three steps: the title, then the steps side by side. No empty column. */
+.prod-grid{align-items:start}
+.prod-title{grid-column:1 / -1;max-inline-size:none}
+.prod-adapt{margin-block-start:var(--s3)}
+@media (min-width: 1024px){
+  .steps3{grid-column:1 / -1;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--gap);margin-block-start:var(--s7)}
+  .steps3 li{grid-template-columns:minmax(0,1fr);row-gap:var(--s2);padding-block-start:var(--s4);border-block-start:1px solid var(--rule-dark)}
+  .steps3__n{grid-row:auto;display:block;block-size:2.5rem;font-size:2.5rem;line-height:1}
+}
+
+/* What you see in your admin: numbers, not a paragraph. */
+.rs-stats{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--s5) var(--gap);margin:var(--s4) 0 0}
+.rs-stats div{display:flex;flex-direction:column-reverse;gap:var(--s1);padding-block-start:var(--s3);border-block-start:1px solid var(--rule-dark)}
+.rs-stats dd{margin:0;font-family:var(--font-display);font-weight:600;font-size:clamp(1.75rem,2.6vw,2.5rem);line-height:1;letter-spacing:-.02em;color:var(--ivory)}
+.rs-stats dt{color:var(--ivory-muted);font:500 .875rem/1.35 var(--font-body)}
+.rs-sum{display:flex;flex-wrap:wrap;align-items:stretch;gap:var(--s2);margin:var(--s5) 0 0}
+.rs-sum__n{display:flex;flex-direction:column;justify-content:center;padding:var(--s3) var(--s4);border:1px solid var(--rule-dark);border-radius:var(--r-btn);font:600 1.25rem/1.1 var(--font-display);color:var(--ivory)}
+.rs-sum__n small{margin-block-start:.3em;font:500 .75rem/1.2 var(--font-body);color:var(--ivory-muted)}
+.rs-sum__n--total{background:var(--gold);border-color:var(--gold);color:var(--ink)}
+.rs-sum__n--total small{color:var(--ink)}
+.rs-sum__op{align-self:center;font:500 1.25rem/1 var(--font-display);color:var(--gold)}
+.rs-line{margin-block-start:var(--s4);max-inline-size:52ch;font-size:1rem;color:var(--ivory-muted)}
+.rs-caption a{color:var(--ivory);text-underline-offset:.2em}
+html:not([data-door]) .rs-stats{grid-template-columns:minmax(0,1fr)}
+html:not([data-door]) .rs-stats div:nth-child(n+3){display:none}
+html:not([data-door]) .rs-sum{display:none}
+@media (min-width: 1024px){ html[data-door] .rs-stats dd{font-size:clamp(2.25rem,3.2vw,3rem)} }
+
+/* See it with your name: the last step, just before the closing line. */
+.ytry{padding-block:var(--s9);background:var(--bg);color:var(--fg)}
+.ytry-grid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));column-gap:var(--gap);row-gap:var(--s6);align-items:end}
+.ytry-head{grid-column:1 / span 6}
+.ytry-body{grid-column:8 / -1}
+.ytry-k{margin:0 0 var(--s3);color:var(--ink-muted);text-transform:uppercase;letter-spacing:.08em}
+.ytry-title{margin:0}
+.ytry-lead{margin:var(--s4) 0 0;max-inline-size:44ch;color:var(--ink-muted)}
+.ytry .door-try{margin:0}
+.ytry-play{margin:var(--s4) 0 0;color:var(--ink-muted)}
+.ytry-play a{display:none;color:var(--ink);font-weight:600;text-underline-offset:.2em}
+html:not([data-door]) .ytry-play a[data-for="sport"],html[data-door="sport"] .ytry-play a[data-for="sport"],html[data-door="artist"] .ytry-play a[data-for="artist"],html[data-door="brand"] .ytry-play a[data-for="brand"]{display:inline}
+@media (max-width: 1023px){ .ytry-head,.ytry-body{grid-column:1 / -1} }
+@media (max-width: 767px){
+  .rs-sum{flex-wrap:nowrap;gap:6px}
+  .rs-sum__n{padding:var(--s2) var(--s3);font-size:1rem}
+  .rs-sum__n small{font-size:.6875rem}
 }

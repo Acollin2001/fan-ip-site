@@ -9,7 +9,6 @@ const read = (f) => readFileSync(new URL(f, root), "utf8");
 const js = read("assets/doors.js");
 const DOORS = Function(`return ${js.slice(js.indexOf("{", js.indexOf("var DOORS")), js.indexOf("\n  };", js.indexOf("var DOORS")) + 4)}`)();
 const index = read("index.html");
-const nf = new Intl.NumberFormat("en-GB");
 
 const PAGES = {
   brand: {
@@ -42,11 +41,9 @@ function swap(html, re, fn) {
 
 for (const [key, page] of Object.entries(PAGES)) {
   const d = DOORS[key];
-  const views = d.members * 0.1 * 2 * 400;
   const text = {
     step1: d.step1, vigTitle: d.vigTitle, vigText: d.vigText, vigPoints: d.vigPoints,
-    reachTitle: d.reachTitle, members: nf.format(d.members), views: nf.format(views),
-    euros: `€${nf.format((views / 1000) * 2)}`,
+    reachTitle: d.reachTitle, vigGoal: d.vigGoal,
   };
   const url = `https://fan-ip.com/${page.file}`;
   let h = index;
@@ -63,8 +60,6 @@ for (const [key, page] of Object.entries(PAGES)) {
   }
   h = swap(h, /<p class="prod-adapt t-small" data-slot="adapt" hidden><\/p>/, () =>
     `<p class="prod-adapt t-small" data-slot="adapt">${esc(d.adapt)}</p>`);
-  h = swap(h, /<a class="btn btn--primary" href="([^"]*)" data-slot="calc">/, (_, href) =>
-    `<a class="btn btn--primary" href="reach-calculator.html?members=${d.members}" data-slot="calc" data-generic-href="${esc(href)}">`);
   h = swap(h, new RegExp(`data-door-pick="${key}" aria-pressed="false"`), `data-door-pick="${key}" aria-pressed="true"`);
   // In-page anchors stay on this page; links to the home page stay on "./".
   writeFileSync(new URL(page.file, root), h);

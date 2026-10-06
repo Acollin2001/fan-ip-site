@@ -17,7 +17,7 @@
       vigText: "One photo on your feed. Tag the brand.",
       vigPoints: "+50",
       reachTitle: "One unboxing post",
-      members: 3000,
+      vigGoal: "A limited-edition gift box for every member",
       world: "aube"
     },
     sport: {
@@ -30,7 +30,7 @@
       vigText: "From the stands. Tag the club and the sponsor.",
       vigPoints: "+60",
       reachTitle: "One matchday post",
-      members: 8000,
+      vigGoal: "A limited supporters’ shirt for every member",
       world: "az"
     },
     artist: {
@@ -43,13 +43,12 @@
       vigText: "From the show. Tag the city and the artist.",
       vigPoints: "+50",
       reachTitle: "One setlist post",
-      members: 5000,
+      vigGoal: "A signed tour poster for every member",
       world: "aube"
     }
   };
-  var TEXT_SLOTS = ["step1", "vigTitle", "vigText", "vigPoints", "reachTitle", "members", "views", "euros"];
+  var TEXT_SLOTS = ["step1", "vigTitle", "vigText", "vigPoints", "reachTitle", "vigGoal"];
   var KEY = "fanip.door";
-  var nf = new Intl.NumberFormat("en-GB");
   var root = document.documentElement;
   var still = window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches;
   var slots = {};
@@ -71,28 +70,19 @@
   function apply(door) {
     var d = DOORS[door];
     var g = generic;
-    root.setAttribute("data-door", d ? door : "");
-    TEXT_SLOTS.slice(0, 5).forEach(function (n) {
+    if (d) root.setAttribute("data-door", door);
+    else root.removeAttribute("data-door");
+    TEXT_SLOTS.forEach(function (n) {
       setText(n, d ? d[n] : g[n]);
     });
-    if (d) {
-      // 10% of members post twice a month, 400 views a post, €2 CPM (default only).
-      var views = d.members * 0.1 * 2 * 400;
-      setText("members", nf.format(d.members));
-      setText("views", nf.format(views));
-      setText("euros", "€" + nf.format((views / 1000) * 2));
-    } else {
-      ["members", "views", "euros"].forEach(function (n) {
-        setText(n, g[n]);
-      });
-    }
     var adapt = el("adapt");
     if (adapt) {
       adapt.textContent = d ? d.adapt : "";
       adapt.hidden = !d;
     }
-    var calc = el("calc");
-    if (calc) calc.setAttribute("href", d ? "reach-calculator.html?members=" + d.members : g.calc);
+    document.querySelectorAll("[data-calc-link]").forEach(function (link) {
+      link.setAttribute("href", "reach-calculator.html" + (d ? "?for=" + door : ""));
+    });
     var name = document.getElementById("door-name");
     if (name && name.form) name.form.setAttribute("data-door", d ? door : "");
     document.querySelectorAll("[data-door-pick]").forEach(function (b) {
@@ -187,14 +177,10 @@
       document.querySelectorAll("[data-slot][data-generic]").forEach(function (node) {
         generic[node.getAttribute("data-slot")] = node.getAttribute("data-generic");
       });
-      var c = el("calc");
-      if (c) generic.calc = c.getAttribute("data-generic-href");
     } else {
       TEXT_SLOTS.forEach(function (n) {
         if (el(n)) generic[n] = el(n).textContent;
       });
-      var calc = el("calc");
-      if (calc) generic.calc = calc.getAttribute("href");
     }
     chip = document.querySelector("[data-world-chip]");
     var band = document.getElementById("world");
@@ -212,7 +198,7 @@
         covering = seen.size;
         showChip();
       });
-      ["#pricing", "#closing", "footer"].forEach(function (sel) {
+      ["#top", "#pricing", "#try", "#closing", "footer"].forEach(function (sel) {
         var node = document.querySelector(sel);
         if (node) watch.observe(node);
       });

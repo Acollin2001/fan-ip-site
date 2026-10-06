@@ -604,6 +604,8 @@ img, svg { max-width: 100%; }
   border-radius: calc(var(--r-card) - 6px); background: var(--tone-bg); color: var(--tone-fg);
 }
 .card-art svg.art { width: 70%; height: 70%; }
+.grid-cards .card-art { container: art / inline-size; }
+@container art (max-width: 200px) { .card-kind, .app[data-style="dial"] .card-bonus { display: none; } }
 .card-val {
   position: absolute; top: 10px; left: 12px; display: flex; flex-direction: column; line-height: 0.85;
   font-family: var(--f-display); font-weight: 900; font-size: 2.25rem;
@@ -1218,36 +1220,690 @@ img, svg { max-width: 100%; }
 .kpi:first-child b { color: var(--fx-ink); }
 .acard a { color: var(--fx-ink); }
 
-/* ---------- Styles: the club keeps its colours, the style sets surface, type and shape ---------- */
-.app[data-style="riso"] { --ground: #f3eee3; --paper: #fbf8f0; --line: #ddd3bf; --r-card: 8px; --r-ctl: 8px; --f-display: "Clash Display", var(--f-text); --shadow-card: 3px 3px 0 color-mix(in srgb, var(--wing) 70%, transparent); --shadow-lift: 4px 4px 0 color-mix(in srgb, var(--kestrel) 60%, transparent); }
-.app[data-style="riso"] .view { background-image: radial-gradient(color-mix(in srgb, var(--kestrel) 14%, transparent) 1px, transparent 1.4px); background-size: 9px 9px; }
-.app[data-style="reel"] { --ground: var(--kestrel); --r-card: 4px; }
-.app[data-style="reel"] .view-inner > header, .app[data-style="reel"] .h-sec, .app[data-style="reel"] .view-inner > .sec > .sec-head .h-sec { color: #fff; }
-.app[data-style="reel"] .lede, .app[data-style="reel"] .view-inner > .meta, .app[data-style="reel"] .view-inner > p.meta { color: rgba(255,255,255,0.85); }
-.app[data-style="reel"] .link { color: #fff; }
-.app[data-style="reel"] .tier, .app[data-style="reel"] .tier-steps, .app[data-style="reel"] .tier-steps .on, .app[data-style="reel"] .view-inner > p.meta { color: #fff; }
-.app[data-style="reel"] .bar > span { background: var(--flood); }
-.app[data-style="reel"] .bar { background: rgba(255,255,255,0.22); }
-.app[data-style="reel"] .h-page { font-size: 3.5rem; }
-.app[data-style="reel"] .mfront { background: var(--moor); }
-.app[data-style="metro"] { --ground: #f7f7f5; --paper: #ffffff; --r-card: 4px; --r-ctl: 4px; --shadow-card: 0 0 0 1px var(--line); --shadow-lift: 0 0 0 1px var(--line), 0 10px 20px -16px rgba(0,0,0,0.4); }
-.app[data-style="metro"] .panel, .app[data-style="metro"] .card, .app[data-style="metro"] .reward { border-left: 6px solid var(--kestrel); }
-.app[data-style="board"], .app[data-style="arena"], .app[data-style="stage"] { --paper: #1d2531; --ink: #f1f3f6; --ink-2: #b9c2ce; --ink-3: #8c97a5; --line: #334052; color-scheme: dark; }
-.app[data-style="board"] { --ground: #11161d; --f-display: "Big Shoulders Display", monospace; --r-card: 6px; }
-.app[data-style="board"] .num, .app[data-style="board"] .card-val { color: var(--flood); }
-.app[data-style="arena"] { --ground: var(--moor); --paper: var(--moor-2); }
-.app[data-style="stage"] { --ground: #0d131c; --paper: #161f2b; --r-card: 22px; --f-display: "Clash Display", var(--f-text); }
-.app[data-style="board"] .reward-layer[data-layer="base"], .app[data-style="arena"] .reward-layer[data-layer="base"], .app[data-style="stage"] .reward-layer[data-layer="base"] { background: #2a3443; }
-.app[data-style="board"] .btn-dark, .app[data-style="arena"] .btn-dark, .app[data-style="stage"] .btn-dark { background: var(--kestrel); }
-.app[data-style="calendar"] { --ground: #f4f2ed; --paper: #fff; --r-card: 3px; --f-display: "Clash Display", var(--f-text); --f-text: "General Sans", Arial, sans-serif; }
-.app[data-style="dial"] { --ground: #eceff3; --r-card: 26px; --r-ctl: 999px; --f-display: "Clash Display", var(--f-text); }
-.app[data-style="print"] { --ground: #ece6d8; --paper: #fffdf7; --r-card: 0px; --r-ctl: 2px; --f-display: Georgia, "Times New Roman", serif; --shadow-card: 0 0 0 1px #c9bfa8, 0 6px 10px -8px rgba(0,0,0,0.3); }
-.app[data-style="poster"] { --ground: var(--buff); --r-card: 0px; --r-ctl: 0px; }
-.app[data-style="poster"] .h-page { font-size: 4.25rem; text-transform: uppercase; }
-.app[data-style="magazine"] { --ground: #ffffff; --paper: #f6f6f4; --r-card: 2px; --f-display: Georgia, "Times New Roman", serif; --shadow-card: none; --shadow-lift: 0 10px 24px -18px rgba(0,0,0,0.5); }
-.app[data-style="magazine"] .h-page { font-weight: 400; font-style: italic; }
-.app[data-style="direct"] { --ground: #eef1f5; --r-card: 24px; --r-ctl: 999px; --f-display: "General Sans", var(--f-text); --f-text: "General Sans", Arial, sans-serif; }
+/* ---------- Styles: the club keeps its colours; each style composes the member app its own way ----------
+   Home layouts come from STYLE_HOMES (script). Below: tokens, then per style the home, the lists and cards,
+   and the navigation. Album is the default and uses the base rules above. */
+.style-pick { display: inline-flex; align-items: center; gap: 8px; font-size: 0.8125rem; color: var(--fx-ink-2); }
+.style-pick select { font: inherit; font-weight: 500; color: var(--fx-ink); background: var(--fx-soft) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M1 1l4 4 4-4' fill='none' stroke='%235b606b' stroke-width='1.6'/%3E%3C/svg%3E") no-repeat right 11px center; border: 1px solid var(--fx-line); border-radius: 999px; padding: 7px 30px 7px 13px; appearance: none; cursor: pointer; }
+@media (max-width: 1100px) { .style-pick span { display: none; } }
+@media (max-width: 760px) { .style-pick { display: none; } }
 .app[data-style] .h-page, .app[data-style] .h-sec { transition: none; }
+.sh { min-width: 0; }
+:where(.sh button) { font: inherit; color: inherit; }
+
+/* Dark surfaces: Board and Stage */
+.app[data-style="board"], .app[data-style="stage"] { --paper: #161c24; --ink: #f1f3f6; --ink-2: #b9c2ce; --ink-3: #8c97a5; --line: #2a3442; color-scheme: dark; }
+.app[data-style="board"] .reward-layer[data-layer="base"], .app[data-style="stage"] .reward-layer[data-layer="base"] { background: #2a3443; }
+.app[data-style="board"] .btn-dark, .app[data-style="stage"] .btn-dark { background: var(--kestrel); }
+.app[data-style="board"] :is(.panel-kicker, .link), .app[data-style="stage"] :is(.panel-kicker, .link) { color: var(--kestrel-hi); }
+.app[data-style="board"] .btn-ghost, .app[data-style="stage"] .btn-ghost { background: transparent; color: var(--ink); box-shadow: inset 0 0 0 1.5px var(--line); }
+.app:is([data-style="board"], [data-style="stage"], [data-style="reel"]) .mfront { box-shadow: 0 0 0 1.5px rgba(255, 255, 255, 0.22), var(--shadow-lift); }
+.app:is([data-style="board"], [data-style="stage"], [data-style="reel"]) .mf-stripe { background: var(--moor-2); }
+
+/* ===================== METRO: the member's own line ===================== */
+.app[data-style="metro"] { --ground: #f5f5f1; --paper: #ffffff; --line: #dcded8; --r-card: 6px; --r-ctl: 6px; --f-display: "General Sans", var(--f-text); --shadow-card: 0 0 0 1px var(--line); --shadow-lift: 0 0 0 1px var(--line), 0 12px 22px -18px rgba(0, 0, 0, 0.45); }
+.app[data-style="metro"] .h-page { font-weight: 600; letter-spacing: -0.025em; font-size: 2.25rem; }
+.app[data-style="metro"] .h-sec { font-weight: 600; letter-spacing: -0.015em; }
+.mt-head { display: flex; flex-direction: column; gap: 10px; }
+.mt-route { display: inline-flex; align-items: center; gap: 10px; align-self: flex-start; padding: 6px 14px 6px 6px; border-radius: 4px; background: var(--moor); color: #fff; font-weight: 600; font-size: 0.875rem; }
+.mt-bullet { flex: none; display: inline-grid; place-items: center; width: 24px; height: 24px; border-radius: 50%; background: var(--kestrel); color: #fff; font-family: "General Sans", var(--f-text); font-weight: 600; font-size: 0.75rem; line-height: 1; }
+.mt-bullet.big { width: 30px; height: 30px; font-size: 1rem; }
+.mt-wrap { display: grid; gap: 22px; }
+.mt-map { position: relative; min-width: 0; }
+.mt-line { list-style: none; margin: 0; padding: 0; --lx: 22px; --lw: 12px; }
+.mt-st { position: relative; display: grid; grid-template-columns: 50px minmax(0, 1fr); align-items: center; min-height: 66px; }
+.mt-st::before { content: ""; position: absolute; top: 0; bottom: 0; left: calc(var(--lx) - var(--lw) / 2); width: var(--lw); background: var(--kestrel); border-inline: 2px solid var(--kestrel-deep); z-index: 1; }
+.mt-st.mt-past::before { background: color-mix(in srgb, var(--kestrel) 42%, var(--ground)); border-color: color-mix(in srgb, var(--kestrel-deep) 55%, var(--ground)); }
+.mt-st.mt-term::before { top: 50%; }
+.mt-st.mt-end::before { bottom: 30%; background: repeating-linear-gradient(var(--kestrel) 0 8px, transparent 8px 13px); border: 0; }
+.mt-mark { position: absolute; z-index: 3; top: 50%; left: var(--lx); width: 22px; height: 22px; margin: -11px 0 0 -11px; border-radius: 50%; background: #fff; border: 4px solid var(--moor); }
+.mt-past .mt-mark { width: 12px; height: 8px; margin: -4px 0 0 calc(var(--lw) / 2 - 1px); border: 0; border-radius: 0; background: color-mix(in srgb, var(--moor) 55%, var(--ground)); }
+.mt-term .mt-mark { width: 34px; height: 9px; margin: -4px 0 0 -17px; border: 0; border-radius: 2px; background: var(--moor); }
+.mt-you .mt-mark { width: 36px; height: 36px; margin: -18px 0 0 -18px; border-width: 5px; box-shadow: 0 0 0 6px color-mix(in srgb, var(--kestrel) 22%, transparent); background: radial-gradient(circle, var(--kestrel) 0 6px, #fff 6.5px); }
+.mt-x .mt-mark { width: 30px; height: 20px; margin: -10px 0 0 -15px; border-radius: 10px; border-width: 3px; }
+.mt-end .mt-mark { display: none; }
+.mt-x::after { content: ""; position: absolute; z-index: 2; left: calc(var(--gutter) * -1); right: calc(var(--gutter) * -1); top: 50%; height: 10px; margin-top: -5px; background: var(--wing); border-block: 2px solid color-mix(in srgb, var(--wing) 50%, var(--moor)); }
+.mt-lbl { grid-column: 2; position: relative; z-index: 3; display: flex; flex-direction: column; gap: 2px; padding: 10px 0; min-width: 0; text-align: left; border: 0; background: none; }
+button.mt-lbl { cursor: pointer; padding-block: 12px; }
+.mt-lbl b { font-weight: 600; font-size: 0.9375rem; line-height: 1.3; }
+.mt-lbl > span { font-size: 0.8125rem; color: var(--ink-3); }
+.mt-past .mt-lbl b { color: var(--ink-2); font-weight: 500; }
+.mt-x { min-height: 92px; }
+.mt-x .mt-lbl { gap: 26px; padding: 4px 0; }
+.mt-x .mt-lbl b { background: var(--ground); align-self: flex-start; padding-right: 6px; }
+.mt-x .mt-lbl > span { background: var(--ground); align-self: flex-start; padding-right: 6px; }
+.mt-ready .mt-lbl > span { color: var(--good); font-weight: 600; }
+.mt-stop .mt-lbl { display: grid; grid-template-columns: auto minmax(0, 1fr); column-gap: 10px; align-items: center; }
+.mt-stop .mt-lbl .mt-bullet { grid-row: span 2; }
+.mt-stop .mt-lbl:hover b { text-decoration: underline; text-underline-offset: 3px; }
+.mt-pts { color: var(--kestrel-deep); font-weight: 700; }
+.mt-you { min-height: 108px; }
+.mt-here { font-size: 0.75rem !important; font-weight: 700; color: var(--kestrel-deep) !important; text-transform: uppercase; letter-spacing: 0.08em; }
+.mt-you .mt-lbl b { font-family: "General Sans", var(--f-text); font-size: 2.5rem; font-weight: 600; letter-spacing: -0.03em; line-height: 1; }
+.mt-you .mt-lbl b small { font-size: 0.9375rem; letter-spacing: 0; color: var(--ink-2); font-weight: 500; }
+.mt-key { align-self: start; display: grid; gap: 14px; padding: 18px; border-radius: 6px; background: var(--paper); box-shadow: 0 0 0 1px var(--line); }
+.mt-key h2 { margin: 0; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.14em; color: var(--ink-2); }
+.mt-key ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 12px; }
+.mt-key li { display: grid; grid-template-columns: 34px minmax(0, 1fr); gap: 10px; align-items: center; font-size: 0.8125rem; color: var(--ink-2); }
+.mt-key li b { display: block; color: var(--ink); font-size: 0.875rem; }
+.mt-key i { display: block; justify-self: center; }
+.k-line { width: 34px; height: 10px; background: var(--kestrel); border-block: 2px solid var(--kestrel-deep); }
+.k-x { width: 34px; height: 10px; background: var(--wing); border-block: 2px solid color-mix(in srgb, var(--wing) 50%, var(--moor)); }
+.k-stop { width: 18px; height: 18px; border-radius: 50%; border: 4px solid var(--moor); background: #fff; }
+.k-you { width: 24px; height: 24px; border-radius: 50%; border: 4px solid var(--moor); background: radial-gradient(circle, var(--kestrel) 0 4px, #fff 4.5px); }
+.mt-dep { display: grid; gap: 4px; padding: 14px; border-radius: 4px; background: var(--moor); color: #fff; }
+.mt-dep-k { font-size: 0.6875rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em; color: var(--flood); }
+.mt-dep b { font-size: 1rem; }
+.mt-dep > span:not(.mt-dep-k) { font-size: 0.8125rem; color: var(--wing-soft); }
+.mt-dep .mt-dep-t { font-family: "Big Shoulders Display", sans-serif; font-weight: 800; font-size: 1.75rem; letter-spacing: 0.04em; color: var(--flood) !important; margin: 4px 0 8px; }
+@container dev (min-width: 900px) {
+  .mt-wrap { grid-template-columns: minmax(0, 1fr) 300px; align-items: start; gap: 32px; }
+  .mt-key { position: sticky; top: 0; }
+  .mt-line { --lx: calc((100% - 64px) / 2 + 32px); --lw: 16px; }
+  .mt-st { grid-template-columns: minmax(0, 1fr) 64px minmax(0, 1fr); min-height: 72px; }
+  .mt-lbl { grid-column: 3; }
+  .mt-past .mt-lbl, .mt-term .mt-lbl { grid-column: 1; text-align: right; align-items: flex-end; }
+  .mt-past.mt-x .mt-lbl b, .mt-past.mt-x .mt-lbl > span { align-self: flex-end; padding: 0 0 0 6px; }
+  .mt-x::after { left: 0; right: 0; }
+  .mt-you .mt-lbl b { font-size: 3.25rem; }
+}
+/* Metro lists: missions as stations on a line */
+.app[data-style="metro"] .grid-cards:has(> .card) { grid-template-columns: minmax(0, 1fr); gap: 0; }
+.app[data-style="metro"] .grid-cards > .card { flex-direction: row; align-items: center; gap: 14px; padding: 10px 70px 10px 54px; min-height: 76px; border-radius: 0; background: transparent; box-shadow: none; border-left: 0; }
+.app[data-style="metro"] .grid-cards > .card::before { content: ""; position: absolute; left: 16px; top: 0; bottom: 0; width: 12px; background: var(--kestrel); border-inline: 2px solid var(--kestrel-deep); }
+.app[data-style="metro"] .grid-cards > .card::after { content: ""; position: absolute; left: 11px; top: 50%; width: 22px; height: 22px; margin-top: -11px; border-radius: 50%; background: #fff; border: 4px solid var(--moor); }
+.app[data-style="metro"] .grid-cards > .card[data-done]::after { background: var(--moor); }
+.app[data-style="metro"] .grid-cards > .card .card-art { position: static; flex: none; width: 52px; aspect-ratio: 1; border-radius: 50%; }
+.app[data-style="metro"] .grid-cards > .card .card-art svg.art { width: 64%; height: 64%; }
+.app[data-style="metro"] .grid-cards > .card :is(.card-kind, .card-bonus) { display: none; }
+.app[data-style="metro"] .grid-cards > .card .card-val { top: 50%; left: auto; right: 12px; transform: translateY(-50%); font-family: "General Sans", var(--f-text); font-weight: 600; font-size: 1.375rem; color: var(--kestrel-deep); text-align: right; }
+.app[data-style="metro"] .grid-cards > .card .card-done { inset: auto 8px 6px auto; padding: 2px 6px; }
+.app[data-style="metro"] .grid-cards > .card .card-text { padding: 0; }
+.app[data-style="metro"] .grid-cards > .card .card-title { min-height: 0; }
+.app[data-style="metro"] .reward { border-top: 6px solid var(--wing); }
+.app[data-style="metro"] .panel { border-top: 6px solid var(--kestrel); }
+/* Metro navigation: the tab bar is a line with stations */
+.app[data-style="metro"] .tabbar { left: 0; right: 0; bottom: 0; max-width: none; border-radius: 0; padding: 8px 6px calc(8px + var(--home-ind, 0px)); background: var(--paper); box-shadow: 0 -1px 0 var(--line); gap: 0; }
+.app[data-style="metro"] .tabbar::before { content: ""; position: absolute; left: 10%; right: 10%; top: 22px; height: 6px; background: var(--kestrel); }
+.app[data-style="metro"] .tab { position: relative; border-radius: 0; background: none; color: var(--ink-2); min-height: 50px; }
+.app[data-style="metro"] .tab svg { width: 30px; height: 30px; padding: 5px; border-radius: 50%; background: #fff; border: 3px solid var(--moor); color: var(--moor); }
+.app[data-style="metro"] .tab[aria-current="page"] { background: none; color: var(--ink); }
+.app[data-style="metro"] .tab[aria-current="page"] svg { background: var(--kestrel); border-color: var(--kestrel-deep); color: #fff; }
+@container dev (min-width: 820px) {
+  .app[data-style="metro"] .rail { background: var(--paper); color: var(--ink); box-shadow: 1px 0 0 var(--line); }
+  .app[data-style="metro"] .rail .club-word { color: var(--ink); }
+  .app[data-style="metro"] .rail .club-word small { color: var(--ink-3); }
+  .app[data-style="metro"] .rail-nav { position: relative; gap: 6px; }
+  .app[data-style="metro"] .rail-nav::before { content: ""; position: absolute; left: 25px; top: 20px; bottom: 20px; width: 8px; background: var(--kestrel); }
+  .app[data-style="metro"] .rail-nav button { position: relative; color: var(--ink-2); padding-left: 8px; }
+  .app[data-style="metro"] .rail-nav button svg { width: 34px; height: 34px; padding: 6px; border-radius: 50%; background: #fff; border: 3px solid var(--moor); color: var(--moor); }
+  .app[data-style="metro"] .rail-nav button:hover { background: var(--ground); color: var(--ink); }
+  .app[data-style="metro"] .rail-nav button[aria-current="page"] { background: none; color: var(--ink); }
+  .app[data-style="metro"] .rail-nav button[aria-current="page"] svg { background: var(--kestrel); border-color: var(--kestrel-deep); color: #fff; }
+  .app[data-style="metro"] .rail-nav .count { background: var(--moor); }
+  .app[data-style="metro"] .rail-me { background: var(--ground); color: var(--ink); }
+  .app[data-style="metro"] .rail-me .who span { color: var(--ink-3); }
+}
+
+/* ===================== BOARD: a split-flap board ===================== */
+.app[data-style="board"] { --ground: #0e1217; --f-display: "Big Shoulders Display", monospace; --r-card: 6px; --shadow-card: 0 0 0 1px #232c38; --shadow-lift: 0 0 0 1px #232c38, 0 18px 30px -20px #000; }
+.app[data-style="board"] .num, .app[data-style="board"] .card-val { color: var(--flood); }
+.app[data-style="board"] .h-page { text-transform: uppercase; letter-spacing: 0.04em; }
+.flaps { display: inline-flex; gap: 3px; perspective: 400px; font-family: "Big Shoulders Display", monospace; font-weight: 800; line-height: 1; }
+.flaps .gap { width: 0.35em; }
+.flap { position: relative; display: inline-grid; place-items: center; width: 0.82em; height: 1.22em; border-radius: 0.09em; color: var(--flood); background: linear-gradient(#262f3b 0 49%, #0b0f14 49% 51%, #1b222c 51%); box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.07), 0 2px 0 #05070a; overflow: hidden; }
+.flap > span { display: block; animation: flapIn 0.55s cubic-bezier(0.3, 1.5, 0.5, 1) both; animation-delay: calc(var(--d, 0) * 70ms + var(--r, 0) * 90ms + 120ms); transform-origin: 50% 50%; }
+@keyframes flapIn { 0% { transform: rotateX(-90deg); opacity: 0.2; } 60% { transform: rotateX(18deg); opacity: 1; } }
+.flaps.xl { font-size: clamp(2.6rem, 13cqi, 3.6rem); }
+.flaps.md { font-size: 1.75rem; }
+.flaps.sm { font-size: 1.125rem; gap: 2px; }
+.sh-board { gap: 22px; }
+.bd-hello { display: flex; flex-direction: column; gap: 8px; }
+.bd-clock { align-self: flex-start; padding: 4px 10px; border-radius: 4px; background: #05070a; color: var(--flood); font-family: "Big Shoulders Display", monospace; font-weight: 800; font-size: 1.125rem; letter-spacing: 0.08em; }
+.bd-grid { display: grid; gap: 16px; }
+.bd-side, .bd-main { display: grid; gap: 16px; align-content: start; min-width: 0; }
+.bd-panel { padding: 14px 16px; border-radius: 8px; background: #141a22; box-shadow: 0 0 0 1px #232c38, inset 0 1px 0 rgba(255, 255, 255, 0.03); min-width: 0; }
+.bd-head { display: flex; justify-content: space-between; gap: 10px; padding-bottom: 10px; margin-bottom: 4px; border-bottom: 1px solid #262f3b; font-family: "Big Shoulders Display", monospace; font-weight: 700; font-size: 0.9375rem; text-transform: uppercase; letter-spacing: 0.12em; color: var(--flood); }
+.bd-head > span:last-child { color: var(--ink-3); }
+.bd-bal .flaps { margin: 8px 0 4px; }
+.bd-note { margin: 6px 0 0; font-size: 0.875rem; color: var(--ink-2); }
+.bd-match { display: flex; flex-direction: column; gap: 2px; margin: 4px 0 10px; }
+.bd-match b { font-size: 1rem; }
+.bd-match b span { color: var(--ink-3); font-weight: 500; }
+.bd-match > span { font-size: 0.8125rem; color: var(--ink-3); }
+.bd-count { display: flex; align-items: flex-end; gap: 6px; flex-wrap: wrap; }
+.bd-count small { font-size: 0.75rem; color: var(--ink-3); margin-right: 6px; }
+.bd-cols { display: grid; grid-template-columns: 70px minmax(0, 1fr) auto; gap: 12px; padding: 4px 0; font-size: 0.6875rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--ink-3); }
+.bd-row { display: grid; grid-template-columns: 70px minmax(0, 1fr) auto; gap: 2px 12px; align-items: center; width: 100%; padding: 11px 0; border: 0; border-bottom: 1px solid #222a35; background: none; text-align: left; cursor: pointer; color: var(--ink); }
+.bd-row:last-of-type { border-bottom: 0; }
+button.bd-row:hover .bd-title { color: var(--flood); }
+.bd-code { font-family: "Big Shoulders Display", monospace; font-weight: 700; font-size: 0.875rem; letter-spacing: 0.06em; color: var(--flood); text-transform: uppercase; }
+.bd-title { font-weight: 600; font-size: 0.9375rem; line-height: 1.3; min-width: 0; }
+.bd-pts { justify-self: end; }
+.bd-st { grid-column: 2 / -1; font-size: 0.75rem; color: var(--ink-3); }
+.bd-st.ok { color: #7bd88f; }
+.bd-rrow { grid-template-columns: minmax(0, 1fr) auto; }
+.bd-rrow .bd-st { grid-column: 1 / -1; }
+.bd-log { cursor: default; }
+.bd-more { margin-top: 8px; width: 100%; min-height: 42px; border-radius: 6px; border: 1px solid #2c3746; background: #0e1217; color: var(--flood); font-family: "Big Shoulders Display", monospace !important; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em; cursor: pointer; }
+@container dev (max-width: 420px) { .bd-row, .bd-cols { grid-template-columns: 58px minmax(0, 1fr) auto; gap: 2px 8px; } .bd-code { font-size: 0.75rem; } }
+@container dev (min-width: 900px) { .bd-grid { grid-template-columns: 360px minmax(0, 1fr); gap: 20px; align-items: start; } }
+.app[data-style="board"] .card-val { font-family: "Big Shoulders Display", monospace; }
+.app[data-style="board"] .card { box-shadow: 0 0 0 1px #232c38; }
+.app[data-style="board"] .card-title { text-transform: uppercase; letter-spacing: 0.03em; font-size: 0.875rem; }
+.app[data-style="board"] .tabbar { background: #05070a; border-radius: 8px; box-shadow: 0 0 0 1px #232c38, 0 20px 30px -20px #000; }
+.app[data-style="board"] .tab { border-radius: 4px; color: #8c97a5; text-transform: uppercase; letter-spacing: 0.08em; font-size: 0.625rem; }
+.app[data-style="board"] .tab[aria-current="page"] { background: #1b222c; color: var(--flood); box-shadow: inset 0 -2px 0 var(--flood); }
+.app[data-style="board"] .points-chip { background: #05070a; color: var(--flood); box-shadow: 0 0 0 1px #232c38; }
+@container dev (min-width: 820px) {
+  .app[data-style="board"] .rail { background: #05070a; }
+  .app[data-style="board"] .rail-nav button { border-radius: 4px; text-transform: uppercase; letter-spacing: 0.06em; font-size: 0.8125rem; color: #8c97a5; }
+  .app[data-style="board"] .rail-nav button:hover { background: #141a22; }
+  .app[data-style="board"] .rail-nav button[aria-current="page"] { background: #1b222c; color: var(--flood); box-shadow: inset 3px 0 0 var(--flood); }
+  .app[data-style="board"] .rail-points { background: #141a22; color: var(--flood); box-shadow: 0 0 0 1px #232c38; }
+  .app[data-style="board"] .rail-me { background: #141a22; }
+}
+
+/* ===================== DIAL: a ring to turn ===================== */
+.app[data-style="dial"] { --ground: #eceff3; --r-card: 26px; --r-ctl: 999px; --f-display: "Clash Display", var(--f-text); }
+.app[data-style="dial"] .h-page { font-weight: 600; }
+.dl-wrap { display: grid; gap: 22px; }
+.dl-stage { display: flex; flex-direction: column; align-items: center; gap: 14px; }
+#dialRing { width: 100%; }
+.dl-dial { position: relative; width: min(100%, 360px); aspect-ratio: 1; margin-inline: auto; container-type: inline-size; }
+.dl-ticks { position: absolute; inset: 0; width: 100%; height: 100%; }
+.dl-ticks .dl-track { fill: none; stroke: var(--paper); stroke-width: 44; filter: drop-shadow(0 6px 10px rgba(23, 38, 58, 0.12)); }
+.dl-ticks line { stroke: color-mix(in srgb, var(--moor) 18%, transparent); stroke-width: 3; stroke-linecap: round; }
+.dl-ticks line.on { stroke: var(--kestrel); }
+.dl-chips { position: absolute; inset: 0; }
+.dl-chip { position: absolute; left: 50%; top: 50%; width: 15cqi; height: 15cqi; margin: -7.5cqi 0 0 -7.5cqi; display: grid; place-items: center; border-radius: 50%; border: 2px solid var(--line) !important; background: var(--ground); cursor: pointer; font-weight: 700; font-size: 3.6cqi !important; transform: rotate(var(--a)) translateY(-37.6cqi) rotate(calc(var(--a) * -1)); transition: transform 0.6s var(--ease-out), background 0.3s, color 0.3s; }
+.dl-chip.on { background: var(--kestrel); color: #fff !important; border-color: var(--kestrel-deep) !important; transform: rotate(var(--a)) translateY(-37.6cqi) rotate(calc(var(--a) * -1)) scale(1.18); }
+.dl-centre { position: absolute; inset: 25%; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; border-radius: 50%; background: var(--moor); color: #fff; text-align: center; padding: 6%; box-shadow: inset 0 0 0 6px var(--moor-2), 0 18px 30px -18px rgba(23, 38, 58, 0.8); }
+.dl-centre b { font-family: "Clash Display", var(--f-text); font-weight: 600; font-size: 12.5cqi; line-height: 0.95; color: #fff; }
+.dl-centre span { font-size: 3.6cqi; color: var(--wing-soft); }
+.dl-centre small { font-size: 3.1cqi; line-height: 1.25; color: var(--flood); margin-top: 4px; }
+.dl-pointer { position: absolute; left: 50%; top: -2px; width: 0; height: 0; margin-left: -9px; border: 9px solid transparent; border-top: 13px solid var(--kestrel); }
+.dl-turn { display: flex; align-items: center; gap: 14px; }
+.dl-btn { width: 52px; height: 52px; border-radius: 50%; border: 0; background: var(--paper); color: var(--ink); display: grid; place-items: center; cursor: pointer; box-shadow: var(--shadow-card); }
+.dl-btn:first-child svg { transform: scaleX(-1); }
+.dl-btn svg { width: 22px; height: 22px; }
+.dl-side { display: grid; gap: 22px; align-content: start; min-width: 0; }
+.dl-focus { display: grid; gap: 6px; }
+.dl-go { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; margin-top: 8px; }
+.dl-pts { font-family: "Clash Display", var(--f-text); font-weight: 600; font-size: 2.25rem; color: var(--kestrel); line-height: 1; }
+.dl-pts small { font-family: var(--f-text); font-size: 0.875rem; color: var(--ink-2); font-weight: 500; }
+.dl-rewards { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+.dl-rw { display: flex; flex-direction: column; align-items: center; gap: 6px; text-align: center; border: 0; background: none; cursor: pointer; min-width: 0; }
+.dl-rw b { font-size: 0.8125rem; font-weight: 600; line-height: 1.3; }
+.dl-rw-ring { display: grid; place-items: center; width: 96px; height: 96px; border-radius: 50%; background: conic-gradient(var(--kestrel) calc(var(--p) * 1%), color-mix(in srgb, var(--moor) 12%, transparent) 0); }
+.dl-rw-art { display: grid; place-items: center; width: 80px; height: 80px; border-radius: 50%; background: var(--tone-bg); color: var(--tone-fg); }
+.dl-rw-art svg { width: 62%; height: 62%; }
+@container dev (min-width: 900px) { .dl-wrap { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-items: center; gap: 40px; } .dl-rewards { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+.app[data-style="dial"] .grid-cards > .card .card-art { border-radius: 50%; aspect-ratio: 1; margin: 6px; box-shadow: 0 0 0 5px var(--paper), 0 0 0 9px color-mix(in srgb, var(--tone-bg) 35%, transparent); }
+.app[data-style="dial"] .grid-cards > .card .card-val { top: 50%; left: 50%; transform: translate(-50%, -50%); align-items: center; text-align: center; text-shadow: 0 2px 10px rgba(0, 0, 0, 0.25); }
+.app[data-style="dial"] .grid-cards > .card .card-art svg.art { opacity: 0.35; }
+.app[data-style="dial"] .grid-cards > .card .card-kind { top: auto; bottom: 14%; right: 50%; transform: translateX(50%); }
+.app[data-style="dial"] .tab[aria-current="page"] { border-radius: 50%; aspect-ratio: 1; justify-self: center; min-height: 0; width: 56px; height: 56px; box-shadow: 0 0 0 4px color-mix(in srgb, var(--kestrel) 25%, transparent); }
+
+/* ===================== CALENDAR: a tear-off pad ===================== */
+.app[data-style="calendar"] { --ground: #f2efe8; --paper: #fff; --r-card: 3px; --r-ctl: 6px; --f-display: "Clash Display", var(--f-text); --f-text: "General Sans", Arial, sans-serif; --shadow-card: 0 1px 0 #ddd6c6, 0 8px 16px -14px rgba(0, 0, 0, 0.5); }
+.app[data-style="calendar"] .h-page { font-weight: 600; }
+.cl-wrap { display: grid; gap: 26px; }
+.cl-pad { position: relative; padding-bottom: 12px; }
+.cl-page { position: relative; z-index: 1; overflow: hidden; border-radius: 4px; background: #fff; text-align: center; box-shadow: 0 4px 0 -1px #fff, 0 4px 0 0 #d9d2c1, 0 8px 0 -1px #fff, 0 8px 0 0 #d9d2c1, 0 12px 0 -1px #fff, 0 12px 0 0 #d9d2c1, 0 24px 30px -22px rgba(0, 0, 0, 0.5); }
+.cl-page.torn { animation: tearOff 0.42s ease-in forwards; }
+.cl-page.fresh { animation: pageIn 0.45s var(--ease-out); }
+@keyframes tearOff { to { transform: translate(40px, -60px) rotate(9deg); opacity: 0; } }
+@keyframes pageIn { from { transform: translateY(8px); } }
+.cl-top { display: flex; justify-content: space-between; padding: 26px 18px 10px; background: var(--kestrel) radial-gradient(circle at 30% 11px, var(--ground) 0 5px, transparent 5.5px) no-repeat, var(--kestrel); background-image: radial-gradient(circle at 30% 11px, #2a1a12 0 5px, transparent 5.5px), radial-gradient(circle at 70% 11px, #2a1a12 0 5px, transparent 5.5px); color: #fff; font-weight: 600; font-size: 0.8125rem; text-transform: uppercase; letter-spacing: 0.16em; border-bottom: 2px dashed rgba(255, 255, 255, 0.45); }
+.cl-day { display: flex; flex-direction: column; align-items: center; padding: 14px 16px 6px; }
+.cl-wd { font-size: 0.8125rem; text-transform: uppercase; letter-spacing: 0.22em; color: var(--ink-2); font-weight: 600; }
+.cl-num { font-family: "Clash Display", var(--f-text); font-weight: 600; font-size: clamp(6.5rem, 34cqi, 9rem); line-height: 0.88; color: var(--moor); letter-spacing: -0.04em; }
+.cl-word { font-family: "Clash Display", var(--f-text); font-weight: 600; font-size: 1.5rem; color: var(--kestrel-deep); }
+.cl-task { display: grid; gap: 4px; margin: 10px 16px 0; padding: 16px; border: 0; border-radius: 4px; background: var(--kestrel); color: #fff; text-align: left; cursor: pointer; width: calc(100% - 32px); }
+.cl-type { font-size: 0.75rem; opacity: 0.9; font-weight: 600; }
+.cl-task b { font-size: 1.125rem; line-height: 1.25; }
+.cl-pts { font-family: "Clash Display", var(--f-text); font-weight: 600; font-size: 1.5rem; color: var(--flood); }
+.cl-foot { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-top: 14px; padding: 12px 18px; border-top: 1px dashed var(--line); font-size: 0.875rem; color: var(--ink-2); }
+.cl-foot b { font-family: "Clash Display", var(--f-text); font-size: 1.25rem; color: var(--ink); font-weight: 600; }
+.cl-tear { border: 1.5px solid var(--line); border-radius: 999px; background: var(--ground); padding: 7px 14px; font-weight: 600; font-size: 0.8125rem; cursor: pointer; }
+.cl-tear:disabled { opacity: 0.5; cursor: default; }
+.cl-next { display: grid; gap: 16px; align-content: start; min-width: 0; }
+.cl-sheets { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+.cl-sheet { position: relative; display: flex; flex-direction: column; gap: 6px; padding: 16px 14px 14px; border: 0; border-top: 10px solid var(--moor); border-radius: 3px; background: #fff; text-align: left; cursor: pointer; box-shadow: 0 1px 0 #ddd6c6, 0 3px 0 -1px #fff, 0 3px 0 0 #ddd6c6; min-width: 0; }
+.cl-sheet b { position: relative; align-self: flex-start; font-family: "Clash Display", var(--f-text); font-weight: 600; font-size: 2.5rem; line-height: 0.95; color: var(--moor); }
+.cl-sheet > span { font-size: 0.875rem; font-weight: 600; line-height: 1.3; }
+.cl-sheet small { font-size: 0.75rem; color: var(--ink-3); }
+.cl-sheet.reach b::after { content: ""; position: absolute; inset: -10px -14px -8px -12px; border: 3px solid var(--kestrel); border-radius: 50%; transform: rotate(-6deg); }
+.cl-sheet.reach small { color: var(--kestrel-deep); font-weight: 700; }
+.cl-date { display: flex; align-items: center; gap: 14px; padding: 12px; border-radius: 4px; background: #fff; box-shadow: var(--shadow-card); font-size: 0.875rem; }
+.cl-date > span:last-child { display: flex; flex-direction: column; gap: 2px; }
+.cl-mini { flex: none; display: flex; flex-direction: column; align-items: center; width: 64px; overflow: hidden; border-radius: 4px; box-shadow: 0 0 0 1px var(--line); }
+.cl-mini span:first-child { align-self: stretch; text-align: center; background: var(--kestrel); color: #fff; font-size: 0.6875rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; padding: 3px 0; }
+.cl-mini b { font-family: "Clash Display", var(--f-text); font-weight: 600; font-size: 1.75rem; line-height: 1.1; }
+.cl-mini span:last-child { font-size: 0.6875rem; color: var(--ink-3); padding-bottom: 4px; }
+@container dev (min-width: 900px) { .cl-wrap { grid-template-columns: 380px minmax(0, 1fr); gap: 36px; align-items: start; } .cl-sheets { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+.app[data-style="calendar"] .grid-cards > :is(.card, .reward) { border-top: 10px solid var(--moor); }
+.app[data-style="calendar"] .card-val { font-family: "Clash Display", var(--f-text); font-weight: 600; }
+.app[data-style="calendar"] .tabbar { left: 0; right: 0; bottom: 0; max-width: none; border-radius: 0; padding: 6px 6px calc(6px + var(--home-ind, 0px)); background: #fff; box-shadow: 0 -1px 0 var(--line); }
+.app[data-style="calendar"] .tab { border-radius: 3px; }
+.app[data-style="calendar"] .tab[aria-current="page"] { background: #fff; color: var(--ink); box-shadow: inset 0 4px 0 var(--kestrel), 0 0 0 1px var(--line); }
+@container dev (min-width: 820px) {
+  .app[data-style="calendar"] .rail { background: #fff; color: var(--ink); box-shadow: 1px 0 0 var(--line); }
+  .app[data-style="calendar"] .rail .club-word { color: var(--ink); }
+  .app[data-style="calendar"] .rail .club-word small { color: var(--ink-3); }
+  .app[data-style="calendar"] .rail-nav button { color: var(--ink-2); border-radius: 3px; }
+  .app[data-style="calendar"] .rail-nav button:hover { background: var(--ground); color: var(--ink); }
+  .app[data-style="calendar"] .rail-nav button[aria-current="page"] { background: #fff; color: var(--ink); box-shadow: inset 0 4px 0 var(--kestrel), 0 0 0 1px var(--line); }
+  .app[data-style="calendar"] .rail-me { background: var(--ground); color: var(--ink); }
+  .app[data-style="calendar"] .rail-me .who span { color: var(--ink-3); }
+}
+
+/* ===================== PRINT: a screen-printing bench ===================== */
+.app[data-style="print"] { --ground: #e7dfcd; --paper: #fffdf7; --line: #d8ccb2; --r-card: 0px; --r-ctl: 2px; --f-display: "Big Shoulders Display", sans-serif; --shadow-card: 0 1px 2px rgba(60, 40, 10, 0.18), 0 10px 16px -12px rgba(60, 40, 10, 0.5); }
+.app[data-style="print"] .view { background-image: repeating-linear-gradient(90deg, rgba(120, 90, 40, 0.035) 0 2px, transparent 2px 11px), repeating-linear-gradient(90deg, rgba(120, 90, 40, 0.03) 0 1px, transparent 1px 37px); }
+.app[data-style="print"] .h-sec, .app[data-style="print"] .h-page { text-transform: uppercase; }
+.pr-sheet { position: relative; padding: 26px 22px 22px; background: var(--paper); box-shadow: var(--shadow-card); min-width: 0; }
+.pr-sheet::before, .pr-sheet::after { content: ""; position: absolute; top: -9px; width: 74px; height: 22px; background: rgba(244, 233, 205, 0.82); box-shadow: 0 1px 1px rgba(0, 0, 0, 0.08); }
+.pr-sheet::before { left: 18px; transform: rotate(-4deg); }
+.pr-sheet::after { right: 18px; transform: rotate(5deg); }
+.pr-reg { position: absolute; width: 16px; height: 16px; border: 1.5px solid var(--moor); border-radius: 50%; opacity: 0.5; background: linear-gradient(var(--moor), var(--moor)) center / 100% 1.5px no-repeat, linear-gradient(var(--moor), var(--moor)) center / 1.5px 100% no-repeat; }
+.pr-reg.tl { top: 8px; left: 8px; } .pr-reg.tr { top: 8px; right: 8px; } .pr-reg.bl { bottom: 8px; left: 8px; } .pr-reg.br { bottom: 8px; right: 8px; }
+.pr-ed { display: block; font-family: "Courier New", Courier, monospace; font-size: 0.75rem; color: var(--ink-2); }
+.pr-name { margin: 8px 0 0; font-family: "Big Shoulders Display", sans-serif; font-weight: 900; text-transform: uppercase; font-size: clamp(3.4rem, 17cqi, 7.5rem); line-height: 0.84; letter-spacing: -0.005em; overflow-wrap: anywhere; }
+.pr-ink { position: relative; display: inline-block; color: var(--kestrel); animation: pull 1.2s var(--ease-out) both 0.15s; }
+.pr-ink::after { content: attr(data-text); position: absolute; left: 3px; top: 2px; color: var(--wing); mix-blend-mode: multiply; opacity: 0.55; z-index: -1; }
+.pr-ink::before { content: ""; position: absolute; inset: 0; background: radial-gradient(rgba(255, 253, 247, 0.55) 0.8px, transparent 1.2px) 0 0 / 5px 5px, radial-gradient(rgba(255, 253, 247, 0.35) 0.6px, transparent 1px) 2px 3px / 7px 7px; mix-blend-mode: screen; pointer-events: none; }
+@keyframes pull { from { clip-path: inset(0 100% 0 0); } to { clip-path: inset(0 0 0 0); } }
+.pr-sub { margin: 12px 0 0; font-family: "Courier New", Courier, monospace; font-size: 0.9375rem; color: var(--ink-2); }
+.pr-bal { display: flex; align-items: center; gap: 14px; margin-top: 14px; padding-top: 14px; border-top: 2px solid var(--moor); }
+.pr-bal b { font-family: "Big Shoulders Display", sans-serif; font-weight: 900; font-size: 3.25rem; line-height: 0.9; color: var(--moor); }
+.pr-bal span { font-size: 0.8125rem; color: var(--ink-2); line-height: 1.35; }
+.pr-line { position: relative; margin-inline: calc(var(--gutter) * -1); padding: 0 var(--gutter); }
+.pr-line::before { content: ""; position: absolute; left: 0; right: 0; top: 14px; height: 2px; background: #6f5a3a; box-shadow: 0 2px 2px rgba(0, 0, 0, 0.15); }
+.pr-prints { display: flex; gap: 16px; overflow-x: auto; padding: 22px 4px 26px; scrollbar-width: none; scroll-snap-type: x mandatory; }
+.pr-prints::-webkit-scrollbar { display: none; }
+.pr-print { position: relative; flex: 0 0 158px; display: flex; flex-direction: column; gap: 8px; padding: 10px 10px 12px; border: 0; background: var(--paper); text-align: left; cursor: pointer; transform: rotate(var(--rot)); transform-origin: 50% -14px; box-shadow: var(--shadow-card); scroll-snap-align: center; transition: transform 0.35s var(--ease-spring); }
+.pr-print:hover { transform: rotate(0deg) translateY(-3px); }
+.pr-peg { position: absolute; top: -20px; left: 50%; width: 12px; height: 30px; margin-left: -6px; border-radius: 3px; background: linear-gradient(90deg, #b48552, #d6a970 45%, #a77845); box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3); }
+.pr-plate { display: grid; place-items: center; aspect-ratio: 1; background: var(--tone-bg); color: var(--tone-fg); background-image: radial-gradient(rgba(0, 0, 0, 0.12) 1px, transparent 1.4px); background-size: 6px 6px; }
+.pr-plate svg.art { width: 68%; height: 68%; }
+.pr-print b { font-size: 0.8125rem; font-weight: 600; line-height: 1.3; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+.pr-val { font-family: "Big Shoulders Display", sans-serif; font-weight: 900; font-size: 1.75rem; line-height: 1; color: var(--kestrel-deep); }
+.pr-two { display: grid; gap: 26px; }
+.pr-merch { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; margin-top: 14px; }
+.pr-item { display: flex; flex-direction: column; gap: 6px; padding: 8px; border: 2px dashed #c9bfa8; background: none; text-align: left; cursor: pointer; min-width: 0; }
+.pr-item b { font-size: 0.75rem; font-weight: 600; line-height: 1.3; }
+.pr-art { display: grid; place-items: center; aspect-ratio: 1; color: var(--tone-bg); background: repeating-linear-gradient(45deg, transparent 0 6px, rgba(0, 0, 0, 0.04) 6px 7px); }
+.pr-art svg { width: 70%; height: 70%; }
+.pr-logl { list-style: none; margin: 12px 0 0; padding: 0; font-family: "Courier New", Courier, monospace; font-size: 0.8125rem; }
+.pr-logl li { display: grid; grid-template-columns: 62px minmax(0, 1fr) auto; gap: 10px; padding: 8px 0; border-bottom: 1px dotted #b9ab8c; }
+.pr-logl b { color: var(--kestrel-deep); }
+@container dev (min-width: 900px) { .pr-two { grid-template-columns: 1fr 1fr; } .pr-line { margin-inline: 0; padding: 0; } .pr-print { flex-basis: 172px; } .pr-hero { padding: 40px 44px 34px; } }
+.app[data-style="print"] .grid-cards { padding-top: 16px; background: linear-gradient(#6f5a3a, #6f5a3a) 0 6px / 100% 2px no-repeat; }
+.app[data-style="print"] .grid-cards > .card { transform: rotate(-1.4deg); transform-origin: 50% 0; }
+.app[data-style="print"] .grid-cards > .card:nth-child(2n) { transform: rotate(1.6deg); }
+.app[data-style="print"] .grid-cards > .card::before { content: ""; position: absolute; z-index: 2; top: -16px; left: 50%; width: 12px; height: 28px; margin-left: -6px; border-radius: 3px; background: linear-gradient(90deg, #b48552, #d6a970 45%, #a77845); }
+.app[data-style="print"] .tabbar { border-radius: 2px; background: var(--paper); box-shadow: 0 1px 2px rgba(60, 40, 10, 0.2), 0 14px 22px -14px rgba(60, 40, 10, 0.6); }
+.app[data-style="print"] .tab { border-radius: 0; font-family: "Courier New", Courier, monospace; font-weight: 700; }
+.app[data-style="print"] .tab[aria-current="page"] { background: none; color: var(--kestrel-deep); box-shadow: inset 0 -4px 0 var(--kestrel); }
+@container dev (min-width: 820px) {
+  .app[data-style="print"] .rail { background: #d9cfb8; color: var(--ink); }
+  .app[data-style="print"] .rail .club-word { color: var(--moor); }
+  .app[data-style="print"] .rail .club-word small { color: var(--ink-2); }
+  .app[data-style="print"] .rail-nav button { color: var(--ink-2); border-radius: 0; font-family: "Courier New", Courier, monospace; font-weight: 700; }
+  .app[data-style="print"] .rail-nav button:hover { background: rgba(255, 253, 247, 0.6); color: var(--ink); }
+  .app[data-style="print"] .rail-nav button[aria-current="page"] { background: var(--paper); color: var(--kestrel-deep); box-shadow: 0 1px 2px rgba(60, 40, 10, 0.25); transform: rotate(-1deg); }
+  .app[data-style="print"] .rail-me { background: var(--paper); color: var(--ink); }
+  .app[data-style="print"] .rail-me .who span { color: var(--ink-2); }
+}
+
+/* ===================== RISO: a two-ink poster ===================== */
+.app[data-style="riso"] { --ground: #f3eee3; --paper: #fbf8f0; --line: #ddd3bf; --r-card: 0px; --r-ctl: 4px; --f-display: "Clash Display", var(--f-text); --shadow-card: 3px 3px 0 color-mix(in srgb, var(--wing) 70%, transparent); --shadow-lift: 4px 4px 0 color-mix(in srgb, var(--kestrel) 60%, transparent); }
+.app[data-style="riso"]::after { content: ""; position: absolute; inset: 0; z-index: 6; pointer-events: none; opacity: 0.22; mix-blend-mode: multiply; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .3 0 0 0 0 .25 0 0 0 0 .2 0 0 0 .55 0'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)'/%3E%3C/svg%3E"); }
+.app[data-style="riso"] .h-page, .app[data-style="riso"] .h-sec { font-weight: 600; color: var(--kestrel-deep); }
+.sh-riso { gap: 30px; }
+.rs-poster { container-type: inline-size; position: relative; overflow: hidden; isolation: isolate; padding: 22px 0 26px; border-top: 6px solid var(--kestrel-deep); border-bottom: 2px solid var(--kestrel-deep); min-height: 380px; display: flex; flex-direction: column; justify-content: flex-end; gap: 8px; }
+.rs-disc { position: absolute; z-index: -1; top: -14%; right: -22%; width: 82%; aspect-ratio: 1; border-radius: 50%; background: radial-gradient(color-mix(in srgb, var(--wing) 100%, transparent) 1.4px, transparent 1.9px) 0 0 / 6px 6px, color-mix(in srgb, var(--wing) 72%, transparent); mix-blend-mode: multiply; }
+.rs-kicker { position: absolute; top: 18px; left: 0; max-width: 60%; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em; color: var(--kestrel-deep); }
+.rs-h1 { margin: 0; font-family: "Clash Display", var(--f-text); font-weight: 600; font-size: 1.75rem; color: var(--moor); }
+.rs-fig { display: flex; align-items: flex-end; gap: 10px; flex-wrap: wrap; }
+.rs-fig b { position: relative; font-family: "Clash Display", var(--f-text); font-weight: 600; font-size: clamp(4rem, 29cqi, 12rem); line-height: 0.8; letter-spacing: -0.045em; color: var(--kestrel-deep); }
+.rs-fig b::before { content: attr(data-text); position: absolute; left: 0.035em; top: 0.03em; z-index: -1; color: var(--wing); mix-blend-mode: multiply; animation: register 1.4s var(--ease-out) both 0.3s; }
+@keyframes register { from { transform: translate(0.08em, 0.06em); } }
+.rs-fig > span { font-weight: 700; font-size: 1.25rem; color: var(--moor); padding-bottom: 0.4em; }
+.rs-line { margin: 4px 0 0; font-size: 1rem; color: var(--moor); font-weight: 600; }
+.rs-list { gap: 0; }
+.rs-list .sec-head { padding-bottom: 12px; }
+.rs-row { display: grid; grid-template-columns: 34px 58px minmax(0, 1fr) auto; gap: 12px; align-items: center; padding: 14px 0; border: 0; border-top: 2px solid var(--kestrel-deep); background: none; text-align: left; cursor: pointer; }
+.rs-n { font-family: "Clash Display", var(--f-text); font-weight: 600; font-size: 1.125rem; color: var(--wing); }
+.rs-plate { display: grid; place-items: center; width: 58px; height: 58px; border-radius: 50%; background: radial-gradient(var(--wing) 1.1px, transparent 1.5px) 0 0 / 5px 5px, color-mix(in srgb, var(--wing) 55%, transparent); color: var(--kestrel-deep); }
+.rs-plate svg.art { width: 70%; height: 70%; mix-blend-mode: multiply; }
+.rs-t { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.rs-t b { font-size: 0.9375rem; line-height: 1.3; color: var(--moor); }
+.rs-t span { font-size: 0.75rem; color: var(--ink-2); }
+.rs-pts { font-family: "Clash Display", var(--f-text); font-weight: 600; font-size: 1.75rem; color: var(--kestrel-deep); }
+@container dev (min-width: 900px) {
+  .sh-riso { display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr); gap: 30px 48px; align-items: start; }
+  .sh-riso > :not(.rs-poster):not(.rs-list) { grid-column: 1 / -1; }
+  .rs-poster { min-height: 520px; }
+}
+.app[data-style="riso"] .card-art::after { content: ""; position: absolute; inset: 0; background: radial-gradient(rgba(0, 0, 0, 0.14) 1px, transparent 1.4px) 0 0 / 6px 6px; mix-blend-mode: multiply; pointer-events: none; }
+.app[data-style="riso"] .tabbar { left: 0; right: 0; bottom: 0; max-width: none; border-radius: 0; padding: 6px 6px calc(6px + var(--home-ind, 0px)); background: var(--paper); box-shadow: 0 -3px 0 var(--kestrel-deep); }
+.app[data-style="riso"] .tab { border-radius: 0; color: var(--moor); }
+.app[data-style="riso"] .tab[aria-current="page"] { background: color-mix(in srgb, var(--wing) 55%, transparent); color: var(--kestrel-deep); }
+@container dev (min-width: 820px) {
+  .app[data-style="riso"] .rail { background: var(--paper); color: var(--moor); box-shadow: 3px 0 0 var(--kestrel-deep); }
+  .app[data-style="riso"] .rail .club-word { color: var(--kestrel-deep); }
+  .app[data-style="riso"] .rail .club-word small { color: var(--ink-2); }
+  .app[data-style="riso"] .rail-nav button { color: var(--moor); border-radius: 0; }
+  .app[data-style="riso"] .rail-nav button:hover { background: color-mix(in srgb, var(--wing) 25%, transparent); color: var(--moor); }
+  .app[data-style="riso"] .rail-nav button[aria-current="page"] { background: color-mix(in srgb, var(--wing) 55%, transparent); color: var(--kestrel-deep); }
+  .app[data-style="riso"] .rail-me { background: color-mix(in srgb, var(--wing) 25%, transparent); color: var(--moor); }
+  .app[data-style="riso"] .rail-me .who span { color: var(--ink-2); }
+}
+
+/* ===================== REEL: one screen at a time ===================== */
+.app[data-style="reel"] { --ground: var(--moor); --r-card: 4px; }
+.app[data-style="reel"] .view { container-type: size; }
+.app[data-style="reel"] .view:has(> .sh-reel) { padding: 0; scroll-snap-type: y mandatory; }
+.app[data-style="reel"] :is(.view-inner > header, .h-sec, .lede, .view-inner > .meta, .tier, .tier-steps, .tier-steps .on, .link) { color: #fff; }
+.app[data-style="reel"] .lede { color: rgba(255, 255, 255, 0.85); }
+.app[data-style="reel"] .bar > span { background: var(--flood); }
+.app[data-style="reel"] .bar { background: rgba(255, 255, 255, 0.22); }
+.app[data-style="reel"] .h-page { font-size: 3.5rem; text-transform: uppercase; }
+.app[data-style="reel"] .topbar .club-word { color: #fff; }
+.app[data-style="reel"] .topbar .club-word small { color: var(--wing-soft); }
+.app[data-style="reel"] .points-chip { background: rgba(255, 255, 255, 0.14); }
+.sh-reel { gap: 0; max-width: none; }
+.rl-screen { position: relative; overflow: hidden; isolation: isolate; min-height: 100cqh; scroll-snap-align: start; display: flex; flex-direction: column; justify-content: center; gap: 14px; padding: 56px var(--gutter) 120px; background: var(--tone-bg, var(--kestrel)); color: var(--tone-fg, #fff); }
+.rl-me { background: var(--kestrel); color: #fff; }
+.rl-count { position: absolute; top: 16px; right: var(--gutter); padding: 3px 10px; border-radius: 999px; background: color-mix(in srgb, currentColor 16%, transparent); font-size: 0.75rem; font-weight: 700; }
+.rl-kicker { font-weight: 700; font-size: 0.9375rem; }
+.rl-huge { font-family: "Big Shoulders Display", sans-serif; font-weight: 900; font-size: clamp(7rem, 40cqi, 18rem); line-height: 0.78; letter-spacing: -0.02em; }
+.rl-unit { font-family: "Big Shoulders Display", sans-serif; font-weight: 900; font-size: 2.25rem; text-transform: uppercase; line-height: 0.9; margin-top: 0.3em; }
+.rl-sub { margin: 0; font-size: 1.0625rem; font-weight: 600; opacity: 0.92; }
+.rl-swipe { position: absolute; bottom: 104px; left: 50%; transform: translateX(-50%); font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.14em; opacity: 0.8; animation: nudge 1.8s ease-in-out infinite; }
+.rl-swipe::before { content: "↑"; display: block; text-align: center; font-size: 1.25rem; }
+@keyframes nudge { 50% { transform: translate(-50%, -8px); } }
+.rl-title { position: relative; z-index: 1; margin: 0; max-width: 15ch; font-family: "Big Shoulders Display", sans-serif; font-weight: 900; text-transform: uppercase; font-size: calc(var(--fs) * 1rem); line-height: 0.9; letter-spacing: 0.005em; overflow-wrap: anywhere; text-wrap: balance; }
+.rl-art { position: absolute; z-index: -1; right: -12%; bottom: 14%; width: 70%; opacity: 0.2; }
+.rl-art svg.art { width: 100%; height: auto; }
+.rl-foot { display: flex; align-items: center; justify-content: space-between; gap: 14px; margin-top: 10px; }
+.rl-pts { font-family: "Big Shoulders Display", sans-serif; font-weight: 900; font-size: 3.75rem; line-height: 0.85; }
+.rl-pts small { font-family: var(--f-text); font-size: 0.875rem; font-weight: 700; margin-left: 6px; }
+.rl-btn { background: var(--tone-fg, #fff); color: var(--tone-bg, var(--kestrel)); min-width: 128px; }
+.rl-me .rl-btn { background: #fff; color: var(--kestrel); }
+@container dev (min-width: 820px) {
+  .rl-screen { padding: 64px 72px; }
+  .rl-title { font-size: calc(var(--fs) * 1.75rem); max-width: 18ch; }
+  .rl-art { width: 42%; right: 4%; bottom: 50%; transform: translateY(50%); opacity: 0.28; }
+  .rl-swipe { bottom: 40px; }
+}
+.app[data-style="reel"] .grid-cards > .card .card-title { font-family: "Big Shoulders Display", sans-serif; font-weight: 900; text-transform: uppercase; font-size: 1.25rem; line-height: 1; min-height: 2em; }
+.app[data-style="reel"] .grid-cards > .card { background: var(--kestrel); color: #fff; }
+.app[data-style="reel"] .grid-cards > .card .card-meta { color: rgba(255, 255, 255, 0.8); }
+.app[data-style="reel"] .tabbar { left: 0; right: 0; bottom: 0; max-width: none; border-radius: 0; padding: 6px 6px calc(6px + var(--home-ind, 0px)); background: rgba(13, 20, 31, 0.88); box-shadow: none; backdrop-filter: blur(8px); }
+.app[data-style="reel"] .tab { color: rgba(255, 255, 255, 0.7); border-radius: 0; }
+.app[data-style="reel"] .tab[aria-current="page"] { background: none; color: #fff; box-shadow: inset 0 -3px 0 var(--flood); }
+@container dev (min-width: 820px) { .app[data-style="reel"] .rail-nav button[aria-current="page"] { background: none; color: #fff; box-shadow: inset 4px 0 0 var(--flood); } }
+
+/* ===================== DIRECT: a conversation ===================== */
+.app[data-style="direct"] { --ground: #eef1f5; --r-card: 22px; --r-ctl: 999px; --f-display: "General Sans", var(--f-text); --f-text: "General Sans", Arial, sans-serif; }
+.app[data-style="direct"] .h-page, .app[data-style="direct"] .h-sec { font-weight: 600; letter-spacing: -0.02em; }
+.dr-wrap { display: grid; gap: 16px; }
+.dr-inbox, .dr-about { display: none; }
+.dr-chat { display: flex; flex-direction: column; gap: 10px; min-width: 0; }
+.dr-head { display: flex; align-items: center; gap: 10px; padding-bottom: 12px; border-bottom: 1px solid var(--line); }
+.dr-head > span:last-child { display: flex; flex-direction: column; }
+.dr-head b { font-size: 1rem; }
+.dr-live { display: inline-flex; align-items: center; gap: 6px; font-size: 0.75rem; color: var(--ink-3); }
+.dr-live i { width: 8px; height: 8px; border-radius: 50%; background: #2fb36a; box-shadow: 0 0 0 3px rgba(47, 179, 106, 0.2); }
+.dm-av { flex: none; display: grid; place-items: center; width: 34px; height: 34px; border-radius: 50%; background: var(--moor); padding: 4px; }
+.dm-av svg { width: 22px; height: auto; }
+.dr-day { display: flex; justify-content: center; margin: 6px 0; }
+.dr-day span { padding: 3px 12px; border-radius: 999px; background: color-mix(in srgb, var(--moor) 8%, transparent); font-size: 0.75rem; font-weight: 500; color: var(--ink-2); }
+.dm { display: flex; align-items: flex-end; gap: 8px; max-width: 100%; }
+.dm-b { padding: 10px 14px; border-radius: 20px 20px 20px 6px; background: var(--paper); box-shadow: 0 1px 0 rgba(23, 38, 58, 0.06); font-size: 0.9375rem; line-height: 1.45; min-width: 0; max-width: min(520px, 88%); }
+.dm-club .dm-b { max-width: calc(100% - 44px); }
+.dm-b p { margin: 0; }
+.dm-me { justify-content: flex-end; }
+.dm-me .dm-b { background: var(--kestrel); color: #fff; border-radius: 20px 20px 6px 20px; }
+.dm-receipt { align-self: flex-end; display: inline-flex; align-items: center; gap: 10px; padding: 6px 12px; border-radius: 10px; border: 1.5px dashed color-mix(in srgb, var(--good) 60%, transparent); background: color-mix(in srgb, var(--good) 8%, var(--paper)); font-size: 0.75rem; color: var(--ink-2); }
+.dm-receipt b { color: var(--good); font-size: 0.875rem; }
+.dm-cards { display: grid; gap: 8px; margin-top: 10px; }
+.dm-card { display: grid; grid-template-columns: 48px minmax(0, 1fr) auto; gap: 10px; align-items: center; padding: 8px; border: 1px solid var(--line); border-radius: 16px; background: var(--ground); text-align: left; cursor: pointer; }
+.dm-card:hover { border-color: var(--kestrel); }
+.dm-art { display: grid; place-items: center; width: 48px; height: 48px; border-radius: 12px; background: var(--tone-bg); color: var(--tone-fg); }
+.dm-art svg.art { width: 72%; height: 72%; }
+.dm-t { display: flex; flex-direction: column; gap: 1px; min-width: 0; }
+.dm-t b { font-size: 0.875rem; line-height: 1.3; }
+.dm-t span { font-size: 0.75rem; color: var(--ink-3); }
+.dm-go { padding: 6px 12px; border-radius: 999px; background: var(--kestrel); color: #fff; font-size: 0.75rem; font-weight: 600; }
+.dr-typing { align-self: flex-start; display: inline-flex; gap: 4px; margin-left: 42px; padding: 12px 14px; border-radius: 18px 18px 18px 6px; background: var(--paper); }
+.dr-typing i { width: 7px; height: 7px; border-radius: 50%; background: var(--ink-3); animation: typing 1.2s infinite; }
+.dr-typing i:nth-child(2) { animation-delay: 0.15s; } .dr-typing i:nth-child(3) { animation-delay: 0.3s; }
+@keyframes typing { 0%, 60%, 100% { opacity: 0.3; transform: none; } 30% { opacity: 1; transform: translateY(-3px); } }
+.dr-quick { display: flex; flex-wrap: wrap; gap: 8px; justify-content: flex-end; margin-top: 6px; }
+.dr-quick button { padding: 9px 14px; border-radius: 999px; border: 1.5px solid var(--kestrel); background: var(--paper); color: var(--kestrel-deep); font-weight: 600; font-size: 0.8125rem; cursor: pointer; }
+.dr-inbox, .dr-about { flex-direction: column; gap: 6px; align-self: start; padding: 14px; border-radius: 22px; background: var(--paper); min-width: 0; }
+.dr-inbox h2 { margin: 0 0 6px; padding: 0 6px; font-size: 1.125rem; font-weight: 600; }
+.dr-thread { display: grid; grid-template-columns: 32px minmax(0, 1fr) auto; gap: 10px; align-items: center; padding: 10px; border: 0; border-radius: 14px; background: none; text-align: left; cursor: pointer; }
+.dr-thread.on { background: var(--ground); }
+.dr-thread > span:nth-child(2) { display: flex; flex-direction: column; min-width: 0; }
+.dr-thread b { font-size: 0.875rem; }
+.dr-thread > span > span { font-size: 0.75rem; color: var(--ink-3); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.dr-thread i { font-style: normal; min-width: 20px; padding: 1px 6px; border-radius: 999px; background: var(--kestrel); color: #fff; font-size: 0.6875rem; font-weight: 700; text-align: center; }
+.dr-about { gap: 14px; }
+.dr-me { display: flex; flex-direction: column; align-items: center; gap: 4px; text-align: center; }
+.dr-me .avatar { width: 64px; height: 64px; font-size: 1.25rem; background: var(--kestrel); cursor: default; }
+.dr-me span:last-child { font-size: 0.8125rem; color: var(--ink-3); }
+.dr-stat { display: flex; align-items: baseline; justify-content: center; gap: 6px; padding: 12px; border-radius: 16px; background: var(--ground); }
+.dr-stat b { font-size: 2.25rem; font-weight: 600; letter-spacing: -0.03em; }
+.dr-next { display: grid; gap: 6px; font-size: 0.875rem; }
+@container dev (min-width: 820px) {
+  .dr-wrap { grid-template-columns: minmax(0, 1fr) 280px; align-items: start; }
+  .dr-about { display: flex; position: sticky; top: 0; }
+  .dr-chat { padding: 18px; border-radius: 26px; background: var(--paper); }
+  .dr-chat .dm-b, .dr-chat .dr-typing { background: var(--ground); }
+  .dr-chat .dm-me .dm-b { background: var(--kestrel); }
+  .dr-chat .dm-card { background: var(--paper); }
+}
+@container dev (min-width: 1250px) { .dr-wrap { grid-template-columns: 250px minmax(0, 1fr) 270px; } .dr-inbox { display: flex; position: sticky; top: 0; } }
+.app[data-style="direct"] .grid-cards > :is(.card, .reward) { border-radius: 22px 22px 22px 6px; }
+.app[data-style="direct"] .tabbar { border-radius: 26px; }
+.app[data-style="direct"] .tab { border-radius: 20px 20px 20px 6px; }
+@container dev (min-width: 820px) {
+  .app[data-style="direct"] .rail { background: var(--paper); color: var(--ink); box-shadow: 1px 0 0 var(--line); }
+  .app[data-style="direct"] .rail .club-word { color: var(--ink); }
+  .app[data-style="direct"] .rail .club-word small { color: var(--ink-3); }
+  .app[data-style="direct"] .rail-nav button { color: var(--ink-2); border-radius: 16px 16px 16px 4px; }
+  .app[data-style="direct"] .rail-nav button:hover { background: var(--ground); color: var(--ink); }
+.app[data-style="direct"] .rail-nav button[aria-current="page"] { color: #fff; }
+  .app[data-style="direct"] .rail-me { background: var(--ground); color: var(--ink); }
+  .app[data-style="direct"] .rail-me .who span { color: var(--ink-3); }
+}
+
+/* ===================== ARENA: matchday under floodlights ===================== */
+.app[data-style="arena"] { --ground: #e8ebef; --paper: #ffffff; --r-card: 2px; --r-ctl: 4px; --shadow-card: none; --shadow-lift: 0 14px 24px -18px rgba(0, 0, 0, 0.6); }
+.app[data-style="arena"] .h-page, .app[data-style="arena"] .h-sec { text-transform: uppercase; }
+.ar-hero { position: relative; overflow: hidden; isolation: isolate; display: grid; gap: 16px; margin-inline: calc(var(--gutter) * -1); padding: 26px calc(var(--gutter) + 40px) 22px var(--gutter); background: var(--kestrel); color: #fff; background-image: linear-gradient(90deg, transparent calc(100% - 34px), var(--moor) calc(100% - 34px) calc(100% - 18px), var(--buff) calc(100% - 18px) calc(100% - 13px), transparent calc(100% - 13px)); }
+.ar-lights i { position: absolute; z-index: -1; top: -60px; width: 72%; height: 340px; background: radial-gradient(ellipse 50% 70% at 50% 0, rgba(255, 246, 214, 0.5), rgba(255, 246, 214, 0.12) 55%, transparent 75%); pointer-events: none; }
+.ar-lights i:first-child { left: -26%; transform: rotate(18deg); }
+.ar-lights i:last-child { right: -18%; transform: rotate(-18deg); }
+.ar-lights i::before { content: ""; position: absolute; left: 50%; top: 58px; width: 62px; height: 22px; margin-left: -31px; border-radius: 3px; background: radial-gradient(circle, #fffbe8 0 2.6px, transparent 3px) 3px 3px / 10px 9px, #23303f; box-shadow: 0 0 22px 6px rgba(255, 246, 214, 0.55); }
+.ar-kicker { font-weight: 800; font-size: 0.8125rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--flood); text-shadow: 0 1px 0 rgba(0, 0, 0, 0.25); margin-top: 26px; }
+.ar-h1 { margin: 0; font-family: "Big Shoulders Display", sans-serif; font-weight: 900; text-transform: uppercase; font-size: clamp(2.7rem, 12.5cqi, 5.5rem); line-height: 0.88; }
+.ar-board { padding: 12px 14px; border-radius: 4px; background: #0b1018 radial-gradient(rgba(255, 255, 255, 0.06) 1px, transparent 1.3px) 0 0 / 4px 4px; border: 3px solid #1f2a38; box-shadow: 0 12px 24px -14px rgba(0, 0, 0, 0.9); font-family: "Big Shoulders Display", sans-serif; }
+.ar-teams { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 10px; }
+.ar-team { display: flex; align-items: center; gap: 8px; }
+.ar-team:last-child { justify-content: flex-end; }
+.ar-team svg { width: 32px; height: auto; flex: none; }
+.ar-team b, .ar-ko, .ar-me b { color: var(--flood); text-shadow: 0 0 10px rgba(255, 210, 77, 0.55); letter-spacing: 0.08em; }
+.ar-team b { font-weight: 800; font-size: 1.75rem; }
+.ar-ko { font-weight: 800; font-size: 1.125rem; padding: 4px 8px; border-radius: 3px; background: #05080d; color: #ff8a5c !important; text-shadow: 0 0 8px rgba(255, 120, 70, 0.6) !important; white-space: nowrap; }
+.ar-me { display: grid; grid-template-columns: auto 1fr auto; align-items: baseline; gap: 10px; margin-top: 10px; padding-top: 10px; border-top: 1px dashed #2a3747; }
+.ar-me span { font-family: var(--f-text); font-size: 0.6875rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--wing-soft); }
+.ar-me b { font-weight: 900; font-size: 2.75rem; line-height: 0.9; text-align: center; }
+.ar-acts { display: grid; gap: 8px; }
+.ar-acts .md-action { background: rgba(23, 38, 58, 0.32); border-radius: 3px; }
+.ar-acts .md-action:hover { background: rgba(23, 38, 58, 0.5); }
+.ar-acts .md-action .ic { border-radius: 3px; background: var(--moor); }
+.ar-acts .md-action .tx span { color: rgba(255, 255, 255, 0.85); }
+.ar-list { display: grid; gap: 6px; }
+.ar-row { display: grid; grid-template-columns: minmax(0, 1fr) auto; grid-template-areas: "type pts" "t pts"; gap: 2px 14px; align-items: center; min-height: 66px; padding: 10px 10px 10px 14px; border: 0; border-left: 8px solid var(--tone-bg); background: var(--paper); text-align: left; cursor: pointer; }
+.ar-row:hover { background: color-mix(in srgb, var(--kestrel) 6%, var(--paper)); }
+.ar-type { grid-area: type; font-size: 0.6875rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.1em; color: var(--ink-3); }
+.ar-t { grid-area: t; display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.ar-t b { font-size: 0.9375rem; line-height: 1.3; }
+.ar-t span { font-size: 0.75rem; color: var(--ink-3); }
+.ar-pts { grid-area: pts; min-width: 66px; padding: 8px 10px; background: var(--moor); color: var(--flood); text-align: center; font-family: "Big Shoulders Display", sans-serif; font-weight: 900; font-size: 1.625rem; line-height: 1; }
+@container dev (min-width: 820px) {
+  .ar-hero { margin-inline: 0; border-radius: 2px; padding: 34px 120px 30px 40px; grid-template-columns: minmax(0, 1.1fr) minmax(320px, 1fr); align-items: end; gap: 22px 36px; background-image: linear-gradient(90deg, transparent calc(100% - 76px), var(--moor) calc(100% - 76px) calc(100% - 50px), var(--buff) calc(100% - 50px) calc(100% - 42px), transparent calc(100% - 42px)); }
+  .ar-kicker, .ar-h1 { grid-column: 1; }
+  .ar-board { grid-column: 2; grid-row: 1 / span 2; align-self: end; }
+  .ar-acts { grid-column: 1 / -1; grid-template-columns: 1fr 1fr; }
+  .ar-row { grid-template-columns: 110px minmax(0, 1fr) auto; grid-template-areas: "type t pts"; }
+}
+.app[data-style="arena"] .panel, .app[data-style="arena"] .grid-cards > :is(.card, .reward) { border-bottom: 4px solid var(--moor); }
+.app[data-style="arena"] .card-title { font-weight: 800; }
+.app[data-style="arena"] .tabbar { left: 0; right: 0; bottom: 0; max-width: none; border-radius: 0; gap: 0; padding: 0 0 var(--home-ind, 0px); background: var(--moor); box-shadow: none; }
+.app[data-style="arena"] .tab { position: relative; border-radius: 0; color: var(--wing-soft); min-height: 58px; }
+.app[data-style="arena"] .tab[aria-current="page"] { background: var(--moor-2); color: #fff; }
+.app[data-style="arena"] .tab[aria-current="page"]::before { content: ""; position: absolute; top: 0; left: 18%; right: 18%; height: 4px; background: var(--flood); }
+@container dev (min-width: 820px) {
+  .app[data-style="arena"] .rail-nav button { border-radius: 2px; text-transform: uppercase; font-size: 0.8125rem; letter-spacing: 0.04em; }
+  .app[data-style="arena"] .rail-nav button[aria-current="page"] { box-shadow: inset 4px 0 0 var(--flood); }
+  .app[data-style="arena"] .rail-points, .app[data-style="arena"] .rail-me { border-radius: 2px; }
+}
+
+/* ===================== POSTER: giant figures, flat colour, ink outlines ===================== */
+.app[data-style="poster"] { --ground: #f4efe2; --paper: #fffdf6; --r-card: 0px; --r-ctl: 0px; --shadow-card: 0 0 0 2px var(--moor); --shadow-lift: 0 0 0 2px var(--moor), 4px 4px 0 2px var(--moor); }
+.app[data-style="poster"] .h-page { font-size: 3.75rem; text-transform: uppercase; }
+.app[data-style="poster"] .h-sec { text-transform: uppercase; }
+.po-hero { position: relative; overflow: hidden; display: flex; flex-direction: column; gap: 4px; padding: 22px 20px 22px; border: 3px solid var(--moor); background: var(--flood); color: var(--moor); box-shadow: 6px 6px 0 var(--moor); background-image: radial-gradient(circle at calc(100% + 34px) -34px, var(--kestrel) 0 128px, var(--moor) 128px 131px, transparent 131px); }
+.po-kicker { font-weight: 800; font-size: 1rem; text-transform: uppercase; letter-spacing: 0.04em; max-width: 60%; }
+.po-giant { font-family: "Big Shoulders Display", sans-serif; font-weight: 900; font-size: clamp(6.2rem, 34cqi, 16rem); line-height: 0.78; letter-spacing: -0.025em; margin-top: 28px; }
+.po-unit { font-family: "Big Shoulders Display", sans-serif; font-weight: 900; font-size: 2.5rem; line-height: 0.9; margin-top: 0.3em; text-transform: uppercase; color: var(--kestrel-deep); }
+.po-sub { margin: 8px 0 12px; font-weight: 700; font-size: 1rem; }
+.po-btn { align-self: flex-start; border: 2px solid var(--moor); border-radius: 0; background: var(--kestrel); color: #fff; box-shadow: 4px 4px 0 var(--moor); text-transform: uppercase; letter-spacing: 0.04em; }
+.po-btn:active { transform: translate(4px, 4px); box-shadow: none; }
+.po-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+.po-tile { display: flex; flex-direction: column; gap: 8px; min-height: 168px; padding: 14px; border: 2px solid var(--moor); background: var(--tone-bg); color: var(--tone-fg); text-align: left; cursor: pointer; box-shadow: 4px 4px 0 var(--moor); transition: transform 0.15s, box-shadow 0.15s; min-width: 0; }
+.po-tile:active { transform: translate(4px, 4px); box-shadow: none; }
+.po-n { font-family: "Big Shoulders Display", sans-serif; font-weight: 900; font-size: 3rem; line-height: 0.85; }
+.po-tile b { font-size: 0.9375rem; line-height: 1.25; font-weight: 800; }
+.po-type { margin-top: auto; font-size: 0.6875rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.08em; }
+@container dev (min-width: 820px) { .po-hero { padding: 32px 40px; background-image: radial-gradient(circle at calc(100% + 60px) -60px, var(--kestrel) 0 260px, var(--moor) 260px 264px, transparent 264px); } .po-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; } }
+.app[data-style="poster"] :is(.btn-primary, .btn-dark) { box-shadow: 3px 3px 0 var(--moor); border: 2px solid var(--moor); }
+.app[data-style="poster"] .tabbar { left: 0; right: 0; bottom: 0; max-width: none; border-radius: 0; gap: 4px; padding: 6px 6px calc(6px + var(--home-ind, 0px)); background: var(--paper); box-shadow: 0 -2px 0 var(--moor); }
+.app[data-style="poster"] .tab { border-radius: 0; color: var(--moor); font-weight: 800; }
+.app[data-style="poster"] .tab[aria-current="page"] { background: var(--moor); color: var(--flood); }
+.app[data-style="poster"] .points-chip { border-radius: 0; box-shadow: 3px 3px 0 var(--kestrel); }
+@container dev (min-width: 820px) { .app[data-style="poster"] .rail-nav button { border-radius: 0; font-weight: 800; } .app[data-style="poster"] .rail-nav button[aria-current="page"] { background: var(--flood); color: var(--moor); box-shadow: 4px 4px 0 var(--kestrel); } .app[data-style="poster"] :is(.rail-points, .rail-me) { border-radius: 0; } }
+
+/* ===================== MAGAZINE: masthead, cover line, contents ===================== */
+.app[data-style="magazine"] { --ground: #ffffff; --paper: #f6f5f1; --r-card: 0px; --f-display: Georgia, "Times New Roman", serif; --shadow-card: none; --shadow-lift: 0 10px 24px -18px rgba(0, 0, 0, 0.5); }
+.app[data-style="magazine"] .h-page { font-weight: 400; font-style: italic; }
+.app[data-style="magazine"] .h-sec { font-weight: 400; }
+.mg-mast { display: grid; gap: 4px; justify-items: center; text-align: center; padding: 10px 0 12px; border-top: 1px solid var(--ink); border-bottom: 4px double var(--ink); }
+.mg-title { font-family: Georgia, "Times New Roman", serif; font-size: clamp(2.8rem, 14cqi, 5.5rem); line-height: 1; letter-spacing: -0.02em; }
+.mg-issue { font-size: 0.6875rem; text-transform: uppercase; letter-spacing: 0.16em; color: var(--ink-2); font-weight: 600; }
+.mg-cover { display: grid; gap: 18px; }
+.mg-fig { margin: 0; }
+.mg-pic { display: block; width: 100%; height: auto; }
+.mg-fig figcaption { margin-top: 6px; padding-bottom: 8px; border-bottom: 1px solid var(--line); font-family: Georgia, serif; font-style: italic; font-size: 0.8125rem; color: var(--ink-2); }
+.mg-story { display: flex; flex-direction: column; gap: 10px; align-items: flex-start; }
+.mg-kick { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.16em; color: var(--kestrel-deep); }
+.mg-h { margin: 0; font-family: Georgia, "Times New Roman", serif; font-weight: 400; font-size: clamp(2.3rem, 10cqi, 4.4rem); line-height: 1.02; letter-spacing: -0.015em; text-wrap: balance; }
+.mg-deck { margin: 0; font-family: Georgia, serif; font-style: italic; font-size: 1.1875rem; line-height: 1.45; color: var(--ink-2); }
+.mg-deck b { font-style: normal; color: var(--ink); }
+.mg-cols { display: grid; gap: 26px; }
+.mg-sh { margin: 0 0 4px; padding-bottom: 6px; border-bottom: 1px solid var(--ink); font-family: var(--f-text); font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.16em; }
+.mg-contents ol { list-style: none; margin: 0; padding: 0; }
+.mg-contents li button { display: grid; grid-template-columns: 34px minmax(0, 1fr) minmax(16px, 60px) auto; gap: 10px; align-items: end; width: 100%; padding: 12px 0; border: 0; border-bottom: 1px solid var(--line); background: none; text-align: left; cursor: pointer; }
+.mg-contents li button:hover .mg-ct b { text-decoration: underline; text-underline-offset: 3px; }
+.mg-no { font-family: Georgia, serif; font-style: italic; font-size: 1.25rem; color: var(--kestrel-deep); align-self: start; }
+.mg-ct { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.mg-ct b { font-family: Georgia, serif; font-weight: 400; font-size: 1.0625rem; line-height: 1.3; }
+.mg-ct span { font-size: 0.75rem; color: var(--ink-3); }
+.mg-dots { align-self: end; margin-bottom: 7px; border-bottom: 2px dotted var(--ink-3); }
+.mg-pg { font-family: Georgia, serif; font-size: 1.125rem; }
+.mg-drop { margin: 10px 0 0; font-family: Georgia, serif; font-size: 1.0625rem; line-height: 1.6; }
+.mg-drop::first-letter { float: left; font-size: 4.3em; line-height: 0.82; padding: 6px 8px 0 0; color: var(--kestrel); }
+.mg-quote { margin: 18px 0 0; padding: 14px 0; border-block: 1px solid var(--ink); font-family: Georgia, serif; font-style: italic; font-size: 1.375rem; line-height: 1.35; }
+.mg-quote cite { display: block; margin-top: 8px; font-style: normal; font-family: var(--f-text); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.12em; color: var(--ink-2); }
+@container dev (min-width: 820px) {
+  .mg-mast { grid-template-columns: 1fr auto 1fr; align-items: center; }
+  .mg-mast .mg-issue:first-child { justify-self: start; }
+  .mg-mast .mg-issue:last-child { justify-self: end; }
+  .mg-cover { grid-template-columns: minmax(0, 6fr) minmax(0, 5fr); align-items: end; gap: 40px; }
+  .mg-cols { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 48px; }
+  .mg-essay { border-left: 1px solid var(--line); padding-left: 48px; }
+  .mg-drop { column-count: 2; column-gap: 28px; }
+}
+.app[data-style="magazine"] .panel { background: none; padding: 16px 0 0; border-top: 1px solid var(--ink); }
+.app[data-style="magazine"] .giveaway { background: var(--paper); padding: 20px; }
+.app[data-style="magazine"] .grid-cards > .card { background: none; box-shadow: none; padding: 0; border-top: 1px solid var(--ink); padding-top: 10px; }
+.app[data-style="magazine"] .card-title { font-family: Georgia, serif; font-weight: 400; font-size: 1.0625rem; }
+.app[data-style="magazine"] .tabbar { left: 0; right: 0; bottom: 0; max-width: none; border-radius: 0; padding: 4px 6px calc(4px + var(--home-ind, 0px)); background: #fff; box-shadow: 0 -1px 0 var(--ink); }
+.app[data-style="magazine"] .tab svg { display: none; }
+.app[data-style="magazine"] .tab { border-radius: 0; min-height: 46px; font-family: Georgia, serif; font-style: italic; font-weight: 400; font-size: 0.875rem; color: var(--ink-2); }
+.app[data-style="magazine"] .tab[aria-current="page"] { background: none; color: var(--ink); text-decoration: underline; text-decoration-color: var(--kestrel); text-decoration-thickness: 2px; text-underline-offset: 6px; }
+@container dev (min-width: 820px) {
+  .app[data-style="magazine"] .rail { background: #fff; color: var(--ink); box-shadow: 1px 0 0 var(--ink); }
+  .app[data-style="magazine"] .rail .club-word { color: var(--ink); font-family: Georgia, serif; font-weight: 400; }
+  .app[data-style="magazine"] .rail .club-word small { color: var(--ink-3); }
+  .app[data-style="magazine"] .rail-nav button svg { display: none; }
+  .app[data-style="magazine"] .rail-nav button { color: var(--ink-2); border-radius: 0; font-family: Georgia, serif; font-weight: 400; font-size: 1.0625rem; border-bottom: 1px solid var(--line); }
+  .app[data-style="magazine"] .rail-nav button:hover { background: var(--paper); color: var(--ink); }
+  .app[data-style="magazine"] .rail-nav button[aria-current="page"] { background: none; color: var(--ink); font-style: italic; box-shadow: inset 3px 0 0 var(--kestrel); }
+  .app[data-style="magazine"] .rail-nav .count { background: var(--ink); }
+  .app[data-style="magazine"] .rail-me { background: var(--paper); color: var(--ink); border-radius: 0; }
+  .app[data-style="magazine"] .rail-me .who span { color: var(--ink-3); }
+  .app[data-style="magazine"] .rail-points { border-radius: 0; }
+}
+
+/* ===================== STAGE: night, spotlights ===================== */
+.app[data-style="stage"] { --ground: #0a0e14; --paper: #131a24; --line: #253041; --r-card: 22px; --f-display: "Clash Display", var(--f-text); --shadow-card: 0 0 0 1px #253041; --shadow-lift: 0 0 0 1px #253041, 0 20px 40px -24px #000; }
+.app[data-style="stage"] .h-page, .app[data-style="stage"] .h-sec { font-weight: 600; }
+.sg-hero { position: relative; overflow: hidden; isolation: isolate; display: grid; gap: 14px; padding: 30px 22px 26px; border-radius: 28px; background: radial-gradient(120% 70% at 50% 115%, #1c2532, #0a0e14 62%); box-shadow: 0 0 0 1px #1d2633; }
+.sg-beams i { position: absolute; z-index: -1; top: -12%; width: 56%; height: 135%; transform-origin: 50% 0; clip-path: polygon(44% 0, 56% 0, 100% 100%, 0 100%); filter: blur(10px); mix-blend-mode: screen; animation: sway 9s ease-in-out infinite alternate; }
+.sg-beams i:nth-child(1) { left: -10%; background: linear-gradient(color-mix(in srgb, var(--kestrel) 80%, transparent), transparent 88%); transform: rotate(16deg); }
+.sg-beams i:nth-child(2) { left: 22%; background: linear-gradient(rgba(255, 236, 190, 0.38), transparent 80%); transform: rotate(0deg); animation-duration: 11s; animation-delay: -3s; }
+.sg-beams i:nth-child(3) { right: -12%; background: linear-gradient(color-mix(in srgb, var(--wing) 75%, transparent), transparent 88%); transform: rotate(-17deg); animation-delay: -5s; }
+@keyframes sway { from { rotate: -5deg; } to { rotate: 5deg; } }
+.sg-floor { position: absolute; z-index: -1; left: 6%; right: 6%; bottom: -26%; height: 46%; border-radius: 50%; background: radial-gradient(closest-side, color-mix(in srgb, var(--kestrel) 45%, transparent), transparent); }
+.sg-kicker { font-weight: 600; color: var(--flood); }
+.sg-h1 { margin: 0; font-family: "Clash Display", var(--f-text); font-weight: 600; font-size: clamp(2.2rem, 10cqi, 4.25rem); line-height: 1; color: #fff; }
+.sg-fig { display: flex; align-items: flex-end; gap: 12px; }
+.sg-fig b { font-family: "Clash Display", var(--f-text); font-weight: 600; font-size: clamp(4.5rem, 24cqi, 8.5rem); line-height: 0.85; letter-spacing: -0.04em; color: #fff; text-shadow: 0 0 46px color-mix(in srgb, var(--kestrel) 75%, transparent); }
+.sg-fig span { font-size: 0.875rem; color: var(--ink-2); padding-bottom: 8px; line-height: 1.3; }
+.sg-tier .tier { color: var(--ink); }
+.sg-tier .bar { background: rgba(255, 255, 255, 0.14); }
+.sg-tier .bar > span { background: var(--flood); }
+.sg-btn { justify-self: start; background: #f1f3f6; color: #0a0e14; border-radius: 999px; }
+.sg-list { display: grid; gap: 10px; }
+.sg-row { display: grid; grid-template-columns: 56px minmax(0, 1fr) auto; gap: 14px; align-items: center; padding: 10px 16px 10px 10px; border: 1px solid #253041; border-radius: 20px; background: var(--paper); text-align: left; cursor: pointer; transition: box-shadow 0.25s, border-color 0.25s; }
+.sg-row:hover { border-color: color-mix(in srgb, var(--kestrel) 60%, #253041); box-shadow: 0 0 30px -8px color-mix(in srgb, var(--kestrel) 60%, transparent); }
+.sg-art { display: grid; place-items: center; width: 56px; height: 56px; border-radius: 16px; background: var(--tone-bg); color: var(--tone-fg); }
+.sg-art svg.art { width: 70%; height: 70%; }
+.sg-t { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.sg-t b { font-size: 0.9375rem; line-height: 1.3; }
+.sg-t span { font-size: 0.75rem; color: var(--ink-3); }
+.sg-pts { font-family: "Clash Display", var(--f-text); font-weight: 600; font-size: 1.5rem; color: var(--flood); }
+@container dev (min-width: 820px) {
+  .sg-hero { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 18px 40px; padding: 48px; min-height: 440px; align-content: center; }
+  .sg-kicker, .sg-h1, .sg-btn { grid-column: 1; }
+  .sg-fig { grid-column: 2; grid-row: 1 / span 2; align-self: end; justify-self: end; flex-direction: column; align-items: flex-end; text-align: right; }
+  .sg-tier { grid-column: 2; }
+  .sg-list { grid-template-columns: 1fr 1fr; }
+}
+.app[data-style="stage"] .tabbar { background: #131a24; box-shadow: 0 0 0 1px #253041, 0 20px 40px -18px #000; }
+.app[data-style="stage"] .tab { color: #8c97a5; }
+.app[data-style="stage"] .tab[aria-current="page"] { background: var(--kestrel); color: #fff; box-shadow: 0 0 26px -2px color-mix(in srgb, var(--kestrel) 80%, transparent); }
+@container dev (min-width: 820px) { .app[data-style="stage"] .rail { background: #06090d; } .app[data-style="stage"] .rail-nav button[aria-current="page"] { box-shadow: 0 0 26px -4px color-mix(in srgb, var(--kestrel) 80%, transparent); } }
+@media (prefers-reduced-motion: reduce) { .sg-beams i, .rl-swipe, .dr-typing i { animation: none; } }
 
 /* ---------- Motion off on request ---------- */
 @media (prefers-reduced-motion: reduce) {
@@ -1360,9 +2016,39 @@ img, svg { max-width: 100%; }
 .sp-row > span:nth-child(2) { display: flex; flex-direction: column; flex: 1; min-width: 0; }
 .sp-row .sub { margin: 0; }
 .sp-row .go { font-size: 0.8125rem; font-weight: 500; text-decoration: underline; text-underline-offset: 3px; }
-.sp-card { display: flex; gap: 14px; align-items: flex-start; flex-wrap: wrap; }
-.sp-card > div { flex: 1; min-width: 240px; }
-.sp-card p { margin: 4px 0 0; font-size: 0.875rem; line-height: 1.5; color: var(--fx-ink-2); }
+.sp-card { display: grid; gap: 16px; }
+.sp-head { display: flex; gap: 12px; align-items: flex-start; }
+.sp-head p { margin: 2px 0 0; font-size: 0.8125rem; line-height: 1.45; }
+.sp-tiles { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+.sp-tile { display: flex; flex-direction: column; gap: 3px; padding: 12px 14px; border-radius: 12px; background: var(--fx-soft); min-width: 0; }
+.sp-tile b { font-family: var(--fx-display); font-weight: 600; font-size: 1.5rem; line-height: 1.05; font-variant-numeric: tabular-nums; letter-spacing: -0.01em; }
+.sp-tile span { font-size: 0.8125rem; color: var(--fx-ink); font-weight: 500; line-height: 1.3; }
+.sp-tile small { font-size: 0.75rem; color: var(--fx-ink-2); line-height: 1.3; }
+.sp-tile.hero { grid-column: 1 / -1; background: #1d1f24; color: #fff; }
+.sp-tile.hero b { font-size: 2.25rem; color: #f3e7c8; }
+.sp-tile.hero span { color: #fff; }
+.sp-tile.hero small { color: #c9ccd3; }
+.sp-bars { display: grid; gap: 10px; }
+.sp-bars h3 { margin: 0; font-size: 0.8125rem; font-weight: 600; }
+.sp-bar { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 4px 12px; align-items: center; font-size: 0.8125rem; }
+.sp-bar .t { grid-column: 1 / -1; color: var(--fx-ink-2); line-height: 1.3; }
+.sp-bar .track { height: 10px; border-radius: 999px; background: var(--fx-soft); overflow: hidden; }
+.sp-bar .track i { display: block; height: 100%; border-radius: inherit; background: #1d1f24; }
+.sp-bar:first-of-type .track i { background: #b8913a; }
+.sp-bar b { font-weight: 600; font-variant-numeric: tabular-nums; min-width: 72px; text-align: right; }
+@container dev (min-width: 900px) {
+  .sp-tiles { grid-template-columns: 1.4fr repeat(4, minmax(0, 1fr)); }
+  .sp-tile.hero { grid-column: auto; }
+}
+.cpm-box { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; padding: 14px 16px; border-radius: 12px; background: var(--fx-surface); border: 1px solid var(--fx-line); }
+.cpm-box label { font-weight: 600; font-size: 0.875rem; }
+.cpm-in { display: inline-flex; align-items: center; border: 1px solid var(--fx-line); border-radius: 10px; background: var(--fx-surface); padding: 0 10px; min-height: 40px; }
+.cpm-in span { color: var(--fx-ink-2); }
+.cpm-in input { width: 64px; border: 0; background: none; font: inherit; font-weight: 600; font-size: 1rem; padding: 0 6px; color: var(--fx-ink); font-variant-numeric: tabular-nums; }
+.cpm-in input:focus { outline: none; }
+.cpm-box small { color: var(--fx-ink-2); font-size: 0.75rem; flex: 1 1 220px; line-height: 1.4; }
+.tag-copy { display: flex; flex-wrap: wrap; gap: 8px; }
+.panel-prize { margin: 8px 0 0; font-weight: 700; font-size: 0.9375rem; line-height: 1.35; }
 .sp-inline { display: flex; align-items: center; gap: 10px; padding: 10px 12px; border-radius: 12px; background: var(--fx-soft); font-size: 0.8125rem; }
 .filters { display: flex; flex-wrap: wrap; gap: 12px; }
 .filters .afield { min-width: 200px; }
@@ -1380,6 +2066,7 @@ img, svg { max-width: 100%; }
     <div class="demo-brand"><span class="demo-logo">FAN<i>/</i>IP</span><span class="demo-name">Season demo, Aldermoor Athletic</span></div>
     <div class="demo-controls">
       <span class="demo-note">Fictional club, illustrative figures</span>
+      <label class="style-pick"><span>Style</span><select id="styleSel" aria-label="Style of the member app"></select></label>
       <div class="seg" role="group" aria-label="View"><button data-act="view" data-v="member" aria-pressed="true">Member app</button><button data-act="view" data-v="admin" aria-pressed="false">Club admin</button></div>
       <div class="seg seg-device" role="group" aria-label="Screen"><button data-act="device" data-d="phone" aria-pressed="false">Phone</button><button data-act="device" data-d="laptop" aria-pressed="true">Laptop</button></div>
     </div>
@@ -1404,7 +2091,7 @@ img, svg { max-width: 100%; }
         <div><span class="t-d">Big Shoulders</span><small>Headlines,<br>scores, numbers</small></div>
         <div><span class="t-t">Archivo</span><small>Everything<br>members read</small></div>
       </div></div>
-      <div class="bs-block"><h3>Words</h3><dl class="bs-words"><dt>Style</dt><dd>Album</dd><dt>Tiers</dt><dd>Academy to Club legend</dd><dt>Leaderboard</dt><dd>League table</dd><dt>Community</dt><dd>The Terrace</dd></dl></div>
+      <div class="bs-block"><h3>Words</h3><dl class="bs-words"><dt>Style</dt><dd id="bsStyle">Album</dd><dt>Tiers</dt><dd>Academy to Club legend</dd><dt>Leaderboard</dt><dd>League table</dd><dt>Community</dt><dd>The Terrace</dd></dl></div>
     </aside>
   </div>
 </div>
@@ -1515,6 +2202,8 @@ function missionArt(kind) {
     play: `<rect x="10" y="22" width="80" height="52" rx="6" fill="none" stroke="currentColor" stroke-width="3"/><path d="M43 36v24l20-12z" fill="currentColor"/><path d="M36 84h28" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>`,
     mates: `<g transform="translate(-14 4) scale(.9)" opacity=".55"><path d="${SHIRT}" fill="currentColor"/></g><g transform="translate(24 10) scale(.9)"><path d="${SHIRT}" fill="none" stroke="currentColor" stroke-width="3.3" stroke-linejoin="round"/></g>`,
     scorer: `<path d="M14 72V34h72v38" fill="none" stroke="currentColor" stroke-width="3"/><path d="M14 44h72M14 54h72M14 64h72M28 34v38M43 34v38M58 34v38M72 34v38" stroke="currentColor" stroke-width="1" opacity=".4"/><circle cx="62" cy="58" r="11" fill="currentColor"/><path d="M30 86q14-22 30-28" fill="none" stroke="currentColor" stroke-width="2.5" stroke-dasharray="3 5" stroke-linecap="round"/><text x="26" y="27" ${fs} font-size="20" fill="currentColor">1st</text>`,
+    post: `<rect x="29" y="8" width="42" height="80" rx="7" fill="none" stroke="currentColor" stroke-width="3"/><rect x="35" y="18" width="30" height="34" rx="2" fill="currentColor" opacity=".3"/><path d="M35 52V44l9-9 7 7 5-5 9 9v6z" fill="currentColor"/><circle cx="58" cy="27" r="3.5" fill="currentColor"/><text x="50" y="76" text-anchor="middle" ${fs} font-size="17" fill="currentColor">@</text><path d="M76 30q10 0 12-10M78 40q16 0 18-18" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" opacity=".55"/>`,
+    story: `<circle cx="50" cy="44" r="31" fill="none" stroke="currentColor" stroke-width="3.5" stroke-dasharray="17 5"/><path d="M31 56V47l19-8 19 8v9z" fill="currentColor" opacity=".9"/><path d="M31 50.5l19-7.5 19 7.5" fill="none" stroke="currentColor" stroke-width="2" opacity=".4"/><path d="M38 34V24M62 34V24" stroke="currentColor" stroke-width="3"/><rect x="34" y="20" width="8" height="5" rx="1" fill="currentColor"/><rect x="58" y="20" width="8" height="5" rx="1" fill="currentColor"/><path d="M30 88h40" stroke="currentColor" stroke-width="3" stroke-linecap="round" opacity=".5"/>`,
     speech: `<path d="M16 20h68a6 6 0 0 1 6 6v36a6 6 0 0 1-6 6H46L28 84V68H16a6 6 0 0 1-6-6V26a6 6 0 0 1 6-6z" fill="none" stroke="currentColor" stroke-width="3" stroke-linejoin="round"/><path d="M24 36h52M24 46h52M24 56h30" stroke="currentColor" stroke-width="3" stroke-linecap="round" opacity=".55"/>`,
     custom: `<circle cx="50" cy="50" r="30" fill="none" stroke="currentColor" stroke-width="3"/><path d="m50 30 5.9 12 13.1 1.9-9.5 9.3 2.2 13.1L50 60.1l-11.7 6.2 2.2-13.1-9.5-9.3 13.1-1.9z" fill="currentColor"/>`,
   };
@@ -1631,6 +2320,15 @@ const TIERS = [
 ];
 
 const MISSIONS = [
+  { id: "post", type: "Social post", group: "share", share: 1, title: "Post your matchday photo, tag @aldermoor and @weirbankmotors", pts: 120, tone: "kestrel", art: "post", meta: "Instagram or TikTok, until Sunday", sponsor: "Weirbank Motors",
+    bonus: ["+100 over 5,000 views"], tags: ["@aldermoor", "@weirbankmotors"],
+    steps: ["Take a photo at The Weir on Saturday: the stand, the pitch, your mates.", "Post it on Instagram or TikTok and tag @aldermoor and @weirbankmotors.", "Tap below. Your linked account confirms the post on its own."],
+    brief: "Your photo puts the club in front of everyone who follows you. Playing earns 120 points, and 100 more if your post passes 5,000 views. The ten most-viewed go on the big screen at the next home match." },
+  { id: "story", type: "Story", group: "share", share: 1, title: "Share a story from the stands", pts: 60, tone: "moor", art: "story", meta: "Instagram or TikTok story, on matchday", tags: ["@aldermoor", "#UpTheKestrels"],
+    steps: ["On matchday, film a few seconds from your seat: the walk-out, a chant, the view.", "Share it as a story and tag @aldermoor. Add #UpTheKestrels if you like.", "Tap below. Views count while the story is up."],
+    brief: "Ten seconds from your seat shows your friends what a Saturday at The Weir feels like. Stories disappear after a day; your linked account counts the views while it's up." },
+  { id: "scarf", type: "Photo", group: "photo", title: "Scarves up: show us yours", pts: 80, tone: "wing", art: "photo", meta: "Checked by the club", sponsor: "Weirbank Motors",
+    brief: "Send a photo of your scarf held high, home or away. The best ten go on the big screen at half-time on Saturday." },
   { id: "predict", type: "Prediction", group: "matchday", title: "Predict the score v Granby Rovers", pts: 50, tone: "kestrel", art: "predict", meta: "Closes at kick-off",
     bonus: () => [`×${state.mult.result} right result`, `×${state.mult.exact} exact score`],
     get brief() { const w = (n) => ({ 2: "double", 3: "triple" }[n] || `go ×${n}`); return `Call the score before kick-off. Playing earns 50 points. Get the result right and they ${w(state.mult.result)} to ${50 * state.mult.result}; nail the exact score and they ${w(state.mult.exact)} to ${50 * state.mult.exact}.`; } },
@@ -1639,15 +2337,9 @@ const MISSIONS = [
     brief: "Pick the first Aldermoor scorer. Playing earns 30 points, and they double to 60 if your player scores first." },
   { id: "checkin", type: "Check-in", group: "matchday", title: "Check in at The Weir", pts: 100, tone: "moor", art: "stadium", meta: "Opens 13:00 on matchday",
     brief: "Tap in when you are inside the ground. Every home check-in adds a matchday pack of three stickers to your Collection." },
-  { id: "quiz", type: "Quiz", group: "quiz", title: "The Weir history quiz", pts: 30, tone: "buff", art: "quiz", meta: "1 min", sponsor: "Corran Lane Bakery",
-    brief: "One question about the ground we have called home for over a century." },
-  { id: "scarf", type: "Photo", group: "photo", title: "Scarves up: show us yours", pts: 80, tone: "wing", art: "photo", meta: "Checked by the club", sponsor: "Weirbank Motors",
-    brief: "Send a photo of your scarf held high, home or away. The best ten go on the big screen at half-time on Saturday." },
   { id: "first", type: "Open question", group: "community", title: "Your first match at The Weir", pts: 40, tone: "buff", art: "speech", meta: "Best answers go in the programme",
     open: { q: "Who took you, who did we play, and what stuck with you?", feature: 100, where: "the Matchday 10 programme and on the big screen" }, bonus: ["+100 if the club features it"],
     brief: "No right or wrong answer, just a few lines. The club picks its favourites for the Matchday 10 programme and the big screen, and each one featured earns 100 bonus points." },
-  { id: "potm", type: "Vote", group: "community", title: "Vote for September's player of the month", pts: 20, tone: "kestrel", art: "vote", meta: "30 sec",
-    brief: "Four players on the shortlist. The winner is presented on the pitch before kick-off." },
   { id: "preview", type: "Video", group: "community", title: "Watch the gaffer's Granby preview", pts: 40, tone: "moor", art: "play", meta: "4 min",
     brief: "The manager on Granby's pressing game and who is back from injury." },
   { id: "mate", type: "Referral", group: "community", title: "Bring a mate to their first match", pts: 250, tone: "buff", art: "mates", meta: "When they check in",
@@ -1852,6 +2544,7 @@ function seasonSection() {
   } else {
     body = `<div class="my-posts">${MY_POSTS.map((x) => `<div class="post-row"><span class="net">${x.net}</span><span><b>${esc(x.m)}</b><span class="meta">${x.when}</span></span>
       <span class="post-stats"><span><b class="num">${big(x.views)}</b>views</span><span><b class="num">${big(x.likes)}</b>likes</span><span><b class="num">${fmt(x.comments)}</b>comments</span><span><b class="num">${fmt(x.shares)}</b>shares</span></span></div>`).join("")}
+      ${state.done.has("post") ? `<div class="post-row pending"><span class="net">Post</span><span><b>Matchday photo, tagged @weirbankmotors</b><span class="meta">Posted today, views are counting</span></span><span class="post-stats"></span></div>` : ""}
       ${state.done.has("scarf") ? `<div class="post-row pending"><span class="net">Photo</span><span><b>Scarves up: show us yours</b><span class="meta">Sent today, the club is checking it</span></span><span class="post-stats"></span></div>` : ""}</div>
       <p class="note" style="margin-top:10px">Counted through your linked accounts. Your posts were seen ${fmt(views)} times, mostly by people who aren't members yet.</p>`;
   }
@@ -1919,9 +2612,9 @@ const JOIN_RULES = { choose: "Members pick a side", seat: "By seat block", rando
 const COUNTS = { all: "Every point earned", checkins: "Home check-ins", missions: "Mission points only" };
 const BATTLES = [
   { id: "stands", name: "North Stand v Riverside End", a: { name: "North Stand", colour: "#c9421b", pts: 48210, members: 4126 }, b: { name: "Riverside End", colour: "#7d9ab6", pts: 45870, members: 3984 },
-    start: isoDay(new Date(NOW.getFullYear(), NOW.getMonth(), 1)), end: isoDay(new Date(NOW.getFullYear(), NOW.getMonth() + 1, 0)), join: "choose", counts: "all", prize: "The first 200 seats on the coach to Granby" },
+    start: isoDay(new Date(NOW.getFullYear(), NOW.getMonth(), 1)), end: isoDay(new Date(NOW.getFullYear(), NOW.getMonth() + 1, 0)), join: "choose", counts: "all", prize: "200 free seats on the away-day coach to Granby, for the winning stand", prizeLine: "The winning stand gets 200 free seats on the away-day coach to Granby." },
   { id: "kits", name: "Home kit v Away kit", a: { name: "Home kit", colour: "#c9421b", pts: 39104, members: 3710 }, b: { name: "Away kit", colour: "#17263a", pts: 41322, members: 3655 },
-    start: isoDay(new Date(NOW.getFullYear(), NOW.getMonth() - 1, 1)), end: isoDay(new Date(NOW.getFullYear(), NOW.getMonth(), 0)), join: "random", counts: "missions", prize: "A morning at the training ground for the top 10 on the winning side", past: 1 },
+    start: isoDay(new Date(NOW.getFullYear(), NOW.getMonth() - 1, 1)), end: isoDay(new Date(NOW.getFullYear(), NOW.getMonth(), 0)), join: "random", counts: "missions", prize: "A morning at the training ground for the top 10 on the winning side", prizeLine: "The top 10 on the winning side get a morning at the training ground.", past: 1 },
 ];
 const battleStatus = (b) => b.past ? "ended" : isoDay(NOW) < b.start ? "upcoming" : isoDay(NOW) > b.end ? "ended" : "live";
 
@@ -1961,7 +2654,7 @@ const state = {
   atab: {}, aresult: [2, 1], ascorer: "Dario Lenk", mult: { result: 2, exact: 3 }, picks: {}, scorer: null,
   ci: { opens: "13:00", closes: "ht", where: "The Weir, within 300 m of the ground" }, colours: null, mq: "", drawn: null, news: null, badgeFresh: null,
   answers: {}, featured: new Set(), spares: { "men-11": 2, "men-5": 1, "women-8": 1, "club-C2": 1 }, offer: null, swapsDone: 0, stab: "activity",
-  rperiod: "season", rfrom: "", rto: "", rsponsor: "all", rsort: "value", psort: "views", rmore: false,
+  cpm: 7, rperiod: "season", rfrom: "", rto: "", rsponsor: "all", rsort: "value", psort: "views", rmore: false,
 };
 const word = () => state.word;
 const tierOf = (b) => [...TIERS].reverse().find((t) => b >= t.at);
@@ -2158,7 +2851,8 @@ function battle(b = featuredBattle()) {
   return `<div class="panel">
     <div class="panel-top"><span class="panel-kicker">${st === "upcoming" ? `Team battle, starts ${dayLabel(b.start)}` : `Team battle, until ${dayLabel(b.end)}`}</span><button class="link" data-act="battle" data-id="${b.id}">How it works</button></div>
     <h3 class="panel-title">${esc(b.name)}</h3>
-    <p class="panel-body">${countsLine(b)} Winners get ${esc(b.prize.replace(/^./, (c) => c.toLowerCase()))}.</p>
+    <p class="panel-prize">${esc(prizeLine(b))}</p>
+    <p class="panel-body">${countsLine(b)}</p>
     <div class="battle-sides">
       <div class="battle-side"><b class="num">${fmt(a)}</b><span>${esc(b.a.name)}${mine === "a" ? ", your side" : ""}</span></div>
       <div class="battle-side"><b class="num">${fmt(z)}</b><span>${esc(b.b.name)}${mine === "b" ? ", your side" : ""}</span></div>
@@ -2168,6 +2862,7 @@ function battle(b = featuredBattle()) {
   </div>`;
 }
 
+const prizeLine = (b) => b.prizeLine || `Prize for the winning side: ${b.prize.replace(/\.$/, "")}.`;
 function battleSheet(id) {
   const b = BATTLES.find((x) => x.id === id);
   const tops = { a: ["Kieran Moss", "Priya Lowe", "Ola Nowak"], b: ["Tom Hadley", "Aoife Brennan", "Dan Whitlock"] };
@@ -2176,7 +2871,7 @@ function battleSheet(id) {
     <ol class="steps">
       <li><span><b>Join a side.</b> ${b.join === "choose" ? "Pick the side you play for. One side per member, for the whole battle." : b.join === "seat" ? "Your side comes from your seat block, so mates sitting together play together." : "Tap join and you are drawn into a side, so both stay even."}</span></li>
       <li><span><b>Earn as usual.</b> ${countsLine(b)}</span></li>
-      <li><span><b>The side with the most wins.</b> Final scores on ${dayLabel(b.end)}. Prize: ${esc(b.prize)}.</span></li>
+      <li><span><b>The side with the most wins.</b> Final scores on ${dayLabel(b.end)}. ${esc(prizeLine(b))}</span></li>
     </ol>
     <div class="contrib panel">${["a", "b"].map((k) => `<div><h4><span class="team-dot" style="background:${b[k].colour}"></span>${esc(b[k].name)}</h4><p class="meta" style="margin:2px 0 0">${fmt(battleScore(b, k))} ${word()}, ${fmt(b[k].members + (state.joined[b.id] === k ? 1 : 0))} members</p><ol>${(b.custom ? [] : tops[k]).map((n) => `<li>${n}</li>`).join("")}${state.joined[b.id] === k ? `<li><b>You</b></li>` : ""}</ol></div>`).join("")}</div>
     ${joinBlock(b)}`);
@@ -2201,6 +2896,7 @@ function greeting() {
 }
 
 function screenHome() {
+  if (STYLE_HOMES[state.style]) return STYLE_HOMES[state.style]();
   const hand = openMissions().slice(0, 5);
   return `<div class="view-inner">
     <header class="hello">
@@ -2212,7 +2908,7 @@ function screenHome() {
       ${matchday()}
     </div>
     <section class="sec" aria-labelledby="h-hand">
-      <div class="sec-head"><h2 class="h-sec" id="h-hand">Your hand this week</h2><button class="link" data-act="tab" data-tab="missions">All missions</button></div>
+      <div class="sec-head"><h2 class="h-sec" id="h-hand">Your missions</h2><button class="link" data-act="tab" data-tab="missions">All missions</button></div>
       <div class="hand ${!state.dealt && !reduceMotion ? "dealing" : ""}">
         ${hand.map((m, i) => `<div class="hand-slot" style="--i:${i};--n:${hand.length};--from:${(i - hand.length / 2) * -40}">${missionCard(m, i)}</div>`).join("")}
       </div>
@@ -2237,7 +2933,7 @@ function giveaway() {
 
 function screenMissions() {
   const f = state.filter;
-  const filters = [["all", "All"], ["matchday", "Matchday"], ["quiz", "Quiz"], ["photo", "Photo"], ["community", "Community"]];
+  const filters = [["all", "All"], ["share", "Post and share"], ["matchday", "Matchday"], ["photo", "Photo"], ["community", "Community"]];
   const list = MISSIONS.filter((m) => f === "all" || m.group === f);
   const open = openMissions();
   return `<div class="view-inner">
@@ -2451,6 +3147,374 @@ function screenProfile() {
 }
 const codeFor = (id) => `AAFC-${id.slice(0, 3).toUpperCase()}-7K2Q`;
 
+/* ---------------------------------------------------------------- styles: each one composes the home differently
+   Faithful to the app's scenes (src/components/member/scenes/): Metro is the member's own
+   line, Board a split-flap board, Dial a ring to turn, Calendar a tear-off pad, Print a
+   screen-printing bench, Riso a two-ink poster, Reel one screen at a time, Direct a
+   conversation. Arena, Poster, Magazine and Stage go further than the app's hero. */
+const TYPE_CODE = { "Social post": "Post", Story: "Story", Photo: "Photo", Prediction: "Predict", "Check-in": "Check-in", "Open question": "Answer", Video: "Watch", Referral: "Bring a mate", Vote: "Vote", Quiz: "Quiz" };
+const nextReward = () => REWARDS.filter((r) => r.cost > state.balance).sort((a, b) => a.cost - b.cost)[0];
+const bestReady = () => REWARDS.filter((r) => r.cost <= state.balance).sort((a, b) => b.cost - a.cost)[0];
+const hello = () => `${greeting()}, ${ME.first}.`;
+const toNext = () => { const n = nextTier(SP()); return n ? `${fmt(n.at - SP())} ${word()} to ${n.name}` : "Top tier reached"; };
+const homeExtras = () => `<div class="duo">${battle()}${sharedGoal()}</div>${giveaway()}`;
+const lc1 = (t) => t.replace(/^Seat on/, "a seat on").replace(/^[A-Z](?=[a-z])/, (c) => c.toLowerCase());
+const pctTo = (cost) => Math.min(100, Math.round((state.balance / cost) * 100));
+/* The mission that brings the next reward within reach */
+function reachMission(list) {
+  const r = nextReward(); if (!r) return null;
+  let b = state.balance;
+  for (const m of list) { b += m.pts; if (b >= r.cost) return { m, r }; }
+  return null;
+}
+
+/* Metro: the member's own line. Terminus the day they joined, what they did, the station
+   where they stand, then the open missions; rewards are lines of their own crossing it. */
+function homeMetro() {
+  const open = openMissions().slice(0, 6);
+  const past = MY_LOG.slice(0, 3).reverse();
+  const ready = bestReady();
+  let bal = state.balance;
+  const ahead = [];
+  const rewardsAhead = REWARDS.filter((r) => r.cost > state.balance).sort((a, b) => a.cost - b.cost);
+  const tierN = nextTier(SP());
+  open.forEach((m) => {
+    bal += m.pts; ahead.push({ k: "stop", m, at: bal });
+    while (rewardsAhead.length && bal >= rewardsAhead[0].cost) ahead.push({ k: "x", r: rewardsAhead.shift() });
+  });
+  const st = (cls, label, sub = "", attrs = "") => `<li class="mt-st ${cls}" ${attrs}><span class="mt-mark" aria-hidden="true"></span><span class="mt-lbl"><b>${label}</b>${sub ? `<span>${sub}</span>` : ""}</span></li>`;
+  const stations = [
+    st("mt-term mt-past", `On the Kestrels line since ${ME.since}`, `Member ${ME.member}`),
+    ...past.map(([d, w, v]) => st("mt-past", esc(w), `+${v} ${word()}, ${d}`)),
+    ready ? st("mt-x mt-past mt-ready", esc(ready.title), `${fmt(ready.cost)} ${word()}. Change here: it's yours to redeem`, `data-act="tab" data-tab="rewards" role="button" tabindex="0"`) : "",
+    `<li class="mt-st mt-you"><span class="mt-mark" aria-hidden="true"></span><span class="mt-lbl"><span class="mt-here">You are here</span><b class="num"><span data-balance>${fmt(state.balance)}</span> <small>${word()}</small></b><span>${esc(tierOf(SP()).name)}, ${toNext()}</span></span></li>`,
+    ...ahead.map((a) => a.k === "stop"
+      ? `<li class="mt-st mt-stop"><span class="mt-mark" aria-hidden="true"></span><button class="mt-lbl" data-act="mission" data-id="${a.m.id}"><span class="mt-bullet" aria-hidden="true">${esc((TYPE_CODE[a.m.type] || a.m.type)[0])}</span><b>${esc(a.m.title)}</b><span><span class="mt-pts">+${a.m.pts}</span> ${esc(a.m.meta)}</span></button></li>`
+      : st("mt-x", esc(a.r.title), `${fmt(a.r.cost)} ${word()}. Change here`, `data-act="tab" data-tab="rewards" role="button" tabindex="0"`)),
+    `<li class="mt-st mt-end"><span class="mt-mark" aria-hidden="true"></span><button class="mt-lbl" data-act="tab" data-tab="missions"><b>The line goes on</b><span>${openMissions().length} open missions, new ones every Monday and on matchday</span></button></li>`,
+  ].join("");
+  const [d, h, mi] = clockParts();
+  return `<div class="view-inner sh sh-metro">
+    <header class="mt-head"><span class="mt-route"><span class="mt-bullet big" aria-hidden="true">K</span>Kestrels line</span><h1 class="h-page">${hello()}</h1>
+      <p class="lede">Every mission is a station. Rewards cross your line where you can afford them.</p></header>
+    <div class="mt-wrap">
+      <section class="mt-map" aria-label="Your line"><ol class="mt-line">${stations}</ol></section>
+      <aside class="mt-key" aria-label="Key">
+        <h2>Key</h2>
+        <ul>
+          <li><i class="k-line"></i><span><b>Kestrels line</b>Your season, one station per mission</span></li>
+          <li><i class="k-x"></i><span><b>Reward lines</b>Change where you can afford one</span></li>
+          <li><i class="k-stop"></i><span><b>Station</b>An open mission and what it pays</span></li>
+          <li><i class="k-you"></i><span><b>You are here</b><span class="num">${fmt(state.balance)}</span> ${word()}</span></li>
+        </ul>
+        <div class="mt-dep"><span class="mt-dep-k">Next departure</span><b>Matchday 9 v Granby Rovers</b><span>${KO_LABEL}, 15:00, The Weir</span>
+          <span class="mt-dep-t num">${state.matchday ? "Today 15:00" : `${d} d ${String(h).padStart(2, "0")} h ${String(mi).padStart(2, "0")} min`}</span>
+          <button class="btn btn-primary btn-sm" data-act="mission" data-id="predict">${state.predicted ? "Your prediction" : "Predict the score"}</button></div>
+      </aside>
+    </div>
+    ${homeExtras()}
+  </div>`;
+}
+
+/* Board: a split-flap board. The balance on big flaps, missions and rewards as rows. */
+const flaps = (text, cls = "") => `<span class="flaps ${cls}" aria-hidden="true">${[...String(text)].map((c, i) => c === " " ? `<i class="gap"></i>` : `<span class="flap" style="--d:${i}"><span>${esc(c)}</span></span>`).join("")}</span>`;
+function homeBoard() {
+  const open = openMissions().slice(0, 7);
+  const [d, h, mi] = clockParts();
+  const rows = open.map((m, i) => `<button class="bd-row" data-act="mission" data-id="${m.id}" style="--r:${i}"><span class="bd-code">${esc((TYPE_CODE[m.type] || m.type).toUpperCase())}</span><span class="bd-title">${esc(m.title)}</span><span class="bd-pts">${flaps("+" + m.pts, "sm")}</span><span class="bd-st">${esc(m.meta)}</span></button>`).join("");
+  const rw = [...REWARDS].sort((a, b) => Math.abs(a.cost - state.balance) - Math.abs(b.cost - state.balance)).slice(0, 4).sort((a, b) => a.cost - b.cost);
+  return `<div class="view-inner sh sh-board">
+    <header class="bd-hello"><span class="bd-clock num">${new Date().toLocaleTimeString("en-GB", { hour: "2-digit", minute: "2-digit" })}</span><h1 class="h-page">${hello()}</h1></header>
+    <div class="bd-grid">
+      <div class="bd-side">
+        <section class="bd-panel bd-bal" aria-label="${fmt(state.balance)} ${word()}">
+          <div class="bd-head"><span>Your ${word()}</span><span>${esc(tierOf(SP()).name)}</span></div>
+          ${flaps(fmt(state.balance), "xl")}
+          <p class="bd-note">${toNext()}</p>
+        </section>
+        <section class="bd-panel" aria-label="Next match">
+          <div class="bd-head"><span>Next match</span><span>Kick-off</span></div>
+          <div class="bd-match"><b>Aldermoor <span>v</span> Granby Rovers</b><span>${KO_LABEL}, The Weir</span></div>
+          ${state.matchday ? flaps("15:00", "md") : `<div class="bd-count">${flaps(String(d), "md")}<small>d</small>${flaps(String(h).padStart(2, "0"), "md")}<small>h</small>${flaps(String(mi).padStart(2, "0"), "md")}<small>m</small></div>`}
+        </section>
+        <section class="bd-panel" aria-labelledby="bd-rw">
+          <div class="bd-head"><span id="bd-rw">Rewards</span><span>${word()}</span></div>
+          ${rw.map((r) => `<button class="bd-row bd-rrow" data-act="tab" data-tab="rewards"><span class="bd-title">${esc(r.title)}</span><span class="bd-pts">${flaps(fmt(r.cost), "sm")}</span><span class="bd-st ${r.cost <= state.balance ? "ok" : ""}">${r.cost <= state.balance ? "Ready" : `${fmt(r.cost - state.balance)} to go`}</span></button>`).join("")}
+        </section>
+      </div>
+      <div class="bd-main">
+        <section class="bd-panel" aria-labelledby="h-hand">
+          <div class="bd-head"><span id="h-hand">Your missions</span><span>${word()}</span></div>
+          <div class="bd-cols" aria-hidden="true"><span>Type</span><span>Mission</span><span>${word()}</span></div>
+          ${rows}
+          <button class="bd-more" data-act="tab" data-tab="missions">All missions</button>
+        </section>
+        <section class="bd-panel" aria-label="Recent activity">
+          <div class="bd-head"><span>Arrived</span><span>${word()}</span></div>
+          ${MY_LOG.slice(0, 4).map(([dd, w, v]) => `<div class="bd-row bd-log"><span class="bd-code">${esc(dd.toUpperCase())}</span><span class="bd-title">${esc(w)}</span><span class="bd-pts">${flaps("+" + v, "sm")}</span></div>`).join("")}
+        </section>
+      </div>
+    </div>
+    ${homeExtras()}
+  </div>`;
+}
+
+/* Dial: missions around a ring the member turns. Sixty ticks light up as the balance nears the next reward. */
+function dialRing() {
+  const list = openMissions().slice(0, 8), n = list.length || 1;
+  const sel = ((state.dialIdx || 0) % n + n) % n;
+  const r = nextReward(), lit = r ? Math.round((state.balance / r.cost) * 60) : 60;
+  const ticks = Array.from({ length: 60 }, (_, i) => { const a = (i / 60) * Math.PI * 2 - Math.PI / 2; const r1 = 148, r2 = i % 5 ? 156 : 160; return `<line x1="${(170 + r1 * Math.cos(a)).toFixed(1)}" y1="${(170 + r1 * Math.sin(a)).toFixed(1)}" x2="${(170 + r2 * Math.cos(a)).toFixed(1)}" y2="${(170 + r2 * Math.sin(a)).toFixed(1)}" class="${i < lit ? "on" : ""}"/>`; }).join("");
+  const raw = state.dialIdx || 0;
+  const chips = list.map((m, i) => { const a = ((i - raw) / n) * 360; return `<button class="dl-chip ${i === sel ? "on" : ""}" style="--a:${a}deg" data-act="dialto" data-i="${i}" aria-label="${esc(m.title)}, ${m.pts} ${word()}"><span class="num">+${m.pts}</span></button>`; }).join("");
+  const m = list[sel];
+  return { sel, m, html: `<div class="dl-dial" style="--n:${n}">
+      <svg class="dl-ticks" viewBox="0 0 340 340" aria-hidden="true"><circle cx="170" cy="170" r="128" class="dl-track"/>${ticks}</svg>
+      <div class="dl-chips">${chips}</div>
+      <div class="dl-centre"><b class="num" data-balance>${fmt(state.balance)}</b><span>${word()}</span><small>${r ? `${fmt(r.cost - state.balance)} to ${esc(lc1(r.title))}` : "Every reward is in reach"}</small></div>
+      <span class="dl-pointer" aria-hidden="true"></span>
+    </div>` };
+}
+function dialFocus(m) {
+  if (!m) return `<p class="panel-body">Nothing open right now.</p>`;
+  return `<span class="panel-kicker">At the top of the dial</span><h2 class="panel-title">${esc(m.title)}</h2>
+    <p class="panel-body">${esc(m.type)}${m.sponsor ? `, with ${esc(m.sponsor)}` : ""}. ${esc(m.meta)}.</p>
+    <div class="dl-go"><span class="dl-pts num">+${m.pts}<small> ${word()}</small></span><button class="btn btn-primary" data-act="mission" data-id="${m.id}">Open the mission</button></div>`;
+}
+function homeDial() {
+  const ring = dialRing();
+  const rw = [...REWARDS].sort((a, b) => a.cost - b.cost).filter((r) => r.cost > state.balance * 0.2).slice(0, 4);
+  return `<div class="view-inner sh sh-dial">
+    <header class="hello"><h1 class="h-page">${hello()}</h1><p class="lede">Turn the dial to pick a mission. The ring lights up as you near your next reward.</p></header>
+    <div class="dl-wrap">
+      <section class="dl-stage" aria-label="Mission dial">
+        <div id="dialRing">${ring.html}</div>
+        <div class="dl-turn"><button class="dl-btn" data-act="dial" data-d="-1" aria-label="Turn left">${icon("flip")}</button><span class="meta">Turn</span><button class="dl-btn" data-act="dial" data-d="1" aria-label="Turn right">${icon("flip")}</button></div>
+      </section>
+      <div class="dl-side">
+        <div class="panel dl-focus" id="dialFocus" aria-live="polite">${dialFocus(ring.m)}</div>
+        <section class="sec" aria-labelledby="h-rw"><div class="sec-head"><h2 class="h-sec" id="h-rw">Rewards, filling up</h2><button class="link" data-act="tab" data-tab="rewards">All rewards</button></div>
+          <div class="dl-rewards">${rw.map((r) => { const p = pctTo(r.cost); return `<button class="dl-rw" data-act="tab" data-tab="rewards" data-tone="${r.tone}" style="--p:${p}"><span class="dl-rw-ring"><span class="dl-rw-art">${rewardPic(r)}</span></span><b>${esc(r.title)}</b><span class="meta num">${p >= 100 ? "Ready" : p + "%"}</span></button>`; }).join("")}</div></section>
+      </div>
+    </div>
+    ${homeExtras()}
+  </div>`;
+}
+
+/* Calendar: a tear-off pad. Today's page, then the next sheets without dates: their big figure is what they bring. */
+function homeCalendar() {
+  const open = openMissions();
+  const idx = Math.min(state.calIdx || 0, Math.max(0, open.length - 1));
+  const today = open[idx], rest = open.slice(idx + 1, idx + 7);
+  const reach = reachMission(open.slice(idx));
+  const word1 = today ? ({ "Social post": "Post.", Story: "Share.", Photo: "Snap.", Prediction: "Call it.", "Check-in": "Turn up.", "Open question": "Tell us.", Video: "Watch.", Referral: "Bring a mate." }[today.type] || "Play.") : "Rest.";
+  const now = new Date();
+  const ko = KO;
+  return `<div class="view-inner sh sh-calendar">
+    <header class="hello"><h1 class="h-page">${hello()}</h1><p class="lede">One page a day. Do today's, tear it off, and the next one is waiting.</p></header>
+    <div class="cl-wrap">
+      <section class="cl-pad" aria-label="Today's page">
+        <div class="cl-page ${state.calTorn ? "fresh" : ""}">
+          <div class="cl-top"><span>${now.toLocaleDateString("en-GB", { month: "long" })}</span><span>${now.getFullYear()}</span></div>
+          <div class="cl-day"><span class="cl-wd">${now.toLocaleDateString("en-GB", { weekday: "long" })}</span><b class="cl-num num">${now.getDate()}</b><span class="cl-word">${word1}</span></div>
+          ${today ? `<button class="cl-task" data-act="mission" data-id="${today.id}"><span class="cl-type">${esc(today.type)}${today.sponsor ? `, with ${esc(today.sponsor)}` : ""}</span><b>${esc(today.title)}</b><span class="cl-pts num">+${today.pts} ${word()}</span></button>` : `<p class="cl-task">Everything is done for today.</p>`}
+          <div class="cl-foot"><span><b class="num" data-balance>${fmt(state.balance)}</b> ${word()}</span><button class="cl-tear" data-act="calTear" ${open.length > 1 ? "" : "disabled"}>Tear off</button></div>
+        </div>
+      </section>
+      <section class="cl-next" aria-labelledby="cl-n">
+        <div class="sec-head"><h2 class="h-sec" id="cl-n">Your missions</h2><button class="link" data-act="tab" data-tab="missions">All missions</button></div>
+        <div class="cl-sheets">${rest.map((m) => `<button class="cl-sheet ${reach && reach.m === m ? "reach" : ""}" data-act="mission" data-id="${m.id}"><b class="num">+${m.pts}</b><span>${esc(m.title)}</span>${reach && reach.m === m ? `<small>This page gets you ${esc(lc1(reach.r.title))}</small>` : `<small>${esc(m.type)}</small>`}</button>`).join("")}</div>
+        <div class="cl-date" role="group" aria-label="Next home match"><span class="cl-mini"><span>${ko.toLocaleDateString("en-GB", { month: "short" })}</span><b class="num">${ko.getDate()}</b><span>${ko.toLocaleDateString("en-GB", { weekday: "short" })}</span></span>
+          <span><b>Matchday 9: Aldermoor v Granby Rovers</b><span class="meta">15:00 at The Weir. Check-in opens at 13:00, +100 ${word()}.</span></span></div>
+      </section>
+    </div>
+    ${homeExtras()}
+  </div>`;
+}
+
+/* Print: a screen-printing bench. The member's name pulled in the club's ink, missions on the drying line. */
+function homePrint() {
+  const open = openMissions().slice(0, 6);
+  const reg = `<span class="pr-reg tl"></span><span class="pr-reg tr"></span><span class="pr-reg bl"></span><span class="pr-reg br"></span>`;
+  return `<div class="view-inner sh sh-print">
+    <section class="pr-sheet pr-hero" aria-label="Your print">${reg}
+      <span class="pr-ed">Edition 2026/27, no. ${ME.member}</span>
+      <h1 class="pr-name"><span class="pr-ink" data-text="${esc(ME.name)}">${esc(ME.name)}</span></h1>
+      <p class="pr-sub">${greeting()}, ${ME.first}. ${esc(tierOf(SP()).name)}, member since ${ME.since}.</p>
+      <div class="pr-bal"><b class="num" data-balance>${fmt(state.balance)}</b><span>${word()}<br>${toNext()}</span></div>
+    </section>
+    <section class="sec" aria-labelledby="h-hand"><div class="sec-head"><h2 class="h-sec" id="h-hand">Your missions</h2><button class="link" data-act="tab" data-tab="missions">All missions</button></div>
+      <div class="pr-line"><div class="pr-prints">${open.map((m, i) => `<button class="pr-print" data-act="mission" data-id="${m.id}" style="--rot:${[-2.5, 1.8, -1.2, 2.4, -1.8, 1.2][i % 6]}deg"><span class="pr-peg" aria-hidden="true"></span><span class="pr-plate" data-tone="${m.tone}">${missionArt(m.art)}</span><b>${esc(m.title)}</b><span class="pr-val num">+${m.pts}</span></button>`).join("")}</div></div>
+    </section>
+    <div class="pr-two">
+      <section class="pr-sheet" aria-labelledby="pr-rw">${reg}<h2 class="h-sec" id="pr-rw">Merch waiting to be printed</h2>
+        <div class="pr-merch">${["scarf", "shirt", "pass"].map((id) => REWARDS.find((r) => r.id === id)).map((r) => { const p = pctTo(r.cost); return `<button class="pr-item" data-act="tab" data-tab="rewards" data-tone="${r.tone}" style="--p:${p}%"><span class="pr-art">${rewardPic(r)}</span><b>${esc(r.title)}</b><span class="meta num">${p >= 100 ? "Ready to print" : `${fmt(r.cost - state.balance)} ${word()} to go`}</span></button>`; }).join("")}</div></section>
+      <section class="pr-sheet" aria-labelledby="pr-log">${reg}<h2 class="h-sec" id="pr-log">Print log</h2>
+        <ol class="pr-logl">${MY_LOG.slice(0, 5).map(([dd, w, v], i) => `<li><span class="num">No. ${64 - i}</span><span>${esc(w)}</span><b class="num">+${v}</b></li>`).join("")}</ol></section>
+    </div>
+    ${homeExtras()}
+  </div>`;
+}
+
+/* Riso: the season as a two-ink poster, the balance huge with the second ink a hair off register. */
+function homeRiso() {
+  const open = openMissions().slice(0, 5);
+  return `<div class="view-inner sh sh-riso">
+    <section class="rs-poster" aria-label="Your season">
+      <span class="rs-disc" aria-hidden="true"></span>
+      <span class="rs-kicker">Aldermoor Athletic, season 2026/27. Printed for ${esc(ME.name)}</span>
+      <h1 class="rs-h1">${hello()}</h1>
+      <div class="rs-fig"><b class="num" data-text="${fmt(state.balance)}"><span data-balance>${fmt(state.balance)}</span></b><span>${word()}</span></div>
+      <p class="rs-line">${toNext()}. ${myRank()}th in the table.</p>
+    </section>
+    <section class="sec rs-list" aria-labelledby="h-hand"><div class="sec-head"><h2 class="h-sec" id="h-hand">Your missions</h2><button class="link" data-act="tab" data-tab="missions">All missions</button></div>
+      ${open.map((m, i) => `<button class="rs-row" data-act="mission" data-id="${m.id}"><span class="rs-n num">0${i + 1}</span><span class="rs-plate">${missionArt(m.art)}</span><span class="rs-t"><b>${esc(m.title)}</b><span>${esc(m.type)}, ${esc(m.meta)}</span></span><span class="rs-pts num">+${m.pts}</span></button>`).join("")}
+    </section>
+    ${homeExtras()}
+  </div>`;
+}
+
+/* Reel: one thing per screen, swiped vertically, huge type on the club's colours. */
+function homeReel() {
+  const open = openMissions().slice(0, 5);
+  const tones = ["moor", "wing", "buff", "kestrel", "moor"];
+  const fit = (t) => Math.max(2.1, Math.min(4.6, 15 / Math.sqrt(t.length))).toFixed(2);
+  const rw = nextReward();
+  return `<div class="view-inner sh sh-reel">
+    <section class="rl-screen rl-me" aria-label="Your ${word()}"><span class="rl-count">1 / ${open.length + 2}</span>
+      <span class="rl-kicker">${hello()}</span>
+      <b class="rl-huge num" data-balance>${fmt(state.balance)}</b><span class="rl-unit">${word()}</span>
+      <p class="rl-sub">${toNext()}</p>
+      <span class="rl-swipe" aria-hidden="true">Swipe up</span></section>
+    ${open.map((m, i) => `<section class="rl-screen" data-tone="${tones[i % tones.length]}" aria-label="${esc(m.title)}"><span class="rl-count">${i + 2} / ${open.length + 2}</span>
+      <span class="rl-kicker">${esc(m.type)}${m.sponsor ? `, with ${esc(m.sponsor)}` : ""}</span>
+      <h2 class="rl-title" style="--fs:${fit(m.title)}">${esc(m.title)}</h2>
+      <div class="rl-art" aria-hidden="true">${missionArt(m.art)}</div>
+      <div class="rl-foot"><span class="rl-pts num">+${m.pts}<small>${word()}</small></span><button class="btn rl-btn" data-act="mission" data-id="${m.id}">Play</button></div></section>`).join("")}
+    <section class="rl-screen" data-tone="kestrel" aria-label="Rewards"><span class="rl-count">${open.length + 2} / ${open.length + 2}</span>
+      <span class="rl-kicker">Next reward</span>
+      ${rw ? `<h2 class="rl-title" style="--fs:${fit(rw.title)}">${esc(rw.title)}</h2><p class="rl-sub">${fmt(rw.cost - state.balance)} ${word()} to go</p>` : `<h2 class="rl-title">Every reward is in reach</h2>`}
+      <div class="rl-foot"><span></span><button class="btn rl-btn" data-act="tab" data-tab="rewards">All rewards</button></div></section>
+  </div>`;
+}
+
+/* Direct: a conversation. The club writes, the member's entries are the replies, points come back as receipts. */
+function homeDirect() {
+  const open = openMissions().slice(0, 4);
+  const club = (t, extra = "") => `<div class="dm dm-club"><span class="dm-av" aria-hidden="true">${crest()}</span><div class="dm-b">${t}${extra}</div></div>`;
+  const me = (t) => `<div class="dm dm-me"><div class="dm-b">${t}</div></div>`;
+  const receipt = (t, v) => `<div class="dm-receipt"><span>${t}</span><b class="num">+${v} ${word()}</b></div>`;
+  const [d, h] = clockParts();
+  const threads = [["Aldermoor Athletic", "Your missions for the week", 3, 1], ["Matchday 9 chat", "Kieran: If Lenk starts I'm calling 3–1", 12], ["The Riverside lot", "Ola: coach at 09:30?", 2], ["Swap table", "Eva has #9 Lenk", 0], ["Weirbank Motors", "Post your matchday photo", 1]];
+  return `<div class="view-inner sh sh-direct">
+    <div class="dr-wrap">
+      <aside class="dr-inbox" aria-label="Conversations"><h2>Messages</h2>${threads.map(([n, l, c, on]) => `<button class="dr-thread ${on ? "on" : ""}" data-act="tab" data-tab="${on ? "home" : "terrace"}"><span class="avatar sm" style="background:${on ? "var(--kestrel)" : "var(--wing)"}">${initials(n)}</span><span><b>${n}</b><span>${esc(l)}</span></span>${c ? `<i class="num">${c}</i>` : ""}</button>`).join("")}</aside>
+      <section class="dr-chat" aria-label="Conversation with Aldermoor Athletic">
+        <header class="dr-head"><span class="dm-av" aria-hidden="true">${crest()}</span><span><b>Aldermoor Athletic</b><span class="dr-live"><i></i>Online, replies in seconds</span></span></header>
+        <div class="dr-day"><span>Saturday</span></div>
+        ${me("Checked in at The Weir. Get in!")}${receipt("Check-in, Matchday 8", 100)}
+        ${me("2–0 v Tarrow Vale, called it.")}${receipt("Exact score, ×3", 150)}
+        <div class="dr-day"><span>Today</span></div>
+        ${club(`<p><b>${hello()}</b> You're on <span class="num" data-balance>${fmt(state.balance)}</span> ${word()}, ${myRank()}th in the table. ${toNext()}.</p>`)}
+        ${club(`<p>Granby Rovers come to The Weir on ${KO_LABEL}, 15:00. That's in ${d} days and ${h} hours. This week's missions:</p>`, `<div class="dm-cards">${open.map((m) => `<button class="dm-card" data-act="mission" data-id="${m.id}"><span class="dm-art" data-tone="${m.tone}">${missionArt(m.art)}</span><span class="dm-t"><b>${esc(m.title)}</b><span>${esc(m.type)}, +${m.pts} ${word()}</span></span><span class="dm-go">Reply</span></button>`).join("")}</div>`)}
+        ${club(`<p>Share yours and tag <b>@weirbankmotors</b>: the ten most-viewed go on the big screen.</p>`)}
+        <div class="dr-typing" aria-label="Aldermoor Athletic is typing"><i></i><i></i><i></i></div>
+        <div class="dr-quick" role="group" aria-label="Quick replies"><button data-act="mission" data-id="post">Post my photo</button><button data-act="mission" data-id="predict">Predict the score</button><button data-act="tab" data-tab="rewards">Show my rewards</button><button data-act="tab" data-tab="table">Where am I?</button></div>
+      </section>
+      <aside class="dr-about" aria-label="About you">
+        <div class="dr-me"><span class="avatar">${initials(ME.name)}</span><b>${ME.name}</b><span>${esc(tierOf(SP()).name)}, member ${ME.member}</span></div>
+        <div class="dr-stat"><b class="num" data-balance>${fmt(state.balance)}</b><span>${word()}</span></div>
+        ${tierBlock()}
+        <div class="dr-next"><span class="meta">Closest reward</span>${(() => { const r = nextReward(); return r ? `<b>${esc(r.title)}</b><div class="bar"><span data-fill="${pctTo(r.cost)}"></span></div><span class="meta">${fmt(r.cost - state.balance)} ${word()} to go</span>` : "<b>Everything is in reach</b>"; })()}</div>
+      </aside>
+    </div>
+    ${homeExtras()}
+  </div>`;
+}
+
+/* Arena: matchday. The hero is a block of the club colour under floodlights, with a scoreboard. */
+function homeArena() {
+  const open = openMissions().slice(0, 6);
+  const [d, h, mi] = clockParts();
+  return `<div class="view-inner sh sh-arena">
+    <section class="ar-hero" aria-label="Matchday">
+      <span class="ar-lights" aria-hidden="true"><i></i><i></i></span>
+      <span class="ar-kicker">Matchday 9, League One</span>
+      <h1 class="ar-h1">${greeting()}, ${esc(ME.first)}.<br>Granby are coming.</h1>
+      <div class="ar-board" role="group" aria-label="Scoreboard">
+        <div class="ar-teams"><span class="ar-team">${crest()}<b>ALD</b></span><span class="ar-ko num">${state.matchday ? "15:00" : `${d}d ${String(h).padStart(2, "0")}h ${String(mi).padStart(2, "0")}m`}</span><span class="ar-team"><b>GRA</b>${rivalCrest()}</span></div>
+        <div class="ar-me"><span>Your ${word()}</span><b class="num" data-balance>${fmt(state.balance)}</b><span>${myRank()}th of ${fmt(18406)}</span></div>
+      </div>
+      <div class="ar-acts">${predictAction()}<button class="md-action" data-act="mission" data-id="checkin"><span class="ic">${icon(state.checkedIn ? "check" : "pin")}</span><span class="tx"><b>${state.checkedIn ? "Checked in" : "Check in at The Weir"}</b><span>${state.checkedIn ? "Enjoy the match" : "Opens 13:00 on matchday"}</span></span><span class="pts">${state.checkedIn ? "" : "+100"}</span></button></div>
+    </section>
+    <section class="sec" aria-labelledby="h-hand"><div class="sec-head"><h2 class="h-sec" id="h-hand">Your missions</h2><button class="link" data-act="tab" data-tab="missions">All missions</button></div>
+      <div class="ar-list">${open.map((m) => `<button class="ar-row" data-act="mission" data-id="${m.id}" data-tone="${m.tone}"><span class="ar-type">${esc(TYPE_CODE[m.type] || m.type)}</span><span class="ar-t"><b>${esc(m.title)}</b><span>${esc(m.meta)}${m.sponsor ? `, with ${esc(m.sponsor)}` : ""}</span></span><span class="ar-pts num">+${m.pts}</span></button>`).join("")}</div></section>
+    ${homeExtras()}
+  </div>`;
+}
+
+/* Poster: a flat field framed in ink, a disc of the club colour cut by the corner, giant type. */
+function homePoster() {
+  const open = openMissions().slice(0, 6);
+  return `<div class="view-inner sh sh-poster">
+    <section class="po-hero" aria-label="Your ${word()}">
+      <span class="po-kicker">${hello()}</span>
+      <b class="po-giant num" data-balance>${fmt(state.balance)}</b>
+      <span class="po-unit">${word()}</span>
+      <p class="po-sub">${toNext()}</p>
+      <button class="btn po-btn" data-act="tab" data-tab="missions">Earn more</button>
+    </section>
+    <section class="sec" aria-labelledby="h-hand"><div class="sec-head"><h2 class="h-sec" id="h-hand">Your missions</h2><button class="link" data-act="tab" data-tab="missions">All</button></div>
+      <div class="po-grid">${open.map((m, i) => `<button class="po-tile" data-act="mission" data-id="${m.id}" data-tone="${m.tone}"><span class="po-n num">+${m.pts}</span><b>${esc(m.title)}</b><span class="po-type">${esc(m.type)}</span></button>`).join("")}</div></section>
+    ${homeExtras()}
+  </div>`;
+}
+
+/* Magazine: a masthead, a cover line in a big serif, the missions as the contents page. */
+function homeMagazine() {
+  const open = openMissions().slice(0, 7);
+  const q = ANSWERS.find((a) => a.status === "featured");
+  const pic = `<svg class="mg-pic" viewBox="0 0 400 260" role="img" aria-label="The Weir under floodlights"><rect width="400" height="260" fill="var(--moor)"/><g fill="var(--flood)" opacity=".9"><rect x="40" y="30" width="44" height="18" rx="3"/><rect x="316" y="30" width="44" height="18" rx="3"/></g><path d="M62 48 0 260h124zM338 48 276 260h124z" fill="var(--flood)" opacity=".12"/><path d="M62 48v130M338 48v130" stroke="#fff" stroke-opacity=".5" stroke-width="3"/><path d="M0 200 200 150l200 50v60H0z" fill="var(--moor-2)"/><path d="M0 212 200 166l200 46" stroke="#fff" stroke-opacity=".2" stroke-width="2" fill="none"/><path d="M0 236q25-12 50 0t50 0 50 0 50 0 50 0 50 0 50 0 50 0" stroke="var(--wing)" stroke-width="4" fill="none"/><path d="M0 250q25-12 50 0t50 0 50 0 50 0 50 0 50 0 50 0 50 0" stroke="var(--wing)" stroke-width="4" fill="none" opacity=".6"/><g transform="translate(176 92) scale(.48)">${crest("", "").replace(/<svg[^>]*>|<\/svg>/g, "")}</g></svg>`;
+  return `<div class="view-inner sh sh-magazine">
+    <header class="mg-mast"><span class="mg-issue">Issue 9, ${KO_LABEL}</span><span class="mg-title">The Kestrel</span><span class="mg-issue">For ${esc(ME.name)}, ${esc(tierOf(SP()).name)}</span></header>
+    <section class="mg-cover" aria-labelledby="mg-h">
+      <figure class="mg-fig">${pic}<figcaption>The Weir, home since 1923. Granby Rovers visit on ${KO_LABEL}.</figcaption></figure>
+      <div class="mg-story"><span class="mg-kick">${greeting()}, ${esc(ME.first)}</span>
+        <h1 class="mg-h" id="mg-h">Granby at The Weir, and your week in seven missions</h1>
+        <p class="mg-deck">You stand at <b class="num" data-balance>${fmt(state.balance)}</b> ${word()}, ${myRank()}th in the table. ${toNext()}.</p>
+        <button class="btn btn-dark" data-act="mission" data-id="post">Start with your matchday photo</button></div>
+    </section>
+    <div class="mg-cols">
+      <section class="mg-contents" aria-labelledby="h-hand"><h2 class="mg-sh" id="h-hand">Your missions</h2>
+        <ol>${open.map((m, i) => `<li><button data-act="mission" data-id="${m.id}"><span class="mg-no num">${String(i + 1).padStart(2, "0")}</span><span class="mg-ct"><b>${esc(m.title)}</b><span>${esc(m.type)}${m.sponsor ? `, with ${esc(m.sponsor)}` : ""}</span></span><span class="mg-dots" aria-hidden="true"></span><span class="mg-pg num">+${m.pts}</span></button></li>`).join("")}</ol></section>
+      <section class="mg-essay" aria-label="Your season so far"><h2 class="mg-sh">Your season</h2>
+        <p class="mg-drop">Seven home matchdays, seven check-ins. You called the score exactly twice, once against Tarrow Vale, and your three posts were seen ${big(MY_POSTS.reduce((n, x) => n + x.views, 0))} times, mostly by people who aren't members yet. ${state.owned.size} of ${albumTotal()} cards are in your album.</p>
+        ${q ? `<blockquote class="mg-quote">“${esc(q.t)}”<cite>${esc(q.handle)}, on their first match at The Weir</cite></blockquote>` : ""}</section>
+    </div>
+    ${homeExtras()}
+  </div>`;
+}
+
+/* Stage: night. Spotlights in the club colours light the hero, nothing else. */
+function homeStage() {
+  const open = openMissions().slice(0, 6);
+  return `<div class="view-inner sh sh-stage">
+    <section class="sg-hero" aria-label="Your ${word()}">
+      <span class="sg-beams" aria-hidden="true"><i></i><i></i><i></i></span><span class="sg-floor" aria-hidden="true"></span>
+      <span class="sg-kicker">${hello()}</span>
+      <h1 class="sg-h1">Your season, <br>in the spotlight</h1>
+      <div class="sg-fig"><b class="num" data-balance>${fmt(state.balance)}</b><span>${word()}<br>${esc(tierOf(SP()).name)}</span></div>
+      <div class="sg-tier">${tierBlock()}</div>
+      <button class="btn sg-btn" data-act="tab" data-tab="missions">See tonight's missions</button>
+    </section>
+    <section class="sec" aria-labelledby="h-hand"><div class="sec-head"><h2 class="h-sec" id="h-hand">Your missions</h2><button class="link" data-act="tab" data-tab="missions">All missions</button></div>
+      <div class="sg-list">${open.map((m) => `<button class="sg-row" data-act="mission" data-id="${m.id}"><span class="sg-art" data-tone="${m.tone}">${missionArt(m.art)}</span><span class="sg-t"><b>${esc(m.title)}</b><span>${esc(m.type)}, ${esc(m.meta)}</span></span><span class="sg-pts num">+${m.pts}</span></button>`).join("")}</div></section>
+    ${homeExtras()}
+  </div>`;
+}
+
+const STYLE_HOMES = { metro: homeMetro, board: homeBoard, dial: homeDial, calendar: homeCalendar, print: homePrint, riso: homeRiso, reel: homeReel, direct: homeDirect, arena: homeArena, poster: homePoster, magazine: homeMagazine, stage: homeStage };
+
 const SCREENS = { home: screenHome, missions: screenMissions, collection: screenCollection, table: screenTable, rewards: screenRewards, terrace: screenTerrace, profile: screenProfile };
 
 /* ---------------------------------------------------------------- render */
@@ -2564,6 +3628,7 @@ function missionSheet(id) {
   if (m.options || m.quiz || m.custom || m.open) body = customBody(m);
   else if (id === "predict") body = predictBody();
   else if (id === "checkin") body = checkinBody();
+  else if (m.share) body = shareBody(m);
   else if (id === "quiz") body = done ? doneBody(m) : `<p style="font-weight:700;font-size:1.0625rem">In which year did Aldermoor play their first match at The Weir?</p><div class="quiz">${["1911", "1923", "1937", "1958"].map((y) => `<button data-act="quiz" data-y="${y}">${y}</button>`).join("")}</div>`;
   else if (id === "scarf") body = done ? `<div class="demo-hint">${icon("clock")}Sent to the club. Your points land once it's checked, usually within a day.</div>` : `<ol class="steps"><li>Hold your scarf up, inside the ground or anywhere with a bit of Aldermoor in shot.</li><li>Choose the photo. The club checks it within a day.</li></ol><label class="btn btn-primary btn-block" for="scarfFile">${icon("plus")}Choose a photo</label><input id="scarfFile" type="file" accept="image/*" data-act="photo" hidden>`;
   else if (id === "potm") body = done ? doneBody(m) : `<div class="quiz">${["Ellis Varga", "Clara Voss", "Noé Castell", "Maya Achebe"].map((n) => `<button data-act="potm" data-n="${n}" style="font-size:1rem">${n}</button>`).join("")}</div>`;
@@ -2595,6 +3660,13 @@ function customBody(m) {
   if (m.type === "Photo") return `<label class="btn btn-primary btn-block" for="cFile">${icon("plus")}Choose a photo</label><input id="cFile" type="file" accept="image/*" data-act="cphoto" data-id="${m.id}" hidden>`;
   if (m.type === "Referral") return `<div class="ref-code" style="justify-content:center"><code>AAFC-JESS-17</code><button class="btn btn-ghost btn-sm" data-act="copy" data-t="AAFC-JESS-17">${icon("copy")}Copy code</button></div>`;
   return `<button class="btn btn-primary btn-block" data-act="cdone" data-id="${m.id}">${m.type === "Social post" ? "I've posted it" : m.type === "Video" ? "Watch now" : "Done"}</button>${m.type === "Social post" ? `<p class="note">Your linked account confirms the post on its own.</p>` : ""}`;
+}
+function shareBody(m) {
+  if (state.done.has(m.id)) return `<div class="success"><span class="big num">+${m.pts}</span><p>Linked. Your account confirms the post on its own${m.id === "post" ? ", and the 100 bonus points land if it passes 5,000 views." : "."}</p></div>`;
+  return `<ol class="steps">${m.steps.map((s) => `<li>${esc(s)}</li>`).join("")}</ol>
+    <div class="tag-copy">${m.tags.map((t) => `<button class="btn btn-ghost btn-sm" data-act="copy" data-t="${esc(t)}">${icon("copy")}${esc(t)}</button>`).join("")}</div>
+    <button class="btn btn-primary btn-block" data-act="cdone" data-id="${m.id}">I've posted it</button>
+    <p class="note">Counted through your linked Instagram or TikTok account for 30 days.</p>`;
 }
 const doneBody = (m) => `<div class="success"><span class="big num">+${m.pts}</span><p>Collected. That card is yours.</p></div>`;
 
@@ -2742,7 +3814,7 @@ document.addEventListener("click", (e) => {
     }
     case "lockin": {
       state.predicted = [...state.score]; state.done.add("predict");
-      const m = MISSIONS[0];
+      const m = MISSIONS.find((x) => x.id === "predict");
       openSheet(`<h2>${m.title}</h2>${predictBody()}`);
       award(50, $("#sheet .score"));
       renderMember(false);
@@ -2902,9 +3974,23 @@ document.addEventListener("click", (e) => {
     case "atab": state.atab[el.dataset.p] = +el.dataset.i; renderAdmin(); break;
     case "gomember": closeDrawer(); state.tab = el.dataset.tab || "home"; if (state.tab === "collection" && ALBUM.specials.length) state.page = "specials"; setView("member"); renderMember(); break;
     case "style": {
-      state.style = el.dataset.k;
-      if (state.style === "album") delete $("#app").dataset.style; else $("#app").dataset.style = state.style;
+      setStyle(el.dataset.k);
       rerenderAdminInPlace(); admToast(`${el.dataset.n} is live for members`, "home");
+      break;
+    }
+    case "dial": case "dialto": {
+      const n = Math.max(1, openMissions().slice(0, 8).length), raw = state.dialIdx || 0, cur = ((raw % n) + n) % n;
+      if (act === "dial") state.dialIdx = raw + +el.dataset.d;
+      else { let dlt = +el.dataset.i - cur; if (dlt > n / 2) dlt -= n; if (dlt < -n / 2) dlt += n; state.dialIdx = raw + dlt; }
+      const ring = dialRing();
+      document.querySelectorAll(".dl-chip").forEach((c, i) => { c.style.setProperty("--a", `${((i - state.dialIdx) / n) * 360}deg`); c.classList.toggle("on", i === ring.sel); });
+      const f = $("#dialFocus"); if (f) f.innerHTML = dialFocus(ring.m);
+      break;
+    }
+    case "calTear": {
+      const pg = $(".cl-page"), n = Math.max(1, openMissions().length);
+      const next = () => { state.calIdx = ((state.calIdx || 0) + 1) % n; state.calTorn = true; renderMember(false); state.calTorn = false; };
+      if (pg && !reduceMotion) { pg.classList.add("torn"); setTimeout(next, 420); } else next();
       break;
     }
     case "resetColours": state.colours = { ...DEFAULT_COLOURS }; applyColours(); rerenderAdminInPlace(); admToast("Back to the club colours"); break;
@@ -2960,6 +4046,7 @@ document.addEventListener("click", (e) => {
 
 document.addEventListener("change", (e) => {
   const t = e.target;
+  if (t.id === "styleSel") { setStyle(t.value); if (state.view !== "member") setView("member"); return; }
   if (t.matches('[data-act="photo"]') && t.files.length) {
     state.done.add("scarf");
     missionSheet("scarf"); renderMember(false); toast("Photo sent to the club");
@@ -2994,6 +4081,11 @@ document.addEventListener("change", (e) => {
 });
 document.addEventListener("input", (e) => {
   const t = e.target;
+  if (t.matches("[data-cpm]")) {
+    const v = parseFloat(String(t.value).replace(",", "."));
+    if (v > 0 && v < 200) { state.cpm = v; clearTimeout(t._t); t._t = setTimeout(() => { const pos = t.selectionStart; rerenderAdminInPlace(); const n = $("#cpmIn"); if (n) { n.focus(); try { n.setSelectionRange(pos, pos); } catch (x) {} } }, 450); }
+    return;
+  }
   if (t.id === "pointsWord") {
     state.word = t.value.trim().toLowerCase() || "points";
     $("#app").dataset.ready = ""; renderMember(false);
@@ -3053,28 +4145,28 @@ setInterval(() => {
 }, 20000);
 
 /* Club admin: the neutral FAN/IP interface, with the club's crest only. */
-const WEEKS = [5940, 6360, 7860, 6740, 8990, 7140, 9580, 7980, 10090, 8580, 10950, 9150, 11900];
+const WEEKS = [3860, 4130, 5110, 4380, 5840, 4640, 6230, 5190, 6560, 5580, 7120, 5950, 7740];
 const MATCH_WEEKS = new Set([2, 4, 6, 8, 10, 12]);
 
 const NARROW_CHART = window.matchMedia("(max-width: 560px)");
 const chartW = () => (NARROW_CHART.matches ? 340 : 640); /* phones: a narrower drawing, so the type stays readable */
 function chartSVG(shade) {
   const W = chartW(), H = 220, L = 44, R = 16, T = 14, B = 30;
-  const max = 16000;
+  const max = 10000;
   const x = (i) => L + (i * (W - L - R)) / (WEEKS.length - 1);
   const y = (v) => T + (1 - v / max) * (H - T - B);
   const line = WEEKS.map((v, i) => `${i ? "L" : "M"}${x(i).toFixed(1)} ${y(v).toFixed(1)}`).join("");
   const area = `${line}L${x(WEEKS.length - 1)} ${y(0)}L${x(0)} ${y(0)}Z`;
-  const grid = [0, 4000, 8000, 12000, 16000].map((v) => `<line x1="${L}" x2="${W - R}" y1="${y(v)}" y2="${y(v)}" stroke="#e3e5ea"/><text x="${L - 8}" y="${y(v) + 4}" text-anchor="end" font-size="11" fill="#5b606b">${v ? v / 1000 + "k" : "0"}</text>`).join("");
+  const grid = [0, 2500, 5000, 7500, 10000].map((v) => `<line x1="${L}" x2="${W - R}" y1="${y(v)}" y2="${y(v)}" stroke="#e3e5ea"/><text x="${L - 8}" y="${y(v) + 4}" text-anchor="end" font-size="11" fill="#5b606b">${v ? v / 1000 + "k" : "0"}</text>`).join("");
   const xl = WEEKS.map((_, i) => (i % (W < 400 ? 4 : 2) === 0 ? `<text x="${x(i)}" y="${H - 8}" text-anchor="middle" font-size="11" fill="#5b606b">Wk ${i + 1}</text>` : "")).join("");
   const last = WEEKS.length - 1;
-  return `<svg viewBox="0 0 ${W} ${H}" role="img" text-rendering="geometricPrecision" style="letter-spacing:0;white-space:nowrap" aria-label="Weekly active members, season weeks 1 to 13, rising from 5,940 to 11,900">
+  return `<svg viewBox="0 0 ${W} ${H}" role="img" text-rendering="geometricPrecision" style="letter-spacing:0;white-space:nowrap" aria-label="Weekly active members, season weeks 1 to 13, rising from 3,860 to 7,740">
     ${shade ? `<rect x="${x(shade[0]) - 8}" y="${T}" width="${x(shade[1]) - x(shade[0]) + 16}" height="${H - T - B}" rx="4" fill="#c9421b" fill-opacity=".08"/>` : ""}${grid}${xl}
     <path d="${area}" fill="#1d1f24" fill-opacity=".06"/>
     <path d="${line}" fill="none" stroke="#1d1f24" stroke-width="2" stroke-linejoin="round"/>
     ${[...MATCH_WEEKS].map((i) => `<circle cx="${x(i)}" cy="${y(WEEKS[i])}" r="3" fill="#1d1f24"/>`).join("")}
     <circle cx="${x(last)}" cy="${y(WEEKS[last])}" r="5" fill="#1d1f24" stroke="#fff" stroke-width="2"/>
-    <text x="${x(last) - 8}" y="${y(WEEKS[last]) - 10}" text-anchor="end" font-size="12" font-weight="600" fill="#1d1f24">11,900</text>
+    <text x="${x(last) - 8}" y="${y(WEEKS[last]) - 10}" text-anchor="end" font-size="12" font-weight="600" fill="#1d1f24">7,740</text>
     <line id="chX" x1="0" x2="0" y1="${T}" y2="${H - B}" stroke="#1d1f24" stroke-opacity=".25" opacity="0"/>
     <rect x="${L}" y="${T}" width="${W - L - R}" height="${H - T - B}" fill="transparent" id="chHit"/>
   </svg><div class="tip" id="chTip"></div>`;
@@ -3188,8 +4280,8 @@ function crestImage(colour) {
 /* ---------------------------------------------------------------- Today */
 function admToday() {
   const kpis = [
-    ["Earned media value, season", eur(rTotals(1).value), "46.1M views on members' posts, at a €2 CPM"],
-    ["Active members this month", "14,300", "+16% on last month"],
+    ["Earned media value, season", eur(rTotals(1).value), `46.1M views on members' posts, at a ${cpmLabel()} CPM`],
+    ["Active members this month", "9,300", "+16% on last month"],
     ["Home check-ins this season", "9,412", "78% of the Fill The Weir goal"],
     ["Missions completed this week", "41,280", "+9% on last week"],
   ];
@@ -3224,7 +4316,7 @@ const EXTRA_ROWS = [
   { title: "Away end at Granby", type: "Photo", pts: 80, when: "Sat 18 Oct", status: "sched" },
   { title: "Christmas jumper day", type: "Photo", pts: 60, when: "Draft", status: "draft" },
 ];
-const FAKE_DONE = { predict: 6140, scorer: 4302, checkin: 0, quiz: 5233, scarf: 1420, first: 1278, potm: 3211, preview: 4870, mate: 212 };
+const FAKE_DONE = { post: 1860, story: 1310, scarf: 1420, predict: 6140, scorer: 4302, checkin: 0, first: 1278, preview: 4870, mate: 212 };
 function admMissions() {
   const tab = state.atab.missions || 0;
   const head = admHead("Missions", "Everything members do to earn points. One button creates every type.", `<button class="adm-btn primary" data-act="newMission">${icon("plus")}New mission</button>`) + admTabs("missions");
@@ -3626,16 +4718,25 @@ const SEASON_DAYS = 91;
 const SEASON_START = new Date(NOW.getTime() - (SEASON_DAYS - 1) * 864e5);
 const big = (n) => n >= 1e6 ? (n / 1e6).toFixed(1) + "M" : n >= 1e4 ? Math.round(n / 1e3) + "k" : fmt(n);
 const eur = (n) => "€" + fmt(n);
+/* Media value: views on members' posts, priced at the ad price per 1,000 views (CPM) the club sets. €7 is a usual sport CPM. */
+const mediaValue = (views) => (views / 1000) * state.cpm;
+const cpmLabel = () => "€" + state.cpm.toFixed(2).replace(/\.00$/, "");
+function cpmBox() {
+  return `<div class="cpm-box"><label for="cpmIn">Ad price per 1,000 views</label><span class="cpm-in"><span>€</span><input id="cpmIn" data-cpm inputmode="decimal" value="${state.cpm.toFixed(2)}" aria-label="Ad price per 1,000 views (CPM), in euros"></span>
+    <small>The CPM: what 1,000 views cost in paid social. €7 is a usual price for sport. Change it to the rate you pay and every value on this page follows.</small></div>`;
+}
 const pct = (a, b) => b ? (a / b * 100).toFixed(1) + "%" : "–";
 /* network, posts, views, like rate, comment rate, share rate (season so far) */
 const NETS = [["Instagram", 3150, 23.8e6, 0.074, 0.0042, 0.0051], ["TikTok", 1860, 17.6e6, 0.088, 0.0036, 0.0064], ["YouTube Shorts", 640, 3.1e6, 0.041, 0.0021, 0.0017], ["Facebook", 762, 1.6e6, 0.032, 0.0048, 0.0072]];
 const SPONSOR_LOOK = { "Weirbank Motors": ["WM", "#17263a", "#ffd24d"], "Corran Lane Bakery": ["CL", "#f0e2c4", "#a33213"] };
 /* Missions with their totals. ago = days since it started. net = share of views per network. */
 const RM = [
+  { id: "post", title: "Post your matchday photo, tag @aldermoor and @weirbankmotors", type: "Social post", sponsor: "Weirbank Motors", ago: 1, done: 1860, seen: 12210, posts: 1860, views: 1.71e6, nm: 118, er: 1.15, net: [0.55, 0.38, 0.04, 0.03] },
+  { id: "story", title: "Share a story from the stands", type: "Story", ago: 1, done: 1310, seen: 11480, posts: 1310, views: 0.62e6, nm: 41, net: [0.72, 0.24, 0, 0.04] },
   { id: "scarf", title: "Scarves up: show us yours", type: "Photo", sponsor: "Weirbank Motors", ago: 3, done: 1420, seen: 12940, posts: 1180, views: 2.94e6, nm: 214, er: 1.1, net: [0.62, 0.27, 0.04, 0.07] },
   { id: "first", title: "Your first match at The Weir", type: "Open question", ago: 2, done: 1278, seen: 9310, posts: 0, views: 0, nm: 0, extra: () => [["Answers featured", String(ANSWER_BASE.first.featured + ANSWERS.filter((a) => a.mid === "first" && a.status === "featured").length)], ["Average answer", "38 words"]] },
   { id: "predict", title: "Predict the score v Granby Rovers", type: "Prediction", ago: 4, done: 6140, seen: 15020, posts: 820, views: 1.12e6, nm: 61, net: [0.48, 0.38, 0.06, 0.08] },
-  { id: "quiz", title: "The Weir history quiz", type: "Quiz", sponsor: "Corran Lane Bakery", ago: 5, done: 5233, seen: 13480, posts: 0, views: 0, nm: 0, extra: [["Right first time", "64%"], ["Average time", "21 s"]] },
+  { id: "quiz", title: "The Weir history quiz", type: "Quiz", sponsor: "Corran Lane Bakery", ago: 9, done: 5233, seen: 13480, posts: 0, views: 0, nm: 0, extra: [["Right first time", "64%"], ["Average time", "21 s"]] },
   { id: "md8", title: "Matchday 8 check-in", type: "Check-in", ago: 12, done: 3804, seen: 14100, posts: 960, views: 2.31e6, nm: 88 },
   { id: "away", title: "Away end at Holbrook", type: "Photo", ago: 19, done: 640, seen: 8820, posts: 590, views: 1.86e6, nm: 97 },
   { id: "kit", title: "New home kit quiz", type: "Quiz", ago: 21, done: 4911, seen: 12650, posts: 0, views: 0, nm: 0, extra: [["Right first time", "71%"]] },
@@ -3654,7 +4755,7 @@ function rPeriod() {
     return { days, f: Math.min(1, days / SEASON_DAYS), from: new Date(state.rfrom + "T00:00:00"), label: `${dayLabel(state.rfrom)} to ${dayLabel(state.rto)}` };
   }
   const days = { "7d": 7, "30d": 30, season: SEASON_DAYS }[p];
-  return { days, f: { "7d": 0.105, "30d": 0.37, season: 1 }[p], from: new Date(NOW.getTime() - (days - 1) * 864e5), label: { "7d": "Last 7 days", "30d": "Last 30 days", season: "Season so far" }[p] };
+  return { days, f: { "7d": 0.105, "30d": 0.37, season: 1 }[p], from: new Date(NOW.getTime() - (days - 1) * 864e5), label: { "7d": "Last 7 days", "30d": "Last 30 days", season: "This season" }[p] };
 }
 function inPeriod(r) {
   if (state.rperiod !== "custom") return r.ago < rPeriod().days;
@@ -3665,10 +4766,10 @@ function rmStats(r) {
   const er = r.er || 1, v = r.views || 0;
   const done = r.done + (state.done.has(r.id) ? 1 : 0);
   const likes = v * 0.077 * er, comments = v * 0.0039 * er, shares = v * 0.0055 * er;
-  return { ...r, done, likes, comments, shares, eng: likes + comments + shares, value: v / 500, reach: v * 0.58, rate: done / r.seen, logo: r.seen * 3.1 };
+  return { ...r, done, likes, comments, shares, eng: likes + comments + shares, value: mediaValue(v), reach: v * 0.58, rate: done / r.seen, logo: r.seen * 3.1 };
 }
 function rTotals(f) {
-  const nets = NETS.map(([name, posts, views, lr, cr, sr]) => { const v = views * f; return { name, posts: posts * f, views: v, likes: v * lr, comments: v * cr, shares: v * sr, value: v / 500 }; });
+  const nets = NETS.map(([name, posts, views, lr, cr, sr]) => { const v = views * f; return { name, posts: posts * f, views: v, likes: v * lr, comments: v * cr, shares: v * sr, value: mediaValue(v) }; });
   const sum = (k) => nets.reduce((a, x) => a + x[k], 0);
   return { nets, posts: sum("posts"), views: sum("views"), likes: sum("likes"), comments: sum("comments"), shares: sum("shares"), value: sum("value") };
 }
@@ -3676,7 +4777,7 @@ const kpi = (l, v, s) => `<div class="kpi"><span>${l}</span><b>${v}</b>${s ? `<s
 const mini = (l, v, s = "") => `<div class="mkpi"><span>${l}</span><b>${v}</b>${s ? `<small>${s}</small>` : ""}</div>`;
 
 function periodBar() {
-  const opts = [["7d", "Last 7 days"], ["30d", "Last 30 days"], ["season", "Season so far"], ["custom", "Pick dates"]];
+  const opts = [["7d", "Last 7 days"], ["30d", "Last 30 days"], ["season", "This season"], ["custom", "Pick dates"]];
   return `<div class="period"><div class="opt-row" role="group" aria-label="Period">${opts.map(([v, l]) => `<button type="button" class="opt" data-act="rperiod" data-v="${v}" aria-pressed="${state.rperiod === v}">${l}</button>`).join("")}</div>
     ${state.rperiod === "custom" ? `<div class="period-dates aform">${fld("From", `<input type="date" name="rfrom" value="${state.rfrom}" min="${isoDay(SEASON_START)}" max="${isoDay(NOW)}">`)}${fld("To", `<input type="date" name="rto" value="${state.rto}" min="${isoDay(SEASON_START)}" max="${isoDay(NOW)}">`)}</div>` : ""}</div>`;
 }
@@ -3702,14 +4803,15 @@ function resultsOverview() {
   const sps = sponsorsIn(list);
   const w0 = Math.max(0, Math.min(12, Math.floor((P.from - SEASON_START) / (7 * 864e5))));
   return `<div class="kpis">
-      ${kpi("Earned media value", eur(T.value), "Views on members' posts at a €2 CPM")}
+      ${kpi("Earned media value", eur(T.value), `Views on members' posts at a ${cpmLabel()} CPM`)}
       ${kpi("Views on members' posts", big(T.views), `${big(T.views * 0.58)} by people who aren't members`)}
       ${kpi("Likes, comments and shares", big(eng), `${pct(eng, T.views)} of views`)}
       ${kpi("New members from members' posts", fmt(2310 * P.f), "Joined through a post or a member's code")}
     </div>
     <details class="more" ${state.rmore ? "open" : ""}><summary data-act="rmore">${state.rmore ? "Hide the detail" : "Show every number for this period"}</summary>
-      <div class="mkpis">${mini("Posts", fmt(T.posts))}${mini("Members who posted", fmt(3870 * P.f))}${mini("Average views a post", fmt(T.views / T.posts))}${mini("Likes", big(T.likes))}${mini("Comments", big(T.comments))}${mini("Shares", big(T.shares))}${mini("Missions completed", big(372400 * P.f))}${mini("Home check-ins", fmt(9412 * P.f))}${mini("Rewards redeemed", fmt(4419 * P.f))}${mini("Active members", fmt(P.f < 0.2 ? 14300 : P.f < 0.5 ? 14600 : 14900), "used the app at least once")}</div>
+      <div class="mkpis">${mini("Posts", fmt(T.posts))}${mini("Members who posted", fmt(3870 * P.f))}${mini("Average views a post", fmt(T.views / T.posts))}${mini("Likes", big(T.likes))}${mini("Comments", big(T.comments))}${mini("Shares", big(T.shares))}${mini("Missions completed", big(372400 * P.f))}${mini("Home check-ins", fmt(9412 * P.f))}${mini("Rewards redeemed", fmt(4419 * P.f))}${mini("Active members", fmt(P.f < 0.2 ? 9300 : P.f < 0.5 ? 9500 : 9700), "used the app at least once")}</div>
     </details>
+    ${cpmBox()}
     <div class="adm-grid">
       <div class="acard"><h2>Weekly active members</h2><p class="sub">${P.f < 1 ? "The shaded weeks are the period you picked" : "Dots mark home matchdays"}</p><div class="chart">${chartSVG(P.f < 1 ? [w0, 12] : null)}</div></div>
       <div class="acard"><h2>Sponsors</h2><p class="sub">Their missions in this period. Open one for its report and a private link to send them.</p>
@@ -3722,6 +4824,24 @@ function resultsOverview() {
       ${top.length ? `<div class="scroll-x"><table class="atable tight"><thead><tr><th>Mission</th><th class="r">Done by</th><th class="r">Views</th><th class="r">Likes, comments, shares</th><th class="r">Media value</th></tr></thead>
       <tbody>${top.map((r) => `<tr class="click" data-act="rmission" data-id="${r.id}"><td class="wrap"><b>${esc(r.title)}</b><br><span class="sub">${r.type}${r.sponsor ? `, with ${r.sponsor}` : ""}</span></td><td class="r">${fmt(r.done)}</td><td class="r">${r.views ? big(r.views) : "–"}</td><td class="r">${r.views ? big(r.eng) : "–"}</td><td class="r">${r.value ? eur(r.value) : "–"}</td></tr>`).join("")}</tbody></table></div>` : `<p class="sub" style="margin-top:10px">No mission started in this period.</p>`}</div>`;
 }
+/* The sponsor's card: the figures they care about, as tiles, and what each mission brought. */
+function sponsorCard(sp, list) {
+  const rows = list.filter((r) => r.sponsor === sp.name).sort((a, b) => b.value - a.value || b.done - a.done);
+  const maxV = Math.max(1, ...rows.map((r) => r.value));
+  const tile = (v, l, s = "", cls = "") => `<div class="sp-tile ${cls}"><b>${v}</b><span>${l}</span>${s ? `<small>${s}</small>` : ""}</div>`;
+  return `<div class="acard sp-card">
+    <div class="sp-head">${sponsorMono(sp.name)}<div><h2>${esc(sp.name)}</h2><p class="sub">${rPeriod().label}: ${sp.n} sponsored mission${sp.n > 1 ? "s" : ""}. Send them the private link and they see this report, nothing else.</p></div></div>
+    <div class="sp-tiles">
+      ${tile(sp.value ? eur(sp.value) : "–", "Media value", sp.value ? `Views of members' posts at a ${cpmLabel()} CPM` : "No public post asked for", "hero")}
+      ${tile(sp.views ? big(sp.views) : "–", "Views of members' posts", sp.views ? `${big(sp.eng)} likes, comments and shares` : "")}
+      ${tile(fmt(sp.done), "Members who took part")}
+      ${tile(fmt(sp.logo), `Times the ${esc(sp.name)} name was seen in the app`)}
+      ${tile(fmt(sp.nm), "New members who joined through it")}
+    </div>
+    ${sp.value ? `<div class="sp-bars" role="img" aria-label="Media value by mission"><h3>Media value by mission</h3>${rows.map((r) => `<div class="sp-bar"><span class="t">${esc(r.title)}</span><span class="track"><i style="width:${Math.max(2, (r.value / maxV) * 100).toFixed(1)}%"></i></span><b>${r.value ? eur(r.value) : "–"}</b></div>`).join("")}</div>` : ""}
+    <div class="adm-actions"><button class="adm-btn" data-act="rcsv" data-s="${esc(sp.name)}">${icon("download")}Sponsor report, CSV</button><button class="adm-btn primary" data-act="splink" data-s="${esc(sp.name)}">${icon("copy")}Copy the sponsor's private link</button></div>
+  </div>`;
+}
 function resultsMissions() {
   const s = state.rsponsor;
   let list = RM.filter(inPeriod).map(rmStats);
@@ -3730,8 +4850,7 @@ function resultsMissions() {
   const tot = (k) => list.reduce((a, r) => a + r[k], 0);
   const sp = s !== "all" && s !== "none" ? sponsorsIn(list)[0] : null;
   const sponsorNames = [...new Set(RM.filter((r) => r.sponsor).map((r) => r.sponsor))];
-  return `${sp ? `<div class="acard sp-card">${sponsorMono(sp.name)}<div><h2>${esc(sp.name)}</h2><p>${sp.n} mission${sp.n > 1 ? "s" : ""} in this period. ${fmt(sp.done)} members took part and saw the ${esc(sp.name)} name ${fmt(sp.logo)} times in the app.${sp.views ? ` Members' posts for these missions were seen ${big(sp.views)} times, with ${big(sp.eng)} likes, comments and shares: ${eur(sp.value)} in media value.` : ""}${sp.nm ? ` ${fmt(sp.nm)} new members joined through them.` : ""} Send them the private link and they see this report, nothing else.</p></div>
-      <div class="adm-actions"><button class="adm-btn" data-act="rcsv" data-s="${esc(sp.name)}">${icon("download")}Sponsor report, CSV</button><button class="adm-btn primary" data-act="splink" data-s="${esc(sp.name)}">${icon("copy")}Copy the sponsor's private link</button></div></div>` : ""}
+  return `${sp ? sponsorCard(sp, list) : ""}
     <div class="acard">
       <div class="filters aform">${fld("Sponsor", sel("rsponsor", [["all", "All missions"], ...sponsorNames.map((n) => [n, n]), ["none", "Missions without a sponsor"]], s))}${fld("Sort by", sel("rsort", [["value", "Media value"], ["views", "Views"], ["eng", "Likes, comments and shares"], ["done", "Members who took part"], ["nm", "New members"]], state.rsort))}</div>
       ${list.length ? `<div class="scroll-x"><table class="atable wide"><thead><tr><th>Mission</th><th class="r">Done by</th><th class="r">Of those who saw it</th><th class="r">Posts</th><th class="r">Views</th><th class="r">Likes</th><th class="r">Comments</th><th class="r">Shares</th><th class="r">Value</th><th class="r">New members</th></tr></thead>
@@ -3754,7 +4873,7 @@ function resultsPosts() {
   return `<div class="acard"><div class="acard-top"><div><h2>Members' best posts</h2><p class="sub">Public posts made for a mission, checked through linked accounts</p></div>
       <div class="filters aform">${fld("Sort by", sel("psort", [["views", "Views"], ["likes", "Likes"], ["comments", "Comments"], ["shares", "Shares"]], k))}</div></div>
     ${list.length ? `<div class="scroll-x"><table class="atable wide"><thead><tr><th>Member</th><th>Network</th><th>Mission</th><th class="r">Views</th><th class="r">Likes</th><th class="r">Comments</th><th class="r">Shares</th><th class="r">Value</th></tr></thead>
-    <tbody>${list.map((p) => `<tr class="click" data-act="rmission" data-id="${p.r.id}"><td>${p.who}</td><td>${p.net}</td><td class="wrap">${esc(p.r.title)}${p.r.sponsor ? `<br><span class="sub">with ${p.r.sponsor}</span>` : ""}</td><td class="r">${big(p.views)}</td><td class="r">${big(p.likes)}</td><td class="r">${fmt(p.comments)}</td><td class="r">${fmt(p.shares)}</td><td class="r">${eur(p.views / 500)}</td></tr>`).join("")}</tbody></table></div>`
+    <tbody>${list.map((p) => `<tr class="click" data-act="rmission" data-id="${p.r.id}"><td>${p.who}</td><td>${p.net}</td><td class="wrap">${esc(p.r.title)}${p.r.sponsor ? `<br><span class="sub">with ${p.r.sponsor}</span>` : ""}</td><td class="r">${big(p.views)}</td><td class="r">${big(p.likes)}</td><td class="r">${fmt(p.comments)}</td><td class="r">${fmt(p.shares)}</td><td class="r">${eur(mediaValue(p.views))}</td></tr>`).join("")}</tbody></table></div>`
       : `<p class="sub" style="margin-top:12px">No posts in this period.</p>`}</div>`;
 }
 function dayBars(r) {
@@ -3776,7 +4895,7 @@ function missionDetail(id) {
   const nets = NET_NAMES.map((n, i) => { const v = r.views * split[i]; return { n, posts: r.posts * split[i], v, likes: r.likes * split[i], comments: r.comments * split[i], shares: r.shares * split[i] }; });
   const posts = postsFor([r]).sort((a, b) => b.views - a.views);
   const body = `${r.sponsor ? `<div class="sp-inline">${sponsorMono(r.sponsor)}<span>With <b>${esc(r.sponsor)}</b>. Their name was seen ${fmt(r.logo)} times in the app.</span></div>` : ""}
-    <div class="mkpis">${mini("Members who took part", fmt(r.done), `${pct(r.done, r.seen)} of the ${fmt(r.seen)} who saw it`)}${r.views ? mini("Posts", fmt(r.posts)) + mini("Views", big(r.views)) + mini("Likes", big(r.likes)) + mini("Comments", fmt(r.comments)) + mini("Shares", fmt(r.shares)) + mini("Media value", eur(r.value), "at a €2 CPM") + mini("Reach outside members", big(r.reach)) : ""}${r.nm ? mini("New members", fmt(r.nm)) : ""}${(typeof r.extra === "function" ? r.extra() : r.extra || []).map(([l, v]) => mini(l, v)).join("")}</div>
+    <div class="mkpis">${mini("Members who took part", fmt(r.done), `${pct(r.done, r.seen)} of the ${fmt(r.seen)} who saw it`)}${r.views ? mini("Posts", fmt(r.posts)) + mini("Views", big(r.views)) + mini("Likes", big(r.likes)) + mini("Comments", fmt(r.comments)) + mini("Shares", fmt(r.shares)) + mini("Media value", eur(r.value), `at a ${cpmLabel()} CPM`) + mini("Reach outside members", big(r.reach)) : ""}${r.nm ? mini("New members", fmt(r.nm)) : ""}${(typeof r.extra === "function" ? r.extra() : r.extra || []).map(([l, v]) => mini(l, v)).join("")}</div>
     ${r.views ? `<h3>Posts each day</h3><div class="chart">${dayBars(r)}</div>
     <h3>By network</h3><div class="scroll-x"><table class="atable tight"><thead><tr><th>Network</th><th class="r">Posts</th><th class="r">Views</th><th class="r">Likes</th><th class="r">Comments</th><th class="r">Shares</th></tr></thead>
       <tbody>${nets.map((x) => `<tr><td>${x.n}</td><td class="r">${fmt(x.posts)}</td><td class="r">${big(x.v)}</td><td class="r">${big(x.likes)}</td><td class="r">${fmt(x.comments)}</td><td class="r">${fmt(x.shares)}</td></tr>`).join("")}</tbody></table></div>
@@ -3789,18 +4908,19 @@ function missionDetail(id) {
     footer: `<button class="adm-btn" data-act="dclose">Close</button>${r.sponsor ? `<button class="adm-btn primary" data-act="splink" data-s="${esc(r.sponsor)}">${icon("copy")}Copy the sponsor's private link</button>` : ""}<button class="adm-btn${r.sponsor ? "" : " primary"}" data-act="rcsv" data-id="${r.id}">${icon("download")}${r.sponsor ? "Report for " + esc(r.sponsor) : "This mission"}, CSV</button>` });
 }
 const RCOLS = ["Mission", "Type", "Sponsor", "Started", "Done by", "Saw it", "Posts", "Views", "Likes", "Comments", "Shares", "Media value (EUR)", "New members"];
+const rcols = () => RCOLS.map((c, i) => (i === 11 ? `Media value (EUR, at a ${cpmLabel()} CPM)` : c));
 const rcsvRow = (r) => [r.title, r.type, r.sponsor || "", isoDay(rmDate(r)), r.done, r.seen, r.posts, Math.round(r.views), Math.round(r.likes), Math.round(r.comments), Math.round(r.shares), Math.round(r.value), r.nm];
 function resultsCSV(el) {
   const slug = (s) => s.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
   if (el.dataset.id) {
     const r = rmStats(RM.find((x) => x.id === el.dataset.id));
     const split = r.net || [0.55, 0.32, 0.06, 0.07];
-    csvDownload([RCOLS, rcsvRow(r), [], ["Network", "Posts", "Views", "Likes", "Comments", "Shares"], ...NET_NAMES.map((n, i) => [n, Math.round(r.posts * split[i]), Math.round(r.views * split[i]), Math.round(r.likes * split[i]), Math.round(r.comments * split[i]), Math.round(r.shares * split[i])])], `aldermoor-${slug(r.title)}.csv`);
+    csvDownload([rcols(), rcsvRow(r), [], ["Network", "Posts", "Views", "Likes", "Comments", "Shares"], ...NET_NAMES.map((n, i) => [n, Math.round(r.posts * split[i]), Math.round(r.views * split[i]), Math.round(r.likes * split[i]), Math.round(r.comments * split[i]), Math.round(r.shares * split[i])])], `aldermoor-${slug(r.title)}.csv`);
     return;
   }
   let list = RM.filter(inPeriod).map(rmStats);
   if (el.dataset.s) list = list.filter((r) => r.sponsor === el.dataset.s);
-  csvDownload([["Period", rPeriod().label], [], RCOLS, ...list.map(rcsvRow)], `aldermoor-results-${el.dataset.s ? slug(el.dataset.s) : "missions"}.csv`);
+  csvDownload([["Period", rPeriod().label], [], rcols(), ...list.map(rcsvRow)], `aldermoor-results-${el.dataset.s ? slug(el.dataset.s) : "missions"}.csv`);
 }
 function admAccount() {
   const team = [["Megan Hale", "Head of supporter experience", "Owner"], ["Rafi Dorsey", "Content and social", "Editor"], ["Sana Iqbal", "Club shop", "Deliveries only"], ["Tom Ferris", "Matchday operations", "Check-ins and results"]];
@@ -3811,10 +4931,10 @@ function admAccount() {
 
 /* ---------------------------------------------------------------- Brand: appearance and modules */
 const STYLES = [
-  ["reel", "Reel", "Full-page colour and huge type, like a campaign"], ["metro", "Metro", "Rewards are stops along a line"], ["riso", "Riso", "Two-ink print with a halftone sun"],
-  ["board", "Board", "A split-flap board for points and missions"], ["calendar", "Calendar", "Today's page makes each mission a ritual"], ["album", "Album", "Collectable cards and a card that turns over"],
-  ["dial", "Dial", "Missions around a dial that lights up"], ["print", "Print", "Cards pegged on a line, printed paper"], ["arena", "Arena", "Matchday punch, scoreboard colours"],
-  ["poster", "Poster", "Giant letters, poster layout"], ["magazine", "Magazine", "Editorial headlines and columns"], ["direct", "Direct", "The club talks to members like a chat"], ["stage", "Stage", "Dark, lit like a stage"],
+  ["reel", "Reel", "One screen at a time, huge type on your colours"], ["metro", "Metro", "Each member's own line: missions are stations, rewards cross it"], ["riso", "Riso", "A two-ink poster with the balance printed huge"],
+  ["board", "Board", "A split-flap board: points and missions flip into place"], ["calendar", "Calendar", "A tear-off pad: one page, one mission"], ["album", "Album", "Collectable cards and a card that turns over"],
+  ["dial", "Dial", "A dial to turn: missions around a ring that lights up"], ["print", "Print", "A print bench: your name in the club's ink, missions on the line"], ["arena", "Arena", "Matchday: floodlights and a scoreboard"],
+  ["poster", "Poster", "Giant figures, flat colour, ink outlines"], ["magazine", "Magazine", "A masthead, a big serif cover line, the contents"], ["direct", "Direct", "A conversation: the club writes, members reply"], ["stage", "Stage", "Night, lit by spotlights in your colours"],
 ];
 function styleThumb(k) {
   const c = state.colours, K = c.kestrel, M = c.moor, W = c.wing, B = c.buff, F = c.flood;
@@ -3871,7 +4991,7 @@ function admBrand() {
   const head = admHead("Brand", "Set once at launch. Changes show in the member app straight away in this demo.", `<button class="adm-btn primary" data-act="gomember" data-tab="home">Open the member app</button>`) + admTabs("brand");
   if (tab === 1) return head + admModules();
   return head + `
-    <div class="acard"><h2>Style</h2><p class="sub">Every style comes in your colours. In this demo a style changes the surfaces, type and shapes of the member app; <a href="https://fan-ip.com/demo/" target="_blank" rel="noopener">the styles demo</a> shows each full layout.</p>
+    <div class="acard"><h2>Style</h2><p class="sub">Every style comes in your colours. Each style lays out the member app its own way: open the member app to see it, or switch from the Style menu at the top. <a href="https://fan-ip.com/demo/" target="_blank" rel="noopener">The styles demo</a> shows them with other brands.</p>
       <div class="styles8">${STYLES.map(([k, n, dsc]) => `<button class="style-opt" data-act="style" data-k="${k}" data-n="${n}" aria-pressed="${state.style === k}"><span class="thumb">${styleThumb(k)}</span>${state.style === k ? `<span class="tag">Live</span>` : k === "riso" ? `<span class="tag def">Default for new clubs</span>` : ""}<b>${n}</b><span class="d">${dsc}</span></button>`).join("")}</div></div>
     <div class="adm-grid">
       <div class="acard"><h2>Colours</h2><p class="sub">Type a hex code (#c9421b) or RGB values (201, 66, 27), or use the picker.</p>
@@ -3931,11 +5051,24 @@ function renderAdmin() {
 function rerenderAdminInPlace() { renderAdmin.keepScroll = true; renderAdmin(); }
 NARROW_CHART.addEventListener("change", () => { const a = document.getElementById("admin"); if (a && !a.hidden) rerenderAdminInPlace(); });
 
+/* A style for the whole member app. Album is the default; a link can open another: #style=metro */
+function setStyle(k) {
+  if (!STYLES.some((s) => s[0] === k)) return;
+  state.style = k; state.dialIdx = 0; state.calIdx = 0;
+  $("#app").dataset.style = k;
+  const sel = $("#styleSel"); if (sel) sel.value = k;
+  const dd = $("#bsStyle"); if (dd) dd.textContent = STYLES.find((s) => s[0] === k)[1];
+  if ($("#app").dataset.ready) renderMember(false);
+}
 /* boot */
 state.colours = { ...DEFAULT_COLOURS };
+$("#app").dataset.style = state.style;
+$("#styleSel").innerHTML = STYLES.map(([k, n]) => `<option value="${k}" ${k === state.style ? "selected" : ""}>${n}</option>`).join("");
 document.getElementById("bsCrest").insertAdjacentHTML("afterbegin", crest());
 setDevice(state.device);
 renderMember();
+const hashStyle = (location.hash.match(/style=([a-z]+)/) || [])[1];
+if (hashStyle) setStyle(hashStyle);
 if (location.hash === "#admin") setView("admin");
 if (location.hash === "#checkin") { state.matchday = true; renderMember(false); missionSheet("checkin"); }
 

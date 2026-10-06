@@ -11,7 +11,7 @@ FAN/IP is for brands, for sport and esports (clubs, teams, gaming venues) and fo
 - [Platform](https://fan-ip.com/platform.html): all fifty features in plain words (missions, predictions, check-ins, seasons, sprints, streaks, team battles, collection, rewards, creator tools, white-label, back office), with a playable member season
 - [Approach](https://fan-ip.com/approach.html): the ten principles behind the product
 - [Compare](https://fan-ip.com/compare.html): FAN/IP next to shop loyalty apps, community platforms, fan-token apps, group chats and building it yourself
-- [Reach calculator](https://fan-ip.com/reach-calculator.html): estimate the views members' posts bring each month and their media value (views ÷ 1,000 × CPM, €2 by default, the same sum as in the FAN/IP admin)
+- [Reach calculator](https://fan-ip.com/reach-calculator.html): estimate the views members' posts bring each month and their media value (views ÷ 1,000 × CPM, starting from a typical price for the niche: €7 sport, €5 music, €8 brands; the same sum as in the FAN/IP admin)
 - [FAQ](https://fan-ip.com/faq.html): plain answers about the platform, who it is for, how it works and what it costs
 - [Book a demo](https://fan-ip.com/book-a-demo.html): one-hour video demo on demo data
 
@@ -27,8 +27,8 @@ After "why", the home page asks "Where do your fans gather?" (Sport, Artists and
 
 - Starter: €99 a month or €990 a year, no setup fee, up to 150 active members a month, 7-day free trial, sign up online at https://app.fan-ip.com/start
 - Club: €490 a month, setup €1,250, up to 1,500 active members a month
-- Season: €1,290 a month, setup €2,500, up to 15,000 active members a month
-- Signature: from €2,900 a month, setup from €5,000, more than 15,000 active members a month
+- Season: €1,290 a month, setup €2,500, up to 10,000 active members a month
+- Signature: from €2,900 a month, setup from €5,000, more than 10,000 active members a month
 - Club, Season and Signature are billed monthly on a 12-month term. An active member is someone who did something in the community this month.
 
 ## Optional

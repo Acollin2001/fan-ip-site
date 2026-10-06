@@ -218,6 +218,30 @@ img, svg { max-width: 100%; }
 .cpm-in input { width: 64px; border: 0; background: none; font: inherit; font-weight: 600; font-size: 1rem; padding: 0 6px; color: var(--fx-ink); font-variant-numeric: tabular-nums; }
 .cpm-in input:focus { outline: none; }
 .cpm-box small { color: var(--fx-ink-2); font-size: 0.75rem; flex: 1 1 220px; }
+/* Media value: one hero figure with a small chart, then supporting tiles */
+.vh { --vh-bg: #24302a; --vh-num: #f5efe6; --vh-accent: #e3a196; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+.vh-tile { display: flex; flex-direction: column; gap: 4px; padding: 14px 16px; border-radius: 14px; background: var(--fx-surface); border: 1px solid var(--fx-line); min-width: 0; }
+.vh-tile b { font-family: var(--fx-display); font-weight: 600; font-size: 1.6rem; line-height: 1.05; font-variant-numeric: tabular-nums; letter-spacing: -0.01em; }
+.vh-tile span { font-size: 0.8125rem; font-weight: 500; line-height: 1.3; }
+.vh-tile small { font-size: 0.75rem; color: var(--fx-ink-2); line-height: 1.35; }
+.vh > .vh-tile:nth-child(4) { grid-column: 1 / -1; }
+.vh-hero { grid-column: 1 / -1; background: var(--vh-bg); border-color: var(--vh-bg); color: #fff; gap: 6px; }
+.vh-hero b { font-size: 2.75rem; color: var(--vh-num); }
+.vh-hero small { color: rgba(255, 255, 255, 0.72); }
+.vh-cols { display: flex; align-items: flex-end; gap: 6px; height: 86px; margin-top: 10px; }
+.vh-cols > span { flex: 1; display: flex; flex-direction: column; justify-content: flex-end; align-items: center; gap: 5px; height: 100%; min-width: 0; }
+.vh-cols i { width: 100%; min-height: 3px; border-radius: 4px 4px 1px 1px; background: var(--vh-accent); }
+.vh-cols em { font-style: normal; font-size: 0.6875rem; color: rgba(255, 255, 255, 0.72); white-space: nowrap; }
+.vh-vs { display: grid; gap: 8px; margin-top: 10px; }
+.vh-vs > div { display: grid; grid-template-columns: 96px minmax(0, 1fr) auto; gap: 10px; align-items: center; font-size: 0.75rem; color: rgba(255, 255, 255, 0.8); }
+.vh-vs i { display: block; height: 12px; border-radius: 999px; background: var(--vh-accent); }
+.vh-vs > div + div i { background: rgba(255, 255, 255, 0.45); }
+.vh-vs em { font-style: normal; font-weight: 600; color: #fff; font-variant-numeric: tabular-nums; }
+@container dev (min-width: 900px) {
+  .vh { grid-template-columns: minmax(0, 1.7fr) repeat(3, minmax(0, 1fr)); }
+  .vh-hero, .vh > .vh-tile:nth-child(4) { grid-column: auto; }
+}
+
 .afield { display: grid; gap: 6px; min-width: 0; }
 .afield > span { font-size: 0.8125rem; color: var(--fx-ink-2); font-weight: 500; }
 .afield input, .afield select, .afield textarea { font: inherit; color: var(--fx-ink); background: var(--fx-surface); border: 1px solid var(--fx-line); border-radius: 9px; min-height: 40px; padding: 0 12px; width: 100%; }
@@ -1009,8 +1033,8 @@ function csvDownload(rows, name) {
 const mediaValue = (views) => (views / 1000) * state.cpm;
 const cpmLabel = () => "€" + state.cpm.toFixed(2).replace(/\.00$/, "");
 function cpmBox() {
-  return `<div class="cpm-box"><label for="cpmIn">Your CPM</label><span class="cpm-in"><span>€</span><input id="cpmIn" data-cpm inputmode="decimal" value="${state.cpm.toFixed(2)}" aria-label="Cost per thousand views, in euros"></span>
-    <small>What 1,000 views are worth to you. €2 is our default; use the rate you pay for paid social and every value below follows.</small></div>`;
+  return `<div class="cpm-box"><label for="cpmIn">Ad price per 1,000 views</label><span class="cpm-in"><span>€</span><input id="cpmIn" data-cpm inputmode="decimal" value="${state.cpm.toFixed(2)}" aria-label="Ad price per 1,000 views (CPM), in euros"></span>
+    <small>The CPM: what 1,000 views cost in paid social. €8 is a usual price for beauty brands. Change it to the rate you pay and every value on this page follows.</small></div>`;
 }
 /* Line chart with hover, used by both demos */
 const NARROW_CHART = window.matchMedia("(max-width: 560px)");
@@ -1329,7 +1353,7 @@ const state = {
   done: new Set(), pressed: new Set(PLATES.filter((p) => !p.unlock).map((p) => p.id)), just: null,
   posts: MY_POSTS.map((p) => ({ ...p })), filter: "all", gfilter: "all", redeemed: [], vote: null, poll: null,
   goal: 7412, reminder: false, friendJoined: false, net: "Instagram", link: "", stars: 0, product: "serum",
-  cpm: 2, admin: "overview", atab: {}, period: "30d", psort: "views", draft: null, news: null, orders: null,
+  cpm: 8, admin: "overview", atab: {}, period: "30d", psort: "views", draft: null, news: null, orders: null,
 };
 const SP = () => state.life + state.earned;
 const tierOf = (n) => [...TIERS].reverse().find((t) => n >= t.at);
@@ -1884,7 +1908,7 @@ function admOverview() {
     <div class="kpis">
       ${kpi("Views on members' posts", big(T.views), `${fmt(T.posts)} posts that tag @maisonaube`)}
       ${kpi("Media value", eur(mediaValue(T.views)), `At your ${cpmLabel()} CPM. <button class="adm-link" data-act="adm" data-p="value">Change it</button>`)}
-      ${kpi("Members who posted", fmt(1486 * T.f), `${pct(1486, 12480)} of active members`)}
+      ${kpi("Members who posted", fmt(1486 * T.f), `${pct(1486, 8480)} of active members`)}
       ${kpi("New members from posts", fmt(2310 * T.f), "Joined through a post or a member's link")}
     </div>
     <div class="adm-grid">
@@ -1933,13 +1957,18 @@ function postsByNetwork() {
 }
 function admValue() {
   const T = totals(), rows = ritualRows().filter((x) => x.views);
-  const paid = mediaValue(T.views);
+  const paid = mediaValue(T.views), gifts = 12600 * T.f;
   return admHead("Media value", "What the reach of members' posts is worth, priced at the CPM you set.") + cpmBox() + periodBar() + `
-    <div class="kpis">
-      ${kpi("Media value", eur(paid), PERIODS[state.period][0])}
-      ${kpi("Views", big(T.views), `${big(T.views * 0.61)} by people who don't follow @maisonaube`)}
+    <div class="vh">
+      <div class="vh-tile vh-hero"><span>Back in media value for every euro of gifts</span><b>${(paid / gifts).toFixed(1)}×</b><small>${eur(paid)} of reach at a ${cpmLabel()} CPM, against ${eur(gifts)} of gifts redeemed</small>
+        <div class="vh-vs" role="img" aria-label="Media value ${eur(paid)} against gifts at cost ${eur(gifts)}"><div><span>Media value</span><i style="width:100%"></i><em>${eur(paid)}</em></div><div><span>Gifts, at cost</span><i style="width:${Math.max(2, Math.min(100, (gifts / paid) * 100)).toFixed(1)}%"></i><em>${eur(gifts)}</em></div></div></div>
+      <div class="vh-tile"><b>${eur(paid)}</b><span>Media value</span><small>${PERIODS[state.period][0]}</small></div>
+      <div class="vh-tile"><b>${big(T.views)}</b><span>Views of members' posts</span><small>${big(T.views * 0.61)} by people who don't follow @maisonaube</small></div>
+      <div class="vh-tile"><b>${eur(gifts)}</b><span>Gifts redeemed, at cost</span><small>Codes counted at face value</small></div>
+    </div>
+    <div class="kpis" style="grid-template-columns:repeat(2,minmax(0,1fr))">
       ${kpi("Value per member who posted", eur(paid / (1486 * T.f)), "Average, before any gift", true)}
-      ${kpi("Gifts redeemed, at cost", eur(6300 * T.f), `${(paid / (6300 * T.f)).toFixed(1)}× back in media value`)}
+      ${kpi("Members who posted", fmt(1486 * T.f), `${pct(1486, 8480)} of active members`, true)}
     </div>
     <div class="adm-grid">
       <div class="acard"><h2>Value by ritual</h2><p class="sub">Rituels that ask for a post</p><div class="splits">${rows.map((x) => `<div><span>${esc(x.r.title.split(":")[0])}</span><span class="bar-a"><i style="width:${(x.views / rows[0].views) * 100}%"></i></span><b>${eurK(mediaValue(x.views))}</b></div>`).join("")}</div></div>
@@ -1953,7 +1982,7 @@ function admMembers() {
   if (tab === 1) return head + `<div class="adm-grid"><div class="acard"><h2>Tiers</h2><p class="sub">Lifetime petals</p><div class="splits">${TIERS.map((t, i) => `<div><span>${t.name}</span><span class="bar-a"><i style="width:${(TIER_COUNTS[i] / TIER_COUNTS[0]) * 100}%"></i></span><b>${fmt(TIER_COUNTS[i])}</b></div>`).join("")}</div></div>
     <div class="acard"><h2>Tier rules</h2><div class="splits">${TIERS.map((t) => `<div><span>${t.name}</span><span style="font-size:.8125rem">${t.gift}</span><b>${fmt(t.at)}</b></div>`).join("")}</div></div></div>
     <div class="acard"><h2>Members who posted the most this month</h2><div class="scroll-x"><table class="atable"><thead><tr><th>Member</th><th class="r">Posts</th><th class="r">Views</th><th class="r">Media value</th><th>Joined through</th></tr></thead><tbody>${TOP.map(([n, h, , p, v], i) => `<tr><td><span class="who"><i>${initials(n)}</i>${n} <span class="sub">${h}</span></span></td><td class="r">${p}</td><td class="r">${big(v)}</td><td class="r">${eur(mediaValue(v))}</td><td>${ORIGIN[i % ORIGIN.length][0]}</td></tr>`).join("")}</tbody></table></div></div>`;
-  return head + `<div class="kpis">${kpi("Members, in total", "23,642", "+1,904 this month")}${kpi("Active this month", "12,480", "53% of members")}${kpi("Joined through a member's post", "2,310", "This month")}${kpi("Linked a social account", "71%", "Needed to earn on posts", true)}</div>
+  return head + `<div class="kpis">${kpi("Members, in total", "23,642", "+1,904 this month")}${kpi("Active this month", "8,480", "36% of members")}${kpi("Joined through a member's post", "2,310", "This month")}${kpi("Linked a social account", "71%", "Needed to earn on posts", true)}</div>
     <div class="adm-row">
       <div class="acard"><h2>How they joined</h2><p class="sub">First touch, this year</p><div class="splits">${ORIGIN.map(([l, v]) => `<div><span>${l}</span><span class="bar-a"><i style="width:${(v / 31) * 100}%"></i></span><b>${v}%</b></div>`).join("")}</div></div>
       <div class="acard"><h2>Where they live</h2><p class="sub">From the delivery address</p><div class="splits">${CITIES.map(([l, v]) => `<div><span>${l}</span><span class="bar-a"><i style="width:${(v / 34) * 100}%"></i></span><b>${v}%</b></div>`).join("")}</div></div>
@@ -2048,7 +2077,7 @@ function admBrand() {
         <div class="aform" style="margin-top:14px"><label class="afield"><span>What members call points</span><input id="pointsWord" value="${esc(BRAND.word)}" maxlength="18"></label></div></div>
       <div class="acard"><h2>Words</h2><dl class="bs-words" style="margin-top:12px"><dt>Missions</dt><dd>Rituels</dd><dt>Tiers</dt><dd>Graine, Bouton, Fleur, Jardin secret</dd><dt>Collection</dt><dd>The Herbier</dd><dt>Community</dt><dd>Le Jardin</dd><dt>Address</dt><dd>jardin.maison-aube.example</dd></dl></div>
     </div>
-    <div class="acard"><h2>Modules</h2><p class="sub">The Season plan includes every module. One switched off disappears from the member app.</p><div class="modules" style="margin-top:12px">${MODULES.map(([n, s]) => `<div class="module"><span><b>${n}</b><span>${s}</span></span><button class="toggle" role="switch" aria-checked="true" aria-label="${n}" data-act="module" data-n="${n}"></button></div>`).join("")}</div></div>`;
+    <div class="acard"><h2>Modules</h2><p class="sub">The Season plan includes every module, for up to 10,000 active members a month. One switched off disappears from the member app.</p><div class="modules" style="margin-top:12px">${MODULES.map(([n, s]) => `<div class="module"><span><b>${n}</b><span>${s}</span></span><button class="toggle" role="switch" aria-checked="true" aria-label="${n}" data-act="module" data-n="${n}"></button></div>`).join("")}</div></div>`;
 }
 const ADMIN_PAGES = {
   overview: ["Overview", "grid", admOverview],

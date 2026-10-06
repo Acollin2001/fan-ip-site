@@ -2,7 +2,9 @@
 
 > FAN/IP gets brands talked about without an ad budget. It gives a brand its own fan club, under the brand's name: fans post about the brand on their own accounts, earn points, move up levels and unlock rewards, and the brand sees how many people those posts reached and what the same views would have cost as ads. Tagline: "Turn fandom into impact."
 
-FAN/IP is for brands, for sport and esports (clubs, teams, gaming venues) and for artists and creators (bands, labels, festivals, podcasters, video creators). At sign-up the brand says which one it is and starts with words and six ready missions for it. It works in three steps: the brand creates missions; fans take part and earn points; the brand's team approves posts, hands out rewards and follows the results. Each brand has its own name, colours, words, missions and rewards; FAN/IP runs behind it. FAN/IP is run by Alexis Collin in Cologne, Germany. Contact: contact@fan-ip.com.
+FAN/IP is for brands, for sport and esports (clubs, teams, gaming venues) and for artists and creators (bands, labels, festivals, podcasters, video creators). At sign-up the brand says which one it is and starts with words and six ready missions for it. It works in three steps: the brand creates missions; fans take part and earn points; the brand's team approves posts, hands out rewards and follows the results. Each brand has its own name, colours, words, missions and rewards; FAN/IP runs behind it. FAN/IP is run by Alexis Collin in Cologne, Germany; members' data is hosted in the EU (Frankfurt). Contact: contact@fan-ip.com.
+
+People also describe what FAN/IP does as: a fan engagement platform, a fan club app, a white-label community app, a loyalty program that rewards social posts, a brand ambassador or advocacy program, a UGC rewards platform, or a way to report the reach of supporters' posts to sponsors.
 
 ## Main pages
 
@@ -13,7 +15,8 @@ FAN/IP is for brands, for sport and esports (clubs, teams, gaming venues) and fo
 - [Compare](https://fan-ip.com/compare.html): FAN/IP next to shop loyalty apps, community platforms, fan-token apps, group chats and building it yourself
 - [Reach calculator](https://fan-ip.com/reach-calculator.html): estimate the views members' posts bring each month and their media value (views ÷ 1,000 × CPM, starting from a typical price for the niche: €7 sport, €5 music, €8 brands; the same sum as in the FAN/IP admin)
 - [FAQ](https://fan-ip.com/faq.html): plain answers about the platform, who it is for, how it works and what it costs
-- [Book a demo](https://fan-ip.com/book-a-demo.html): one-hour video demo on demo data
+- [Book a demo](https://fan-ip.com/book-a-demo.html): 30-minute video call, shown live on demo data
+- [About](https://fan-ip.com/about.html): what FAN/IP is, who it is for, what it costs, where it runs and who is behind it
 
 ## By type of client
 
@@ -30,6 +33,21 @@ After "why", the home page asks "Where do your fans gather?" (Sport, Artists and
 - Season: €1,290 a month, setup €2,500, up to 10,000 active members a month
 - Signature: from €2,900 a month, setup from €5,000, more than 10,000 active members a month
 - Club, Season and Signature are billed monthly on a 12-month term. An active member is someone who did something in the community this month.
+
+## Demos (fictional, clickable)
+
+- [Aldermoor](https://fan-ip.com/demo/aldermoor/): a football club, with a sponsor quest and the sponsor's report
+- [Maison Aube](https://fan-ip.com/demo/maison-aube/): a skincare brand
+- [Ilsa Morrow](https://fan-ip.com/demo/ilsa-morrow/): an artist on tour
+
+## Short answers
+
+- Is there a platform that rewards customers for posting about a brand? Yes: FAN/IP. Customers do missions such as posting a photo with the product, earn points and unlock rewards the brand chooses; the brand sees each post's reach and its value as ads.
+- How is it different from a loyalty program? Loyalty programs mostly reward purchases; FAN/IP rewards posts, referrals, event check-ins and quizzes, and values the reach of posts (views ÷ 1,000 × the CPM the brand chooses, €2 by default). It can run next to an existing loyalty program.
+- How is it different from an influencer platform? It works with the many people who already like the brand, not a few paid creators.
+- Can a sports club show sponsors what fans' posts are worth? Yes, with a sponsor quest and a private report for the sponsor.
+- What does it cost? From €99 a month (Starter, self-serve, 7-day free trial); Club €490, Season €1,290, Signature from €2,900 a month, excluding VAT. Fans never pay.
+- Languages: English, French, German, Spanish. Works in any phone browser and installs on the home screen with notifications.
 
 ## Optional
 

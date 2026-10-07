@@ -309,6 +309,104 @@ img, svg { max-width: 100%; }
   .adm-panel > footer { padding: 12px 16px; }
   .splits div { grid-template-columns: 96px 1fr 56px; }
 }
+/* Admin pieces shared by every Season demo: styles, colours, modules, drawers, answers, results */
+.adm-row3 { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
+.drop { display: flex; align-items: center; gap: 12px; padding: 14px; border: 1.5px dashed #c9ccd3; border-radius: 12px; background: var(--fx-soft); cursor: pointer; font-size: 0.8125rem; color: var(--fx-ink-2); }
+.drop b { color: var(--fx-ink); font-weight: 600; display: block; }
+.drop svg { width: 22px; height: 22px; flex: none; }
+.styles8 { display: grid; grid-template-columns: repeat(auto-fill, minmax(170px, 1fr)); gap: 10px; margin-top: 12px; }
+.style-opt { position: relative; display: flex; flex-direction: column; gap: 6px; padding: 10px; border-radius: 12px; border: 1px solid var(--fx-line); background: var(--fx-surface); cursor: pointer; text-align: left; font: inherit; color: var(--fx-ink); }
+.style-opt[aria-pressed="true"] { border-color: var(--fx-ink); box-shadow: inset 0 0 0 1px var(--fx-ink); }
+.style-opt .thumb { aspect-ratio: 16 / 10; border-radius: 8px; background: var(--fx-soft); overflow: hidden; }
+.style-opt .thumb svg { width: 100%; height: 100%; display: block; }
+.style-opt b { font-weight: 500; font-size: 0.8125rem; }
+.style-opt span.d { font-size: 0.75rem; color: var(--fx-ink-2); line-height: 1.3; }
+.style-opt .tag { position: absolute; top: 14px; left: 14px; padding: 1px 8px; border-radius: 999px; background: var(--fx-ink); color: #fff; font-size: 0.6875rem; font-weight: 500; }
+.style-opt .tag.def { background: #f3e7c8; color: #4d3d10; }
+.module .mi { width: 36px; height: 36px; flex: none; border-radius: 9px; background: var(--fx-soft); display: grid; place-items: center; }
+.module .mi svg { width: 18px; height: 18px; }
+.module > span:nth-child(2) { min-width: 0; }
+.colour-rows { display: grid; gap: 10px; margin-top: 12px; }
+.colour-row { display: grid; grid-template-columns: 44px minmax(0, 1fr) 150px; gap: 12px; align-items: center; }
+.colour-row input[type="color"] { width: 44px; height: 44px; padding: 0; border: 1px solid var(--fx-line); border-radius: 10px; background: none; cursor: pointer; }
+.colour-row input[type="color"]::-webkit-color-swatch-wrapper { padding: 3px; }
+.colour-row input[type="color"]::-webkit-color-swatch { border: 0; border-radius: 7px; }
+.colour-row b { display: block; font-weight: 500; font-size: 0.875rem; }
+.colour-row span { font-size: 0.75rem; color: var(--fx-ink-2); }
+.colour-row input[type="text"] { min-height: 40px; border-radius: 9px; border: 1px solid var(--fx-line); padding: 0 10px; font: inherit; font-size: 0.8125rem; font-variant-numeric: tabular-nums; width: 100%; color: var(--fx-ink); background: var(--fx-surface); }
+.colour-row input[type="text"][aria-invalid="true"] { border-color: #b3223a; }
+.contrast { display: flex; align-items: center; gap: 10px; margin-top: 12px; font-size: 0.8125rem; }
+.contrast i { display: grid; place-items: center; width: 44px; height: 32px; border-radius: 8px; font-style: normal; font-weight: 700; flex: none; }
+.font-row { display: grid; gap: 6px; margin-top: 12px; }
+.font-row > span { font-size: 0.8125rem; color: var(--fx-ink-2); font-weight: 500; }
+.font-opts { display: grid; grid-template-columns: repeat(auto-fill, minmax(118px, 1fr)); gap: 8px; }
+.font-opt { display: grid; gap: 2px; padding: 10px 12px; border-radius: 10px; border: 1px solid var(--fx-line); background: var(--fx-surface); cursor: pointer; text-align: left; color: var(--fx-ink); }
+.font-opt[aria-pressed="true"] { border-color: var(--fx-ink); box-shadow: inset 0 0 0 1px var(--fx-ink); }
+.font-opt b { font-size: 1.125rem; line-height: 1.15; font-weight: 700; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.font-opt small { font-family: var(--fx-text); font-size: 0.6875rem; color: var(--fx-ink-2); }
+.corner-opts { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; }
+.corner-opt { display: grid; justify-items: center; gap: 6px; padding: 10px 6px; border-radius: 10px; border: 1px solid var(--fx-line); background: var(--fx-surface); cursor: pointer; font-size: 0.75rem; color: var(--fx-ink-2); }
+.corner-opt i { width: 46px; height: 30px; border: 2px solid var(--fx-ink); border-right: 0; border-bottom: 0; display: block; transform: translate(6px, 6px); }
+.corner-opt[aria-pressed="true"] { border-color: var(--fx-ink); box-shadow: inset 0 0 0 1px var(--fx-ink); color: var(--fx-ink); }
+.logo-opts { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; margin-top: 12px; }
+.logo-opt { position: relative; display: grid; justify-items: center; gap: 8px; padding: 12px 8px; border-radius: 12px; border: 1px solid var(--fx-line); background: var(--fx-surface); cursor: pointer; font-size: 0.75rem; color: var(--fx-ink-2); text-align: center; }
+.logo-opt[aria-pressed="true"] { border-color: var(--fx-ink); box-shadow: inset 0 0 0 1px var(--fx-ink); color: var(--fx-ink); }
+.logo-opt .lg { width: 52px; height: 52px; display: grid; place-items: center; }
+.logo-opt .lg svg, .logo-opt .lg img { width: 100%; height: 100%; object-fit: contain; display: block; }
+.logo-opt input { position: absolute; inset: 0; opacity: 0; cursor: pointer; }
+.brand-split { display: grid; grid-template-columns: minmax(0, 1fr) 300px; gap: 14px; align-items: start; }
+.brand-split > div { display: grid; gap: 14px; min-width: 0; }
+.bp-card { position: sticky; top: 0; }
+.bp-wrap { display: grid; place-items: center; margin-top: 12px; padding: 16px 10px; border-radius: 12px; background: var(--fx-soft); }
+.bp-phone { width: 236px; max-width: 100%; padding: 7px; border-radius: 32px; background: #1b1b1f; box-shadow: 0 0 0 1px #3a3a42, 0 24px 40px -26px rgba(20, 24, 32, 0.7); }
+.bp-screen { position: relative; display: flex; flex-direction: column; min-height: 430px; border-radius: 26px; overflow: hidden; background: var(--ground); color: var(--ink); font-family: var(--f-text); font-size: 12px; line-height: 1.4; text-align: left; }
+.bp-screen * { box-sizing: border-box; }
+.settle { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; margin-top: 12px; }
+.settle div { padding: 12px; border-radius: 10px; background: var(--fx-soft); min-width: 0; }
+.settle b { display: block; font-family: var(--fx-display); font-weight: 600; font-size: 1.375rem; font-variant-numeric: tabular-nums; }
+.settle span { font-size: 0.75rem; color: var(--fx-ink-2); }
+.album-pages { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; margin-top: 12px; }
+.album-pages div { padding: 12px; border-radius: 10px; background: var(--fx-soft); min-width: 0; }
+.album-pages b { display: block; font-weight: 600; }
+.album-pages span { font-size: 0.75rem; color: var(--fx-ink-2); }
+.card-strip { display: flex; gap: 10px; margin-top: 12px; overflow-x: auto; padding-bottom: 6px; }
+.team-dot { display: inline-block; width: 9px; height: 9px; border-radius: 50%; margin-right: 6px; vertical-align: 1px; }
+.ans-list { display: grid; margin-top: 12px; }
+.ans { display: grid; gap: 6px; padding: 12px 0; border-top: 1px solid var(--fx-line); }
+.ans p { margin: 0; font-size: 0.875rem; line-height: 1.45; }
+.ans .who { display: flex; align-items: center; gap: 8px; font-size: 0.8125rem; }
+.ans .who i { width: 26px; height: 26px; border-radius: 50%; display: grid; place-items: center; font-style: normal; font-size: 0.6875rem; font-weight: 600; background: var(--fx-soft); flex: none; }
+.ans.hidden p { color: var(--fx-ink-2); text-decoration: line-through; }
+.ans .adm-btn { min-height: 34px; padding: 0 12px; font-size: 0.8125rem; }
+.ans .stars-a { color: var(--fx-gold); letter-spacing: 1px; font-size: 0.8125rem; }
+.adm-btn.ghost { background: none; border-color: transparent; text-decoration: underline; text-underline-offset: 3px; }
+.more { margin: -8px 0 0; }
+.more summary { cursor: pointer; font-size: 0.8125rem; font-weight: 500; color: var(--fx-ink-2); list-style: none; display: inline-flex; padding: 6px 0; text-decoration: underline; text-underline-offset: 3px; }
+.more summary::-webkit-details-marker { display: none; }
+.filters { display: flex; flex-wrap: wrap; gap: 12px; }
+.filters .afield { min-width: 200px; }
+.vote-bars { display: grid; gap: 10px; margin-top: 12px; }
+.vote-bars > div { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 4px 12px; font-size: 0.8125rem; }
+.vote-bars .bar-a { grid-column: 1 / -1; }
+.vote-bars b { font-weight: 600; font-variant-numeric: tabular-nums; }
+.vote-bars .lead .bar-a i { background: var(--fx-gold); }
+.usage { display: grid; gap: 6px; margin-top: 14px; }
+.usage .bar-a { height: 10px; }
+.usage > div:first-child { display: flex; justify-content: space-between; gap: 10px; font-size: 0.8125rem; }
+.atable td .st + .sub { display: block; }
+@container dev (max-width: 1080px) {
+  .brand-split { grid-template-columns: minmax(0, 1fr); }
+  .bp-card { position: static; }
+  .settle, .album-pages { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@container dev (max-width: 760px) {
+  .adm-row3 { grid-template-columns: minmax(0, 1fr); }
+  .colour-row { grid-template-columns: 44px minmax(0, 1fr); }
+  .colour-row input[type="text"] { grid-column: 2; }
+  .styles8 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .logo-opts { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .filters .afield { min-width: 0; flex: 1 1 160px; }
+}
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
 }
@@ -346,15 +444,15 @@ img, svg { max-width: 100%; }
   --f-display: "Syne", "Arial Black", sans-serif;
   --f-text: "DM Sans", "Helvetica Neue", Arial, sans-serif;
   --f-mono: "Space Mono", "Courier New", monospace;
-  --r-card: 14px;
+  --r-card: calc(14px * var(--rk, 1));
   --shadow-card: 0 1px 0 rgba(255,255,255,0.03) inset, 0 14px 30px -20px rgba(0,0,0,0.8);
   --shadow-lift: 0 30px 50px -26px rgba(0,0,0,0.9);
   --sheet-bg: var(--scene);
-  --r-sheet: 20px;
+  --r-sheet: calc(20px * var(--rk, 1));
   --toast-bg: var(--sel);
   --toast-fg: var(--nuit);
   --fly-bg: var(--rouge);
-  --r-toast: 6px;
+  --r-toast: calc(6px * var(--rk, 1));
 }
 .device { color-scheme: dark; }
 
@@ -366,7 +464,7 @@ img, svg { max-width: 100%; }
 .top { display: flex; align-items: center; gap: 10px; padding: calc(12px + var(--notch, 0px)) var(--gutter) 12px; background: var(--nuit-0); z-index: 3; min-width: 0; }
 .wm { border: 0; background: none; padding: 0; color: var(--ink); cursor: pointer; text-align: left; font-family: var(--f-display); font-weight: 800; font-size: 1.05rem; line-height: 0.9; letter-spacing: 0.02em; text-transform: uppercase; }
 .wm small { display: block; font-family: var(--f-mono); font-weight: 400; font-size: 0.625rem; letter-spacing: 0.06em; text-transform: none; color: var(--maree); margin-top: 5px; }
-.notes { margin-left: auto; display: inline-flex; align-items: baseline; gap: 6px; padding: 8px 14px; border-radius: 6px; border: 0; background: var(--rouge); color: #fff; cursor: pointer; white-space: nowrap; }
+.notes { margin-left: auto; display: inline-flex; align-items: baseline; gap: 6px; padding: 8px 14px; border-radius: calc(6px * var(--rk, 1)); border: 0; background: var(--rouge); color: #fff; cursor: pointer; white-space: nowrap; }
 .notes b { font-family: var(--f-display); font-weight: 800; font-size: 1.05rem; line-height: 1; }
 .notes span { font-family: var(--f-mono); font-size: 0.6875rem; }
 .me-btn { flex: none; width: 36px; height: 36px; border-radius: 50%; border: 1.5px solid var(--maree); background: none; color: var(--ink); font-weight: 700; font-size: 0.75rem; cursor: pointer; }
@@ -383,17 +481,17 @@ img, svg { max-width: 100%; }
   .rail .wm { font-size: 1.32rem; line-height: 0.9; }
   .rail .wm small { font-size: 0.6875rem; margin-top: 8px; }
   .rail-nav { display: flex; flex-direction: column; gap: 1px; }
-  .rail-nav button { display: grid; grid-template-columns: 28px 1fr auto; align-items: baseline; padding: 10px 10px; border: 0; border-radius: 6px; background: none; color: var(--ink-2); font-size: 0.9375rem; font-weight: 600; text-align: left; cursor: pointer; }
+  .rail-nav button { display: grid; grid-template-columns: 28px 1fr auto; align-items: baseline; padding: 10px 10px; border: 0; border-radius: calc(6px * var(--rk, 1)); background: none; color: var(--ink-2); font-size: 0.9375rem; font-weight: 600; text-align: left; cursor: pointer; }
   .rail-nav button i { font-style: normal; font-family: var(--f-mono); font-size: 0.6875rem; color: var(--ink-3); }
   .rail-nav button:hover { color: var(--ink); background: var(--scene); }
   .rail-nav button[aria-current="page"] { color: var(--ink); background: var(--scene-2); }
   .rail-nav button[aria-current="page"] i { color: var(--rouge); }
   .rail-nav .n { font-family: var(--f-mono); font-size: 0.6875rem; color: var(--rouge); }
   .rail-foot { margin-top: auto; display: grid; gap: 10px; }
-  .rail-notes { display: flex; align-items: baseline; justify-content: space-between; padding: 14px; border-radius: 8px; background: var(--rouge); border: 0; color: #fff; cursor: pointer; }
+  .rail-notes { display: flex; align-items: baseline; justify-content: space-between; padding: 14px; border-radius: calc(8px * var(--rk, 1)); background: var(--rouge); border: 0; color: #fff; cursor: pointer; }
   .rail-notes b { font-family: var(--f-display); font-weight: 800; font-size: 1.9rem; line-height: 1; }
   .rail-notes span { font-family: var(--f-mono); font-size: 0.75rem; }
-  .rail-me { display: flex; align-items: center; gap: 10px; padding: 10px; border-radius: 8px; border: 1px solid var(--line); background: none; color: var(--ink); text-align: left; cursor: pointer; }
+  .rail-me { display: flex; align-items: center; gap: 10px; padding: 10px; border-radius: calc(8px * var(--rk, 1)); border: 1px solid var(--line); background: none; color: var(--ink); text-align: left; cursor: pointer; }
   .rail-me .me-btn { width: 34px; height: 34px; }
   .rail-me span { display: flex; flex-direction: column; font-size: 0.75rem; color: var(--ink-3); min-width: 0; }
   .rail-me b { font-size: 0.875rem; color: var(--ink); }
@@ -414,7 +512,7 @@ img, svg { max-width: 100%; }
 .meta { color: var(--ink-3); font-size: 0.8125rem; }
 .foot-note { margin: 0; padding-top: 16px; border-top: 1px dashed var(--line); font-family: var(--f-mono); font-size: 0.6875rem; color: var(--ink-3); text-align: center; }
 @container dev (min-width: 820px) { .h-page { font-size: 3.8rem; } .h-sec { font-size: 1.6rem; } }
-.btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 48px; padding: 0 22px; border: 0; border-radius: 6px; font-weight: 700; font-size: 0.9375rem; cursor: pointer; transition: transform 0.15s, background 0.2s; text-align: center; }
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 48px; padding: 0 22px; border: 0; border-radius: calc(6px * var(--rk, 1)); font-weight: 700; font-size: 0.9375rem; cursor: pointer; transition: transform 0.15s, background 0.2s; text-align: center; }
 .btn:active { transform: scale(0.97); }
 .btn svg { width: 18px; height: 18px; }
 .btn-red { background: var(--rouge); color: #fff; }
@@ -427,11 +525,11 @@ img, svg { max-width: 100%; }
 .btn:disabled { opacity: 0.45; cursor: not-allowed; transform: none; }
 .chips { display: flex; gap: 8px; overflow-x: auto; scrollbar-width: none; margin-inline: calc(var(--gutter) * -1); padding-inline: var(--gutter); }
 .chips::-webkit-scrollbar { display: none; }
-.chip { flex: none; border: 1px solid var(--scene-3); padding: 8px 14px; border-radius: 6px; background: none; color: var(--ink-2); font-family: var(--f-mono); font-size: 0.75rem; cursor: pointer; }
+.chip { flex: none; border: 1px solid var(--scene-3); padding: 8px 14px; border-radius: calc(6px * var(--rk, 1)); background: none; color: var(--ink-2); font-family: var(--f-mono); font-size: 0.75rem; cursor: pointer; }
 .chip[aria-pressed="true"] { background: var(--sel); border-color: var(--sel); color: var(--nuit); }
 @container dev (min-width: 820px) { .chips { margin-inline: 0; padding-inline: 0; flex-wrap: wrap; } }
 .panel { background: var(--scene); border-radius: var(--r-card); padding: 20px; min-width: 0; }
-.bar { position: relative; height: 6px; border-radius: 999px; background: var(--scene-3); overflow: hidden; }
+.bar { position: relative; height: 6px; border-radius: calc(999px * var(--rk, 1)); background: var(--scene-3); overflow: hidden; }
 .bar > span { position: absolute; inset: 0 auto 0 0; width: var(--fill); border-radius: inherit; background: var(--rouge); transition: --fill 1.2s var(--ease-out); }
 
 /* ---------- Tonight ---------- */
@@ -444,11 +542,11 @@ img, svg { max-width: 100%; }
 .is-tilting .tilt { transition: transform 0.08s linear; }
 .pass-in { transition: transform 0.8s var(--ease-spring); }
 .pass[aria-pressed="true"] .pass-in { transform: rotateY(180deg); }
-.pface { position: absolute; inset: 0; border-radius: 14px; overflow: hidden; backface-visibility: hidden; -webkit-backface-visibility: hidden; box-shadow: var(--shadow-lift); text-align: left; container-type: inline-size; }
+.pface { position: absolute; inset: 0; border-radius: calc(14px * var(--rk, 1)); overflow: hidden; backface-visibility: hidden; -webkit-backface-visibility: hidden; box-shadow: var(--shadow-lift); text-align: left; container-type: inline-size; }
 .pfront { background: var(--sel); color: var(--nuit); display: grid; grid-template-columns: 15% 1fr; }
 .p-band { background: var(--rouge); color: var(--sel); display: flex; flex-direction: column; align-items: center; justify-content: space-between; padding: 10% 0; position: relative; }
 .p-band b { writing-mode: vertical-rl; transform: rotate(180deg); font-family: var(--f-display); font-weight: 800; font-size: clamp(0.9rem, 5.4cqi, 1.5rem); letter-spacing: 0.08em; }
-.p-slot { width: 38%; height: 14%; border-radius: 999px; background: var(--nuit); }
+.p-slot { width: 38%; height: 14%; border-radius: calc(999px * var(--rk, 1)); background: var(--nuit); }
 .p-body { position: relative; display: flex; flex-direction: column; padding: 7% 7% 6%; overflow: hidden; }
 .p-body svg.tide { position: absolute; left: 0; right: 0; bottom: 0; width: 100%; height: 46%; }
 .p-top { position: relative; display: flex; justify-content: space-between; gap: 8px; font-family: var(--f-mono); font-size: clamp(0.55rem, 2.6cqi, 0.75rem); }
@@ -459,7 +557,7 @@ img, svg { max-width: 100%; }
 .p-bal b { font-family: var(--f-display); font-weight: 800; font-size: clamp(1.4rem, 9cqi, 2.4rem); line-height: 0.9; color: var(--nuit); }
 .p-bal span { font-family: var(--f-mono); font-size: clamp(0.6rem, 2.8cqi, 0.8rem); }
 .pback { transform: rotateY(180deg); background: var(--scene-2); color: var(--ink); display: grid; grid-template-columns: 40% 1fr; gap: 6%; padding: 7%; align-items: center; }
-.pback .qr { background: #fff; border-radius: 8px; padding: 6%; aspect-ratio: 1; }
+.pback .qr { background: #fff; border-radius: calc(8px * var(--rk, 1)); padding: 6%; aspect-ratio: 1; }
 .pback .qr svg { width: 100%; height: 100%; display: block; }
 .pb-facts { display: grid; gap: 6px; }
 .pb-facts b { display: block; font-family: var(--f-display); font-weight: 800; font-size: clamp(1rem, 6cqi, 1.6rem); line-height: 1; }
@@ -474,7 +572,7 @@ img, svg { max-width: 100%; }
 
 .tk-wrap { container: ticket / inline-size; min-width: 0; }
 /* Next show: a ticket with a perforated stub */
-.ticket { position: relative; display: grid; border-radius: 12px; overflow: hidden; background: var(--sel); color: var(--nuit); box-shadow: var(--shadow-lift); }
+.ticket { position: relative; display: grid; border-radius: calc(12px * var(--rk, 1)); overflow: hidden; background: var(--sel); color: var(--nuit); box-shadow: var(--shadow-lift); }
 .t-main { position: relative; padding: 22px 22px 18px; display: flex; flex-direction: column; gap: 12px; }
 .t-main .kicker { color: var(--rouge-d); }
 .t-city { font-family: var(--f-display); font-weight: 800; font-size: 3.2rem; line-height: 0.85; text-transform: uppercase; letter-spacing: -0.02em; }
@@ -486,12 +584,12 @@ img, svg { max-width: 100%; }
 .t-stub::before { left: -11px; }
 .t-stub::after { right: -11px; }
 .clock { display: flex; gap: 6px; font-family: var(--f-mono); }
-.clock div { min-width: 54px; padding: 6px; border-radius: 4px; background: rgba(18,16,22,0.22); text-align: center; }
+.clock div { min-width: 54px; padding: 6px; border-radius: calc(4px * var(--rk, 1)); background: rgba(18,16,22,0.22); text-align: center; }
 .clock b { display: block; font-family: var(--f-display); font-weight: 800; font-size: 1.7rem; line-height: 1; }
 .clock span { font-size: 0.625rem; }
 .t-acts { display: grid; gap: 8px; padding: 0 22px 22px; background: var(--rouge); }
-.t-act { display: flex; align-items: center; gap: 12px; padding: 12px 14px; border-radius: 8px; border: 0; background: var(--nuit); color: var(--ink); text-align: left; cursor: pointer; }
-.t-act .ic { flex: none; width: 38px; height: 38px; border-radius: 6px; display: grid; place-items: center; background: var(--scene-3); color: var(--sel); }
+.t-act { display: flex; align-items: center; gap: 12px; padding: 12px 14px; border-radius: calc(8px * var(--rk, 1)); border: 0; background: var(--nuit); color: var(--ink); text-align: left; cursor: pointer; }
+.t-act .ic { flex: none; width: 38px; height: 38px; border-radius: calc(6px * var(--rk, 1)); display: grid; place-items: center; background: var(--scene-3); color: var(--sel); }
 .t-act .ic svg { width: 19px; height: 19px; }
 .t-act .tx { flex: 1; min-width: 0; display: flex; flex-direction: column; }
 .t-act .tx b { font-size: 0.9375rem; }
@@ -510,7 +608,7 @@ img, svg { max-width: 100%; }
 @container ticket (min-width: 800px) {
   .t-acts { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
-.demo-hint { display: flex; align-items: center; justify-content: space-between; gap: 10px; flex-wrap: wrap; padding: 10px 12px; border-radius: 8px; border: 1px dashed var(--maree-d); font-family: var(--f-mono); font-size: 0.75rem; color: var(--ink-2); }
+.demo-hint { display: flex; align-items: center; justify-content: space-between; gap: 10px; flex-wrap: wrap; padding: 10px 12px; border-radius: calc(8px * var(--rk, 1)); border: 1px dashed var(--maree-d); font-family: var(--f-mono); font-size: 0.75rem; color: var(--ink-2); }
 
 /* Route: the tour drawn as a line across a blank map */
 .route { position: relative; border-radius: var(--r-card); background: var(--scene); padding: 14px; overflow: hidden; }
@@ -522,7 +620,7 @@ img, svg { max-width: 100%; }
 .route .ping { animation: ping 1.8s ease-out infinite; }
 
 /* Setlist: missions written on a taped sheet */
-.setlist { position: relative; background: var(--sel); color: var(--nuit); border-radius: 3px; padding: 30px 18px 22px; box-shadow: var(--shadow-lift); transform: rotate(-0.6deg); max-width: 760px; }
+.setlist { position: relative; background: var(--sel); color: var(--nuit); border-radius: calc(3px * var(--rk, 1)); padding: 30px 18px 22px; box-shadow: var(--shadow-lift); transform: rotate(-0.6deg); max-width: 760px; }
 .setlist::before, .setlist::after { content: ""; position: absolute; top: -10px; width: 86px; height: 24px; background: rgba(43, 179, 163, 0.75); }
 .setlist::before { left: 18px; transform: rotate(-4deg); }
 .setlist::after { right: 18px; transform: rotate(5deg); }
@@ -555,7 +653,7 @@ img, svg { max-width: 100%; }
 .setlist-wrap { display: grid; gap: 26px; }
 @container dev (min-width: 1080px) { .setlist-wrap { grid-template-columns: minmax(0, 1fr) 300px; align-items: start; } }
 .rules { display: grid; gap: 10px; }
-.rules div { padding: 14px; border-radius: 10px; background: var(--scene); font-size: 0.875rem; color: var(--ink-2); }
+.rules div { padding: 14px; border-radius: calc(10px * var(--rk, 1)); background: var(--scene); font-size: 0.875rem; color: var(--ink-2); }
 .rules b { display: block; margin-bottom: 2px; font-family: var(--f-text); font-weight: 700; color: var(--ink); font-size: 0.9375rem; }
 .rules .played { background: none; box-shadow: inset 0 0 0 1px var(--line); }
 .rules .played > span:first-child { display: block; font-family: var(--f-mono); font-size: 0.6875rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-3); }
@@ -564,7 +662,7 @@ img, svg { max-width: 100%; }
 .stubs { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
 @container dev (min-width: 640px) { .stubs { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
 @container dev (min-width: 1000px) { .stubs { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; } }
-.stub { position: relative; display: grid; grid-template-columns: 12px 1fr; min-height: 132px; border-radius: 8px; overflow: hidden; border: 0; padding: 0; text-align: left; cursor: pointer; color: inherit; font: inherit; }
+.stub { position: relative; display: grid; grid-template-columns: 12px 1fr; min-height: 132px; border-radius: calc(8px * var(--rk, 1)); overflow: hidden; border: 0; padding: 0; text-align: left; cursor: pointer; color: inherit; font: inherit; }
 .stub .band { background: var(--scene-3); }
 .stub .body { position: relative; padding: 12px 12px 10px; display: flex; flex-direction: column; gap: 4px; border-left: 2px dashed transparent; container-type: inline-size; }
 .stub .no { font-family: var(--f-mono); font-size: 0.625rem; }
@@ -594,18 +692,18 @@ img, svg { max-width: 100%; }
 .riser .av { width: 48px; height: 48px; border-radius: 50%; display: grid; place-items: center; background: var(--scene-3); font-weight: 700; font-size: 0.8125rem; }
 .riser .who { font-weight: 700; font-size: 0.8125rem; line-height: 1.2; overflow-wrap: anywhere; }
 .riser .pts { font-family: var(--f-mono); font-size: 0.75rem; color: var(--ink-2); }
-.riser .block { width: 100%; display: grid; place-items: center; border-radius: 6px 6px 0 0; background: var(--scene-2); font-family: var(--f-display); font-weight: 800; font-size: 2.4rem; color: var(--ink-3); }
+.riser .block { width: 100%; display: grid; place-items: center; border-radius: calc(6px * var(--rk, 1)) calc(6px * var(--rk, 1)) 0 0; background: var(--scene-2); font-family: var(--f-display); font-weight: 800; font-size: 2.4rem; color: var(--ink-3); }
 .riser.r1 .block { height: 120px; background: var(--rouge); color: #fff; font-size: 3.4rem; }
 .riser.r1 .av { background: var(--rouge); color: #fff; box-shadow: 0 0 0 3px var(--sel); }
 .riser.r2 .block { height: 86px; }
 .riser.r3 .block { height: 62px; }
-.prize { display: grid; gap: 8px; padding: 18px; border-radius: 10px; background: var(--sel); color: var(--nuit); }
+.prize { display: grid; gap: 8px; padding: 18px; border-radius: calc(10px * var(--rk, 1)); background: var(--sel); color: var(--nuit); }
 .prize b { font-family: var(--f-display); font-weight: 800; font-size: 1.2rem; text-transform: uppercase; line-height: 1.05; }
 .prize p { margin: 0; font-size: 0.875rem; }
 .prize .kicker { color: var(--rouge-d); }
 .board-wrap { display: grid; gap: 24px; }
 @container dev (min-width: 1060px) { .board-wrap { grid-template-columns: minmax(0, 1.55fr) minmax(290px, 1fr); align-items: start; } }
-.ltable { width: 100%; border-collapse: collapse; font-size: 0.875rem; background: var(--scene); border-radius: 10px; overflow: hidden; }
+.ltable { width: 100%; border-collapse: collapse; font-size: 0.875rem; background: var(--scene); border-radius: calc(10px * var(--rk, 1)); overflow: hidden; }
 .ltable th { text-align: left; font-family: var(--f-mono); font-weight: 400; font-size: 0.6875rem; color: var(--ink-3); padding: 12px 10px 8px; border-bottom: 1px solid var(--line); }
 .ltable td { padding: 10px; border-bottom: 1px solid var(--line); vertical-align: middle; }
 .ltable tr:last-child td { border-bottom: 0; }
@@ -622,14 +720,14 @@ img, svg { max-width: 100%; }
 .ltable tr.gap td { text-align: center; color: var(--ink-3); padding: 4px; letter-spacing: 0.3em; }
 .hide-sm { display: none; }
 @container dev (min-width: 620px) { .hide-sm { display: table-cell; } }
-.me-card { display: grid; gap: 14px; padding: 20px; border-radius: 12px; background: var(--scene-2); }
+.me-card { display: grid; gap: 14px; padding: 20px; border-radius: calc(12px * var(--rk, 1)); background: var(--scene-2); }
 .me-top { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
 .me-top .av { width: 52px; height: 52px; border-radius: 50%; display: grid; place-items: center; background: var(--rouge); color: #fff; font-weight: 700; }
 .me-top b { display: block; font-family: var(--f-display); font-weight: 800; font-size: 1.5rem; line-height: 1; text-transform: uppercase; }
 .me-top span { font-size: 0.8125rem; color: var(--ink-2); }
 .me-stats { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
 @container dev (min-width: 620px) { .me-stats { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
-.me-stats div { padding: 12px; border-radius: 8px; background: var(--scene); }
+.me-stats div { padding: 12px; border-radius: calc(8px * var(--rk, 1)); background: var(--scene); }
 .me-stats b { display: block; font-family: var(--f-display); font-weight: 800; font-size: 1.5rem; line-height: 1; }
 .me-stats span { font-family: var(--f-mono); font-size: 0.6875rem; color: var(--ink-3); }
 
@@ -637,7 +735,7 @@ img, svg { max-width: 100%; }
 .merch { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
 @container dev (min-width: 760px) { .merch { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; } }
 @container dev (min-width: 1080px) { .merch.four { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
-.item { display: flex; flex-direction: column; background: var(--scene); border-radius: 12px; overflow: hidden; min-width: 0; }
+.item { display: flex; flex-direction: column; background: var(--scene); border-radius: calc(12px * var(--rk, 1)); overflow: hidden; min-width: 0; }
 .item-art { position: relative; aspect-ratio: 5 / 4; background: var(--tone-bg); display: grid; place-items: center; }
 .item-art svg.art { width: 62%; height: 80%; }
 .item-art .tag { position: absolute; top: 8px; left: 8px; padding: 2px 7px; background: var(--nuit); color: var(--sel); font-family: var(--f-mono); font-size: 0.625rem; }
@@ -657,7 +755,7 @@ img, svg { max-width: 100%; }
 /* ---------- The Band ---------- */
 .duo { display: grid; gap: 38px; }
 @container dev (min-width: 1000px) { .duo { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 36px; align-items: start; } }
-.tidegoal { position: relative; display: grid; gap: 18px; padding: 22px; border-radius: 14px; background: var(--scene); overflow: hidden; isolation: isolate; }
+.tidegoal { position: relative; display: grid; gap: 18px; padding: 22px; border-radius: calc(14px * var(--rk, 1)); background: var(--scene); overflow: hidden; isolation: isolate; }
 .tidegoal .water { position: absolute; left: 0; right: 0; bottom: 0; height: var(--lvl); z-index: -1; background: var(--maree-d); transition: height 1.6s var(--ease-out); }
 .tidegoal .water svg { position: absolute; left: 0; bottom: 100%; width: 200%; height: 18px; animation: swell 7s linear infinite; }
 @keyframes swell { to { transform: translateX(-50%); } }
@@ -667,11 +765,11 @@ img, svg { max-width: 100%; }
 .tg-num { display: flex; align-items: baseline; gap: 8px; margin-top: 12px; }
 .tg-num b { font-family: var(--f-display); font-weight: 800; font-size: 2.2rem; line-height: 1; }
 .tg-num span { font-family: var(--f-mono); font-size: 0.75rem; color: var(--ink-2); }
-.player { width: 100%; box-sizing: border-box; display: flex; align-items: center; gap: 12px; padding: 12px; border-radius: 10px; background: rgba(11,10,14,0.72); max-width: 420px; }
+.player { width: 100%; box-sizing: border-box; display: flex; align-items: center; gap: 12px; padding: 12px; border-radius: calc(10px * var(--rk, 1)); background: rgba(11,10,14,0.72); max-width: 420px; }
 .player .pl { flex: none; width: 44px; height: 44px; border-radius: 50%; display: grid; place-items: center; background: var(--scene-3); color: var(--ink-3); border: 0; }
 .player .pl svg { width: 18px; height: 18px; }
 .player .wave { flex: 1; display: flex; align-items: center; gap: 2px; height: 32px; }
-.player .wave i { flex: 1; min-width: 2px; opacity: 0.8; background: var(--scene-3); border-radius: 2px; }
+.player .wave i { flex: 1; min-width: 2px; opacity: 0.8; background: var(--scene-3); border-radius: calc(2px * var(--rk, 1)); }
 .player .tx { font-family: var(--f-mono); font-size: 0.6875rem; color: var(--ink-3); white-space: nowrap; }
 .player.open .pl { background: var(--maree); color: var(--nuit); cursor: pointer; }
 .player.open .wave i { background: var(--maree); }
@@ -679,12 +777,12 @@ img, svg { max-width: 100%; }
 .feed { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
 @container dev (min-width: 700px) { .feed { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
 @container dev (min-width: 1100px) { .feed { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; } }
-.post { display: flex; flex-direction: column; background: var(--scene); border-radius: 10px; overflow: hidden; min-width: 0; }
+.post { display: flex; flex-direction: column; background: var(--scene); border-radius: calc(10px * var(--rk, 1)); overflow: hidden; min-width: 0; }
 .post-art { position: relative; aspect-ratio: 9 / 12; overflow: hidden; }
 .post-art svg.scene { width: 100%; height: 100%; display: block; }
 .post-art .net { position: absolute; top: 8px; left: 8px; padding: 1px 6px; background: var(--sel); color: var(--nuit); font-family: var(--f-mono); font-size: 0.625rem; font-weight: 700; }
 .post-art .cty { position: absolute; top: 8px; right: 8px; padding: 1px 6px; background: var(--rouge); color: #fff; font-family: var(--f-mono); font-size: 0.625rem; }
-.post-art .views { position: absolute; left: 8px; bottom: 8px; display: inline-flex; align-items: center; gap: 4px; padding: 2px 8px; border-radius: 4px; background: rgba(11,10,14,0.8); color: #fff; font-family: var(--f-mono); font-size: 0.6875rem; }
+.post-art .views { position: absolute; left: 8px; bottom: 8px; display: inline-flex; align-items: center; gap: 4px; padding: 2px 8px; border-radius: calc(4px * var(--rk, 1)); background: rgba(11,10,14,0.8); color: #fff; font-family: var(--f-mono); font-size: 0.6875rem; }
 .post-art .views svg { width: 12px; height: 12px; }
 .post-text { padding: 9px 11px 11px; display: flex; flex-direction: column; gap: 1px; }
 .post-text b { font-size: 0.8125rem; }
@@ -692,26 +790,26 @@ img, svg { max-width: 100%; }
 .post.mine { box-shadow: inset 0 0 0 2px var(--rouge); }
 .band-grid { display: grid; gap: 22px; }
 @container dev (min-width: 1000px) { .band-grid { grid-template-columns: minmax(0, 1fr) minmax(290px, 360px); align-items: start; } }
-.memo { padding: 18px; border-radius: 12px; background: var(--sel); color: var(--nuit); display: grid; gap: 8px; transform: rotate(0.6deg); }
+.memo { padding: 18px; border-radius: calc(12px * var(--rk, 1)); background: var(--sel); color: var(--nuit); display: grid; gap: 8px; transform: rotate(0.6deg); }
 .memo .from { font-family: var(--f-mono); font-size: 0.6875rem; color: var(--rouge-d); }
 .memo p { margin: 0; font-size: 0.9375rem; }
 .memo .sig { font-family: var(--f-display); font-weight: 800; text-transform: uppercase; }
 .poll { display: grid; gap: 8px; }
-.poll button { position: relative; overflow: hidden; display: flex; justify-content: space-between; align-items: center; min-height: 46px; padding: 0 14px; border-radius: 6px; border: 1px solid var(--scene-3); background: none; color: var(--ink); font-weight: 600; cursor: pointer; text-align: left; isolation: isolate; }
+.poll button { position: relative; overflow: hidden; display: flex; justify-content: space-between; align-items: center; min-height: 46px; padding: 0 14px; border-radius: calc(6px * var(--rk, 1)); border: 1px solid var(--scene-3); background: none; color: var(--ink); font-weight: 600; cursor: pointer; text-align: left; isolation: isolate; }
 .poll button::before { content: ""; position: absolute; inset: 0 auto 0 0; width: var(--fill); background: var(--scene-3); z-index: -1; transition: --fill 1s var(--ease-out); }
 .poll button[aria-pressed="true"] { border-color: var(--rouge); }
 .poll button[aria-pressed="true"]::before { background: var(--rouge-soft); }
 .poll .pc { font-family: var(--f-mono); font-size: 0.8125rem; }
 .answers { display: grid; gap: 8px; }
-.answer { margin: 0; padding: 12px 14px; border-radius: 10px; background: var(--scene); }
+.answer { margin: 0; padding: 12px 14px; border-radius: calc(10px * var(--rk, 1)); background: var(--scene); }
 .answer blockquote { margin: 0; font-size: 0.9375rem; }
 .answer figcaption { margin-top: 6px; font-family: var(--f-mono); font-size: 0.6875rem; color: var(--ink-3); }
 .answer.mine { box-shadow: inset 0 0 0 1.5px var(--rouge); }
 
 /* ---------- Me ---------- */
 .myposts { display: grid; gap: 8px; }
-.mypost { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; gap: 4px 12px; align-items: center; padding: 12px 14px; border-radius: 10px; background: var(--scene); font-size: 0.875rem; }
-.mypost .nt { width: 34px; height: 34px; border-radius: 6px; display: grid; place-items: center; background: var(--scene-3); font-family: var(--f-mono); font-size: 0.6875rem; font-weight: 700; }
+.mypost { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; gap: 4px 12px; align-items: center; padding: 12px 14px; border-radius: calc(10px * var(--rk, 1)); background: var(--scene); font-size: 0.875rem; }
+.mypost .nt { width: 34px; height: 34px; border-radius: calc(6px * var(--rk, 1)); display: grid; place-items: center; background: var(--scene-3); font-family: var(--f-mono); font-size: 0.6875rem; font-weight: 700; }
 .mypost .nt svg { width: 16px; height: 16px; }
 .mypost .tx { display: flex; flex-direction: column; min-width: 0; }
 .mypost .tx b { font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
@@ -723,10 +821,10 @@ img, svg { max-width: 100%; }
 .duo { display: grid; gap: 18px; }
 @container dev (min-width: 860px) { .duo { grid-template-columns: 1fr 1fr; gap: 24px; } }
 .ref { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin-top: 12px; }
-.ref code { font-family: var(--f-mono); font-weight: 700; font-size: 1.15rem; padding: 6px 12px; border-radius: 6px; background: var(--sel); color: var(--nuit); }
+.ref code { font-family: var(--f-mono); font-weight: 700; font-size: 1.15rem; padding: 6px 12px; border-radius: calc(6px * var(--rk, 1)); background: var(--sel); color: var(--nuit); }
 .linked { display: grid; gap: 8px; margin-top: 12px; }
-.linked div { display: flex; align-items: center; gap: 12px; padding: 10px 12px; border-radius: 8px; background: var(--scene-2); font-size: 0.875rem; }
-.linked .nt { width: 30px; height: 30px; border-radius: 6px; display: grid; place-items: center; background: var(--sel); color: var(--nuit); font-family: var(--f-mono); font-size: 0.625rem; font-weight: 700; }
+.linked div { display: flex; align-items: center; gap: 12px; padding: 10px 12px; border-radius: calc(8px * var(--rk, 1)); background: var(--scene-2); font-size: 0.875rem; }
+.linked .nt { width: 30px; height: 30px; border-radius: calc(6px * var(--rk, 1)); display: grid; place-items: center; background: var(--sel); color: var(--nuit); font-family: var(--f-mono); font-size: 0.625rem; font-weight: 700; }
 .linked .ok { margin-left: auto; font-family: var(--f-mono); font-size: 0.6875rem; color: var(--good); }
 .note { font-size: 0.8125rem; color: var(--ink-2); }
 
@@ -739,61 +837,64 @@ img, svg { max-width: 100%; }
 .tagline { display: flex; flex-wrap: wrap; gap: 6px; }
 .tagline code { font-family: var(--f-mono); font-size: 0.8125rem; padding: 3px 8px; background: var(--sel); color: var(--nuit); }
 .netpick { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; }
-.netpick button { min-height: 44px; border-radius: 6px; border: 1px solid var(--scene-3); background: none; color: var(--ink); font-weight: 600; font-size: 0.8125rem; cursor: pointer; }
+.netpick button { min-height: 44px; border-radius: calc(6px * var(--rk, 1)); border: 1px solid var(--scene-3); background: none; color: var(--ink); font-weight: 600; font-size: 0.8125rem; cursor: pointer; }
 .netpick button[aria-pressed="true"] { border-color: var(--sel); box-shadow: inset 0 0 0 1px var(--sel); }
 .linkbox { display: grid; gap: 8px; }
 .linkbox label { font-family: var(--f-mono); font-size: 0.75rem; color: var(--ink-2); }
-.linkbox input, .linkbox textarea { width: 100%; min-height: 48px; border-radius: 6px; border: 1px solid var(--scene-3); background: var(--nuit); padding: 0 14px; font: inherit; color: var(--ink); }
+.linkbox input, .linkbox textarea { width: 100%; min-height: 48px; border-radius: calc(6px * var(--rk, 1)); border: 1px solid var(--scene-3); background: var(--nuit); padding: 0 14px; font: inherit; color: var(--ink); }
 .linkbox textarea { min-height: 90px; padding: 12px 14px; resize: vertical; }
 .linkbox input:focus, .linkbox textarea:focus { outline: none; border-color: var(--maree); }
 .linkbox .row { display: flex; gap: 8px; }
 .linkbox .row input { flex: 1; min-width: 0; }
-.found { display: grid; grid-template-columns: auto 1fr; gap: 12px; align-items: center; padding: 14px; border-radius: 8px; background: var(--sel); color: var(--nuit); font-size: 0.875rem; }
-.found .nt { width: 44px; height: 44px; border-radius: 8px; display: grid; place-items: center; background: var(--nuit); color: var(--sel); font-family: var(--f-mono); font-weight: 700; font-size: 0.75rem; }
+.found { display: grid; grid-template-columns: auto 1fr; gap: 12px; align-items: center; padding: 14px; border-radius: calc(8px * var(--rk, 1)); background: var(--sel); color: var(--nuit); font-size: 0.875rem; }
+.found .nt { width: 44px; height: 44px; border-radius: calc(8px * var(--rk, 1)); display: grid; place-items: center; background: var(--nuit); color: var(--sel); font-family: var(--f-mono); font-weight: 700; font-size: 0.75rem; }
 .found ul { margin: 4px 0 0; padding: 0; list-style: none; display: grid; gap: 2px; font-family: var(--f-mono); font-size: 0.75rem; }
 .found li::before { content: "+ "; color: var(--rouge-d); }
-.checking { display: flex; align-items: center; gap: 12px; padding: 16px; border-radius: 8px; background: var(--scene-2); font-family: var(--f-mono); font-size: 0.8125rem; color: var(--ink-2); }
+.checking { display: flex; align-items: center; gap: 12px; padding: 16px; border-radius: calc(8px * var(--rk, 1)); background: var(--scene-2); font-family: var(--f-mono); font-size: 0.8125rem; color: var(--ink-2); }
 .success { display: flex; flex-direction: column; align-items: center; gap: 10px; text-align: center; padding: 4px 0; }
 .success .big { font-family: var(--f-display); font-weight: 800; font-size: 4.2rem; line-height: 0.9; color: var(--rouge); }
 .success p { max-width: 40ch; color: var(--ink-2); }
-.got-row { display: flex; align-items: center; gap: 14px; padding: 12px 14px; border-radius: 8px; background: var(--sel); color: var(--nuit); font-size: 0.875rem; text-align: left; }
-.got-row .mini { flex: none; width: 54px; height: 40px; display: grid; grid-template-columns: 6px 1fr; border-radius: 4px; overflow: hidden; background: var(--sel-2); }
+.got-row { display: flex; align-items: center; gap: 14px; padding: 12px 14px; border-radius: calc(8px * var(--rk, 1)); background: var(--sel); color: var(--nuit); font-size: 0.875rem; text-align: left; }
+.got-row .mini { flex: none; width: 54px; height: 40px; display: grid; grid-template-columns: 6px 1fr; border-radius: calc(4px * var(--rk, 1)); overflow: hidden; background: var(--sel-2); }
 .got-row .mini i { background: var(--rouge); }
 .got-row .mini span { display: grid; place-items: center; font-family: var(--f-display); font-weight: 800; font-size: 0.6rem; text-transform: uppercase; }
-.lyrics { display: grid; gap: 4px; padding: 14px; border-radius: 8px; background: var(--nuit); }
+.lyrics { display: grid; gap: 4px; padding: 14px; border-radius: calc(8px * var(--rk, 1)); background: var(--nuit); }
 .lyrics div { font-family: var(--f-display); font-weight: 700; font-size: 1.05rem; text-transform: uppercase; color: var(--ink-3); transition: color 0.3s; }
 .lyrics div.on { color: var(--ink); }
 .lyrics div.on::before { content: "> "; color: var(--rouge); font-family: var(--f-mono); }
 .meter { display: flex; align-items: flex-end; gap: 3px; height: 70px; padding: 0 4px; }
-.meter i { flex: 1; height: 6%; border-radius: 2px; background: var(--scene-3); transition: height 0.12s; }
+.meter i { flex: 1; height: 6%; border-radius: calc(2px * var(--rk, 1)); background: var(--scene-3); transition: height 0.12s; }
 .meter.live i { background: var(--rouge); }
 .rec-time { display: flex; justify-content: space-between; font-family: var(--f-mono); font-size: 0.75rem; color: var(--ink-3); }
 .rec-time b { color: var(--ink); font-size: 1.4rem; font-family: var(--f-display); }
-.scanner { position: relative; aspect-ratio: 1; max-width: 260px; width: 100%; margin: 0 auto; border-radius: 16px; background: #050407; overflow: hidden; }
+.scanner { position: relative; aspect-ratio: 1; max-width: 260px; width: 100%; margin: 0 auto; border-radius: calc(16px * var(--rk, 1)); background: #050407; overflow: hidden; }
 .scanner .stand { position: absolute; inset: 0; display: grid; place-items: center; }
 .scanner .stand svg { width: 70%; }
 .scanner .line { position: absolute; left: 14%; right: 14%; top: 14%; height: 2px; background: var(--rouge); animation: scan 1.6s ease-in-out infinite alternate; }
 @keyframes scan { to { top: 86%; } }
 .pickc { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; }
-.pickc button { padding: 12px 8px; border-radius: 8px; border: 1px solid var(--scene-3); background: none; color: var(--ink); cursor: pointer; text-align: center; font-family: var(--f-display); font-weight: 700; text-transform: uppercase; font-size: 0.9rem; }
+.pickc button { padding: 12px 8px; border-radius: calc(8px * var(--rk, 1)); border: 1px solid var(--scene-3); background: none; color: var(--ink); cursor: pointer; text-align: center; font-family: var(--f-display); font-weight: 700; text-transform: uppercase; font-size: 0.9rem; }
 .pickc button small { display: block; font-family: var(--f-mono); font-weight: 400; text-transform: none; font-size: 0.6875rem; color: var(--ink-3); margin-top: 2px; }
 .pickc button[aria-pressed="true"] { border-color: var(--rouge); background: var(--rouge-soft); }
 .quiz { display: grid; gap: 8px; }
-.quiz button { min-height: 50px; border-radius: 6px; border: 1px solid var(--scene-3); background: none; color: var(--ink); font-family: var(--f-display); font-weight: 700; text-transform: uppercase; font-size: 1rem; cursor: pointer; }
+.quiz button { min-height: 50px; border-radius: calc(6px * var(--rk, 1)); border: 1px solid var(--scene-3); background: none; color: var(--ink); font-family: var(--f-display); font-weight: 700; text-transform: uppercase; font-size: 1rem; cursor: pointer; }
 .quiz button:hover { border-color: var(--ink-2); }
 .quiz button.right { background: var(--good); border-color: var(--good); color: var(--nuit); }
 .quiz button.wrong { border-color: var(--rouge); color: var(--rouge); animation: shake 0.35s; }
 @keyframes shake { 25% { transform: translateX(-5px); } 75% { transform: translateX(5px); } }
 @container dev (min-width: 520px) { .quiz { grid-template-columns: 1fr 1fr; } }
-.lyric-q { padding: 16px; border-radius: 8px; background: var(--sel); color: var(--nuit); font-family: var(--f-display); font-weight: 700; font-size: 1.15rem; text-transform: uppercase; line-height: 1.25; }
+.lyric-q { padding: 16px; border-radius: calc(8px * var(--rk, 1)); background: var(--sel); color: var(--nuit); font-family: var(--f-display); font-weight: 700; font-size: 1.15rem; text-transform: uppercase; line-height: 1.25; }
 .lyric-q u { text-decoration: none; display: inline-block; min-width: 70px; border-bottom: 3px solid var(--rouge); }
-.sum { display: grid; gap: 6px; padding: 14px; border-radius: 8px; background: var(--scene-2); font-size: 0.875rem; }
+.sum { display: grid; gap: 6px; padding: 14px; border-radius: calc(8px * var(--rk, 1)); background: var(--scene-2); font-size: 0.875rem; }
 .sum div { display: flex; justify-content: space-between; gap: 10px; }
 .sum b { font-weight: 700; text-align: right; }
 .code-box { display: flex; justify-content: center; }
-.code-box code { font-family: var(--f-mono); font-weight: 700; font-size: 1.4rem; padding: 8px 14px; border-radius: 6px; background: var(--sel); color: var(--nuit); }
-.tierup { display: grid; gap: 6px; padding: 14px; border-radius: 10px; background: var(--rouge); color: #fff; text-align: center; }
+.code-box code { font-family: var(--f-mono); font-weight: 700; font-size: 1.4rem; padding: 8px 14px; border-radius: calc(6px * var(--rk, 1)); background: var(--sel); color: var(--nuit); }
+.tierup { display: grid; gap: 6px; padding: 14px; border-radius: calc(10px * var(--rk, 1)); background: var(--rouge); color: #fff; text-align: center; }
 .tierup b { font-family: var(--f-display); font-weight: 800; font-size: 1.4rem; text-transform: uppercase; }
+.wm-mark { display: inline-block; width: 26px; height: 26px; vertical-align: middle; margin-right: 8px; }
+.wm-mark svg, .wm-mark img { width: 100%; height: 100%; display: block; object-fit: contain; }
+.rail .wm-mark { display: block; width: 40px; height: 40px; margin: 0 0 12px; }
 </style>
 </head>
 <body>
@@ -1185,6 +1286,200 @@ document.addEventListener("keydown", (e) => {
   if ($("#admDrawer.open")) closeDrawer(); else closeSheet();
 });
 
+
+
+/* ---------------------------------------------------------------- admin kit, shared by every Season demo
+   Brand appearance (style, colours, logo, type, corners), modules, account, drawers.
+   Each brand script defines BRANDKIT and MODULES; this part draws the pages. */
+Object.assign(ICONS, {
+  upload: '<path d="M12 16V4M7 8.5l5-5 5 5M4.5 20.5h15"/>',
+  swords: '<path d="M14.5 17.5 3 6V3h3l11.5 11.5M13 19l6-6M16 16l4 4M19 21l2-2"/><path d="M9.5 6.5 13 3h3v3l-3.5 3.5M5 14l4 4M7 17l-3 3M3 19l2 2"/>',
+  collection: '<path d="M4 5a2 2 0 0 1 2-2h14v15H6a2 2 0 0 0-2 2z"/><path d="M4 20a2 2 0 0 0 2 1.5h14V18"/><rect x="9" y="6.5" width="6" height="7" rx="1"/>',
+  missions: '<rect x="3.5" y="6.5" width="12" height="15" rx="2"/><path d="M8.5 3.5h10a2 2 0 0 1 2 2v13"/>',
+  table: '<path d="M4 20h16"/><rect x="5" y="11" width="3.5" height="9" rx="1"/><rect x="10.25" y="5" width="3.5" height="15" rx="1"/><rect x="15.5" y="14" width="3.5" height="6" rx="1"/>',
+  mail: '<rect x="3" y="5.5" width="18" height="13" rx="2"/><path d="m3.5 7 8.5 6.5L20.5 7"/>',
+});
+const isoDay = (d) => { const x = new Date(d); return `${x.getFullYear()}-${String(x.getMonth() + 1).padStart(2, "0")}-${String(x.getDate()).padStart(2, "0")}`; };
+const dayLabel = (iso) => new Date(iso + "T12:00:00").toLocaleDateString("en-GB", { day: "numeric", month: "short" });
+const lines = (t) => String(t || "").split("\n").map((x) => x.trim()).filter(Boolean);
+const hex2rgb = (h) => { const n = parseInt(h.slice(1), 16); return [(n >> 16) & 255, (n >> 8) & 255, n & 255]; };
+const rgb2hex = (r) => "#" + r.map((v) => Math.round(Math.max(0, Math.min(255, v))).toString(16).padStart(2, "0")).join("");
+const mix = (a, b, t) => rgb2hex(hex2rgb(a).map((v, i) => v + (hex2rgb(b)[i] - v) * t));
+function parseColour(t) {
+  t = String(t).trim().toLowerCase();
+  let m = t.match(/^#?([0-9a-f]{6})$/); if (m) return "#" + m[1];
+  m = t.match(/^#?([0-9a-f]{3})$/); if (m) return "#" + m[1].split("").map((x) => x + x).join("");
+  m = t.match(/^(?:rgb\()?\s*(\d{1,3})\s*[, ]\s*(\d{1,3})\s*[, ]\s*(\d{1,3})\s*\)?$/);
+  if (m && m.slice(1).every((v) => +v <= 255)) return rgb2hex(m.slice(1).map(Number));
+  return null;
+}
+function luminance(h) { return hex2rgb(h).map((v) => { v /= 255; return v <= 0.03928 ? v / 12.92 : Math.pow((v + 0.055) / 1.055, 2.4); }).reduce((s, v, i) => s + v * [0.2126, 0.7152, 0.0722][i], 0); }
+const contrast = (a, b) => { const [x, y] = [luminance(a), luminance(b)].sort((p, q) => q - p); return (x + 0.05) / (y + 0.05); };
+/* Option buttons outside a drawer: the brand script decides what each one sets */
+const aud = (app) => BRAND.kind === "artist" ? (app ? "fan app" : "fans") : (app ? "member app" : "members");
+const optRowA = (name, opts, cur) => `<div class="opt-row" role="group">${opts.map(([v, l]) => `<button type="button" class="opt" data-act="aopt" data-name="${name}" data-v="${esc(v)}" aria-pressed="${String(cur) === String(v)}">${l}</button>`).join("")}</div>`;
+const stl = (s) => ({ live: ["live", "Live"], sched: ["sched", "Scheduled"], draft: ["draft", "Draft"], show: ["sched", "Show day"] }[s] || ["draft", s]);
+
+/* A drawer redraws its form only when a choice changes its shape (type, kind, delivery) */
+function refreshDrawer() {
+  const d = state.draft; if (!d || !$("#dForm")) return;
+  const F = FORMS[d.form]; if (!F) return;
+  if (F.fix) F.fix(d);
+  const sig = F.sig ? F.sig(d) : "";
+  if (sig !== d._sig) { d._sig = sig; $("#dForm").innerHTML = F.form(d); }
+  const pv = $("#dPreview"); if (pv && F.preview) { pv.innerHTML = F.preview(d); enhance(pv); }
+}
+function openForm(form, draft, { title, sub, cta, act }) {
+  const F = FORMS[form];
+  state.draft = { form, ...draft };
+  if (F.fix) F.fix(state.draft);
+  state.draft._sig = F.sig ? F.sig(state.draft) : "";
+  openDrawer({ title, sub, body: F.form(state.draft), preview: F.preview ? F.preview(state.draft) : "", footer: `<button class="adm-btn" data-act="dclose">Cancel</button><button class="adm-btn primary" data-act="${act}">${cta}</button>` });
+}
+
+const INVITE_FORM = { form: (d) => `${fld("Name", inp("name", d.name, 'maxlength="60" placeholder="First and last name"'))}${fld("Work email", inp("email", d.email, 'type="email" placeholder="name@company.example"'))}${fld("Role", optRow("role", [["Editor", "Editor"], ["Moderator", "Moderator"], ["Deliveries", "Deliveries"], ["Read only", "Read only"]], d.role), "Owners can change a role at any time.")}` };
+
+/* QR code as a print-ready PNG */
+async function downloadQRPng(text, title, line, file) {
+  const q = qrcode(0, "M"); q.addData(text); q.make();
+  const n = q.getModuleCount(), S = 1200, cv = document.createElement("canvas"); cv.width = S; cv.height = S + 240;
+  const g = cv.getContext("2d");
+  g.fillStyle = "#fff"; g.fillRect(0, 0, cv.width, cv.height);
+  const m = (S - 160) / n; g.fillStyle = "#1d1f24";
+  for (let r = 0; r < n; r++) for (let c = 0; c < n; c++) if (q.isDark(r, c)) g.fillRect(80 + c * m, 80 + r * m, Math.ceil(m), Math.ceil(m));
+  try { await document.fonts.load('600 80px "Clash Display"'); } catch (e) {}
+  g.textAlign = "center"; g.font = '600 88px "Clash Display", sans-serif'; g.fillText(title, S / 2, S + 95);
+  g.font = '500 38px "General Sans", sans-serif'; g.fillStyle = "#5b606b"; g.fillText(line, S / 2, S + 170);
+  cv.toBlob((b) => saveBlob(b, file));
+}
+
+/* ---------------------------------------------------------------- Brand: appearance */
+function kitInit() {
+  const L = BRANDKIT.looks[0];
+  state.kit = { look: L.k, colours: { ...L.c }, fd: L.fd, ft: L.ft, rk: L.rk, edited: false, logo: BRANDKIT.logos[0][0], logoImg: null };
+}
+const kitFont = (list, k) => (list.find((f) => f[0] === k) || list[0])[2];
+function kitIsDefault() {
+  const s = state.kit, L = BRANDKIT.looks[0];
+  return Object.keys(L.c).every((k) => s.colours[k] === L.c[k]);
+}
+function kitApply() {
+  const s = state.kit, B = BRANDKIT, d = $("#device").style, L = B.looks[0];
+  B.vars.forEach((v) => d.removeProperty(v));
+  ["--f-display", "--f-text", "--rk"].forEach((v) => d.removeProperty(v));
+  B.reset();
+  if (!kitIsDefault()) B.apply(s.colours, d);
+  if (s.fd !== L.fd) d.setProperty("--f-display", kitFont(B.fontsD, s.fd));
+  if (s.ft !== L.ft) d.setProperty("--f-text", kitFont(B.fontsT, s.ft));
+  if (String(s.rk) !== String(L.rk)) d.setProperty("--rk", s.rk);
+  delete $("#app").dataset.ready;
+  kitPreview();
+}
+function kitPreview() {
+  const p = $("#bpScreen"); if (p) p.innerHTML = BRANDKIT.preview();
+  const c = $("#contrastNote"); if (c) c.innerHTML = kitContrast();
+}
+function kitContrast() {
+  const B = BRANDKIT, col = state.kit.colours[B.contrastRole], r = contrast(col, "#ffffff");
+  return `<i style="background:${col};color:#fff">Aa</i><span>White text on ${B.contrastLabel}: <b>${r.toFixed(1)}:1</b>. ${r >= 4.5 ? "Easy to read everywhere." : r >= 3 ? "Fine for buttons and big type." : "Too light for white text. Pick a deeper shade."}</span>`;
+}
+function admAppearance() {
+  const s = state.kit, B = BRANDKIT;
+  const fontOpts = (w, list) => `<div class="font-opts" role="group">${list.map(([k, n, fam, note]) => `<button type="button" class="font-opt" data-act="kitFont" data-w="${w}" data-k="${k}" aria-pressed="${s[w] === k}"><b style="font-family:${esc(fam)}">${n}</b><small>${note}</small></button>`).join("")}</div>`;
+  return `
+    <div class="acard"><h2>Style</h2><p class="sub">${B.styleSub}</p>
+      <div class="styles8">${B.looks.map((L, i) => `<button type="button" class="style-opt" data-act="kitLook" data-k="${L.k}" aria-pressed="${s.look === L.k}"><span class="thumb">${B.thumb(L)}</span>${s.look === L.k ? `<span class="tag">${s.edited ? "Live, edited" : "Live"}</span>` : i === 0 ? `<span class="tag def">As designed</span>` : ""}<b>${L.n}</b><span class="d">${L.d}</span></button>`).join("")}</div></div>
+    <div class="brand-split"><div>
+      <div class="acard"><h2>Colours</h2><p class="sub">Type a hex code (${B.looks[0].c[B.contrastRole]}) or RGB values (${hex2rgb(B.looks[0].c[B.contrastRole]).join(", ")}), or use the picker.</p>
+        <div class="colour-rows">${B.roles.map(([k, n, sub]) => `<div class="colour-row"><input type="color" data-colour="${k}" value="${s.colours[k]}" aria-label="${n}"><span><b>${n}</b><span>${sub}</span></span><input type="text" data-colourtext="${k}" value="${s.colours[k]}" aria-label="${n}, hex or RGB" spellcheck="false"></div>`).join("")}</div>
+        <div class="contrast" id="contrastNote">${kitContrast()}</div>
+        <div class="adm-actions" style="margin-top:12px"><button class="adm-btn sm" data-act="kitReset">${B.resetLabel}</button></div></div>
+      <div class="adm-row">
+        <div class="acard"><h2>Logo</h2><p class="sub">${B.logoSub}</p>
+          <div class="logo-opts" role="group">${B.logos.map(([k, n, svg]) => `<button type="button" class="logo-opt" data-act="kitLogo" data-k="${k}" aria-pressed="${s.logo === k}"><span class="lg">${svg()}</span>${n}</button>`).join("")}
+            <label class="logo-opt" aria-pressed="${s.logo === "upload"}"><span class="lg">${s.logoImg ? `<img src="${s.logoImg}" alt="">` : icon("upload")}</span>${s.logoImg ? "Your logo" : "Upload yours"}<input type="file" accept="image/*" data-kitlogo aria-label="Upload a logo"></label></div>
+          <p class="sub" style="margin-top:10px">SVG or PNG, on a transparent background.</p></div>
+        <div class="acard"><h2>Type and corners</h2><p class="sub">Every font here is served with the app, so it loads fast for members.</p>
+          <div class="font-row"><span>Headlines</span>${fontOpts("fd", B.fontsD)}</div>
+          <div class="font-row"><span>Text</span>${fontOpts("ft", B.fontsT)}</div>
+          <div class="font-row"><span>Corners on cards and buttons</span><div class="corner-opts" role="group">${[["0", "Square"], ["1", "Soft"], ["1.8", "Round"]].map(([v, l]) => `<button type="button" class="corner-opt" data-act="kitCorner" data-v="${v}" aria-pressed="${String(s.rk) === v}"><i style="border-top-left-radius:${Math.round(12 * v)}px"></i>${l}</button>`).join("")}</div></div></div>
+      </div>
+      <div class="acard"><h2>Words</h2><p class="sub">What ${aud()} read across the app</p>
+        <div class="aform" style="margin-top:12px"><label class="afield"><span>What ${aud()} call points</span><input id="pointsWord" value="${esc(BRAND.word)}" maxlength="18"></label></div>
+        <dl class="bs-words" style="margin-top:14px">${B.words.map(([t, d]) => `<dt>${t}</dt><dd>${d}</dd>`).join("")}</dl></div>
+    </div>
+    <div class="acard bp-card"><h2>What ${aud()} see</h2><p class="sub">Changes as you edit this page</p><div class="bp-wrap"><div class="bp-phone"><div class="bp-screen" id="bpScreen">${B.preview()}</div></div></div>
+      <div class="adm-actions" style="margin-top:12px">${memberLink("home", B.openLabel)}</div></div>
+    </div>`;
+}
+function admModules() {
+  return `<p class="sub" style="margin:0">The Season plan includes every module, for up to 10,000 active members a month. A module switched off disappears from the menu and from the ${aud(1)}.</p>
+    <div class="modules">${MODULES.map(([n, ic, s, p, i]) => `<div class="module"><span class="mi">${icon(ic)}</span><span><b>${n}</b><span>${s}</span>${p ? `<br><button class="adm-link" data-act="adm" data-p="${p}" data-i="${i || 0}">Settings</button>` : ""}</span><button class="toggle" role="switch" aria-checked="${!state.modOff.has(n)}" aria-label="${n}" data-act="module" data-n="${n}"></button></div>`).join("")}</div>`;
+}
+/* Brand-page and shared admin actions. Returns true when it handled the click. */
+function kitAction(act, el) {
+  const s = state.kit;
+  switch (act) {
+    case "kitLook": { const L = BRANDKIT.looks.find((x) => x.k === el.dataset.k); Object.assign(s, { look: L.k, colours: { ...L.c }, fd: L.fd, ft: L.ft, rk: L.rk, edited: false }); kitApply(); rerenderAdminInPlace(); admToast(`${L.n} is live in the ${aud(1)}`, "home"); return true; }
+    case "kitFont": s[el.dataset.w] = el.dataset.k; s.edited = true; kitApply(); rerenderAdminInPlace(); return true;
+    case "kitCorner": s.rk = el.dataset.v; s.edited = true; kitApply(); rerenderAdminInPlace(); return true;
+    case "kitLogo": s.logo = el.dataset.k; kitApply(); rerenderAdminInPlace(); return true;
+    case "kitReset": kitInit(); kitApply(); rerenderAdminInPlace(); admToast(BRANDKIT.resetToast); return true;
+    case "module": { const n = el.dataset.n, on = el.getAttribute("aria-checked") !== "true"; el.setAttribute("aria-checked", on); if (on) state.modOff.delete(n); else state.modOff.add(n); admToast(`${n} ${on ? "switched on" : "switched off"} for members`); return true; }
+    case "invite": openForm("invite", { name: "", email: "", role: "Editor" }, { title: "Invite someone", sub: "They get an email with a link to set their password. Two-factor sign-in is required.", cta: "Send the invitation", act: "sendInvite" }); return true;
+    case "sendInvite": {
+      const d = state.draft;
+      if (!d.name.trim() || !/^\S+@\S+\.\S+$/.test(d.email.trim())) { admToast("Add a name and a valid email first"); return true; }
+      TEAM.push([d.name.trim(), d.email.trim(), d.role, "Invitation sent"]);
+      closeDrawer(); rerenderAdminInPlace(); admToast(`Invitation sent to ${d.email.trim()}`); return true;
+    }
+  }
+  return false;
+}
+function kitInput(t) {
+  if (!(t.dataset.colour || t.dataset.colourtext)) return false;
+  const k = t.dataset.colour || t.dataset.colourtext;
+  const c = t.dataset.colour ? t.value : parseColour(t.value);
+  if (t.dataset.colourtext) t.setAttribute("aria-invalid", c ? "false" : "true");
+  if (!c) return true;
+  state.kit.colours[k] = c; state.kit.edited = true;
+  if (t.dataset.colour) $(`[data-colourtext="${k}"]`).value = c; else $(`[data-colour="${k}"]`).value = c;
+  kitApply();
+  const tag = $(".style-opt[aria-pressed=true] .tag"); if (tag) tag.textContent = "Live, edited";
+  return true;
+}
+function kitChange(t) {
+  if (!t.matches("[data-kitlogo]") || !t.files || !t.files.length) return false;
+  state.kit.logoImg = URL.createObjectURL(t.files[0]); state.kit.logo = "upload";
+  kitApply(); rerenderAdminInPlace(); admToast(`Your logo is in the ${aud(1)}`, "home");
+  return true;
+}
+/* The logo the brand chose, wherever the app draws it */
+function logoMark(cls = "") {
+  const s = state.kit;
+  if (s && s.logo === "upload" && s.logoImg) return `<img class="${cls}" src="${s.logoImg}" alt="${esc(BRAND.name)}">`;
+  const L = BRANDKIT.logos.find((x) => x[0] === (s ? s.logo : "")) || BRANDKIT.logos[0];
+  return (L[3] || L[2])(cls);
+}
+
+/* ---------------------------------------------------------------- Account */
+function accountPage({ domain, active, renews, sub }) {
+  const roles = [["Owner", "Everything, including billing and the team"], ["Editor", "Missions, rewards, brand and season"], ["Moderator", "Posts, answers and members"], ["Deliveries", "Winners & deliveries only"], ["Read only", "Results and exports"]];
+  return admHead("Account", sub) + `
+    <div class="adm-grid">
+      <div class="acard"><div class="acard-top"><div><h2>Team</h2><p class="sub">Unlimited seats on Season. Each person sees what their role allows.</p></div><button class="adm-btn sm" data-act="invite">${icon("plus")}Invite someone</button></div>
+        <div class="scroll-x"><table class="atable"><thead><tr><th>Name</th><th>Job</th><th>Role</th><th>Last active</th></tr></thead>
+        <tbody>${TEAM.map(([n, j, r, l]) => `<tr><td><span class="who"><i>${initials(n)}</i>${esc(n)}</span></td><td class="wrap">${esc(j)}</td><td>${r}</td><td>${l === "Invitation sent" ? `<span class="st sched">${l}</span>` : l}</td></tr>`).join("")}</tbody></table></div></div>
+      <div class="acard"><h2>Plan</h2><p class="sub">Season. Every program module, unlimited team seats and your own domain.</p>
+        <div class="usage"><div><span>Active members this month</span><b>${fmt(active)} of 10,000</b></div><span class="bar-a"><i style="width:${(active / 100).toFixed(1)}%"></i></span><small class="sub">Members who used the app at least once this month. Sign-ups who never come back are not counted.</small></div>
+        <dl class="bs-words" style="margin-top:14px"><dt>Price</dt><dd>€1,290 a month, excluding VAT</dd><dt>Term</dt><dd>12 months, renews ${renews}</dd><dt>Invoices</dt><dd>Monthly, by email, paid by bank transfer</dd><dt>Support</dt><dd>Reply within one business day</dd></dl></div>
+    </div>
+    <div class="adm-row">
+      <div class="acard"><h2>Roles</h2><div class="scroll-x"><table class="atable"><tbody>${roles.map(([r, w]) => `<tr><td><b style="font-weight:500">${r}</b></td><td class="wrap">${w}</td></tr>`).join("")}</tbody></table></div></div>
+      <div class="acard"><h2>Security and data</h2><dl class="bs-words" style="margin-top:12px"><dt>Team sign-in</dt><dd>Two-factor, required for everyone</dd><dt>${aud() === "fans" ? "Fans" : "Members"} sign in</dt><dd>Email link, Apple or Google</dd><dt>Domain</dt><dd>${domain}</dd><dt>Data</dt><dd>Hosted in the EU, exports on request</dd><dt>${aud() === "fans" ? "Fan" : "Member"} data</dt><dd>Deleted 30 days after a ${aud() === "fans" ? "fan" : "member"} leaves</dd></dl></div>
+    </div>`;
+}
+
 </script>
 <script>
 /* Ilsa Morrow, the Band. Season plan. Everything here is fictional: the
@@ -1211,9 +1506,6 @@ const PASS_URL = "https://band.ilsamorrow.example/m/0731";
 const checkinURL = (c) => `https://band.ilsamorrow.example/checkin/${c}`;
 
 /* ---------------------------------------------------------------- artwork */
-function brandMark(cls = "") {
-  return `<svg class="${cls}" viewBox="0 0 48 48" role="img" aria-label="Ilsa Morrow"><rect width="48" height="48" rx="10" fill="${K.nuit}"/><circle cx="24" cy="22" r="11" fill="none" stroke="${K.sel}" stroke-width="2.4"/><path d="M9 31c5-4 10 4 15 0s10-4 15 0" fill="none" stroke="${K.tide}" stroke-width="2.6" stroke-linecap="round"/><path d="M9 37c5-4 10 4 15 0s10-4 15 0" fill="none" stroke="${K.tide}" stroke-width="2.6" stroke-linecap="round" opacity=".55"/><circle cx="24" cy="22" r="3.2" fill="${K.red}"/></svg>`;
-}
 const tideLines = (c = K.tide) => `<svg class="tide" viewBox="0 0 200 60" preserveAspectRatio="none" aria-hidden="true">${[0, 1, 2, 3].map((i) => `<path d="M0 ${14 + i * 12}c25-10 50 10 75 0s50-10 75 0 35 8 50 0" fill="none" stroke="${c}" stroke-width="2.2" opacity="${0.9 - i * 0.2}"/>`).join("")}</svg>`;
 function itemArt(kind, t) {
   const fg = t === "sel" ? K.nuit : K.sel, acc = t === "red" ? K.nuit : K.red;
@@ -1358,7 +1650,7 @@ function shell() {
   const rail = [...TABS, ["band", "The Band", "band"], ["me", "Me", "user"]];
   return `
   <aside class="rail" aria-label="The Band">
-    <button class="wm" data-act="tab" data-tab="home">Ilsa<br>Morrow<small>The Band, Marée haute tour</small></button>
+    <button class="wm" data-act="tab" data-tab="home">${wmMark()}Ilsa<br>Morrow<small>The Band, Marée haute tour</small></button>
     <nav class="rail-nav" data-shell="rail">${rail.map(([k, l], i) => `<button data-act="tab" data-tab="${k}" ${state.tab === k ? 'aria-current="page"' : ""}><i>${String(i + 1).padStart(2, "0")}</i>${l}${k === "setlist" ? `<span class="n">${openMissions().length}</span>` : k === "tour" ? `<span class="n">${state.got.size}/12</span>` : ""}</button>`).join("")}</nav>
     <div class="rail-foot">
       <button class="rail-notes" data-act="tab" data-tab="merch" data-points-target><b data-balance class="num">${fmt(state.balance)}</b><span>${BRAND.word}</span></button>
@@ -1366,7 +1658,7 @@ function shell() {
     </div>
   </aside>
   <header class="top">
-    <button class="wm" data-act="tab" data-tab="home">Ilsa Morrow<small>The Band</small></button>
+    <button class="wm" data-act="tab" data-tab="home">${wmMark()}Ilsa Morrow<small>The Band</small></button>
     <button class="notes" data-act="tab" data-tab="merch" data-points-target><b data-balance class="num">${fmt(state.balance)}</b><span data-shell="word">${BRAND.word}</span></button>
     <button class="me-btn" data-act="tab" data-tab="me" aria-label="Me">${initials(ME.name)}</button>
   </header>
@@ -1581,7 +1873,7 @@ function missionSheet(id) {
   const m = mission(id); if (!m) return;
   if (state.done.has(id) && m.kind !== "vote") return openSheet(head(m) + `<div class="success"><p>Played. ${m.city && state.got.has(m.city) ? `${city(m.city).city} is on your tour.` : "Counted."}</p><button class="btn btn-red" data-act="close">Close</button></div>`);
   if (locked(m)) return openSheet(head(m) + `<p>${esc(m.brief)}</p><div class="sum"><div><span>Opens</span><b>${dayShort(NEXT.date)}, ${m.kind === "checkin" ? "19:30, at doors" : "at the encore"}</b></div><div><span>Where</span><b>${NEXT.city}, at the venue</b></div></div><div class="demo-hint"><span>Demo: jump to show night</span><button class="btn btn-red btn-sm" data-act="shownight" data-then="${id}">It's show night</button></div>`);
-  const body = { post: postBody, sing: singBody, checkin: checkinBody, friend: friendBody, quiz: quizBody, vote: voteBody, open: openBody }[m.kind](m);
+  const body = (m.gen ? genBody : { post: postBody, sing: singBody, checkin: checkinBody, friend: friendBody, quiz: quizBody, vote: voteBody, open: openBody }[m.kind])(m);
   openSheet(head(m) + body);
 }
 function postBody(m) {
@@ -1651,6 +1943,7 @@ function redeemSheet(id) {
 /* ---------------------------------------------------------------- actions */
 function onAction(act, el) {
   switch (act) {
+    case "gvote": case "gquiz": case "gsend": return genAction(act, el);
     case "mission": return missionSheet(el.dataset.id);
     case "filter": state.filter = el.dataset.f; return renderMember(false);
     case "mfilter": state.mfilter = el.dataset.f; return renderMember(false);
@@ -1779,23 +2072,54 @@ const DAILY = Array.from({ length: 30 }, (_, i) => {
 });
 const DAY_LABELS = DAILY.map((_, i) => dayNum(addDays(i - 29)));
 const SHOW_MARKS = DAILY.map((_, i) => i).filter((i) => TOUR.some((c) => c.d === i - 29));
-const NETS = [["TikTok", 0.47, 0.58], ["Instagram", 0.41, 0.33], ["YouTube Shorts", 0.1, 0.08], ["Facebook", 0.02, 0.01]];
+/* network, share of posts, share of views, like rate, comment rate, share rate */
+const NETS = [["TikTok", 0.47, 0.58, 0.09, 0.0038, 0.0066], ["Instagram", 0.41, 0.33, 0.072, 0.0043, 0.005], ["YouTube Shorts", 0.1, 0.08, 0.042, 0.0021, 0.0017], ["Facebook", 0.02, 0.01, 0.031, 0.0047, 0.007]];
 const played = () => TOUR.filter((c) => c.d < 0);
 const tourTot = (k) => played().reduce((a, c) => a + (c[k] || 0), 0) + (k === "ci" && state.done.has("merch") ? 1 : 0) + (k === "ci" ? state.live : 0);
-const STATUSES = { post: ["To send", "Sent", "Delivered"], book: ["Date to fix", "Date fixed", "Done"], code: ["Delivered instantly"], unlock: ["Delivered instantly"] };
+
+/* ---------------------------------------------------------------- deliveries */
+Object.assign(HOW, { pickup: "Collect it at the merch stand, any show", file: "Download straight away" });
+const STATUSES = { post: ["To send", "Sent", "Delivered"], book: ["Date to fix", "Date fixed", "Done"], pickup: ["To prepare", "Ready at the stand", "Collected"], code: ["Delivered instantly"], unlock: ["Delivered instantly"], file: ["Delivered instantly"] };
+const DELIV = { post: "Posted", book: "Booked with the team", pickup: "At the merch stand", code: "Code, instant", unlock: "Track, instant", file: "File, instant" };
 const ORDERS0 = [
-  { who: "Inès Ould-Ali", item: "setl", status: "To send", d: -1 }, { who: "Jonas Peeters", item: "sound", status: "Date to fix", d: -2 },
-  { who: "Pauline Morel", item: "poster", status: "To send", d: -2 }, { who: "Sam Okonjo", item: "vinyl", status: "Sent", d: -6 }, { who: "Noé Brunet", item: "tee", status: "Delivered instantly", d: -4 },
+  { who: "Aya Benali", label: "Encore tour laminate", how: "Tier perk: reached Encore", deliv: "post", status: "To send", d: 0 },
+  { who: "Inès Ould-Ali", item: "setl", status: "To send", d: -1 },
+  { who: "Hugo Lefèvre", item: "memo", status: "Delivered instantly", d: -1 },
+  { who: "Jonas Peeters", item: "sound", status: "Date to fix", d: -2 },
+  { who: "Pauline Morel", item: "poster", status: "To send", d: -2 },
+  { who: "Clémence Vidal", label: "The Bordeaux setlist, signed", how: "Best setlist photo, Bordeaux", deliv: "post", status: "Sent", d: -2 },
+  { who: "Noé Brunet", item: "tee", status: "Delivered instantly", d: -4 },
+  { who: "Sam Okonjo", item: "vinyl", status: "Sent", d: -6 },
+  { who: "Lou Garnier-Roy", label: "Tour poster, signed", how: "Tour collection: 5 cities", deliv: "post", status: "Delivered", d: -9 },
 ];
 const orders = () => { if (!state.orders) state.orders = ORDERS0.map((o) => ({ ...o })); return state.orders; };
-const toSend = () => orders().filter((o) => ["To send", "Date to fix"].includes(o.status)).length;
-function admOverview() {
-  const views = tourTot("views"), posts = tourTot("posts");
+const oItem = (o) => MERCH.find((x) => x.id === o.item);
+const oTitle = (o) => o.label || (oItem(o) || {}).title || "";
+const oDeliv = (o) => o.deliv || (oItem(o) || {}).how || "post";
+const oHow = (o) => o.how || (oItem(o) ? `Redeemed, ${fmt(oItem(o).cost)} ${BRAND.word}` : "");
+const PREP = ["To send", "Date to fix", "To prepare"], WAY = ["Sent", "Date fixed", "Ready at the stand"];
+const toSend = () => orders().filter((o) => PREP.includes(o.status)).length;
+
+Object.assign(state, {
+  admin: "today", olist: "all", mq: "", psort: "views", rsort: "value", drawn: null, entered: false, encoreClosed: null, opener: null, openerPick: "Phare",
+  mult: { opener: 3, encore: 2 }, ci: { opens: "19:30", closes: "curfew", where: "200", mode: "qr" }, rmore: false, gv: {}, modOff: new Set(), poster: "5", collectBy: "both",
+});
+
+/* ---------------------------------------------------------------- Today */
+function admToday() {
+  const views = tourTot("views");
   const plan = [["16:00", "Soundcheck: 2 Band winners in", "Names on the door list"], ["19:30", "Doors. Merch check-in opens", "QR on the stand, 200 m radius"], ["20:15", "Push: the setlist mission is coming", "Band members within 1 km"], ["22:40", "Encore. Setlist photo mission opens", "Open for 24 hours"], ["23:30", "Check-in closes", "Curfew"]];
-  return admHead("Overview", "Ilsa Morrow, the Band. Marée haute tour so far: 6 of 12 dates. Illustrative figures.", `<button class="adm-btn primary" data-act="adm" data-p="checkin">${icon("qr")}Lyon check-in</button>`) + `
+  const todo = [
+    ["wins", 0, `${toSend()} rewards to send, prepare or book`, "Winners & deliveries"],
+    ["missions", 1, state.opener ? `Toulouse opener confirmed: '${state.opener}'` : `Confirm what opened Toulouse: ${fmt(OPENER_CALLS)} fans called it`, "Setlist calls and votes"],
+    ["missions", 3, `${fmt(41 + ansList().filter((a) => a.status === "new").length)} new answers to read`, "Open questions"],
+    ["missions", 2, "Print the Lyon check-in QR for the stand", "Check-ins"],
+    ["season", 3, `Front Row race closes ${dayShort(FRONT_CUTOFF)}: 10th place is on 3,420 ${BRAND.word}`, "Season"],
+  ];
+  return admHead("Today", "Ilsa Morrow, the Band. Marée haute tour so far: 6 of 12 dates. Illustrative figures.", `<button class="adm-btn primary" data-act="newMission">${icon("plus")}New mission</button>`) + `
     <div class="kpis">
-      ${kpi("Views on fans' posts", big(views), `${fmt(posts)} posts that tag @ilsamorrow`)}
-      ${kpi("Media value", eur(mediaValue(views)), `At your ${cpmLabel()} CPM. <button class="adm-link" data-act="adm" data-p="value">Change it</button>`)}
+      ${kpi("Media value, tour so far", eur(mediaValue(views)), `${big(views)} views on fans' posts, at a ${cpmLabel()} CPM`)}
+      ${kpi("Active fans this month", "9,200", "+12% on last month")}
       ${kpi("Merch-stand check-ins", fmt(tourTot("ci")), `${pct(tourTot("ci"), played().reduce((a, c) => a + c.cap, 0))} of the tickets sold`)}
       ${kpi("New Band members on tour", fmt(tourTot("joined")), "Joined at a show or from a fan's post")}
     </div>
@@ -1803,53 +2127,402 @@ function admOverview() {
       <div class="acard"><h2>Views on fans' posts, per day</h2><p class="sub">Dots mark show nights. Views peak the day after each show.</p>${lineChart({ id: "daily", data: DAILY, labels: DAY_LABELS, max: 800000, marks: SHOW_MARKS, aria: "Daily views on fans' posts, last 30 days", tipFor: (i) => { const c = TOUR.find((x) => x.d === i - 29); return `<b>${DAY_LABELS[i]}</b>, ${fmt(DAILY[i])} views${c ? `, ${c.city} show` : ""}`; } })}</div>
       <div class="acard"><h2>Lyon, ${dayShort(NEXT.date)}</h2><p class="sub">Scheduled, runs on its own</p><ol class="timeline">${plan.map(([t, b, s]) => `<li><time>${t}</time><span class="dot"></span><span class="tl"><b>${b}</b><span>${s}</span></span></li>`).join("")}</ol></div>
     </div>
-    <div class="acard"><h2>Things to do</h2><div class="todo">
-      <button data-act="adm" data-p="merch" data-i="1"><span>${toSend()} rewards to send or to book</span><small>Merch table</small></button>
-      <button data-act="adm" data-p="tour" data-i="1"><span>Toulouse posts are still coming in: 738 so far</span><small>Tour</small></button>
-      <button data-act="adm" data-p="missions"><span>Geneva encore vote closes in ${Math.max(1, city("gva").d - 1)} days: 'Les quais à 4 h' leads</span><small>Missions</small></button>
-      <button data-act="adm" data-p="goal"><span>High tide at ${goalPct()}%: ${fmt(50000 - state.goal)} missions to the acoustic track</span><small>Band goal</small></button>
-    </div></div>`;
+    <div class="acard"><h2>Things to do</h2><div class="todo">${todo.map(([p, i, t, w]) => `<button data-act="adm" data-p="${p}" data-i="${i}"><span>${t}</span><small>${w}</small></button>`).join("")}</div></div>`;
 }
+
+/* ---------------------------------------------------------------- Missions */
+const MTYPE = { sing: "Video", setlist: "Social post", merch: "Check-in", friend: "Referral", fit: "Photo", lyric: "Quiz", encore: "Vote", first: "Open question" };
+const DONE_SINCE = { sing: 4120, setlist: 0, merch: 0, friend: 960, fit: 1830, lyric: 7240, encore: 8641, first: 2210 };
+const EXTRA_ROWS = [
+  { title: "Geneva: the encore, from where you stood", type: "Video", pts: 150, city: "Geneva", when: dayNum(city("gva").date), status: "sched" },
+  { title: "Paris: the last-night setlist", type: "Social post", pts: 200, city: "Paris", when: "Draft", status: "draft" },
+];
+function admMissions() {
+  const tab = state.atab.missions || 0;
+  const h = admHead("Missions", "The setlist: everything fans do to earn notes. City missions are created for every date on their own.", `<button class="adm-btn primary" data-act="newMission">${icon("plus")}New mission</button>`) + admTabs("missions");
+  if (tab === 1) return h + admCalls();
+  if (tab === 2) return h + admCheckin();
+  if (tab === 3) return h + admAnswers();
+  const rows = [...MISSIONS.map((m) => ({ m, title: m.title, type: m.type || MTYPE[m.id] || "Social post", city: m.city ? city(m.city).city : "Anywhere", pts: m.pts, when: m.show ? dayNum(NEXT.date) : m.when || "Now", status: m.show ? "show" : "live", n: (DONE_SINCE[m.id] || 0) + (state.done.has(m.id) ? 1 : 0) })), ...EXTRA_ROWS];
+  return h + `<div class="acard"><div class="scroll-x"><table class="atable"><thead><tr><th>Mission</th><th>Type</th><th>City</th><th class="r">${BRAND.word.replace(/^./, (c) => c.toUpperCase())}</th><th>When</th><th class="r">Done by</th><th>Status</th></tr></thead>
+    <tbody>${rows.map((r) => `<tr class="${r.m && r.m.fresh ? "fresh" : ""}"><td class="wrap"><b>${esc(r.title)}</b>${r.m ? `<br><span class="sub">${esc(r.m.meta)}</span>` : ""}</td><td>${esc(r.type)}</td><td>${esc(r.city)}</td><td class="r">${r.pts}</td><td>${esc(r.when)}</td><td class="r">${r.n ? fmt(r.n) : "–"}</td><td><span class="st ${stl(r.status)[0]}">${stl(r.status)[1]}</span></td></tr>`).join("")}</tbody></table></div></div>
+    <div class="acard"><h2>Mission types on this plan</h2><p class="sub">Social post, video, photo, check-in, setlist call, vote, quiz, open question, referral. Every date gets its check-in, setlist photo and bring-a-friend missions on its own; city missions open on show day.</p></div>`;
+}
+
+/* Setlist calls: the music world's predictions */
+const SONGS = ["Phare", "Marée haute", "Sel", "Basse mer", "Les quais à 4 h"];
+const OPENER_SPLIT = { Phare: 0.34, "Marée haute": 0.29, Sel: 0.18, "Basse mer": 0.1196, "Les quais à 4 h": 0.07 };
+const OPENER_CALLS = 3140;
+function openerStats(song) {
+  const right = Math.round(OPENER_CALLS * OPENER_SPLIT[song]);
+  return { total: OPENER_CALLS, right, wrong: OPENER_CALLS - right, paid: OPENER_CALLS * 20 + right * 20 * (state.mult.opener - 1) };
+}
+const ENC_BASE = { phare: 2840, quais: 3610, sel: 2190 };
+function admCalls() {
+  const res = state.opener, st = res ? openerStats(res) : null;
+  const enc = ENCORES.map(([k, l, s]) => [k, l, s, ENC_BASE[k] + (state.vote === k ? 1 : 0)]), etot = enc.reduce((a, x) => a + x[3], 0), emax = Math.max(...enc.map((x) => x[3]));
+  const customs = MISSIONS.filter((m) => m.call);
+  return `<div class="adm-grid">
+    <div class="acard"><h2>Toulouse: call the opener</h2><p class="sub">${dayShort(city("tls").date)}. Fans called the first song before doors. ${res ? "Answer confirmed, notes paid." : "Confirm what Ilsa opened with and every call is settled at once."}</p>
+      <div class="vote-bars">${SONGS.map((s) => `<div class="${res === s ? "lead" : ""}"><span>${s}</span><b>${fmt(OPENER_CALLS * OPENER_SPLIT[s])} calls</b><span class="bar-a"><i style="width:${((OPENER_SPLIT[s] / 0.34) * 100).toFixed(1)}%"></i></span></div>`).join("")}</div>
+      <div class="adm-row" style="margin-top:14px">${fld("Song that opened Toulouse", res ? `<input value="${esc(res)}" disabled>` : sel("openerPick", SONGS.map((s) => [s, s]), state.openerPick))}
+        <div class="afield"><span>&nbsp;</span>${res ? `<button class="adm-btn" data-act="resetOpener">Correct the answer</button>` : `<button class="adm-btn primary" data-act="settleOpener">${icon("check")}Confirm the opener</button>`}</div></div>
+      ${st ? `<div class="settle"><div><b>${fmt(st.total)}</b><span>calls settled</span></div><div><b>${fmt(st.right)}</b><span>right, ×${state.mult.opener}</span></div><div><b>${fmt(st.wrong)}</b><span>missed, 20 ${BRAND.word} each</span></div><div><b>${fmt(st.paid)}</b><span>${BRAND.word} paid</span></div></div>
+        <div class="callout ok" style="margin-top:12px">Fans got a push with their ${BRAND.word}. The ${fmt(st.right)} who called '${esc(res)}' are on the Front Row race already.</div>` : ""}</div>
+    <div class="acard"><h2>Bonus for setlist calls</h2><p class="sub">Shown on every call, so fans know what they play for.</p>
+      <div class="aform" style="margin-top:12px">${fld("Taking part", `<input value="20 ${BRAND.word}" disabled>`)}
+        ${fld("Right opener", sel("multOpener", [["2", "Notes doubled (×2)"], ["3", "Notes tripled (×3)"], ["5", "Notes ×5"]], state.mult.opener))}
+        ${fld("Right encore", sel("multEncore", [["2", "Notes doubled (×2)"], ["3", "Notes tripled (×3)"]], state.mult.encore))}</div></div>
+  </div>
+  <div class="acard"><div class="acard-top"><div><h2>Vote: the encore for Geneva</h2><p class="sub">${fmt(etot)} votes, +30 ${BRAND.word} each. Closes the day before the show, ${dayShort(addDays(city("gva").d - 1))}. The winner closes the Geneva show.</p></div>
+      ${state.encoreClosed ? `<span class="st live">Closed: '${esc(state.encoreClosed)}' wins</span>` : `<button class="adm-btn" data-act="closeEncore">Close the vote now</button>`}</div>
+    <div class="vote-bars">${enc.map(([k, l, s, n]) => `<div class="${n === emax ? "lead" : ""}"><span>${l} <span class="sub">${s}</span></span><b>${fmt(n)}, ${pct(n, etot)}</b><span class="bar-a"><i style="width:${((n / emax) * 100).toFixed(1)}%"></i></span></div>`).join("")}</div></div>
+  ${customs.length ? `<div class="acard"><h2>Your other calls</h2><p class="sub">Set the right answer and fans who called it get their bonus.</p>
+    <div class="scroll-x"><table class="atable"><tbody>${customs.map((m) => `<tr><td class="wrap">${esc(m.title)}</td><td>${m.answer ? `Answer: <b>${esc(m.answer)}</b>` : sel("ans-" + m.id, m.options.map((o) => [o, o]), m.options[0])}</td><td class="r">${m.answer ? `<span class="st live">Settled</span>` : `<button class="adm-btn sm" data-act="setCall" data-id="${m.id}">Confirm</button>`}</td></tr>`).join("")}</tbody></table></div></div>` : ""}`;
+}
+
+/* Check-ins */
+function admCheckin() {
+  const c = state.live + (state.done.has("merch") ? 1 : 0);
+  return `<div class="adm-grid">
+    <div class="acard"><h2>Lyon, ${dayShort(NEXT.date)}</h2><p class="sub">One QR per date. Print it A3 for the stand, A5 for the bar. It only works at the venue, inside the time window.</p>
+      <div class="qr-box"><span class="qr">${qrSVG(checkinURL("lyon"), "#1d1f24")}</span>
+        <div style="display:grid;gap:8px;min-width:0;flex:1 1 220px"><span class="st ${state.showNight ? "live" : "sched"}" style="justify-self:start">${state.showNight ? "Open now" : `Opens ${state.ci.opens} on show day`}</span>
+          <b style="font-family:var(--fx-display);font-weight:600;font-size:1.75rem;font-variant-numeric:tabular-nums">${fmt(c)}</b><span class="sub" style="margin:0">checked in so far, of ${fmt(NEXT.pre)} Band members with tickets</span>
+          <div class="adm-actions"><button class="adm-btn" data-act="qrpng">${icon("download")}Download the QR code</button><button class="adm-btn" data-act="copy" data-copy="${checkinURL("lyon")}">${icon("copy")}Copy the link</button><button class="adm-btn" data-act="opendoors">${state.showNight ? "Simulate 200 more scans" : "Open check-in now"}</button></div></div></div></div>
+    <div class="acard"><h2>Rules</h2><p class="sub">Set once, used for every date</p>
+      <div class="aform" style="margin-top:12px">
+        <div class="adm-row">${fld("Opens", `<input type="time" name="ciOpens" value="${state.ci.opens}">`)}${fld("Closes", sel("ciCloses", [["curfew", "At curfew, 23:30"], ["encore", "After the encore"], ["midnight", "At midnight"]], state.ci.closes))}</div>
+        ${fld("How close to the venue", sel("ciWhere", [["100", "Within 100 m"], ["200", "Within 200 m"], ["500", "Within 500 m"]], state.ci.where), "Fans' phones check they are this close.")}
+        <div class="afield"><span>How fans check in</span>${optRowA("ciMode", [["qr", "Scan the QR"], ["loc", "Location only"], ["both", "QR and location"]], state.ci.mode)}</div>
+        ${fld("What they get", `<input value="150 ${esc(BRAND.word)} and the city on their tour" disabled>`)}</div></div>
+  </div>
+  <div class="acard"><h2>Last six shows</h2><div class="scroll-x"><table class="atable"><thead><tr><th>City</th><th>Date</th><th class="r">Checked in</th><th class="r">Of tickets</th><th class="r">Joined the Band there</th></tr></thead>
+    <tbody>${played().map((x) => `<tr><td><b>${x.city}</b></td><td>${dayNum(x.date)}</td><td class="r">${fmt(x.ci)}</td><td class="r">${pct(x.ci, x.cap)}</td><td class="r">${fmt(x.joined)}</td></tr>`).join("")}</tbody></table></div></div>`;
+}
+
+/* Open questions: the team reads answers and features the best */
+const ANS = [
+  { who: "Lina Haddad", handle: "@lina.hdd", when: "Today", t: "'Les quais à 4 h', on a demo my brother found on a forum. I was fifteen.", status: "new" },
+  { who: "Théo Marchal", handle: "@theo.mrc", when: "Today", t: "'Marée haute' at the Rennes show, before I knew any of the words.", status: "new" },
+  { who: "Jade Fontaine", handle: "@jade.ftn", when: "Yesterday", t: "'Sel', on repeat through every revision week of my second year.", status: "new" },
+  { who: "Victor Blanc", handle: "@vic.blanc", when: "Yesterday", t: "'Phare', in a hospital waiting room. My daughter is three now.", status: "new" },
+  ...ANSWERS.map(([w, t], i) => ({ who: w, handle: ["@noe.brn", "@rosa.alm", "@bastroux"][i], when: `${3 + i} days ago`, t, status: "featured" })),
+];
+const ansList = () => [...(state.answer ? [{ me: 1, who: ME.name, handle: ME.handle, when: "Just now", t: state.answer, status: state.ansMine || "new" }] : []), ...ANS];
+function admAnswers() {
+  const m = mission("first"), list = ansList(), feat = list.filter((a) => a.status === "featured").length;
+  const order = { new: 0, featured: 1, hidden: 2 };
+  const rows = [...list].sort((a, b) => (b.me ? 1 : 0) - (a.me ? 1 : 0) || order[a.status] - order[b.status]);
+  const extra = MISSIONS.filter((x) => x.gen === "open" && x.id !== "first");
+  return `<div class="acard"><div class="acard-top"><div><h2>Which song was your first, and where were you?</h2><p class="sub">${esc(m.title)}. ${fmt(DONE_SINCE.first + (state.answer ? 1 : 0))} answers, ${feat} featured, +50 ${BRAND.word} for each one featured. Featured answers show in the Band, and Ilsa reads a few out in Paris.</p></div>
+      <div class="adm-actions"><button class="adm-btn" data-act="answersCsv">${icon("download")}Featured answers, CSV</button></div></div>
+    <div class="ans-list">${rows.map((a) => { const i = a.me ? -1 : ANS.indexOf(a); return `<div class="ans ${a.status}">
+      <span class="who"><i>${initials(a.who)}</i><span><b>${esc(a.who)}</b> <span class="sub">${esc(a.handle)}, ${a.when}</span></span></span>
+      <p>${esc(a.t)}</p>
+      <div class="adm-actions">${a.status === "featured" ? `<span class="st live">Featured</span><button class="adm-btn ghost" data-act="ans" data-i="${i}" data-s="new">Undo</button>`
+        : a.status === "hidden" ? `<span class="st">Hidden</span><button class="adm-btn ghost" data-act="ans" data-i="${i}" data-s="new">Show again</button>`
+        : `<button class="adm-btn primary" data-act="ans" data-i="${i}" data-s="featured">Feature, +50</button><button class="adm-btn ghost" data-act="ans" data-i="${i}" data-s="hidden">Hide</button>`}</div></div>`; }).join("")}</div>
+    <p class="sub" style="margin-top:12px">Showing the latest. The other ${fmt(DONE_SINCE.first - ANS.length)} are in the CSV.</p></div>
+    ${extra.map((x) => `<div class="acard"><h2>${esc(x.title)}</h2><p class="sub">${state.done.has(x.id) ? "1 answer so far: yours, in the fan app." : "No answers yet. They appear here as fans send them."}</p></div>`).join("")}`;
+}
+function setAns(i, status) {
+  const a = i < 0 ? null : ANS[i], was = a ? a.status : state.ansMine || "new";
+  if (a) {
+    a.status = status;
+    const k = ANSWERS.findIndex((x) => x[1] === a.t);
+    if (status === "featured" && k < 0) ANSWERS.unshift([a.who, a.t]);
+    if (status !== "featured" && k >= 0) ANSWERS.splice(k, 1);
+  } else {
+    state.ansMine = status;
+    if (status === "featured" && was !== "featured") { state.balance += 50; state.earned += 50; state.news = `Your first-song answer is featured in the Band. +50 ${BRAND.word}.`; }
+    if (was === "featured" && status !== "featured") { state.balance -= 50; state.earned -= 50; state.news = null; }
+  }
+  rerenderAdminInPlace();
+  admToast(status === "featured" ? `${a ? a.who.split(" ")[0] : ME.first}'s answer is featured, +50 ${BRAND.word} sent` : status === "hidden" ? "Hidden from fans" : "Back with the others", status === "featured" ? "band" : null);
+}
+
+/* New mission */
+const MTYPES = [["Social post", "Social post"], ["Photo", "Photo"], ["Video", "Video"], ["Setlist call", "Setlist call"], ["Vote", "Vote"], ["Quiz", "Quiz"], ["Open question", "Open question"]];
+function newMissionDraft() {
+  return { type: "Setlist call", title: "Lyon: call the encore", brief: "Pick the song Ilsa closes Lyon with. Call it right and your notes are tripled.", pts: 40, meta: "Closes at doors", city: "lyo",
+    options: "Phare\nSel\nLes quais à 4 h\nBasse mer", mult: "3", q: "Which song did Ilsa write on the ferry to Belle-Île?", a1: "Phare", a2: "Sel", a3: "Basse mer", a4: "Les quais à 4 h", right: "1",
+    start: isoDay(NOW), end: isoDay(addDays(2)), who: "all", publish: "now" };
+}
+const draftM = (d) => ({ id: "draft", title: d.title || "Untitled mission", pts: Math.max(0, parseInt(d.pts, 10) || 0), meta: d.meta || "", city: d.city === "any" ? null : d.city });
+function missionForm(d) {
+  const t = d.type;
+  let extra = "";
+  if (t === "Setlist call") extra = `<h3 style="margin:4px 0 0;font-size:.875rem">What fans call</h3>${fld("Songs, one per line", `<textarea name="options">${esc(d.options)}</textarea>`)}${fld("Bonus when they are right", sel("mult", [["2", "Notes doubled (×2)"], ["3", "Notes tripled (×3)"], ["5", "Notes ×5"]], d.mult), "You confirm the right song after the show, in Setlist calls and votes.")}`;
+  else if (t === "Vote") extra = `${fld("Choices, one per line", `<textarea name="options">${esc(d.options)}</textarea>`)}`;
+  else if (t === "Quiz") extra = `${fld("Question", inp("q", d.q))}<div class="adm-row">${[1, 2, 3, 4].map((i) => fld(`Answer ${i}`, inp("a" + i, d["a" + i]))).join("")}</div>${fld("Right answer", sel("right", [["1", "Answer 1"], ["2", "Answer 2"], ["3", "Answer 3"], ["4", "Answer 4"]], d.right))}`;
+  else if (t === "Open question") extra = `<p class="sub" style="margin:0">Fans write up to 280 characters. You read them in Missions, Open questions, and feature the best.</p>`;
+  else extra = `<p class="sub" style="margin:0">Fans post on their own account, tag @ilsamorrow and paste the link. The post is checked on its own and its views counted for 30 days.</p>`;
+  return `${fld("Type", optRow("type", MTYPES, t))}
+    ${fld("Title", inp("title", d.title, 'maxlength="60"'))}
+    ${fld("What fans read", `<textarea name="brief">${esc(d.brief)}</textarea>`)}
+    <div class="adm-row">${fld(BRAND.word.replace(/^./, (c) => c.toUpperCase()), inp("pts", d.pts, 'type="number" min="0" step="5"'))}${fld("Line under the title", inp("meta", d.meta, 'maxlength="40"'))}</div>
+    <div class="afield"><span>City</span>${optRow("city", [["any", "Anywhere"], ...TOUR.filter((c) => c.d >= 0).map((c) => [c.id, c.city])], d.city)}</div>
+    ${extra}
+    <div class="adm-row">${fld("Starts", inp("start", d.start, 'type="date"'))}${fld("Ends", inp("end", d.end, 'type="date"'))}</div>
+    ${fld("Who sees it", sel("who", [["all", "Every Band member"], ["tickets", "Fans with a ticket for that city"], ["tier", "Singalong tier and above"], ["quiet", "Fans who haven't played this month"]], d.who))}
+    ${fld("Publish", optRow("publish", [["now", "Publish now"], ["sched", "Schedule for the start date"], ["draft", "Save as draft"]], d.publish))}`;
+}
+let customN = 0;
+function createMission() {
+  const d = state.draft, t = d.type, opts = lines(d.options);
+  if (!d.title.trim()) return admToast("Give the mission a title first");
+  if ((t === "Setlist call" || t === "Vote") && opts.length < 2) return admToast("Add at least two choices");
+  if (t === "Quiz" && [d.a1, d.a2, d.a3, d.a4].filter((x) => String(x).trim()).length < 2) return admToast("Add at least two answers");
+  const m = { id: "c" + ++customN, type: t, title: d.title.trim(), pts: Math.max(5, parseInt(d.pts, 10) || 50), meta: d.meta, city: d.city === "any" ? null : d.city, brief: d.brief || d.title.trim() + ".", fresh: 1, when: `${dayLabel(d.start)} to ${dayLabel(d.end)}` };
+  if (["Social post", "Photo", "Video"].includes(t)) Object.assign(m, { kind: "post", tag: "#MaréeHauteTour", steps: ["Make it your way.", "Post it on your account and tag @ilsamorrow.", "Paste the link here."] });
+  else if (t === "Setlist call") Object.assign(m, { kind: "vote", gen: "vote", call: true, options: opts, mult: +d.mult });
+  else if (t === "Vote") Object.assign(m, { kind: "vote", gen: "vote", options: opts });
+  else if (t === "Quiz") Object.assign(m, { kind: "quiz", gen: "quiz", quiz: { q: d.q, options: [d.a1, d.a2, d.a3, d.a4].filter((x) => String(x).trim()), right: +d.right - 1 } });
+  else Object.assign(m, { kind: "open", gen: "open" });
+  if (d.publish === "now") {
+    MISSIONS.push(m); state.news = `New mission: ${m.title}`;
+    closeDrawer(); state.admin = "missions"; state.atab.missions = 0; renderAdmin(); admToast(`"${m.title}" is live for fans`, "setlist");
+  } else {
+    EXTRA_ROWS.unshift({ title: m.title, type: t, pts: m.pts, city: m.city ? city(m.city).city : "Anywhere", when: d.publish === "sched" ? dayLabel(d.start) : "Draft", status: d.publish });
+    closeDrawer(); renderAdmin(); admToast(d.publish === "sched" ? `Scheduled for ${dayLabel(d.start)}` : "Saved as a draft");
+  }
+}
+
+/* ---------------------------------------------------------------- Rewards */
+const REDEEMED = { memo: 1210, tee: 2080, poster: 96, setl: 11, vinyl: 22, sound: 4, hello: 0 };
+const kindOf = (how) => (["code", "unlock", "file"].includes(how) ? "digital" : how === "book" ? "experience" : "physical");
+function admRewards() {
+  const kindL = (g) => ({ digital: `Digital: ${{ code: "code", unlock: "track or film", file: "file" }[g.how]}`, physical: g.how === "pickup" ? "Collect at the stand" : "Posted", experience: "Experience" }[kindOf(g.how)]);
+  return admHead("Rewards", "The merch table: what fans spend their notes on, or win.", `${memberLink("merch", "See it in the fan app")}<button class="adm-btn primary" data-act="newReward">${icon("plus")}New reward</button>`) + `
+    <div class="acard"><div class="scroll-x"><table class="atable"><thead><tr><th>Reward</th><th>Kind</th><th class="r">Cost</th><th class="r">Stock</th><th class="r">Redeemed on tour</th><th>Delivery</th></tr></thead>
+    <tbody>${MERCH.map((g) => `<tr class="${g.fresh ? "fresh" : ""}"><td class="wrap"><b>${esc(g.title)}</b></td><td>${kindL(g)}</td><td class="r">${fmt(g.cost)}</td><td class="r">${g.stock == null ? "Unlimited" : g.stock}</td><td class="r">${fmt((REDEEMED[g.id] || 0) + state.redeemed.filter((r) => r.id === g.id).length)}</td><td>${kindOf(g.how) === "digital" ? `<span class="st live">Instant</span>` : `<button class="adm-link" data-act="adm" data-p="wins">Winners & deliveries</button>`}</td></tr>`).join("")}</tbody></table></div></div>
+    <div class="adm-grid">
+      <div class="acard"><h2>Giveaway: two places at the Paris soundcheck</h2><p class="sub">One entry per fan, 100 ${BRAND.word}. Draw on ${dayShort(addDays(12))}. ${fmt(1384 + (state.entered ? 1 : 0))} entries.</p>
+        ${state.drawn ? `<div class="callout ok" style="margin-top:12px">Drawn: ${state.drawn.join(" and ")}. They are in Winners & deliveries.</div>` : `<div class="adm-actions" style="margin-top:12px"><button class="adm-btn primary" data-act="draw">Draw 2 winners now</button></div>`}</div>
+      <div class="acard"><h2>How digital rewards work</h2><p class="sub">Fans get the track, the code or the file the moment they redeem. Nothing to send, and the delivery is logged in Winners & deliveries.</p></div>
+    </div>
+    <div class="acard"><h2>Tier perks</h2><p class="sub">Sent on their own when a fan reaches the tier</p><div class="splits">${TIERS.map((t) => `<div><span>${t.name}</span><span style="font-size:.8125rem">${t.perk}</span><b>${fmt(t.at)}</b></div>`).join("")}</div></div>`;
+}
+const RARTS = [["memo", "Voice memo"], ["tee", "Tee"], ["poster", "Poster"], ["setlist", "Setlist"], ["vinyl", "Vinyl"], ["mic", "Mic"], ["pass", "Pass"], ["phone", "Phone"]];
+const RTONES = [["tide", "Tide"], ["red", "Stage red"], ["sel", "Salt"], ["night", "Night"]];
+const DELIV_FOR = { digital: [["unlock", "A track or a film"], ["code", "A code"], ["file", "A file to download"]], physical: [["post", "Posted"], ["pickup", "Collect at the merch stand"]], experience: [["book", "The team fixes a date"]] };
+const draftReward = (d) => ({ id: "rpv", title: d.title || "Untitled reward", cost: Math.max(1, parseInt(d.cost, 10) || 1), art: d.art, tone: d.tone, how: d.how, stock: d.kind === "digital" || d.stock === "" ? null : Math.max(0, parseInt(d.stock, 10) || 0) });
+function rewardForm(d) {
+  return `${fld("Kind", optRow("kind", [["digital", "Digital"], ["physical", "Physical"], ["experience", "Experience"]], d.kind))}
+    ${fld("Title", inp("title", d.title, 'maxlength="60"'))}
+    <div class="adm-row">${fld(`Cost in ${BRAND.word}`, inp("cost", d.cost, 'type="number" min="1" step="50"'))}${d.kind === "digital" ? fld("Stock", `<input value="Unlimited" disabled>`) : fld("Stock", inp("stock", d.stock, 'type="number" min="0" placeholder="Unlimited"'))}</div>
+    ${fld("How fans get it", optRow("how", DELIV_FOR[d.kind], d.how))}
+    ${d.how === "file" ? `<label class="drop">${icon("upload")}<span><b>Upload the file fans get</b>PDF, image, audio, any file up to 50 MB</span><input type="file" name="rfile" hidden></label>` : d.how === "code" ? fld("Code", inp("code", d.code || "BAND-LYON-10"), "Or upload a list of single-use codes as a CSV.") : ""}
+    ${fld("Picture", optRow("art", RARTS, d.art))}
+    ${fld("Card colour", optRow("tone", RTONES, d.tone))}`;
+}
+let rewardN = 0;
+function createReward() {
+  const d = state.draft, r = draftReward(d);
+  if (!d.title.trim()) return admToast("Give the reward a title first");
+  r.id = "r" + ++rewardN; r.fresh = 1; REDEEMED[r.id] = 0;
+  MERCH.unshift(r);
+  closeDrawer(); rerenderAdminInPlace(); admToast(`"${r.title}" is on the merch table`, "merch");
+}
+
+/* ---------------------------------------------------------------- Winners & deliveries */
+function admWins() {
+  const f = state.olist, all = orders();
+  const groups = { prep: (o) => PREP.includes(o.status), way: (o) => WAY.includes(o.status), done: (o) => !PREP.includes(o.status) && !WAY.includes(o.status) };
+  const list = all.filter((o) => f === "all" || groups[f](o));
+  const n = (k) => all.filter(groups[k]).length;
+  return admHead("Winners & deliveries", "Who won what, where it came from, and where it is now. Fans see each status in the app.", `<button class="adm-btn" data-act="csv">${icon("download")}Export CSV</button>`) + `
+    <div class="kpis">
+      ${kpi("To send, prepare or book", fmt(n("prep")), `Oldest from ${dayNum(addDays(-2))}`, true)}
+      ${kpi("On the way", fmt(n("way")), "Posted, ready or booked", true)}
+      ${kpi("Delivered on this tour", fmt(86 + all.filter((o) => ["Delivered", "Done", "Collected"].includes(o.status)).length), "Physical and experiences")}
+      ${kpi("Digital, delivered instantly", fmt(3290 + all.filter((o) => o.status === "Delivered instantly").length), "Tracks, codes and files")}
+    </div>
+    <div class="acard">
+      <div class="opt-row">${[["all", "All"], ["prep", "To send"], ["way", "On the way"], ["done", "Done"]].map(([k, l]) => `<button class="opt" data-act="olist" data-f="${k}" aria-pressed="${f === k}">${l}</button>`).join("")}</div>
+      <div class="scroll-x"><table class="atable" style="min-width:760px"><thead><tr><th>Fan</th><th>Won</th><th>How</th><th>Date</th><th>Delivery</th><th>Status</th></tr></thead>
+      <tbody>${list.map((o) => { const i = all.indexOf(o), flow = STATUSES[oDeliv(o)];
+        return `<tr class="${o.fresh ? "fresh" : ""}"><td><span class="who"><i>${initials(o.who)}</i>${esc(o.who)}</span></td><td class="wrap">${esc(oTitle(o))}</td><td class="wrap">${esc(oHow(o))}</td><td>${dayNum(addDays(o.d))}</td><td>${DELIV[oDeliv(o)]}</td>
+        <td>${flow.length > 1 ? `<label class="afield" style="min-width:150px"><select data-ostatus="${i}" aria-label="Status">${flow.map((s) => `<option ${s === o.status ? "selected" : ""}>${s}</option>`).join("")}</select></label>` : `<span class="st live">${o.status}</span>`}</td></tr>`; }).join("") || `<tr><td colspan="6">Nothing here.</td></tr>`}</tbody></table></div>
+    </div>`;
+}
+
+/* ---------------------------------------------------------------- Season */
+const JOIN_RULES = { choose: "Fans pick a side", city: "By home city", random: "Drawn at random" };
+const COUNTS = { all: "Every note earned", posts: "Notes from posts only", checkin: "Check-ins only" };
+const BATTLES = [
+  { id: "ns", name: "North v South, the last week", a: { name: "North", colour: "#2bb3a3", pts: 0, members: 0 }, b: { name: "South", colour: "#f0412f", pts: 0, members: 0 }, start: isoDay(addDays(9)), end: isoDay(city("par").date), join: "city", counts: "all", prize: "The winning side's top 20 get the Paris setlist, printed and signed" },
+  { id: "fest", name: "Summer festivals: Tide v Stage red", a: { name: "Tide", colour: "#2bb3a3", pts: 412880, members: 2140 }, b: { name: "Stage red", colour: "#f0412f", pts: 398140, members: 2010 }, start: isoDay(addDays(-112)), end: isoDay(addDays(-61)), join: "choose", counts: "all", prize: "Tide won: a signed festival wristband for its top 20" },
+];
+const battleStatus = (b) => (isoDay(NOW) < b.start ? "upcoming" : isoDay(NOW) > b.end ? "ended" : "live");
+const BONUS_CARDS = [];
+function admSeason() {
+  const tab = state.atab.season || 0;
+  const btn = tab === 1 ? `<button class="adm-btn primary" data-act="newBattle">${icon("plus")}New team battle</button>` : tab === 2 ? `<button class="adm-btn primary" data-act="newCard">${icon("plus")}Add a card</button>` : "";
+  const h = admHead("Season", "What you set once a tour. Each part shows only if its module is on.", btn) + admTabs("season");
+  if (tab === 1) return h + seasonBattles();
+  if (tab === 2) return h + seasonCollection();
+  if (tab === 3) return h + seasonBoard();
+  const n = goalPct();
+  return h + `<div class="adm-grid"><div class="acard"><h2>High tide</h2><p class="sub">Missions done by any fan since the tour was announced. Everyone sees the water rise.</p>
+      <div class="goal-adm"><div class="kpis" style="grid-template-columns:repeat(3,minmax(0,1fr))">${kpi("Done", fmt(state.goal), `${n}% of 50,000`)}${kpi("To go", fmt(50000 - state.goal), "About 9 days at tour pace", true)}${kpi("Fans who helped", "12,904", "So far", true)}</div>
+        <span class="bar-a"><i style="width:${n}%"></i></span><div class="adm-actions"><button class="adm-btn" data-act="goalsim">Simulate a show weekend (+4,000)</button>${memberLink("band", "See it in the Band")}</div></div></div>
+    <div class="acard"><h2>Settings</h2><div class="aform" style="margin-top:12px">${fld("Target", inp("gt", "50,000 missions", "disabled"))}${fld("What counts", inp("gc", "Any mission, by any fan", "disabled"))}${fld("Unlocks", inp("gu", "'Marée haute', acoustic kitchen take", "disabled"))}${fld("For", inp("gf", "Every Band member, to stream in the app", "disabled"))}</div></div></div>`;
+}
+function seasonBattles() {
+  return `<div class="acard"><div class="scroll-x"><table class="atable"><thead><tr><th>Battle</th><th>Sides and score</th><th>Dates</th><th>How fans join</th><th>Counts</th><th>Status</th></tr></thead>
+    <tbody>${BATTLES.map((b) => { const s = battleStatus(b); return `<tr class="${b.fresh ? "fresh" : ""}"><td class="wrap"><b style="font-weight:500">${esc(b.name)}</b><br><span class="sub">${esc(b.prize)}</span></td>
+      <td class="wrap"><span class="team-dot" style="background:${b.a.colour}"></span>${esc(b.a.name)} ${b.a.pts ? fmt(b.a.pts) : ""}<br><span class="team-dot" style="background:${b.b.colour}"></span>${esc(b.b.name)} ${b.b.pts ? fmt(b.b.pts) : ""}</td>
+      <td>${dayLabel(b.start)} to ${dayLabel(b.end)}</td><td class="wrap">${JOIN_RULES[b.join]}</td><td class="wrap">${COUNTS[b.counts]}</td><td><span class="st ${s === "live" ? "live" : s === "upcoming" ? "sched" : "draft"}">${s === "upcoming" ? "Starts " + dayLabel(b.start) : s === "live" ? "Live" : "Ended"}</span></td></tr>`; }).join("")}</tbody></table></div></div>
+    <div class="acard"><h2>How a battle works</h2><p class="sub">Two sides, a start and an end. Fans join a side in the app and every ${BRAND.word.replace(/s$/, "")} they earn counts for it. The Band sees the score live, on Tonight and in the Front Row race.</p></div>`;
+}
+function battleCard(b) {
+  const a = b.a.pts, c = b.b.pts, t = a + c;
+  return `<div style="padding:14px;border-radius:calc(14px * var(--rk, 1));background:var(--scene);color:var(--ink);font-family:var(--f-text)"><span class="kicker">TEAM BATTLE, ${dayLabel(b.start).toUpperCase()} TO ${dayLabel(b.end).toUpperCase()}</span>
+    <b style="display:block;font-family:var(--f-display);font-weight:800;text-transform:uppercase;font-size:1.1rem;line-height:1;margin:8px 0 12px">${esc(b.name)}</b>
+    <div style="display:flex;height:10px;border-radius:999px;overflow:hidden;background:var(--scene-3)"><i style="width:${t ? (a / t) * 100 : 50}%;background:${b.a.colour}"></i><i style="flex:1;background:${b.b.colour}"></i></div>
+    <div style="display:flex;justify-content:space-between;margin-top:8px;font-size:.8125rem"><span>${esc(b.a.name)}</span><span>${esc(b.b.name)}</span></div>
+    <p class="note" style="margin:10px 0 0">${esc(b.prize)}</p><span class="btn btn-red btn-sm" style="margin-top:12px">Pick my side</span></div>`;
+}
+const draftBattle = (d) => ({ name: d.name || `${d.an} v ${d.bn}`, a: { name: d.an || "Side 1", colour: d.ac, pts: 0 }, b: { name: d.bn || "Side 2", colour: d.bc, pts: 0 }, start: d.start, end: d.end < d.start ? d.start : d.end, join: d.join, counts: d.counts, prize: d.prize || "Bragging rights" });
+function battleForm(d) {
+  return `${fld("Name", inp("name", d.name, 'maxlength="50"'))}
+    <div class="adm-row">${fld("Side 1", `<div style="display:flex;gap:8px"><input type="color" name="ac" value="${d.ac}" style="width:44px;height:40px;padding:2px;border-radius:9px;flex:none">${inp("an", d.an)}</div>`)}
+      ${fld("Side 2", `<div style="display:flex;gap:8px"><input type="color" name="bc" value="${d.bc}" style="width:44px;height:40px;padding:2px;border-radius:9px;flex:none">${inp("bn", d.bn)}</div>`)}</div>
+    <div class="adm-row">${fld("Starts", inp("start", d.start, 'type="date"'))}${fld("Ends", inp("end", d.end, 'type="date"'))}</div>
+    ${fld("How fans join", sel("join", Object.entries(JOIN_RULES), d.join), "Fans can join until the last day. One side each.")}
+    ${fld("What counts", sel("counts", Object.entries(COUNTS), d.counts))}
+    ${fld("Prize for the winning side", inp("prize", d.prize))}`;
+}
+let battleN = 0;
+function createBattle() {
+  const b = draftBattle(state.draft); b.id = "b" + ++battleN; b.fresh = 1; b.a.members = 0; b.b.members = 0;
+  BATTLES.unshift(b); closeDrawer(); rerenderAdminInPlace();
+  admToast(`${b.name} is set up. ${battleStatus(b) === "upcoming" ? `Fans can join from ${dayLabel(b.start)}` : "Fans can join from now"}`);
+}
+function seasonCollection() {
+  const P = played(), have = (c) => c.ci + Math.round(c.posts * 0.3);
+  return `<div class="adm-grid">
+    <div class="acard"><h2>The tour, city by city</h2><p class="sub">12 cities. A city goes on a fan's tour when they ${state.collectBy === "both" ? "check in at the stand or post from the show" : "check in at the stand"}. ${state.poster} cities: a signed tour poster. All twelve: their name in the tour book.</p>
+      <div class="album-pages"><div><b>${P.length} of 12</b><span>cities played</span></div><div><b>6,212</b><span>fans with a city or more</span></div><div><b>148</b><span>fans with 5 cities, poster sent</span></div><div><b>${BONUS_CARDS.length}</b><span>bonus card${BONUS_CARDS.length === 1 ? "" : "s"}</span></div></div>
+      ${BONUS_CARDS.length ? `<div class="card-strip">${BONUS_CARDS.map((c) => `<div style="width:92px;flex:none">${cardArt(c)}</div>`).join("")}</div>` : ""}</div>
+    <div class="acard"><h2>Rules</h2><div class="aform" style="margin-top:12px">${fld("Cities for the signed poster", sel("poster", [["4", "4 cities"], ["5", "5 cities"], ["6", "6 cities"]], state.poster))}
+      <div class="afield"><span>A city counts with</span>${optRowA("collectBy", [["both", "A check-in or a post"], ["ci", "A check-in only"]], state.collectBy)}</div>
+      ${fld("All twelve", `<input value="Their name printed in the tour book" disabled>`)}</div></div>
+  </div>
+  <div class="acard"><h2>Cities</h2><div class="scroll-x"><table class="atable"><thead><tr><th>City</th><th>Date</th><th class="r">Fans who have it</th><th>Status</th></tr></thead>
+    <tbody>${TOUR.map((c) => `<tr><td><b>${c.city}</b>${c.final ? ' <span class="sub">Last night</span>' : ""}</td><td>${dayNum(c.date)}</td><td class="r">${c.d < 0 ? fmt(have(c)) : "–"}</td><td>${c.d < 0 ? `<span class="st live">Played</span>` : c === NEXT ? `<span class="st sched">Next</span>` : `<span class="st draft">Coming</span>`}</td></tr>`).join("")}</tbody></table></div></div>`;
+}
+function cardArt(d) {
+  if (d.img) return `<div style="position:relative;aspect-ratio:3/4;border-radius:calc(8px * var(--rk, 1));overflow:hidden"><img src="${d.img}" alt="" style="width:100%;height:100%;object-fit:cover;display:block"></div>`;
+  return `<svg viewBox="0 0 90 120" style="display:block;width:100%;border-radius:calc(8px * var(--rk, 1))" role="img" aria-label="${esc(d.name)}"><rect width="90" height="120" fill="${K.nuit}"/><rect x="0" y="0" width="90" height="10" fill="${d.rarity === "Limited" ? K.red : d.rarity === "Foil" ? K.sel : K.tide}"/>${[0, 1, 2].map((i) => `<path d="M0 ${70 + i * 9}c15-7 30 7 45 0s30-7 45 0" fill="none" stroke="${K.tide}" stroke-width="2" opacity="${0.9 - i * 0.25}"/>`).join("")}<circle cx="45" cy="44" r="16" fill="none" stroke="${K.sel}" stroke-width="2"/><circle cx="45" cy="44" r="4" fill="${K.red}"/><text x="45" y="103" text-anchor="middle" font-family="Syne, sans-serif" font-weight="800" font-size="8" fill="${K.sel}" textLength="${Math.min(76, Math.max(20, String(d.name).length * 5.2))}" lengthAdjust="spacingAndGlyphs">${esc(String(d.name).toUpperCase())}</text><text x="45" y="112" text-anchor="middle" font-family="Space Mono, monospace" font-size="4.6" fill="${K.tide}">${esc(String(d.sub || "").toUpperCase().slice(0, 30))}</text></svg>`;
+}
+function cardForm(d) {
+  return `${fld("Design", `<label class="drop">${icon("upload")}<span><b>${d.img ? "Design uploaded" : "Upload your design"}</b>PNG or JPG, portrait 3:4. Without one, the card is drawn in the Band's colours.</span><input type="file" name="cimg" accept="image/*" hidden></label>`)}
+    <div class="adm-row">${fld("Name", inp("name", d.name, 'maxlength="22"'))}${fld("Line under the name", inp("sub", d.sub, 'maxlength="30"'))}</div>
+    ${fld("Rarity", optRow("rarity", [["Common", "Common"], ["Foil", "Foil"], ["Limited", "Limited"]], d.rarity))}
+    ${fld("How fans get it", optRow("how", [["checkin", "At a merch-stand check-in"], ["all", "Every fan, now"], ["mission", "As a mission reward"]], d.how))}`;
+}
+function createCard() {
+  const d = state.draft; if (!d.name.trim()) return admToast("Give the card a name first");
+  BONUS_CARDS.push({ name: d.name.trim(), sub: d.sub, rarity: d.rarity, img: d.img });
+  closeDrawer(); rerenderAdminInPlace();
+  admToast(d.how === "all" ? `${d.name} is in every fan's tour collection` : d.how === "checkin" ? `${d.name} now comes with merch-stand check-ins` : `${d.name} is ready to give as a mission reward`);
+}
+function seasonBoard() {
+  return `<div class="adm-grid"><div class="acard"><h2>The Front Row race</h2><p class="sub">Fans are ranked by ${BRAND.word} earned since the tour started.</p>
+      <dl class="bs-words" style="margin-top:14px"><dt>Race</dt><dd>From the first date to ${dayShort(FRONT_CUTOFF)}, 23:59</dd><dt>Prize</dt><dd>Top 10: the barrier in Paris, entry before doors, the setlist from that night</dd><dt>Spending</dt><dd>Never moves a fan down the race</dd><dt>Ties</dt><dd>The fan who got there first stays ahead</dd><dt>Tiers</dt><dd>${TIERS.map((t) => `${t.name} ${fmt(t.at)}`).join(", ")}</dd></dl>
+      <div class="adm-actions" style="margin-top:14px">${memberLink("front", "See the race in the app")}</div></div>
+    <div class="acard"><h2>Top 10 right now</h2><div class="scroll-x"><table class="atable tight"><thead><tr><th>#</th><th>Fan</th><th>Home show</th><th class="r">${BRAND.word.replace(/^./, (c) => c.toUpperCase())}</th></tr></thead>
+      <tbody>${TOP.map(([n, , c, p], i) => `<tr><td>${i + 1}</td><td><span class="who"><i>${initials(n)}</i>${esc(n)}</span></td><td>${c}</td><td class="r">${fmt(p)}</td></tr>`).join("")}</tbody></table></div></div></div>`;
+}
+
+/* ---------------------------------------------------------------- Tour */
 function admTour() {
   const tab = state.atab.tour || 0;
-  const h = admHead("Tour", "Posts and views per city. A post counts for the city when it is made within a day of the show, near the venue, or tags the date.", `<button class="adm-btn" data-act="csv">${icon("download")}Download, CSV</button>`) + admTabs("tour");
-  if (tab === 1) return h + tourPosts();
-  if (tab === 2) return h + tourNext();
-  const P = played(), max = Math.max(...P.map((c) => c.views));
-  const tot = (k) => P.reduce((a, c) => a + c[k], 0);
-  return h + `<div class="acard"><h2>Played so far</h2><p class="sub">Views counted for 30 days after each show, so recent cities are still growing</p>
-    <div class="scroll-x"><table class="atable"><thead><tr><th>City</th><th>Date</th><th class="r">Check-ins</th><th class="r">Of tickets</th><th class="r">Posts</th><th class="r">Views</th><th class="r">Views a post</th><th class="r">Media value</th><th class="r">New members</th></tr></thead>
-    <tbody>${P.map((c) => `<tr><td><b>${c.city}</b></td><td>${dayNum(c.date)}</td><td class="r">${fmt(c.ci)}</td><td class="r">${pct(c.ci, c.cap)}</td><td class="r">${fmt(c.posts)}</td><td class="r">${big(c.views)}</td><td class="r">${fmt(c.views / c.posts)}</td><td class="r">${eur(mediaValue(c.views))}</td><td class="r">${fmt(c.joined)}</td></tr>`).join("")}</tbody>
-    <tfoot><tr><td>6 cities</td><td></td><td class="r">${fmt(tot("ci"))}</td><td class="r">${pct(tot("ci"), tot("cap"))}</td><td class="r">${fmt(tot("posts"))}</td><td class="r">${big(tot("views"))}</td><td class="r">${fmt(tot("views") / tot("posts"))}</td><td class="r">${eur(mediaValue(tot("views")))}</td><td class="r">${fmt(tot("joined"))}</td></tr></tfoot></table></div></div>
-    <div class="adm-row"><div class="acard"><h2>Views per city</h2><div class="splits">${P.map((c) => `<div><span>${c.city}</span><span class="bar-a"><i style="width:${(c.views / max) * 100}%"></i></span><b>${big(c.views)}</b></div>`).join("")}</div></div>
-      <div class="acard"><h2>Where fans post</h2><p class="sub">Share of views, tour so far</p><div class="splits">${NETS.map(([n, , v]) => `<div><span>${n}</span><span class="bar-a"><i style="width:${v / 0.58 * 100}%"></i></span><b>${Math.round(v * 100)}%</b></div>`).join("")}</div></div></div>`;
+  const h = admHead("Tour", "Twelve dates. Each one gets its own check-in QR, setlist call and city missions on its own.", `<button class="adm-btn" data-act="tourCsv">${icon("download")}Download, CSV</button>`) + admTabs("tour");
+  if (tab === 1) {
+    const P = played(), max = Math.max(...P.map((c) => c.views)), tot = (k) => P.reduce((a, c) => a + c[k], 0);
+    return h + `<div class="acard"><h2>Played so far</h2><p class="sub">A post counts for the city when it is made within a day of the show, near the venue, or tags the date. Views counted for 30 days, so recent cities are still growing.</p>
+      <div class="scroll-x"><table class="atable"><thead><tr><th>City</th><th>Date</th><th class="r">Check-ins</th><th class="r">Of tickets</th><th class="r">Posts</th><th class="r">Views</th><th class="r">Views a post</th><th class="r">Media value</th><th class="r">New members</th></tr></thead>
+      <tbody>${P.map((c) => `<tr><td><b>${c.city}</b></td><td>${dayNum(c.date)}</td><td class="r">${fmt(c.ci)}</td><td class="r">${pct(c.ci, c.cap)}</td><td class="r">${fmt(c.posts)}</td><td class="r">${big(c.views)}</td><td class="r">${fmt(c.views / c.posts)}</td><td class="r">${eur(mediaValue(c.views))}</td><td class="r">${fmt(c.joined)}</td></tr>`).join("")}</tbody>
+      <tfoot><tr><td>6 cities</td><td></td><td class="r">${fmt(tot("ci"))}</td><td class="r">${pct(tot("ci"), tot("cap"))}</td><td class="r">${fmt(tot("posts"))}</td><td class="r">${big(tot("views"))}</td><td class="r">${fmt(tot("views") / tot("posts"))}</td><td class="r">${eur(mediaValue(tot("views")))}</td><td class="r">${fmt(tot("joined"))}</td></tr></tfoot></table></div></div>
+      <div class="acard"><h2>Views per city</h2><div class="splits">${P.map((c) => `<div><span>${c.city}</span><span class="bar-a"><i style="width:${(c.views / max) * 100}%"></i></span><b>${big(c.views)}</b></div>`).join("")}</div></div>`;
+  }
+  const N = TOUR.filter((c) => c.d >= 0);
+  return h + `<div class="acard"><h2>Coming up</h2><p class="sub">Missions are ready for every date. Check-in opens at doors.</p>
+    <div class="scroll-x"><table class="atable"><thead><tr><th>City</th><th>Date</th><th class="r">Band members with tickets</th><th class="r">Capacity</th><th>Missions ready</th><th>Status</th></tr></thead>
+    <tbody>${N.map((c) => `<tr><td><b>${c.city}</b>${c.final ? ' <span class="sub">Last night, Front Row prize</span>' : ""}</td><td>${dayShort(c.date)}</td><td class="r">${fmt(c.pre)}</td><td class="r">${fmt(c.cap)}</td><td>Check-in, setlist call, setlist photo, bring a friend</td><td>${c === NEXT ? `<span class="st live">Next</span>` : `<span class="st sched">Scheduled</span>`}</td></tr>`).join("")}</tbody></table></div></div>`;
 }
+
+/* ---------------------------------------------------------------- Members */
+function admMembers() {
+  const tab = state.atab.members || 0;
+  const h = admHead("Members", "31,980 fans in the Band. Where they joined, where they go to shows, and each one's record.") + admTabs("members");
+  if (tab === 1) {
+    const all = [...TOP.map((r) => [r[0], r[1], r[2], r[3], r[4]]), ...NEAR, ...BELOW, [ME.name, ME.handle, ME.city, monthPts(), state.posts.reduce((a, p) => a + p.views, 0)]].sort((a, b) => b[3] - a[3]);
+    const q = (state.mq || "").toLowerCase(), rows = all.filter((r) => (r[0] + r[1] + r[2]).toLowerCase().includes(q));
+    return h + `<div class="acard"><div class="afield" style="max-width:320px"><input name="mq" value="${esc(state.mq || "")}" placeholder="Search by name, handle or city" aria-label="Search fans"></div>
+      <div class="scroll-x"><table class="atable"><thead><tr><th>Fan</th><th>Tier</th><th>Home show</th><th class="r">${BRAND.word.replace(/^./, (c) => c.toUpperCase())}, this tour</th><th class="r">Views on posts</th><th>Last seen</th></tr></thead>
+      <tbody>${rows.map((r, i) => `<tr><td><span class="who"><i>${initials(r[0])}</i>${esc(r[0])} <span class="sub">${r[1]}</span></span></td><td>${tierOf(r[0] === ME.name ? SP() : r[3] * 1.8).name}</td><td>${r[2]}</td><td class="r">${fmt(r[3])}</td><td class="r">${big(r[4])}</td><td>${["Today", "Today", "Yesterday", "2 days ago"][i % 4]}</td></tr>`).join("") || `<tr><td colspan="6">No fan matches.</td></tr>`}</tbody></table></div></div>`;
+  }
+  const P = played();
+  return h + `<div class="kpis">${kpi("Band members, in total", "31,980", `+${fmt(tourTot("joined"))} since the tour started`)}${kpi("Active this month", "9,200", "29% of the Band")}${kpi("Linked a social account", "68%", "Needed to earn on posts", true)}${kpi("Came to 2 shows or more", "1,148", "On this tour", true)}</div>
+    <div class="adm-row"><div class="acard"><h2>Joined on this tour, by city</h2><p class="sub">QR at the stand, or a fan's post from that show</p><div class="splits">${P.map((c) => `<div><span>${c.city}</span><span class="bar-a"><i style="width:${(c.joined / 498) * 100}%"></i></span><b>${fmt(c.joined)}</b></div>`).join("")}</div></div>
+      <div class="acard"><h2>How they joined</h2><p class="sub">All members</p><div class="splits">${[["QR at a merch stand", 34], ["A fan's post or link", 27], ["Link in Ilsa's profile", 21], ["Ticket confirmation email", 12], ["Newsletter", 6]].map(([l, v]) => `<div><span>${l}</span><span class="bar-a"><i style="width:${(v / 34) * 100}%"></i></span><b>${v}%</b></div>`).join("")}</div></div></div>`;
+}
+
+/* ---------------------------------------------------------------- Results */
+/* Missions with their totals on this tour. Posts and views add up to the tour's 5,555 posts and 9.3M views. */
+const RM = [
+  { id: "barrier", title: "From the barrier: film one song", type: "Video", ago: 12, done: 1260, seen: 4308, posts: 1260, views: 2.69e6, nm: 230, net: [0.66, 0.24, 0.09, 0.01] },
+  { id: "sing", title: "Sing the chorus of 'Marée haute'", type: "Video", ago: 20, done: 1420, seen: 8960, posts: 1420, views: 2.48e6, nm: 190, net: [0.61, 0.27, 0.11, 0.01] },
+  { id: "setlist", title: "Setlist photo, after the encore", type: "Social post", ago: 12, done: 1030, seen: 4308, posts: 1030, views: 1.21e6, nm: 110, net: [0.38, 0.55, 0.05, 0.02] },
+  { id: "phare", title: "Sing 'Phare' in one take", type: "Video", ago: 6, done: 320, seen: 7420, posts: 320, views: 1.16e6, nm: 150, net: [0.72, 0.18, 0.09, 0.01] },
+  { id: "fit", title: "Merch fit: the tour tee, your way", type: "Photo", ago: 15, done: 980, seen: 8310, posts: 980, views: 1.06e6, nm: 120, net: [0.44, 0.49, 0.05, 0.02] },
+  { id: "doors", title: "The queue at doors", type: "Photo", ago: 12, done: 545, seen: 4308, posts: 545, views: 0.71e6, nm: 70, net: [0.41, 0.52, 0.04, 0.03] },
+  { id: "merch", title: "Check in at the merch stand", type: "Check-in", ago: 12, done: 4308, seen: 9040, posts: 0, views: 0, nm: 1241, extra: [["Of tickets sold", pct(4308, 12100)], ["Average a show", "718"]] },
+  { id: "friend", title: "Bring a friend to the show", type: "Referral", ago: 12, done: 960, seen: 8120, posts: 0, views: 0, nm: 212, extra: [["Links sent", "960"], ["Friends who checked in", "212"]] },
+  { id: "lyric", title: "Finish the line", type: "Quiz", ago: 9, done: 7240, seen: 9020, posts: 0, views: 0, nm: 0, extra: [["Right first time", "64%"], ["Average time", "14 s"]] },
+  { id: "encore", title: "Pick the encore for Geneva", type: "Vote", ago: 4, done: 8641, seen: 9110, posts: 0, views: 0, nm: 0, extra: () => [["Leading", "'Les quais à 4 h'"], ["Votes", fmt(8640 + (state.vote ? 1 : 0))]] },
+  { id: "first", title: "Your first Ilsa song, in one line", type: "Open question", ago: 8, done: 2210, seen: 8640, posts: 0, views: 0, nm: 0, extra: () => [["Answers featured", String(ansList().filter((a) => a.status === "featured").length)], ["Average answer", "17 words"]] },
+];
+const NET_NAMES = NETS.map((n) => n[0]);
 const POSTERS = ["@jonaspeet", "@lou.gr", "@pau.mrl", "@clem.vdl", "@hugolfv", "@sam.okj", "@ines.oa", "@aya.bnl", "@theo.mrc", "@elsamoreau", "@bastroux", "@lina.hdd", "@vic.blanc", "@jade.ftn", "@noe.brn", "@rosa.alm"];
-const MTITLES = ["Sing the chorus", "Setlist photo", "Merch fit", "From the barrier", "Queue at doors", "The encore"];
+const RATE = Object.fromEntries(NETS.map(([n, , , l, c, s]) => [n, [l, c, s]]));
 const POSTLIST = (() => {
   let s = 11; const rnd = () => ((s = (s * 9301 + 49297) % 233280) / 233280);
+  const mids = ["barrier", "sing", "setlist", "fit", "doors", "phare"];
   return Array.from({ length: 40 }, (_, i) => {
     const c = played()[Math.floor(rnd() * 6)], n = NETS[rnd() < 0.55 ? 0 : rnd() < 0.85 ? 1 : 2][0];
-    const views = Math.round(4000 + Math.pow(rnd(), 2.4) * 90000);
-    return { who: POSTERS[i % POSTERS.length], city: c.city, net: n, t: MTITLES[Math.floor(rnd() * MTITLES.length)], views, likes: Math.round(views * (n === "TikTok" ? 0.09 : 0.07)), ago: -c.d + Math.floor(rnd() * 2) };
+    const views = Math.round(4000 + Math.pow(rnd(), 2.4) * 90000), r = RATE[n];
+    return { who: POSTERS[i % POSTERS.length], city: c.city, net: n, mid: mids[Math.floor(rnd() * mids.length)], views, likes: views * r[0], comments: views * r[1], shares: views * r[2], ago: -c.d + Math.floor(rnd() * 2) };
   });
 })();
-function tourPosts() {
-  const list = POSTLIST.filter((p) => state.tcity === "all" || p.city === state.tcity).sort((a, b) => b.views - a.views);
-  return `<div class="acard"><div class="acard-top"><div><h2>Most viewed fan posts</h2><p class="sub">${list.length} of ${fmt(tourTot("posts"))} posts shown</p></div>
-      <label class="afield" style="min-width:180px"><span>City</span><select data-tcity>${[["all", "Every city"], ...played().map((c) => [c.city, c.city])].map(([v, l]) => `<option value="${v}" ${state.tcity === v ? "selected" : ""}>${l}</option>`).join("")}</select></label></div>
-    <div class="scroll-x"><table class="atable"><thead><tr><th>Fan</th><th>City</th><th>Mission</th><th>Network</th><th class="r">Posted</th><th class="r">Views</th><th class="r">Likes</th><th class="r">Value</th></tr></thead>
-    <tbody>${list.map((p) => `<tr><td><span class="who"><i>${p.who.slice(1, 3).toUpperCase()}</i>${p.who}</span></td><td>${p.city}</td><td>${p.t}</td><td><span class="net-pill">${p.net}</span></td><td class="r">${p.ago} d ago</td><td class="r">${fmt(p.views)}</td><td class="r">${fmt(p.likes)}</td><td class="r">${eur(mediaValue(p.views))}</td></tr>`).join("")}</tbody></table></div></div>`;
+const rmStats = (r) => { const v = r.views, net = r.net || [0.58, 0.33, 0.08, 0.01]; const lk = NETS.reduce((a, n, i) => a + v * net[i] * n[3], 0), cm = NETS.reduce((a, n, i) => a + v * net[i] * n[4], 0), sh = NETS.reduce((a, n, i) => a + v * net[i] * n[5], 0); const done = r.done + (state.done.has(r.id) ? 1 : 0); return { ...r, done, likes: lk, comments: cm, shares: sh, eng: lk + cm + sh, value: mediaValue(v), rate: done / r.seen }; };
+function tourNets() {
+  const v = tourTot("views"), p = tourTot("posts");
+  return NETS.map(([name, ps, vs, lr, cr, sr]) => ({ name, posts: p * ps, views: v * vs, likes: v * vs * lr, comments: v * vs * cr, shares: v * vs * sr, value: mediaValue(v * vs) }));
 }
-function tourNext() {
-  const N = TOUR.filter((c) => c.d >= 0);
-  return `<div class="acard"><h2>Coming up</h2><p class="sub">Each date gets its own check-in QR and setlist mission automatically</p>
-    <div class="scroll-x"><table class="atable"><thead><tr><th>City</th><th>Date</th><th class="r">Band members with tickets</th><th class="r">Capacity</th><th>Missions ready</th><th>Status</th></tr></thead>
-    <tbody>${N.map((c) => `<tr><td><b>${c.city}</b>${c.final ? ' <span class="sub">Last night, front row prize</span>' : ""}</td><td>${dayShort(c.date)}</td><td class="r">${fmt(c.pre)}</td><td class="r">${fmt(c.cap)}</td><td>Check-in, setlist, bring a friend</td><td>${c === NEXT ? `<span class="st live">Next</span>` : `<span class="st sched">Scheduled</span>`}</td></tr>`).join("")}</tbody></table></div></div>`;
-}
-function admValue() {
-  const P = played(), views = tourTot("views"), v = mediaValue(views);
-  return admHead("Media value", "What the reach of fans' posts is worth, priced at the CPM you set.") + cpmBox() + `
+function admResults() {
+  const tab = state.atab.results || 0;
+  const h = admHead("Results", "What the Band brings in, tour so far. The top line stays simple: open any mission for the detail.", `<button class="adm-btn" data-act="rcsv">${icon("download")}Download, CSV</button>`) + admTabs("results");
+  if (tab === 1) return h + resultsMissions();
+  if (tab === 2) return h + resultsPosts();
+  const P = played(), views = tourTot("views"), v = mediaValue(views), N = tourNets();
+  const sum = (k) => N.reduce((a, n) => a + n[k], 0), eng = sum("likes") + sum("comments") + sum("shares");
+  const top = RM.map(rmStats).sort((a, b) => b.value - a.value || b.done - a.done).slice(0, 5);
+  return h + `<div class="kpis">
+      ${kpi("Earned media value", eur(v), `Views on fans' posts at a ${cpmLabel()} CPM`)}
+      ${kpi("Views on fans' posts", big(views), `${big(views * 0.64)} by people who don't follow Ilsa`)}
+      ${kpi("Likes, comments and shares", big(eng), `${pct(eng, views)} of views`)}
+      ${kpi("New members from fans' posts", fmt(870), `Of the ${fmt(tourTot("joined"))} who joined on tour`)}
+    </div>
+    <details class="more" ${state.rmore ? "open" : ""}><summary data-act="rmore">${state.rmore ? "Hide the detail" : "Show every number for the tour"}</summary>
+      <div class="mkpis">${mini("Posts", fmt(tourTot("posts")))}${mini("Fans who posted", "3,412")}${mini("Average views a post", fmt(views / tourTot("posts")))}${mini("Likes", big(sum("likes")))}${mini("Comments", big(sum("comments")))}${mini("Shares", big(sum("shares")))}${mini("Missions completed", "41,860")}${mini("Merch-stand check-ins", fmt(tourTot("ci")))}${mini("Rewards redeemed", fmt(3423 + state.redeemed.length))}${mini("Active fans this month", "9,200")}</div>
+    </details>
+    ${cpmBox()}
     <div class="vh">
       <div class="vh-tile vh-hero"><span>Media value per show</span><b>${eur(v / P.length)}</b><small>Average of ${P.length} shows: views of fans' posts at a ${cpmLabel()} CPM</small>
         <div class="vh-cols" role="img" aria-label="Media value per show: ${P.map((c) => `${c.city} ${eur(mediaValue(c.views))}`).join(", ")}">${P.map((c) => `<span><i style="height:${((c.views / Math.max(...P.map((x) => x.views))) * 62).toFixed(1)}px"></i><em>${c.city.slice(0, 3)}</em></span>`).join("")}</div></div>
@@ -1857,93 +2530,253 @@ function admValue() {
       <div class="vh-tile"><b>${big(views)}</b><span>Views of fans' posts</span><small>${big(views * 0.64)} by people who don't follow Ilsa</small></div>
       <div class="vh-tile"><b>${eur(v / tourTot("ci"))}</b><span>Per check-in</span><small>Value of posts per fan at the stand</small></div>
     </div>
-    <div class="adm-row"><div class="acard"><h2>Value per city</h2><div class="splits">${P.map((c) => `<div><span>${c.city}</span><span class="bar-a"><i style="width:${(c.views / 2.31e6) * 100}%"></i></span><b>${eur(mediaValue(c.views))}</b></div>`).join("")}</div></div>
-      <div class="acard"><h2>How we count it</h2><p class="sub" style="line-height:1.55">Views on public posts that tag @ilsamorrow from fans' linked accounts, counted for 30 days after posting. Value = views ÷ 1,000 × your CPM. Change the CPM above and every figure follows, including the CSV.</p><div class="callout ok" style="margin-top:12px">At ${cpmLabel()}, ${big(views)} views would cost ${eur(v)} in paid social.</div></div></div>`;
+    <div class="adm-grid">
+      <div class="acard"><h2>Views on fans' posts, per day</h2><p class="sub">Dots mark show nights</p>${lineChart({ id: "rdaily", data: DAILY, labels: DAY_LABELS, max: 800000, marks: SHOW_MARKS, aria: "Daily views on fans' posts, last 30 days", tipFor: (i) => `<b>${DAY_LABELS[i]}</b>, ${fmt(DAILY[i])} views, ${eur(mediaValue(DAILY[i]))}` })}</div>
+      <div class="acard"><h2>Value per city</h2><p class="sub">How we count it: views on public posts that tag @ilsamorrow, from fans' linked accounts, for 30 days. Value = views ÷ 1,000 × your CPM.</p><div class="splits">${P.map((c) => `<div><span>${c.city}</span><span class="bar-a"><i style="width:${(c.views / 2.31e6) * 100}%"></i></span><b>${eur(mediaValue(c.views))}</b></div>`).join("")}</div></div>
+    </div>
+    <div class="acard"><h2>Where fans post</h2><p class="sub">Tour so far, checked through fans' linked accounts</p>
+      <div class="scroll-x"><table class="atable"><thead><tr><th>Network</th><th class="r">Posts</th><th class="r">Views</th><th class="r">Likes</th><th class="r">Comments</th><th class="r">Shares</th><th class="r">Engagement</th><th class="r">Media value</th></tr></thead>
+      <tbody>${N.map((n) => `<tr><td>${n.name}</td><td class="r">${fmt(n.posts)}</td><td class="r">${big(n.views)}</td><td class="r">${big(n.likes)}</td><td class="r">${big(n.comments)}</td><td class="r">${big(n.shares)}</td><td class="r">${pct(n.likes + n.comments + n.shares, n.views)}</td><td class="r">${eur(n.value)}</td></tr>`).join("")}</tbody></table></div></div>
+    <div class="acard"><div class="acard-top"><div><h2>Missions that did the most</h2><p class="sub">Open one for its full detail</p></div><button class="adm-btn" data-act="atab" data-p="results" data-i="1">See all missions</button></div>
+      <div class="scroll-x"><table class="atable"><thead><tr><th>Mission</th><th class="r">Done by</th><th class="r">Views</th><th class="r">Likes, comments, shares</th><th class="r">Media value</th></tr></thead>
+      <tbody>${top.map((r) => `<tr class="click" data-act="rmission" data-id="${r.id}"><td class="wrap"><b>${esc(r.title)}</b><br><span class="sub">${r.type}</span></td><td class="r">${fmt(r.done)}</td><td class="r">${r.views ? big(r.views) : "–"}</td><td class="r">${r.views ? big(r.eng) : "–"}</td><td class="r">${r.value ? eur(r.value) : "–"}</td></tr>`).join("")}</tbody></table></div></div>`;
 }
-function admCheckin() {
-  const c = state.live + (state.done.has("merch") ? 1 : 0);
-  return admHead("Merch-stand check-in", "One QR per date, printed on the stand. It only works at the venue, from doors to curfew.", memberLink("home", "See it in the fan app")) + `
-    <div class="adm-grid"><div class="acard"><h2>Lyon, ${dayShort(NEXT.date)}</h2><p class="sub">Print it A3 for the stand, A5 for the bar</p>
-      <div class="qr-box"><span class="qr">${qrSVG(checkinURL("lyon"), "#1d1f24")}</span><div style="display:grid;gap:8px"><span class="sub">${checkinURL("lyon")}</span><button class="adm-btn sm" data-act="copy" data-copy="${checkinURL("lyon")}">${icon("copy")}Copy the link</button><span class="st ${state.showNight ? "live" : "sched"}">${state.showNight ? "Open now" : "Opens at 19:30 on show day"}</span></div></div></div>
-      <div class="acard"><h2>Tonight</h2><div class="mkpis">${mini("Checked in", fmt(c))}${mini("Band members with tickets", fmt(NEXT.pre))}${mini("Average, last 6 shows", "718")}</div>
-        <div class="adm-actions" style="margin-top:12px"><button class="adm-btn" data-act="opendoors">${state.showNight ? "Simulate 200 more scans" : "Open doors now (demo)"}</button></div></div></div>
-    <div class="acard"><h2>Rules</h2><div class="splits"><div><span>Window</span><span style="font-size:.8125rem">Doors to curfew, 19:30 to 23:30</span><b></b></div><div><span>Where</span><span style="font-size:.8125rem">Within 200 m of the venue</span><b></b></div><div><span>Gives</span><span style="font-size:.8125rem">150 notes and the city on the fan's tour</span><b></b></div></div></div>`;
+function resultsMissions() {
+  const list = RM.map(rmStats).sort((a, b) => b[state.rsort] - a[state.rsort]);
+  const tot = (k) => list.reduce((a, r) => a + r[k], 0);
+  return `<div class="acard"><div class="acard-top"><div><h2>By mission</h2><p class="sub">Tour so far. Missions without a post still bring check-ins, votes and new members.</p></div>
+      <div class="filters aform">${fld("Sort by", sel("rsort", [["value", "Media value"], ["views", "Views"], ["eng", "Likes, comments and shares"], ["done", "Fans who took part"], ["nm", "New members"]], state.rsort))}</div></div>
+    <div class="scroll-x"><table class="atable"><thead><tr><th>Mission</th><th class="r">Done by</th><th class="r">Of those who saw it</th><th class="r">Posts</th><th class="r">Views</th><th class="r">Likes</th><th class="r">Comments</th><th class="r">Shares</th><th class="r">Value</th><th class="r">New members</th></tr></thead>
+    <tbody>${list.map((r) => `<tr class="click" data-act="rmission" data-id="${r.id}"><td class="wrap"><b>${esc(r.title)}</b><br><span class="sub">${r.type}, from ${dayNum(addDays(-r.ago))}</span></td><td class="r">${fmt(r.done)}</td><td class="r">${pct(r.done, r.seen)}</td><td class="r">${r.posts ? fmt(r.posts) : "–"}</td><td class="r">${r.views ? big(r.views) : "–"}</td><td class="r">${r.views ? big(r.likes) : "–"}</td><td class="r">${r.views ? big(r.comments) : "–"}</td><td class="r">${r.views ? big(r.shares) : "–"}</td><td class="r">${r.value ? eur(r.value) : "–"}</td><td class="r">${r.nm ? fmt(r.nm) : "–"}</td></tr>`).join("")}</tbody>
+    <tfoot><tr><td>${list.length} missions</td><td class="r">${fmt(tot("done"))}</td><td></td><td class="r">${fmt(tot("posts"))}</td><td class="r">${big(tot("views"))}</td><td class="r">${big(tot("likes"))}</td><td class="r">${big(tot("comments"))}</td><td class="r">${big(tot("shares"))}</td><td class="r">${eur(tot("value"))}</td><td class="r">${fmt(tot("nm"))}</td></tr></tfoot></table></div></div>`;
 }
-function admMissions() {
-  const done = { sing: 4120, setlist: 0, merch: 0, friend: 960, fit: 1830, lyric: 7240, encore: 8641, first: 2210 };
-  return admHead("Missions", "What fans are asked to do. City missions are created for every date automatically.", `<button class="adm-btn primary" data-act="newMission">${icon("plus")}New mission</button>`) + `
-    <div class="acard"><div class="scroll-x"><table class="atable"><thead><tr><th>Mission</th><th>City</th><th class="r">Notes</th><th>Status</th><th class="r">Done by</th></tr></thead>
-    <tbody>${MISSIONS.map((m) => `<tr class="${m.fresh ? "fresh" : ""}"><td class="wrap"><b>${esc(m.title)}</b><br><span class="sub">${esc(m.meta)}</span></td><td>${m.city ? city(m.city).city : "Anywhere"}</td><td class="r">${m.pts}</td><td>${m.show ? `<span class="st sched">Show day</span>` : `<span class="st live">Live</span>`}</td><td class="r">${fmt((done[m.id] || 0) + (state.done.has(m.id) ? 1 : 0))}</td></tr>`).join("")}</tbody></table></div></div>`;
+function resultsPosts() {
+  const k = state.psort;
+  const list = POSTLIST.filter((p) => state.tcity === "all" || p.city === state.tcity).sort((a, b) => b[k] - a[k]);
+  return `<div class="acard"><div class="acard-top"><div><h2>Fans' best posts</h2><p class="sub">${list.length} of ${fmt(tourTot("posts"))} posts shown. Public posts made for a mission, checked through linked accounts.</p></div>
+      <div class="filters aform">${fld("City", `<select data-tcity>${[["all", "Every city"], ...played().map((c) => [c.city, c.city])].map(([v, l]) => `<option value="${v}" ${state.tcity === v ? "selected" : ""}>${l}</option>`).join("")}</select>`)}${fld("Sort by", sel("psort", [["views", "Views"], ["likes", "Likes"], ["comments", "Comments"], ["shares", "Shares"]], k))}</div></div>
+    <div class="scroll-x"><table class="atable"><thead><tr><th>Fan</th><th>City</th><th>Mission</th><th>Network</th><th class="r">Posted</th><th class="r">Views</th><th class="r">Likes</th><th class="r">Comments</th><th class="r">Value</th></tr></thead>
+    <tbody>${list.map((p) => `<tr class="click" data-act="rmission" data-id="${p.mid}"><td><span class="who"><i>${p.who.slice(1, 3).toUpperCase()}</i>${p.who}</span></td><td>${p.city}</td><td class="wrap">${esc(RM.find((r) => r.id === p.mid).title)}</td><td><span class="net-pill">${p.net}</span></td><td class="r">${p.ago} d ago</td><td class="r">${fmt(p.views)}</td><td class="r">${fmt(p.likes)}</td><td class="r">${fmt(p.comments)}</td><td class="r">${eur(mediaValue(p.views))}</td></tr>`).join("")}</tbody></table></div></div>`;
 }
-function draftM(d) { return { id: "draft", title: d.title || "Untitled", pts: +d.pts || 0, meta: d.meta || "", city: d.city === "any" ? null : d.city }; }
-function refreshDrawer() { const d = state.draft, pv = $("#dPreview"); if (d && pv) pv.innerHTML = previewM(d); }
-const previewM = (d) => `<div class="setlist" style="transform:none;padding:22px 14px 10px">${setlistRow(draftM(d), MISSIONS.length)}</div>`;
+function dayBars(r) {
+  const n = 12, W = 560, H = 150, B = 22, L = 4;
+  const w = Array.from({ length: n }, (_, d) => (TOUR.some((c) => c.d === d - r.ago) ? 1 : 0.25) + Math.exp(-d / 5) * 0.3 + 0.05);
+  const s = w.reduce((a, b) => a + b, 0), vals = w.map((x) => (r.posts * x) / s), max = Math.max(...vals), bw = (W - L * 2) / n;
+  return `<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Posts each day">${vals.map((v, d) => {
+    const hh = ((H - B - 30) * v) / max, x = L + d * bw, day = addDays(d - r.ago);
+    return `<rect x="${(x + 3).toFixed(1)}" y="${(H - B - hh).toFixed(1)}" width="${(bw - 6).toFixed(1)}" height="${hh.toFixed(1)}" rx="3" fill="#1d1f24" fill-opacity="${v === max ? 0.9 : 0.55}"><title>${dayNum(day)}: ${fmt(v)} posts</title></rect>${d % 2 === 0 ? `<text x="${(x + bw / 2).toFixed(1)}" y="${H - 6}" text-anchor="middle" font-size="11" fill="#5b606b">${dayNum(day)}</text>` : ""}`;
+  }).join("")}<text x="${L}" y="12" font-size="11" fill="#5b606b">Peak ${fmt(max)} posts a day, on show nights</text></svg>`;
+}
+function missionDetail(id) {
+  const r = rmStats(RM.find((x) => x.id === id));
+  const tiers = [["Listener", 44], ["Singalong", 35], ["Encore", 17], ["Soundcheck", 4]].map(([t, p], i) => [t, p + ((r.ago + i * 3) % 5) - 2]);
+  const split = r.net || [0.58, 0.33, 0.08, 0.01];
+  const nets = NET_NAMES.map((n, i) => ({ n, posts: r.posts * split[i], v: r.views * split[i], likes: r.likes * split[i], comments: r.comments * split[i], shares: r.shares * split[i] }));
+  const posts = POSTLIST.filter((p) => p.mid === id).sort((a, b) => b.views - a.views).slice(0, 5);
+  const ex = typeof r.extra === "function" ? r.extra() : r.extra || [];
+  const body = `<div class="mkpis">${mini("Fans who took part", fmt(r.done))}${mini("Of those who saw it", pct(r.done, r.seen))}${r.views ? mini("Posts", fmt(r.posts)) + mini("Views", big(r.views)) + mini("Likes", big(r.likes)) + mini("Comments", fmt(r.comments)) + mini("Shares", fmt(r.shares)) + mini("Media value", eur(r.value)) + mini("Reach outside the Band", big(r.views * 0.64)) : ""}${r.nm ? mini("New members", fmt(r.nm)) : ""}${ex.map(([l, v]) => mini(l, v)).join("")}</div>
+    ${r.views ? `<h3 style="font-size:.875rem;margin:18px 0 0">Posts each day</h3><div class="chart">${dayBars(r)}</div>
+    <h3 style="font-size:.875rem;margin:18px 0 0">By network</h3><div class="scroll-x"><table class="atable"><thead><tr><th>Network</th><th class="r">Posts</th><th class="r">Views</th><th class="r">Likes</th><th class="r">Comments</th><th class="r">Shares</th></tr></thead>
+      <tbody>${nets.map((x) => `<tr><td>${x.n}</td><td class="r">${fmt(x.posts)}</td><td class="r">${big(x.v)}</td><td class="r">${big(x.likes)}</td><td class="r">${fmt(x.comments)}</td><td class="r">${fmt(x.shares)}</td></tr>`).join("")}</tbody></table></div>
+    ${posts.length ? `<h3 style="font-size:.875rem;margin:18px 0 0">Best posts</h3><div class="scroll-x"><table class="atable"><thead><tr><th>Fan</th><th>City</th><th>Network</th><th class="r">Views</th><th class="r">Likes</th></tr></thead><tbody>${posts.map((p) => `<tr><td>${p.who}</td><td>${p.city}</td><td>${p.net}</td><td class="r">${fmt(p.views)}</td><td class="r">${fmt(p.likes)}</td></tr>`).join("")}</tbody></table></div>` : ""}`
+    : `<p class="sub" style="margin-top:14px">This mission doesn't ask for a public post, so what counts is who took part and what it brought back.</p>`}
+    <h3 style="font-size:.875rem;margin:18px 0 0">Who took part</h3><div class="splits">${tiers.map(([t, p]) => `<div><span>${t}</span><span class="bar-a"><i style="width:${p}%"></i></span><b>${p}%</b></div>`).join("")}</div>
+    <p class="sub" style="margin-top:8px">${14 + (r.ago % 9)}% joined the Band on this tour. Fans aged 18 to 34 did ${58 + (r.ago % 7)}% of it.</p>`;
+  openDrawer({ title: esc(r.title), sub: `${r.type}, from ${dayNum(addDays(-r.ago))}`, body, footer: `<button class="adm-btn" data-act="dclose">Close</button><button class="adm-btn primary" data-act="rcsv" data-id="${r.id}">${icon("download")}This mission, CSV</button>` });
+}
+function resultsCSV(el) {
+  const head = ["Mission", "Type", "Started", "Done by", "Saw it", "Posts", "Views", "Likes", "Comments", "Shares", `Media value (EUR, at a ${cpmLabel()} CPM)`, "New members"];
+  const row = (r) => [r.title, r.type, isoDay(addDays(-r.ago)), r.done, r.seen, r.posts, Math.round(r.views), Math.round(r.likes), Math.round(r.comments), Math.round(r.shares), Math.round(r.value), r.nm];
+  const list = RM.map(rmStats).filter((r) => !el.dataset.id || r.id === el.dataset.id);
+  csvDownload([head, ...list.map(row)], el.dataset.id ? `ilsa-morrow-${el.dataset.id}.csv` : "ilsa-morrow-results.csv");
+  admToast("CSV downloaded");
+}
+
+/* ---------------------------------------------------------------- Brand */
+const K0 = { ...K };
+function markTide(cls = "") {
+  return `<svg class="${cls}" viewBox="0 0 48 48" role="img" aria-label="Ilsa Morrow"><rect width="48" height="48" rx="10" fill="${K.nuit}"/><circle cx="24" cy="22" r="11" fill="none" stroke="${K.sel}" stroke-width="2.4"/><path d="M9 31c5-4 10 4 15 0s10-4 15 0" fill="none" stroke="${K.tide}" stroke-width="2.6" stroke-linecap="round"/><path d="M9 37c5-4 10 4 15 0s10-4 15 0" fill="none" stroke="${K.tide}" stroke-width="2.6" stroke-linecap="round" opacity=".55"/><circle cx="24" cy="22" r="3.2" fill="${K.red}"/></svg>`;
+}
+const markMono = (cls = "") => `<svg class="${cls}" viewBox="0 0 48 48" role="img" aria-label="Ilsa Morrow"><circle cx="24" cy="24" r="23" fill="${K.red}"/><text x="24" y="31" text-anchor="middle" font-family="Syne, sans-serif" font-weight="800" font-size="19" fill="#fff">IM</text></svg>`;
+const markWord = () => `<svg viewBox="0 0 64 48" aria-hidden="true"><rect width="64" height="48" rx="8" fill="${K.nuit}"/><text x="8" y="22" font-family="Syne, sans-serif" font-weight="800" font-size="11" textLength="24" lengthAdjust="spacingAndGlyphs" fill="${K.ink}">ILSA</text><text x="8" y="34" font-family="Syne, sans-serif" font-weight="800" font-size="11" textLength="48" lengthAdjust="spacingAndGlyphs" fill="${K.ink}">MORROW</text></svg>`;
+function brandMark(cls = "") { return logoMark(cls); }
+function wmMark() { return state.kit && state.kit.logo !== "word" ? `<span class="wm-mark">${logoMark()}</span>` : ""; }
+const BRANDKIT = {
+  roles: [["main", "Main colour", "Notes, buttons, what fans earn"], ["second", "Second colour", "The tide: goals, links, the whole Band"], ["dark", "Night", "Backgrounds, panels and the menu"], ["light", "Salt", "Tickets, setlists, light buttons"], ["text", "Text", "Everything fans read"]],
+  looks: [
+    { k: "backstage", n: "Backstage", d: "Night violet, stage red and the tide, as designed for the tour", c: { main: "#f0412f", second: "#2bb3a3", dark: "#121016", light: "#f1e9d8", text: "#f3eee6" }, fd: "syne", ft: "dm", rk: "1" },
+    { k: "neon", n: "Neon", d: "Electric pink and cyan on black, rounder shapes", c: { main: "#d6267a", second: "#3fd0e8", dark: "#0b0b14", light: "#f2eefc", text: "#f4f2fb" }, fd: "clash", ft: "general", rk: "1.8" },
+    { k: "harbour", n: "Harbour", d: "Port lights at night: copper and sea blue, a quieter text face", c: { main: "#c2571f", second: "#5fb7d4", dark: "#0f1a24", light: "#efe7d6", text: "#eef2f4" }, fd: "syne", ft: "general", rk: "1" },
+    { k: "setlist", n: "Setlist", d: "Typewriter headlines and square corners, like tape on a stage floor", c: { main: "#d8352a", second: "#c6ab72", dark: "#191613", light: "#f6efe0", text: "#f6efe0" }, fd: "mono", ft: "dm", rk: "0" },
+  ],
+  fontsD: [["syne", "Syne", '"Syne", "Arial Black", sans-serif', "As designed"], ["clash", "Clash Display", '"Clash Display", "General Sans", sans-serif', "Geometric"], ["mono", "Space Mono", '"Space Mono", "Courier New", monospace', "Typewriter"], ["serif", "Georgia", 'Georgia, "Times New Roman", serif', "Classic serif"]],
+  fontsT: [["dm", "DM Sans", '"DM Sans", "Helvetica Neue", Arial, sans-serif', "As designed"], ["general", "General Sans", '"General Sans", "Helvetica Neue", Arial, sans-serif', "Neutral"], ["serif", "Georgia", 'Georgia, "Times New Roman", serif', "Bookish"]],
+  logos: [["word", "Wordmark only", markWord, markTide], ["mark", "Tide mark", markTide], ["mono", "Monogram", markMono]],
+  logoSub: "Shown next to the name at the top of the fan app, on the Band pass and in the admin",
+  styleSub: "Each style sets colours, type and corners in one go. Pick one, then fine-tune anything below; the fan app follows straight away.",
+  resetLabel: "Back to Ilsa's colours", resetToast: "Back to Ilsa's colours, type and corners", openLabel: "Open the fan app",
+  contrastRole: "main", contrastLabel: "the main colour",
+  words: [["Missions", "The setlist"], ["Tiers", "Listener, Singalong, Encore, Soundcheck"], ["Collection", "The tour, city by city"], ["Leaderboard", "The Front Row race"], ["Community", "The Band"], ["Address", "band.ilsamorrow.example"]],
+  vars: ["--rouge", "--rouge-d", "--rouge-soft", "--maree", "--maree-d", "--nuit", "--nuit-0", "--scene", "--scene-2", "--scene-3", "--line", "--sel", "--sel-2", "--ink", "--ink-2", "--ink-3", "--ground", "--paper", "--accent", "--sheet-bg", "--toast-bg", "--toast-fg", "--fly-bg"],
+  reset() { Object.assign(K, K0); },
+  apply(c, d) {
+    const set = (k, v) => d.setProperty(k, v);
+    const dk = c.dark, n0 = mix(dk, "#000000", 0.38), sc = mix(dk, "#ffffff", 0.06), sc2 = mix(dk, "#ffffff", 0.11), sc3 = mix(dk, "#ffffff", 0.19);
+    set("--rouge", c.main); set("--rouge-d", mix(c.main, "#000000", 0.2)); set("--rouge-soft", mix(c.main, dk, 0.78)); set("--accent", c.main); set("--fly-bg", c.main);
+    set("--maree", c.second); set("--maree-d", mix(c.second, "#000000", 0.45));
+    set("--nuit", dk); set("--ground", dk); set("--nuit-0", n0); set("--scene", sc); set("--paper", sc); set("--sheet-bg", sc); set("--scene-2", sc2); set("--scene-3", sc3); set("--line", mix(dk, "#ffffff", 0.13));
+    set("--sel", c.light); set("--sel-2", mix(c.light, "#000000", 0.06)); set("--toast-bg", c.light); set("--toast-fg", dk);
+    set("--ink", c.text); set("--ink-2", mix(c.text, dk, 0.3)); set("--ink-3", mix(c.text, dk, 0.48));
+    Object.assign(K, { nuit: dk, n0, sc, sc2, sc3, red: c.main, redD: mix(c.main, "#000000", 0.2), tide: c.second, tideD: mix(c.second, "#000000", 0.45), sel: c.light, sel2: mix(c.light, "#000000", 0.06), ink: c.text });
+  },
+  thumb(L) {
+    const c = L.c, r = (n) => Math.round(n * L.rk);
+    const fam = kitFont(BRANDKIT.fontsD, L.fd).replace(/"/g, "'");
+    return `<svg viewBox="0 0 160 100" aria-hidden="true"><rect width="160" height="100" fill="${c.dark}"/><rect width="160" height="18" fill="${mix(c.dark, "#000000", 0.38)}"/><text x="10" y="13" font-family="${fam}" font-weight="800" font-size="8" textLength="72" lengthAdjust="spacingAndGlyphs" fill="${c.text}">ILSA MORROW</text><rect x="116" y="4" width="36" height="10" rx="${r(3)}" fill="${c.main}"/>
+      <text x="10" y="44" font-family="${fam}" font-weight="800" font-size="15" fill="${c.text}">LYON,</text><text x="10" y="62" font-family="${fam}" font-weight="800" font-size="15" textLength="84" lengthAdjust="spacingAndGlyphs" fill="${c.main}">TONIGHT</text>
+      <rect x="104" y="28" width="46" height="40" rx="${r(4)}" fill="${c.light}"/>${[0, 1, 2, 3].map((i) => `<rect x="110" y="${35 + i * 7}" width="${[30, 22, 34, 18][i]}" height="2.6" fill="${c.dark}"/>`).join("")}
+      ${[0, 1].map((i) => `<path d="M0 ${80 + i * 8}c20-7 40 7 60 0s40-7 60 0 30 6 40 0" fill="none" stroke="${c.second}" stroke-width="2" opacity="${0.9 - i * 0.35}"/>`).join("")}</svg>`;
+  },
+  preview() {
+    const tabs = ["Tonight", "Setlist", "Tour", "Front row", "Merch"];
+    const rows = [["01", "Sing the chorus of 'Marée haute'", "20 s video, any network", 200], ["02", "Merch fit: the tour tee, your way", "Photo or video", 120], ["03", "Finish the line", "One lyric, one go", 60]];
+    return `<div style="display:flex;align-items:center;gap:8px;padding:30px 12px 10px;background:var(--nuit-0)">${wmMark().replace('class="wm-mark"', 'style="width:24px;height:24px;flex:none;display:block"')}
+        <span style="font-family:var(--f-display);font-weight:800;text-transform:uppercase;font-size:12px;line-height:.9;letter-spacing:.02em">Ilsa Morrow<small style="display:block;font-family:var(--f-mono);font-weight:400;font-size:8px;text-transform:none;color:var(--maree);margin-top:3px;letter-spacing:.04em">The Band</small></span>
+        <span style="margin-left:auto;background:var(--rouge);color:#fff;border-radius:calc(6px * var(--rk, 1));padding:5px 8px;white-space:nowrap"><b style="font-family:var(--f-display);font-weight:800;font-size:12px">2,140</b> <span style="font-family:var(--f-mono);font-size:8px">${esc(BRAND.word)}</span></span></div>
+      <div style="padding:14px 12px;display:grid;gap:12px;flex:1;align-content:start">
+        <span style="font-family:var(--f-mono);font-size:9px;letter-spacing:.04em;color:var(--maree)">TONIGHT, ${dayShort(NEXT.date).toUpperCase()}</span>
+        <b style="font-family:var(--f-display);font-weight:800;font-size:23px;line-height:.95;text-transform:uppercase;margin-top:-6px">Lyon, you've been <span style="color:var(--rouge)">warned.</span></b>
+        <div style="background:var(--sel);color:var(--nuit);border-radius:calc(3px * var(--rk, 1));padding:10px 10px 6px">${rows.map(([n, t, m, p]) => `<div style="display:grid;grid-template-columns:18px 1fr auto;gap:6px;align-items:baseline;padding:5px 0;border-bottom:1px solid var(--sel-2)"><span style="font-family:var(--f-mono);font-size:8px">${n}</span><span style="font-weight:700;font-size:10.5px;line-height:1.2">${t}<small style="display:block;font-weight:400;font-size:8.5px;opacity:.7">${m}</small></span><b style="font-family:var(--f-display);font-weight:800;font-size:11px;color:var(--rouge-d)">+${p}</b></div>`).join("")}</div>
+        <span style="display:grid;place-items:center;min-height:34px;border-radius:calc(8px * var(--rk, 1));background:var(--rouge);color:#fff;font-weight:700;font-size:11px">Check in at the stand</span>
+        <div style="background:var(--scene);border-radius:calc(14px * var(--rk, 1));padding:10px"><div style="display:flex;justify-content:space-between;font-size:9.5px"><b style="font-family:var(--f-display);font-weight:800;text-transform:uppercase">High tide</b><span style="font-family:var(--f-mono);color:var(--ink-2)">${goalPct()}%</span></div><div style="height:6px;border-radius:999px;background:var(--scene-3);margin-top:7px;overflow:hidden"><i style="display:block;height:100%;width:${goalPct()}%;background:var(--maree)"></i></div></div>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(5,1fr);background:var(--nuit-0);border-top:1px solid var(--line);padding:6px 2px 12px">${tabs.map((t, i) => `<span style="text-align:center;font-size:8px;font-weight:600;padding-top:6px;color:${i ? "var(--ink-3)" : "var(--ink)"};box-shadow:inset 0 2px 0 ${i ? "transparent" : "var(--rouge)"}">${t}</span>`).join("")}</div>`;
+  },
+};
+const MODULES = [
+  ["Setlist missions", "missions", "Posts, songs, photos and more", "missions", 0], ["Setlist calls", "target", "Call the opener, ×3 if you're right", "missions", 1], ["Votes", "list", "Encores and choices for the Band", "missions", 1],
+  ["Merch-stand check-in", "qr", "One QR per date, doors to curfew", "missions", 2], ["Open questions", "chat", "Answers you feature in the Band", "missions", 3], ["Merch table", "gift", "Tracks, codes, merch, moments", "rewards"],
+  ["Giveaways", "ticket", "Draws with entry rules", "rewards"], ["Band goal", "users", "One target for every fan", "season", 0], ["Team battles", "swords", "Sides, dates, join rules", "season", 1],
+  ["The tour", "collection", "Cities collected, bonus cards", "season", 2], ["Front Row race", "table", "Leaderboard with a prize", "season", 3], ["Referrals", "route", "Bring a friend to a show"],
+  ["Pre-sale by tier", "calendar", "Codes sent by tier"], ["Push and email", "bell", "Scheduled by show"],
+];
+function admBrand() {
+  const tab = state.atab.brand || 0;
+  const h = admHead("Brand", "Set once at launch. Changes show in the fan app straight away in this demo.", `<button class="adm-btn primary" data-act="gomember" data-tab="home">Open the fan app</button>`) + admTabs("brand");
+  return h + (tab === 1 ? admModules() : admAppearance());
+}
+
+/* ---------------------------------------------------------------- Account */
+const TEAM = [["Camille Arnaud", "Manager", "Owner", "Today"], ["Yanis Belhadj", "Tour manager", "Editor", "Today"], ["Romane Petit", "Social and content", "Moderator", "Yesterday"], ["Lucas Moreau", "Merch, on the road", "Deliveries", "Today"]];
+const admAccount = () => accountPage({ domain: "band.ilsamorrow.example", active: 9200, renews: dayLabel(isoDay(addDays(141))), sub: "Plan, team, billing and security." });
+
+/* ---------------------------------------------------------------- forms, actions */
+const FORMS = {
+  mission: { form: missionForm, sig: (d) => d.type, preview: (d) => `<div class="setlist" style="transform:none;padding:22px 14px 10px">${setlistRow(draftM(d), MISSIONS.length)}</div>` },
+  reward: { form: rewardForm, fix: (d) => { if (!DELIV_FOR[d.kind].some(([v]) => v === d.how)) d.how = DELIV_FOR[d.kind][0][0]; }, sig: (d) => d.kind + d.how, preview: (d) => `<div style="width:200px">${itemCard(draftReward(d), { noBtn: true })}</div>` },
+  battle: { form: battleForm, preview: (d) => battleCard(draftBattle(d)) },
+  card: { form: cardForm, sig: (d) => String(!!d.img), preview: (d) => `<div style="width:150px">${cardArt(d)}</div><p class="sub" style="margin:8px 0 0">${esc(d.name)}${d.rarity !== "Common" ? `, ${d.rarity.toLowerCase()}` : ""}</p>` },
+  invite: INVITE_FORM,
+};
 function onAdminAction(act, el) {
+  if (kitAction(act, el)) return;
   switch (act) {
-    case "newMission": {
-      state.draft = { title: "Geneva: your view from the balcony", pts: 120, meta: "Photo from the show", city: "gva" };
-      return openDrawer({ title: "New mission", sub: "Shows in the fan app as soon as you publish", body: `${fld("Title", inp("title", state.draft.title, 'maxlength="60"'))}<div class="adm-row">${fld("Notes", inp("pts", state.draft.pts, 'inputmode="numeric"'))}${fld("Line under the title", inp("meta", state.draft.meta))}</div><div class="afield"><span>City</span>${optRow("city", [["any", "Anywhere"], ...TOUR.filter((c) => c.d >= 0).map((c) => [c.id, c.city])], state.draft.city)}</div>`, preview: previewM(state.draft), footer: `<button class="adm-btn" data-act="dclose">Cancel</button><button class="adm-btn primary" data-act="publishM">Publish now</button>` });
-    }
-    case "publishM": {
-      const d = state.draft; if (!d || !d.title.trim()) return;
-      MISSIONS.push({ id: "c" + Date.now(), kind: "post", title: d.title.trim(), pts: Math.max(5, +d.pts || 50), meta: d.meta, city: d.city === "any" ? null : d.city, tag: "#MaréeHauteTour", fresh: 1, brief: d.title.trim() + ".", steps: ["Make it your way.", "Post it on your account and tag @ilsamorrow.", "Paste the link here."] });
-      closeDrawer(); state.news = `New mission: ${d.title.trim()}`; rerenderAdminInPlace(); return admToast("Published. Fans see it now.", "setlist");
+    case "newMission": return openForm("mission", newMissionDraft(), { title: "New mission", sub: "Fans get it in the setlist the moment you publish.", cta: "Create mission", act: "createMission" });
+    case "createMission": return createMission();
+    case "newReward": return openForm("reward", { kind: "digital", how: "unlock", title: "Lyon, the soundcheck recording", cost: 700, stock: "", art: "memo", tone: "tide" }, { title: "New reward", sub: "Digital rewards are delivered the moment fans redeem them.", cta: "Add the reward", act: "createReward" });
+    case "createReward": return createReward();
+    case "newBattle": { const s = addDays(16), e = addDays(45); return openForm("battle", { name: "Winter dates: Tide v Stage red", an: "Tide", ac: "#2bb3a3", bn: "Stage red", bc: "#f0412f", start: isoDay(s), end: isoDay(e), join: "choose", counts: "all", prize: "Top 20 of the winning side: a signed copy of the next single" }, { title: "New team battle", sub: "Two sides, a start and an end. Fans see it on Tonight and in the Front Row race.", cta: "Create the battle", act: "createBattle" }); }
+    case "createBattle": return createBattle();
+    case "newCard": if (state.admin !== "season" || state.atab.season !== 2) { state.admin = "season"; state.atab.season = 2; renderAdmin(); } return openForm("card", { name: "Paris rehearsal", sub: "The night before the last night", rarity: "Limited", how: "checkin", img: null }, { title: "Add a card", sub: "It goes in the tour collection, next to the twelve cities.", cta: "Add to the collection", act: "createCard" });
+    case "createCard": return createCard();
+    case "settleOpener": { state.opener = state.openerPick; rerenderAdminInPlace(); return admToast(`Toulouse is settled. Fans who called '${state.opener}' got ×${state.mult.opener}`); }
+    case "resetOpener": state.opener = null; return rerenderAdminInPlace();
+    case "closeEncore": { const w = ENCORES.map(([k, l]) => [l, ENC_BASE[k] + (state.vote === k ? 1 : 0)]).sort((a, b) => b[1] - a[1])[0][0]; state.encoreClosed = w; state.news = `The Band picked '${w}' to close Geneva.`; rerenderAdminInPlace(); return admToast(`Vote closed. '${w}' closes Geneva`, "band"); }
+    case "setCall": {
+      const m = MISSIONS.find((x) => x.id === el.dataset.id); m.answer = $(`select[name="ans-${m.id}"]`).value;
+      if (state.gv[m.id] != null && m.options[state.gv[m.id]] === m.answer) { const x = m.pts * ((m.mult || 2) - 1); state.balance += x; state.earned += x; state.news = `${m.title}: you called it. +${x} ${BRAND.word}.`; }
+      rerenderAdminInPlace(); return admToast("Answer confirmed. Bonuses paid");
     }
     case "opendoors": if (!state.showNight) { state.showNight = true; state.live = 412; } else state.live += 200; rerenderAdminInPlace(); return admToast(`${fmt(state.live)} fans checked in at Lyon so far`, "home");
+    case "qrpng": downloadQRPng(checkinURL("lyon"), "SCAN TO CHECK IN", `Ilsa Morrow, Lyon, ${dayShort(NEXT.date)}. +150 ${BRAND.word}`, "ilsa-morrow-lyon-check-in-qr.png"); return admToast("QR code downloaded, ready to print");
+    case "aopt": { const n = el.dataset.name, v = el.dataset.v; if (n === "ciMode") state.ci.mode = v; else state[n] = v; return rerenderAdminInPlace(); }
+    case "ans": return setAns(+el.dataset.i, el.dataset.s);
+    case "answersCsv": csvDownload([["Fan", "Handle", "Answer"], ...ansList().filter((a) => a.status === "featured").map((a) => [a.who, a.handle, a.t])], "ilsa-morrow-featured-answers.csv"); return admToast("CSV downloaded");
+    case "draw": {
+      const pool = ["Elsa Moreau", "Bastien Roux", "Rosa Almeida", "Théo Marchal", "Jade Fontaine"];
+      state.drawn = pool.sort(() => Math.random() - 0.5).slice(0, 2);
+      state.drawn.forEach((w) => orders().unshift({ who: w, label: "A place at the Paris soundcheck", how: "Giveaway draw", deliv: "book", status: "Date to fix", d: 0, fresh: 1 }));
+      rerenderAdminInPlace(); return admToast("2 winners drawn and told by email");
+    }
+    case "olist": state.olist = el.dataset.f; return rerenderAdminInPlace();
+    case "csv": csvDownload([["Fan", "Won", "How", "Date", "Delivery", "Status"], ...orders().map((o) => [o.who, oTitle(o), oHow(o), isoDay(addDays(o.d)), DELIV[oDeliv(o)], o.status])], "ilsa-morrow-winners-and-deliveries.csv"); return admToast("CSV downloaded");
+    case "tourCsv": csvDownload([["city", "date", "checkins", "posts", "views", `media_value_eur_cpm_${state.cpm}`, "new_members"], ...played().map((c) => [c.city, isoDay(c.date), c.ci, c.posts, c.views, mediaValue(c.views).toFixed(2), c.joined])], "ilsa-morrow-tour.csv"); return admToast("CSV downloaded");
+    case "rcsv": return resultsCSV(el);
+    case "rmission": return missionDetail(el.dataset.id);
+    case "rmore": state.rmore = !state.rmore; return rerenderAdminInPlace();
     case "goalsim": state.goal = Math.min(50000, state.goal + 4000); rerenderAdminInPlace(); return admToast(`High tide at ${goalPct()}%`, "band");
-    case "csv": csvDownload([["city", "date", "checkins", "posts", "views", `media_value_eur_cpm_${state.cpm}`, "new_members"], ...played().map((c) => [c.city, dayNum(c.date), c.ci, c.posts, c.views, mediaValue(c.views).toFixed(2), c.joined])], "ilsa-morrow-tour.csv"); return admToast("CSV downloaded");
-    case "module": el.setAttribute("aria-checked", el.getAttribute("aria-checked") === "true" ? "false" : "true"); return admToast(el.getAttribute("aria-checked") === "true" ? `${el.dataset.n} is on` : `${el.dataset.n} is off for fans`);
   }
 }
 function onChange(t) {
+  if (kitChange(t)) return;
   if (t.matches("[data-tcity]")) { state.tcity = t.value; return rerenderAdminInPlace(); }
-  if (t.matches("[data-order]")) { orders()[+t.dataset.order].status = t.value; rerenderAdminInPlace(); admToast(`Marked ${t.value.toLowerCase()}. The fan sees it in the app.`); }
+  if (t.dataset.ostatus != null) { const o = orders()[+t.dataset.ostatus]; o.status = t.value; rerenderAdminInPlace(); return admToast(`${o.who}: ${t.value.toLowerCase()}. The fan sees it in the app.`); }
+  if (state.draft && t.type === "file" && t.files && t.files.length && t.closest("#dForm")) { if (t.name === "cimg") { state.draft.img = URL.createObjectURL(t.files[0]); refreshDrawer(); } else admToast(`${t.files[0].name} is attached`); return; }
+  if (t.closest && t.closest("#dForm")) return;
+  if (t.name === "openerPick") state.openerPick = t.value;
+  if (t.name === "multOpener" || t.name === "multEncore") { state.mult[t.name === "multOpener" ? "opener" : "encore"] = +t.value; rerenderAdminInPlace(); admToast("Setlist calls show the new bonus", "setlist"); }
+  if (t.name === "ciOpens") { state.ci.opens = t.value || "19:30"; rerenderAdminInPlace(); }
+  if (t.name === "ciCloses") state.ci.closes = t.value;
+  if (t.name === "ciWhere") state.ci.where = t.value;
+  if (t.name === "poster") { state.poster = t.value; rerenderAdminInPlace(); }
+  if (t.name === "psort" || t.name === "rsort") { state[t.name] = t.value; rerenderAdminInPlace(); }
 }
-function onInput(t) { if (t.matches("#pointsWord")) { const v = t.value.trim().toLowerCase(); if (v) { BRAND.word = v; delete $("#app").dataset.ready; } } }
-function admMerch() {
-  const tab = state.atab.merch || 0;
-  const h = admHead("Merch table", "What fans spend their notes on, and what is waiting to be sent.", memberLink("merch")) + admTabs("merch");
-  if (tab === 1) return h + `<div class="acard"><h2>To send and to book</h2><div class="scroll-x"><table class="atable"><thead><tr><th>Fan</th><th>Reward</th><th>Redeemed</th><th>Status</th></tr></thead>
-    <tbody>${orders().map((o, i) => { const g = MERCH.find((x) => x.id === o.item), flow = STATUSES[g.how]; return `<tr><td><span class="who"><i>${initials(o.who)}</i>${o.who}</span></td><td class="wrap">${esc(g.title)}</td><td>${dayNum(addDays(o.d))}</td><td>${flow.length > 1 ? `<label class="afield" style="min-width:150px"><select data-order="${i}">${flow.map((s) => `<option ${s === o.status ? "selected" : ""}>${s}</option>`).join("")}</select></label>` : `<span class="st live">${o.status}</span>`}</td></tr>`; }).join("")}</tbody></table></div></div>`;
-  const red = { memo: 1210, tee: 2080, poster: 96, setl: 11, vinyl: 22, sound: 4, hello: 0 };
-  return h + `<div class="acard"><div class="scroll-x"><table class="atable"><thead><tr><th>Reward</th><th class="r">Notes</th><th>How</th><th class="r">Stock</th><th class="r">Redeemed on tour</th></tr></thead>
-    <tbody>${MERCH.map((g) => `<tr><td class="wrap"><b>${esc(g.title)}</b></td><td class="r">${fmt(g.cost)}</td><td>${HOW[g.how]}</td><td class="r">${g.stock || "No limit"}</td><td class="r">${fmt(red[g.id] + state.redeemed.filter((r) => r.id === g.id).length)}</td></tr>`).join("")}</tbody></table></div></div>`;
+function onInput(t) {
+  if (kitInput(t)) return;
+  if (t.matches("#pointsWord")) { const v = t.value.trim().toLowerCase(); if (v) { BRAND.word = v; delete $("#app").dataset.ready; kitPreview(); } }
+  if (t.name === "mq" && t.closest("#admin")) { state.mq = t.value; rerenderAdminInPlace(); const i = $('input[name="mq"]'); if (i) { i.focus(); i.setSelectionRange(i.value.length, i.value.length); } }
 }
-function admMembers() {
-  const P = played();
-  return admHead("Members", "31,980 members in total. Where they joined and where they go to shows.") + `
-    <div class="kpis">${kpi("Band members, in total", "31,980", `+${fmt(tourTot("joined"))} since the tour started`)}${kpi("Active this month", "9,200", "29% of the Band")}${kpi("Linked a social account", "68%", "Needed to earn on posts", true)}${kpi("Came to 2 shows or more", "1,148", "On this tour", true)}</div>
-    <div class="adm-row"><div class="acard"><h2>Joined on this tour, by city</h2><p class="sub">QR at the stand, or a fan's post from that show</p><div class="splits">${P.map((c) => `<div><span>${c.city}</span><span class="bar-a"><i style="width:${(c.joined / 498) * 100}%"></i></span><b>${fmt(c.joined)}</b></div>`).join("")}</div></div>
-      <div class="acard"><h2>How they joined</h2><p class="sub">All members</p><div class="splits">${[["QR at a merch stand", 34], ["A fan's post or link", 27], ["Link in Ilsa's profile", 21], ["Ticket confirmation email", 12], ["Newsletter", 6]].map(([l, v]) => `<div><span>${l}</span><span class="bar-a"><i style="width:${(v / 34) * 100}%"></i></span><b>${v}%</b></div>`).join("")}</div></div></div>`;
+
+/* Generic missions created in the admin: votes, setlist calls, quizzes, open questions */
+function genBody(m) {
+  if (m.gen === "vote") {
+    const v = state.gv[m.id], w = m.options.map((_, i) => [38, 27, 20, 15, 11, 8][i] || 6), tw = w.reduce((a, b) => a + b, 0);
+    return `<p>${esc(m.brief)}</p><div class="poll">${m.options.map((o, i) => { const p = Math.round((w[i] / tw) * 100); return `<button data-act="gvote" data-id="${m.id}" data-i="${i}" aria-pressed="${v === i}" ${v != null ? `data-fill="${p}" disabled` : ""}><span>${esc(o)}</span>${v != null ? `<span class="pc">${p}%</span>` : ""}</button>`; }).join("")}</div>
+      <p class="note">${v != null ? (m.call ? `Called. ×${m.mult} if you're right; the team confirms it after the show.` : "Counted.") : m.call ? `Get it right and your ${BRAND.word} are multiplied by ${m.mult}.` : "One vote each."}</p>`;
+  }
+  if (m.gen === "quiz") return `<p>${esc(m.quiz.q)}</p><div class="quiz">${m.quiz.options.map((a, i) => `<button data-act="gquiz" data-id="${m.id}" data-i="${i}">${esc(a)}</button>`).join("")}</div>`;
+  return `<p>${esc(m.brief)}</p><div class="linkbox"><label for="gans">Your answer</label><textarea id="gans" maxlength="280"></textarea></div><button class="btn btn-red btn-block" data-act="gsend" data-id="${m.id}">Send it</button>`;
 }
-function admGoal() {
-  const n = goalPct();
-  return admHead("Band goal", "One target for every fan. Everyone sees the water rise.", memberLink("band")) + `
-    <div class="adm-grid"><div class="acard"><h2>High tide</h2><p class="sub">Missions done by any fan since the tour was announced</p>
-      <div class="goal-adm"><div class="kpis" style="grid-template-columns:repeat(3,minmax(0,1fr))">${kpi("Done", fmt(state.goal), `${n}% of 50,000`)}${kpi("To go", fmt(50000 - state.goal), "About 9 days at tour pace", true)}${kpi("Fans who helped", "12,904", "So far", true)}</div>
-        <span class="bar-a"><i style="width:${n}%"></i></span><div class="adm-actions"><button class="adm-btn" data-act="goalsim">Simulate a show weekend (+4,000)</button>${memberLink("band", "See it in the Band")}</div></div></div>
-      <div class="acard"><h2>Settings</h2><div class="aform" style="margin-top:12px">${fld("Target", inp("a", "50,000 missions", "disabled"))}${fld("Unlocks", inp("b", "'Marée haute', acoustic kitchen take", "disabled"))}${fld("For", inp("c", "Every Band member, to stream in the app", "disabled"))}</div></div></div>`;
+function genAction(act, el) {
+  const m = mission(el.dataset.id); if (!m) return;
+  if (act === "gvote") { if (state.gv[m.id] != null) return; state.gv[m.id] = +el.dataset.i; openSheet(head(m) + genBody(m)); complete(m.id, $("#sheet .poll [aria-pressed=true]")); return renderMember(false); }
+  if (act === "gquiz") {
+    if (state.done.has(m.id)) return;
+    const right = +el.dataset.i === m.quiz.right; el.parentElement.querySelectorAll("button").forEach((b) => (b.disabled = true));
+    el.classList.add(right ? "right" : "wrong");
+    if (right) complete(m.id, el); else { el.parentElement.querySelectorAll("button")[m.quiz.right].classList.add("right"); state.done.add(m.id); const half = Math.round(m.pts / 2); award(half, el, `+${half} ${BRAND.word} for trying`); }
+    return renderMember(false);
+  }
+  if (act === "gsend") {
+    const t = ($("#gans").value || "").trim(); if (t.length < 8) { toast("A few more words"); $("#gans").focus(); return; }
+    const before = complete(m.id, el); el.outerHTML = successHtml(m, before, "Sent. The team reads every answer.");
+    return renderMember(false);
+  }
 }
-const MODULES = [["Setlist missions", "Posts, songs, votes"], ["Merch-stand check-in", "One QR per date"], ["The tour", "Cities collected"], ["Front Row race", "Leaderboard with a prize"], ["Band goal", "One target for everyone"], ["Merch table", "Rewards and codes"], ["Referrals", "Bring a friend to a show"], ["Pre-sale by tier", "Codes sent by tier"], ["Push and email", "Scheduled by show"]];
-function admBrand() {
-  return admHead("Brand", "The fan app uses Ilsa's own colours, type and words.", memberLink("home", "Open the fan app")) + `
-    <div class="adm-row"><div class="acard"><h2>Identity</h2><p class="sub">Posters in Syne, text in DM Sans, tickets in Space Mono</p>
-      <div class="colour-chips">${[["#121016", "Nuit"], ["#f0412f", "Stage red"], ["#2bb3a3", "Tide"], ["#f1e9d8", "Salt"], ["#26222e", "Backstage"]].map(([c, n]) => `<span><i style="background:${c}"></i>${n}</span>`).join("")}</div>
-      <div class="aform" style="margin-top:14px"><label class="afield"><span>What fans call points</span><input id="pointsWord" value="${esc(BRAND.word)}" maxlength="18"></label></div></div>
-      <div class="acard"><h2>Words</h2><dl class="bs-words" style="margin-top:12px"><dt>Missions</dt><dd>The setlist</dd><dt>Tiers</dt><dd>Listener, Singalong, Encore, Soundcheck</dd><dt>Collection</dt><dd>The tour, city by city</dd><dt>Leaderboard</dt><dd>The Front Row race</dd><dt>Community</dt><dd>The Band</dd><dt>Address</dt><dd>band.ilsamorrow.example</dd></dl></div></div>
-    <div class="acard"><h2>Modules</h2><p class="sub">The Season plan includes every module, for up to 10,000 active members a month.</p><div class="modules" style="margin-top:12px">${MODULES.map(([n, s]) => `<div class="module"><span><b>${n}</b><span>${s}</span></span><button class="toggle" role="switch" aria-checked="true" aria-label="${n}" data-act="module" data-n="${n}"></button></div>`).join("")}</div></div>`;
-}
+
 const ADMIN_PAGES = {
-  overview: ["Overview", "grid", admOverview],
-  tour: ["Tour", "route", admTour, ["By city", "Fan posts", "Coming up"]],
-  value: ["Media value", "euro", admValue],
-  checkin: ["Merch check-in", "qr", admCheckin],
-  missions: ["Missions", "list", admMissions],
-  merch: ["Merch table", "gift", admMerch, ["Catalogue", "To send"], toSend],
-  members: ["Members", "users", admMembers],
-  goal: ["Band goal", "target", admGoal],
-  brand: ["Brand", "palette", admBrand],
+  today: ["Today", "grid", admToday],
+  missions: ["Missions", "missions", admMissions, ["All missions", "Setlist calls and votes", "Check-ins", "Open questions"]],
+  rewards: ["Rewards", "gift", admRewards],
+  wins: ["Winners & deliveries", "truck", admWins, null, toSend],
+  season: ["Season", "calendar", admSeason, ["Community goal", "Team battles", "Collection", "Leaderboard"]],
+  tour: ["Tour", "route", admTour, ["Coming up", "Played"]],
+  members: ["Members", "users", admMembers, ["Where they come from", "All fans"]],
+  results: ["Results", "chart", admResults, ["Overview", "By mission", "Posts"]],
+  brand: ["Brand", "palette", admBrand, ["Appearance", "Modules"]],
+  account: ["Account", "shield", admAccount],
 };
+kitInit();
 
 /* ---------------------------------------------------------------- boot */
 $("#bsMark").insertAdjacentHTML("afterbegin", brandMark());

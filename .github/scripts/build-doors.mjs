@@ -13,21 +13,21 @@ const index = read("index.html");
 const PAGES = {
   brand: {
     file: "brands.html",
-    title: "FAN/IP for brands · Get your customers posting about you",
+    title: "Brand loyalty program where customers post about you · FAN/IP",
     description:
-      "Give your customers a reason to post about your brand, reward them for it and see how many people they reached. A fan club under your brand's name, for beauty, fashion, food and lifestyle brands.",
+      "A fan club under your brand’s name: customers post about you on Instagram and TikTok, earn points and rewards, and you see the reach of every post. For beauty, fashion, food and lifestyle brands. From €99 a month.",
   },
   sport: {
     file: "sport.html",
-    title: "FAN/IP for sport and esports · Supporters who post, reach your sponsors can see",
+    title: "Fan engagement app for clubs and esports teams · FAN/IP",
     description:
-      "Give your supporters a reason to post about the club, reward them for it and show your sponsors how many people they reached. A fan club under your name, for sports clubs, esports teams and gaming venues.",
+      "A white-label fan club app for sports clubs, esports teams and gaming venues: supporters post, earn points and rewards, and sponsors get a report of the reach. From €99 a month.",
   },
   artist: {
     file: "artists.html",
-    title: "FAN/IP for artists and creators · Fans who post after every show",
+    title: "Fan club app for artists and creators · FAN/IP",
     description:
-      "Give your fans a reason to post about you, reward them for it and see how many people they reached. A fan club under your name, for bands, DJs, rappers, festivals and creators.",
+      "A fan club under your own name for bands, DJs, rappers, festivals and creators: fans post after every show, earn points and rewards, and you see how many people they reached. From €99 a month.",
   },
 };
 

@@ -160,3 +160,6 @@ html:not([data-door]) .ytry-play a[data-for="sport"],html[data-door="sport"] .yt
   .rs-sum__n{padding:var(--s2) var(--s3);font-size:1rem}
   .rs-sum__n small{font-size:.6875rem}
 }
+
+/* Platform: where the starting CPM comes from */
+.money-note{display:block;margin-block-start:.25rem;font-size:.75rem;line-height:1.3;opacity:.72;max-inline-size:22ch}

@@ -101,7 +101,7 @@
               <li>Upgrade to Club anytime, with setup at €500 instead of €1,250</li>
             </ul>
           </div>
-          <a class="btn plan-cta starter-cta" href="https://app.fan-ip.com/start">Start my free trial</a>
+          <a class="btn plan-cta starter-cta" href="https://app.fan-ip.com/start" data-start-link>Start my free trial</a>
         </article>
         <ul class="price-grid" role="list">
           <li class="plan">
@@ -252,5 +252,14 @@
       </div>
     </div>
   </footer>
+  <script>
+    // The trial starts with the world the visitor picked on the home page.
+    try {
+      var door = localStorage.getItem("fanip.door");
+      if (/^(brand|sport|artist)$/.test(door || "")) {
+        document.querySelectorAll("[data-start-link]").forEach(function (a) { a.href = "https://app.fan-ip.com/start?for=" + door; });
+      }
+    } catch (e) {}
+  </script>
 </body>
 </html>

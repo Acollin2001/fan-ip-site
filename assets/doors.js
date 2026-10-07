@@ -80,6 +80,9 @@
       adapt.textContent = d ? d.adapt : "";
       adapt.hidden = !d;
     }
+    document.querySelectorAll("[data-start-link]").forEach(function (link) {
+      link.setAttribute("href", "https://app.fan-ip.com/start" + (d ? "?for=" + door : ""));
+    });
     document.querySelectorAll("[data-calc-link]").forEach(function (link) {
       link.setAttribute("href", "reach-calculator.html" + (d ? "?for=" + door : ""));
     });

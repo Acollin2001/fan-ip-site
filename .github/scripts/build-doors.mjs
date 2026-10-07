@@ -61,6 +61,7 @@ for (const [key, page] of Object.entries(PAGES)) {
   h = swap(h, /<p class="prod-adapt t-small" data-slot="adapt" hidden><\/p>/, () =>
     `<p class="prod-adapt t-small" data-slot="adapt">${esc(d.adapt)}</p>`);
   h = swap(h, new RegExp(`data-door-pick="${key}" aria-pressed="false"`), `data-door-pick="${key}" aria-pressed="true"`);
+  h = swap(h, /href="https:\/\/app\.fan-ip\.com\/start" data-start-link/, `href="https://app.fan-ip.com/start?for=${key}" data-start-link`);
   // In-page anchors stay on this page; links to the home page stay on "./".
   writeFileSync(new URL(page.file, root), h);
   console.log(`wrote ${page.file}`);

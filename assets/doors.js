@@ -3,14 +3,17 @@
 // Artists and creators or Brands, a gold slash sweeps across and the page
 // below (the steps, the mission card, the example numbers) speaks to that
 // world. Nothing picked: the generic page stays as written.
-// brands.html, sport.html and artists.html are the same page, already set to
-// their world in the HTML (html[data-door]) so search engines read it too.
+// brands.html, sport.html and artists.html are built from the home page by
+// .github/scripts/build-doors.mjs, already set to their world in the HTML
+// (html[data-door]) and written for it: their own h1, world section and FAQ.
+// On those pages, picking another world opens that world's page.
 (function () {
   var DOORS = {
     brand: {
       name: "Brands",
       who: "brands",
       hash: "brands",
+      page: "brands.html",
       adapt: "Examples for a brand. Your missions, words and rewards are yours to set.",
       step1: "Set a mission: an unboxing, your routine, a friend who needs it. You choose the points and the rewards.",
       vigTitle: "Post your unboxing",
@@ -24,6 +27,7 @@
       name: "Sport",
       who: "clubs, teams and esports",
       hash: "sport",
+      page: "sport.html",
       adapt: "Examples for a club or team. Your challenges, words and rewards are yours to set, sponsors included.",
       step1: "Set a challenge: a matchday photo, a shout-out for your sponsor, a mate brought to the next home game. You choose the points and the rewards.",
       vigTitle: "Matchday photo",
@@ -37,6 +41,7 @@
       name: "Artists and creators",
       who: "artists and creators",
       hash: "artists",
+      page: "artists.html",
       adapt: "Examples for an artist. Your missions, words and rewards are yours to set.",
       step1: "Set a mission: a setlist photo, the new single in a story, a friend brought to the show. You choose the points and the rewards.",
       vigTitle: "Post your setlist photo",
@@ -50,6 +55,8 @@
   var TEXT_SLOTS = ["step1", "vigTitle", "vigText", "vigPoints", "reachTitle", "vigGoal"];
   var KEY = "fanip.door";
   var root = document.documentElement;
+  // Set on brands.html, sport.html and artists.html: the page is that world.
+  var fixedDoor = DOORS[root.getAttribute("data-door")] ? root.getAttribute("data-door") : "";
   var still = window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches;
   var slots = {};
   var generic = {};
@@ -94,12 +101,17 @@
     var status = document.querySelector("[data-world-status]");
     if (status) {
       status.textContent = "";
-      if (d) {
+      if (d && !fixedDoor) {
         status.appendChild(document.createTextNode("The page below now speaks to " + d.who + ". "));
         var go = document.createElement("a");
         go.href = "#product";
         go.textContent = "See how it works";
         status.appendChild(go);
+        status.appendChild(document.createTextNode(" · "));
+        var more = document.createElement("a");
+        more.href = d.page;
+        more.textContent = "Read the page for " + d.who;
+        status.appendChild(more);
       }
     }
     var chipName = document.querySelector("[data-world-chip-name]");
@@ -211,6 +223,20 @@
     document.querySelectorAll("[data-door-pick]").forEach(function (b) {
       b.addEventListener("click", function () {
         var pick = b.getAttribute("data-door-pick");
+        if (fixedDoor) {
+          // A world page: the same world goes back to its own section,
+          // another world opens its page.
+          if (pick === fixedDoor) {
+            var own = document.getElementById("for-you");
+            if (own) own.scrollIntoView({ behavior: still ? "auto" : "smooth", block: "start" });
+            return;
+          }
+          store(pick);
+          sweep(function () {
+            location.href = DOORS[pick].page;
+          });
+          return;
+        }
         var next = root.getAttribute("data-door") === pick ? "" : pick;
         store(next);
         try {

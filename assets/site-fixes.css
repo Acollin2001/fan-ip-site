@@ -163,3 +163,56 @@ html:not([data-door]) .ytry-play a[data-for="sport"],html[data-door="sport"] .yt
 
 /* Platform: where the starting CPM comes from */
 .money-note{display:block;margin-block-start:.25rem;font-size:.75rem;line-height:1.3;opacity:.72;max-inline-size:22ch}
+
+/* ---- 7 Oct: the world pages (brands.html, sport.html, artists.html) ----
+   Written by .github/scripts/build-doors.mjs. The hero keeps "Turn fandom
+   into impact." big; the world's promise above it is the page's h1. Under
+   the hero, the world in its own words (.dw); before the prices, the
+   world's questions (.dq). The home page has neither. */
+h1.hero-promise{text-wrap:balance}
+
+.dw{padding-block:var(--s9);background:var(--bg);color:var(--fg)}
+.dw-grid{display:grid;grid-template-columns:repeat(var(--cols),minmax(0,1fr));column-gap:var(--gap);row-gap:var(--s6);align-items:end}
+.dw-head{grid-column:1 / span 6}
+.dw-k{margin:0 0 var(--s3);color:var(--muted);text-transform:uppercase;letter-spacing:.08em}
+.dw-title{max-inline-size:13ch}
+.dw-lead{grid-column:8 / -1;max-inline-size:34rem;color:var(--fg)}
+.dw-cols{grid-column:1 / -1;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--gap);align-items:start;margin-block-start:var(--s4)}
+.dw-col{display:flex;flex-direction:column;gap:var(--s3);min-inline-size:0;padding-block-start:var(--s4);border-block-start:2px solid var(--ink)}
+.dw-h{display:flex;align-items:baseline;gap:var(--s3);font-family:var(--font-display);font-weight:500;font-size:clamp(1.25rem,1.6vw,1.5rem);line-height:1.15;letter-spacing:-.01em}
+.dw-n{flex:none;font:600 .8125rem/1 var(--font-body);letter-spacing:.04em;color:var(--burnished)}
+.dw-p{max-inline-size:42ch;color:var(--muted)}
+/* The missions: a dark card, like the member's own mission list. */
+.dw-col--list{padding:var(--s5);border:0;border-radius:var(--r-btn);background:var(--ink);color:var(--ivory)}
+.dw-col--list .dw-n{color:var(--gold)}
+.dw-list{display:grid;margin:0;padding:0;list-style:none}
+.dw-list li{position:relative;padding-block:var(--s2);padding-inline-start:1.5rem;border-block-start:1px solid var(--rule-dark);font:500 1rem/1.4 var(--font-body)}
+.dw-list li:first-child{border-block-start:0}
+.dw-list li:before{content:"/";position:absolute;inset-inline-start:0;color:var(--gold);font-weight:600}
+.dw-after{color:var(--ivory-muted)}
+.dw-foot{grid-column:1 / -1;margin:0;color:var(--muted)}
+.dw-foot a{color:var(--fg);font-weight:600;text-underline-offset:.2em}
+.dw-foot span{color:var(--burnished)}
+
+.dq{padding-block:var(--s9);background:var(--bg);color:var(--fg)}
+.dq-grid{display:grid;grid-template-columns:repeat(var(--cols),minmax(0,1fr));column-gap:var(--gap);row-gap:var(--s6)}
+.dq-head{grid-column:1 / span 4;align-self:start;position:sticky;top:calc(var(--header-h) + var(--s5))}
+.dq-title{max-inline-size:9ch}
+.dq-more{margin-block-start:var(--s4);max-inline-size:28ch;color:var(--muted)}
+.dq-more a,.dq-a a{color:var(--fg);text-underline-offset:.2em}
+.dq-list{grid-column:6 / -1}
+.dq-item{display:grid;gap:var(--s2);padding-block:var(--s5);border-block-start:1px solid var(--rule)}
+.dq-item:first-child{padding-block-start:0;border-block-start:0}
+.dq-q{font-family:var(--font-display);font-weight:500;font-size:clamp(1.25rem,1.7vw,1.625rem);line-height:1.15;letter-spacing:-.01em}
+.dq-a{max-inline-size:60ch;color:var(--muted)}
+
+@media (max-width: 1023px){
+  .dw-head,.dw-lead,.dq-head,.dq-list{grid-column:1 / -1}
+  .dw-cols{grid-template-columns:minmax(0,1fr);gap:var(--s6)}
+  .dq-head{position:static}
+}
+@media (max-width: 767px){
+  .dw,.dq{padding-block:var(--s8)}
+  .dw-grid{row-gap:var(--s5)}
+  .dw-col--list{padding:var(--s4)}
+}

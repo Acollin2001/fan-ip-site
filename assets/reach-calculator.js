@@ -1,5 +1,5 @@
 // Reach calculator: views of members' posts and their media value, the same
-// sum as Post impact in the FAN/IP admin (views / 1,000 x CPM, default €2).
+// sum as Post impact in the FAN/IP admin (views / 1,000 x CPM; typical niche prices: sport €7, music €5, brands €8).
 // Runs only in the browser: no requests, no cookies, no storage.
 
 function init(form) {
@@ -18,6 +18,19 @@ function init(form) {
   const order = shuffled(100, 7);
 
   const params = new URLSearchParams(location.search);
+  // ?for=sport|artist|brand starts from that niche's typical ad price.
+  const niche = form.querySelector(`[data-for="${params.get("for")}"]`);
+  if (niche && !params.has("cpm")) {
+    values.cpm = Number(niche.getAttribute("data-cpm"));
+    input.cpm.value = show("cpm", values.cpm);
+  }
+  form.querySelectorAll("[data-cpm]").forEach((b) =>
+    b.addEventListener("click", () => {
+      input.cpm.value = b.getAttribute("data-cpm");
+      input.cpm.dispatchEvent(new Event("input", { bubbles: true }));
+      input.cpm.dispatchEvent(new Event("change", { bubbles: true }));
+    }),
+  );
   for (const f of fields) {
     if (!params.has(f)) continue;
     const v = parse(f, params.get(f));

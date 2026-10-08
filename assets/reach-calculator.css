@@ -55,3 +55,9 @@ html:not(.js) .rc-ones{display:none}
   .rc-peek[hidden]{display:flex;translate:0 110%;visibility:hidden;transition:translate .2s ease-out,visibility 0s .2s}
 }
 @media(prefers-reduced-motion:reduce){.rc-in,.rc-ones span,.rc-peek,.rc-peek[hidden]{transition:none}}
+/* Typical ad prices per niche: one tap sets the CPM. */
+.rc-hint#rc-cpm-hint{margin-block-end:var(--s3)}
+.rc-niche{display:flex;flex-wrap:wrap;align-items:center;gap:var(--s2);margin:0;color:var(--muted)}
+.rc-niche__b{min-block-size:40px;padding:0 var(--s3);border:1px solid var(--rule);border-radius:999px;background:none;color:var(--fg);font:600 .875rem/1 var(--font-body);cursor:pointer}
+.rc-niche__b:hover{border-color:var(--fg)}
+.rc-niche__b:focus-visible{outline:2px solid var(--focus);outline-offset:2px}

@@ -56,8 +56,6 @@
       <a class="wordmark" href="./" aria-label="FAN/IP, home"><span class="logo-slot"><svg class="wordmark__mark" viewBox="0 0 32 32" width="28" height="28" aria-hidden="true" focusable="false"><rect class="wordmark__tile" x="0.5" y="0.5" width="31" height="31"/><path class="wordmark__stroke" d="M20 5 12 27"/></svg><span class="wordmark__text">FAN<span class="wordmark__slash" aria-hidden="true">/</span>IP</span></span></a>
       <nav class="site-nav" aria-label="Site">
         <a href="./#product">How it works</a>
-        <a href="./#value">What it's worth</a>
-        <a href="./#for">Who it's for</a>
         <a href="platform.html">Platform</a>
         <a href="pricing.html">Pricing</a>
       </nav>
@@ -67,8 +65,6 @@
         <div class="menu__panel">
           <nav class="menu__nav" aria-label="Site">
             <a href="./#product">How it works</a>
-            <a href="./#value">What it's worth</a>
-            <a href="./#for">Who it's for</a>
             <a href="platform.html">Platform</a>
             <a href="pricing.html">Pricing</a>
           </nav>
@@ -122,10 +118,11 @@
 
             <p class="rc-sentence">
               <label for="rc-cpm">An ad costs us</label>
-              <span class="rc-unit"><span aria-hidden="true">€</span><input id="rc-cpm" class="rc-in" name="cpm" type="text" inputmode="decimal" autocomplete="off" value="2" data-min="0.1" data-max="1000" aria-describedby="rc-cpm-hint"></span>
+              <span class="rc-unit"><span aria-hidden="true">€</span><input id="rc-cpm" class="rc-in" name="cpm" type="text" inputmode="decimal" autocomplete="off" value="7" data-min="0.1" data-max="1000" aria-describedby="rc-cpm-hint"></span>
               <span>per 1,000 views.</span>
             </p>
-            <p class="rc-hint t-small" id="rc-cpm-hint">Your CPM. We start at €2, the same default as in the FAN/IP admin. Use the rate you pay for your own ads.</p>
+            <p class="rc-hint t-small" id="rc-cpm-hint">What 1,000 views cost as ads in your niche. We start from a typical European price; use your own rate if you know it.</p>
+            <p class="rc-niche t-small"><span>Typical prices:</span> <button type="button" class="rc-niche__b" data-cpm="7" data-for="sport">Sport €7</button> <button type="button" class="rc-niche__b" data-cpm="5" data-for="artist">Music and creators €5</button> <button type="button" class="rc-niche__b" data-cpm="8" data-for="brand">Brands €8</button></p>
           </form>
 
           <div class="rc-out" id="estimate" data-surface="dark" aria-labelledby="out-title">
@@ -143,7 +140,7 @@
               </div>
               <div class="rc-fig">
                 <dt>What those views would cost as ads</dt>
-                <dd><output data-o="value-m">€480</output></dd>
+                <dd><output data-o="value-m">€1,680</output></dd>
               </div>
             </dl>
 
@@ -155,11 +152,11 @@
               </div>
               <div class="rc-fig">
                 <dt>Media value</dt>
-                <dd><output data-o="value-y">€5,760</output></dd>
+                <dd><output data-o="value-y">€20,160</output></dd>
               </div>
             </dl>
 
-            <p class="rc-math t-small" data-o="math">3,000 members × 10% × 2 posts = 600 posts a month. 600 × 400 views = 240,000 views. 240,000 ÷ 1,000 × €2 = €480.</p>
+            <p class="rc-math t-small" data-o="math">3,000 members × 10% × 2 posts = 600 posts a month. 600 × 400 views = 240,000 views. 240,000 ÷ 1,000 × €7 = €1,680.</p>
             <p class="rc-note t-small">An estimate from your numbers, not a promise. A year is twelve times one month; real months go up and down with your season.</p>
             <button type="button" class="rc-copy" data-copy hidden>Copy a link to these numbers</button>
           </div>
@@ -167,7 +164,7 @@
       </div>
     </section>
 
-    <a class="rc-peek" href="#estimate" data-surface="dark" data-peek hidden><span><b data-o="peek-views">240,000</b> views a month</span><span>worth <b data-o="peek-value">€480</b></span></a>
+    <a class="rc-peek" href="#estimate" data-surface="dark" data-peek hidden><span><b data-o="peek-views">240,000</b> views a month</span><span>worth <b data-o="peek-value">€1,680</b></span></a>
 
     <section class="pg-section rc-how" data-surface="sand" aria-labelledby="how-title">
       <div class="container">
@@ -183,7 +180,7 @@
           </li>
           <li>
             <h3 class="rc-list__k">Your CPM, not ours</h3>
-            <p class="t-body">€2 per 1,000 views is where the FAN/IP admin starts too. If your ads cost more, put in your own rate: the value moves with it, the views don’t.</p>
+            <p class="t-body">We start from a typical ad price for your niche: €7 per 1,000 views for sport, €5 for music and creators, €8 for brands. If your ads cost more or less, put in your own rate: the value moves with it, the views don’t.</p>
           </li>
           <li>
             <h3 class="rc-list__k">What we leave out</h3>
@@ -191,7 +188,7 @@
           </li>
           <li>
             <h3 class="rc-list__k">Then the real figures</h3>
-            <p class="t-body">In FAN/IP, Post impact (rolling out) reads the real views of members’ posts from their linked accounts and prices them the same way, at your CPM. You can hold this estimate against what actually happens.</p>
+            <p class="t-body">In FAN/IP, Post impact reads the real views of members’ posts from their linked accounts and prices them the same way, at your CPM. You can hold this estimate against what actually happens.</p>
           </li>
         </ul>
         <p class="rc-private t-small">Nothing you type here leaves this page. No cookies, no tracking.</p>
@@ -218,9 +215,10 @@
         <a href="./#white-label">White-label</a>
         <a href="platform.html">Platform</a>
         <a href="approach.html">Approach</a>
+        <a href="about.html">About</a>
         <a href="compare.html">Compare</a>
         <a href="reach-calculator.html">Reach calculator</a>
-        <a href="./#pricing">Pricing</a>
+        <a href="pricing.html">Pricing</a>
         <a href="faq.html">FAQ</a>
         <a href="book-a-demo.html">Book a demo</a>
       </nav>

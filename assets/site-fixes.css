@@ -216,3 +216,7 @@ h1.hero-promise{text-wrap:balance}
   .dw-grid{row-gap:var(--s5)}
   .dw-col--list{padding:var(--s4)}
 }
+
+/* Home: "Built for anyone with fans" now sits after Pricing, right before the trial; a hairline keeps the two light sections apart */
+#for{padding-block-end:clamp(3rem,6vw,4.5rem)}
+#for + #try{border-block-start:1px solid rgba(18,17,14,.14)}

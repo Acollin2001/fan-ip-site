@@ -88,7 +88,7 @@ export const PAGES = {
       {
         q: "What does it cost a small brand?",
         aHtml:
-          'Starter is €99 a month with a 7-day free trial: up to 150 active members, with 3 missions and 3 rewards at a time. Club is €490 a month and Season €1,290, for up to 10,000 active members. <a href="pricing.html">Compare the plans</a>.',
+          'Starter is €99 a month with a 7-day free trial: up to 150 active members, with 3 missions and 3 rewards at a time and a leaderboard. Club is €490 a month and Season €1,290, for up to 10,000 active members. <a href="pricing.html">Compare the plans</a>.',
       },
       {
         q: "Does it work with our online shop?",
@@ -328,7 +328,7 @@ export const PAGES = {
       {
         q: "How much does it cost?",
         aHtml:
-          'Starter is €99 a month with a 7-day free trial, for up to 150 active fans and 3 missions and 3 rewards at a time. Club, at €490 a month, suits a first tour. Season, at €1,290, is for up to 10,000 active members. <a href="pricing.html">Compare the plans</a>.',
+          'Starter is €99 a month with a 7-day free trial, for up to 150 active fans, 3 missions and 3 rewards at a time, and a leaderboard. Club, at €490 a month, suits a first tour. Season, at €1,290, is for up to 10,000 active members. <a href="pricing.html">Compare the plans</a>.',
       },
     ],
 

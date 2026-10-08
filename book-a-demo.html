@@ -31,7 +31,12 @@
   <script type="module" crossorigin src="./assets/book-B2zE6O1n.js"></script>
   <link rel="modulepreload" crossorigin href="./assets/header-AsSSiagq.js">
   <script src="./assets/analytics.js" defer></script>
+  <script src="./assets/booking.js" defer></script>
   <link rel="stylesheet" crossorigin href="./assets/style-CsTO_O25.css">
+  <style>
+    /* Calendly has no header to crop; booking.js sets the height it reports. */
+    .book-frame .book-iframe[src*="calendly.com"]{block-size:720px;margin-block-start:0}
+  </style>
 </head>
 <body>
   <a class="skip" href="#main">Skip to content</a>
@@ -77,13 +82,13 @@
           <li><span class="book-steps__n" aria-hidden="true">3</span><h3 class="book-steps__k">Get the invitation</h3><p class="t-body">A calendar invitation with a Google Meet link arrives by email.</p></li>
         </ol>
 
-        <div class="book-frame" data-book data-src="https://calendar.google.com/calendar/appointments/schedules/AcZssZ0pVvrSX9Qbe-LSdjXOl1TMpb9wOl33dZo9WLuUImi0b4mVp1QydcVfxFfRoxsTBll5xI5RmFB0?gv=true">
+        <div class="book-frame" data-book data-src="https://calendly.com/fan-ip/30min?embed_domain=fan-ip.com&amp;embed_type=Inline&amp;hide_gdpr_banner=1">
           <div class="book-consent">
-            <p class="book-consent__title">The booking calendar is provided by Google Calendar.</p>
-            <p class="t-body">Showing it here loads content from Google, which then receives your IP address. Nothing loads until you ask. Details in our <a href="privacy.html#booking">privacy policy</a>.</p>
+            <p class="book-consent__title">The booking calendar is provided by Calendly.</p>
+            <p class="t-body">Showing it here loads content from Calendly, which then receives your IP address. Nothing loads until you ask. Details in our <a href="privacy.html#booking">privacy policy</a>.</p>
             <div class="book-consent__actions">
               <button class="btn btn--primary" type="button" data-book-load>Show available times</button>
-              <a class="book-consent__alt" href="https://calendar.google.com/calendar/appointments/schedules/AcZssZ0pVvrSX9Qbe-LSdjXOl1TMpb9wOl33dZo9WLuUImi0b4mVp1QydcVfxFfRoxsTBll5xI5RmFB0" target="_blank" rel="noopener">Open it on Google instead</a>
+              <a class="book-consent__alt" href="https://calendly.com/fan-ip/30min" target="_blank" rel="noopener">Open it on Calendly instead</a>
             </div>
           </div>
         </div>

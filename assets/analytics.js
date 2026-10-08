@@ -75,8 +75,8 @@
     var href = el.getAttribute("href") || "";
     if (/(^|\/)book-a-demo\.html/.test(href)) {
       send("Book a demo clicked", { button: text(el), plan: planOf(el) });
-    } else if (/calendar\.google\.com/.test(href)) {
-      send("Booking opened on Google");
+    } else if (/calendly\.com/.test(href)) {
+      send("Booking opened on Calendly");
     } else if (/^mailto:/.test(href)) {
       send("Email link clicked", { address: href.slice(7) });
     } else if (/app\.fan-ip\.com\/start/.test(href)) {
@@ -84,6 +84,18 @@
     } else if (/(^|\/)demo\/[a-z-]+\/?$/.test(href)) {
       send("Demo opened", { demo: href.replace(/^.*demo\/([a-z-]+)\/?$/, "$1") });
     }
+  });
+
+  // Steps inside the Calendly calendar on the Book a demo page. Calendly tells
+  // the page which step was reached; nothing typed in its form is sent.
+  var STEPS = {
+    "calendly.event_type_viewed": "Booking times viewed",
+    "calendly.date_and_time_selected": "Booking time picked",
+    "calendly.event_scheduled": "Booking confirmed"
+  };
+  window.addEventListener("message", function (e) {
+    if (e.origin !== "https://calendly.com" || !e.data || !STEPS[e.data.event]) return;
+    send(STEPS[e.data.event]);
   });
 
   // First time a visitor changes a number in the reach calculator or the

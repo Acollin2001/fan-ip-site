@@ -123,7 +123,7 @@ for (const [key, page] of Object.entries(PAGES)) {
   let h = index;
 
   // Head: title, description, social cards, canonical, JSON-LD with the FAQ.
-  h = swap(h, /<html lang="en">/, `<html lang="en" data-door="${key}">`);
+  h = swap(h, /<html lang="en-GB">/, `<html lang="en-GB" data-door="${key}">`);
   h = swap(h, /<title>[^<]*<\/title>/, `<title>${esc(page.title)}</title>`);
   h = swap(h, /<meta name="description" content="[^"]*">/, `<meta name="description" content="${esc(page.description)}">`);
   h = swap(h, /<meta property="og:title" content="[^"]*">/, `<meta property="og:title" content="${esc(page.ogTitle)}">`);
@@ -143,7 +143,8 @@ for (const [key, page] of Object.entries(PAGES)) {
   h = swap(h, /<div class="hero-actions">[\s\S]*?<\/div>/, `<div class="hero-actions">
           <a class="btn btn--primary" href="https://app.fan-ip.com/start?for=${key}" data-start-link>Start my free trial</a>
           <a class="hero-link" href="book-a-demo.html">Book a demo</a>
-        </div>`);
+        </div>
+        <p class="hero-plan t-small">${esc(page.planNote)}</p>`);
   h = swap(h, /(<div class="door">\s*<p class="sr-only">)[^<]*(<\/p>)/, `$1${esc(page.tickerLabel)}$2`);
   h = swap(h, /<div class="door-ticker__track">[\s\S]*?<\/ul><\/div>/, ticker(page.ticker));
 

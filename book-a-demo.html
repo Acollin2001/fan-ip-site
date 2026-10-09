@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en-GB">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -11,7 +11,7 @@
   <meta property="og:site_name" content="FAN/IP">
   <meta property="og:url" content="https://fan-ip.com/book-a-demo.html">
   <meta property="og:type" content="website">
-  <meta property="og:locale" content="en_US">
+  <meta property="og:locale" content="en_GB">
   <meta property="og:image" content="https://fan-ip.com/og-image.png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
@@ -36,6 +36,10 @@
   <style>
     /* Calendly has no header to crop; booking.js sets the height it reports. */
     .book-frame .book-iframe[src*="calendly.com"]{block-size:720px;margin-block-start:0}
+    .book-agenda{display:grid;gap:.4rem;margin:1.25rem 0 0;padding:0;list-style:none}
+    .book-agenda li{display:flex;gap:.75rem;align-items:baseline}
+    .book-agenda b{flex:none;min-inline-size:4.25rem;color:var(--gold);font-weight:600}
+    .book-prep{margin-block-start:.9rem;color:var(--ivory-muted)}
   </style>
 </head>
 <body>
@@ -70,6 +74,12 @@
       <div class="container doc-head__inner">
         <h1 id="doc-title" class="doc-title">Book a demo</h1>
         <p class="doc-lead t-lead">30 minutes on video with Alexis. We show FAN/IP live in your world, on demo data, and answer your questions.</p>
+        <ol class="book-agenda" role="list">
+          <li><b>5 min</b> Your goals and your community</li>
+          <li><b>15 min</b> A live demo in your world</li>
+          <li><b>10 min</b> The right plan and a launch date</li>
+        </ol>
+        <p class="book-prep t-body">In English or French. Useful to have in mind: roughly how many people follow you, and one thing you would like them to do.</p>
       </div>
     </section>
 

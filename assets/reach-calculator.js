@@ -18,8 +18,17 @@ function init(form) {
   const order = shuffled(100, 7);
 
   const params = new URLSearchParams(location.search);
-  // ?for=sport|artist|brand starts from that niche's typical ad price.
-  const niche = form.querySelector(`[data-for="${params.get("for")}"]`);
+  // ?for=sport|artist|brand starts from that niche's typical ad price; without
+  // it, the world picked on the home page (localStorage "fanip.door") does.
+  let door = params.get("for");
+  if (!door) {
+    try {
+      door = localStorage.getItem("fanip.door");
+    } catch {}
+  }
+  const niche = form.querySelector(`[data-for="${door}"]`);
+  const start = document.querySelector("[data-rc-start]");
+  if (start && /^(sport|artist|brand)$/.test(door || "")) start.href += `?for=${door}`;
   if (niche && !params.has("cpm")) {
     values.cpm = Number(niche.getAttribute("data-cpm"));
     input.cpm.value = show("cpm", values.cpm);

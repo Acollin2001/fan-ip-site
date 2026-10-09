@@ -3231,7 +3231,7 @@
 .sc-reel-hello { color: var(--tone-soft); font-size: 1rem; font-weight: 500; }
 .sc-reel-mid { flex-direction: column; gap: 16px; margin-block: auto; display: flex; }
 .sc-reel-giant, .sc-reel-title { transition-property: none; }
-.sc-reel-giant { font-family: var(--ds-font-display); font-weight: var(--ds-display-weight); font-size: calc(var(--fs) * 1cqi); letter-spacing: -0.02em; white-space: nowrap; font-variant-numeric: lining-nums tabular-nums; font-synthesis-weight: none; margin-inline: -0.03em; line-height: 0.82; }
+.sc-reel-giant { font-family: var(--ds-font-display); font-weight: var(--ds-display-weight); font-size: calc(var(--fs) * 1cqi); letter-spacing: -0.02em; white-space: nowrap; font-variant-numeric: lining-nums tabular-nums; font-synthesis-weight: none; margin-inline: -0.03em; line-height: 0.82; padding-bottom: 0.14em; }
 .sc-reel-caption { max-width: 32ch; font-size: 1.125rem; font-weight: 500; line-height: 1.35; }
 .sc-reel-bar { background: var(--tone-line); height: 14px; }
 .sc-reel-bar > span, .sc-direct-bar > span { width: var(--fill); transform-origin: 0px center; height: 100%; display: block; }
@@ -3540,7 +3540,7 @@ a.sc-board-row:focus-visible { outline: 2px solid var(--ring); outline-offset: -
   :root[data-direction="dial"] { --dial-tick: color-mix(in oklab, var(--foreground) 20%, var(--card)); }
 }
 .sc-dial { flex-direction: column; gap: 40px; display: flex; }
-.sc-dial-top { flex-direction: column; gap: 22px; display: flex; }
+.sc-dial-top { flex-direction: column; gap: 22px; display: flex; overflow-x: clip; }
 .sc-dial-hello { flex-direction: column; gap: 6px; display: flex; }
 .sc-dial-within { color: var(--primary-ink); font-size: 0.9375rem; font-weight: 600; }
 .sc-dial-h1 { font-family: var(--ds-font-display); font-size: var(--ds-title-size); font-weight: var(--ds-title-weight); line-height: var(--ds-title-leading); letter-spacing: var(--ds-title-tracking); overflow-wrap: anywhere; }
@@ -4337,7 +4337,7 @@ a.sc-metro-stop:focus-visible { outline: 2px solid var(--ring); outline-offset: 
 :root[data-direction="arena"] { --ds-tab-active-fg: var(--arena-lamp); --ds-tab-indicator: var(--arena-lamp); }
 .sc-arena-hero { isolation: isolate; padding: 56px calc(var(--arena-pad) + 34px) var(--arena-pad) var(--arena-pad); background: radial-gradient(120% 70% at 18% -10%, var(--primary) 0%, transparent 60%), radial-gradient(120% 70% at 82% -10%, var(--primary) 0%, transparent 60%), var(--primary); gap: 20px; display: grid; position: relative; overflow: hidden; }
 @supports (color: color-mix(in lab, red, red)) {
-  .sc-arena-hero { background: radial-gradient(120% 70% at 18% -10%, color-mix(in oklab, var(--primary) 60%, white) 0%, transparent 60%), radial-gradient(120% 70% at 82% -10%, color-mix(in oklab, var(--primary) 60%, white) 0%, transparent 60%), var(--primary); }
+  .sc-arena-hero { background: radial-gradient(120% 70% at 18% -10%, color-mix(in oklab, var(--primary) 75%, white) 0%, transparent 60%), radial-gradient(120% 70% at 82% -10%, color-mix(in oklab, var(--primary) 75%, white) 0%, transparent 60%), var(--primary); }
 }
 .sc-arena-hero { color: var(--arena-hero-fg); border-radius: var(--arena-r); }
 @media (max-width: 767px) {
@@ -4349,7 +4349,7 @@ a.sc-metro-stop:focus-visible { outline: 2px solid var(--ring); outline-offset: 
 .sc-arena-lights i:last-child { right: 18%; transform: rotate(8deg); }
 .sc-arena-stripe { background: linear-gradient(90deg, var(--arena-hero-fg) 0 3px, var(--accent) 3px calc(100% - 3px), var(--arena-hero-fg) calc(100% - 3px)); width: 22px; box-shadow: -4px 0 0 var(--primary), -7px 0 0 var(--arena-night); position: absolute; top: 0px; bottom: 0px; right: 14px; }
 .sc-arena-hero-main { flex-direction: column; gap: 14px; min-width: 0px; display: flex; }
-.sc-arena-kicker { font-family: var(--brand-font-body); letter-spacing: 0.12em; text-transform: uppercase; color: var(--arena-hero-soft); font-size: 0.8125rem; font-weight: 700; }
+.sc-arena-kicker { font-family: var(--brand-font-body); letter-spacing: 0.12em; text-transform: uppercase; color: var(--arena-hero-fg); font-size: 0.8125rem; font-weight: 700; }
 .sc-arena-h1 { font-family: var(--brand-font-heading); text-transform: uppercase; letter-spacing: -0.005em; overflow-wrap: anywhere; hyphens: auto; font-synthesis-weight: none; font-size: clamp(2.5rem, 11vw, 3.25rem); font-weight: 800; line-height: 0.9; }
 .sc-arena-goal { color: var(--arena-hero-fg); max-width: 36ch; font-size: 1rem; line-height: 1.4; }
 .sc-arena-actions { flex-wrap: wrap; align-items: center; gap: 12px 20px; display: flex; }
@@ -4498,6 +4498,7 @@ a.sc-arena-fixture:hover { background: var(--card); }
 .sc-poster-h1 { max-width: 64%; font-family: var(--brand-font-heading); font-weight: 900; font-size: clamp(1.125rem, min(8cqi, calc(58cqi / (var(--word, 8) * .7))), 3rem); letter-spacing: -0.02em; text-transform: uppercase; overflow-wrap: break-word; hyphens: auto; font-synthesis-weight: none; line-height: 0.95; }
 .sc-poster-figure { flex-direction: column; margin-block: 4px; line-height: 0.82; display: flex; }
 .sc-poster-figure > span:first-child { font-family: var(--brand-font-heading); font-weight: 900; font-size: var(--size, 30cqi); letter-spacing: -0.04em; white-space: nowrap; font-synthesis-weight: none; }
+.sc-poster-figure > span:first-child:not(:last-child) { padding-bottom: 0.16em; }
 .sc-poster-unit { font-family: var(--brand-font-heading); text-transform: uppercase; letter-spacing: -0.01em; font-size: clamp(1.5rem, 9cqi, 3.5rem); font-weight: 900; line-height: 1; }
 .sc-poster-goal { max-width: 34ch; font-weight: 700; line-height: 1.35; }
 .sc-poster-bar { border: var(--poster-key) solid currentColor; background: none; max-width: 28rem; height: 14px; }

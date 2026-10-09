@@ -38,7 +38,7 @@
   --paper: #ffffff;
   --ink: #17263a;
   --ink-2: #4a5a6f;
-  --ink-3: #6f7d8f;
+  --ink-3: #5c6877;
   --line: #d3d9e1;
   --good: #2f7d4f;
 
@@ -110,7 +110,8 @@ img, svg { max-width: 100%; }
   white-space: nowrap;
 }
 .demo-logo i { font-style: normal; color: var(--fx-gold); }
-.demo-name { font-size: 0.875rem; color: var(--fx-ink-2); white-space: nowrap; }
+.demo-name { min-width: 0; font-size: 0.875rem; color: var(--fx-ink-2); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+@media (max-width: 1100px) { .demo-name { display: none; } }
 .demo-controls { display: flex; gap: 12px; margin-left: auto; align-items: center; }
 .seg {
   display: inline-flex;
@@ -279,7 +280,7 @@ img, svg { max-width: 100%; }
   height: 38px;
   border-radius: 50%;
   border: 0;
-  background: var(--wing);
+  background: #5f768b;
   color: #fff;
   font-weight: 700;
   font-size: 0.8125rem;
@@ -360,7 +361,7 @@ img, svg { max-width: 100%; }
   .rail-nav button:hover { background: var(--moor-2); color: #fff; }
   .rail-nav button[aria-current="page"] { background: var(--kestrel); color: #fff; }
   .rail-nav .count { margin-left: auto; font-size: 0.75rem; font-weight: 700; background: var(--moor-3); color: #fff; border-radius: 999px; padding: 1px 8px; }
-  .rail-nav button[aria-current="page"] .count { background: rgba(255,255,255,0.22); }
+  .rail-nav button[aria-current="page"] .count { background: rgba(0,0,0,0.22); }
   .rail-foot { margin-top: auto; display: flex; flex-direction: column; gap: 12px; }
   .rail-me {
     display: flex; align-items: center; gap: 10px; padding: 12px;
@@ -399,7 +400,7 @@ img, svg { max-width: 100%; }
 .meta { color: var(--ink-3); font-size: 0.8125rem; }
 .sec { display: flex; flex-direction: column; gap: 16px; min-width: 0; }
 .sec-head { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; }
-.link { border: 0; background: none; padding: 4px 0; color: var(--kestrel); font-weight: 700; font-size: 0.875rem; cursor: pointer; text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 4px; text-decoration-color: color-mix(in srgb, var(--kestrel) 35%, transparent); }
+.link { border: 0; background: none; padding: 4px 0; color: var(--kestrel-deep); font-weight: 700; font-size: 0.875rem; cursor: pointer; text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 4px; text-decoration-color: color-mix(in srgb, var(--kestrel) 35%, transparent); }
 .link:hover { text-decoration-color: currentColor; }
 @container dev (min-width: 820px) {
   .h-page { font-size: 4rem; }
@@ -476,7 +477,7 @@ img, svg { max-width: 100%; }
 .mf-tier { font-size: 0.75rem; font-weight: 700; padding: 4px 10px; border-radius: 999px; background: rgba(23,38,58,0.28); white-space: nowrap; }
 .mf-name { position: relative; margin-top: auto; display: flex; flex-direction: column; gap: 3px; }
 .mf-name b { font-family: var(--f-display); font-weight: 800; font-size: clamp(1.75rem, 11cqi, 2.75rem); line-height: 0.88; letter-spacing: 0.005em; }
-.mf-name span { font-size: 0.75rem; opacity: 0.85; }
+.mf-name span { font-size: 0.75rem; }
 .mf-foot { position: relative; display: flex; align-items: flex-end; justify-content: space-between; margin-top: 12px; }
 .mf-bal { display: flex; align-items: baseline; gap: 6px; }
 .mf-bal b { font-family: var(--f-display); font-weight: 800; font-size: clamp(1.75rem, 10cqi, 2.5rem); line-height: 0.9; }
@@ -612,8 +613,8 @@ img, svg { max-width: 100%; }
   position: absolute; top: 10px; left: 12px; display: flex; flex-direction: column; line-height: 0.85;
   font-family: var(--f-display); font-weight: 900; font-size: 2.25rem;
 }
-.card-val small { font-family: var(--f-text); font-weight: 700; font-size: 0.6875rem; line-height: 1.2; margin-top: 4px; opacity: 0.85; }
-.card-kind { position: absolute; top: 12px; right: 12px; font-size: 0.6875rem; font-weight: 700; padding: 4px 9px; border-radius: 999px; background: rgba(255,255,255,0.2); }
+.card-val small { font-family: var(--f-text); font-weight: 700; font-size: 0.6875rem; line-height: 1.2; margin-top: 4px; }
+.card-kind { position: absolute; top: 12px; right: 12px; font-size: 0.6875rem; font-weight: 700; padding: 4px 9px; border-radius: 999px; background: rgba(0,0,0,0.22); }
 .card-done {
   position: absolute; inset: auto 10px 10px 10px; display: flex; align-items: center; justify-content: center; gap: 6px;
   padding: 8px; border-radius: 10px; background: var(--paper); color: var(--good); font-size: 0.8125rem; font-weight: 700;
@@ -627,7 +628,7 @@ img, svg { max-width: 100%; }
 [data-tone="moor"] { --tone-bg: var(--moor); --tone-fg: var(--buff); }
 [data-tone="wing"] { --tone-bg: var(--wing); --tone-fg: var(--moor); }
 [data-tone="buff"] { --tone-bg: var(--buff); --tone-fg: var(--moor); }
-[data-tone="wing"] .card-kind, [data-tone="buff"] .card-kind { background: rgba(23,38,58,0.12); }
+[data-tone="wing"] .card-kind, [data-tone="buff"] .card-kind { background: rgba(255,255,255,0.4); }
 
 .grid-cards { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
 @container dev (min-width: 700px) { .grid-cards { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; } }
@@ -756,7 +757,7 @@ img, svg { max-width: 100%; }
 .pod.p1 .pos { font-size: 3.5rem; color: var(--flood); }
 .pod .who { font-weight: 700; font-size: 0.875rem; line-height: 1.2; overflow-wrap: anywhere; }
 .pod .pts { font-family: var(--f-display); font-weight: 800; font-size: 1.25rem; line-height: 1; }
-.pod .pts small { font-family: var(--f-text); font-size: 0.6875rem; font-weight: 600; opacity: 0.8; }
+.pod .pts small { font-family: var(--f-text); font-size: 0.6875rem; font-weight: 600; }
 .pod .avatar { width: 46px; height: 46px; cursor: default; }
 .pod.p1 .avatar { background: var(--moor); }
 
@@ -824,6 +825,7 @@ img, svg { max-width: 100%; }
 .group-row span { font-size: 0.8125rem; color: var(--ink-2); }
 .group-row .gpos { margin-left: auto; font-family: var(--f-display); font-weight: 800; font-size: 1.5rem; }
 .stack { display: flex; }
+.group-row .stack .avatar { color: #fff; }
 .stack .avatar { width: 34px; height: 34px; font-size: 0.6875rem; box-shadow: 0 0 0 2px var(--ground); cursor: default; }
 .stack .avatar + .avatar { margin-left: -6px; }
 
@@ -954,7 +956,7 @@ img, svg { max-width: 100%; }
 .atable .r { text-align: right; }
 .st { display: inline-flex; align-items: center; gap: 6px; padding: 2px 9px; border-radius: 999px; font-size: 0.75rem; font-weight: 500; background: var(--fx-soft); }
 .st::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: currentColor; }
-.st.live { color: var(--good); background: #e7f2eb; }
+.st.live { color: #276b43; background: #e7f2eb; }
 .st.sched { color: #6a5414; background: #f6eed9; }
 .st.draft { color: var(--fx-ink-2); }
 .minibar { display: inline-block; width: 70px; height: 6px; border-radius: 3px; background: var(--fx-soft); vertical-align: middle; margin-right: 8px; overflow: hidden; }
@@ -1044,7 +1046,7 @@ img, svg { max-width: 100%; }
 }
 .me-card::after { content: ""; position: absolute; right: -40px; top: -60px; width: 220px; aspect-ratio: 1; border-radius: 50%; background: radial-gradient(closest-side, color-mix(in srgb, var(--kestrel) 55%, transparent), transparent); z-index: -1; }
 .me-top { display: flex; align-items: center; gap: 12px; }
-.me-top .avatar { width: 48px; height: 48px; background: var(--kestrel); cursor: default; font-size: 1rem; }
+.me-top .avatar { width: 48px; height: 48px; background: var(--kestrel); color: #fff; cursor: default; font-size: 1rem; }
 .me-top b { display: block; font-size: 1.0625rem; }
 .me-top span { font-size: 0.8125rem; color: var(--wing-soft); }
 .me-rank { margin-left: auto; text-align: right; }
@@ -1130,9 +1132,9 @@ img, svg { max-width: 100%; }
 .opt-row { display: flex; flex-wrap: wrap; gap: 6px; }
 .opt { border: 1px solid var(--fx-line); background: var(--fx-surface); border-radius: 999px; padding: 7px 12px; font-size: 0.8125rem; font-weight: 500; cursor: pointer; color: var(--fx-ink-2); }
 .opt[aria-pressed="true"] { background: var(--fx-ink); color: #fff; border-color: var(--fx-ink); }
-.drop { display: flex; align-items: center; gap: 12px; padding: 14px; border: 1.5px dashed #c9ccd3; border-radius: 12px; background: var(--fx-soft); cursor: pointer; font-size: 0.8125rem; color: var(--fx-ink-2); }
-.drop b { color: var(--fx-ink); font-weight: 600; display: block; }
-.drop svg { width: 22px; height: 22px; flex: none; }
+label.drop { display: flex; align-items: center; gap: 12px; padding: 14px; border: 1.5px dashed #c9ccd3; border-radius: 12px; background: var(--fx-soft); cursor: pointer; font-size: 0.8125rem; color: var(--fx-ink-2); }
+label.drop b { color: var(--fx-ink); font-weight: 600; display: block; }
+label.drop svg { width: 22px; height: 22px; flex: none; }
 .callout { padding: 12px 14px; border-radius: 12px; background: #f6eed9; color: #4d3d10; font-size: 0.8125rem; }
 .callout.ok { background: #e7f2eb; color: #1f5435; }
 .adm-drawer { position: absolute; inset: 0; z-index: 30; display: flex; justify-content: flex-end; pointer-events: none; }
@@ -2966,7 +2968,7 @@ function screenCollection() {
       </header>
       <button class="pack-cta" data-act="pack" ${state.packs ? "" : "disabled"}>${packArt("pack-mini")}<span><b>${state.packs ? `Open your matchday pack` : "No packs to open"}</b><span>${state.packs ? "Earned by checking in at The Weir" : "Check in at the next home match"}</span></span></button>
     </div>
-    <div class="chips" role="group" aria-label="Album pages">${Object.keys(ALBUM).filter((k) => ALBUM[k].length).map((k) => `<button class="chip" data-act="page" data-p="${k}" aria-pressed="${pg === k}">${PAGE_NAMES[k]} <span class="meta" style="color:inherit;opacity:.7">${ALBUM[k].filter((s) => state.owned.has(s.id)).length}/${ALBUM[k].length}</span></button>`).join("")}</div>
+    <div class="chips" role="group" aria-label="Album pages">${Object.keys(ALBUM).filter((k) => ALBUM[k].length).map((k) => `<button class="chip" data-act="page" data-p="${k}" aria-pressed="${pg === k}">${PAGE_NAMES[k]} <span class="meta" style="color:inherit">${ALBUM[k].filter((s) => state.owned.has(s.id)).length}/${ALBUM[k].length}</span></button>`).join("")}</div>
     <div class="album-page">
       <div class="sec-head" style="margin-bottom:16px"><h2 class="h-sec">${PAGE_NAMES[pg]}</h2><span class="meta">${pageHave} of ${list.length}</span></div>
       ${pg === "specials" ? `<p class="meta" style="margin:-8px 0 16px">Designed by the club. Limited cards stop being printed once they are gone.</p>` : ""}
@@ -2981,7 +2983,7 @@ function screenCollection() {
 function tableRows() {
   const mode = state.table;
   const meRow = (pos) => `<tr class="me"><td class="pos">${pos}<span class="mv up">▲ 14</span></td><td><span class="mem"><span class="avatar sm">${initials(ME.name)}</span><b>You, ${ME.handle}</b></span></td><td class="hide-sm r tnum">${state.checkedIn ? 8 : 7}</td><td class="hide-sm">${formDots(state.checkedIn ? 5 : 4)}</td><td class="r ptsc num">${fmt(SP())}</td></tr>`;
-  const row = (r, pos) => `<tr><td class="pos">${pos}<span class="mv ${r[2]}">${r[2] === "up" ? "▲" : r[2] === "down" ? "▼" : "–"}</span></td><td><span class="mem"><span class="avatar sm" style="background:${["#7d9ab6", "#213550", "#a33213", "#5d7a62"][pos % 4]}">${initials(r[0])}</span><b>${r[0]}</b></span></td><td class="hide-sm r tnum">${r[3]}</td><td class="hide-sm">${formDots(r[4])}</td><td class="r ptsc num">${fmt(r[1])}</td></tr>`;
+  const row = (r, pos) => `<tr><td class="pos">${pos}<span class="mv ${r[2]}">${r[2] === "up" ? "▲" : r[2] === "down" ? "▼" : "–"}</span></td><td><span class="mem"><span class="avatar sm" style="background:${["#5f768b", "#213550", "#a33213", "#5d7a62"][pos % 4]}">${initials(r[0])}</span><b>${r[0]}</b></span></td><td class="hide-sm r tnum">${r[3]}</td><td class="hide-sm">${formDots(r[4])}</td><td class="r ptsc num">${fmt(r[1])}</td></tr>`;
   if (mode === "group") {
     const rows = [...GROUP.map((r) => ({ r })), { me: true, pts: SP() }].sort((a, b) => (b.pts || b.r[1]) - (a.pts || a.r[1]));
     return rows.map((x, i) => (x.me ? meRow(i + 1) : row(x.r, i + 1))).join("");
@@ -3133,7 +3135,7 @@ function screenProfile() {
       <div class="sec"><div class="panel"><span class="panel-kicker">Bring a mate</span><h3 class="panel-title">250 ${word()} each when they check in for the first time</h3>
         <div class="ref-code"><code>AAFC-JESS-17</code><button class="btn btn-ghost btn-sm" data-act="copy" data-t="AAFC-JESS-17">${icon("copy")}Copy code</button></div>
         <p class="note" style="margin-top:10px">2 mates joined with your code. 1 still has to check in.</p>
-        <div class="groups"><div class="group-row"><span class="stack">${["KM", "DW", "ON", "EG"].map((x, i) => `<span class="avatar" style="background:${["#7d9ab6", "#213550", "#a33213", "#5d7a62"][i]}">${x}</span>`).join("")}</span><span><b>The Riverside lot</b><span>Private group, you are 2nd</span></span><span class="gpos">2</span></div></div>
+        <div class="groups"><div class="group-row"><span class="stack">${["KM", "DW", "ON", "EG"].map((x, i) => `<span class="avatar" style="background:${["#5f768b", "#213550", "#a33213", "#5d7a62"][i]}">${x}</span>`).join("")}</span><span><b>The Riverside lot</b><span>Private group, you are 2nd</span></span><span class="gpos">2</span></div></div>
       </div>
       <div class="panel"><span class="panel-kicker">Birthday, 14 March</span><p class="panel-body" style="margin-top:6px">The club sends you a surprise that week, and your name goes up on the big screen if there's a home game.</p></div></div>
     </div>

@@ -98,6 +98,7 @@ html[data-door="sport"] .plan-pick__list [data-for="sport"] b,html[data-door="ar
   .hero-promise{grid-column:1 / span 7;grid-row:1 / span 2;align-self:start;margin-block-start:-.12em !important;max-inline-size:none;margin:0;font-size:clamp(2.25rem,3.5vw,3.75rem);line-height:1.02;letter-spacing:-.02em}
   .hero-lead{grid-column:8 / -1;grid-row:1;margin:0;max-inline-size:26em}
   .hero-actions{grid-column:8 / -1;grid-row:2;margin-block-start:var(--s5)}
+  .hero-plan{grid-column:8 / -1;grid-row:3}
 }
 @media (max-width: 1023px){
   .hero-promise{font-size:clamp(1.875rem,6.4vw,2.75rem);line-height:1.04;max-inline-size:none}
@@ -162,7 +163,7 @@ html:not([data-door]) .ytry-play a[data-for="sport"],html[data-door="sport"] .yt
 }
 
 /* Platform: where the starting CPM comes from */
-.money-note{display:block;margin-block-start:.25rem;font-size:.75rem;line-height:1.3;opacity:.72;max-inline-size:22ch}
+.money-note{display:block;margin-block-start:.25rem;font-size:.75rem;line-height:1.3;opacity:.8;max-inline-size:22ch}
 
 /* ---- 7 Oct: the world pages (brands.html, sport.html, artists.html) ----
    Written by .github/scripts/build-doors.mjs. The hero keeps "Turn fandom
@@ -247,3 +248,6 @@ h1.hero-promise{text-wrap:balance}
 .plan-faq__item[open] summary::after{content:"−"}
 /* Phone carousels: snap the first card to the padding, not the screen edge. */
 .rs-grid,.lv-grid{scroll-padding-inline:20px}
+
+/* "Why": the hover hints next to each verb need room; in a narrow window with a mouse they pushed the column off screen. */
+@media (hover: hover) and (pointer: fine) and (max-width: 767px){ .why-verbs .why-hint{display:none} }

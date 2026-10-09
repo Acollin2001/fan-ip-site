@@ -1700,7 +1700,7 @@ function nextShow() {
   return `<div class="tk-wrap"><section class="ticket" aria-labelledby="nsT">
     <div class="t-main"><span class="kicker">Next stop, date 07 of 12</span><span class="t-city" id="nsT">${NEXT.city}</span>
       <div class="t-info"><span><small>Date</small>${dayShort(NEXT.date)}</span><span><small>Doors</small>19:30</span><span><small>On stage</small>21:00</span><span><small>Band here</small>${fmt(NEXT.pre + (state.done.has("friend") ? 1 : 0))}</span><span><small>Capacity</small>${fmt(NEXT.cap)}</span><span><small>Merch</small>From doors</span></div></div>
-    <div class="t-stub">${state.showNight ? `<span class="kicker" style="color:#fff">Tonight</span><b style="font-family:var(--f-display);font-size:1.6rem;line-height:1">Doors are open</b>` : `<span class="mono" style="font-size:.6875rem">Until doors</span><div class="clock" id="showClock"><div><b class="num">${d}</b><span>days</span></div><div><b class="num">${String(h).padStart(2, "0")}</b><span>hrs</span></div><div><b class="num">${String(m).padStart(2, "0")}</b><span>min</span></div></div>`}</div>
+    <div class="t-stub">${state.showNight ? `<span class="kicker" style="color:#fff">Tonight</span><b style="font-family:var(--f-display);font-size:1.6rem;line-height:1">Doors are open</b>` : `<span class="mono" style="font-size:.6875rem">Until doors</span><div class="clock" id="showClock"><div><b class="num">${d}</b><span>${d === 1 ? "day" : "days"}</span></div><div><b class="num">${String(h).padStart(2, "0")}</b><span>${h === 1 ? "hr" : "hrs"}</span></div><div><b class="num">${String(m).padStart(2, "0")}</b><span>min</span></div></div>`}</div>
     <div class="t-acts">
       <button class="t-act" data-act="mission" data-id="merch" data-state="${ci}"><span class="ic">${icon(ci === "done" ? "check" : ci === "open" ? "qr" : "lock")}</span><span class="tx"><b>${ci === "done" ? "Checked in, Lyon is yours" : "Check in at the merch stand"}</b><span>${ci === "done" ? "See your tour" : ci === "open" ? "Open now, until curfew" : "Opens at doors, show day"}</span></span><span class="pts">${ci === "done" ? "" : "+150"}</span></button>
       <button class="t-act" data-act="mission" data-id="setlist" data-state="${sl}"><span class="ic">${icon(sl === "done" ? "check" : sl === "open" ? "camera" : "lock")}</span><span class="tx"><b>${sl === "done" ? "Setlist posted" : "Setlist photo"}</b><span>${sl === "done" ? "Counted" : sl === "open" ? "After the encore" : "Opens at the encore"}</span></span><span class="pts">${sl === "done" ? "" : "+120"}</span></button>
@@ -2063,7 +2063,7 @@ const gotRow = (id) => `<div class="got-row"><span class="mini"><i></i><span>${c
 setInterval(() => {
   const c = $("#showClock"); if (!c) return;
   const [d, h, m] = untilParts(NEXT.date), b = c.querySelectorAll("b");
-  if (b.length === 3) { b[0].textContent = d; b[1].textContent = String(h).padStart(2, "0"); b[2].textContent = String(m).padStart(2, "0"); }
+  if (b.length === 3) { b[0].textContent = d; b[1].textContent = String(h).padStart(2, "0"); b[2].textContent = String(m).padStart(2, "0"); c.querySelectorAll("span").forEach((l, i) => { const n = [d, h, m][i]; if (i < 2) l.textContent = l.textContent.replace(/s$/, "") + (n === 1 ? "" : "s"); }); }
 }, 20000);
 
 /* ================================================================ Artist admin */

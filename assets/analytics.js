@@ -10,6 +10,24 @@
 
   if (!KEY || !/(^|\.)fan-ip\.com$/.test(location.hostname)) return;
 
+  // What the library would read from the device beyond what every request
+  // already carries: screen and window size, time zone, language. Not sent.
+  var DEVICE = /^\$(initial_)?(screen_|viewport_|timezone|browser_language)/;
+
+  // Every event leaves without device details, and with addresses cut at "?"
+  // and "#": the reach calculator can put the numbers typed into its address.
+  function clean(ev) {
+    if (!ev) return ev;
+    [ev.properties, ev.$set, ev.$set_once].forEach(function (p) {
+      if (!p) return;
+      Object.keys(p).forEach(function (k) {
+        if (DEVICE.test(k)) delete p[k];
+        else if (typeof p[k] === "string" && /^https?:\/\//.test(p[k])) p[k] = p[k].split(/[?#]/)[0];
+      });
+    });
+    return ev;
+  }
+
   var stub = [];
   stub._i = [[KEY, {
     api_host: HOST,
@@ -27,7 +45,8 @@
     disable_web_experiments: true,
     advanced_disable_flags: true,
     capture_exceptions: false,
-    respect_dnt: true
+    respect_dnt: true,
+    before_send: clean
   }]];
   stub.capture = function () { stub.push(["capture"].concat([].slice.call(arguments))); };
   window.posthog = stub;
@@ -85,6 +104,14 @@
       send("Demo opened", { demo: href.replace(/^.*demo\/([a-z-]+)\/?$/, "$1") });
     }
   });
+
+  // The "see it with your name" box opens the trial in the app: a form, not a link.
+  document.addEventListener("submit", function (e) {
+    var form = e.target;
+    if (!form || !/app\.fan-ip\.com\/start/.test(form.getAttribute("action") || "")) return;
+    var btn = form.querySelector("[type=submit]");
+    send("Free trial clicked", { button: btn ? text(btn) : "Start my free trial", plan: "Starter", from: "name box" });
+  }, true);
 
   // Steps inside the Calendly calendar on the Book a demo page. Calendly tells
   // the page which step was reached; nothing typed in its form is sent.

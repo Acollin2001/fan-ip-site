@@ -1734,7 +1734,7 @@ function dropPanel() {
       <span class="eyebrow">The drop</span>
       <h2 id="dropT">Givre, the winter collection</h2>
       <p>A balm, a mist and a solid perfume for skin that meets the cold. Fleur members shop it 48 hours before everyone.</p>
-      <div style="margin-top:16px">${open ? `<span class="eyebrow">Open to you now</span>` : `<div class="clock" id="dropClock" aria-label="Time until Givre opens to you"><div><b class="num">${d}</b><span>days</span></div><div><b class="num">${String(h).padStart(2, "0")}</b><span>hours</span></div><div><b class="num">${String(m).padStart(2, "0")}</b><span>min</span></div></div><p style="margin-top:8px;font-size:.8125rem">${fleur ? `Opens to you on ${dayShort(DROP_EARLY)}, 10:00` : `Opens to everyone on ${dayShort(DROP_PUBLIC)}. Reach Fleur to shop it on ${dayShort(DROP_EARLY)}.`}</p>`}</div>
+      <div style="margin-top:16px">${open ? `<span class="eyebrow">Open to you now</span>` : `<div class="clock" id="dropClock" aria-label="Time until Givre opens to you"><div><b class="num">${d}</b><span>${d === 1 ? "day" : "days"}</span></div><div><b class="num">${String(h).padStart(2, "0")}</b><span>${h === 1 ? "hour" : "hours"}</span></div><div><b class="num">${String(m).padStart(2, "0")}</b><span>min</span></div></div><p style="margin-top:8px;font-size:.8125rem">${fleur ? `Opens to you on ${dayShort(DROP_EARLY)}, 10:00` : `Opens to everyone on ${dayShort(DROP_PUBLIC)}. Reach Fleur to shop it on ${dayShort(DROP_EARLY)}.`}</p>`}</div>
     </div>
     <div class="drop-art" aria-hidden="true">${productArt("jar", { a: P.frost, b: P.pet, c: P.lait }, "x")}${productArt("flacon", { a: P.lait, b: P.rose, c: P.saugeS }, "x")}${productArt("mist", fr, "x")}</div>
     <div class="drop-acts">
@@ -2130,7 +2130,7 @@ function onAction(act, el) {
 setInterval(() => {
   const c = $("#dropClock"); if (!c) return;
   const [d, h, m] = untilParts(SP() >= 4000 ? DROP_EARLY : DROP_PUBLIC), b = c.querySelectorAll("b");
-  if (b.length === 3) { b[0].textContent = d; b[1].textContent = String(h).padStart(2, "0"); b[2].textContent = String(m).padStart(2, "0"); }
+  if (b.length === 3) { b[0].textContent = d; b[1].textContent = String(h).padStart(2, "0"); b[2].textContent = String(m).padStart(2, "0"); c.querySelectorAll("span").forEach((l, i) => { const n = [d, h, m][i]; if (i < 2) l.textContent = l.textContent.replace(/s$/, "") + (n === 1 ? "" : "s"); }); }
 }, 20000);
 
 /* ================================================================ Brand admin */

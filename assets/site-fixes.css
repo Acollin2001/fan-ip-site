@@ -227,9 +227,6 @@ h1.hero-promise{text-wrap:balance}
 
 /* Pricing in one line above the cards (home and Pricing), so a phone reader
    sees all four prices before scrolling through the cards. */
-.price-line{display:flex;flex-wrap:wrap;align-items:baseline;gap:.35rem .6rem;margin-block-start:var(--s4);font:600 1rem/1.4 var(--font-body);color:var(--ivory)}
-.price-line__per{font-weight:400;color:var(--ivory-muted)}
-.price-line a{margin-inline-start:auto;color:var(--ivory);text-decoration:underline;text-decoration-color:var(--gold);text-underline-offset:4px}
 
 /* Platform, "Your name on the door": link to the member layouts gallery. */
 .fx-more{margin:0}
@@ -248,3 +245,5 @@ h1.hero-promise{text-wrap:balance}
 .plan-faq__item summary::-webkit-details-marker{display:none}
 .plan-faq__item summary::after{content:"+";margin-inline-start:auto;padding-inline-start:var(--s3);color:var(--gold);font-weight:600}
 .plan-faq__item[open] summary::after{content:"−"}
+/* Phone carousels: snap the first card to the padding, not the screen edge. */
+.rs-grid,.lv-grid{scroll-padding-inline:20px}

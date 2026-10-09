@@ -1,6 +1,6 @@
 // Reach calculator: views of members' posts and their media value, the same
-// sum as Post impact in the FAN/IP admin (views / 1,000 x CPM; typical niche prices: sport €7, music €5, brands €8).
-// Runs only in the browser: no requests, no cookies, no storage.
+// sum as Post impact in the FAN/IP admin (views / 1,000 x CPM; typical niche prices: sport €7, music €5, brands €8, otherwise €6).
+// Runs only in the browser: no requests and no cookies. It only reads the world picked on the home page.
 
 function init(form) {
   const fields = ["members", "share", "posts", "views", "cpm"];
@@ -62,7 +62,6 @@ function init(form) {
       input[f].value = show(f, values[f]);
       input[f].setAttribute("aria-invalid", "false");
       size(input[f]);
-      remember();
     });
   }
   form.addEventListener("submit", (e) => e.preventDefault());
@@ -120,7 +119,8 @@ function init(form) {
     out("crowd").textContent = crowd(share);
   }
 
-  // Keep the numbers in the address so a link brings them back. Defaults stay out.
+  // Put the numbers in the address only when the visitor copies a link, so a
+  // link brings them back. Defaults stay out.
   function remember() {
     const q = new URLSearchParams();
     for (const f of fields) if (values[f] !== defaults[f]) q.set(f, String(values[f]));

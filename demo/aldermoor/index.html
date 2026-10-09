@@ -2759,7 +2759,7 @@ function matchday() {
     <div class="md-head"><span class="md-label" id="md-t">Matchday 9, League One</span><span class="md-where">${KO_LABEL}, 15:00, The Weir</span></div>
     <div class="md-teams">
       <div class="md-team">${crest()}<b>Aldermoor</b><span class="md-form" aria-label="Last five: won, won, drew, lost, won">${["W", "W", "D", "L", "W"].map((r) => `<span class="${r}">${r}</span>`).join("")}</span></div>
-      <div class="md-clock" aria-label="Time to kick-off" id="mdClock">${state.matchday ? `<div><b>15:00</b><span>today</span></div>` : `<div><b class="num">${d}</b><span>days</span></div><div><b class="num">${String(h).padStart(2, "0")}</b><span>hrs</span></div><div><b class="num">${String(m).padStart(2, "0")}</b><span>mins</span></div>`}</div>
+      <div class="md-clock" aria-label="Time to kick-off" id="mdClock">${state.matchday ? `<div><b>15:00</b><span>today</span></div>` : `<div><b class="num">${d}</b><span>${d === 1 ? "day" : "days"}</span></div><div><b class="num">${String(h).padStart(2, "0")}</b><span>${h === 1 ? "hr" : "hrs"}</span></div><div><b class="num">${String(m).padStart(2, "0")}</b><span>${m === 1 ? "min" : "mins"}</span></div>`}</div>
       <div class="md-team">${rivalCrest()}<b>Granby Rovers</b><span class="md-form" aria-label="Last five: drew, lost, won, won, drew">${["D", "L", "W", "W", "D"].map((r) => `<span class="${r}">${r}</span>`).join("")}</span></div>
     </div>
     <div class="md-actions">
@@ -4144,7 +4144,7 @@ function setDevice(d) {
 setInterval(() => {
   const c = $("#mdClock"); if (!c || state.matchday) return;
   const [d, h, m] = clockParts();
-  const b = c.querySelectorAll("b"); if (b.length === 3) { b[0].textContent = d; b[1].textContent = String(h).padStart(2, "0"); b[2].textContent = String(m).padStart(2, "0"); }
+  const b = c.querySelectorAll("b"); if (b.length === 3) { b[0].textContent = d; b[1].textContent = String(h).padStart(2, "0"); b[2].textContent = String(m).padStart(2, "0"); c.querySelectorAll("span").forEach((l, i) => { const n = [d, h, m][i]; if (i < 3) l.textContent = l.textContent.replace(/s$/, "") + (n === 1 ? "" : "s"); }); }
 }, 20000);
 
 /* Club admin: the neutral FAN/IP interface, with the club's crest only. */

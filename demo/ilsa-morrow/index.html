@@ -1,8 +1,10 @@
 <!doctype html>
-<html lang="en">
+<html lang="en-GB">
 <head>
 <meta charset="utf-8">
-<meta name="robots" content="noindex, nofollow">
+<meta name="robots" content="index, follow">
+<meta name="description" content="Interactive demo of an artist's fan club on tour, run on FAN/IP: missions, rewards and a season of results. Fictional artist and data.">
+<link rel="canonical" href="https://fan-ip.com/demo/ilsa-morrow/">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Ilsa Morrow Season Demo</title>
 <style>
@@ -2445,10 +2447,10 @@ function admTour() {
   const h = admHead("Tour", "Twelve dates. Each one gets its own check-in QR, setlist call and city missions on its own.", `<button class="adm-btn" data-act="tourCsv">${icon("download")}Download, CSV</button>`) + admTabs("tour");
   if (tab === 1) {
     const P = played(), max = Math.max(...P.map((c) => c.views)), tot = (k) => P.reduce((a, c) => a + c[k], 0);
-    return h + `<div class="acard"><h2>Played so far</h2><p class="sub">A post counts for the city when it is made within a day of the show, near the venue, or tags the date. Views counted for 30 days, so recent cities are still growing.</p>
-      <div class="scroll-x"><table class="atable"><thead><tr><th>City</th><th>Date</th><th class="r">Check-ins</th><th class="r">Of tickets</th><th class="r">Posts</th><th class="r">Views</th><th class="r">Views a post</th><th class="r">Media value</th><th class="r">New members</th></tr></thead>
-      <tbody>${P.map((c) => `<tr><td><b>${c.city}</b></td><td>${dayNum(c.date)}</td><td class="r">${fmt(c.ci)}</td><td class="r">${pct(c.ci, c.cap)}</td><td class="r">${fmt(c.posts)}</td><td class="r">${big(c.views)}</td><td class="r">${fmt(c.views / c.posts)}</td><td class="r">${eur(mediaValue(c.views))}</td><td class="r">${fmt(c.joined)}</td></tr>`).join("")}</tbody>
-      <tfoot><tr><td>6 cities</td><td></td><td class="r">${fmt(tot("ci"))}</td><td class="r">${pct(tot("ci"), tot("cap"))}</td><td class="r">${fmt(tot("posts"))}</td><td class="r">${big(tot("views"))}</td><td class="r">${fmt(tot("views") / tot("posts"))}</td><td class="r">${eur(mediaValue(tot("views")))}</td><td class="r">${fmt(tot("joined"))}</td></tr></tfoot></table></div></div>
+    return h + `<div class="acard"><h2>Played so far</h2><p class="sub">A post counts for the city when it answers one of that date’s missions. Views counted for 30 days, so recent cities are still growing.</p>
+      <div class="scroll-x"><table class="atable"><thead><tr><th>City</th><th>Date</th><th class="r">Check-ins</th><th class="r">Of tickets</th><th class="r">Posts</th><th class="r">Views</th><th class="r">Views a post</th><th class="r">New members</th></tr></thead>
+      <tbody>${P.map((c) => `<tr><td><b>${c.city}</b></td><td>${dayNum(c.date)}</td><td class="r">${fmt(c.ci)}</td><td class="r">${pct(c.ci, c.cap)}</td><td class="r">${fmt(c.posts)}</td><td class="r">${big(c.views)}</td><td class="r">${fmt(c.views / c.posts)}</td><td class="r">${fmt(c.joined)}</td></tr>`).join("")}</tbody>
+      <tfoot><tr><td>6 cities</td><td></td><td class="r">${fmt(tot("ci"))}</td><td class="r">${pct(tot("ci"), tot("cap"))}</td><td class="r">${fmt(tot("posts"))}</td><td class="r">${big(tot("views"))}</td><td class="r">${fmt(tot("views") / tot("posts"))}</td><td class="r">${fmt(tot("joined"))}</td></tr></tfoot></table></div></div>
       <div class="acard"><h2>Views per city</h2><div class="splits">${P.map((c) => `<div><span>${c.city}</span><span class="bar-a"><i style="width:${(c.views / max) * 100}%"></i></span><b>${big(c.views)}</b></div>`).join("")}</div></div>`;
   }
   const N = TOUR.filter((c) => c.d >= 0);
@@ -2477,12 +2479,12 @@ function admMembers() {
 /* ---------------------------------------------------------------- Results */
 /* Missions with their totals on this tour. Posts and views add up to the tour's 5,555 posts and 9.3M views. */
 const RM = [
-  { id: "barrier", title: "From the barrier: film one song", type: "Video", ago: 12, done: 1260, seen: 4308, posts: 1260, views: 2.69e6, nm: 230, net: [0.66, 0.24, 0.09, 0.01] },
-  { id: "sing", title: "Sing the chorus of 'Marée haute'", type: "Video", ago: 20, done: 1420, seen: 8960, posts: 1420, views: 2.48e6, nm: 190, net: [0.61, 0.27, 0.11, 0.01] },
-  { id: "setlist", title: "Setlist photo, after the encore", type: "Social post", ago: 12, done: 1030, seen: 4308, posts: 1030, views: 1.21e6, nm: 110, net: [0.38, 0.55, 0.05, 0.02] },
-  { id: "phare", title: "Sing 'Phare' in one take", type: "Video", ago: 6, done: 320, seen: 7420, posts: 320, views: 1.16e6, nm: 150, net: [0.72, 0.18, 0.09, 0.01] },
-  { id: "fit", title: "Merch fit: the tour tee, your way", type: "Photo", ago: 15, done: 980, seen: 8310, posts: 980, views: 1.06e6, nm: 120, net: [0.44, 0.49, 0.05, 0.02] },
-  { id: "doors", title: "The queue at doors", type: "Photo", ago: 12, done: 545, seen: 4308, posts: 545, views: 0.71e6, nm: 70, net: [0.41, 0.52, 0.04, 0.03] },
+  { id: "barrier", short: "Barrier", label: "Barrier song", title: "From the barrier: film one song", type: "Video", ago: 12, done: 1260, seen: 4308, posts: 1260, views: 2.69e6, nm: 230, net: [0.66, 0.24, 0.09, 0.01] },
+  { id: "sing", short: "Chorus", label: "Chorus", title: "Sing the chorus of 'Marée haute'", type: "Video", ago: 20, done: 1420, seen: 8960, posts: 1420, views: 2.48e6, nm: 190, net: [0.61, 0.27, 0.11, 0.01] },
+  { id: "setlist", short: "Setlist", label: "Setlist photo", title: "Setlist photo, after the encore", type: "Social post", ago: 12, done: 1030, seen: 4308, posts: 1030, views: 1.21e6, nm: 110, net: [0.38, 0.55, 0.05, 0.02] },
+  { id: "phare", short: "Phare", label: "Phare", title: "Sing 'Phare' in one take", type: "Video", ago: 6, done: 320, seen: 7420, posts: 320, views: 1.16e6, nm: 150, net: [0.72, 0.18, 0.09, 0.01] },
+  { id: "fit", short: "Tee", label: "Tour tee", title: "Merch fit: the tour tee, your way", type: "Photo", ago: 15, done: 980, seen: 8310, posts: 980, views: 1.06e6, nm: 120, net: [0.44, 0.49, 0.05, 0.02] },
+  { id: "doors", short: "Queue", label: "Queue at doors", title: "The queue at doors", type: "Photo", ago: 12, done: 545, seen: 4308, posts: 545, views: 0.71e6, nm: 70, net: [0.41, 0.52, 0.04, 0.03] },
   { id: "merch", title: "Check in at the merch stand", type: "Check-in", ago: 12, done: 4308, seen: 9040, posts: 0, views: 0, nm: 1241, extra: [["Of tickets sold", pct(4308, 12100)], ["Average a show", "718"]] },
   { id: "friend", title: "Bring a friend to the show", type: "Referral", ago: 12, done: 960, seen: 8120, posts: 0, views: 0, nm: 212, extra: [["Links sent", "960"], ["Friends who checked in", "212"]] },
   { id: "lyric", title: "Finish the line", type: "Quiz", ago: 9, done: 7240, seen: 9020, posts: 0, views: 0, nm: 0, extra: [["Right first time", "64%"], ["Average time", "14 s"]] },
@@ -2490,6 +2492,10 @@ const RM = [
   { id: "first", title: "Your first Ilsa song, in one line", type: "Open question", ago: 8, done: 2210, seen: 8640, posts: 0, views: 0, nm: 0, extra: () => [["Answers featured", String(ansList().filter((a) => a.status === "featured").length)], ["Average answer", "17 words"]] },
 ];
 const NET_NAMES = NETS.map((n) => n[0]);
+/* Potential reach: followers of the accounts that posted. 3,412 fans posted on tour, 1,840 followers on average.
+   A mission's share follows its posts, so missions add up to the tour figure. */
+const POSTERS_N = 3412, FOLLOWERS_AVG = 1840;
+const reachOf = (posts) => (posts * POSTERS_N * FOLLOWERS_AVG) / tourTot("posts");
 const POSTERS = ["@jonaspeet", "@lou.gr", "@pau.mrl", "@clem.vdl", "@hugolfv", "@sam.okj", "@ines.oa", "@aya.bnl", "@theo.mrc", "@elsamoreau", "@bastroux", "@lina.hdd", "@vic.blanc", "@jade.ftn", "@noe.brn", "@rosa.alm"];
 const RATE = Object.fromEntries(NETS.map(([n, , , l, c, s]) => [n, [l, c, s]]));
 const POSTLIST = (() => {
@@ -2511,29 +2517,30 @@ function admResults() {
   const h = admHead("Results", "What the Band brings in, tour so far. The top line stays simple: open any mission for the detail.", `<button class="adm-btn" data-act="rcsv">${icon("download")}Download, CSV</button>`) + admTabs("results");
   if (tab === 1) return h + resultsMissions();
   if (tab === 2) return h + resultsPosts();
-  const P = played(), views = tourTot("views"), v = mediaValue(views), N = tourNets();
+  const views = tourTot("views"), v = mediaValue(views), N = tourNets();
   const sum = (k) => N.reduce((a, n) => a + n[k], 0), eng = sum("likes") + sum("comments") + sum("shares");
   const top = RM.map(rmStats).sort((a, b) => b.value - a.value || b.done - a.done).slice(0, 5);
+  const byM = RM.filter((r) => r.views).map(rmStats).sort((a, b) => b.views - a.views);
   return h + `<div class="kpis">
       ${kpi("Earned media value", eur(v), `Views on fans' posts at a ${cpmLabel()} CPM`)}
-      ${kpi("Views on fans' posts", big(views), `${big(views * 0.64)} by people who don't follow Ilsa`)}
+      ${kpi("Views on fans' posts", big(views), `From ${fmt(tourTot("posts"))} posts by ${fmt(POSTERS_N)} fans`)}
       ${kpi("Likes, comments and shares", big(eng), `${pct(eng, views)} of views`)}
       ${kpi("New members from fans' posts", fmt(870), `Of the ${fmt(tourTot("joined"))} who joined on tour`)}
     </div>
     <details class="more" ${state.rmore ? "open" : ""}><summary data-act="rmore">${state.rmore ? "Hide the detail" : "Show every number for the tour"}</summary>
-      <div class="mkpis">${mini("Posts", fmt(tourTot("posts")))}${mini("Fans who posted", "3,412")}${mini("Average views a post", fmt(views / tourTot("posts")))}${mini("Likes", big(sum("likes")))}${mini("Comments", big(sum("comments")))}${mini("Shares", big(sum("shares")))}${mini("Missions completed", "41,860")}${mini("Merch-stand check-ins", fmt(tourTot("ci")))}${mini("Rewards redeemed", fmt(3423 + state.redeemed.length))}${mini("Active fans this month", "9,200")}</div>
+      <div class="mkpis">${mini("Posts", fmt(tourTot("posts")))}${mini("Fans who posted", fmt(POSTERS_N))}${mini("Average views a post", fmt(views / tourTot("posts")))}${mini("Likes", big(sum("likes")))}${mini("Comments", big(sum("comments")))}${mini("Shares", big(sum("shares")))}${mini("Missions completed", "41,860")}${mini("Merch-stand check-ins", fmt(tourTot("ci")))}${mini("Rewards redeemed", fmt(3423 + state.redeemed.length))}${mini("Active fans this month", "9,200")}</div>
     </details>
     ${cpmBox()}
     <div class="vh">
-      <div class="vh-tile vh-hero"><span>Media value per show</span><b>${eur(v / P.length)}</b><small>Average of ${P.length} shows: views of fans' posts at a ${cpmLabel()} CPM</small>
-        <div class="vh-cols" role="img" aria-label="Media value per show: ${P.map((c) => `${c.city} ${eur(mediaValue(c.views))}`).join(", ")}">${P.map((c) => `<span><i style="height:${((c.views / Math.max(...P.map((x) => x.views))) * 62).toFixed(1)}px"></i><em>${c.city.slice(0, 3)}</em></span>`).join("")}</div></div>
-      <div class="vh-tile"><b>${eur(v)}</b><span>Media value, tour so far</span><small>${P.length} shows</small></div>
-      <div class="vh-tile"><b>${big(views)}</b><span>Views of fans' posts</span><small>${big(views * 0.64)} by people who don't follow Ilsa</small></div>
-      <div class="vh-tile"><b>${eur(v / tourTot("ci"))}</b><span>Per check-in</span><small>Value of posts per fan at the stand</small></div>
+      <div class="vh-tile vh-hero"><span>Media value, tour so far</span><b>${eur(v)}</b><small>Views of fans' posts at a ${cpmLabel()} CPM, by mission</small>
+        <div class="vh-cols" role="img" aria-label="Media value by mission: ${byM.map((r) => `${r.label} ${eur(r.value)}`).join(", ")}">${byM.map((r) => `<span><i style="height:${((r.views / byM[0].views) * 62).toFixed(1)}px"></i><em>${r.short}</em></span>`).join("")}</div></div>
+      <div class="vh-tile"><b>${fmt(tourTot("posts"))}</b><span>Fans' posts</span><small>By ${fmt(POSTERS_N)} fans</small></div>
+      <div class="vh-tile"><b>${big(views)}</b><span>Views of fans' posts</span><small>${fmt(views / tourTot("posts"))} a post on average</small></div>
+      <div class="vh-tile"><b>${big(POSTERS_N * FOLLOWERS_AVG)}</b><span>Potential reach</span><small>Followers of the accounts that posted</small></div>
     </div>
     <div class="adm-grid">
-      <div class="acard"><h2>Views on fans' posts, per day</h2><p class="sub">Dots mark show nights</p>${lineChart({ id: "rdaily", data: DAILY, labels: DAY_LABELS, max: 800000, marks: SHOW_MARKS, aria: "Daily views on fans' posts, last 30 days", tipFor: (i) => `<b>${DAY_LABELS[i]}</b>, ${fmt(DAILY[i])} views, ${eur(mediaValue(DAILY[i]))}` })}</div>
-      <div class="acard"><h2>Value per city</h2><p class="sub">How we count it: views on public posts that tag @ilsamorrow, from fans' linked accounts, for 30 days. Value = views ÷ 1,000 × your CPM.</p><div class="splits">${P.map((c) => `<div><span>${c.city}</span><span class="bar-a"><i style="width:${(c.views / 2.31e6) * 100}%"></i></span><b>${eur(mediaValue(c.views))}</b></div>`).join("")}</div></div>
+      <div class="acard"><h2>Views on fans' posts, per day</h2><p class="sub">Dots mark show nights</p>${lineChart({ id: "rdaily", data: DAILY, labels: DAY_LABELS, max: 800000, marks: SHOW_MARKS, aria: "Daily views on fans' posts, last 30 days", tipFor: (i) => `<b>${DAY_LABELS[i]}</b>, ${fmt(DAILY[i])} views` })}</div>
+      <div class="acard"><h2>Value by mission</h2><p class="sub">How we count it: views on public posts that tag @ilsamorrow, from fans' linked accounts, for 30 days. Value = views ÷ 1,000 × your CPM.</p><div class="splits">${byM.map((r) => `<div><span>${r.label}</span><span class="bar-a"><i style="width:${(r.views / byM[0].views) * 100}%"></i></span><b>${eur(r.value)}</b></div>`).join("")}</div></div>
     </div>
     <div class="acard"><h2>Where fans post</h2><p class="sub">Tour so far, checked through fans' linked accounts</p>
       <div class="scroll-x"><table class="atable"><thead><tr><th>Network</th><th class="r">Posts</th><th class="r">Views</th><th class="r">Likes</th><th class="r">Comments</th><th class="r">Shares</th><th class="r">Engagement</th><th class="r">Media value</th></tr></thead>
@@ -2575,14 +2582,14 @@ function missionDetail(id) {
   const nets = NET_NAMES.map((n, i) => ({ n, posts: r.posts * split[i], v: r.views * split[i], likes: r.likes * split[i], comments: r.comments * split[i], shares: r.shares * split[i] }));
   const posts = POSTLIST.filter((p) => p.mid === id).sort((a, b) => b.views - a.views).slice(0, 5);
   const ex = typeof r.extra === "function" ? r.extra() : r.extra || [];
-  const body = `<div class="mkpis">${mini("Fans who took part", fmt(r.done))}${mini("Of those who saw it", pct(r.done, r.seen))}${r.views ? mini("Posts", fmt(r.posts)) + mini("Views", big(r.views)) + mini("Likes", big(r.likes)) + mini("Comments", fmt(r.comments)) + mini("Shares", fmt(r.shares)) + mini("Media value", eur(r.value)) + mini("Reach outside the Band", big(r.views * 0.64)) : ""}${r.nm ? mini("New members", fmt(r.nm)) : ""}${ex.map(([l, v]) => mini(l, v)).join("")}</div>
+  const body = `<div class="mkpis">${mini("Fans who took part", fmt(r.done))}${mini("Of those who saw it", pct(r.done, r.seen))}${r.views ? mini("Posts", fmt(r.posts)) + mini("Views", big(r.views)) + mini("Likes", big(r.likes)) + mini("Comments", fmt(r.comments)) + mini("Shares", fmt(r.shares)) + mini("Media value", eur(r.value)) + mini("Potential reach", big(reachOf(r.posts))) : ""}${r.nm ? mini("New members", fmt(r.nm)) : ""}${ex.map(([l, v]) => mini(l, v)).join("")}</div>
     ${r.views ? `<h3 style="font-size:.875rem;margin:18px 0 0">Posts each day</h3><div class="chart">${dayBars(r)}</div>
     <h3 style="font-size:.875rem;margin:18px 0 0">By network</h3><div class="scroll-x"><table class="atable"><thead><tr><th>Network</th><th class="r">Posts</th><th class="r">Views</th><th class="r">Likes</th><th class="r">Comments</th><th class="r">Shares</th></tr></thead>
       <tbody>${nets.map((x) => `<tr><td>${x.n}</td><td class="r">${fmt(x.posts)}</td><td class="r">${big(x.v)}</td><td class="r">${big(x.likes)}</td><td class="r">${fmt(x.comments)}</td><td class="r">${fmt(x.shares)}</td></tr>`).join("")}</tbody></table></div>
     ${posts.length ? `<h3 style="font-size:.875rem;margin:18px 0 0">Best posts</h3><div class="scroll-x"><table class="atable"><thead><tr><th>Fan</th><th>City</th><th>Network</th><th class="r">Views</th><th class="r">Likes</th></tr></thead><tbody>${posts.map((p) => `<tr><td>${p.who}</td><td>${p.city}</td><td>${p.net}</td><td class="r">${fmt(p.views)}</td><td class="r">${fmt(p.likes)}</td></tr>`).join("")}</tbody></table></div>` : ""}`
     : `<p class="sub" style="margin-top:14px">This mission doesn't ask for a public post, so what counts is who took part and what it brought back.</p>`}
     <h3 style="font-size:.875rem;margin:18px 0 0">Who took part</h3><div class="splits">${tiers.map(([t, p]) => `<div><span>${t}</span><span class="bar-a"><i style="width:${p}%"></i></span><b>${p}%</b></div>`).join("")}</div>
-    <p class="sub" style="margin-top:8px">${14 + (r.ago % 9)}% joined the Band on this tour. Fans aged 18 to 34 did ${58 + (r.ago % 7)}% of it.</p>`;
+    <p class="sub" style="margin-top:8px">${14 + (r.ago % 9)}% joined the Band on this tour.</p>`;
   openDrawer({ title: esc(r.title), sub: `${r.type}, from ${dayNum(addDays(-r.ago))}`, body, footer: `<button class="adm-btn" data-act="dclose">Close</button><button class="adm-btn primary" data-act="rcsv" data-id="${r.id}">${icon("download")}This mission, CSV</button>` });
 }
 function resultsCSV(el) {
@@ -2711,7 +2718,7 @@ function onAdminAction(act, el) {
     }
     case "olist": state.olist = el.dataset.f; return rerenderAdminInPlace();
     case "csv": csvDownload([["Fan", "Won", "How", "Date", "Delivery", "Status"], ...orders().map((o) => [o.who, oTitle(o), oHow(o), isoDay(addDays(o.d)), DELIV[oDeliv(o)], o.status])], "ilsa-morrow-winners-and-deliveries.csv"); return admToast("CSV downloaded");
-    case "tourCsv": csvDownload([["city", "date", "checkins", "posts", "views", `media_value_eur_cpm_${state.cpm}`, "new_members"], ...played().map((c) => [c.city, isoDay(c.date), c.ci, c.posts, c.views, mediaValue(c.views).toFixed(2), c.joined])], "ilsa-morrow-tour.csv"); return admToast("CSV downloaded");
+    case "tourCsv": csvDownload([["city", "date", "checkins", "posts", "views", "new_members"], ...played().map((c) => [c.city, isoDay(c.date), c.ci, c.posts, c.views, c.joined])], "ilsa-morrow-tour.csv"); return admToast("CSV downloaded");
     case "rcsv": return resultsCSV(el);
     case "rmission": return missionDetail(el.dataset.id);
     case "rmore": state.rmore = !state.rmore; return rerenderAdminInPlace();

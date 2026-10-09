@@ -113,7 +113,7 @@
       const finalText = el.querySelector(".sr-only")?.textContent ?? "";
       const value = Number(finalText.replace(/[^\d-]/g, ""));
       if (!shown || !Number.isFinite(value) || value === 0) return;
-      const format = new Intl.NumberFormat(root.lang || "fr");
+      const format = new Intl.NumberFormat(root.lang || "en-GB");
       shown.textContent = format.format(0);
       const io = new IntersectionObserver(
         (entries) => {

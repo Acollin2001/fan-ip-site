@@ -1,8 +1,10 @@
 <!doctype html>
-<html lang="en">
+<html lang="en-GB">
 <head>
 <meta charset="utf-8">
-<meta name="robots" content="noindex, nofollow">
+<meta name="robots" content="index, follow">
+<meta name="description" content="Interactive demo of a beauty brand's fan club on FAN/IP: missions, rewards and a season of results. Fictional brand, fictional data.">
+<link rel="canonical" href="https://fan-ip.com/demo/maison-aube/">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Maison Aube Season Demo</title>
 <style>
@@ -232,11 +234,6 @@ img, svg { max-width: 100%; }
 .vh-cols > span { flex: 1; display: flex; flex-direction: column; justify-content: flex-end; align-items: center; gap: 5px; height: 100%; min-width: 0; }
 .vh-cols i { width: 100%; min-height: 3px; border-radius: 4px 4px 1px 1px; background: var(--vh-accent); }
 .vh-cols em { font-style: normal; font-size: 0.6875rem; color: rgba(255, 255, 255, 0.72); white-space: nowrap; }
-.vh-vs { display: grid; gap: 8px; margin-top: 10px; }
-.vh-vs > div { display: grid; grid-template-columns: 96px minmax(0, 1fr) auto; gap: 10px; align-items: center; font-size: 0.75rem; color: rgba(255, 255, 255, 0.8); }
-.vh-vs i { display: block; height: 12px; border-radius: 999px; background: var(--vh-accent); }
-.vh-vs > div + div i { background: rgba(255, 255, 255, 0.45); }
-.vh-vs em { font-style: normal; font-weight: 600; color: #fff; font-variant-numeric: tabular-nums; }
 @container dev (min-width: 900px) {
   .vh { grid-template-columns: minmax(0, 1.7fr) repeat(3, minmax(0, 1fr)); }
   .vh-hero, .vh > .vh-tile:nth-child(4) { grid-column: auto; }
@@ -2164,6 +2161,10 @@ const RS = [
   { id: "remind", done: 7340, posts: 0, vshare: 0, joined: 0, seen: 8360, note: "7,340 reminders for the Givre drop" },
 ];
 const OTHER_POST_VIEWS = 0.1; /* views from rituels that have since ended */
+/* Potential reach: followers of the accounts that posted. 1,486 members posted in the last 30 days, 2,100 followers on average.
+   A ritual's share follows its posts, so rituels add up to the total. */
+const POSTERS_30 = 1486, FOLLOWERS_AVG = 2100;
+const reachOf = (posts) => (posts * POSTERS_30 * FOLLOWERS_AVG) / POSTS_30;
 const HANDLES = ["@camille.rsl", "@yas.skin", "@lea.fnt", "@margaux.db", "@sofia.mrc", "@anais.lbt", "@chloe.nav", "@nora.hdd", "@julie.prn", "@emmacollet", "@sarah.bnt", "@manon.grd", "@clara.vss", "@zoe.mrtn", "@lou.bernard", "@elise.rnd", "@ambre.ctl", "@juliette.fx"];
 function seeded(n) { let s = n * 9301 + 49297; return () => ((s = (s * 9301 + 49297) % 233280) / 233280); }
 const POSTLIST = (() => {
@@ -2245,7 +2246,7 @@ function admToday() {
       ${kpi("New members from posts", fmt(2310 * T.f), "Joined through a post or a member's link")}
     </div>
     <div class="adm-grid">
-      <div class="acard"><h2>Views on members' posts, per day</h2><p class="sub">Last 30 days. The jump is the Givre coffret arriving at members' homes.</p>${lineChart({ id: "daily", data: DAILY, labels: DAY_LABELS, max: 800000, aria: "Daily views on members' posts over the last 30 days", tipFor: (i) => `<b>${DAY_LABELS[i]}</b>, ${fmt(DAILY[i])} views, ${eur(mediaValue(DAILY[i]))}`, color: "#1d1f24" })}</div>
+      <div class="acard"><h2>Views on members' posts, per day</h2><p class="sub">Last 30 days. The jump is the Givre coffret arriving at members' homes.</p>${lineChart({ id: "daily", data: DAILY, labels: DAY_LABELS, max: 800000, aria: "Daily views on members' posts over the last 30 days", tipFor: (i) => `<b>${DAY_LABELS[i]}</b>, ${fmt(DAILY[i])} views`, color: "#1d1f24" })}</div>
       <div class="acard"><h2>This week, Givre</h2><p class="sub">Scheduled, runs on its own</p>
         <ol class="timeline">${plan.map(([t, b, s]) => `<li><time>${t}</time><span class="dot"></span><span class="tl"><b>${b}</b><span>${s}</span></span></li>`).join("")}</ol></div>
     </div>
@@ -2558,7 +2559,7 @@ function admMembers() {
       <div class="acard"><h2>How they joined</h2><p class="sub">First touch, this year</p><div class="splits">${ORIGIN.map(([l, v]) => `<div><span>${l}</span><span class="bar-a"><i style="width:${(v / 31) * 100}%"></i></span><b>${v}%</b></div>`).join("")}</div></div>
       <div class="acard"><h2>Where they live</h2><p class="sub">From the delivery address</p><div class="splits">${CITIES.map(([l, v]) => `<div><span>${l}</span><span class="bar-a"><i style="width:${(v / 34) * 100}%"></i></span><b>${v}%</b></div>`).join("")}</div></div>
     </div>
-    <div class="acard"><h2>From a post to a member</h2><p class="sub">Last 30 days: what members' posts bring back</p><div class="mkpis">${mini("Views on members' posts", big(DAILY.reduce((a, b) => a + b, 0)))}${mini("Taps on a member's link", "41,200")}${mini("Visits to the shop", "33,900")}${mini("Joined le Jardin", "2,310")}${mini("First orders", "1,174")}</div></div>`;
+    <div class="acard"><h2>From a post to a member</h2><p class="sub">Last 30 days: what members' posts bring back</p><div class="mkpis">${mini("Members' posts", fmt(POSTS_30))}${mini("Members who posted", fmt(POSTERS_30))}${mini("Views on members' posts", big(DAILY.reduce((a, b) => a + b, 0)))}${mini("Potential reach", big(POSTERS_30 * FOLLOWERS_AVG))}${mini("Joined le Jardin from a post", "2,310")}</div></div>`;
 }
 
 /* ---------------------------------------------------------------- Results */
@@ -2571,27 +2572,28 @@ function admResults() {
   const h = admHead("Results", "What le Jardin brings in. The top line stays simple: open any ritual for the detail.", `<button class="adm-btn" data-act="csv">${icon("download")}Download, CSV</button>`) + admTabs("results") + periodBar();
   if (tab === 1) return h + resultsMissions();
   if (tab === 2) return h + resultsPosts();
-  const T = totals(), paid = mediaValue(T.views), gifts = 12600 * T.f, eng = T.likes + T.comments + T.shares;
+  const T = totals(), paid = mediaValue(T.views), eng = T.likes + T.comments + T.shares, posters = POSTERS_30 * T.f;
+  const byR = ritualRows().filter((x) => x.views).sort((a, b) => b.views - a.views);
   const top = ritualRows().filter((x) => x.views).sort((a, b) => b.views - a.views).slice(0, 5);
   return h + `<div class="kpis">
       ${kpi("Earned media value", eur(paid), `Views on members' posts at a ${cpmLabel()} CPM`)}
-      ${kpi("Views on members' posts", big(T.views), `${big(T.views * 0.61)} by people who don't follow @maisonaube`)}
+      ${kpi("Views on members' posts", big(T.views), `From ${fmt(T.posts)} posts by ${fmt(posters)} members`)}
       ${kpi("Likes, comments and shares", big(eng), `${pct(eng, T.views)} of views`)}
       ${kpi("New members from posts", fmt(2310 * T.f), "Joined through a post or a member's link")}
     </div>
     <details class="more" ${state.rmore ? "open" : ""}><summary data-act="rmore">${state.rmore ? "Hide the detail" : "Show every number for this period"}</summary>
-      <div class="mkpis">${mini("Posts", fmt(T.posts))}${mini("Members who posted", fmt(1486 * T.f))}${mini("Average views a post", fmt(T.views / T.posts))}${mini("Likes", big(T.likes))}${mini("Comments", big(T.comments))}${mini("Shares", big(T.shares))}${mini("Rituals completed", fmt(24800 * T.f))}${mini("Gifts redeemed", fmt(1457 * T.f))}${mini("Boutique check-ins", fmt(1126 * T.f))}${mini("Active members", "8,480")}</div>
+      <div class="mkpis">${mini("Posts", fmt(T.posts))}${mini("Members who posted", fmt(posters))}${mini("Average views a post", fmt(T.views / T.posts))}${mini("Likes", big(T.likes))}${mini("Comments", big(T.comments))}${mini("Shares", big(T.shares))}${mini("Rituals completed", fmt(24800 * T.f))}${mini("Gifts redeemed", fmt(1457 * T.f))}${mini("Boutique check-ins", fmt(1126 * T.f))}${mini("Active members", "8,480")}</div>
     </details>
     ${cpmBox()}
     <div class="vh">
-      <div class="vh-tile vh-hero"><span>Back in media value for every euro of gifts</span><b>${(paid / gifts).toFixed(1)}×</b><small>${eur(paid)} of reach at a ${cpmLabel()} CPM, against ${eur(gifts)} of gifts redeemed</small>
-        <div class="vh-vs" role="img" aria-label="Media value ${eur(paid)} against gifts at cost ${eur(gifts)}"><div><span>Media value</span><i style="width:100%"></i><em>${eur(paid)}</em></div><div><span>Gifts, at cost</span><i style="width:${Math.max(2, Math.min(100, (gifts / paid) * 100)).toFixed(1)}%"></i><em>${eur(gifts)}</em></div></div></div>
-      <div class="vh-tile"><b>${eur(paid)}</b><span>Media value</span><small>${PERIODS[state.period][0]}</small></div>
-      <div class="vh-tile"><b>${eur(paid / (1486 * T.f))}</b><span>Per member who posted</span><small>Average, before any gift</small></div>
-      <div class="vh-tile"><b>${eur(gifts)}</b><span>Gifts redeemed, at cost</span><small>Codes counted at face value</small></div>
+      <div class="vh-tile vh-hero"><span>Earned media value</span><b>${eur(paid)}</b><small>${PERIODS[state.period][0]}: views of members' posts at a ${cpmLabel()} CPM, by ritual</small>
+        <div class="vh-cols" role="img" aria-label="Media value by ritual: ${byR.map((x) => `${x.r.type} ${eur(x.value)}`).join(", ")}">${byR.map((x) => `<span><i style="height:${((x.views / byR[0].views) * 62).toFixed(1)}px"></i><em>${x.r.type}</em></span>`).join("")}</div></div>
+      <div class="vh-tile"><b>${fmt(T.posts)}</b><span>Members' posts</span><small>By ${fmt(posters)} members</small></div>
+      <div class="vh-tile"><b>${big(T.views)}</b><span>Views of members' posts</span><small>${fmt(T.views / T.posts)} a post on average</small></div>
+      <div class="vh-tile"><b>${big(posters * FOLLOWERS_AVG)}</b><span>Potential reach</span><small>Followers of the accounts that posted</small></div>
     </div>
     <div class="adm-grid">
-      <div class="acard"><h2>Views on members' posts, per day</h2><p class="sub">Last 30 days</p>${lineChart({ id: "rdaily", data: DAILY, labels: DAY_LABELS, max: 800000, aria: "Daily views on members' posts over the last 30 days", tipFor: (i) => `<b>${DAY_LABELS[i]}</b>, ${fmt(DAILY[i])} views, ${eur(mediaValue(DAILY[i]))}` })}</div>
+      <div class="acard"><h2>Views on members' posts, per day</h2><p class="sub">Last 30 days</p>${lineChart({ id: "rdaily", data: DAILY, labels: DAY_LABELS, max: 800000, aria: "Daily views on members' posts over the last 30 days", tipFor: (i) => `<b>${DAY_LABELS[i]}</b>, ${fmt(DAILY[i])} views` })}</div>
       <div class="acard"><h2>How we count it</h2><p class="sub" style="line-height:1.55">Views on public posts that tag @maisonaube, from members' linked accounts, counted for 30 days after posting. Value = views ÷ 1,000 × your CPM. Posts the team rejects are taken out.</p><div class="callout ok" style="margin-top:12px">At ${cpmLabel()}, ${big(T.views)} views would cost ${eur(paid)} in paid social.</div></div>
     </div>
     <div class="acard"><h2>Where members post</h2><p class="sub">${PERIODS[state.period][0]}, checked through members' linked accounts</p>
@@ -2626,7 +2628,7 @@ function ritualDetail(id) {
   const tiers = [["Graine", 46], ["Bouton", 33], ["Fleur", 17], ["Jardin secret", 4]].map(([t, p], i) => [t, p + ((id.length + i * 3) % 5) - 2]);
   const posts = POSTLIST.filter((p) => p.rid === id).sort((a, b) => b.views - a.views).slice(0, 5);
   const T = totals();
-  const body = `<div class="mkpis">${mini("Members who took part", fmt(x.done))}${mini("Of those who saw it", pct(x.done, x.seen * Math.max(T.f, 0.2)))}${x.views ? mini("Posts", fmt(x.posts)) + mini("Views", big(x.views)) + mini("Likes", big(x.likes)) + mini("Comments", fmt(x.comments)) + mini("Shares", fmt(x.shares)) + mini("Media value", eur(x.value)) + mini("Reach outside members", big(x.views * 0.61)) : ""}${x.joined ? mini("New members", fmt(x.joined)) : ""}</div>
+  const body = `<div class="mkpis">${mini("Members who took part", fmt(x.done))}${mini("Of those who saw it", pct(x.done, x.seen * Math.max(T.f, 0.2)))}${x.views ? mini("Posts", fmt(x.posts)) + mini("Views", big(x.views)) + mini("Likes", big(x.likes)) + mini("Comments", fmt(x.comments)) + mini("Shares", fmt(x.shares)) + mini("Media value", eur(x.value)) + mini("Potential reach", big(reachOf(x.posts))) : ""}${x.joined ? mini("New members", fmt(x.joined)) : ""}</div>
     ${x.note ? `<p class="sub" style="margin-top:12px">${x.note}.</p>` : ""}
     ${x.views ? `<h3 style="font-size:.875rem;margin:18px 0 0">By network</h3><div class="scroll-x"><table class="atable"><thead><tr><th>Network</th><th class="r">Views</th><th class="r">Share</th><th class="r">Media value</th></tr></thead>
       <tbody>${NETS.map(([n, , vs]) => `<tr><td>${n}</td><td class="r">${big(x.views * vs)}</td><td class="r">${Math.round(vs * 100)}%</td><td class="r">${eur(mediaValue(x.views * vs))}</td></tr>`).join("")}</tbody></table></div>

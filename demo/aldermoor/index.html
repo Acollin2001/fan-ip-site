@@ -1,8 +1,10 @@
 <!doctype html>
-<html lang="en">
+<html lang="en-GB">
 <head>
 <meta charset="utf-8">
-<meta name="robots" content="noindex, nofollow">
+<meta name="robots" content="index, follow">
+<meta name="description" content="Interactive demo of a football club's supporters club on FAN/IP: missions, rewards and a season of results. Fictional club, fictional data.">
+<link rel="canonical" href="https://fan-ip.com/demo/aldermoor/">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Aldermoor Season Demo</title>
 <style>
@@ -2580,7 +2582,7 @@ const BADGES = [
   { id: "ever25", name: "Ever-present 2025/26", glyph: "19/19", bg: "#17263a", fg: "#ffd24d", how: "Checked in at all 19 home matches last season.", got: 1 },
   { id: "away", name: "Away days", glyph: "12", big: 1, bg: "#c9421b", fg: "#ffffff", how: "Twelve away trips on the supporters' coach.", got: 1 },
   { id: "quiz", name: "Quiz master", glyph: "?", big: 1, bg: "#f0e2c4", fg: "#17263a", how: "Twenty quizzes right first time.", got: 1 },
-  { id: "founder", name: "Founding member", glyph: "crest", bg: "#7d9ab6", fg: "#17263a", how: "Joined in the program's first month.", got: 1 },
+  { id: "dayone", name: "Day one", glyph: "crest", bg: "#7d9ab6", fg: "#17263a", how: "Joined in the first week.", got: 1 },
   { id: "called", name: "Called it", glyph: "2–1", bg: "#213550", fg: "#f0e2c4", how: "Predicted an exact score.", got: 1 },
   { id: "derby", name: "Derby day", glyph: "GR", bg: "#2f6b45", fg: "#f4f4f0", how: "Check in at The Weir when Granby Rovers visit.", prog: () => [state.checkedIn ? 1 : 0, 1] },
   { id: "foil", name: "Foil hunter", glyph: "3", big: 1, bg: "#ffd24d", fg: "#17263a", how: "Find three foil cards in your packs.", prog: () => [["men-9", "women-4", "club-C1"].filter((id) => state.owned.has(id)).length, 3] },
@@ -4747,6 +4749,10 @@ const RM = [
 ];
 const POSTERS = ["@weirend_mags", "@kestrel_kev", "@aldermoor_abi", "@scarfsup_sian", "@ola.collects", "@northstand_priya", "@tomhalloran", "@riverside_km", "@olderthanthecrest", "@holbrook_away"];
 const NET_NAMES = NETS.map((n) => n[0]);
+/* Potential reach: followers of the accounts that posted. 3,870 members posted this season, 2,400 followers on average.
+   A mission's share follows its posts, so missions and sponsors add up to the season figure. */
+const POSTERS_SEASON = 3870, FOLLOWERS_AVG = 2400;
+const SEASON_POSTS = NETS.reduce((a, n) => a + n[1], 0);
 const rmDate = (r) => new Date(NOW.getTime() - r.ago * 864e5);
 
 function rPeriod() {
@@ -4767,7 +4773,7 @@ function rmStats(r) {
   const er = r.er || 1, v = r.views || 0;
   const done = r.done + (state.done.has(r.id) ? 1 : 0);
   const likes = v * 0.077 * er, comments = v * 0.0039 * er, shares = v * 0.0055 * er;
-  return { ...r, done, likes, comments, shares, eng: likes + comments + shares, value: mediaValue(v), reach: v * 0.58, rate: done / r.seen, logo: r.seen * 3.1 };
+  return { ...r, done, likes, comments, shares, eng: likes + comments + shares, value: mediaValue(v), reach: ((r.posts || 0) * POSTERS_SEASON * FOLLOWERS_AVG) / SEASON_POSTS, rate: done / r.seen };
 }
 function rTotals(f) {
   const nets = NETS.map(([name, posts, views, lr, cr, sr]) => { const v = views * f; return { name, posts: posts * f, views: v, likes: v * lr, comments: v * cr, shares: v * sr, value: mediaValue(v) }; });
@@ -4784,7 +4790,7 @@ function periodBar() {
 }
 function sponsorsIn(list) {
   const out = {};
-  list.filter((r) => r.sponsor).forEach((r) => { const s = out[r.sponsor] || (out[r.sponsor] = { name: r.sponsor, n: 0, done: 0, views: 0, eng: 0, value: 0, logo: 0, nm: 0 }); s.n++; ["done", "views", "eng", "value", "logo", "nm"].forEach((k) => (s[k] += r[k])); });
+  list.filter((r) => r.sponsor).forEach((r) => { const s = out[r.sponsor] || (out[r.sponsor] = { name: r.sponsor, n: 0, done: 0, views: 0, eng: 0, value: 0, reach: 0, nm: 0 }); s.n++; ["done", "views", "eng", "value", "reach", "nm"].forEach((k) => (s[k] += r[k])); });
   return Object.values(out);
 }
 const sponsorMono = (s) => { const [m, bg, fg] = SPONSOR_LOOK[s] || ["", "#eee", "#333"]; return `<span class="sp-mono" style="background:${bg};color:${fg}">${m}</span>`; };
@@ -4805,18 +4811,18 @@ function resultsOverview() {
   const w0 = Math.max(0, Math.min(12, Math.floor((P.from - SEASON_START) / (7 * 864e5))));
   return `<div class="kpis">
       ${kpi("Earned media value", eur(T.value), `Views on members' posts at a ${cpmLabel()} CPM`)}
-      ${kpi("Views on members' posts", big(T.views), `${big(T.views * 0.58)} by people who aren't members`)}
+      ${kpi("Views on members' posts", big(T.views), `From ${fmt(T.posts)} posts by ${fmt(POSTERS_SEASON * P.f)} members`)}
       ${kpi("Likes, comments and shares", big(eng), `${pct(eng, T.views)} of views`)}
       ${kpi("New members from members' posts", fmt(2310 * P.f), "Joined through a post or a member's code")}
     </div>
     <details class="more" ${state.rmore ? "open" : ""}><summary data-act="rmore">${state.rmore ? "Hide the detail" : "Show every number for this period"}</summary>
-      <div class="mkpis">${mini("Posts", fmt(T.posts))}${mini("Members who posted", fmt(3870 * P.f))}${mini("Average views a post", fmt(T.views / T.posts))}${mini("Likes", big(T.likes))}${mini("Comments", big(T.comments))}${mini("Shares", big(T.shares))}${mini("Missions completed", big(372400 * P.f))}${mini("Home check-ins", fmt(9412 * P.f))}${mini("Rewards redeemed", fmt(4419 * P.f))}${mini("Active members", fmt(P.f < 0.2 ? 9300 : P.f < 0.5 ? 9500 : 9700), "used the app at least once")}</div>
+      <div class="mkpis">${mini("Posts", fmt(T.posts))}${mini("Members who posted", fmt(POSTERS_SEASON * P.f))}${mini("Potential reach", big(POSTERS_SEASON * P.f * FOLLOWERS_AVG), "followers of the accounts that posted")}${mini("Average views a post", fmt(T.views / T.posts))}${mini("Likes", big(T.likes))}${mini("Comments", big(T.comments))}${mini("Shares", big(T.shares))}${mini("Missions completed", big(372400 * P.f))}${mini("Home check-ins", fmt(9412 * P.f))}${mini("Rewards redeemed", fmt(4419 * P.f))}${mini("Active members", fmt(P.f < 0.2 ? 9300 : P.f < 0.5 ? 9500 : 9700), "used the app at least once")}</div>
     </details>
     ${cpmBox()}
     <div class="adm-grid">
       <div class="acard"><h2>Weekly active members</h2><p class="sub">${P.f < 1 ? "The shaded weeks are the period you picked" : "Dots mark home matchdays"}</p><div class="chart">${chartSVG(P.f < 1 ? [w0, 12] : null)}</div></div>
       <div class="acard"><h2>Sponsors</h2><p class="sub">Their missions in this period. Open one for its report and a private link to send them.</p>
-        ${sps.length ? `<div class="sp-list">${sps.map((s) => `<button class="sp-row" data-act="rsponsor" data-s="${esc(s.name)}">${sponsorMono(s.name)}<span><b>${esc(s.name)}</b><span class="sub">${s.n} mission${s.n > 1 ? "s" : ""}, ${fmt(s.done)} members took part, ${s.value ? eur(s.value) + " media value" : big(s.logo) + " logo views in the app"}</span></span><span class="go">Report</span></button>`).join("")}</div>` : `<p class="sub" style="margin-top:10px">No sponsored mission in this period.</p>`}</div>
+        ${sps.length ? `<div class="sp-list">${sps.map((s) => `<button class="sp-row" data-act="rsponsor" data-s="${esc(s.name)}">${sponsorMono(s.name)}<span><b>${esc(s.name)}</b><span class="sub">${s.n} mission${s.n > 1 ? "s" : ""}, ${fmt(s.done)} members took part${s.value ? ", " + eur(s.value) + " media value" : ""}</span></span><span class="go">Report</span></button>`).join("")}</div>` : `<p class="sub" style="margin-top:10px">No sponsored mission in this period.</p>`}</div>
     </div>
     <div class="acard"><h2>Where members talk about the club</h2><p class="sub">${P.label}, checked through members' linked accounts</p>
       <div class="scroll-x"><table class="atable tight"><thead><tr><th>Network</th><th class="r">Posts</th><th class="r">Views</th><th class="r">Likes</th><th class="r">Comments</th><th class="r">Shares</th><th class="r">Engagement</th><th class="r">Media value</th></tr></thead>
@@ -4836,7 +4842,7 @@ function sponsorCard(sp, list) {
       ${tile(sp.value ? eur(sp.value) : "–", "Media value", sp.value ? `Views of members' posts at a ${cpmLabel()} CPM` : "No public post asked for", "hero")}
       ${tile(sp.views ? big(sp.views) : "–", "Views of members' posts", sp.views ? `${big(sp.eng)} likes, comments and shares` : "")}
       ${tile(fmt(sp.done), "Members who took part")}
-      ${tile(fmt(sp.logo), `Times the ${esc(sp.name)} name was seen in the app`)}
+      ${tile(sp.reach ? big(sp.reach) : "–", "Potential reach", sp.reach ? "Followers of the accounts that posted" : "")}
       ${tile(fmt(sp.nm), "New members who joined through it")}
     </div>
     ${sp.value ? `<div class="sp-bars" role="img" aria-label="Media value by mission"><h3>Media value by mission</h3>${rows.map((r) => `<div class="sp-bar"><span class="t">${esc(r.title)}</span><span class="track"><i style="width:${Math.max(2, (r.value / maxV) * 100).toFixed(1)}%"></i></span><b>${r.value ? eur(r.value) : "–"}</b></div>`).join("")}</div>` : ""}
@@ -4895,16 +4901,16 @@ function missionDetail(id) {
   const split = r.net || [0.55, 0.32, 0.06, 0.07];
   const nets = NET_NAMES.map((n, i) => { const v = r.views * split[i]; return { n, posts: r.posts * split[i], v, likes: r.likes * split[i], comments: r.comments * split[i], shares: r.shares * split[i] }; });
   const posts = postsFor([r]).sort((a, b) => b.views - a.views);
-  const body = `${r.sponsor ? `<div class="sp-inline">${sponsorMono(r.sponsor)}<span>With <b>${esc(r.sponsor)}</b>. Their name was seen ${fmt(r.logo)} times in the app.</span></div>` : ""}
-    <div class="mkpis">${mini("Members who took part", fmt(r.done), `${pct(r.done, r.seen)} of the ${fmt(r.seen)} who saw it`)}${r.views ? mini("Posts", fmt(r.posts)) + mini("Views", big(r.views)) + mini("Likes", big(r.likes)) + mini("Comments", fmt(r.comments)) + mini("Shares", fmt(r.shares)) + mini("Media value", eur(r.value), `at a ${cpmLabel()} CPM`) + mini("Reach outside members", big(r.reach)) : ""}${r.nm ? mini("New members", fmt(r.nm)) : ""}${(typeof r.extra === "function" ? r.extra() : r.extra || []).map(([l, v]) => mini(l, v)).join("")}</div>
+  const body = `${r.sponsor ? `<div class="sp-inline">${sponsorMono(r.sponsor)}<span>Sponsored by <b>${esc(r.sponsor)}</b>.</span></div>` : ""}
+    <div class="mkpis">${mini("Members who took part", fmt(r.done), `${pct(r.done, r.seen)} of the ${fmt(r.seen)} who saw it`)}${r.views ? mini("Posts", fmt(r.posts)) + mini("Views", big(r.views)) + mini("Likes", big(r.likes)) + mini("Comments", fmt(r.comments)) + mini("Shares", fmt(r.shares)) + mini("Media value", eur(r.value), `at a ${cpmLabel()} CPM`) + mini("Potential reach", big(r.reach), "followers of the accounts that posted") : ""}${r.nm ? mini("New members", fmt(r.nm)) : ""}${(typeof r.extra === "function" ? r.extra() : r.extra || []).map(([l, v]) => mini(l, v)).join("")}</div>
     ${r.views ? `<h3>Posts each day</h3><div class="chart">${dayBars(r)}</div>
     <h3>By network</h3><div class="scroll-x"><table class="atable tight"><thead><tr><th>Network</th><th class="r">Posts</th><th class="r">Views</th><th class="r">Likes</th><th class="r">Comments</th><th class="r">Shares</th></tr></thead>
       <tbody>${nets.map((x) => `<tr><td>${x.n}</td><td class="r">${fmt(x.posts)}</td><td class="r">${big(x.v)}</td><td class="r">${big(x.likes)}</td><td class="r">${fmt(x.comments)}</td><td class="r">${fmt(x.shares)}</td></tr>`).join("")}</tbody></table></div>
     <h3>Best posts</h3><div class="scroll-x"><table class="atable tight"><thead><tr><th>Member</th><th>Network</th><th class="r">Views</th><th class="r">Likes</th><th class="r">Comments</th><th class="r">Shares</th></tr></thead>
       <tbody>${posts.map((p) => `<tr><td>${p.who}</td><td>${p.net}</td><td class="r">${big(p.views)}</td><td class="r">${big(p.likes)}</td><td class="r">${fmt(p.comments)}</td><td class="r">${fmt(p.shares)}</td></tr>`).join("")}</tbody></table></div>`
-      : `<p class="sub" style="margin-top:14px">This type of mission doesn't ask for a public post, so what counts is who took part and how often members saw it.</p>`}
+      : `<p class="sub" style="margin-top:14px">This type of mission doesn't ask for a public post, so what counts is who took part and what it brought back.</p>`}
     <h3>Who took part</h3><div class="splits">${tiers.map(([t, p]) => `<div><span>${t}</span><span class="bar-a"><i style="width:${p}%"></i></span><b>${p}%</b></div>`).join("")}</div>
-    <p class="sub" style="margin-top:8px">${18 + (r.ago % 9)}% joined this season. Members aged 18 to 34 did ${52 + (r.ago % 7)}% of it.</p>`;
+    <p class="sub" style="margin-top:8px">${18 + (r.ago % 9)}% joined this season.</p>`;
   openDrawer({ title: esc(r.title), sub: `${r.type}, started ${dayLabel(isoDay(rmDate(r)))}`, body,
     footer: `<button class="adm-btn" data-act="dclose">Close</button>${r.sponsor ? `<button class="adm-btn primary" data-act="splink" data-s="${esc(r.sponsor)}">${icon("copy")}Copy the sponsor's private link</button>` : ""}<button class="adm-btn${r.sponsor ? "" : " primary"}" data-act="rcsv" data-id="${r.id}">${icon("download")}${r.sponsor ? "Report for " + esc(r.sponsor) : "This mission"}, CSV</button>` });
 }

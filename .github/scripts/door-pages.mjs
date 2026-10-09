@@ -15,7 +15,7 @@ export const PAGES = {
       "A loyalty program that rewards customers for posting about your brand. You see every post, its views and its media value. From €99 a month.",
     ogTitle: "FAN/IP for brands · Customers who post about you.",
     planNote:
-      "Collectibles, giveaways and PR packages come with Club. On Starter you can try photo and video missions, polls, quizzes, referrals and rewards.",
+      "Collectibles, giveaways and PR packages come with Club. On Starter you can try photo and video missions, polls, quizzes, referrals, rewards and the leaderboard.",
     h1Html: 'Customers who post<br><span class="hero-promise__gold">about you.</span>',
     lead:
       "A loyalty program that rewards what customers say, not only what they buy. They post your product, earn points and unlock your rewards. You see every post and how far it went.",
@@ -135,7 +135,7 @@ export const PAGES = {
       "A supporters club app under your club’s name. Fans post, earn points and rewards, and your sponsors see the reach. For sport and esports. From €99 a month.",
     ogTitle: "FAN/IP for sport · Supporters who post. Sponsors who see it.",
     planNote:
-      "Sponsor quests and match predictions come with Club, team battles with Season. On Starter you can try missions, QR check-ins and rewards.",
+      "Sponsor quests and match predictions come with Club, team battles with Season. On Starter you can try missions, QR check-ins, rewards and the leaderboard.",
     h1Html: 'Supporters who post.<br><span class="hero-promise__gold">Sponsors who see it.</span>',
     lead:
       "A supporters club app under your club’s name. Fans post from the stands, earn points and climb the levels. Your sponsors get a report of how many people saw it.",
@@ -255,7 +255,7 @@ export const PAGES = {
       "Fans post after every show, earn points and unlock rewards you choose. You see the views of their posts, show by show. Your own fan club, your name.",
     ogTitle: "FAN/IP for artists · Fans who post after every show.",
     planNote:
-      "Open questions, mission roads and giveaways come with Club. On Starter you can try photo and video missions, polls, quizzes, QR check-ins and rewards.",
+      "Open questions, mission roads and giveaways come with Club. On Starter you can try photo and video missions, polls, quizzes, QR check-ins, rewards and the leaderboard.",
     h1Html: 'Fans who post<br><span class="hero-promise__gold">after every show.</span>',
     lead:
       "Your own fan club app, under your name. Fans post from the front row, earn points and unlock the rewards you choose. You see the views and media value of every show.",

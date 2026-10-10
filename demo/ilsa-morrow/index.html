@@ -1101,7 +1101,7 @@ function refreshShell() {
   const fresh = document.createElement("div"); fresh.innerHTML = shell();
   $$("[data-shell]").forEach((el) => { const src = fresh.querySelector(`[data-shell="${el.dataset.shell}"]`); if (src) el.innerHTML = src.innerHTML; });
 }
-const screenFoot = () => `<p class="foot-note">${esc(BRAND.name)} is a fictional ${BRAND.kind}. Every name and figure here is illustrative. Powered by FAN/IP.</p>`;
+const screenFoot = () => `<p class="foot-note">${esc(BRAND.name)} is a fictional ${BRAND.kind}. Every name and figure here is illustrative. A FAN/IP demo.</p>`;
 
 /* ---------------------------------------------------------------- presenter */
 function setView(v) {
@@ -1343,7 +1343,7 @@ function openForm(form, draft, { title, sub, cta, act }) {
   openDrawer({ title, sub, body: F.form(state.draft), preview: F.preview ? F.preview(state.draft) : "", footer: `<button class="adm-btn" data-act="dclose">Cancel</button><button class="adm-btn primary" data-act="${act}">${cta}</button>` });
 }
 
-const INVITE_FORM = { form: (d) => `${fld("Name", inp("name", d.name, 'maxlength="60" placeholder="First and last name"'))}${fld("Work email", inp("email", d.email, 'type="email" placeholder="name@company.example"'))}${fld("Role", optRow("role", [["Editor", "Editor"], ["Moderator", "Moderator"], ["Deliveries", "Deliveries"], ["Read only", "Read only"]], d.role), "Owners can change a role at any time.")}` };
+const INVITE_FORM = { form: (d) => `${fld("Name", inp("name", d.name, 'maxlength="60" placeholder="First and last name"'))}${fld("Work email", inp("email", d.email, 'type="email" placeholder="name@company.example"'))}${fld("Role", optRow("role", [["Admin", "Admin"], ["Moderator", "Moderator"]], d.role), "Admin: everything, including billing and the team. Moderator: posts, answers and members.")}` };
 
 /* QR code as a print-ready PNG */
 async function downloadQRPng(text, title, line, file) {
@@ -1432,7 +1432,7 @@ function kitAction(act, el) {
     case "kitLogo": s.logo = el.dataset.k; kitApply(); rerenderAdminInPlace(); return true;
     case "kitReset": kitInit(); kitApply(); rerenderAdminInPlace(); admToast(BRANDKIT.resetToast); return true;
     case "module": { const n = el.dataset.n, on = el.getAttribute("aria-checked") !== "true"; el.setAttribute("aria-checked", on); if (on) state.modOff.delete(n); else state.modOff.add(n); admToast(`${n} ${on ? "switched on" : "switched off"} for members`); return true; }
-    case "invite": openForm("invite", { name: "", email: "", role: "Editor" }, { title: "Invite someone", sub: "They get an email with a link to set their password. Two-factor sign-in is required.", cta: "Send the invitation", act: "sendInvite" }); return true;
+    case "invite": openForm("invite", { name: "", email: "", role: "Moderator" }, { title: "Invite someone", sub: "They get an email with a link to set their password. Two-step sign-in is required for every administrator.", cta: "Send the invitation", act: "sendInvite" }); return true;
     case "sendInvite": {
       const d = state.draft;
       if (!d.name.trim() || !/^\S+@\S+\.\S+$/.test(d.email.trim())) { admToast("Add a name and a valid email first"); return true; }
@@ -1470,7 +1470,7 @@ function logoMark(cls = "") {
 
 /* ---------------------------------------------------------------- Account */
 function accountPage({ domain, active, renews, sub }) {
-  const roles = [["Owner", "Everything, including billing and the team"], ["Editor", "Missions, rewards, brand and season"], ["Moderator", "Posts, answers and members"], ["Deliveries", "Winners & deliveries only"], ["Read only", "Results and exports"]];
+  const roles = [["Admin", "Everything, including billing and the team"], ["Moderator", "Posts, answers and members"]];
   return admHead("Account", sub) + `
     <div class="adm-grid">
       <div class="acard"><div class="acard-top"><div><h2>Team</h2><p class="sub">Unlimited seats on Season. Each person sees what their role allows.</p></div><button class="adm-btn sm" data-act="invite">${icon("plus")}Invite someone</button></div>
@@ -1478,11 +1478,11 @@ function accountPage({ domain, active, renews, sub }) {
         <tbody>${TEAM.map(([n, j, r, l]) => `<tr><td><span class="who"><i>${initials(n)}</i>${esc(n)}</span></td><td class="wrap">${esc(j)}</td><td>${r}</td><td>${l === "Invitation sent" ? `<span class="st sched">${l}</span>` : l}</td></tr>`).join("")}</tbody></table></div></div>
       <div class="acard"><h2>Plan</h2><p class="sub">Season. Every program module, unlimited team seats and your own domain.</p>
         <div class="usage"><div><span>Active members this month</span><b>${fmt(active)} of 10,000</b></div><span class="bar-a"><i style="width:${(active / 100).toFixed(1)}%"></i></span><small class="sub">Members who used the app at least once this month. Sign-ups who never come back are not counted.</small></div>
-        <dl class="bs-words" style="margin-top:14px"><dt>Price</dt><dd>€1,290 a month, excluding VAT</dd><dt>Term</dt><dd>12 months, renews ${renews}</dd><dt>Invoices</dt><dd>Monthly, by email, paid by bank transfer</dd><dt>Support</dt><dd>Reply within one business day</dd></dl></div>
+        <dl class="bs-words" style="margin-top:14px"><dt>Price</dt><dd>€1,290 a month, excluding VAT</dd><dt>Term</dt><dd>12 months, renews ${renews}</dd><dt>Invoices</dt><dd>Monthly, by card</dd><dt>Support</dt><dd>Reply within one business day</dd></dl></div>
     </div>
     <div class="adm-row">
       <div class="acard"><h2>Roles</h2><div class="scroll-x"><table class="atable"><tbody>${roles.map(([r, w]) => `<tr><td><b style="font-weight:500">${r}</b></td><td class="wrap">${w}</td></tr>`).join("")}</tbody></table></div></div>
-      <div class="acard"><h2>Security and data</h2><dl class="bs-words" style="margin-top:12px"><dt>Team sign-in</dt><dd>Two-factor, required for everyone</dd><dt>${aud() === "fans" ? "Fans" : "Members"} sign in</dt><dd>Email link, Apple or Google</dd><dt>Domain</dt><dd>${domain}</dd><dt>Data</dt><dd>Hosted in the EU, exports on request</dd><dt>${aud() === "fans" ? "Fan" : "Member"} data</dt><dd>Deleted 30 days after a ${aud() === "fans" ? "fan" : "member"} leaves</dd></dl></div>
+      <div class="acard"><h2>Security and data</h2><dl class="bs-words" style="margin-top:12px"><dt>Team sign-in</dt><dd>Two-step</dd><dt>${aud() === "fans" ? "Fans" : "Members"} sign in</dt><dd>Email and password</dd><dt>Domain</dt><dd>${domain}</dd><dt>Data</dt><dd>Hosted in the EU, member export in one click</dd><dt>${aud() === "fans" ? "Fan" : "Member"} data</dt><dd>Deleted 30 days after a ${aud() === "fans" ? "fan" : "member"} leaves</dd></dl></div>
     </div>`;
 }
 
@@ -1569,8 +1569,8 @@ const MISSIONS = [
     steps: ["Take the photo after the encore.", "Post it on your account and tag @ilsamorrow.", "Paste the link here."] },
   { id: "merch", kind: "checkin", show: true, city: "lyo", title: "Check in at the merch stand", pts: 150, meta: "QR on the stand, doors to curfew",
     brief: "Scan the QR on the merch stand. It puts Lyon in your tour, and every city you check in at counts towards the signed poster." },
-  { id: "friend", kind: "friend", city: "lyo", title: "Bring a friend to the Lyon show", pts: 100, meta: "+300 when they check in",
-    brief: "Send your link. When your friend joins the Band and checks in at the stand in Lyon, you get 300 more notes and they get 10% off at the stand." },
+  { id: "friend", kind: "friend", city: "lyo", title: "Bring a friend to the Lyon show", pts: 100, meta: "+300 after their first mission",
+    brief: "Send your link. When your friend joins the Band and their first mission is approved, you get 300 more notes and they get 10% off at the stand." },
   { id: "fit", kind: "post", title: "Merch fit: the tour tee, your way", pts: 120, meta: "Photo or video", tag: "#BandFit",
     brief: "Tied, cropped, under a suit jacket, on the dog. Show us how you wear the tour tee.",
     steps: ["Photo or short video, wherever you are.", "Post it on your account and tag @ilsamorrow.", "Paste the link here."] },
@@ -1864,7 +1864,7 @@ function screenMe() {
       <section class="sec"><div class="sec-head"><h2 class="h-sec">My posts</h2><span class="meta mono">Views over 30 days</span></div>
         <div class="myposts">${state.posts.map((p) => `<div class="mypost ${p.fresh ? "fresh" : ""}"><span class="nt">${NET_SHORT[p.net]}</span><span class="tx"><b>${esc(p.title)}</b><span>${p.fresh ? "Just now, views coming in" : `${p.ago} days ago${p.city ? ", " + p.city : ""}`}</span></span><span class="vw"><b class="num">${fmt(p.views)}</b><span>views</span></span></div>`).join("")}</div></section>
       <section class="sec"><div class="sec-head"><h2 class="h-sec">Bring a friend</h2></div>
-        <div class="panel"><p class="note">They get 10% off at the merch stand. You get 300 ${BRAND.word} when they check in at a show.</p><div class="ref"><code>${ME.code}</code><button class="btn btn-line btn-sm" data-act="copy" data-copy="${ME.code}">${icon("copy")}Copy</button></div></div>
+        <div class="panel"><p class="note">They get 10% off at the merch stand. You get 300 ${BRAND.word} when their first mission is approved.</p><div class="ref"><code>${ME.code}</code><button class="btn btn-line btn-sm" data-act="copy" data-copy="${ME.code}">${icon("copy")}Copy</button></div></div>
         <div class="panel"><b>Linked accounts</b><p class="note">So we can find posts that tag Ilsa and count their views. We never post for you.</p>
           <div class="linked"><div><span class="nt">TT</span>TikTok, ${ME.handle}<span class="ok">LINKED</span></div><div><span class="nt">IG</span>Instagram, ${ME.handle}<span class="ok">LINKED</span></div><div><span class="nt">YT</span>YouTube Shorts<button class="link" style="margin-left:auto" data-act="linkyt">Link</button></div></div></div>
       </section>
@@ -2031,10 +2031,10 @@ function onAction(act, el) {
     case "sendfriend": {
       const nm = ($("#friendName").value || "").trim() || "your friend";
       const m = mission("friend"), before = complete("friend", el); state.friendName = nm;
-      $("#friendZone").innerHTML = successHtml(m, before, `Link sent to ${esc(nm)}. 300 more ${BRAND.word} when they check in at the stand.`) + `<div class="demo-hint"><span>Demo: ${esc(nm)} checks in in Lyon</span><button class="btn btn-line btn-sm" data-act="friendin">${esc(nm)} checks in</button></div>`;
+      $("#friendZone").innerHTML = successHtml(m, before, `Link sent to ${esc(nm)}. 300 more ${BRAND.word} when their first mission is approved.`) + `<div class="demo-hint"><span>Demo: ${esc(nm)} checks in in Lyon, their first mission</span><button class="btn btn-line btn-sm" data-act="friendin">${esc(nm)} checks in</button></div>`;
       return renderMember(false);
     }
-    case "friendin": if (state.friendJoined) return; state.friendJoined = true; el.disabled = true; award(300, el, `${state.friendName === "your friend" ? "Your friend" : state.friendName} checked in. +300 ${BRAND.word}`); return setTimeout(() => renderMember(false), 1200);
+    case "friendin": if (state.friendJoined) return; state.friendJoined = true; el.disabled = true; award(300, el, `${state.friendName === "your friend" ? "Your friend" : state.friendName}'s first mission is approved. +300 ${BRAND.word}`); return setTimeout(() => renderMember(false), 1200);
     case "quiz": {
       if (state.done.has("lyric")) return;
       const right = +el.dataset.i === QUIZ.right; el.parentElement.querySelectorAll("button").forEach((b) => (b.disabled = true));
@@ -2319,7 +2319,7 @@ function rewardForm(d) {
     ${fld("Title", inp("title", d.title, 'maxlength="60"'))}
     <div class="adm-row">${fld(`Cost in ${BRAND.word}`, inp("cost", d.cost, 'type="number" min="1" step="50"'))}${d.kind === "digital" ? fld("Stock", `<input value="Unlimited" disabled>`) : fld("Stock", inp("stock", d.stock, 'type="number" min="0" placeholder="Unlimited"'))}</div>
     ${fld("How fans get it", optRow("how", DELIV_FOR[d.kind], d.how))}
-    ${d.how === "file" ? `<label class="drop">${icon("upload")}<span><b>Upload the file fans get</b>PDF, image, audio, any file up to 50 MB</span><input type="file" name="rfile" hidden></label>` : d.how === "code" ? fld("Code", inp("code", d.code || "BAND-LYON-10"), "Or upload a list of single-use codes as a CSV.") : ""}
+    ${d.how === "file" ? `<label class="drop">${icon("upload")}<span><b>Upload the file fans get</b>PDF, image, audio or video, up to 10 MB</span><input type="file" name="rfile" hidden></label>` : d.how === "code" ? fld("Code", inp("code", d.code || "BAND-LYON-10"), "Or upload a list of single-use codes as a CSV.") : ""}
     ${fld("Picture", optRow("art", RARTS, d.art))}
     ${fld("Card colour", optRow("tone", RTONES, d.tone))}`;
 }
@@ -2489,7 +2489,7 @@ const RM = [
   { id: "fit", short: "Tee", label: "Tour tee", title: "Merch fit: the tour tee, your way", type: "Photo", ago: 15, done: 980, seen: 8310, posts: 980, views: 1.06e6, nm: 120, net: [0.44, 0.49, 0.05, 0.02] },
   { id: "doors", short: "Queue", label: "Queue at doors", title: "The queue at doors", type: "Photo", ago: 12, done: 545, seen: 4308, posts: 545, views: 0.71e6, nm: 70, net: [0.41, 0.52, 0.04, 0.03] },
   { id: "merch", title: "Check in at the merch stand", type: "Check-in", ago: 12, done: 4308, seen: 9040, posts: 0, views: 0, nm: 1029, extra: [["Of tickets sold", pct(4308, 12100)], ["Average a show", "718"]] },
-  { id: "friend", title: "Bring a friend to the show", type: "Referral", ago: 12, done: 960, seen: 8120, posts: 0, views: 0, nm: 212, extra: [["Links sent", "960"], ["Friends who checked in", "212"]] },
+  { id: "friend", title: "Bring a friend to the show", type: "Referral", ago: 12, done: 960, seen: 8120, posts: 0, views: 0, nm: 212, extra: [["Links sent", "960"], ["Friends who joined", "212"]] },
   { id: "lyric", title: "Finish the line", type: "Quiz", ago: 9, done: 7240, seen: 9020, posts: 0, views: 0, nm: 0, extra: [["Right first time", "64%"], ["Average time", "14 s"]] },
   { id: "encore", title: "Pick the encore for Geneva", type: "Vote", ago: 4, done: 8641, seen: 9110, posts: 0, views: 0, nm: 0, extra: () => [["Leading", "'Les quais à 4 h'"], ["Votes", fmt(8640 + (state.vote ? 1 : 0))]] },
   { id: "first", title: "Your first Ilsa song, in one line", type: "Open question", ago: 8, done: 2210, seen: 8640, posts: 0, views: 0, nm: 0, extra: () => [["Answers featured", String(ansList().filter((a) => a.status === "featured").length)], ["Average answer", "17 words"]] },
@@ -2678,7 +2678,7 @@ function admBrand() {
 }
 
 /* ---------------------------------------------------------------- Account */
-const TEAM = [["Camille Arnaud", "Manager", "Owner", "Today"], ["Yanis Belhadj", "Tour manager", "Editor", "Today"], ["Romane Petit", "Social and content", "Moderator", "Yesterday"], ["Lucas Moreau", "Merch, on the road", "Deliveries", "Today"]];
+const TEAM = [["Camille Arnaud", "Manager", "Admin", "Today"], ["Yanis Belhadj", "Tour manager", "Admin", "Today"], ["Romane Petit", "Social and content", "Moderator", "Yesterday"], ["Lucas Moreau", "Merch, on the road", "Moderator", "Today"]];
 const admAccount = () => accountPage({ domain: "band.ilsamorrow.example", active: 9200, renews: dayLabel(isoDay(addDays(141))), sub: "Plan, team, billing and security." });
 
 /* ---------------------------------------------------------------- forms, actions */

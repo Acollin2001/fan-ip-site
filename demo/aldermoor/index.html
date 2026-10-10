@@ -2347,8 +2347,8 @@ const MISSIONS = [
     brief: "No right or wrong answer, just a few lines. The club picks its favourites for the Matchday 10 programme and the big screen, and each one featured earns 100 bonus points." },
   { id: "preview", type: "Video", group: "community", title: "Watch the gaffer's Granby preview", pts: 40, tone: "moor", art: "play", meta: "4 min",
     brief: "The manager on Granby's pressing game and who is back from injury." },
-  { id: "mate", type: "Referral", group: "community", title: "Bring a mate to their first match", pts: 250, tone: "buff", art: "mates", meta: "When they check in",
-    brief: "Share your code. When your mate joins and checks in at The Weir for the first time, you both get the points." },
+  { id: "mate", type: "Referral", group: "community", title: "Bring a mate to their first match", pts: 250, tone: "buff", art: "mates", meta: "After their first mission",
+    brief: "Share your code. When your mate joins and their first mission is approved, you both get the points." },
 ];
 const PAST = [
   { id: "md8", type: "Check-in", title: "Matchday 8 check-in", pts: 100, tone: "moor", art: "stadium", meta: "Sat 20 Sep" },
@@ -2593,7 +2593,7 @@ const BADGES = [
   { id: "page", name: "Women's squad page", glyph: "W", big: 1, bg: "#7d9ab6", fg: "#ffffff", how: "Fill the Women's squad page of the album.", prog: () => [ALBUM.women.filter((x) => state.owned.has(x.id)).length, 12] },
   { id: "album", name: "Full album", glyph: "36", big: 1, bg: "#f0e2c4", fg: "#c9421b", how: "Complete the 2026/27 album.", prog: () => [state.owned.size, 36] },
   { id: "xi", name: "First XI", glyph: "XI", big: 1, bg: "#213550", fg: "#ffffff", how: "Eleven missions in one week.", prog: () => [Math.min(11, 4 + state.done.size), 11] },
-  { id: "mate", name: "Bring a mate", glyph: "+1", big: 1, bg: "#c9421b", fg: "#f0e2c4", how: "Three mates check in for the first time with your code.", prog: () => [1, 3] },
+  { id: "mate", name: "Bring a mate", glyph: "+1", big: 1, bg: "#c9421b", fg: "#f0e2c4", how: "Three mates join with your code and get their first mission approved.", prog: () => [1, 3] },
   { id: "scarves", name: "Scarves up", glyph: "5", big: 1, bg: "#7d9ab6", fg: "#17263a", how: "Five photos approved by the club.", prog: () => [2 + (state.done.has("scarf") ? 1 : 0), 5] },
   { id: "voice", name: "Terrace voice", glyph: "50", big: 1, bg: "#f0e2c4", fg: "#213550", how: "Fifty messages in The Terrace.", prog: () => [Math.min(50, 31 + state.chat.length), 50] },
   { id: "top50", name: "Top 50", glyph: "50", big: 1, bg: "#ffd24d", fg: "#c9421b", how: `Finish the season in the top 50. The cut is ${fmt(TOP50_CUT)} points today.`, prog: () => [Math.min(SP(), TOP50_CUT), TOP50_CUT] },
@@ -3132,9 +3132,9 @@ function screenProfile() {
   return `<div class="view-inner">
     <header><h1 class="h-page">My club</h1><p class="lede">${ME.name}, member ${ME.member}. ${tierOf(SP()).name}, North Stand.</p></header>
     <div class="home-top"><div class="mcard-wrap">${memberCard()}${tierBlock()}</div>
-      <div class="sec"><div class="panel"><span class="panel-kicker">Bring a mate</span><h3 class="panel-title">250 ${word()} each when they check in for the first time</h3>
+      <div class="sec"><div class="panel"><span class="panel-kicker">Bring a mate</span><h3 class="panel-title">250 ${word()} each when their first mission is approved</h3>
         <div class="ref-code"><code>AAFC-JESS-17</code><button class="btn btn-ghost btn-sm" data-act="copy" data-t="AAFC-JESS-17">${icon("copy")}Copy code</button></div>
-        <p class="note" style="margin-top:10px">2 mates joined with your code. 1 still has to check in.</p>
+        <p class="note" style="margin-top:10px">2 mates joined with your code. 1 is still waiting for their first mission to be approved.</p>
         <div class="groups"><div class="group-row"><span class="stack">${["KM", "DW", "ON", "EG"].map((x, i) => `<span class="avatar" style="background:${["#5f768b", "#213550", "#a33213", "#5d7a62"][i]}">${x}</span>`).join("")}</span><span><b>The Riverside lot</b><span>Private group, you are 2nd</span></span><span class="gpos">2</span></div></div>
       </div>
       <div class="panel"><span class="panel-kicker">Birthday, 14 March</span><p class="panel-body" style="margin-top:6px">The club sends you a surprise that week, and your name goes up on the big screen if there's a home game.</p></div></div>
@@ -3638,7 +3638,7 @@ function missionSheet(id) {
   else if (id === "scarf") body = done ? `<div class="demo-hint">${icon("clock")}Sent to the club. Your points land once it's checked, usually within a day.</div>` : `<ol class="steps"><li>Hold your scarf up, inside the ground or anywhere with a bit of Aldermoor in shot.</li><li>Choose the photo. The club checks it within a day.</li></ol><label class="btn btn-primary btn-block" for="scarfFile">${icon("plus")}Choose a photo</label><input id="scarfFile" type="file" accept="image/*" data-act="photo" hidden>`;
   else if (id === "potm") body = done ? doneBody(m) : `<div class="quiz">${["Ellis Varga", "Clara Voss", "Noé Castell", "Maya Achebe"].map((n) => `<button data-act="potm" data-n="${n}" style="font-size:1rem">${n}</button>`).join("")}</div>`;
   else if (id === "preview") body = done ? doneBody(m) : `<div class="matchday" style="aspect-ratio:16/9;justify-content:center;align-items:center"><button class="btn btn-flood" data-act="watch">Play the preview</button><div class="bar" style="width:70%;background:rgba(255,255,255,.15)" id="watchBar"><span data-fill="0" style="background:var(--flood)"></span></div></div>`;
-  else if (id === "mate") body = `<div class="ref-code" style="justify-content:center"><code>AAFC-JESS-17</code><button class="btn btn-ghost btn-sm" data-act="copy" data-t="AAFC-JESS-17">${icon("copy")}Copy code</button></div><p class="note" style="text-align:center">Points arrive when your mate checks in at their first home match.</p>`;
+  else if (id === "mate") body = `<div class="ref-code" style="justify-content:center"><code>AAFC-JESS-17</code><button class="btn btn-ghost btn-sm" data-act="copy" data-t="AAFC-JESS-17">${icon("copy")}Copy code</button></div><p class="note" style="text-align:center">Points arrive when your mate's first mission is approved.</p>`;
   openSheet(`${id === "predict" || id === "checkin" ? "" : `<div class="sheet-card">${missionCard(m, 0, { still: true })}</div>`}<h2>${esc(m.title)}</h2>${m.sponsor ? `<p class="presented">With ${esc(m.sponsor)}</p>` : ""}<p class="note">${esc(m.brief)}</p>${body}`);
 }
 function outcomeHtml(kind, pts) {
@@ -4520,7 +4520,7 @@ function draftReward(d) {
 function rewardForm(d) {
   const deliv = d.kind === "digital" ? [["download", "A file to download"], ["code", "A code"], ["unlock", "A film or a link"]] : d.kind === "physical" ? [["post", "Posted"], ["pickup", "Collect at the club shop"]] : [["ticket", "The club books a date"]];
   let what = "";
-  if (d.delivery === "download") what = `<label class="drop">${icon("upload")}<span><b>${d.file ? esc(d.file.name) : "Upload the file members get"}</b>${d.file ? "Members download it the moment they redeem" : "PDF, image, audio, any file up to 50 MB"}</span><input type="file" name="rfile" hidden></label>`;
+  if (d.delivery === "download") what = `<label class="drop">${icon("upload")}<span><b>${d.file ? esc(d.file.name) : "Upload the file members get"}</b>${d.file ? "Members download it the moment they redeem" : "PDF, image, audio or video, up to 10 MB"}</span><input type="file" name="rfile" hidden></label>`;
   else if (d.delivery === "code") what = fld("Code", inp("code", d.code), "Or upload a list of single-use codes as a CSV.");
   else if (d.delivery === "unlock") what = fld("Link to the film or page", inp("link", d.link, 'placeholder="https://"'));
   else what = fld("Stock", inp("stock", d.stock, 'type="number" min="0" placeholder="Unlimited"'), d.delivery === "post" ? "Members give their address when they redeem." : "");
@@ -4932,10 +4932,10 @@ function resultsCSV(el) {
   csvDownload([["Period", rPeriod().label], [], rcols(), ...list.map(rcsvRow)], `aldermoor-results-${el.dataset.s ? slug(el.dataset.s) : "missions"}.csv`);
 }
 function admAccount() {
-  const team = [["Megan Hale", "Head of supporter experience", "Owner"], ["Rafi Dorsey", "Content and social", "Editor"], ["Sana Iqbal", "Club shop", "Deliveries only"], ["Tom Ferris", "Matchday operations", "Check-ins and results"]];
+  const team = [["Megan Hale", "Head of supporter experience", "Admin"], ["Rafi Dorsey", "Content and social", "Admin"], ["Sana Iqbal", "Club shop", "Moderator"], ["Tom Ferris", "Matchday operations", "Moderator"]];
   return admHead("Account", "Plan, team and security.") + `
     <div class="adm-grid"><div class="acard"><h2>Team</h2><table class="atable"><tbody>${team.map(([n, r, p]) => `<tr><td><span class="who"><i>${initials(n)}</i>${n}</span></td><td class="wrap">${r}</td><td>${p}</td></tr>`).join("")}</tbody></table></div>
-      <div class="acard"><h2>Plan</h2><p class="sub">Season. Every program module and your own domain.</p><dl class="bs-words" style="margin-top:14px"><dt>Security</dt><dd>Two-factor sign-in required for the whole team</dd><dt>Domain</dt><dd>members.aldermoor-athletic.example</dd><dt>Data</dt><dd>Hosted in the EU, exports on request</dd></dl></div></div>`;
+      <div class="acard"><h2>Plan</h2><p class="sub">Season. Every program module and your own domain.</p><dl class="bs-words" style="margin-top:14px"><dt>Security</dt><dd>Two-step sign-in required for every administrator</dd><dt>Domain</dt><dd>members.aldermoor-athletic.example</dd><dt>Data</dt><dd>Hosted in the EU, member export in one click</dd></dl></div></div>`;
 }
 
 /* ---------------------------------------------------------------- Brand: appearance and modules */

@@ -1,8 +1,10 @@
 <!doctype html>
-<html lang="en">
+<html lang="en-GB">
 <head>
 <meta charset="utf-8">
-<meta name="robots" content="noindex, nofollow">
+<meta name="robots" content="index, follow">
+<meta name="description" content="Interactive demo of a football club's supporters club on FAN/IP: missions, rewards and a season of results. Fictional club, fictional data.">
+<link rel="canonical" href="https://fan-ip.com/demo/aldermoor/">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Aldermoor Season Demo</title>
 <style>
@@ -2061,6 +2063,7 @@ button.bd-row:hover .bd-title { color: var(--flood); }
 .bar-a i { display: block; height: 100%; background: var(--fx-ink); border-radius: inherit; }
 .pbody h3 { margin: 18px 0 0; font-size: 0.875rem; font-weight: 600; }
 </style>
+<script src="../../assets/analytics.js" defer></script>
 </head>
 <body>
 <div class="stage" id="stage" data-device="laptop">
@@ -2344,8 +2347,8 @@ const MISSIONS = [
     brief: "No right or wrong answer, just a few lines. The club picks its favourites for the Matchday 10 programme and the big screen, and each one featured earns 100 bonus points." },
   { id: "preview", type: "Video", group: "community", title: "Watch the gaffer's Granby preview", pts: 40, tone: "moor", art: "play", meta: "4 min",
     brief: "The manager on Granby's pressing game and who is back from injury." },
-  { id: "mate", type: "Referral", group: "community", title: "Bring a mate to their first match", pts: 250, tone: "buff", art: "mates", meta: "When they check in",
-    brief: "Share your code. When your mate joins and checks in at The Weir for the first time, you both get the points." },
+  { id: "mate", type: "Referral", group: "community", title: "Bring a mate to their first match", pts: 250, tone: "buff", art: "mates", meta: "After their first mission",
+    brief: "Share your code. When your mate joins and their first mission is approved, you both get the points." },
 ];
 const PAST = [
   { id: "md8", type: "Check-in", title: "Matchday 8 check-in", pts: 100, tone: "moor", art: "stadium", meta: "Sat 20 Sep" },
@@ -2581,7 +2584,7 @@ const BADGES = [
   { id: "ever25", name: "Ever-present 2025/26", glyph: "19/19", bg: "#17263a", fg: "#ffd24d", how: "Checked in at all 19 home matches last season.", got: 1 },
   { id: "away", name: "Away days", glyph: "12", big: 1, bg: "#c9421b", fg: "#ffffff", how: "Twelve away trips on the supporters' coach.", got: 1 },
   { id: "quiz", name: "Quiz master", glyph: "?", big: 1, bg: "#f0e2c4", fg: "#17263a", how: "Twenty quizzes right first time.", got: 1 },
-  { id: "founder", name: "Founding member", glyph: "crest", bg: "#7d9ab6", fg: "#17263a", how: "Joined in the program's first month.", got: 1 },
+  { id: "dayone", name: "Day one", glyph: "crest", bg: "#7d9ab6", fg: "#17263a", how: "Joined in the first week.", got: 1 },
   { id: "called", name: "Called it", glyph: "2–1", bg: "#213550", fg: "#f0e2c4", how: "Predicted an exact score.", got: 1 },
   { id: "derby", name: "Derby day", glyph: "GR", bg: "#2f6b45", fg: "#f4f4f0", how: "Check in at The Weir when Granby Rovers visit.", prog: () => [state.checkedIn ? 1 : 0, 1] },
   { id: "foil", name: "Foil hunter", glyph: "3", big: 1, bg: "#ffd24d", fg: "#17263a", how: "Find three foil cards in your packs.", prog: () => [["men-9", "women-4", "club-C1"].filter((id) => state.owned.has(id)).length, 3] },
@@ -2590,7 +2593,7 @@ const BADGES = [
   { id: "page", name: "Women's squad page", glyph: "W", big: 1, bg: "#7d9ab6", fg: "#ffffff", how: "Fill the Women's squad page of the album.", prog: () => [ALBUM.women.filter((x) => state.owned.has(x.id)).length, 12] },
   { id: "album", name: "Full album", glyph: "36", big: 1, bg: "#f0e2c4", fg: "#c9421b", how: "Complete the 2026/27 album.", prog: () => [state.owned.size, 36] },
   { id: "xi", name: "First XI", glyph: "XI", big: 1, bg: "#213550", fg: "#ffffff", how: "Eleven missions in one week.", prog: () => [Math.min(11, 4 + state.done.size), 11] },
-  { id: "mate", name: "Bring a mate", glyph: "+1", big: 1, bg: "#c9421b", fg: "#f0e2c4", how: "Three mates check in for the first time with your code.", prog: () => [1, 3] },
+  { id: "mate", name: "Bring a mate", glyph: "+1", big: 1, bg: "#c9421b", fg: "#f0e2c4", how: "Three mates join with your code and get their first mission approved.", prog: () => [1, 3] },
   { id: "scarves", name: "Scarves up", glyph: "5", big: 1, bg: "#7d9ab6", fg: "#17263a", how: "Five photos approved by the club.", prog: () => [2 + (state.done.has("scarf") ? 1 : 0), 5] },
   { id: "voice", name: "Terrace voice", glyph: "50", big: 1, bg: "#f0e2c4", fg: "#213550", how: "Fifty messages in The Terrace.", prog: () => [Math.min(50, 31 + state.chat.length), 50] },
   { id: "top50", name: "Top 50", glyph: "50", big: 1, bg: "#ffd24d", fg: "#c9421b", how: `Finish the season in the top 50. The cut is ${fmt(TOP50_CUT)} points today.`, prog: () => [Math.min(SP(), TOP50_CUT), TOP50_CUT] },
@@ -2758,7 +2761,7 @@ function matchday() {
     <div class="md-head"><span class="md-label" id="md-t">Matchday 9, League One</span><span class="md-where">${KO_LABEL}, 15:00, The Weir</span></div>
     <div class="md-teams">
       <div class="md-team">${crest()}<b>Aldermoor</b><span class="md-form" aria-label="Last five: won, won, drew, lost, won">${["W", "W", "D", "L", "W"].map((r) => `<span class="${r}">${r}</span>`).join("")}</span></div>
-      <div class="md-clock" aria-label="Time to kick-off" id="mdClock">${state.matchday ? `<div><b>15:00</b><span>today</span></div>` : `<div><b class="num">${d}</b><span>days</span></div><div><b class="num">${String(h).padStart(2, "0")}</b><span>hrs</span></div><div><b class="num">${String(m).padStart(2, "0")}</b><span>mins</span></div>`}</div>
+      <div class="md-clock" aria-label="Time to kick-off" id="mdClock">${state.matchday ? `<div><b>15:00</b><span>today</span></div>` : `<div><b class="num">${d}</b><span>${d === 1 ? "day" : "days"}</span></div><div><b class="num">${String(h).padStart(2, "0")}</b><span>${h === 1 ? "hr" : "hrs"}</span></div><div><b class="num">${String(m).padStart(2, "0")}</b><span>${m === 1 ? "min" : "mins"}</span></div>`}</div>
       <div class="md-team">${rivalCrest()}<b>Granby Rovers</b><span class="md-form" aria-label="Last five: drew, lost, won, won, drew">${["D", "L", "W", "W", "D"].map((r) => `<span class="${r}">${r}</span>`).join("")}</span></div>
     </div>
     <div class="md-actions">
@@ -3129,9 +3132,9 @@ function screenProfile() {
   return `<div class="view-inner">
     <header><h1 class="h-page">My club</h1><p class="lede">${ME.name}, member ${ME.member}. ${tierOf(SP()).name}, North Stand.</p></header>
     <div class="home-top"><div class="mcard-wrap">${memberCard()}${tierBlock()}</div>
-      <div class="sec"><div class="panel"><span class="panel-kicker">Bring a mate</span><h3 class="panel-title">250 ${word()} each when they check in for the first time</h3>
+      <div class="sec"><div class="panel"><span class="panel-kicker">Bring a mate</span><h3 class="panel-title">250 ${word()} each when their first mission is approved</h3>
         <div class="ref-code"><code>AAFC-JESS-17</code><button class="btn btn-ghost btn-sm" data-act="copy" data-t="AAFC-JESS-17">${icon("copy")}Copy code</button></div>
-        <p class="note" style="margin-top:10px">2 mates joined with your code. 1 still has to check in.</p>
+        <p class="note" style="margin-top:10px">2 mates joined with your code. 1 is still waiting for their first mission to be approved.</p>
         <div class="groups"><div class="group-row"><span class="stack">${["KM", "DW", "ON", "EG"].map((x, i) => `<span class="avatar" style="background:${["#5f768b", "#213550", "#a33213", "#5d7a62"][i]}">${x}</span>`).join("")}</span><span><b>The Riverside lot</b><span>Private group, you are 2nd</span></span><span class="gpos">2</span></div></div>
       </div>
       <div class="panel"><span class="panel-kicker">Birthday, 14 March</span><p class="panel-body" style="margin-top:6px">The club sends you a surprise that week, and your name goes up on the big screen if there's a home game.</p></div></div>
@@ -3418,7 +3421,7 @@ function homeDirect() {
         ${me("2–0 v Tarrow Vale, called it.")}${receipt("Exact score, ×3", 150)}
         <div class="dr-day"><span>Today</span></div>
         ${club(`<p><b>${hello()}</b> You're on <span class="num" data-balance>${fmt(state.balance)}</span> ${word()}, ${myRank()}th in the table. ${toNext()}.</p>`)}
-        ${club(`<p>Granby Rovers come to The Weir on ${KO_LABEL}, 15:00. That's in ${d} days and ${h} hours. This week's missions:</p>`, `<div class="dm-cards">${open.map((m) => `<button class="dm-card" data-act="mission" data-id="${m.id}"><span class="dm-art" data-tone="${m.tone}">${missionArt(m.art)}</span><span class="dm-t"><b>${esc(m.title)}</b><span>${esc(m.type)}, +${m.pts} ${word()}</span></span><span class="dm-go">Reply</span></button>`).join("")}</div>`)}
+        ${club(`<p>Granby Rovers come to The Weir on ${KO_LABEL}, 15:00. That's in ${d ? `${d} day${d === 1 ? "" : "s"} and ` : ""}${h} hour${h === 1 ? "" : "s"}. This week's missions:</p>`, `<div class="dm-cards">${open.map((m) => `<button class="dm-card" data-act="mission" data-id="${m.id}"><span class="dm-art" data-tone="${m.tone}">${missionArt(m.art)}</span><span class="dm-t"><b>${esc(m.title)}</b><span>${esc(m.type)}, +${m.pts} ${word()}</span></span><span class="dm-go">Reply</span></button>`).join("")}</div>`)}
         ${club(`<p>Share yours and tag <b>@weirbankmotors</b>: the ten most-viewed go on the big screen.</p>`)}
         <div class="dr-typing" aria-label="Aldermoor Athletic is typing"><i></i><i></i><i></i></div>
         <div class="dr-quick" role="group" aria-label="Quick replies"><button data-act="mission" data-id="post">Post my photo</button><button data-act="mission" data-id="predict">Predict the score</button><button data-act="tab" data-tab="rewards">Show my rewards</button><button data-act="tab" data-tab="table">Where am I?</button></div>
@@ -3635,7 +3638,7 @@ function missionSheet(id) {
   else if (id === "scarf") body = done ? `<div class="demo-hint">${icon("clock")}Sent to the club. Your points land once it's checked, usually within a day.</div>` : `<ol class="steps"><li>Hold your scarf up, inside the ground or anywhere with a bit of Aldermoor in shot.</li><li>Choose the photo. The club checks it within a day.</li></ol><label class="btn btn-primary btn-block" for="scarfFile">${icon("plus")}Choose a photo</label><input id="scarfFile" type="file" accept="image/*" data-act="photo" hidden>`;
   else if (id === "potm") body = done ? doneBody(m) : `<div class="quiz">${["Ellis Varga", "Clara Voss", "Noé Castell", "Maya Achebe"].map((n) => `<button data-act="potm" data-n="${n}" style="font-size:1rem">${n}</button>`).join("")}</div>`;
   else if (id === "preview") body = done ? doneBody(m) : `<div class="matchday" style="aspect-ratio:16/9;justify-content:center;align-items:center"><button class="btn btn-flood" data-act="watch">Play the preview</button><div class="bar" style="width:70%;background:rgba(255,255,255,.15)" id="watchBar"><span data-fill="0" style="background:var(--flood)"></span></div></div>`;
-  else if (id === "mate") body = `<div class="ref-code" style="justify-content:center"><code>AAFC-JESS-17</code><button class="btn btn-ghost btn-sm" data-act="copy" data-t="AAFC-JESS-17">${icon("copy")}Copy code</button></div><p class="note" style="text-align:center">Points arrive when your mate checks in at their first home match.</p>`;
+  else if (id === "mate") body = `<div class="ref-code" style="justify-content:center"><code>AAFC-JESS-17</code><button class="btn btn-ghost btn-sm" data-act="copy" data-t="AAFC-JESS-17">${icon("copy")}Copy code</button></div><p class="note" style="text-align:center">Points arrive when your mate's first mission is approved.</p>`;
   openSheet(`${id === "predict" || id === "checkin" ? "" : `<div class="sheet-card">${missionCard(m, 0, { still: true })}</div>`}<h2>${esc(m.title)}</h2>${m.sponsor ? `<p class="presented">With ${esc(m.sponsor)}</p>` : ""}<p class="note">${esc(m.brief)}</p>${body}`);
 }
 function outcomeHtml(kind, pts) {
@@ -4143,7 +4146,7 @@ function setDevice(d) {
 setInterval(() => {
   const c = $("#mdClock"); if (!c || state.matchday) return;
   const [d, h, m] = clockParts();
-  const b = c.querySelectorAll("b"); if (b.length === 3) { b[0].textContent = d; b[1].textContent = String(h).padStart(2, "0"); b[2].textContent = String(m).padStart(2, "0"); }
+  const b = c.querySelectorAll("b"); if (b.length === 3) { b[0].textContent = d; b[1].textContent = String(h).padStart(2, "0"); b[2].textContent = String(m).padStart(2, "0"); c.querySelectorAll("span").forEach((l, i) => { const n = [d, h, m][i]; if (i < 3) l.textContent = l.textContent.replace(/s$/, "") + (n === 1 ? "" : "s"); }); }
 }, 20000);
 
 /* Club admin: the neutral FAN/IP interface, with the club's crest only. */
@@ -4517,7 +4520,7 @@ function draftReward(d) {
 function rewardForm(d) {
   const deliv = d.kind === "digital" ? [["download", "A file to download"], ["code", "A code"], ["unlock", "A film or a link"]] : d.kind === "physical" ? [["post", "Posted"], ["pickup", "Collect at the club shop"]] : [["ticket", "The club books a date"]];
   let what = "";
-  if (d.delivery === "download") what = `<label class="drop">${icon("upload")}<span><b>${d.file ? esc(d.file.name) : "Upload the file members get"}</b>${d.file ? "Members download it the moment they redeem" : "PDF, image, audio, any file up to 50 MB"}</span><input type="file" name="rfile" hidden></label>`;
+  if (d.delivery === "download") what = `<label class="drop">${icon("upload")}<span><b>${d.file ? esc(d.file.name) : "Upload the file members get"}</b>${d.file ? "Members download it the moment they redeem" : "PDF, image, audio or video, up to 10 MB"}</span><input type="file" name="rfile" hidden></label>`;
   else if (d.delivery === "code") what = fld("Code", inp("code", d.code), "Or upload a list of single-use codes as a CSV.");
   else if (d.delivery === "unlock") what = fld("Link to the film or page", inp("link", d.link, 'placeholder="https://"'));
   else what = fld("Stock", inp("stock", d.stock, 'type="number" min="0" placeholder="Unlimited"'), d.delivery === "post" ? "Members give their address when they redeem." : "");
@@ -4734,7 +4737,7 @@ const SPONSOR_LOOK = { "Weirbank Motors": ["WM", "#17263a", "#ffd24d"], "Corran 
 /* Missions with their totals. ago = days since it started. net = share of views per network. */
 const RM = [
   { id: "post", title: "Post your matchday photo, tag @aldermoor and @weirbankmotors", type: "Social post", sponsor: "Weirbank Motors", ago: 1, done: 1860, seen: 12210, posts: 1860, views: 1.71e6, nm: 118, er: 1.15, net: [0.55, 0.38, 0.04, 0.03] },
-  { id: "story", title: "Share a story from the stands", type: "Story", ago: 1, done: 1310, seen: 11480, posts: 1310, views: 0.62e6, nm: 41, net: [0.72, 0.24, 0, 0.04] },
+  { id: "story", title: "Share a story from the stands", type: "Story", ago: 1, done: 1310, seen: 11480, posts: 1310, views: 1.31e6, nm: 41, net: [0.72, 0.24, 0, 0.04] },
   { id: "scarf", title: "Scarves up: show us yours", type: "Photo", sponsor: "Weirbank Motors", ago: 3, done: 1420, seen: 12940, posts: 1180, views: 2.94e6, nm: 214, er: 1.1, net: [0.62, 0.27, 0.04, 0.07] },
   { id: "first", title: "Your first match at The Weir", type: "Open question", ago: 2, done: 1278, seen: 9310, posts: 0, views: 0, nm: 0, extra: () => [["Answers featured", String(ANSWER_BASE.first.featured + ANSWERS.filter((a) => a.mid === "first" && a.status === "featured").length)], ["Average answer", "38 words"]] },
   { id: "predict", title: "Predict the score v Granby Rovers", type: "Prediction", ago: 4, done: 6140, seen: 15020, posts: 820, views: 1.12e6, nm: 61, net: [0.48, 0.38, 0.06, 0.08] },
@@ -4748,6 +4751,10 @@ const RM = [
 ];
 const POSTERS = ["@weirend_mags", "@kestrel_kev", "@aldermoor_abi", "@scarfsup_sian", "@ola.collects", "@northstand_priya", "@tomhalloran", "@riverside_km", "@olderthanthecrest", "@holbrook_away"];
 const NET_NAMES = NETS.map((n) => n[0]);
+/* Potential reach: followers of the accounts that posted. 3,870 members posted this season, 2,400 followers on average.
+   A mission's share follows its posts, so missions and sponsors add up to the season figure. */
+const POSTERS_SEASON = 3870, FOLLOWERS_AVG = 2400;
+const SEASON_POSTS = NETS.reduce((a, n) => a + n[1], 0);
 const rmDate = (r) => new Date(NOW.getTime() - r.ago * 864e5);
 
 function rPeriod() {
@@ -4768,7 +4775,7 @@ function rmStats(r) {
   const er = r.er || 1, v = r.views || 0;
   const done = r.done + (state.done.has(r.id) ? 1 : 0);
   const likes = v * 0.077 * er, comments = v * 0.0039 * er, shares = v * 0.0055 * er;
-  return { ...r, done, likes, comments, shares, eng: likes + comments + shares, value: mediaValue(v), reach: v * 0.58, rate: done / r.seen, logo: r.seen * 3.1 };
+  return { ...r, done, likes, comments, shares, eng: likes + comments + shares, value: mediaValue(v), reach: ((r.posts || 0) * POSTERS_SEASON * FOLLOWERS_AVG) / SEASON_POSTS, rate: done / r.seen };
 }
 function rTotals(f) {
   const nets = NETS.map(([name, posts, views, lr, cr, sr]) => { const v = views * f; return { name, posts: posts * f, views: v, likes: v * lr, comments: v * cr, shares: v * sr, value: mediaValue(v) }; });
@@ -4785,7 +4792,7 @@ function periodBar() {
 }
 function sponsorsIn(list) {
   const out = {};
-  list.filter((r) => r.sponsor).forEach((r) => { const s = out[r.sponsor] || (out[r.sponsor] = { name: r.sponsor, n: 0, done: 0, views: 0, eng: 0, value: 0, logo: 0, nm: 0 }); s.n++; ["done", "views", "eng", "value", "logo", "nm"].forEach((k) => (s[k] += r[k])); });
+  list.filter((r) => r.sponsor).forEach((r) => { const s = out[r.sponsor] || (out[r.sponsor] = { name: r.sponsor, n: 0, done: 0, views: 0, eng: 0, value: 0, reach: 0, nm: 0 }); s.n++; ["done", "views", "eng", "value", "reach", "nm"].forEach((k) => (s[k] += r[k])); });
   return Object.values(out);
 }
 const sponsorMono = (s) => { const [m, bg, fg] = SPONSOR_LOOK[s] || ["", "#eee", "#333"]; return `<span class="sp-mono" style="background:${bg};color:${fg}">${m}</span>`; };
@@ -4806,18 +4813,18 @@ function resultsOverview() {
   const w0 = Math.max(0, Math.min(12, Math.floor((P.from - SEASON_START) / (7 * 864e5))));
   return `<div class="kpis">
       ${kpi("Earned media value", eur(T.value), `Views on members' posts at a ${cpmLabel()} CPM`)}
-      ${kpi("Views on members' posts", big(T.views), `${big(T.views * 0.58)} by people who aren't members`)}
+      ${kpi("Views on members' posts", big(T.views), `From ${fmt(T.posts)} posts by ${fmt(POSTERS_SEASON * P.f)} members`)}
       ${kpi("Likes, comments and shares", big(eng), `${pct(eng, T.views)} of views`)}
       ${kpi("New members from members' posts", fmt(2310 * P.f), "Joined through a post or a member's code")}
     </div>
     <details class="more" ${state.rmore ? "open" : ""}><summary data-act="rmore">${state.rmore ? "Hide the detail" : "Show every number for this period"}</summary>
-      <div class="mkpis">${mini("Posts", fmt(T.posts))}${mini("Members who posted", fmt(3870 * P.f))}${mini("Average views a post", fmt(T.views / T.posts))}${mini("Likes", big(T.likes))}${mini("Comments", big(T.comments))}${mini("Shares", big(T.shares))}${mini("Missions completed", big(372400 * P.f))}${mini("Home check-ins", fmt(9412 * P.f))}${mini("Rewards redeemed", fmt(4419 * P.f))}${mini("Active members", fmt(P.f < 0.2 ? 9300 : P.f < 0.5 ? 9500 : 9700), "used the app at least once")}</div>
+      <div class="mkpis">${mini("Posts", fmt(T.posts))}${mini("Members who posted", fmt(POSTERS_SEASON * P.f))}${mini("Potential reach", big(POSTERS_SEASON * P.f * FOLLOWERS_AVG), "followers of the accounts that posted")}${mini("Average views a post", fmt(T.views / T.posts))}${mini("Likes", big(T.likes))}${mini("Comments", big(T.comments))}${mini("Shares", big(T.shares))}${mini("Missions completed", big(372400 * P.f))}${mini("Home check-ins", fmt(9412 * P.f))}${mini("Rewards redeemed", fmt(4419 * P.f))}${mini("Active members", fmt(P.f < 0.2 ? 9300 : P.f < 0.5 ? 9500 : 9700), "used the app at least once")}</div>
     </details>
     ${cpmBox()}
     <div class="adm-grid">
       <div class="acard"><h2>Weekly active members</h2><p class="sub">${P.f < 1 ? "The shaded weeks are the period you picked" : "Dots mark home matchdays"}</p><div class="chart">${chartSVG(P.f < 1 ? [w0, 12] : null)}</div></div>
       <div class="acard"><h2>Sponsors</h2><p class="sub">Their missions in this period. Open one for its report and a private link to send them.</p>
-        ${sps.length ? `<div class="sp-list">${sps.map((s) => `<button class="sp-row" data-act="rsponsor" data-s="${esc(s.name)}">${sponsorMono(s.name)}<span><b>${esc(s.name)}</b><span class="sub">${s.n} mission${s.n > 1 ? "s" : ""}, ${fmt(s.done)} members took part, ${s.value ? eur(s.value) + " media value" : big(s.logo) + " logo views in the app"}</span></span><span class="go">Report</span></button>`).join("")}</div>` : `<p class="sub" style="margin-top:10px">No sponsored mission in this period.</p>`}</div>
+        ${sps.length ? `<div class="sp-list">${sps.map((s) => `<button class="sp-row" data-act="rsponsor" data-s="${esc(s.name)}">${sponsorMono(s.name)}<span><b>${esc(s.name)}</b><span class="sub">${s.n} mission${s.n > 1 ? "s" : ""}, ${fmt(s.done)} members took part${s.value ? ", " + eur(s.value) + " media value" : ""}</span></span><span class="go">Report</span></button>`).join("")}</div>` : `<p class="sub" style="margin-top:10px">No sponsored mission in this period.</p>`}</div>
     </div>
     <div class="acard"><h2>Where members talk about the club</h2><p class="sub">${P.label}, checked through members' linked accounts</p>
       <div class="scroll-x"><table class="atable tight"><thead><tr><th>Network</th><th class="r">Posts</th><th class="r">Views</th><th class="r">Likes</th><th class="r">Comments</th><th class="r">Shares</th><th class="r">Engagement</th><th class="r">Media value</th></tr></thead>
@@ -4837,7 +4844,7 @@ function sponsorCard(sp, list) {
       ${tile(sp.value ? eur(sp.value) : "–", "Media value", sp.value ? `Views of members' posts at a ${cpmLabel()} CPM` : "No public post asked for", "hero")}
       ${tile(sp.views ? big(sp.views) : "–", "Views of members' posts", sp.views ? `${big(sp.eng)} likes, comments and shares` : "")}
       ${tile(fmt(sp.done), "Members who took part")}
-      ${tile(fmt(sp.logo), `Times the ${esc(sp.name)} name was seen in the app`)}
+      ${tile(sp.reach ? big(sp.reach) : "–", "Potential reach", sp.reach ? "Followers of the accounts that posted" : "")}
       ${tile(fmt(sp.nm), "New members who joined through it")}
     </div>
     ${sp.value ? `<div class="sp-bars" role="img" aria-label="Media value by mission"><h3>Media value by mission</h3>${rows.map((r) => `<div class="sp-bar"><span class="t">${esc(r.title)}</span><span class="track"><i style="width:${Math.max(2, (r.value / maxV) * 100).toFixed(1)}%"></i></span><b>${r.value ? eur(r.value) : "–"}</b></div>`).join("")}</div>` : ""}
@@ -4896,16 +4903,16 @@ function missionDetail(id) {
   const split = r.net || [0.55, 0.32, 0.06, 0.07];
   const nets = NET_NAMES.map((n, i) => { const v = r.views * split[i]; return { n, posts: r.posts * split[i], v, likes: r.likes * split[i], comments: r.comments * split[i], shares: r.shares * split[i] }; });
   const posts = postsFor([r]).sort((a, b) => b.views - a.views);
-  const body = `${r.sponsor ? `<div class="sp-inline">${sponsorMono(r.sponsor)}<span>With <b>${esc(r.sponsor)}</b>. Their name was seen ${fmt(r.logo)} times in the app.</span></div>` : ""}
-    <div class="mkpis">${mini("Members who took part", fmt(r.done), `${pct(r.done, r.seen)} of the ${fmt(r.seen)} who saw it`)}${r.views ? mini("Posts", fmt(r.posts)) + mini("Views", big(r.views)) + mini("Likes", big(r.likes)) + mini("Comments", fmt(r.comments)) + mini("Shares", fmt(r.shares)) + mini("Media value", eur(r.value), `at a ${cpmLabel()} CPM`) + mini("Reach outside members", big(r.reach)) : ""}${r.nm ? mini("New members", fmt(r.nm)) : ""}${(typeof r.extra === "function" ? r.extra() : r.extra || []).map(([l, v]) => mini(l, v)).join("")}</div>
+  const body = `${r.sponsor ? `<div class="sp-inline">${sponsorMono(r.sponsor)}<span>Sponsored by <b>${esc(r.sponsor)}</b>.</span></div>` : ""}
+    <div class="mkpis">${mini("Members who took part", fmt(r.done), `${pct(r.done, r.seen)} of the ${fmt(r.seen)} who saw it`)}${r.views ? mini("Posts", fmt(r.posts)) + mini("Views", big(r.views)) + mini("Likes", big(r.likes)) + mini("Comments", fmt(r.comments)) + mini("Shares", fmt(r.shares)) + mini("Media value", eur(r.value), `at a ${cpmLabel()} CPM`) + mini("Potential reach", big(r.reach), "followers of the accounts that posted") : ""}${r.nm ? mini("New members", fmt(r.nm)) : ""}${(typeof r.extra === "function" ? r.extra() : r.extra || []).map(([l, v]) => mini(l, v)).join("")}</div>
     ${r.views ? `<h3>Posts each day</h3><div class="chart">${dayBars(r)}</div>
     <h3>By network</h3><div class="scroll-x"><table class="atable tight"><thead><tr><th>Network</th><th class="r">Posts</th><th class="r">Views</th><th class="r">Likes</th><th class="r">Comments</th><th class="r">Shares</th></tr></thead>
       <tbody>${nets.map((x) => `<tr><td>${x.n}</td><td class="r">${fmt(x.posts)}</td><td class="r">${big(x.v)}</td><td class="r">${big(x.likes)}</td><td class="r">${fmt(x.comments)}</td><td class="r">${fmt(x.shares)}</td></tr>`).join("")}</tbody></table></div>
     <h3>Best posts</h3><div class="scroll-x"><table class="atable tight"><thead><tr><th>Member</th><th>Network</th><th class="r">Views</th><th class="r">Likes</th><th class="r">Comments</th><th class="r">Shares</th></tr></thead>
       <tbody>${posts.map((p) => `<tr><td>${p.who}</td><td>${p.net}</td><td class="r">${big(p.views)}</td><td class="r">${big(p.likes)}</td><td class="r">${fmt(p.comments)}</td><td class="r">${fmt(p.shares)}</td></tr>`).join("")}</tbody></table></div>`
-      : `<p class="sub" style="margin-top:14px">This type of mission doesn't ask for a public post, so what counts is who took part and how often members saw it.</p>`}
+      : `<p class="sub" style="margin-top:14px">This type of mission doesn't ask for a public post, so what counts is who took part and what it brought back.</p>`}
     <h3>Who took part</h3><div class="splits">${tiers.map(([t, p]) => `<div><span>${t}</span><span class="bar-a"><i style="width:${p}%"></i></span><b>${p}%</b></div>`).join("")}</div>
-    <p class="sub" style="margin-top:8px">${18 + (r.ago % 9)}% joined this season. Members aged 18 to 34 did ${52 + (r.ago % 7)}% of it.</p>`;
+    <p class="sub" style="margin-top:8px">${18 + (r.ago % 9)}% joined this season.</p>`;
   openDrawer({ title: esc(r.title), sub: `${r.type}, started ${dayLabel(isoDay(rmDate(r)))}`, body,
     footer: `<button class="adm-btn" data-act="dclose">Close</button>${r.sponsor ? `<button class="adm-btn primary" data-act="splink" data-s="${esc(r.sponsor)}">${icon("copy")}Copy the sponsor's private link</button>` : ""}<button class="adm-btn${r.sponsor ? "" : " primary"}" data-act="rcsv" data-id="${r.id}">${icon("download")}${r.sponsor ? "Report for " + esc(r.sponsor) : "This mission"}, CSV</button>` });
 }
@@ -4925,10 +4932,10 @@ function resultsCSV(el) {
   csvDownload([["Period", rPeriod().label], [], rcols(), ...list.map(rcsvRow)], `aldermoor-results-${el.dataset.s ? slug(el.dataset.s) : "missions"}.csv`);
 }
 function admAccount() {
-  const team = [["Megan Hale", "Head of supporter experience", "Owner"], ["Rafi Dorsey", "Content and social", "Editor"], ["Sana Iqbal", "Club shop", "Deliveries only"], ["Tom Ferris", "Matchday operations", "Check-ins and results"]];
+  const team = [["Megan Hale", "Head of supporter experience", "Admin"], ["Rafi Dorsey", "Content and social", "Admin"], ["Sana Iqbal", "Club shop", "Moderator"], ["Tom Ferris", "Matchday operations", "Moderator"]];
   return admHead("Account", "Plan, team and security.") + `
     <div class="adm-grid"><div class="acard"><h2>Team</h2><table class="atable"><tbody>${team.map(([n, r, p]) => `<tr><td><span class="who"><i>${initials(n)}</i>${n}</span></td><td class="wrap">${r}</td><td>${p}</td></tr>`).join("")}</tbody></table></div>
-      <div class="acard"><h2>Plan</h2><p class="sub">Season. Every program module and your own domain.</p><dl class="bs-words" style="margin-top:14px"><dt>Security</dt><dd>Two-factor sign-in required for the whole team</dd><dt>Domain</dt><dd>members.aldermoor-athletic.example</dd><dt>Data</dt><dd>Hosted in the EU, exports on request</dd></dl></div></div>`;
+      <div class="acard"><h2>Plan</h2><p class="sub">Season. Every program module and your own domain.</p><dl class="bs-words" style="margin-top:14px"><dt>Security</dt><dd>Two-step sign-in required for every administrator</dd><dt>Domain</dt><dd>members.aldermoor-athletic.example</dd><dt>Data</dt><dd>Hosted in the EU, member export in one click</dd></dl></div></div>`;
 }
 
 /* ---------------------------------------------------------------- Brand: appearance and modules */

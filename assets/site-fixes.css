@@ -28,7 +28,7 @@
 .lv-k{color:var(--ink-muted);text-transform:uppercase;letter-spacing:.08em}
 .lv-line{font-family:var(--font-display);font-weight:500;font-size:clamp(1.25rem,1.8vw,1.625rem);line-height:1.1;letter-spacing:-.01em}
 .lv-go{color:var(--ink);margin-block-start:auto}
-.lv-go span{color:var(--burnished)}
+.lv-go span{color:var(--ink-muted)}
 .lv-tag{display:none;align-self:flex-start;padding:.35em .7em;border-radius:999px;background:var(--gold);color:var(--ink);font:600 .75rem/1 var(--font-body)}
 .lv-caption{margin-block-start:var(--s5);color:var(--ink-muted)}
 .lv .wl-close{margin-block-start:var(--s7)}
@@ -181,7 +181,7 @@ h1.hero-promise{text-wrap:balance}
 .dw-cols{grid-column:1 / -1;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--gap);align-items:start;margin-block-start:var(--s4)}
 .dw-col{display:flex;flex-direction:column;gap:var(--s3);min-inline-size:0;padding-block-start:var(--s4);border-block-start:2px solid var(--ink)}
 .dw-h{display:flex;align-items:baseline;gap:var(--s3);font-family:var(--font-display);font-weight:500;font-size:clamp(1.25rem,1.6vw,1.5rem);line-height:1.15;letter-spacing:-.01em}
-.dw-n{flex:none;font:600 .8125rem/1 var(--font-body);letter-spacing:.04em;color:var(--burnished)}
+.dw-n{flex:none;font:600 .8125rem/1 var(--font-body);letter-spacing:.04em;color:#8a6510}
 .dw-p{max-inline-size:42ch;color:var(--muted)}
 /* The missions: a dark card, like the member's own mission list. */
 .dw-col--list{padding:var(--s5);border:0;border-radius:var(--r-btn);background:var(--ink);color:var(--ivory)}
@@ -193,7 +193,7 @@ h1.hero-promise{text-wrap:balance}
 .dw-after{color:var(--ivory-muted)}
 .dw-foot{grid-column:1 / -1;margin:0;color:var(--muted)}
 .dw-foot a{color:var(--fg);font-weight:600;text-underline-offset:.2em}
-.dw-foot span{color:var(--burnished)}
+.dw-foot span{color:var(--ink-muted)}
 
 .dq{padding-block:var(--s9);background:var(--bg);color:var(--fg)}
 .dq-grid{display:grid;grid-template-columns:repeat(var(--cols),minmax(0,1fr));column-gap:var(--gap);row-gap:var(--s6)}
@@ -221,6 +221,33 @@ h1.hero-promise{text-wrap:balance}
 /* Home: "Built for anyone with fans" now sits after Pricing, right before the trial; a hairline keeps the two light sections apart */
 #for{padding-block-end:clamp(3rem,6vw,4.5rem)}
 #for + #try{border-block-start:1px solid rgba(18,17,14,.14)}
+
+/* Platform, "What members see": the mission title sits on the dark card, so it
+   takes the card's light text colour (it inherited the page's ink before). */
+.pv-card .pv-title{color:var(--ivory)}
+
+/* Pricing in one line above the cards (home and Pricing), so a phone reader
+   sees all four prices before scrolling through the cards. */
+
+/* Platform, "Your name on the door": link to the member layouts gallery. */
+.fx-more{margin:0}
+.fx-more a{color:inherit;text-decoration:underline;text-decoration-color:var(--gold);text-underline-offset:4px;font-weight:600}
+
+/* World pages: which plan the page's features come with, under the hero
+   buttons, so a Starter trial does not look for sponsor quests in vain. */
+.hero-plan{margin-block-start:var(--s4);max-inline-size:52ch;color:var(--ivory-muted)}
+
+/* Pricing questions: five short answers under the plans, folded. */
+.plan-faq{margin-block-start:var(--s6);display:grid;gap:var(--s2)}
+.plan-faq .plan-pick__title{margin-block-end:var(--s3)}
+.plan-faq__item{border-block-start:1px solid var(--rule-dark);padding-block:var(--s3)}
+.plan-faq__item summary{cursor:pointer;font-weight:600;list-style-position:outside;min-block-size:44px;display:flex;align-items:center}
+.plan-faq__item p{margin:var(--s2) 0 0;color:var(--ivory-muted);max-inline-size:62ch}
+.plan-faq__item summary::-webkit-details-marker{display:none}
+.plan-faq__item summary::after{content:"+";margin-inline-start:auto;padding-inline-start:var(--s3);color:var(--gold);font-weight:600}
+.plan-faq__item[open] summary::after{content:"−"}
+/* Phone carousels: snap the first card to the padding, not the screen edge. */
+.rs-grid,.lv-grid{scroll-padding-inline:20px}
 
 /* "Why": the hover hints next to each verb need room; in a narrow window with a mouse they pushed the column off screen. */
 @media (hover: hover) and (pointer: fine) and (max-width: 767px){ .why-verbs .why-hint{display:none} }

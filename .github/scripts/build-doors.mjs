@@ -90,17 +90,28 @@ ${items}
 `;
 }
 
+const CRUMB = { "brands.html": "Brands", "sport.html": "Sport and esports", "artists.html": "Artists and creators" };
+
 function jsonLd(html, page, url) {
   return swap(html, /<script type="application\/ld\+json">\n([\s\S]*?)\n  <\/script>/, (_, body) => {
     const data = JSON.parse(body);
     const web = data["@graph"].find((n) => n["@type"] === "WebPage");
     if (!web) throw new Error("not found: WebPage in JSON-LD");
-    Object.assign(web, { "@id": `${url}#webpage`, url, name: page.title, description: page.description });
+    Object.assign(web, {
+      "@id": `${url}#webpage`, url, name: page.title, description: page.description,
+      breadcrumb: {
+        "@type": "BreadcrumbList",
+        itemListElement: [
+          { "@type": "ListItem", position: 1, name: "FAN/IP", item: "https://fan-ip.com/" },
+          { "@type": "ListItem", position: 2, name: CRUMB[page.file], item: url },
+        ],
+      },
+    });
     data["@graph"].push({
       "@type": "FAQPage",
       "@id": `${url}#faq`,
       url,
-      inLanguage: "en",
+      inLanguage: "en-GB",
       isPartOf: { "@id": "https://fan-ip.com/#website" },
       mainEntity: page.faq.map((f) => ({
         "@type": "Question",
@@ -123,7 +134,7 @@ for (const [key, page] of Object.entries(PAGES)) {
   let h = index;
 
   // Head: title, description, social cards, canonical, JSON-LD with the FAQ.
-  h = swap(h, /<html lang="en">/, `<html lang="en" data-door="${key}">`);
+  h = swap(h, /<html lang="en-GB">/, `<html lang="en-GB" data-door="${key}">`);
   h = swap(h, /<title>[^<]*<\/title>/, `<title>${esc(page.title)}</title>`);
   h = swap(h, /<meta name="description" content="[^"]*">/, `<meta name="description" content="${esc(page.description)}">`);
   h = swap(h, /<meta property="og:title" content="[^"]*">/, `<meta property="og:title" content="${esc(page.ogTitle)}">`);
@@ -143,7 +154,8 @@ for (const [key, page] of Object.entries(PAGES)) {
   h = swap(h, /<div class="hero-actions">[\s\S]*?<\/div>/, `<div class="hero-actions">
           <a class="btn btn--primary" href="https://app.fan-ip.com/start?for=${key}" data-start-link>Start my free trial</a>
           <a class="hero-link" href="book-a-demo.html">Book a demo</a>
-        </div>`);
+        </div>
+        <p class="hero-plan t-small">${esc(page.planNote)}</p>`);
   h = swap(h, /(<div class="door">\s*<p class="sr-only">)[^<]*(<\/p>)/, `$1${esc(page.tickerLabel)}$2`);
   h = swap(h, /<div class="door-ticker__track">[\s\S]*?<\/ul><\/div>/, ticker(page.ticker));
 

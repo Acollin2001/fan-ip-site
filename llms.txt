@@ -10,11 +10,12 @@ People also describe what FAN/IP does as: a fan engagement platform, a fan club 
 
 - [Home](https://fan-ip.com/): getting talked about without an ad budget, how it works in three steps, what fans' posts are worth, who it is for, white-label demo, plans
 - [Pricing](https://fan-ip.com/pricing.html): the four plans, the full comparison table and the pricing rules
-- [Platform](https://fan-ip.com/platform.html): all fifty features in plain words (missions, predictions, check-ins, seasons, sprints, streaks, team battles, collection, rewards, creator tools, white-label, back office), with a playable member season
+- [Platform](https://fan-ip.com/platform.html): all fifty features in plain words (missions, predictions, check-ins, seasons, sprints, streaks, team battles, collection, rewards, creator tools, white-label, back office), with links to the live demos
 - [Approach](https://fan-ip.com/approach.html): the ten principles behind the product
 - [Compare](https://fan-ip.com/compare.html): FAN/IP next to shop loyalty apps, community platforms, fan-token apps, group chats and building it yourself
-- [Reach calculator](https://fan-ip.com/reach-calculator.html): estimate the views members' posts bring each month and their media value (views ÷ 1,000 × CPM, starting from a typical price for the niche: €7 sport, €5 music, €8 brands; the same sum as in the FAN/IP admin)
+- [Reach calculator](https://fan-ip.com/reach-calculator.html): estimate the views members' posts bring each month and their media value (views ÷ 1,000 × CPM, starting from a typical price for the niche: €7 sport, €5 music, €8 brands, €6 otherwise; the same sum as in the FAN/IP admin)
 - [FAQ](https://fan-ip.com/faq.html): plain answers about the platform, who it is for, how it works and what it costs
+- [Glossary](https://fan-ip.com/glossary.html): earned media value, CPM, views per post, potential reach, UGC, white-label fan club app, fan loyalty program, brand advocacy, active member, mission, season, team battle and sponsor quest, each defined in a sentence or two
 - [Book a demo](https://fan-ip.com/book-a-demo.html): 30-minute video call, shown live on demo data
 - [About](https://fan-ip.com/about.html): what FAN/IP is, who it is for, what it costs, where it runs and who is behind it
 
@@ -28,26 +29,35 @@ After "why", the home page asks "Where do your fans gather?" (Sport, Artists and
 
 ## Pricing (euros, excluding VAT)
 
-- Starter: €99 a month or €990 a year, no setup fee, up to 150 active members a month, 7-day free trial, sign up online at https://app.fan-ip.com/start
-- Club: €490 a month, setup €1,250, up to 1,500 active members a month
-- Season: €1,290 a month, setup €2,500, up to 10,000 active members a month
-- Signature: from €2,900 a month, setup from €5,000, more than 10,000 active members a month
+- Starter: €99 a month or €990 a year, no set-up fee, up to 150 active members a month, leaderboard included, 7-day free trial, sign up online at https://app.fan-ip.com/start
+- Club: €490 a month, set-up €1,250, up to 1,500 active members a month
+- Season: €1,290 a month, set-up €2,500, up to 10,000 active members a month
+- Signature: from €2,900 a month, set-up from €5,000, more than 10,000 active members a month
 - Club, Season and Signature are billed monthly on a 12-month term. An active member is someone who did something in the community this month.
 
-## Demos (fictional, clickable)
+## Demos (fictional names and data, clickable, all on the Season plan)
 
-- [Aldermoor](https://fan-ip.com/demo/aldermoor/): a football club, with a sponsor quest and the sponsor's report
-- [Maison Aube](https://fan-ip.com/demo/maison-aube/): a skincare brand
-- [Ilsa Morrow](https://fan-ip.com/demo/ilsa-morrow/): an artist on tour
+- [Aldermoor](https://fan-ip.com/demo/aldermoor/): a football club's supporters club, with a sponsor quest and the sponsor's report; play it as a supporter, then as the club
+- [Maison Aube](https://fan-ip.com/demo/maison-aube/): a skincare brand's fan club, with the member side and the brand's admin
+- [Ilsa Morrow](https://fan-ip.com/demo/ilsa-morrow/): an artist on tour, with the fan side and the artist's admin
+- [Member layouts](https://fan-ip.com/demo/): the layouts a brand can choose for its members' space, shown on three demo brands
 
 ## Short answers
 
 - Is there a platform that rewards customers for posting about a brand? Yes: FAN/IP. Customers do missions such as posting a photo with the product, earn points and unlock rewards the brand chooses; the brand sees each post's reach and its value as ads.
-- How is it different from a loyalty program? Loyalty programs mostly reward purchases; FAN/IP rewards posts, referrals, event check-ins and quizzes, and values the reach of posts (views ÷ 1,000 × the CPM the brand chooses, €2 by default). It can run next to an existing loyalty program.
+- How is it different from a loyalty program? Loyalty programs mostly reward purchases; FAN/IP rewards posts, referrals, event check-ins and quizzes, and values the reach of posts (views ÷ 1,000 × the CPM the brand chooses, starting from the typical price for the niche: €7 sport, €5 music and creators, €8 brands, €6 otherwise). It can run next to an existing loyalty program.
 - How is it different from an influencer platform? It works with the many people who already like the brand, not a few paid creators.
 - Can a sports club show sponsors what fans' posts are worth? Yes, with a sponsor quest and a private report for the sponsor.
 - What does it cost? From €99 a month (Starter, self-serve, 7-day free trial); Club €490, Season €1,290, Signature from €2,900 a month, excluding VAT. Fans never pay.
 - Languages: English, French, German, Spanish. Works in any phone browser and installs on the home screen with notifications.
+
+## How FAN/IP values fans' posts
+
+- Media value of a post = views ÷ 1,000 × CPM. Example: a post seen 900 times at a €6 CPM is worth €5.40.
+- CPM (price of 1,000 ad views) starts from a typical European price for the niche: €7 sport, €5 music and creators, €8 brands, €6 otherwise. Each brand can set its own.
+- Views, not followers: the figure the network reports for each post. Estimates on the site start from 900 views a post on average; inside the product each post's measured views are used.
+- Potential reach (followers of the accounts that posted) is reported next to views and never used to compute value.
+- Left out of the value: shares, comments, saves, new members and sales that follow a post.
 
 ## Optional
 

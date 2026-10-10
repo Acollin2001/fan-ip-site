@@ -227,7 +227,7 @@ export const PAGES = {
     },
     resultTitle: "What you and your sponsor see.",
     resultCaptionHtml:
-      'Screens from the Aldermoor demo: a fictional club, illustrative figures. Media value is what the same views would cost as ads, at €7 per 1,000 views for sport. You set your own. <a href="reach-calculator.html?for=sport" data-calc-link>Work out your numbers</a>',
+      'Screens from the Aldermoor demo: a fictional club, illustrative figures. Media value is what the same views would cost as ads, at €7 per 1,000 views for sport. You set your own. <a href="reach-calculator.html?for=sport" data-calc-link>Work out your numbers</a> · <a href="sample-report.html">See a sample sponsor report</a>',
     demosLead:
       "Your crest, your colours, your words. Supporters see the club, not us. Open the Aldermoor demo and play it as a supporter, then as the club.",
     worldLead: "This page is for clubs, teams and esports. Pick another world to see its own page.",

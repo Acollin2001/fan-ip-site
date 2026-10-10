@@ -10,8 +10,12 @@
   <meta property="og:site_name" content="FAN/IP">
   <meta property="og:url" content="https://fan-ip.com/sport.html">
   <link rel="canonical" href="https://fan-ip.com/sport.html">
+  <link rel="alternate" hreflang="en-GB" href="https://fan-ip.com/sport.html">
+  <link rel="alternate" hreflang="fr-FR" href="https://fan-ip.com/fr/sport.html">
+  <link rel="alternate" hreflang="x-default" href="https://fan-ip.com/sport.html">
   <meta property="og:type" content="website">
   <meta property="og:locale" content="en_US">
+  <meta property="og:locale:alternate" content="fr_FR">
   <meta property="og:image" content="https://fan-ip.com/og-image.png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
@@ -183,6 +187,7 @@
   <link rel="stylesheet" href="./assets/home-refocus.css">
   <link rel="stylesheet" href="./assets/doors.css">
   <link rel="stylesheet" href="./assets/site-fixes.css">
+  <link rel="stylesheet" href="./assets/lang.css">
   <script src="./assets/doors.js" defer></script>
 </head>
 <body>
@@ -196,6 +201,10 @@
         <a href="platform.html">Platform</a>
         <a href="pricing.html">Pricing</a>
       </nav>
+      <nav class="lang-switch lang-switch--bar" aria-label="Language">
+        <a href="sport.html" lang="en" hreflang="en-GB" data-lang="en" aria-current="page">EN<span class="sr-only"> English</span></a>
+        <a href="fr/sport.html" lang="fr" hreflang="fr-FR" data-lang="fr">FR<span class="sr-only"> Français</span></a>
+      </nav>
       <a class="btn btn--primary site-header__cta" href="book-a-demo.html">Book a demo</a>
       <details class="menu">
         <summary class="menu__summary"><span class="menu__open">Menu</span><span class="menu__close">Close</span></summary>
@@ -204,6 +213,10 @@
             <a href="#product">How it works</a>
             <a href="platform.html">Platform</a>
             <a href="pricing.html">Pricing</a>
+          </nav>
+          <nav class="lang-switch lang-switch--menu" aria-label="Language">
+            <a href="sport.html" lang="en" hreflang="en-GB" data-lang="en" aria-current="page">EN<span class="sr-only"> English</span></a>
+            <a href="fr/sport.html" lang="fr" hreflang="fr-FR" data-lang="fr">FR<span class="sr-only"> Français</span></a>
           </nav>
           <a class="btn btn--primary menu__cta" href="book-a-demo.html">Book a demo</a>
         </div>

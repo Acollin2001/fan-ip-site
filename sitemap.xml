@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://fan-ip.com/</loc>
-    <lastmod>2026-10-07</lastmod>
+    <lastmod>2026-10-10</lastmod>
+    <xhtml:link rel="alternate" hreflang="en-GB" href="https://fan-ip.com/"/>
+    <xhtml:link rel="alternate" hreflang="fr-FR" href="https://fan-ip.com/fr/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://fan-ip.com/"/>
   </url>
   <url>
     <loc>https://fan-ip.com/platform.html</loc>
@@ -18,7 +21,10 @@
   </url>
   <url>
     <loc>https://fan-ip.com/pricing.html</loc>
-    <lastmod>2026-10-07</lastmod>
+    <lastmod>2026-10-10</lastmod>
+    <xhtml:link rel="alternate" hreflang="en-GB" href="https://fan-ip.com/pricing.html"/>
+    <xhtml:link rel="alternate" hreflang="fr-FR" href="https://fan-ip.com/fr/pricing.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://fan-ip.com/pricing.html"/>
   </url>
   <url>
     <loc>https://fan-ip.com/reach-calculator.html</loc>
@@ -26,15 +32,24 @@
   </url>
   <url>
     <loc>https://fan-ip.com/brands.html</loc>
-    <lastmod>2026-10-07</lastmod>
+    <lastmod>2026-10-10</lastmod>
+    <xhtml:link rel="alternate" hreflang="en-GB" href="https://fan-ip.com/brands.html"/>
+    <xhtml:link rel="alternate" hreflang="fr-FR" href="https://fan-ip.com/fr/brands.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://fan-ip.com/brands.html"/>
   </url>
   <url>
     <loc>https://fan-ip.com/sport.html</loc>
-    <lastmod>2026-10-07</lastmod>
+    <lastmod>2026-10-10</lastmod>
+    <xhtml:link rel="alternate" hreflang="en-GB" href="https://fan-ip.com/sport.html"/>
+    <xhtml:link rel="alternate" hreflang="fr-FR" href="https://fan-ip.com/fr/sport.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://fan-ip.com/sport.html"/>
   </url>
   <url>
     <loc>https://fan-ip.com/artists.html</loc>
-    <lastmod>2026-10-07</lastmod>
+    <lastmod>2026-10-10</lastmod>
+    <xhtml:link rel="alternate" hreflang="en-GB" href="https://fan-ip.com/artists.html"/>
+    <xhtml:link rel="alternate" hreflang="fr-FR" href="https://fan-ip.com/fr/artists.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://fan-ip.com/artists.html"/>
   </url>
   <url>
     <loc>https://fan-ip.com/faq.html</loc>
@@ -42,7 +57,10 @@
   </url>
   <url>
     <loc>https://fan-ip.com/book-a-demo.html</loc>
-    <lastmod>2026-10-07</lastmod>
+    <lastmod>2026-10-10</lastmod>
+    <xhtml:link rel="alternate" hreflang="en-GB" href="https://fan-ip.com/book-a-demo.html"/>
+    <xhtml:link rel="alternate" hreflang="fr-FR" href="https://fan-ip.com/fr/book-a-demo.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://fan-ip.com/book-a-demo.html"/>
   </url>
   <url>
     <loc>https://fan-ip.com/legal.html</loc>
@@ -63,5 +81,47 @@
   <url>
     <loc>https://fan-ip.com/about.html</loc>
     <lastmod>2026-10-07</lastmod>
+  </url>
+  <url>
+    <loc>https://fan-ip.com/fr/</loc>
+    <lastmod>2026-10-10</lastmod>
+    <xhtml:link rel="alternate" hreflang="en-GB" href="https://fan-ip.com/"/>
+    <xhtml:link rel="alternate" hreflang="fr-FR" href="https://fan-ip.com/fr/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://fan-ip.com/"/>
+  </url>
+  <url>
+    <loc>https://fan-ip.com/fr/pricing.html</loc>
+    <lastmod>2026-10-10</lastmod>
+    <xhtml:link rel="alternate" hreflang="en-GB" href="https://fan-ip.com/pricing.html"/>
+    <xhtml:link rel="alternate" hreflang="fr-FR" href="https://fan-ip.com/fr/pricing.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://fan-ip.com/pricing.html"/>
+  </url>
+  <url>
+    <loc>https://fan-ip.com/fr/brands.html</loc>
+    <lastmod>2026-10-10</lastmod>
+    <xhtml:link rel="alternate" hreflang="en-GB" href="https://fan-ip.com/brands.html"/>
+    <xhtml:link rel="alternate" hreflang="fr-FR" href="https://fan-ip.com/fr/brands.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://fan-ip.com/brands.html"/>
+  </url>
+  <url>
+    <loc>https://fan-ip.com/fr/sport.html</loc>
+    <lastmod>2026-10-10</lastmod>
+    <xhtml:link rel="alternate" hreflang="en-GB" href="https://fan-ip.com/sport.html"/>
+    <xhtml:link rel="alternate" hreflang="fr-FR" href="https://fan-ip.com/fr/sport.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://fan-ip.com/sport.html"/>
+  </url>
+  <url>
+    <loc>https://fan-ip.com/fr/artists.html</loc>
+    <lastmod>2026-10-10</lastmod>
+    <xhtml:link rel="alternate" hreflang="en-GB" href="https://fan-ip.com/artists.html"/>
+    <xhtml:link rel="alternate" hreflang="fr-FR" href="https://fan-ip.com/fr/artists.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://fan-ip.com/artists.html"/>
+  </url>
+  <url>
+    <loc>https://fan-ip.com/fr/book-a-demo.html</loc>
+    <lastmod>2026-10-10</lastmod>
+    <xhtml:link rel="alternate" hreflang="en-GB" href="https://fan-ip.com/book-a-demo.html"/>
+    <xhtml:link rel="alternate" hreflang="fr-FR" href="https://fan-ip.com/fr/book-a-demo.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://fan-ip.com/book-a-demo.html"/>
   </url>
 </urlset>

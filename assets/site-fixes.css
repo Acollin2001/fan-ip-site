@@ -28,7 +28,7 @@
 .lv-k{color:var(--ink-muted);text-transform:uppercase;letter-spacing:.08em}
 .lv-line{font-family:var(--font-display);font-weight:500;font-size:clamp(1.25rem,1.8vw,1.625rem);line-height:1.1;letter-spacing:-.01em}
 .lv-go{color:var(--ink);margin-block-start:auto}
-.lv-go span{color:var(--burnished)}
+.lv-go span{color:var(--ink-muted)}
 .lv-tag{display:none;align-self:flex-start;padding:.35em .7em;border-radius:999px;background:var(--gold);color:var(--ink);font:600 .75rem/1 var(--font-body)}
 .lv-caption{margin-block-start:var(--s5);color:var(--ink-muted)}
 .lv .wl-close{margin-block-start:var(--s7)}
@@ -193,7 +193,7 @@ h1.hero-promise{text-wrap:balance}
 .dw-after{color:var(--ivory-muted)}
 .dw-foot{grid-column:1 / -1;margin:0;color:var(--muted)}
 .dw-foot a{color:var(--fg);font-weight:600;text-underline-offset:.2em}
-.dw-foot span{color:var(--burnished)}
+.dw-foot span{color:var(--ink-muted)}
 
 .dq{padding-block:var(--s9);background:var(--bg);color:var(--fg)}
 .dq-grid{display:grid;grid-template-columns:repeat(var(--cols),minmax(0,1fr));column-gap:var(--gap);row-gap:var(--s6)}

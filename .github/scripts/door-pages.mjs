@@ -15,7 +15,7 @@ export const PAGES = {
       "A loyalty program that rewards customers for posting about your brand. You see every post, its views and its media value. From €99 a month.",
     ogTitle: "FAN/IP for brands · Customers who post about you.",
     planNote:
-      "Collectibles, giveaways and PR packages come with Club. On Starter you can try photo and video missions, polls, quizzes, referrals, rewards and the leaderboard.",
+      "Collectibles, giveaways and PR packages come with Club, community goals with Season. On Starter you can try photo and video missions, polls, quizzes, referrals, rewards and the leaderboard.",
     h1Html: 'Customers who post<br><span class="hero-promise__gold">about you.</span>',
     lead:
       "A loyalty program that rewards what customers say, not only what they buy. They post your product, earn points and unlock your rewards. You see every post and how far it went.",
@@ -80,7 +80,7 @@ export const PAGES = {
       {
         q: "What counts as user-generated content here?",
         aHtml:
-          "The photos, videos and stories customers post on their own Instagram or TikTok for a mission. Your team reviews each one before points are awarded, and the admin keeps every post with its views. Instagram needs a free Creator or Business account to link; TikTok works with any account.",
+          "The photos, videos and stories customers post on their own Instagram or TikTok for a mission. Your team reviews each one before points are awarded; posts the network confirms through a member’s linked account can be approved automatically, and you can switch this off. The admin keeps every post with its views. Instagram needs a free Creator or Business account to link; TikTok works with any account.",
       },
       {
         q: "Is it an ambassador program?",
@@ -135,7 +135,7 @@ export const PAGES = {
       "A supporters club app under your club’s name. Fans post, earn points and rewards, and your sponsors see the reach. For sport and esports. From €99 a month.",
     ogTitle: "FAN/IP for sport · Supporters who post. Sponsors who see it.",
     planNote:
-      "Sponsor quests and match predictions come with Club, team battles with Season. On Starter you can try missions, QR check-ins, rewards and the leaderboard.",
+      "Sponsor quests and match predictions come with Club, team battles and community goals with Season. On Starter you can try missions, QR check-ins, rewards and the leaderboard.",
     h1Html: 'Supporters who post.<br><span class="hero-promise__gold">Sponsors who see it.</span>',
     lead:
       "A supporters club app under your club’s name. Fans post from the stands, earn points and climb the levels. Your sponsors get a report of how many people saw it.",
@@ -255,7 +255,7 @@ export const PAGES = {
       "Fans post after every show, earn points and unlock rewards you choose. You see the views of their posts, show by show. Your own fan club, your name.",
     ogTitle: "FAN/IP for artists · Fans who post after every show.",
     planNote:
-      "Open questions, mission roads and giveaways come with Club. On Starter you can try photo and video missions, polls, quizzes, QR check-ins, rewards and the leaderboard.",
+      "Open questions, mission roads and giveaways come with Club, community goals with Season. On Starter you can try photo and video missions, polls, quizzes, QR check-ins, rewards and the leaderboard.",
     h1Html: 'Fans who post<br><span class="hero-promise__gold">after every show.</span>',
     lead:
       "Your own fan club app, under your name. Fans post from the front row, earn points and unlock the rewards you choose. You see the views and media value of every show.",
@@ -302,7 +302,7 @@ export const PAGES = {
         {
           h: "Show by show",
           pHtml:
-            "Make one mission per show and each post is tied to it. Your admin adds up views, likes, comments and shares, the followers of the fans who posted and media value, mission by mission, at €5 per 1,000 views for music. You set your own rate. You see where the word of mouth was loudest before you plan the next tour.",
+            "Make one mission per show and each post is tied to it. Your admin adds up views, likes, comments, shares and media value, mission by mission from Club, and the potential reach of everyone who posted. Media value starts at €5 per 1,000 views for music; you set your own rate. You see where the word of mouth was loudest before you plan the next tour.",
         },
       ],
       footHtml:
@@ -324,7 +324,7 @@ export const PAGES = {
       {
         q: "How do I see which shows people talk about most?",
         aHtml:
-          'Make one mission per show. The admin adds up views, the followers of the fans who posted and media value for each mission. The <a href="demo/ilsa-morrow/">Ilsa Morrow demo</a> shows a six-date tour.',
+          'Make one mission per show. Your admin adds up views, likes, comments, shares and media value, mission by mission from Club, and the potential reach of everyone who posted. The <a href="demo/ilsa-morrow/">Ilsa Morrow demo</a> shows a six-date tour.',
       },
       {
         q: "How is this different from paid promotion?",

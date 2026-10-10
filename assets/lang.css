@@ -65,4 +65,4 @@
 
 /* French pages: a small "EN" tag on every link that leads to a page in
    English (the language switch excepted), so nobody lands there unwarned. */
-:lang(fr) a[hreflang="en"]:not([data-lang])::after{content:"EN";display:inline-block;margin-inline-start:.35em;padding:.1em .3em;border:1px solid currentColor;border-radius:3px;font:600 .625rem/1 var(--font-body);letter-spacing:.06em;vertical-align:.15em;text-decoration:none}
+:lang(fr) a[hreflang="en"]:not([data-lang])::after{content:"EN";display:inline-block;margin-inline-start:.35em;padding:.1em .3em;border:1px solid currentColor;border-radius:3px;font:600 .625rem/1 var(--font-body);letter-spacing:.06em;vertical-align:.15em;text-decoration:none;align-self:flex-start;justify-self:start;flex:none}

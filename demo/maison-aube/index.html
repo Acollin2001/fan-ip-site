@@ -2453,7 +2453,7 @@ function admWins() {
 }
 
 /* ---------------------------------------------------------------- Season */
-const JOIN_RULES = { choose: "Members pick a side", tier: "By tier", random: "Drawn at random" };
+const JOIN_RULES = { choose: "Members pick a side" };
 const COUNTS = { all: "Every petal earned", posts: "Petals from posts only", reviews: "Reviews only" };
 const nextMonth = new Date(NOW.getFullYear(), NOW.getMonth() + 1, 1), nextMonthEnd = new Date(NOW.getFullYear(), NOW.getMonth() + 2, 0);
 const BATTLES = [
@@ -2500,7 +2500,7 @@ function battleForm(d) {
     <div class="adm-row">${fld("Side 1", `<div style="display:flex;gap:8px"><input type="color" name="ac" value="${d.ac}" style="width:44px;height:40px;padding:2px;border-radius:9px;flex:none">${inp("an", d.an)}</div>`)}
       ${fld("Side 2", `<div style="display:flex;gap:8px"><input type="color" name="bc" value="${d.bc}" style="width:44px;height:40px;padding:2px;border-radius:9px;flex:none">${inp("bn", d.bn)}</div>`)}</div>
     <div class="adm-row">${fld("Starts", inp("start", d.start, 'type="date"'))}${fld("Ends", inp("end", d.end, 'type="date"'))}</div>
-    ${fld("How members join", sel("join", Object.entries(JOIN_RULES), d.join), "Members can join until the last day. One side each.")}
+    ${fld("How members join", `<input value="${JOIN_RULES.choose}" disabled>`, "Members can join until the last day. One side each.")}
     ${fld("What counts", sel("counts", Object.entries(COUNTS), d.counts))}
     ${fld("Prize for the winning side", inp("prize", d.prize))}`;
 }

@@ -1010,7 +1010,7 @@ function icon(name, cls = "") {
   return `<svg class="${cls}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${ICONS[name] || ""}</svg>`;
 }
 /* Network marks: plain letters in a rounded square, never the networks' logos */
-const NET_SHORT = { Instagram: "IG", TikTok: "TT", "YouTube Shorts": "YT", Facebook: "FB" };
+const NET_SHORT = { Instagram: "IG", TikTok: "TT", "YouTube Shorts": "YT" };
 
 /* ---------------------------------------------------------------- member feedback */
 function toast(msg) {
@@ -2079,7 +2079,7 @@ const DAILY = Array.from({ length: 30 }, (_, i) => {
 const DAY_LABELS = DAILY.map((_, i) => dayNum(addDays(i - 29)));
 const SHOW_MARKS = DAILY.map((_, i) => i).filter((i) => TOUR.some((c) => c.d === i - 29));
 /* network, share of posts, share of views, like rate, comment rate, share rate */
-const NETS = [["TikTok", 0.47, 0.57, 0.09, 0.0038, 0.0066], ["Instagram", 0.41, 0.33, 0.072, 0.0043, 0.005], ["YouTube Shorts", 0.1, 0.08, 0.042, 0.0021, 0.0017], ["Facebook", 0.02, 0.02, 0.031, 0.0047, 0.007]];
+const NETS = [["TikTok", 0.47, 0.57, 0.09, 0.0038, 0.0066], ["Instagram", 0.41, 0.33, 0.072, 0.0043, 0.005], ["YouTube Shorts", 0.12, 0.1, 0.042, 0.0021, 0.0017]];
 const played = () => TOUR.filter((c) => c.d < 0);
 const tourTot = (k) => played().reduce((a, c) => a + (c[k] || 0), 0) + (k === "ci" && state.done.has("merch") ? 1 : 0) + (k === "ci" ? state.live : 0);
 
@@ -2482,12 +2482,12 @@ function admMembers() {
 /* ---------------------------------------------------------------- Results */
 /* Missions with their totals on this tour. Posts and views add up to the tour's 5,555 posts and 9.3M views. */
 const RM = [
-  { id: "barrier", short: "Barrier", label: "Barrier song", title: "From the barrier: film one song", type: "Video", ago: 12, done: 1260, seen: 4308, posts: 1260, views: 2.69e6, nm: 230, net: [0.66, 0.24, 0.09, 0.01] },
-  { id: "sing", short: "Chorus", label: "Chorus", title: "Sing the chorus of 'Marée haute'", type: "Video", ago: 20, done: 1420, seen: 8960, posts: 1420, views: 2.48e6, nm: 190, net: [0.61, 0.27, 0.11, 0.01] },
-  { id: "setlist", short: "Setlist", label: "Setlist photo", title: "Setlist photo, after the encore", type: "Social post", ago: 12, done: 1030, seen: 4308, posts: 1030, views: 1.21e6, nm: 110, net: [0.38, 0.55, 0.05, 0.02] },
-  { id: "phare", short: "Phare", label: "Phare", title: "Sing 'Phare' in one take", type: "Video", ago: 6, done: 320, seen: 7420, posts: 320, views: 1.16e6, nm: 150, net: [0.72, 0.18, 0.09, 0.01] },
-  { id: "fit", short: "Tee", label: "Tour tee", title: "Merch fit: the tour tee, your way", type: "Photo", ago: 15, done: 980, seen: 8310, posts: 980, views: 1.06e6, nm: 120, net: [0.44, 0.49, 0.05, 0.02] },
-  { id: "doors", short: "Queue", label: "Queue at doors", title: "The queue at doors", type: "Photo", ago: 12, done: 545, seen: 4308, posts: 545, views: 0.71e6, nm: 70, net: [0.41, 0.52, 0.04, 0.03] },
+  { id: "barrier", short: "Barrier", label: "Barrier song", title: "From the barrier: film one song", type: "Video", ago: 12, done: 1260, seen: 4308, posts: 1260, views: 2.69e6, nm: 230, net: [0.66, 0.24, 0.1] },
+  { id: "sing", short: "Chorus", label: "Chorus", title: "Sing the chorus of 'Marée haute'", type: "Video", ago: 20, done: 1420, seen: 8960, posts: 1420, views: 2.48e6, nm: 190, net: [0.61, 0.27, 0.12] },
+  { id: "setlist", short: "Setlist", label: "Setlist photo", title: "Setlist photo, after the encore", type: "Social post", ago: 12, done: 1030, seen: 4308, posts: 1030, views: 1.21e6, nm: 110, net: [0.38, 0.55, 0.07] },
+  { id: "phare", short: "Phare", label: "Phare", title: "Sing 'Phare' in one take", type: "Video", ago: 6, done: 320, seen: 7420, posts: 320, views: 1.16e6, nm: 150, net: [0.72, 0.18, 0.1] },
+  { id: "fit", short: "Tee", label: "Tour tee", title: "Merch fit: the tour tee, your way", type: "Photo", ago: 15, done: 980, seen: 8310, posts: 980, views: 1.06e6, nm: 120, net: [0.44, 0.49, 0.07] },
+  { id: "doors", short: "Queue", label: "Queue at doors", title: "The queue at doors", type: "Photo", ago: 12, done: 545, seen: 4308, posts: 545, views: 0.71e6, nm: 70, net: [0.41, 0.52, 0.07] },
   { id: "merch", title: "Check in at the merch stand", type: "Check-in", ago: 12, done: 4308, seen: 9040, posts: 0, views: 0, nm: 1029, extra: [["Of tickets sold", pct(4308, 12100)], ["Average a show", "718"]] },
   { id: "friend", title: "Bring a friend to the show", type: "Referral", ago: 12, done: 960, seen: 8120, posts: 0, views: 0, nm: 212, extra: [["Links sent", "960"], ["Friends who joined", "212"]] },
   { id: "lyric", title: "Finish the line", type: "Quiz", ago: 9, done: 7240, seen: 9020, posts: 0, views: 0, nm: 0, extra: [["Right first time", "64%"], ["Average time", "14 s"]] },
@@ -2510,7 +2510,7 @@ const POSTLIST = (() => {
     return { who: POSTERS[i % POSTERS.length], city: c.city, net: n, mid: mids[Math.floor(rnd() * mids.length)], views, likes: views * r[0], comments: views * r[1], shares: views * r[2], ago: -c.d + Math.floor(rnd() * 2) };
   });
 })();
-const rmStats = (r) => { const v = r.views, net = r.net || [0.58, 0.33, 0.08, 0.01]; const lk = NETS.reduce((a, n, i) => a + v * net[i] * n[3], 0), cm = NETS.reduce((a, n, i) => a + v * net[i] * n[4], 0), sh = NETS.reduce((a, n, i) => a + v * net[i] * n[5], 0); const done = r.done + (state.done.has(r.id) ? 1 : 0); return { ...r, done, likes: lk, comments: cm, shares: sh, eng: lk + cm + sh, value: mediaValue(v), rate: done / r.seen }; };
+const rmStats = (r) => { const v = r.views, net = r.net || [0.58, 0.33, 0.09]; const lk = NETS.reduce((a, n, i) => a + v * net[i] * n[3], 0), cm = NETS.reduce((a, n, i) => a + v * net[i] * n[4], 0), sh = NETS.reduce((a, n, i) => a + v * net[i] * n[5], 0); const done = r.done + (state.done.has(r.id) ? 1 : 0); return { ...r, done, likes: lk, comments: cm, shares: sh, eng: lk + cm + sh, value: mediaValue(v), rate: done / r.seen }; };
 function tourNets() {
   const v = tourTot("views"), p = tourTot("posts");
   return NETS.map(([name, ps, vs, lr, cr, sr]) => ({ name, posts: p * ps, views: v * vs, likes: v * vs * lr, comments: v * vs * cr, shares: v * vs * sr, value: mediaValue(v * vs) }));
@@ -2581,7 +2581,7 @@ function dayBars(r) {
 function missionDetail(id) {
   const r = rmStats(RM.find((x) => x.id === id));
   const tiers = [["Listener", 44], ["Singalong", 35], ["Encore", 17], ["Soundcheck", 4]].map(([t, p], i) => [t, p + ((r.ago + i * 3) % 5) - 2]);
-  const split = r.net || [0.58, 0.33, 0.08, 0.01];
+  const split = r.net || [0.58, 0.33, 0.09];
   const nets = NET_NAMES.map((n, i) => ({ n, posts: r.posts * split[i], v: r.views * split[i], likes: r.likes * split[i], comments: r.comments * split[i], shares: r.shares * split[i] }));
   const posts = POSTLIST.filter((p) => p.mid === id).sort((a, b) => b.views - a.views).slice(0, 5);
   const ex = typeof r.extra === "function" ? r.extra() : r.extra || [];

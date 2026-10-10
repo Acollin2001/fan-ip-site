@@ -1588,8 +1588,8 @@ const RITUELS = [
     brief: "Three notes, one winner. The note with the most votes on Sunday becomes December's candle, poured in our Grasse atelier." },
   { id: "label", kind: "quiz", type: "Quiz", title: "Read the label: Sérum Rosée", pts: 60, art: "label", tone: "sauge", meta: "One question",
     brief: "One question about what is inside the serum, and why it is there." },
-  { id: "written", kind: "written", type: "Review", title: "Review a product you've used for a month", pts: 80, art: "jar", tone: "lin", meta: "Stars and three lines", herb: "vetiver",
-    brief: "A month is long enough to know. Give it stars and three honest lines; your review appears on the product page with your first name." },
+  { id: "written", kind: "written", type: "Open question", title: "Tell us about a product you've used for a month", pts: 80, art: "jar", tone: "lin", meta: "Three honest lines", herb: "vetiver",
+    brief: "A month is long enough to know. Three honest lines on what changed. The team reads every answer." },
   { id: "remind", kind: "remind", type: "Drop", title: "Remind me when Givre opens", pts: 20, art: "flacon", tone: "cypres", meta: "One tap",
     brief: "One notification, the moment Givre opens to you. Nothing else." },
 ];
@@ -1658,7 +1658,7 @@ const state = {
   balance: 1840, earned: 0, life: 3360, monthBase: 1120,
   done: new Set(), pressed: new Set(PLATES.filter((p) => !p.unlock).map((p) => p.id)), just: null,
   posts: MY_POSTS.map((p) => ({ ...p })), filter: "all", gfilter: "all", redeemed: [], vote: null, poll: null,
-  goal: 7412, reminder: false, friendJoined: false, net: "Instagram", link: "", stars: 0, product: "serum",
+  goal: 7412, reminder: false, friendJoined: false, net: "Instagram", link: "", product: "serum",
   cpm: 8, admin: "overview", atab: {}, period: "30d", psort: "views", draft: null, news: null, orders: null,
 };
 /* life: season XP so far (tiers). monthBase: XP earned this month (the leaderboard). balance: petals to spend. */
@@ -1979,9 +1979,8 @@ function quizBody(r) {
 }
 function writtenBody(r) {
   return `<p>${esc(r.brief)}</p>
-    <div class="linkbox"><label>Baume Nuit, bought ${dayNum(addDays(-38))}</label><div class="stars" role="group" aria-label="Stars">${[1, 2, 3, 4, 5].map((n) => `<button data-act="star" data-n="${n}" class="${n <= state.stars ? "on" : ""}" aria-label="${n} star${n > 1 ? "s" : ""}">${icon("star")}</button>`).join("")}</div></div>
-    <div class="textbox linkbox"><label for="revText">Three honest lines</label><textarea id="revText" maxlength="280" placeholder="What changed after a month?"></textarea></div>
-    <button class="btn btn-dark btn-block" data-act="sendreview">Publish my review</button>`;
+    <div class="textbox linkbox"><label for="revText">Baume Nuit, bought ${dayNum(addDays(-38))}: three honest lines</label><textarea id="revText" maxlength="280" placeholder="What changed after a month?"></textarea></div>
+    <button class="btn btn-dark btn-block" data-act="sendreview">Send my answer</button>`;
 }
 function remindBody(r) {
   const fleur = SP() >= 4000;
@@ -2101,14 +2100,12 @@ function onAction(act, el) {
       } else if (!right) setTimeout(() => el.classList.remove("wrong"), 400);
       return;
     }
-    case "star": state.stars = +el.dataset.n; $$(".stars button").forEach((b) => b.classList.toggle("on", +b.dataset.n <= state.stars)); return;
     case "sendreview": {
       const tx = ($("#revText").value || "").trim();
-      if (!state.stars) return toast("Give it a number of stars first");
       if (tx.length < 12) { toast("A few more words, please"); $("#revText").focus(); return; }
-      state.review = { stars: state.stars, t: tx };
+      state.review = { t: tx };
       const r = ritual("written"), before = complete("written", el);
-      el.outerHTML = successHtml(r, before, `Thank you. Your review is on the Baume Nuit page, signed ${ME.first}.`);
+      el.outerHTML = successHtml(r, before, `Thank you. The team reads every answer.`);
       renderMember(false); return;
     }
     case "remindme": {
@@ -2160,7 +2157,7 @@ const RS = [
   { id: "review15", done: 455, posts: 441, vshare: 0.15, joined: 260, seen: 7340 },
   { id: "mist", done: 398, posts: 384, vshare: 0.08, joined: 120, seen: 6980 },
   { id: "friend", done: 920, posts: 0, vshare: 0, joined: 214, seen: 7610, note: "920 links sent, 214 friends joined" },
-  { id: "written", done: 530, posts: 0, vshare: 0, joined: 0, seen: 5240, note: "530 reviews on product pages, average 4.6 stars" },
+  { id: "written", done: 530, posts: 0, vshare: 0, joined: 0, seen: 5240 },
   { id: "candle", done: 8210, posts: 0, vshare: 0, joined: 0, seen: 8410, note: "Figue verte leads with 38%" },
   { id: "label", done: 4980, posts: 0, vshare: 0, joined: 0, seen: 8120, note: "71% right first time" },
   { id: "remind", done: 7340, posts: 0, vshare: 0, joined: 0, seen: 8360, note: "7,340 reminders for the Givre drop" },
@@ -2239,7 +2236,7 @@ function admToday() {
   const todo = [
     ["results", 2, "18 posts to look at: the tag is in a comment, not the caption", "Results, Posts"],
     ["wins", 0, `${toSend()} gifts to send or book`, "Winners & deliveries"],
-    ["missions", 3, `${fmt(24 + revList().filter((r) => r.status === "new").length)} new reviews to read`, "Reviews and answers"],
+    ["missions", 3, `${fmt(24 + revList().filter((r) => r.status === "new").length)} new answers to read`, "Reviews and answers"],
     ["missions", 1, state.candleClosed ? `Candle vote closed: ${state.candleClosed}` : "Candle vote closes on Sunday: Figue verte leads with 38%", "Votes and quizzes"],
     ["season", 0, `Aube Rose goal at ${goalPct()}%, ${fmt(10000 - state.goal)} rituals to go`, "Season"],
   ];
@@ -2273,7 +2270,7 @@ function admMissions() {
   return h + `<div class="acard"><div class="scroll-x"><table class="atable"><thead><tr><th>Ritual</th><th>Type</th><th class="r">XP · petals</th><th>When</th><th class="r">Done by, 30 days</th><th class="r">Posts</th><th class="r">Plate</th><th>Status</th></tr></thead>
     <tbody>${rows.map(({ r, s }) => `<tr class="${r.fresh ? "fresh" : ""}"><td class="wrap"><b>${esc(r.title)}</b><br><span class="sub">${esc(r.meta)}</span></td><td>${r.type}</td><td class="r">${r.pts}</td><td>${r.when || "Now"}</td><td class="r">${s.done || state.done.has(r.id) ? fmt(s.done + (state.done.has(r.id) ? 1 : 0)) : "–"}</td><td class="r">${s.posts ? fmt(s.posts) : "–"}</td><td class="r">${r.herb ? PLATES.find((p) => p.id === r.herb).name : "–"}</td><td><span class="st live">Live</span></td></tr>`).join("")}
       ${EXTRA_ROWS.map((x) => `<tr><td class="wrap"><b>${esc(x.title)}</b></td><td>${x.type}</td><td class="r">${x.pts}</td><td>${x.when}</td><td class="r">–</td><td class="r">–</td><td class="r">–</td><td><span class="st ${stl(x.status)[0]}">${stl(x.status)[1]}</span></td></tr>`).join("")}</tbody></table></div></div>
-    <div class="acard"><h2>Mission types on this plan</h2><p class="sub">Post, photo, video, 15-second review, written review, vote, quiz, open question, bring a friend, drop reminder, boutique check-in. Up to three rituels a day per member. Posts must be public and tag @maisonaube; views are counted for 30 days and a post can earn once.</p></div>`;
+    <div class="acard"><h2>Mission types on this plan</h2><p class="sub">Post, photo, video, 15-second review, vote, quiz, open question, bring a friend, drop reminder, boutique check-in. Up to three rituels a day per member. Posts must be public and tag @maisonaube; views are counted for 30 days and a post can earn once.</p></div>`;
 }
 
 /* Votes and quizzes */
@@ -2322,28 +2319,27 @@ function admCheckin() {
 
 /* Reviews and answers */
 const REVIEWS = [
-  { who: "Manon Giraud", handle: "@manon.grd", when: "Today", stars: 5, product: "Baume Nuit", t: "My hands crack every winter. Three weeks in, they don't. It smells of nothing much, which I like.", status: "new" },
-  { who: "Sarah Benoît", handle: "@sarah.bnt", when: "Today", stars: 4, product: "Sérum Rosée", t: "Skin feels plumper in the morning. One star off because the dropper sticks.", status: "new" },
-  { who: "Zoé Martin", handle: "@zoe.mrtn", when: "Yesterday", stars: 5, product: "Brume d'Iris", t: "I keep it at my desk and use it between meetings. The bottle is nearly empty.", status: "new" },
-  { who: "Clara Vasseur", handle: "@clara.vss", when: "Yesterday", stars: 3, product: "Baume Nuit", t: "Works, but too rich for my skin in the day. Fine at night.", status: "new" },
-  { who: "Anaïs Lambert", handle: "@anais.lbt", when: "3 days ago", stars: 5, product: "Sérum Rosée", t: "A month of it and my redness is calmer. I've stopped wearing foundation on weekends.", status: "featured" },
-  { who: "Léa Fontaine", handle: "@lea.fnt", when: "4 days ago", stars: 5, product: "Baume Nuit", t: "The only balm that survived a week of skiing with me.", status: "featured" },
+  { who: "Manon Giraud", handle: "@manon.grd", when: "Today", product: "Baume Nuit", t: "My hands crack every winter. Three weeks in, they don't. It smells of nothing much, which I like.", status: "new" },
+  { who: "Sarah Benoît", handle: "@sarah.bnt", when: "Today", product: "Sérum Rosée", t: "Skin feels plumper in the morning. The dropper sticks, though.", status: "new" },
+  { who: "Zoé Martin", handle: "@zoe.mrtn", when: "Yesterday", product: "Brume d'Iris", t: "I keep it at my desk and use it between meetings. The bottle is nearly empty.", status: "new" },
+  { who: "Clara Vasseur", handle: "@clara.vss", when: "Yesterday", product: "Baume Nuit", t: "Works, but too rich for my skin in the day. Fine at night.", status: "new" },
+  { who: "Anaïs Lambert", handle: "@anais.lbt", when: "3 days ago", product: "Sérum Rosée", t: "A month of it and my redness is calmer. I've stopped wearing foundation on weekends.", status: "featured" },
+  { who: "Léa Fontaine", handle: "@lea.fnt", when: "4 days ago", product: "Baume Nuit", t: "The only balm that survived a week of skiing with me.", status: "featured" },
 ];
-const revList = () => [...(state.review ? [{ me: 1, who: ME.name, handle: ME.handle, when: "Just now", stars: state.review.stars, product: "Baume Nuit", t: state.review.t, status: state.revMine }] : []), ...REVIEWS];
+const revList = () => [...(state.review ? [{ me: 1, who: ME.name, handle: ME.handle, when: "Just now", product: "Baume Nuit", t: state.review.t, status: state.revMine }] : []), ...REVIEWS];
 function admReviews() {
   const list = revList(), feat = list.filter((a) => a.status === "featured").length;
   const order = { new: 0, featured: 1, hidden: 2 };
   const rows = [...list].sort((a, b) => (b.me ? 1 : 0) - (a.me ? 1 : 0) || order[a.status] - order[b.status]);
   const opens = RITUELS.filter((r) => r.gen === "open");
-  return `<div class="acard"><div class="acard-top"><div><h2>Review a product you've used for a month</h2><p class="sub">${fmt(530 + (state.review ? 1 : 0))} reviews in the last 30 days, average 4.6 stars. Reviews go on the product page on their own; pin the best ones to the top, +50 XP and ${BRAND.word} each. ${feat} pinned.</p></div>
-      <div class="adm-actions"><button class="adm-btn" data-act="reviewsCsv">${icon("download")}Pinned reviews, CSV</button></div></div>
+  return `<div class="acard"><div class="acard-top"><div><h2>Tell us about a product you've used for a month</h2><p class="sub">${fmt(530 + (state.review ? 1 : 0))} answers in the last 30 days. Nothing is published on its own; feature the best ones. ${feat} featured.</p></div>
+      <div class="adm-actions"><button class="adm-btn" data-act="reviewsCsv">${icon("download")}Featured answers, CSV</button></div></div>
     <div class="ans-list">${rows.map((a) => { const i = a.me ? -1 : REVIEWS.indexOf(a); return `<div class="ans ${a.status}">
       <span class="who"><i>${initials(a.who)}</i><span><b>${esc(a.who)}</b> <span class="sub">${esc(a.handle)}, ${a.when}, ${a.product}</span></span></span>
-      <span class="stars-a" aria-label="${a.stars} stars out of 5">${"★".repeat(a.stars)}${"☆".repeat(5 - a.stars)}</span>
       <p>${esc(a.t)}</p>
-      <div class="adm-actions">${a.status === "featured" ? `<span class="st live">Pinned to the product page</span><button class="adm-btn ghost" data-act="rev" data-i="${i}" data-s="new">Undo</button>`
+      <div class="adm-actions">${a.status === "featured" ? `<span class="st live">Featured</span><button class="adm-btn ghost" data-act="rev" data-i="${i}" data-s="new">Undo</button>`
         : a.status === "hidden" ? `<span class="st">Hidden</span><button class="adm-btn ghost" data-act="rev" data-i="${i}" data-s="new">Show again</button>`
-        : `<button class="adm-btn primary" data-act="rev" data-i="${i}" data-s="featured">Pin it, +50</button><button class="adm-btn ghost" data-act="rev" data-i="${i}" data-s="hidden">Hide</button>`}</div></div>`; }).join("")}</div>
+        : `<button class="adm-btn primary" data-act="rev" data-i="${i}" data-s="featured">Feature it</button><button class="adm-btn ghost" data-act="rev" data-i="${i}" data-s="hidden">Hide</button>`}</div></div>`; }).join("")}</div>
     <p class="sub" style="margin-top:12px">Showing the latest. The other ${fmt(530 - REVIEWS.length)} are in the CSV.</p></div>
     ${opens.map((x) => `<div class="acard"><h2>${esc(x.title)}</h2><p class="sub">${state.done.has(x.id) ? "1 answer so far: yours, in the member app." : "No answers yet. They appear here as members send them."}</p></div>`).join("")}`;
 }
@@ -2352,11 +2348,11 @@ function setRev(i, status) {
   if (a) a.status = status;
   else {
     state.revMine = status;
-    if (status === "featured" && was !== "featured") { state.balance += 50; state.earned += 50; state.news = `Your Baume Nuit review is pinned to the top of the product page. ${xpPts(50)}.`; }
-    if (was === "featured" && status !== "featured") { state.balance -= 50; state.earned -= 50; state.news = null; }
+    if (status === "featured" && was !== "featured") state.news = "Your Baume Nuit answer is featured.";
+    if (was === "featured" && status !== "featured") state.news = null;
   }
   rerenderAdminInPlace();
-  admToast(status === "featured" ? `${a ? a.who.split(" ")[0] : ME.first}'s review is pinned, ${xpPts(50)} sent` : status === "hidden" ? "Hidden from the product page" : "Back with the others", !a && status === "featured" ? "profile" : null);
+  admToast(status === "featured" ? `${a ? a.who.split(" ")[0] : ME.first}'s answer is featured` : status === "hidden" ? "Hidden from members" : "Back with the others", !a && status === "featured" ? "profile" : null);
 }
 
 /* New mission */
@@ -2710,7 +2706,7 @@ const BRANDKIT = {
 };
 const MODULES = [
   ["Rituels", "missions", "Posts, reviews, photos and more", "missions", 0], ["Votes and quizzes", "list", "Notes, workshops, the label", "missions", 1], ["Boutique check-in", "qr", "QR at the till and at events", "missions", 2],
-  ["Reviews and answers", "chat", "Pin the best to the product page", "missions", 3], ["Gifts", "gift", "Products, codes, moments", "rewards"], ["Tier gifts", "star", "Sent on reaching a tier", "rewards"],
+  ["Reviews and answers", "chat", "Read them, feature the best", "missions", 3], ["Gifts", "gift", "Products, codes, moments", "rewards"], ["Tier gifts", "star", "Sent on reaching a tier", "rewards"],
   ["Giveaways", "ticket", "Draws with entry rules", "rewards"], ["Community goal", "users", "One target for everyone", "season", 0], ["Team battles", "swords", "Sides, dates, join rules", "season", 1],
   ["Herbier", "collection", "A plate for each ingredient", "season", 2], ["Leaderboard", "table", "Monthly, by XP", "season", 3], ["Referrals", "route", "Codes and links"],
   ["Drops", "calendar", "Early access by tier"], ["Push and email", "bell", "Scheduled with drops"],
@@ -2750,7 +2746,7 @@ function onAdminAction(act, el) {
     case "qrpng": downloadQRPng(CHECKIN_URL, "SCAN TO CHECK IN", `Maison Aube, Paris boutique. +100 XP and ${BRAND.word} once a month`, "maison-aube-boutique-check-in-qr.png"); return admToast("QR code downloaded, ready to print");
     case "aopt": { const n = el.dataset.name, v = el.dataset.v; if (n === "ciMode") state.ci.mode = v; else state[n] = v; return rerenderAdminInPlace(); }
     case "rev": return setRev(+el.dataset.i, el.dataset.s);
-    case "reviewsCsv": csvDownload([["Member", "Handle", "Product", "Stars", "Review"], ...revList().filter((a) => a.status === "featured").map((a) => [a.who, a.handle, a.product, a.stars, a.t])], "maison-aube-pinned-reviews.csv"); return admToast("CSV downloaded");
+    case "reviewsCsv": csvDownload([["Member", "Handle", "Product", "Answer"], ...revList().filter((a) => a.status === "featured").map((a) => [a.who, a.handle, a.product, a.t])], "maison-aube-featured-answers.csv"); return admToast("CSV downloaded");
     case "draw": {
       const pool = ["Emma Collet", "Manon Giraud", "Zoé Martin", "Clara Vasseur", "Sofia Marchand", "Julie Perrin"];
       state.drawn = pool.sort(() => Math.random() - 0.5).slice(0, 3);

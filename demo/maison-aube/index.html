@@ -978,7 +978,7 @@ function icon(name, cls = "") {
   return `<svg class="${cls}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${ICONS[name] || ""}</svg>`;
 }
 /* Network marks: plain letters in a rounded square, never the networks' logos */
-const NET_SHORT = { Instagram: "IG", TikTok: "TT", "YouTube Shorts": "YT", Facebook: "FB" };
+const NET_SHORT = { Instagram: "IG", TikTok: "TT", "YouTube Shorts": "YT" };
 
 /* ---------------------------------------------------------------- member feedback */
 function toast(msg) {
@@ -1069,7 +1069,7 @@ function refreshShell() {
   const fresh = document.createElement("div"); fresh.innerHTML = shell();
   $$("[data-shell]").forEach((el) => { const src = fresh.querySelector(`[data-shell="${el.dataset.shell}"]`); if (src) el.innerHTML = src.innerHTML; });
 }
-const screenFoot = () => `<p class="foot-note">${esc(BRAND.name)} is a fictional ${BRAND.kind}. Every name and figure here is illustrative. A FAN/IP demo.</p>`;
+const screenFoot = () => `<p class="foot-note">${esc(BRAND.name)} is a fictional ${BRAND.kind}. Every name and figure here is illustrative; a few screens show features on our roadmap. A FAN/IP demo.</p>`;
 
 /* ---------------------------------------------------------------- presenter */
 function setView(v) {
@@ -2144,7 +2144,7 @@ function periodViews() {
 }
 const pf = () => periodViews() / DAILY.reduce((a, b) => a + b, 0);
 /* network, share of posts, share of views, like rate, comment rate, share rate */
-const NETS = [["Instagram", 0.55, 0.51, 0.071, 0.0041, 0.0049], ["TikTok", 0.33, 0.41, 0.086, 0.0035, 0.0068], ["YouTube Shorts", 0.09, 0.06, 0.039, 0.002, 0.0016], ["Facebook", 0.03, 0.02, 0.031, 0.0046, 0.007]];
+const NETS = [["Instagram", 0.55, 0.51, 0.071, 0.0041, 0.0049], ["TikTok", 0.33, 0.41, 0.086, 0.0035, 0.0068], ["YouTube Shorts", 0.12, 0.08, 0.039, 0.002, 0.0016]];
 const POSTS_30 = 3120;
 /* Ritual results over the last 30 days */
 const RS = [

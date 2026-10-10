@@ -112,7 +112,7 @@ img, svg { max-width: 100%; }
 .demo-logo i { font-style: normal; color: var(--fx-gold); }
 .demo-name { min-width: 0; font-size: 0.875rem; color: var(--fx-ink-2); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 @media (max-width: 1100px) { .demo-name { display: none; } }
-.demo-controls { display: flex; gap: 12px; margin-left: auto; align-items: center; }
+.demo-controls { display: flex; gap: 12px; margin-left: auto; align-items: center; min-width: 0; }
 .seg {
   display: inline-flex;
   padding: 3px;
@@ -133,7 +133,7 @@ img, svg { max-width: 100%; }
 }
 .seg button[aria-pressed="true"] { background: var(--fx-ink); color: #fff; }
 .seg button:disabled { opacity: 0.4; cursor: not-allowed; }
-.demo-note { font-size: 0.75rem; color: var(--fx-ink-2); white-space: nowrap; }
+.demo-note { flex: 0 1 auto; min-width: 0; max-width: 64ch; font-size: 0.75rem; line-height: 1.3; color: var(--fx-ink-2); text-align: right; text-wrap: balance; }
 
 .stage-body {
   min-height: 0;
@@ -297,6 +297,7 @@ img, svg { max-width: 100%; }
   overscroll-behavior: contain;
 }
 .view-inner { display: flex; flex-direction: column; gap: 34px; max-width: 1180px; margin-inline: auto; }
+.foot-note { max-width: 1180px; margin: 34px auto 0; padding-top: 16px; border-top: 1px solid var(--line); font-size: 0.75rem; line-height: 1.45; color: var(--ink-3); text-align: center; }
 
 .tabbar {
   position: absolute;
@@ -930,9 +931,9 @@ img, svg { max-width: 100%; }
 .adm-btn.primary { background: var(--fx-ink); color: #fff; border-color: var(--fx-ink); }
 .adm-btn svg { width: 16px; height: 16px; }
 .kpis { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px; }
-.kpi { padding: 16px 18px; border-radius: 14px; background: var(--fx-surface); border: 1px solid var(--fx-line); min-width: 0; }
+.kpi { padding: 16px 18px; border-radius: 14px; background: var(--fx-surface); border: 1px solid var(--fx-line); min-width: 0; container-type: inline-size; }
 .kpi span { display: block; color: var(--fx-ink-2); font-size: 0.8125rem; }
-.kpi b { display: block; margin-top: 6px; font-family: var(--fx-display); font-weight: 600; font-size: 1.75rem; line-height: 1; font-variant-numeric: tabular-nums; }
+.kpi b { display: block; margin-top: 6px; font-family: var(--fx-display); font-weight: 600; font-size: clamp(1.25rem, 17cqi, 1.75rem); line-height: 1; font-variant-numeric: tabular-nums; white-space: nowrap; }
 .kpi small { display: block; margin-top: 6px; font-size: 0.75rem; color: var(--good); font-weight: 500; }
 .acard { padding: 18px 20px; border-radius: 14px; background: var(--fx-surface); border: 1px solid var(--fx-line); min-width: 0; }
 .acard h2 { margin: 0; font-size: 1rem; font-weight: 600; }
@@ -1611,6 +1612,7 @@ button.bd-row:hover .bd-title { color: var(--flood); }
 .app[data-style="reel"] { --ground: var(--moor); --r-card: 4px; }
 .app[data-style="reel"] .view { container-type: size; }
 .app[data-style="reel"] .view:has(> .sh-reel) { padding: 0; scroll-snap-type: y mandatory; }
+.app[data-style="reel"] .view > .foot-note { scroll-snap-align: end; margin: 0 auto; padding: 18px var(--gutter) calc(96px + var(--home-ind, 0px)); border-top: 0; color: var(--wing-soft); }
 .app[data-style="reel"] :is(.view-inner > header, .h-sec, .lede, .view-inner > .meta, .tier, .tier-steps, .tier-steps .on, .link) { color: #fff; }
 .app[data-style="reel"] .lede { color: rgba(255, 255, 255, 0.85); }
 .app[data-style="reel"] .bar > span { background: var(--flood); }
@@ -2028,8 +2030,8 @@ button.bd-row:hover .bd-title { color: var(--flood); }
 .sp-tile b { font-family: var(--fx-display); font-weight: 600; font-size: 1.5rem; line-height: 1.05; font-variant-numeric: tabular-nums; letter-spacing: -0.01em; }
 .sp-tile span { font-size: 0.8125rem; color: var(--fx-ink); font-weight: 500; line-height: 1.3; }
 .sp-tile small { font-size: 0.75rem; color: var(--fx-ink-2); line-height: 1.3; }
-.sp-tile.hero { grid-column: 1 / -1; background: #1d1f24; color: #fff; }
-.sp-tile.hero b { font-size: 2.25rem; color: #f3e7c8; }
+.sp-tile.hero { grid-column: 1 / -1; background: #1d1f24; color: #fff; container-type: inline-size; }
+.sp-tile.hero b { font-size: clamp(1.5rem, 19cqi, 2.25rem); color: #f3e7c8; white-space: nowrap; }
 .sp-tile.hero span { color: #fff; }
 .sp-tile.hero small { color: #c9ccd3; }
 .sp-bars { display: grid; gap: 10px; }
@@ -2041,6 +2043,9 @@ button.bd-row:hover .bd-title { color: var(--flood); }
 .sp-bar:first-of-type .track i { background: #b8913a; }
 .sp-bar b { font-weight: 600; font-variant-numeric: tabular-nums; min-width: 72px; text-align: right; }
 @container dev (min-width: 900px) {
+  .sp-tiles { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+}
+@container dev (min-width: 1100px) {
   .sp-tiles { grid-template-columns: 1.4fr repeat(4, minmax(0, 1fr)); }
   .sp-tile.hero { grid-column: auto; }
 }
@@ -2070,7 +2075,7 @@ button.bd-row:hover .bd-title { color: var(--flood); }
   <header class="demo-bar">
     <div class="demo-brand"><span class="demo-logo">FAN<i>/</i>IP</span><span class="demo-name">Season demo, Aldermoor Athletic</span></div>
     <div class="demo-controls">
-      <span class="demo-note">Fictional club, illustrative figures</span>
+      <span class="demo-note">Fictional club, illustrative figures; a few screens show features on our roadmap</span>
       <label class="style-pick"><span>Style</span><select id="styleSel" aria-label="Style of the member app"></select></label>
       <div class="seg" role="group" aria-label="View"><button data-act="view" data-v="member" aria-pressed="true">Member app</button><button data-act="view" data-v="admin" aria-pressed="false">Club admin</button></div>
       <div class="seg seg-device" role="group" aria-label="Screen"><button data-act="device" data-d="phone" aria-pressed="false">Phone</button><button data-act="device" data-d="laptop" aria-pressed="true">Laptop</button></div>
@@ -3534,7 +3539,7 @@ function renderMember(scrollTop = true) {
     });
   }
   const view = $("#view"), keep = view.scrollTop;
-  view.innerHTML = SCREENS[state.tab]();
+  view.innerHTML = SCREENS[state.tab]() + screenFoot();
   view.scrollTop = scrollTop ? 0 : keep;
   enhance(view);
   if (state.tab === "home") state.dealt = true;
@@ -3542,6 +3547,7 @@ function renderMember(scrollTop = true) {
   maybeBadgeToast();
 }
 
+const screenFoot = () => `<p class="foot-note">Aldermoor is a fictional club. Every name and figure here is illustrative; a few screens show features on our roadmap. A FAN/IP demo.</p>`;
 function enhance(root) {
   requestAnimationFrame(() => requestAnimationFrame(() => {
     root.querySelectorAll("[data-fill]").forEach((el) => el.style.setProperty("--fill", el.dataset.fill + "%"));
@@ -4718,7 +4724,7 @@ function csvDownload(rows, name) {
 /* ---------------------------------------------------------------- Results */
 const SEASON_DAYS = 91;
 const SEASON_START = new Date(NOW.getTime() - (SEASON_DAYS - 1) * 864e5);
-const big = (n) => n >= 1e6 ? (n / 1e6).toFixed(1) + "M" : n >= 1e4 ? Math.round(n / 1e3) + "k" : fmt(n);
+const big = (n) => n >= 1e6 ? (n / 1e6).toFixed(n >= 1e8 ? 1 : 2).replace(/\.?0+$/, "") + "M" : n >= 1e4 ? Math.round(n / 1e3) + "k" : fmt(n);
 const eur = (n) => "€" + fmt(n);
 /* Media value: views on members' posts, priced at the ad price per 1,000 views (CPM) the club sets. €7 is a usual sport CPM. */
 const mediaValue = (views) => (views / 1000) * state.cpm;
@@ -4729,20 +4735,20 @@ function cpmBox() {
 }
 const pct = (a, b) => b ? (a / b * 100).toFixed(1) + "%" : "–";
 /* network, posts, views, like rate, comment rate, share rate (season so far) */
-const NETS = [["Instagram", 3150, 23.8e6, 0.074, 0.0042, 0.0051], ["TikTok", 1860, 17.6e6, 0.088, 0.0036, 0.0064], ["YouTube Shorts", 640, 3.1e6, 0.041, 0.0021, 0.0017], ["Facebook", 762, 1.6e6, 0.032, 0.0048, 0.0072]];
+const NETS = [["Instagram", 3150, 23.8e6, 0.074, 0.0042, 0.0051], ["TikTok", 1860, 17.6e6, 0.088, 0.0036, 0.0064], ["YouTube Shorts", 1402, 4.7e6, 0.041, 0.0021, 0.0017]];
 const SPONSOR_LOOK = { "Weirbank Motors": ["WM", "#17263a", "#ffd24d"], "Corran Lane Bakery": ["CL", "#f0e2c4", "#a33213"] };
 /* Missions with their totals. ago = days since it started. net = share of views per network. */
 const RM = [
-  { id: "post", title: "Post your matchday photo, tag @aldermoor and @weirbankmotors", type: "Social post", sponsor: "Weirbank Motors", ago: 1, done: 1860, seen: 12210, posts: 1860, views: 1.71e6, nm: 118, er: 1.15, net: [0.55, 0.38, 0.04, 0.03] },
-  { id: "story", title: "Share a story from the stands", type: "Story", ago: 1, done: 1310, seen: 11480, posts: 1310, views: 1.31e6, nm: 41, net: [0.72, 0.24, 0, 0.04] },
-  { id: "scarf", title: "Scarves up: show us yours", type: "Photo", sponsor: "Weirbank Motors", ago: 3, done: 1420, seen: 12940, posts: 1180, views: 2.94e6, nm: 214, er: 1.1, net: [0.62, 0.27, 0.04, 0.07] },
+  { id: "post", title: "Post your matchday photo, tag @aldermoor and @weirbankmotors", type: "Social post", sponsor: "Weirbank Motors", ago: 1, done: 1860, seen: 12210, posts: 1860, views: 1.71e6, nm: 118, er: 1.15, net: [0.55, 0.38, 0.07] },
+  { id: "story", title: "Share a story from the stands", type: "Story", ago: 1, done: 1310, seen: 11480, posts: 1310, views: 1.31e6, nm: 41, net: [0.72, 0.24, 0.04] },
+  { id: "scarf", title: "Scarves up: show us yours", type: "Photo", sponsor: "Weirbank Motors", ago: 3, done: 1420, seen: 12940, posts: 1180, views: 2.94e6, nm: 214, er: 1.1, net: [0.62, 0.27, 0.11] },
   { id: "first", title: "Your first match at The Weir", type: "Open question", ago: 2, done: 1278, seen: 9310, posts: 0, views: 0, nm: 0, extra: () => [["Answers featured", String(ANSWER_BASE.first.featured + ANSWERS.filter((a) => a.mid === "first" && a.status === "featured").length)], ["Average answer", "38 words"]] },
-  { id: "predict", title: "Predict the score v Granby Rovers", type: "Prediction", ago: 4, done: 6140, seen: 15020, posts: 820, views: 1.12e6, nm: 61, net: [0.48, 0.38, 0.06, 0.08] },
+  { id: "predict", title: "Predict the score v Granby Rovers", type: "Prediction", ago: 4, done: 6140, seen: 15020, posts: 820, views: 1.12e6, nm: 61, net: [0.48, 0.38, 0.14] },
   { id: "quiz", title: "The Weir history quiz", type: "Quiz", sponsor: "Corran Lane Bakery", ago: 9, done: 5233, seen: 13480, posts: 0, views: 0, nm: 0, extra: [["Right first time", "64%"], ["Average time", "21 s"]] },
   { id: "md8", title: "Matchday 8 check-in", type: "Check-in", ago: 12, done: 3804, seen: 14100, posts: 960, views: 2.31e6, nm: 88 },
   { id: "away", title: "Away end at Holbrook", type: "Photo", ago: 19, done: 640, seen: 8820, posts: 590, views: 1.86e6, nm: 97 },
   { id: "kit", title: "New home kit quiz", type: "Quiz", ago: 21, done: 4911, seen: 12650, posts: 0, views: 0, nm: 0, extra: [["Right first time", "71%"]] },
-  { id: "chant", title: "Film your Derby Day chant", type: "Social post", sponsor: "Weirbank Motors", ago: 36, done: 2150, seen: 11870, posts: 2150, views: 9.42e6, nm: 512, er: 1.25, net: [0.31, 0.58, 0.08, 0.03] },
+  { id: "chant", title: "Film your Derby Day chant", type: "Social post", sponsor: "Weirbank Motors", ago: 36, done: 2150, seen: 11870, posts: 2150, views: 9.42e6, nm: 512, er: 1.25, net: [0.31, 0.58, 0.11] },
   { id: "fill", title: "Fill The Weir: bring a mate", type: "Referral", sponsor: "Corran Lane Bakery", ago: 48, done: 1305, seen: 10200, posts: 410, views: 0.88e6, nm: 1305 },
   { id: "kitlaunch", title: "Kit launch: wear it, post it", type: "Social post", ago: 64, done: 1890, seen: 9900, posts: 1890, views: 6.71e6, nm: 340 },
 ];
@@ -4787,10 +4793,14 @@ function periodBar() {
   return `<div class="period"><div class="opt-row" role="group" aria-label="Period">${opts.map(([v, l]) => `<button type="button" class="opt" data-act="rperiod" data-v="${v}" aria-pressed="${state.rperiod === v}">${l}</button>`).join("")}</div>
     ${state.rperiod === "custom" ? `<div class="period-dates aform">${fld("From", `<input type="date" name="rfrom" value="${state.rfrom}" min="${isoDay(SEASON_START)}" max="${isoDay(NOW)}">`)}${fld("To", `<input type="date" name="rto" value="${state.rto}" min="${isoDay(SEASON_START)}" max="${isoDay(NOW)}">`)}</div>` : ""}</div>`;
 }
+/* Members who took part in several missions: a member can take part in more than one, so a total counts each person once.
+   Weirbank Motors' three missions had 2,150, 1,860 and 1,420 taking part: 3,240 different members. Other sets follow the
+   same overlap: the biggest mission, plus a third of the others. */
+const peopleIn = (rows) => { if (!rows.length) return 0; const d = rows.map((r) => r.done), max = Math.max(...d), rest = d.reduce((a, b) => a + b, 0) - max; return Math.round(max + (rest * 1090) / 3280); };
 function sponsorsIn(list) {
   const out = {};
-  list.filter((r) => r.sponsor).forEach((r) => { const s = out[r.sponsor] || (out[r.sponsor] = { name: r.sponsor, n: 0, done: 0, views: 0, eng: 0, value: 0, reach: 0, nm: 0 }); s.n++; ["done", "views", "eng", "value", "reach", "nm"].forEach((k) => (s[k] += r[k])); });
-  return Object.values(out);
+  list.filter((r) => r.sponsor).forEach((r) => { const s = out[r.sponsor] || (out[r.sponsor] = { name: r.sponsor, n: 0, done: 0, views: 0, eng: 0, value: 0, reach: 0, nm: 0, rows: [] }); s.n++; s.rows.push(r); ["done", "views", "eng", "value", "reach", "nm"].forEach((k) => (s[k] += r[k])); });
+  return Object.values(out).map((s) => ({ ...s, people: peopleIn(s.rows) }));
 }
 const sponsorMono = (s) => { const [m, bg, fg] = SPONSOR_LOOK[s] || ["", "#eee", "#333"]; return `<span class="sp-mono" style="background:${bg};color:${fg}">${m}</span>`; };
 
@@ -4821,7 +4831,7 @@ function resultsOverview() {
     <div class="adm-grid">
       <div class="acard"><h2>Weekly active members</h2><p class="sub">${P.f < 1 ? "The shaded weeks are the period you picked" : "Dots mark home matchdays"}</p><div class="chart">${chartSVG(P.f < 1 ? [w0, 12] : null)}</div></div>
       <div class="acard"><h2>Sponsors</h2><p class="sub">Their missions in this period. Open one for its report and a private link to send them.</p>
-        ${sps.length ? `<div class="sp-list">${sps.map((s) => `<button class="sp-row" data-act="rsponsor" data-s="${esc(s.name)}">${sponsorMono(s.name)}<span><b>${esc(s.name)}</b><span class="sub">${s.n} mission${s.n > 1 ? "s" : ""}, ${fmt(s.done)} members took part${s.value ? ", " + eur(s.value) + " media value" : ""}</span></span><span class="go">Report</span></button>`).join("")}</div>` : `<p class="sub" style="margin-top:10px">No sponsored mission in this period.</p>`}</div>
+        ${sps.length ? `<div class="sp-list">${sps.map((s) => `<button class="sp-row" data-act="rsponsor" data-s="${esc(s.name)}">${sponsorMono(s.name)}<span><b>${esc(s.name)}</b><span class="sub">${s.n} mission${s.n > 1 ? "s" : ""}, ${fmt(s.people)} members took part${s.value ? ", " + eur(s.value) + " media value" : ""}</span></span><span class="go">Report</span></button>`).join("")}</div>` : `<p class="sub" style="margin-top:10px">No sponsored mission in this period.</p>`}</div>
     </div>
     <div class="acard"><h2>Where members talk about the club</h2><p class="sub">${P.label}, checked through members' linked accounts</p>
       <div class="scroll-x"><table class="atable tight"><thead><tr><th>Network</th><th class="r">Posts</th><th class="r">Views</th><th class="r">Likes</th><th class="r">Comments</th><th class="r">Shares</th><th class="r">Engagement</th><th class="r">Media value</th></tr></thead>
@@ -4840,7 +4850,7 @@ function sponsorCard(sp, list) {
     <div class="sp-tiles">
       ${tile(sp.value ? eur(sp.value) : "–", "Media value", sp.value ? `Views of members' posts at a ${cpmLabel()} CPM` : "No public post asked for", "hero")}
       ${tile(sp.views ? big(sp.views) : "–", "Views of members' posts", sp.views ? `${big(sp.eng)} likes, comments and shares` : "")}
-      ${tile(fmt(sp.done), "Members who took part")}
+      ${tile(fmt(sp.people), "Members who took part", sp.n > 1 ? "Each member counted once" : "")}
       ${tile(sp.reach ? big(sp.reach) : "–", "Potential reach", sp.reach ? "Followers of the accounts that posted" : "")}
       ${tile(fmt(sp.nm), "New members who joined through it")}
     </div>
@@ -4861,14 +4871,14 @@ function resultsMissions() {
       <div class="filters aform">${fld("Sponsor", sel("rsponsor", [["all", "All missions"], ...sponsorNames.map((n) => [n, n]), ["none", "Missions without a sponsor"]], s))}${fld("Sort by", sel("rsort", [["value", "Media value"], ["views", "Views"], ["eng", "Likes, comments and shares"], ["done", "Members who took part"], ["nm", "New members"]], state.rsort))}</div>
       ${list.length ? `<div class="scroll-x"><table class="atable wide"><thead><tr><th>Mission</th><th class="r">Done by</th><th class="r">Of those who saw it</th><th class="r">Posts</th><th class="r">Views</th><th class="r">Likes</th><th class="r">Comments</th><th class="r">Shares</th><th class="r">Value</th><th class="r">New members</th></tr></thead>
       <tbody>${list.map((r) => `<tr class="click" data-act="rmission" data-id="${r.id}"><td class="wrap"><b>${esc(r.title)}</b><br><span class="sub">${r.type}, ${dayLabel(isoDay(rmDate(r)))}${r.sponsor ? `, with ${r.sponsor}` : ""}</span></td><td class="r">${fmt(r.done)}</td><td class="r">${pct(r.done, r.seen)}</td><td class="r">${r.posts ? fmt(r.posts) : "–"}</td><td class="r">${r.views ? big(r.views) : "–"}</td><td class="r">${r.views ? big(r.likes) : "–"}</td><td class="r">${r.views ? big(r.comments) : "–"}</td><td class="r">${r.views ? big(r.shares) : "–"}</td><td class="r">${r.value ? eur(r.value) : "–"}</td><td class="r">${r.nm ? fmt(r.nm) : "–"}</td></tr>`).join("")}</tbody>
-      <tfoot><tr><td>${list.length} mission${list.length > 1 ? "s" : ""}</td><td class="r">${fmt(tot("done"))}</td><td></td><td class="r">${fmt(tot("posts"))}</td><td class="r">${big(tot("views"))}</td><td class="r">${big(tot("likes"))}</td><td class="r">${big(tot("comments"))}</td><td class="r">${big(tot("shares"))}</td><td class="r">${eur(tot("value"))}</td><td class="r">${fmt(tot("nm"))}</td></tr></tfoot></table></div>`
+      <tfoot><tr><td>${list.length} mission${list.length > 1 ? "s" : ""}</td><td class="r">${sp ? fmt(sp.people) : ""}</td><td></td><td class="r">${fmt(tot("posts"))}</td><td class="r">${big(tot("views"))}</td><td class="r">${big(tot("likes"))}</td><td class="r">${big(tot("comments"))}</td><td class="r">${big(tot("shares"))}</td><td class="r">${eur(tot("value"))}</td><td class="r">${fmt(tot("nm"))}</td></tr></tfoot></table></div>${sp && list.length > 1 ? `<p class="sub" style="margin-top:10px">Done by, in total: ${fmt(sp.people)} members, each counted once. A member can take part in several missions.</p>` : ""}`
         : `<p class="sub" style="margin-top:12px">No mission matches. Try a longer period.</p>`}
     </div>`;
 }
 function postsFor(list) {
   const out = [];
   list.filter((r) => r.views).forEach((r, i) => [0.071, 0.046, 0.029].forEach((sh, j) => {
-    const v = r.views * sh * (1 - ((i + j) % 3) * 0.08), net = NET_NAMES[(r.net ? [0, 1, 0] : [1, 0, 3])[j]];
+    const v = r.views * sh * (1 - ((i + j) % 3) * 0.08), net = NET_NAMES[(r.net ? [0, 1, 0] : [1, 0, 2])[j]];
     out.push({ who: POSTERS[(i * 3 + j) % POSTERS.length], net, r, ago: Math.max(0, r.ago - j), views: v, likes: v * (net === "TikTok" ? 0.088 : 0.074) * (r.er || 1), comments: v * 0.004, shares: v * 0.0058 });
   }));
   return out;
@@ -4897,7 +4907,7 @@ function dayBars(r) {
 function missionDetail(id) {
   const r = rmStats(RM.find((x) => x.id === id));
   const tiers = [["Academy", 38], ["First team", 41], ["Captain", 17], ["Club legend", 4]].map(([t, p], i) => [t, p + ((r.ago + i * 3) % 5) - 2]);
-  const split = r.net || [0.55, 0.32, 0.06, 0.07];
+  const split = r.net || [0.55, 0.32, 0.13];
   const nets = NET_NAMES.map((n, i) => { const v = r.views * split[i]; return { n, posts: r.posts * split[i], v, likes: r.likes * split[i], comments: r.comments * split[i], shares: r.shares * split[i] }; });
   const posts = postsFor([r]).sort((a, b) => b.views - a.views);
   const body = `${r.sponsor ? `<div class="sp-inline">${sponsorMono(r.sponsor)}<span>Sponsored by <b>${esc(r.sponsor)}</b>.</span></div>` : ""}
@@ -4920,7 +4930,7 @@ function resultsCSV(el) {
   const slug = (s) => s.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
   if (el.dataset.id) {
     const r = rmStats(RM.find((x) => x.id === el.dataset.id));
-    const split = r.net || [0.55, 0.32, 0.06, 0.07];
+    const split = r.net || [0.55, 0.32, 0.13];
     csvDownload([rcols(), rcsvRow(r), [], ["Network", "Posts", "Views", "Likes", "Comments", "Shares"], ...NET_NAMES.map((n, i) => [n, Math.round(r.posts * split[i]), Math.round(r.views * split[i]), Math.round(r.likes * split[i]), Math.round(r.comments * split[i]), Math.round(r.shares * split[i])])], `aldermoor-${slug(r.title)}.csv`);
     return;
   }

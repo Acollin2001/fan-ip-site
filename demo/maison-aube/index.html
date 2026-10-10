@@ -1456,7 +1456,7 @@ function accountPage({ domain, active, renews, sub }) {
         <dl class="bs-words" style="margin-top:14px"><dt>Price</dt><dd>€1,290 a month, excluding VAT</dd><dt>Term</dt><dd>12 months, renews ${renews}</dd><dt>Invoices</dt><dd>Monthly, by card</dd><dt>Support</dt><dd>Reply within one business day</dd></dl></div>
     </div>
     <div class="adm-row">
-      <div class="acard"><h2>Roles</h2><div class="scroll-x"><table class="atable"><tbody>${roles.map(([r, w]) => `<tr><td><b style="font-weight:500">${r}</b></td><td class="wrap">${w}</td></tr>`).join("")}</tbody></table></div></div>
+      <div class="acard"><h2>Roles</h2><table class="atable"><tbody>${roles.map(([r, w]) => `<tr><td><b style="font-weight:500">${r}</b></td><td class="wrap">${w}</td></tr>`).join("")}</tbody></table></div>
       <div class="acard"><h2>Security and data</h2><dl class="bs-words" style="margin-top:12px"><dt>Team sign-in</dt><dd>Two-step</dd><dt>${aud() === "fans" ? "Fans" : "Members"} sign in</dt><dd>Email and password</dd><dt>Domain</dt><dd>${domain}</dd><dt>Data</dt><dd>Hosted in the EU, member export in one click</dd><dt>${aud() === "fans" ? "Fan" : "Member"} data</dt><dd>Deleted 30 days after a ${aud() === "fans" ? "fan" : "member"} leaves</dd></dl></div>
     </div>`;
 }

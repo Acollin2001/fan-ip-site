@@ -2017,7 +2017,7 @@ function onAction(act, el) {
       setTimeout(() => {
         z.innerHTML = `<div class="found"><span class="nt">${NET_SHORT[state.net]}</span><span><b>Found it: ${state.net}, ${ME.handle}</b><ul><li>Tags @maisonaube</li><li>${r.tag} in the caption</li><li>Public, posted a few minutes ago</li></ul></span></div>`;
         setTimeout(() => {
-          state.posts.unshift({ title: r.title, net: state.net, ago: 0, views: 312, likes: 24, fresh: 1 });
+          state.posts.unshift({ title: r.title, net: state.net, ago: 0, views: 940, likes: 72, fresh: 1 });
           const before = complete(r.id, $("#postZone .nt"));
           state.link = "";
           const sh = $("#sheet");
@@ -2059,7 +2059,7 @@ function onAction(act, el) {
       const r = ritual("review15"), z = $("#postZone");
       z.innerHTML = `<div class="checking"><span class="spin"></span>Looking for your review on ${state.net}…</div>`;
       setTimeout(() => {
-        state.posts.unshift({ title: "A review in 15 seconds", net: state.net, ago: 0, views: 188, likes: 15, fresh: 1 });
+        state.posts.unshift({ title: "A review in 15 seconds", net: state.net, ago: 0, views: 910, likes: 71, fresh: 1 });
         const before = complete("review15", z);
         z.outerHTML = successHtml(r, before, "Found and counted. Fifteen seconds well spent.");
         renderMember(false);
@@ -2147,7 +2147,7 @@ function periodViews() {
 }
 const pf = () => periodViews() / DAILY.reduce((a, b) => a + b, 0);
 /* network, share of posts, share of views, like rate, comment rate, share rate */
-const NETS = [["Instagram", 0.55, 0.52, 0.071, 0.0041, 0.0049], ["TikTok", 0.33, 0.41, 0.086, 0.0035, 0.0068], ["YouTube Shorts", 0.09, 0.06, 0.039, 0.002, 0.0016], ["Facebook", 0.03, 0.01, 0.031, 0.0046, 0.007]];
+const NETS = [["Instagram", 0.55, 0.51, 0.071, 0.0041, 0.0049], ["TikTok", 0.33, 0.41, 0.086, 0.0035, 0.0068], ["YouTube Shorts", 0.09, 0.06, 0.039, 0.002, 0.0016], ["Facebook", 0.03, 0.02, 0.031, 0.0046, 0.007]];
 const POSTS_30 = 3120;
 /* Ritual results over the last 30 days */
 const RS = [

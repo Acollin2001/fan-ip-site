@@ -1970,7 +1970,7 @@ function onAction(act, el) {
       setTimeout(() => {
         z.innerHTML = `<div class="found"><span class="nt">${NET_SHORT[state.net]}</span><span><b>Found: ${state.net}, ${ME.handle}</b><ul><li>Tags @ilsamorrow</li><li>${m.tag} in the caption</li><li>Public, posted minutes ago${m.city ? `, near the venue` : ""}</li></ul></span></div>`;
         setTimeout(() => {
-          state.posts.unshift({ title: m.title, net: state.net, city: m.city ? city(m.city).city : "", ago: 0, views: 264, likes: 31, fresh: 1, kind: m.id === "fit" ? "tee" : "setlist" });
+          state.posts.unshift({ title: m.title, net: state.net, city: m.city ? city(m.city).city : "", ago: 0, views: 930, likes: 109, fresh: 1, kind: m.id === "fit" ? "tee" : "setlist" });
           const before = complete(m.id, $("#postZone .nt"));
           let extra = "";
           if (m.city && !state.got.has(m.city)) { state.got.add(m.city); state.just = m.city; extra = gotRow(m.city); }
@@ -2009,7 +2009,7 @@ function onAction(act, el) {
       const m = mission("sing"), z = $("#recZone");
       z.innerHTML = `<div class="checking"><span class="spin"></span>Looking for your video on ${state.net}...</div>`;
       setTimeout(() => {
-        state.posts.unshift({ title: "Sing the chorus of 'Marée haute'", net: state.net, city: "", ago: 0, views: 412, likes: 58, fresh: 1, kind: "stage" });
+        state.posts.unshift({ title: "Sing the chorus of 'Marée haute'", net: state.net, city: "", ago: 0, views: 1240, likes: 175, fresh: 1, kind: "stage" });
         const before = complete("sing", z);
         z.outerHTML = successHtml(m, before, "Found and counted. Ilsa hears these on the bus.");
         renderMember(false);
@@ -2079,7 +2079,7 @@ const DAILY = Array.from({ length: 30 }, (_, i) => {
 const DAY_LABELS = DAILY.map((_, i) => dayNum(addDays(i - 29)));
 const SHOW_MARKS = DAILY.map((_, i) => i).filter((i) => TOUR.some((c) => c.d === i - 29));
 /* network, share of posts, share of views, like rate, comment rate, share rate */
-const NETS = [["TikTok", 0.47, 0.58, 0.09, 0.0038, 0.0066], ["Instagram", 0.41, 0.33, 0.072, 0.0043, 0.005], ["YouTube Shorts", 0.1, 0.08, 0.042, 0.0021, 0.0017], ["Facebook", 0.02, 0.01, 0.031, 0.0047, 0.007]];
+const NETS = [["TikTok", 0.47, 0.57, 0.09, 0.0038, 0.0066], ["Instagram", 0.41, 0.33, 0.072, 0.0043, 0.005], ["YouTube Shorts", 0.1, 0.08, 0.042, 0.0021, 0.0017], ["Facebook", 0.02, 0.02, 0.031, 0.0047, 0.007]];
 const played = () => TOUR.filter((c) => c.d < 0);
 const tourTot = (k) => played().reduce((a, c) => a + (c[k] || 0), 0) + (k === "ci" && state.done.has("merch") ? 1 : 0) + (k === "ci" ? state.live : 0);
 

@@ -13,7 +13,7 @@
 export const UI_FR = {
   trial: "Commencer mon essai gratuit",
   demo: "Réserver une démo",
-  faqMoreHtml: 'D’autres réponses, pour tous les univers, dans la <a href="../faq.html" hreflang="en">FAQ complète</a> (en anglais).',
+  faqMoreHtml: 'D’autres réponses, pour tous les univers, dans la <a href="../faq.html" hreflang="en">FAQ complète</a>.',
 };
 
 export const PAGES_FR = {
@@ -54,7 +54,7 @@ export const PAGES_FR = {
         {
           h: "Pour qui",
           pHtml:
-            "Beauté, soin, mode, café, alimentation, sportswear et boutiques indépendantes. Toute marque dont les clients prennent en photo ce qu’ils ont acheté. Il fonctionne à côté de votre programme de fidélité actuel : l’un récompense ce que les clients achètent, l’autre ce qu’ils disent. Commencez avec Starter à 99 € par mois, jusqu’à 150 membres actifs.",
+            "Beauté, soin, mode, café, alimentation, sportswear et boutiques indépendantes. Toute marque dont les clients prennent en photo ce qu’ils ont acheté. FAN/IP fonctionne à côté de votre programme de fidélité actuel : l’un récompense ce que les clients achètent, l’autre ce qu’ils disent. Commencez avec Starter à 99 € par mois, jusqu’à 150 membres actifs.",
         },
         {
           h: "Les missions de vos clients",
@@ -76,7 +76,7 @@ export const PAGES_FR = {
         },
       ],
       footHtml:
-        'Voyez-le configuré pour une marque : <a href="../demo/maison-aube/">la démo Maison Aube</a>, une marque de soin fictive.',
+        'Voyez-le configuré pour une marque : <a href="../demo/maison-aube/" hreflang="en">la démo Maison Aube</a>, une marque de soin fictive.',
     },
 
     faqTitle: "Les questions des marques.",
@@ -196,7 +196,7 @@ export const PAGES_FR = {
         },
       ],
       footHtml:
-        'Voyez une saison complète à <a href="../demo/aldermoor/">Aldermoor</a>, un club de football fictif, rapport sponsor compris.',
+        'Voyez une saison complète à <a href="../demo/aldermoor/" hreflang="en">Aldermoor</a>, un club de football fictif, rapport sponsor compris.',
     },
 
     faqTitle: "Les questions des clubs.",
@@ -209,7 +209,7 @@ export const PAGES_FR = {
       {
         q: "Comment montrer aux sponsors ce que valent les fans ?",
         aHtml:
-          'Lancez une quête sponsor. Les supporters publient des photos de match avec le sponsor dans le cadre, et le sponsor reçoit un lien privé vers son rapport : membres qui ont participé, publications, vues et valeur média au prix des 1 000 vues que vous fixez. La <a href="../demo/aldermoor/">démo Aldermoor</a> en montre un.',
+          'Lancez une quête sponsor. Les supporters publient des photos de match avec le sponsor dans le cadre, et le sponsor reçoit un lien privé vers son rapport : membres qui ont participé, publications, vues et valeur média au prix des 1 000 vues que vous fixez. La <a href="../demo/aldermoor/" hreflang="en">démo Aldermoor</a> en montre un.',
       },
       {
         q: "Est-ce que ça marche pour les équipes esport et les salles gaming ?",
@@ -231,7 +231,7 @@ export const PAGES_FR = {
     product: {
       titleHtml: "Trois étapes.<br>Vos supporters font le reste.",
       step2: "Les supporters publient depuis leurs propres comptes. Chaque publication validée leur rapporte de l’XP pour leur niveau et des points pour la boutique.",
-      step3: "Chaque publication et ses vues, dans un rapport à envoyer à votre sponsor.",
+      step3: "Chaque publication et ses vues dans votre admin, et un rapport privé avec les totaux pour votre sponsor.",
       caption: "Valeurs indicatives. Chaque club nomme et règle ses propres défis, niveaux et récompenses, sponsors compris. ",
     },
     resultTitle: "Ce que vous et votre sponsor voyez.",
@@ -315,7 +315,7 @@ export const PAGES_FR = {
         },
       ],
       footHtml:
-        'Voyez une tournée de six dates avec <a href="../demo/ilsa-morrow/">Ilsa Morrow</a>, une chanteuse fictive.',
+        'Voyez une tournée de six dates avec <a href="../demo/ilsa-morrow/" hreflang="en">Ilsa Morrow</a>, une chanteuse fictive.',
     },
 
     faqTitle: "Les questions des artistes.",
@@ -333,7 +333,7 @@ export const PAGES_FR = {
       {
         q: "Comment voir de quels concerts on parle le plus ?",
         aHtml:
-          'Créez une mission par concert. Votre admin additionne les vues, les j’aime, les commentaires, les partages et la valeur média, mission par mission à partir de Club, et la portée potentielle de tous ceux qui ont publié. La <a href="../demo/ilsa-morrow/">démo Ilsa Morrow</a> montre une tournée de six dates.',
+          'Créez une mission par concert. Votre admin additionne les vues, les j’aime, les commentaires, les partages et la valeur média, mission par mission à partir de Club, et la portée potentielle de tous ceux qui ont publié. La <a href="../demo/ilsa-morrow/" hreflang="en">démo Ilsa Morrow</a> montre une tournée de six dates.',
       },
       {
         q: "En quoi est-ce différent de la promotion payante ?",

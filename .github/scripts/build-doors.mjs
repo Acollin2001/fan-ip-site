@@ -260,7 +260,7 @@ ${w.oldLines.map((l) => `          <p class="why-line t-body">${esc(l)}</p>`).jo
   // See it with your name, the closing line and the footer.
   h = swap(h, /(<p class="ytry-lead t-body">)[^<]*(<\/p>)/, `$1${esc(page.tryLead)}$2`);
   h = swap(h, /(id="door-name"[^>]*placeholder=")[^"]*"/, `$1${esc(page.tryPlaceholder)}"`);
-  h = swap(h, /<a data-for="(\w+)" href="[^"]*">[^<]*<\/a>/g, (m, k) => (k === key ? m : ""));
+  h = swap(h, /<a data-for="(\w+)" href="[^"]*"(?: hreflang="en")?>[^<]*<\/a>/g, (m, k) => (k === key ? m : ""));
   h = swap(h, /(<p class="close-lead t-lead">)[^<]*(<\/p>)/, `$1${esc(page.closeLead)}$2`);
   h = swap(h, /(<p class="foot-sentence t-body">)[^<]*(<\/p>)/, `$1${esc(page.footSentence)}$2`);
 

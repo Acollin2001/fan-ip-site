@@ -15,7 +15,7 @@
   <link rel="alternate" hreflang="x-default" href="https://fan-ip.com/sport.html">
   <meta property="og:type" content="website">
   <meta property="og:locale" content="fr_FR">
-  <meta property="og:locale:alternate" content="en_US">
+  <meta property="og:locale:alternate" content="en_GB">
   <meta property="og:image" content="https://fan-ip.com/og-image.png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
@@ -50,7 +50,15 @@
         "founder": {
           "@type": "Person",
           "name": "Alexis Collin"
-        }
+        },
+        "knowsAbout": [
+          "Engagement des fans",
+          "Programmes de fidélité pour les fans",
+          "Valeur des médias gagnés",
+          "Contenu généré par les utilisateurs",
+          "Ambassadeurs de marque",
+          "Applications de fan club en marque blanche"
+        ]
       },
       {
         "@type": "WebSite",
@@ -58,7 +66,7 @@
         "name": "FAN/IP",
         "url": "https://fan-ip.com/",
         "inLanguage": [
-          "en",
+          "en-GB",
           "fr-FR"
         ],
         "publisher": {
@@ -78,7 +86,25 @@
         "about": {
           "@id": "https://fan-ip.com/#organization"
         },
-        "primaryImageOfPage": "https://fan-ip.com/og-image.png"
+        "primaryImageOfPage": "https://fan-ip.com/og-image.png",
+        "dateModified": "2026-10-10",
+        "breadcrumb": {
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            {
+              "@type": "ListItem",
+              "position": 1,
+              "name": "FAN/IP",
+              "item": "https://fan-ip.com/fr/"
+            },
+            {
+              "@type": "ListItem",
+              "position": 2,
+              "name": "Sport et esport",
+              "item": "https://fan-ip.com/fr/sport.html"
+            }
+          ]
+        }
       },
       {
         "@type": "SoftwareApplication",
@@ -98,7 +124,7 @@
             "name": "Starter",
             "price": "99",
             "priceCurrency": "EUR",
-            "description": "Par mois, hors TVA. Ou 990 € par an. Sans frais de mise en place. Jusqu’à 150 membres actifs par mois.",
+            "description": "Par mois, hors TVA. Ou 990 € par an. Sans frais de mise en place. Jusqu’à 150 membres actifs par mois. Classement inclus.",
             "url": "https://fan-ip.com/fr/pricing.html"
           },
           {
@@ -186,6 +212,7 @@
   <link rel="preload" href="../assets/ClashDisplay-600-DcA1xgJG.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="../assets/GeneralSans-400-BeAhF2WT.woff2" as="font" type="font/woff2" crossorigin>
   <script type="module" crossorigin src="../assets/header-AsSSiagq.js"></script>
+  <script src="../assets/analytics.js" defer></script>
   <script type="module" crossorigin src="../assets/main-MXyARl6K.js"></script>
   <link rel="stylesheet" crossorigin href="../assets/style-CsTO_O25.css">
   <link rel="stylesheet" href="../assets/home-refocus.css">
@@ -240,6 +267,7 @@
           <a class="btn btn--primary" href="https://app.fan-ip.com/start?for=sport" data-start-link>Commencer mon essai gratuit</a>
           <a class="hero-link" href="book-a-demo.html">Réserver une démo</a>
         </div>
+        <p class="hero-plan t-small">Les quêtes sponsor et les pronostics de match arrivent avec Club, les batailles d’équipes avec Season. Avec Starter, vous pouvez essayer les missions, les check-ins par QR code, les récompenses et le classement.</p>
       </div>
       <div class="door">
         <p class="sr-only">Pour les clubs de football, de basket, de hockey sur glace, de handball et de cyclisme, les équipes esport et les salles gaming.</p>
@@ -268,7 +296,7 @@
             </div>
             <div class="dw-col">
               <h3 class="dw-h"><span class="dw-n" aria-hidden="true">03</span>Le rapport sponsor</h3>
-              <p class="dw-p t-body">Associez le nom d’un sponsor à une série de missions. Les supporters publient avec le sponsor dans le cadre, et le sponsor reçoit un lien privé sur son téléphone : membres qui ont participé, publications, vues, portée au-delà des abonnés du club et valeur média à 7 € les 1 000 vues, un tarif que vous pouvez modifier. De quoi montrer bien plus qu’un logo sur un maillot au moment du renouvellement.</p>
+              <p class="dw-p t-body">Associez le nom d’un sponsor à une série de missions. Les supporters publient avec le sponsor dans le cadre, et le sponsor reçoit un lien privé sur son téléphone : membres qui ont participé, publications, vues, abonnés des supporters qui ont publié et valeur média à 7 € les 1 000 vues, un tarif que vous pouvez modifier. De quoi montrer bien plus qu’un logo sur un maillot au moment du renouvellement.</p>
             </div>
         </div>
         <p class="dw-foot t-small">Voyez une saison complète à <a href="../demo/aldermoor/">Aldermoor</a>, un club de football fictif, rapport sponsor compris. <span aria-hidden="true">→</span></p>
@@ -326,7 +354,7 @@
               </div>
               <p class="vig-title">Niveau 3</p>
             </div>
-            <p class="vig-text">Encore 125 points avant le niveau 4.</p>
+            <p class="vig-text">125 XP avant le niveau 4.</p>
           </li>
           <li class="vig vig--reward">
             <p class="vig-label">Portée</p>
@@ -354,22 +382,22 @@
         <h2 id="result-title" class="rs-title t-h2">Ce que vous et votre sponsor voyez.</h2>
         <ul class="rs-grid" role="list">
           <li class="rs-card" data-for="sport">
-            <img class="rs-shot" src="../assets/demo-shots/aldermoor-result.jpg" width="390" height="700" loading="lazy" alt="Espace admin du club Aldermoor, onglet Résultats : la carte du sponsor Weirbank Motors en chiffres, avec le lien privé vers son rapport.">
+            <img class="rs-shot" src="../assets/demo-shots/aldermoor-result.jpg" width="390" height="700" loading="lazy" alt="Espace admin du club Aldermoor, onglet Résultats : le rapport du sponsor Weirbank Motors, avec la valeur média, les vues, les membres qui ont participé, la portée potentielle et les nouveaux membres.">
             <div class="rs-text">
               <p class="rs-k t-small">Un club, pour son sponsor Weirbank Motors · cette saison</p>
               <dl class="rs-stats">
-                <div><dt>Vues des publications des fans</dt><dd>14,1 M</dd></div>
+                <div><dt>Vues des publications des fans</dt><dd>14,07 M</dd></div>
                 <div><dt>Membres qui ont participé</dt><dd>5 430</dd></div>
-                <div><dt>Fois où les fans ont vu le sponsor dans l’app</dt><dd>114 762</dd></div>
+                <div><dt>Portée potentielle, abonnés des comptes qui ont publié</dt><dd>7,5 M</dd></div>
                 <div><dt>Nouveaux membres venus par le sponsor</dt><dd>844</dd></div>
               </dl>
-              <p class="rs-sum" aria-label="14,1 millions de vues à 7 € les 1 000 vues, soit 98 490 € de valeur média"><span class="rs-sum__n">14,1 M <small>vues</small></span><span class="rs-sum__op" aria-hidden="true">×</span><span class="rs-sum__n">7 € <small>les 1 000</small></span><span class="rs-sum__op" aria-hidden="true">=</span><span class="rs-sum__n rs-sum__n--total">98 490 € <small>de valeur média</small></span></p>
+              <p class="rs-sum" aria-label="14,07 millions de vues à 7 € les 1 000 vues, soit 98 490 € de valeur média"><span class="rs-sum__n">14,07 M <small>vues</small></span><span class="rs-sum__op" aria-hidden="true">×</span><span class="rs-sum__n">7 € <small>les 1 000</small></span><span class="rs-sum__op" aria-hidden="true">=</span><span class="rs-sum__n rs-sum__n--total">98 490 € <small>de valeur média</small></span></p>
               <p class="rs-line">Le sponsor reçoit ce rapport par un lien privé.</p>
               <a class="rs-go" href="../demo/aldermoor/">Ouvrir la démo du club <span aria-hidden="true">→</span></a>
             </div>
           </li>
         </ul>
-        <p class="rs-caption t-small">Écrans de la démo Aldermoor : un club fictif, des chiffres indicatifs. La valeur média correspond à ce que les mêmes vues coûteraient en publicité, à 7 € les 1 000 vues pour le sport. Vous fixez votre propre tarif. <a href="../reach-calculator.html?for=sport" hreflang="en" data-calc-link>Calculez vos chiffres</a></p>
+        <p class="rs-caption t-small">Écrans de la démo Aldermoor : un club fictif, des chiffres indicatifs. La valeur média correspond à ce que les mêmes vues coûteraient en publicité, à 7 € les 1 000 vues pour le sport. Vous fixez votre propre tarif. <a href="../reach-calculator.html?for=sport" hreflang="en" data-calc-link>Calculez vos chiffres</a> · <a href="../sample-report.html" hreflang="en">Voir un exemple de rapport sponsor</a></p>
       </div>
     </section>
 
@@ -526,6 +554,7 @@
             <p class="plan-for t-body">Pour un petit club ou une petite équipe. Inscrivez-vous en ligne et configurez tout vous-même.</p>
             <ul class="plan-list" role="list">
               <li>Jusqu’à 150 membres actifs par mois, puis une liste d’attente</li>
+              <li>Missions, récompenses et un classement par XP de saison</li>
               <li>Vos couleurs, vos polices et votre logo, sur un sous-domaine FAN/IP</li>
               <li>Guide en ligne et e-mails pour la mise en route ; support humain à partir de Club</li>
             </ul>
@@ -534,7 +563,7 @@
         </article>
         <ul class="price-grid" role="list">
           <li class="plan">
-            <p class="plan-name">Club</p>
+            <h3 class="plan-name">Club</h3>
             <p class="plan-price"><span class="plan-amount">490 €</span> <span class="plan-per">/ mois</span></p>
             <p class="plan-setup t-small">Mise en place 1 250 €</p>
             <p class="plan-for t-body">Pour un club qui lance son club de supporters.</p>
@@ -546,7 +575,7 @@
             <a class="btn plan-cta" href="book-a-demo.html">Réserver une démo</a>
           </li>
           <li class="plan plan--featured">
-            <p class="plan-name">Season <span class="plan-badge">Recommandée</span></p>
+            <h3 class="plan-name">Season <span class="plan-badge">Recommandée</span></h3>
             <p class="plan-price"><span class="plan-amount">1 290 €</span> <span class="plan-per">/ mois</span></p>
             <p class="plan-setup t-small">Mise en place 2 500 €</p>
             <p class="plan-for t-body">Pour un club qui rend des comptes à ses sponsors.</p>
@@ -559,7 +588,7 @@
             <a class="btn plan-cta" href="book-a-demo.html">Réserver une démo</a>
           </li>
           <li class="plan">
-            <p class="plan-name">Signature</p>
+            <h3 class="plan-name">Signature</h3>
             <p class="plan-price"><span class="plan-from">Dès</span> <span class="plan-amount">2 900 €</span> <span class="plan-per">/ mois</span></p>
             <p class="plan-setup t-small">Mise en place dès 5 000 €</p>
             <p class="plan-for t-body">Pour les grands clubs et les groupes qui ont plusieurs équipes.</p>
@@ -578,7 +607,7 @@
             <li data-for="sport"><b>Clubs et équipes :</b> Season, pour toute une saison avec vos sponsors à bord. Un club plus petit commence avec Club.</li>
           </ul>
           <p class="plan-pick__note t-small">Les trois démos en ligne tournent sur Season. <a href="#white-label">Les ouvrir</a></p>
-          <p class="plan-pick__note t-small">Fonctionne avec votre boutique en ligne et votre outil d’e-mailing, comme Shopify ou Klaviyo : les codes de récompense et les listes de membres s’exportent en tableur, sans rien à installer. <a href="../faq.html#integrations" hreflang="en">Comment ça marche</a></p>
+          <p class="plan-pick__note t-small">Fonctionne avec votre boutique en ligne et votre outil d’e-mailing, comme Shopify ou Klaviyo : les codes de récompense s’exportent en tableur, et les listes de membres aussi à partir de Club, sans rien à installer. <a href="../faq.html#integrations" hreflang="en">Comment ça marche</a></p>
         </div>
         <p class="price-more"><a class="btn btn--line" href="pricing.html">Comparer les formules</a></p>
       </div>
@@ -637,13 +666,14 @@
         <a href="../reach-calculator.html" hreflang="en">Calculateur de portée</a>
         <a href="pricing.html">Tarifs</a>
         <a href="../faq.html" hreflang="en">FAQ</a>
+        <a href="../glossary.html" hreflang="en">Glossaire</a>
         <a href="book-a-demo.html">Réserver une démo</a>
       </nav>
       <nav class="foot-for t-small" aria-label="Pensé pour">
         <span class="foot-for__lead">Pensé pour</span>
-        <a href="brands.html">les marques</a><span aria-hidden="true">·</span>
-        <a href="sport.html">le sport et l’esport</a><span aria-hidden="true">·</span>
-        <a href="artists.html">les artistes et créateurs</a>
+        <a href="brands.html">les marques</a>
+        <span class="foot-for__i"><span aria-hidden="true">·</span><a href="sport.html">le sport et l’esport</a></span>
+        <span class="foot-for__i"><span aria-hidden="true">·</span><a href="artists.html">les artistes et créateurs</a></span>
       </nav>
       <div class="foot-base">
         <p class="foot-copy t-small">© 2026 FAN/IP</p>
@@ -652,6 +682,7 @@
           <a href="../privacy.html" hreflang="en">Confidentialité</a>
           <a href="../data-deletion.html" hreflang="en">Suppression des données</a>
           <a href="../terms.html" hreflang="en">Conditions d’utilisation</a>
+          <a href="../security.html" hreflang="en">Sécurité</a>
           <button type="button" data-cookie-settings hidden>Paramètres des cookies</button>
         </nav>
       </div>

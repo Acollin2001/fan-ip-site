@@ -23,6 +23,8 @@ export const PAGES_FR = {
     description:
       "Un programme de fidélité qui récompense vos clients quand ils publient sur votre marque. Chaque post, ses vues, sa valeur média. Dès 99 € par mois.",
     ogTitle: "FAN/IP pour les marques · Des clients qui parlent de vous.",
+    planNote:
+      "Objets à collectionner, jeux-concours et colis presse arrivent avec Club. Avec Starter, vous pouvez essayer les missions photo et vidéo, les sondages, les quiz, le parrainage, les récompenses et le classement.",
     h1Html: 'Des clients qui parlent<br><span class="hero-promise__gold">de vous.</span>',
     lead:
       "Un programme de fidélité qui récompense ce que vos clients disent, pas seulement ce qu’ils achètent. Ils publient votre produit, gagnent des points et débloquent vos récompenses. Vous voyez chaque publication et jusqu’où elle est allée.",
@@ -70,7 +72,7 @@ export const PAGES_FR = {
         {
           h: "Ce que vous voyez dans l’admin",
           pHtml:
-            "Chaque publication faite pour une mission, avec ses vues et la portée au-delà des abonnés du client. Votre contenu généré par les utilisateurs (UGC), au même endroit. La valeur média lui donne un prix : les vues × le coût pour 1 000 vues dans votre niche. Nous partons de 8 € pour les marques, et vous pouvez le modifier. Juste à côté, ce que vos cadeaux vous coûtent.",
+            "Chaque publication faite pour une mission, avec ses vues, ses j’aime, ses commentaires et ses partages, et les abonnés du client qui l’a publiée. Votre contenu généré par les utilisateurs (UGC), au même endroit. La valeur média lui donne un prix : les vues × le coût pour 1 000 vues dans votre niche. Nous partons de 8 € pour les marques, et vous pouvez le modifier. Juste à côté, ce que vos cadeaux vous coûtent.",
         },
       ],
       footHtml:
@@ -87,7 +89,7 @@ export const PAGES_FR = {
       {
         q: "Qu’est-ce qui compte comme contenu généré par les utilisateurs ?",
         aHtml:
-          "Les photos, vidéos et stories que vos clients publient sur leur propre compte Instagram ou TikTok pour une mission. Votre équipe valide chacune avant l’attribution des points, et l’admin conserve chaque publication avec ses vues.",
+          "Les photos, vidéos et stories que vos clients publient sur leur propre compte Instagram ou TikTok pour une mission. Votre équipe valide chacune avant l’attribution des points, et l’admin conserve chaque publication avec ses vues. Pour Instagram, il faut un compte Créateur ou Professionnel, gratuit, pour le relier ; TikTok fonctionne avec n’importe quel compte.",
       },
       {
         q: "Est-ce un programme d’ambassadeurs ?",
@@ -97,12 +99,12 @@ export const PAGES_FR = {
       {
         q: "Combien ça coûte pour une petite marque ?",
         aHtml:
-          'Starter coûte 99 € par mois, avec 7 jours d’essai gratuit : jusqu’à 150 membres actifs, avec 3 missions et 3 récompenses à la fois. Club est à 490 € par mois et Season à 1 290 €, jusqu’à 10 000 membres actifs. <a href="pricing.html">Comparer les formules</a>.',
+          'Starter coûte 99 € par mois, avec 7 jours d’essai gratuit : jusqu’à 150 membres actifs, avec 3 missions et 3 récompenses à la fois et un classement. Club est à 490 € par mois pour jusqu’à 1 500 membres actifs, et Season à 1 290 € pour jusqu’à 10 000. <a href="pricing.html">Comparer les formules</a>.',
       },
       {
         q: "Est-ce que ça marche avec notre boutique en ligne ?",
         aHtml:
-          "En parallèle. Les codes de récompense et les listes de membres s’exportent en tableur pour des outils comme Shopify ou Klaviyo, sans rien à installer. Avec Season, nous mettons en place le lien avec la boutique à vos côtés.",
+          "En parallèle. Les codes de récompense s’exportent en tableur pour des outils comme Shopify ou Klaviyo, sans rien à installer, et les listes de membres aussi à partir de Club. Avec Season, nous mettons en place le lien avec la boutique à vos côtés.",
       },
     ],
 
@@ -141,6 +143,8 @@ export const PAGES_FR = {
     description:
       "Une app de supporters à votre nom. Les fans publient et gagnent des récompenses, vos sponsors voient la portée. Sport et esport, dès 99 € par mois.",
     ogTitle: "FAN/IP pour le sport · Des supporters qui publient. Des sponsors qui le voient.",
+    planNote:
+      "Les quêtes sponsor et les pronostics de match arrivent avec Club, les batailles d’équipes avec Season. Avec Starter, vous pouvez essayer les missions, les check-ins par QR code, les récompenses et le classement.",
     h1Html: 'Des supporters qui publient.<br><span class="hero-promise__gold">Des sponsors qui le voient.</span>',
     lead:
       "Une app de supporters au nom de votre club. Les fans publient depuis la tribune, gagnent des points et montent de niveau. Vos sponsors reçoivent un rapport qui montre combien de personnes l’ont vu.",
@@ -188,7 +192,7 @@ export const PAGES_FR = {
         {
           h: "Le rapport sponsor",
           pHtml:
-            "Associez le nom d’un sponsor à une série de missions. Les supporters publient avec le sponsor dans le cadre, et le sponsor reçoit un lien privé sur son téléphone : membres qui ont participé, publications, vues, portée au-delà des abonnés du club et valeur média à 7 € les 1 000 vues, un tarif que vous pouvez modifier. De quoi montrer bien plus qu’un logo sur un maillot au moment du renouvellement.",
+            "Associez le nom d’un sponsor à une série de missions. Les supporters publient avec le sponsor dans le cadre, et le sponsor reçoit un lien privé sur son téléphone : membres qui ont participé, publications, vues, abonnés des supporters qui ont publié et valeur média à 7 € les 1 000 vues, un tarif que vous pouvez modifier. De quoi montrer bien plus qu’un logo sur un maillot au moment du renouvellement.",
         },
       ],
       footHtml:
@@ -232,7 +236,7 @@ export const PAGES_FR = {
     },
     resultTitle: "Ce que vous et votre sponsor voyez.",
     resultCaptionHtml:
-      'Écrans de la démo Aldermoor : un club fictif, des chiffres indicatifs. La valeur média correspond à ce que les mêmes vues coûteraient en publicité, à 7 € les 1 000 vues pour le sport. Vous fixez votre propre tarif. <a href="../reach-calculator.html?for=sport" hreflang="en" data-calc-link>Calculez vos chiffres</a>',
+      'Écrans de la démo Aldermoor : un club fictif, des chiffres indicatifs. La valeur média correspond à ce que les mêmes vues coûteraient en publicité, à 7 € les 1 000 vues pour le sport. Vous fixez votre propre tarif. <a href="../reach-calculator.html?for=sport" hreflang="en" data-calc-link>Calculez vos chiffres</a> · <a href="../sample-report.html" hreflang="en">Voir un exemple de rapport sponsor</a>',
     demosLead:
       "Votre écusson, vos couleurs, vos mots. Les supporters voient le club, pas nous. Ouvrez la démo Aldermoor et jouez-la comme un supporter, puis comme le club.",
     worldLead: "Cette page s’adresse aux clubs, aux équipes et à l’esport. Choisissez un autre univers pour voir sa page.",
@@ -257,11 +261,13 @@ export const PAGES_FR = {
     file: "artists.html",
     title: "App de fan club pour artistes et créateurs · FAN/IP",
     description:
-      "Vos fans publient après chaque concert, gagnent des points et débloquent vos récompenses. Vous voyez leur portée ville par ville. Un fan club à votre nom.",
+      "Vos fans publient après chaque concert, gagnent des points et vos récompenses. Vous voyez les vues de leurs posts, concert par concert. Votre fan club.",
     ogTitle: "FAN/IP pour les artistes · Des fans qui publient après chaque concert.",
+    planNote:
+      "Questions ouvertes, parcours de missions et jeux-concours arrivent avec Club. Avec Starter, vous pouvez essayer les missions photo et vidéo, les sondages, les quiz, les check-ins par QR code, les récompenses et le classement.",
     h1Html: 'Des fans qui publient<br><span class="hero-promise__gold">après chaque concert.</span>',
     lead:
-      "Votre propre app de fan club, à votre nom. Les fans publient depuis le premier rang, gagnent des points et débloquent les récompenses que vous choisissez. Vous voyez la portée de chaque concert, ville par ville.",
+      "Votre propre app de fan club, à votre nom. Les fans publient depuis le premier rang, gagnent des points et débloquent les récompenses que vous choisissez. Vous voyez les vues et la valeur média de chaque concert.",
     tickerLabel: "Pour les groupes, chanteurs, DJ, rappeurs, festivals, podcasteurs et créateurs.",
     ticker: ["groupes", "chanteurs", "DJ", "festivals", "rappeurs", "podcasteurs", "youtubeurs", "streamers", "humoristes", "chorales"],
 
@@ -276,7 +282,7 @@ export const PAGES_FR = {
         ["Inviter un ami", "Au prochain concert"],
       ],
       outcome: "Une portée que vous ne payez pas.",
-      note: "Vos fans filment déjà le concert. Vous pouvez maintenant leur proposer de le publier, les récompenser et voir quelle ville en a le plus parlé.",
+      note: "Vos fans filment déjà le concert. Vous pouvez maintenant leur proposer de le publier, les récompenser et voir quel concert a le plus fait parler.",
     },
 
     world: {
@@ -303,9 +309,9 @@ export const PAGES_FR = {
           after: "Un objectif collectif peut débloquer quelque chose pour chaque membre, comme une affiche de tournée dédicacée.",
         },
         {
-          h: "Ville par ville",
+          h: "Concert par concert",
           pHtml:
-            "Chaque publication est liée à un concert. Votre admin additionne les vues, la portée auprès des gens qui ne vous suivent pas encore et la valeur média, par concert et par ville, à 5 € les 1 000 vues pour la musique. Vous fixez votre propre tarif. Vous voyez où le bouche-à-oreille a été le plus fort avant de préparer la prochaine tournée.",
+            "Créez une mission par concert, et chaque publication y est liée. Votre admin additionne les vues, les j’aime, les commentaires et les partages, les abonnés des fans qui ont publié et la valeur média, mission par mission, à 5 € les 1 000 vues pour la musique. Vous fixez votre propre tarif. Vous voyez où le bouche-à-oreille a été le plus fort avant de préparer la prochaine tournée.",
         },
       ],
       footHtml:
@@ -325,9 +331,9 @@ export const PAGES_FR = {
           "Ils publient une photo de la setlist ou un extrait sur Instagram ou TikTok, identifient la ville et vous, puis gagnent des points une fois la publication validée par votre équipe. Autres missions : une story pour le nouveau single, des quiz, des sondages, des check-ins par QR code et l’invitation d’un ami.",
       },
       {
-        q: "Comment voir les villes qui parlent le plus ?",
+        q: "Comment voir de quels concerts on parle le plus ?",
         aHtml:
-          'Chaque publication est liée à un concert. L’admin additionne les vues, la portée au-delà de vos abonnés et la valeur média par concert et par ville. La <a href="../demo/ilsa-morrow/">démo Ilsa Morrow</a> montre une tournée de six dates.',
+          'Créez une mission par concert. L’admin additionne les vues, les abonnés des fans qui ont publié et la valeur média de chaque mission. La <a href="../demo/ilsa-morrow/">démo Ilsa Morrow</a> montre une tournée de six dates.',
       },
       {
         q: "En quoi est-ce différent de la promotion payante ?",
@@ -337,14 +343,14 @@ export const PAGES_FR = {
       {
         q: "Combien ça coûte ?",
         aHtml:
-          'Starter coûte 99 € par mois avec 7 jours d’essai gratuit, jusqu’à 150 fans actifs, 3 missions et 3 récompenses à la fois. Club, à 490 € par mois, convient à une première tournée. Season, à 1 290 €, va jusqu’à 10 000 membres actifs. <a href="pricing.html">Comparer les formules</a>.',
+          'Starter coûte 99 € par mois avec 7 jours d’essai gratuit, jusqu’à 150 fans actifs, 3 missions et 3 récompenses à la fois, et un classement. Club, à 490 € par mois, convient à une première tournée. Season, à 1 290 €, va jusqu’à 10 000 membres actifs. <a href="pricing.html">Comparer les formules</a>.',
       },
     ],
 
     product: {
       titleHtml: "Trois étapes.<br>Vos fans publient après le concert.",
       step2: "Les fans publient depuis leurs propres comptes. Chaque publication validée rapporte des points, des niveaux et des récompenses.",
-      step3: "Chaque publication et ses vues, concert par concert et ville par ville.",
+      step3: "Chaque publication et ses vues, concert par concert.",
       caption: "Valeurs indicatives. Vous nommez et réglez vos propres missions, niveaux et récompenses, tournée après tournée. ",
     },
     resultTitle: "Ce que vous voyez, concert par concert.",

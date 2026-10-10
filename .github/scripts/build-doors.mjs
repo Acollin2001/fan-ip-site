@@ -28,14 +28,18 @@ const readVar = (name) => {
 // words of each world and the few words the build itself writes.
 const LOCALES = [
   {
-    lang: "en", inLanguage: "en", dir: "", source: "index.html", pages: PAGES, doors: readVar("DOORS"),
+    lang: "en-GB", inLanguage: "en-GB", dir: "", source: "index.html", pages: PAGES, doors: readVar("DOORS"),
+    crumbs: { "brands.html": "Brands", "sport.html": "Sport and esports", "artists.html": "Artists and creators" },
     ui: {
       trial: "Start my free trial",
       demo: "Book a demo",
       faqMoreHtml: 'More answers, for every world, in the <a href="faq.html">full FAQ</a>.',
     },
   },
-  { lang: "fr", inLanguage: "fr-FR", dir: "fr/", source: "fr/index.html", pages: PAGES_FR, doors: readVar("DOORS_FR"), ui: UI_FR },
+  {
+    lang: "fr", inLanguage: "fr-FR", dir: "fr/", source: "fr/index.html", pages: PAGES_FR, doors: readVar("DOORS_FR"), ui: UI_FR,
+    crumbs: { "brands.html": "Marques", "sport.html": "Sport et esport", "artists.html": "Artistes et créateurs" },
+  },
 ];
 
 const esc = (t) => String(t).replace(/&/g, "&amp;").replace(/"/g, "&quot;").replace(/</g, "&lt;");
@@ -112,12 +116,21 @@ ${items}
 `;
 }
 
-function jsonLd(html, page, url, inLanguage) {
+function jsonLd(html, page, url, { inLanguage, home, crumbs }) {
   return swap(html, /<script type="application\/ld\+json">\n([\s\S]*?)\n  <\/script>/, (_, body) => {
     const data = JSON.parse(body);
     const web = data["@graph"].find((n) => n["@type"] === "WebPage");
     if (!web) throw new Error("not found: WebPage in JSON-LD");
-    Object.assign(web, { "@id": `${url}#webpage`, url, name: page.title, description: page.description });
+    Object.assign(web, {
+      "@id": `${url}#webpage`, url, name: page.title, description: page.description,
+      breadcrumb: {
+        "@type": "BreadcrumbList",
+        itemListElement: [
+          { "@type": "ListItem", position: 1, name: "FAN/IP", item: home },
+          { "@type": "ListItem", position: 2, name: crumbs[page.file], item: url },
+        ],
+      },
+    });
     data["@graph"].push({
       "@type": "FAQPage",
       "@id": `${url}#faq`,
@@ -135,7 +148,7 @@ function jsonLd(html, page, url, inLanguage) {
   });
 }
 
-for (const { lang, inLanguage, dir, source, pages, doors: DOORS, ui } of LOCALES) {
+for (const { lang, inLanguage, dir, source, pages, doors: DOORS, ui, crumbs } of LOCALES) {
 const index = read(source);
 for (const [key, page] of Object.entries(pages)) {
   const d = DOORS[key];
@@ -156,14 +169,14 @@ for (const [key, page] of Object.entries(pages)) {
   h = swap(h, /<meta name="twitter:description" content="[^"]*">/, `<meta name="twitter:description" content="${esc(page.description)}">`);
   h = swap(h, /<meta property="og:url" content="[^"]*">/, `<meta property="og:url" content="${url}">`);
   h = swap(h, /<link rel="canonical" href="[^"]*">/, `<link rel="canonical" href="${url}">`);
-  h = jsonLd(h, page, url, inLanguage);
+  h = jsonLd(h, page, url, { inLanguage, home: `https://fan-ip.com/${dir}`, crumbs });
 
   // The same page in the other language: hreflang links and the EN / FR switch.
   const alt = { "en-GB": `https://fan-ip.com/${page.file}`, "fr-FR": `https://fan-ip.com/fr/${page.file}`, "x-default": `https://fan-ip.com/${page.file}` };
   for (const [hl, href] of Object.entries(alt)) {
     h = swap(h, new RegExp(`<link rel="alternate" hreflang="${hl}" href="[^"]*">`), `<link rel="alternate" hreflang="${hl}" href="${href}">`);
   }
-  const twin = lang === "en" ? { en: page.file, fr: `fr/${page.file}` } : { en: `../${page.file}`, fr: page.file };
+  const twin = dir === "" ? { en: page.file, fr: `fr/${page.file}` } : { en: `../${page.file}`, fr: page.file };
   for (const [l, href] of Object.entries(twin)) {
     h = swap(h, new RegExp(`<a href="[^"]*"( lang="${l}" hreflang="[^"]*" data-lang="${l}")`, "g"), `<a href="${href}"$1`);
   }
@@ -177,7 +190,8 @@ for (const [key, page] of Object.entries(pages)) {
   h = swap(h, /<div class="hero-actions">[\s\S]*?<\/div>/, `<div class="hero-actions">
           <a class="btn btn--primary" href="https://app.fan-ip.com/start?for=${key}" data-start-link>${ui.trial}</a>
           <a class="hero-link" href="book-a-demo.html">${ui.demo}</a>
-        </div>`);
+        </div>
+        <p class="hero-plan t-small">${esc(page.planNote)}</p>`);
   h = swap(h, /(<div class="door">\s*<p class="sr-only">)[^<]*(<\/p>)/, `$1${esc(page.tickerLabel)}$2`);
   h = swap(h, /<div class="door-ticker__track">[\s\S]*?<\/ul><\/div>/, ticker(page.ticker));
 

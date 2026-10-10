@@ -1,6 +1,6 @@
 // Reach calculator: views of members' posts and their media value, the same
-// sum as Post impact in the FAN/IP admin (views / 1,000 x CPM; typical niche prices: sport €7, music €5, brands €8).
-// Runs only in the browser: no requests, no cookies, no storage.
+// sum as Post impact in the FAN/IP admin (views / 1,000 x CPM; typical niche prices: sport €7, music €5, brands €8, otherwise €6).
+// Runs only in the browser: no requests and no cookies. It only reads the world picked on the home page.
 
 function init(form) {
   const fields = ["members", "share", "posts", "views", "cpm"];
@@ -10,6 +10,7 @@ function init(form) {
   const out = (k) => document.querySelector(`[data-o="${k}"]`);
   const ones = document.querySelector("[data-ones]");
   const copy = document.querySelector("[data-copy]");
+  const book = document.querySelector("[data-rc-book]");
   const values = { ...defaults };
 
   // 100 small "1"s, one per member out of 100. Posting members light up in a
@@ -18,8 +19,18 @@ function init(form) {
   const order = shuffled(100, 7);
 
   const params = new URLSearchParams(location.search);
-  // ?for=sport|artist|brand starts from that niche's typical ad price.
-  const niche = form.querySelector(`[data-for="${params.get("for")}"]`);
+  // ?for=sport|artist|brand starts from that niche's typical ad price; without
+  // it, the world picked on the home page (localStorage "fanip.door") does.
+  let door = params.get("for");
+  if (!door) {
+    try {
+      door = localStorage.getItem("fanip.door");
+    } catch {}
+  }
+  if (!/^(sport|artist|brand|other)$/.test(door || "")) door = null;
+  const niche = form.querySelector(`[data-for="${door}"]`);
+  const start = document.querySelector("[data-rc-start]");
+  if (start && /^(sport|artist|brand)$/.test(door || "")) start.href += `?for=${door}`;
   if (niche && !params.has("cpm")) {
     values.cpm = Number(niche.getAttribute("data-cpm"));
     input.cpm.value = show("cpm", values.cpm);
@@ -53,7 +64,6 @@ function init(form) {
       input[f].value = show(f, values[f]);
       input[f].setAttribute("aria-invalid", "false");
       size(input[f]);
-      remember();
     });
   }
   form.addEventListener("submit", (e) => e.preventDefault());
@@ -91,8 +101,9 @@ function init(form) {
 
   function render() {
     const { members, share, posts, views, cpm } = values;
-    const postsMonth = (members * share) / 100 * posts;
-    const viewsMonth = postsMonth * views;
+    // Each step of the working line uses the number it shows, so the sum can be checked by hand.
+    const postsMonth = Math.round((members * share) / 100 * posts * 100) / 100;
+    const viewsMonth = Math.round(postsMonth * views);
     const valueMonth = (viewsMonth / 1000) * cpm;
 
     out("views-m").textContent = big(viewsMonth);
@@ -102,16 +113,26 @@ function init(form) {
     out("views-y").textContent = big(viewsMonth * 12);
     out("value-y").textContent = euro(valueMonth * 12);
     out("math").textContent =
-      `${int(members)} members × ${num(share)}% × ${num(posts)} ${posts === 1 ? "post" : "posts"} = ${about(postsMonth)} ${Math.round(postsMonth) === 1 ? "post" : "posts"} a month. ` +
-      `${int(postsMonth)} × ${int(views)} views = ${int(viewsMonth)} views. ` +
+      `${int(members)} ${members === 1 ? "member" : "members"} × ${num(share)}% × ${num(posts)} ${posts === 1 ? "post" : "posts"} = ${num(postsMonth)} ${postsMonth === 1 ? "post" : "posts"} a month. ` +
+      `${num(postsMonth)} × ${int(views)} views = ${int(viewsMonth)} views. ` +
       `${int(viewsMonth)} ÷ 1,000 × ${euro(cpm)} = ${euro(valueMonth)}.`;
+
+    // The plan that fits the members typed, and a demo link that carries the estimate to the booking form.
+    const [plan, limit] = PLANS.find(([, max]) => members <= max) || ["Signature", Infinity];
+    out("plan").replaceChildren(
+      `For ${int(members)} ${members === 1 ? "member" : "members"}, `,
+      Object.assign(document.createElement("a"), { href: `pricing.html#${plan.toLowerCase()}-name`, textContent: plan }),
+      limit === Infinity ? " fits: more than 10,000 active members a month." : ` fits: up to ${int(limit)} active members a month.`,
+    );
+    if (book) book.href = `book-a-demo.html?${new URLSearchParams({ members, share, posts, views, cpm, value: Math.round(valueMonth) })}`;
 
     const lit = Math.min(100, Math.round(share));
     order.forEach((cell, i) => cells[cell].classList.toggle("is-on", i < lit));
     out("crowd").textContent = crowd(share);
   }
 
-  // Keep the numbers in the address so a link brings them back. Defaults stay out.
+  // Put the numbers in the address only when the visitor copies a link, so a
+  // link brings them back. Defaults stay out.
   function remember() {
     const q = new URLSearchParams();
     for (const f of fields) if (values[f] !== defaults[f]) q.set(f, String(values[f]));
@@ -159,6 +180,8 @@ function size(el) {
   el.style.inlineSize = `${Math.max(2, el.value.length) + 0.4}ch`;
 }
 
+const PLANS = [["Starter", 150], ["Club", 1500], ["Season", 10000]];
+
 const nf0 = new Intl.NumberFormat("en-GB", { maximumFractionDigits: 0 });
 const nf2 = new Intl.NumberFormat("en-GB", { maximumFractionDigits: 2 });
 
@@ -167,9 +190,6 @@ function int(n) {
 }
 function num(n) {
   return nf2.format(n);
-}
-function about(n) {
-  return Number.isInteger(Math.round(n * 100) / 100) ? int(n) : `about ${int(n)}`;
 }
 function big(n) {
   for (const [size, word] of [[1e9, "billion"], [1e6, "million"]]) {

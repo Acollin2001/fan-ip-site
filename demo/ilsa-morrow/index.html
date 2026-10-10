@@ -2221,14 +2221,14 @@ function admAnswers() {
   const order = { new: 0, featured: 1, hidden: 2 };
   const rows = [...list].sort((a, b) => (b.me ? 1 : 0) - (a.me ? 1 : 0) || order[a.status] - order[b.status]);
   const extra = MISSIONS.filter((x) => x.gen === "open" && x.id !== "first");
-  return `<div class="acard"><div class="acard-top"><div><h2>Which song was your first, and where were you?</h2><p class="sub">${esc(m.title)}. ${fmt(DONE_SINCE.first + (state.answer ? 1 : 0))} answers, ${feat} featured, +50 ${BRAND.word} for each one featured. Featured answers show in the Band, and Ilsa reads a few out in Paris.</p></div>
+  return `<div class="acard"><div class="acard-top"><div><h2>Which song was your first, and where were you?</h2><p class="sub">${esc(m.title)}. ${fmt(DONE_SINCE.first + (state.answer ? 1 : 0))} answers, ${feat} featured. Featured answers show in the Band, and Ilsa reads a few out in Paris.</p></div>
       <div class="adm-actions"><button class="adm-btn" data-act="answersCsv">${icon("download")}Featured answers, CSV</button></div></div>
     <div class="ans-list">${rows.map((a) => { const i = a.me ? -1 : ANS.indexOf(a); return `<div class="ans ${a.status}">
       <span class="who"><i>${initials(a.who)}</i><span><b>${esc(a.who)}</b> <span class="sub">${esc(a.handle)}, ${a.when}</span></span></span>
       <p>${esc(a.t)}</p>
       <div class="adm-actions">${a.status === "featured" ? `<span class="st live">Featured</span><button class="adm-btn ghost" data-act="ans" data-i="${i}" data-s="new">Undo</button>`
         : a.status === "hidden" ? `<span class="st">Hidden</span><button class="adm-btn ghost" data-act="ans" data-i="${i}" data-s="new">Show again</button>`
-        : `<button class="adm-btn primary" data-act="ans" data-i="${i}" data-s="featured">Feature, +50</button><button class="adm-btn ghost" data-act="ans" data-i="${i}" data-s="hidden">Hide</button>`}</div></div>`; }).join("")}</div>
+        : `<button class="adm-btn primary" data-act="ans" data-i="${i}" data-s="featured">Feature</button><button class="adm-btn ghost" data-act="ans" data-i="${i}" data-s="hidden">Hide</button>`}</div></div>`; }).join("")}</div>
     <p class="sub" style="margin-top:12px">Showing the latest. The other ${fmt(DONE_SINCE.first - ANS.length)} are in the CSV.</p></div>
     ${extra.map((x) => `<div class="acard"><h2>${esc(x.title)}</h2><p class="sub">${state.done.has(x.id) ? "1 answer so far: yours, in the fan app." : "No answers yet. They appear here as fans send them."}</p></div>`).join("")}`;
 }
@@ -2241,11 +2241,11 @@ function setAns(i, status) {
     if (status !== "featured" && k >= 0) ANSWERS.splice(k, 1);
   } else {
     state.ansMine = status;
-    if (status === "featured" && was !== "featured") { state.balance += 50; state.earned += 50; state.news = `Your first-song answer is featured in the Band. +50 ${BRAND.word}.`; }
-    if (was === "featured" && status !== "featured") { state.balance -= 50; state.earned -= 50; state.news = null; }
+    if (status === "featured" && was !== "featured") state.news = "Your first-song answer is featured in the Band.";
+    if (was === "featured" && status !== "featured") state.news = null;
   }
   rerenderAdminInPlace();
-  admToast(status === "featured" ? `${a ? a.who.split(" ")[0] : ME.first}'s answer is featured, +50 ${BRAND.word} sent` : status === "hidden" ? "Hidden from fans" : "Back with the others", status === "featured" ? "band" : null);
+  admToast(status === "featured" ? `${a ? a.who.split(" ")[0] : ME.first}'s answer is featured` : status === "hidden" ? "Hidden from fans" : "Back with the others", status === "featured" ? "band" : null);
 }
 
 /* New mission */

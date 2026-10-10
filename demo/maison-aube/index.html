@@ -2328,14 +2328,14 @@ function admReviews() {
   const order = { new: 0, featured: 1, hidden: 2 };
   const rows = [...list].sort((a, b) => (b.me ? 1 : 0) - (a.me ? 1 : 0) || order[a.status] - order[b.status]);
   const opens = RITUELS.filter((r) => r.gen === "open");
-  return `<div class="acard"><div class="acard-top"><div><h2>Tell us about a product you've used for a month</h2><p class="sub">${fmt(530 + (state.review ? 1 : 0))} answers in the last 30 days. Nothing is published on its own; feature the best ones, +50 ${BRAND.word} each. ${feat} featured.</p></div>
+  return `<div class="acard"><div class="acard-top"><div><h2>Tell us about a product you've used for a month</h2><p class="sub">${fmt(530 + (state.review ? 1 : 0))} answers in the last 30 days. Nothing is published on its own; feature the best ones. ${feat} featured.</p></div>
       <div class="adm-actions"><button class="adm-btn" data-act="reviewsCsv">${icon("download")}Featured answers, CSV</button></div></div>
     <div class="ans-list">${rows.map((a) => { const i = a.me ? -1 : REVIEWS.indexOf(a); return `<div class="ans ${a.status}">
       <span class="who"><i>${initials(a.who)}</i><span><b>${esc(a.who)}</b> <span class="sub">${esc(a.handle)}, ${a.when}, ${a.product}</span></span></span>
       <p>${esc(a.t)}</p>
       <div class="adm-actions">${a.status === "featured" ? `<span class="st live">Featured</span><button class="adm-btn ghost" data-act="rev" data-i="${i}" data-s="new">Undo</button>`
         : a.status === "hidden" ? `<span class="st">Hidden</span><button class="adm-btn ghost" data-act="rev" data-i="${i}" data-s="new">Show again</button>`
-        : `<button class="adm-btn primary" data-act="rev" data-i="${i}" data-s="featured">Feature it, +50</button><button class="adm-btn ghost" data-act="rev" data-i="${i}" data-s="hidden">Hide</button>`}</div></div>`; }).join("")}</div>
+        : `<button class="adm-btn primary" data-act="rev" data-i="${i}" data-s="featured">Feature it</button><button class="adm-btn ghost" data-act="rev" data-i="${i}" data-s="hidden">Hide</button>`}</div></div>`; }).join("")}</div>
     <p class="sub" style="margin-top:12px">Showing the latest. The other ${fmt(530 - REVIEWS.length)} are in the CSV.</p></div>
     ${opens.map((x) => `<div class="acard"><h2>${esc(x.title)}</h2><p class="sub">${state.done.has(x.id) ? "1 answer so far: yours, in the member app." : "No answers yet. They appear here as members send them."}</p></div>`).join("")}`;
 }
@@ -2344,11 +2344,11 @@ function setRev(i, status) {
   if (a) a.status = status;
   else {
     state.revMine = status;
-    if (status === "featured" && was !== "featured") { state.balance += 50; state.earned += 50; state.news = `Your Baume Nuit answer is featured. +50 ${BRAND.word}.`; }
-    if (was === "featured" && status !== "featured") { state.balance -= 50; state.earned -= 50; state.news = null; }
+    if (status === "featured" && was !== "featured") state.news = "Your Baume Nuit answer is featured.";
+    if (was === "featured" && status !== "featured") state.news = null;
   }
   rerenderAdminInPlace();
-  admToast(status === "featured" ? `${a ? a.who.split(" ")[0] : ME.first}'s answer is featured, +50 ${BRAND.word} sent` : status === "hidden" ? "Hidden from members" : "Back with the others", !a && status === "featured" ? "profile" : null);
+  admToast(status === "featured" ? `${a ? a.who.split(" ")[0] : ME.first}'s answer is featured` : status === "hidden" ? "Hidden from members" : "Back with the others", !a && status === "featured" ? "profile" : null);
 }
 
 /* New mission */

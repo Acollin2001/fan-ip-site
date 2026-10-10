@@ -24,7 +24,7 @@ export const PAGES_FR = {
       "Un programme de fidélité qui récompense vos clients quand ils publient sur votre marque. Chaque post, ses vues, sa valeur média. Dès 99 € par mois.",
     ogTitle: "FAN/IP pour les marques · Des clients qui parlent de vous.",
     planNote:
-      "Objets à collectionner, jeux-concours et colis presse arrivent avec Club. Avec Starter, vous pouvez essayer les missions photo et vidéo, les sondages, les quiz, le parrainage, les récompenses et le classement.",
+      "Objets à collectionner, jeux-concours et colis presse arrivent avec Club, les objectifs communs avec Season. Avec Starter, vous pouvez essayer les missions photo et vidéo, les sondages, les quiz, le parrainage, les récompenses et le classement.",
     h1Html: 'Des clients qui parlent<br><span class="hero-promise__gold">de vous.</span>',
     lead:
       "Un programme de fidélité qui récompense ce que vos clients disent, pas seulement ce qu’ils achètent. Ils publient votre produit, gagnent des points et débloquent vos récompenses. Vous voyez chaque publication et jusqu’où elle est allée.",
@@ -89,7 +89,7 @@ export const PAGES_FR = {
       {
         q: "Qu’est-ce qui compte comme contenu généré par les utilisateurs ?",
         aHtml:
-          "Les photos, vidéos et stories que vos clients publient sur leur propre compte Instagram ou TikTok pour une mission. Votre équipe valide chacune avant l’attribution des points, et l’admin conserve chaque publication avec ses vues. Pour Instagram, il faut un compte Créateur ou Professionnel, gratuit, pour le relier ; TikTok fonctionne avec n’importe quel compte.",
+          "Les photos, vidéos et stories que vos clients publient sur leur propre compte Instagram ou TikTok pour une mission. Votre équipe valide chacune avant l’attribution des points ; les publications que le réseau confirme via le compte lié d’un membre peuvent être validées automatiquement, et vous pouvez désactiver cette option. L’admin conserve chaque publication avec ses vues. Pour Instagram, il faut un compte Créateur ou Professionnel, gratuit, pour le relier ; TikTok fonctionne avec n’importe quel compte.",
       },
       {
         q: "Est-ce un programme d’ambassadeurs ?",
@@ -110,7 +110,7 @@ export const PAGES_FR = {
 
     product: {
       titleHtml: "Trois étapes.<br>Vos clients font le reste.",
-      step2: "Les clients partagent depuis leurs propres comptes. Chaque publication validée rapporte des points, des niveaux et des récompenses.",
+      step2: "Les clients partagent depuis leurs propres comptes. Chaque publication validée leur rapporte de l’XP pour leur niveau et des points pour la boutique.",
       step3: "Chaque publication, ses vues et sa valeur média, à côté de ce que vos cadeaux vous coûtent.",
       caption: "Valeurs indicatives. Vous nommez et réglez vos propres missions, niveaux et récompenses. ",
     },
@@ -144,7 +144,7 @@ export const PAGES_FR = {
       "Une app de supporters à votre nom. Les fans publient et gagnent des récompenses, vos sponsors voient la portée. Sport et esport, dès 99 € par mois.",
     ogTitle: "FAN/IP pour le sport · Des supporters qui publient. Des sponsors qui le voient.",
     planNote:
-      "Les quêtes sponsor et les pronostics de match arrivent avec Club, les batailles d’équipes avec Season. Avec Starter, vous pouvez essayer les missions, les check-ins par QR code, les récompenses et le classement.",
+      "Les quêtes sponsor et les pronostics de match arrivent avec Club, les batailles d’équipes et les objectifs communs avec Season. Avec Starter, vous pouvez essayer les missions, les check-ins par QR code, les récompenses et le classement.",
     h1Html: 'Des supporters qui publient.<br><span class="hero-promise__gold">Des sponsors qui le voient.</span>',
     lead:
       "Une app de supporters au nom de votre club. Les fans publient depuis la tribune, gagnent des points et montent de niveau. Vos sponsors reçoivent un rapport qui montre combien de personnes l’ont vu.",
@@ -230,7 +230,7 @@ export const PAGES_FR = {
 
     product: {
       titleHtml: "Trois étapes.<br>Vos supporters font le reste.",
-      step2: "Les supporters publient depuis leurs propres comptes. Chaque publication validée rapporte des points, un niveau de plus et des récompenses.",
+      step2: "Les supporters publient depuis leurs propres comptes. Chaque publication validée leur rapporte de l’XP pour leur niveau et des points pour la boutique.",
       step3: "Chaque publication et ses vues, dans un rapport à envoyer à votre sponsor.",
       caption: "Valeurs indicatives. Chaque club nomme et règle ses propres défis, niveaux et récompenses, sponsors compris. ",
     },
@@ -264,7 +264,7 @@ export const PAGES_FR = {
       "Vos fans publient après chaque concert, gagnent des points et vos récompenses. Vous voyez les vues de leurs posts, concert par concert. Votre fan club.",
     ogTitle: "FAN/IP pour les artistes · Des fans qui publient après chaque concert.",
     planNote:
-      "Questions ouvertes, parcours de missions et jeux-concours arrivent avec Club. Avec Starter, vous pouvez essayer les missions photo et vidéo, les sondages, les quiz, les check-ins par QR code, les récompenses et le classement.",
+      "Questions ouvertes, parcours de missions et jeux-concours arrivent avec Club, les objectifs communs avec Season. Avec Starter, vous pouvez essayer les missions photo et vidéo, les sondages, les quiz, les check-ins par QR code, les récompenses et le classement.",
     h1Html: 'Des fans qui publient<br><span class="hero-promise__gold">après chaque concert.</span>',
     lead:
       "Votre propre app de fan club, à votre nom. Les fans publient depuis le premier rang, gagnent des points et débloquent les récompenses que vous choisissez. Vous voyez les vues et la valeur média de chaque concert.",
@@ -311,7 +311,7 @@ export const PAGES_FR = {
         {
           h: "Concert par concert",
           pHtml:
-            "Créez une mission par concert, et chaque publication y est liée. Votre admin additionne les vues, les j’aime, les commentaires et les partages, les abonnés des fans qui ont publié et la valeur média, mission par mission, à 5 € les 1 000 vues pour la musique. Vous fixez votre propre tarif. Vous voyez où le bouche-à-oreille a été le plus fort avant de préparer la prochaine tournée.",
+            "Créez une mission par concert, et chaque publication y est liée. Votre admin additionne les vues, les j’aime, les commentaires, les partages et la valeur média, mission par mission à partir de Club, et la portée potentielle de tous ceux qui ont publié. La valeur média part de 5 € les 1 000 vues pour la musique ; vous fixez votre propre tarif. Vous voyez où le bouche-à-oreille a été le plus fort avant de préparer la prochaine tournée.",
         },
       ],
       footHtml:
@@ -333,7 +333,7 @@ export const PAGES_FR = {
       {
         q: "Comment voir de quels concerts on parle le plus ?",
         aHtml:
-          'Créez une mission par concert. L’admin additionne les vues, les abonnés des fans qui ont publié et la valeur média de chaque mission. La <a href="../demo/ilsa-morrow/">démo Ilsa Morrow</a> montre une tournée de six dates.',
+          'Créez une mission par concert. Votre admin additionne les vues, les j’aime, les commentaires, les partages et la valeur média, mission par mission à partir de Club, et la portée potentielle de tous ceux qui ont publié. La <a href="../demo/ilsa-morrow/">démo Ilsa Morrow</a> montre une tournée de six dates.',
       },
       {
         q: "En quoi est-ce différent de la promotion payante ?",
@@ -349,7 +349,7 @@ export const PAGES_FR = {
 
     product: {
       titleHtml: "Trois étapes.<br>Vos fans publient après le concert.",
-      step2: "Les fans publient depuis leurs propres comptes. Chaque publication validée rapporte des points, des niveaux et des récompenses.",
+      step2: "Les fans publient depuis leurs propres comptes. Chaque publication validée leur rapporte de l’XP pour leur niveau et des points pour la boutique.",
       step3: "Chaque publication et ses vues, concert par concert.",
       caption: "Valeurs indicatives. Vous nommez et réglez vos propres missions, niveaux et récompenses, tournée après tournée. ",
     },

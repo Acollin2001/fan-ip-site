@@ -101,7 +101,7 @@ export const PAGES = {
 
     product: {
       titleHtml: "Three steps.<br>Your customers do the rest.",
-      step2: "Customers share from their own accounts. Each approved post earns points, levels and rewards.",
+      step2: "Customers share from their own accounts. Each approved post earns them XP for their level and points for the shop.",
       step3: "Every post, its views and its media value, next to what your gifts cost.",
       caption: "Illustrative values. You name and set your own missions, levels and rewards. ",
     },
@@ -221,7 +221,7 @@ export const PAGES = {
 
     product: {
       titleHtml: "Three steps.<br>Your supporters do the rest.",
-      step2: "Supporters post from their own accounts. Each approved post earns points, a higher level and rewards.",
+      step2: "Supporters post from their own accounts. Each approved post earns them XP for their level and points for the shop.",
       step3: "Every post and its views, in a report you can send to your sponsor.",
       caption: "Illustrative values. Each club names and sets its own challenges, levels and rewards, sponsors included. ",
     },
@@ -340,7 +340,7 @@ export const PAGES = {
 
     product: {
       titleHtml: "Three steps.<br>Your fans post after the show.",
-      step2: "Fans post from their own accounts. Each approved post earns points, levels and rewards.",
+      step2: "Fans post from their own accounts. Each approved post earns them XP for their level and points for the shop.",
       step3: "Every post and its views, show by show.",
       caption: "Illustrative values. You name and set your own missions, levels and rewards, tour by tour. ",
     },

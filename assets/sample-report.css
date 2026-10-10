@@ -9,12 +9,12 @@
 .sr-wrap{padding-block:var(--s7) var(--s9)}
 .sr-sheet{
   --sr-bg:#fffdf7;--sr-ink:var(--ink);--sr-muted:var(--ink-muted);--sr-rule:var(--rule-light);
-  --c1:#2a6fc4;--c2:#d65a28;--c3:#15936a;--c4:#b8860b;--c5:#6250d6;--c6:#d55181;--c7:#008300;
+  --c1:#2a6fc4;--c2:#d65a28;--c3:#15936a;--c5:#6250d6;--c6:#d55181;--c7:#008300;
   max-inline-size:1120px;margin-inline:auto;padding:clamp(1rem,3.2vw,2.75rem);
   background:var(--sr-bg);color:var(--sr-ink);border:1px solid var(--sr-rule);border-radius:14px;
   font:400 1rem/1.5 var(--font-body)
 }
-.sr-sheet .s1{background:var(--c1)}.sr-sheet .s2{background:var(--c2)}.sr-sheet .s3{background:var(--c3)}.sr-sheet .s4{background:var(--c4)}
+.sr-sheet .s1{background:var(--c1)}.sr-sheet .s2{background:var(--c2)}.sr-sheet .s3{background:var(--c3)}
 .sr-sheet .s5{background:var(--c5)}.sr-sheet .s6{background:var(--c6)}.sr-sheet .s7{background:var(--c7)}
 .sr-sheet a{color:inherit;text-decoration:underline;text-underline-offset:.18em}
 

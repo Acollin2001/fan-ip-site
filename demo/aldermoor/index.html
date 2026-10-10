@@ -2342,9 +2342,9 @@ const MISSIONS = [
     brief: "Pick the first Aldermoor scorer. Playing earns 30 points, and they double to 60 if your player scores first." },
   { id: "checkin", type: "Check-in", group: "matchday", title: "Check in at The Weir", pts: 100, tone: "moor", art: "stadium", meta: "Opens 13:00 on matchday",
     brief: "Tap in when you are inside the ground. Every home check-in adds a matchday pack of three stickers to your Collection." },
-  { id: "first", type: "Open question", group: "community", title: "Your first match at The Weir", pts: 40, tone: "buff", art: "speech", meta: "Best answers go in the programme",
-    open: { q: "Who took you, who did we play, and what stuck with you?", feature: 100, where: "the Matchday 10 programme and on the big screen" }, bonus: ["+100 if the club features it"],
-    brief: "No right or wrong answer, just a few lines. The club picks its favourites for the Matchday 10 programme and the big screen, and each one featured earns 100 bonus points." },
+  { id: "first", type: "Open question", group: "community", title: "Your first match at The Weir", pts: 40, tone: "buff", art: "speech", meta: "Best answers go in the program",
+    open: { q: "Who took you, who did we play, and what stuck with you?", feature: 0, where: "the Matchday 10 program and on the big screen" },
+    brief: "No right or wrong answer, just a few lines. The club picks its favourites for the Matchday 10 program and the big screen." },
   { id: "preview", type: "Video", group: "community", title: "Watch the gaffer's Granby preview", pts: 40, tone: "moor", art: "play", meta: "4 min",
     brief: "The manager on Granby's pressing game and who is back from injury." },
   { id: "mate", type: "Referral", group: "community", title: "Bring a mate to their first match", pts: 250, tone: "buff", art: "mates", meta: "After their first mission",
@@ -2429,7 +2429,7 @@ function openBody(m) {
     <p class="note">The club reads every answer before it appears anywhere.</p>${wall}`;
   const feat = state.featured.has(m.id);
   return `<figure class="answer mine"><blockquote>${esc(mine)}</blockquote><figcaption><span class="avatar sm">${initials(ME.name)}</span>You, ${ME.handle}</figcaption></figure>
-    ${feat ? `<div class="outcome"><b>+${m.open.feature}</b><span>The club featured your answer. It goes in ${esc(m.open.where)}.</span></div>`
+    ${feat ? `<div class="outcome">${m.open.feature ? `<b>+${m.open.feature}</b>` : ""}<span>The club featured your answer. It goes in ${esc(m.open.where)}.</span></div>`
       : `<div class="success"><span class="big num">+${m.pts}</span><p>Sent to the club.${m.open.feature ? ` If they feature it, you get ${m.open.feature} more.` : ""}</p></div>`}${wall}`;
 }
 
@@ -2613,13 +2613,13 @@ const NOW = new Date();
 const MONTH_NAME = NOW.toLocaleDateString("en-GB", { month: "long" });
 const isoDay = (d) => `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`;
 const dayLabel = (iso) => new Date(iso + "T12:00:00").toLocaleDateString("en-GB", { day: "numeric", month: "short" });
-const JOIN_RULES = { choose: "Members pick a side", seat: "By seat block", random: "Drawn at random when they join" };
+const JOIN_RULES = { choose: "Members pick a side" };
 const COUNTS = { all: "Every point earned", checkins: "Home check-ins", missions: "Mission points only" };
 const BATTLES = [
   { id: "stands", name: "North Stand v Riverside End", a: { name: "North Stand", colour: "#c9421b", pts: 48210, members: 4126 }, b: { name: "Riverside End", colour: "#7d9ab6", pts: 45870, members: 3984 },
     start: isoDay(new Date(NOW.getFullYear(), NOW.getMonth(), 1)), end: isoDay(new Date(NOW.getFullYear(), NOW.getMonth() + 1, 0)), join: "choose", counts: "all", prize: "200 free seats on the away-day coach to Granby, for the winning stand", prizeLine: "The winning stand gets 200 free seats on the away-day coach to Granby." },
   { id: "kits", name: "Home kit v Away kit", a: { name: "Home kit", colour: "#c9421b", pts: 39104, members: 3710 }, b: { name: "Away kit", colour: "#17263a", pts: 41322, members: 3655 },
-    start: isoDay(new Date(NOW.getFullYear(), NOW.getMonth() - 1, 1)), end: isoDay(new Date(NOW.getFullYear(), NOW.getMonth(), 0)), join: "random", counts: "missions", prize: "A morning at the training ground for the top 10 on the winning side", prizeLine: "The top 10 on the winning side get a morning at the training ground.", past: 1 },
+    start: isoDay(new Date(NOW.getFullYear(), NOW.getMonth() - 1, 1)), end: isoDay(new Date(NOW.getFullYear(), NOW.getMonth(), 0)), join: "choose", counts: "missions", prize: "A morning at the training ground for the top 10 on the winning side", prizeLine: "The top 10 on the winning side get a morning at the training ground.", past: 1 },
 ];
 const battleStatus = (b) => b.past ? "ended" : isoDay(NOW) < b.start ? "upcoming" : isoDay(NOW) > b.end ? "ended" : "live";
 
@@ -2845,8 +2845,6 @@ function joinBlock(b) {
     const from = Math.max(0, state.earned - (state.joinEarned[b.id] || 0));
     return `<div class="battle-you"><i style="background:${b[mine].colour}"></i><span>You're in <b>${esc(b[mine].name)}</b>. ${from ? `${fmt(from)} ${word()} from you so far.` : `Earn ${word()} to push your side.`}</span></div>`;
   }
-  if (b.join === "seat") return `<div class="battle-you"><i style="background:${b.a.colour}"></i><span>Your seat is in block F, so you play for <b>${esc(b.a.name)}</b>.</span><button class="btn btn-primary btn-sm" style="margin-left:auto" data-act="join" data-id="${b.id}" data-side="a">Join</button></div>`;
-  if (b.join === "random") return `<div class="battle-join" style="grid-template-columns:1fr"><button class="btn btn-primary" data-act="join" data-id="${b.id}" data-side="random">Join and get drawn into a side</button></div>`;
   return `<div class="battle-join"><button class="btn btn-primary" data-act="join" data-id="${b.id}" data-side="a">Join ${esc(b.a.name)}</button><button class="btn btn-ghost" data-act="join" data-id="${b.id}" data-side="b">Join ${esc(b.b.name)}</button></div>`;
 }
 function battle(b = featuredBattle()) {
@@ -2874,7 +2872,7 @@ function battleSheet(id) {
   openSheet(`<h2>${esc(b.name)}</h2>
     <p class="note">${battleStatus(b) === "upcoming" ? "Starts" : "Running"} ${dayLabel(b.start)} to ${dayLabel(b.end)}. ${fmt(b.a.members + b.b.members)} members playing.</p>
     <ol class="steps">
-      <li><span><b>Join a side.</b> ${b.join === "choose" ? "Pick the side you play for. One side per member, for the whole battle." : b.join === "seat" ? "Your side comes from your seat block, so mates sitting together play together." : "Tap join and you are drawn into a side, so both stay even."}</span></li>
+      <li><span><b>Join a side.</b> Pick the side you play for. One side per member, for the whole battle.</span></li>
       <li><span><b>Earn as usual.</b> ${countsLine(b)}</span></li>
       <li><span><b>The side with the most wins.</b> Final scores on ${dayLabel(b.end)}. ${esc(prizeLine(b))}</span></li>
     </ol>
@@ -3883,11 +3881,10 @@ document.addEventListener("click", (e) => {
     case "battle": battleSheet(el.dataset.id); break;
     case "join": {
       const b = BATTLES.find((x) => x.id === el.dataset.id);
-      let side = el.dataset.side;
-      if (side === "random") side = b.a.members <= b.b.members ? "a" : "b";
+      const side = el.dataset.side;
       state.joined[b.id] = side; state.joinEarned[b.id] = state.earned;
       b[side].members += 0;
-      toast(el.dataset.side === "random" ? `You've been drawn into ${b[side].name}` : `You're in ${b[side].name}. Every ${word().replace(/s$/, "")} counts now`);
+      toast(`You're in ${b[side].name}. Every ${word().replace(/s$/, "")} counts now`);
       const sheetOpen = $("#sheetLayer").classList.contains("open");
       renderMember(false); if (sheetOpen) battleSheet(b.id);
       break;
@@ -4333,7 +4330,7 @@ function admMissions() {
   const lab = { live: "Live", sched: "Scheduled", draft: "Draft" };
   return head + `<div class="acard scroll-x"><table class="atable"><thead><tr><th>Mission</th><th>Type</th><th class="r">Points</th><th>Bonus</th><th>When</th><th class="r">Done by</th><th>Status</th></tr></thead>
     <tbody>${rows.map((r) => `<tr class="${r.m && r.m.fresh ? "fresh" : ""}"><td class="wrap">${esc(r.title)}</td><td>${esc(r.type)}</td><td class="r">${r.pts}</td><td>${r.m && r.m.bonus ? esc(bonusOf(r.m).join(", ")) : "–"}</td><td>${esc(r.when)}</td><td class="r">${r.n != null ? fmt(r.n) : "–"}</td><td><span class="st ${r.status}">${lab[r.status]}</span></td></tr>`).join("")}</tbody></table></div>
-    <div class="acard"><h2>Mission types on this plan</h2><p class="sub">Prediction, check-in, quiz, open question, photo, video, vote, referral, social post, survey, sponsor quest. Score predictions are created for every fixture on their own.</p></div>`;
+    <div class="acard"><h2>Mission types on this plan</h2><p class="sub">Prediction, check-in, quiz, open question, photo, video, vote, referral, social post, survey, sponsor quest. You add each fixture once; predictions open and close on their own at kick-off.</p></div>`;
 }
 
 const MTYPES = [["Prediction", "Prediction"], ["Quiz", "Quiz"], ["Photo", "Photo"], ["Video", "Video"], ["Vote", "Vote"], ["Social post", "Social post"], ["Referral", "Referral"], ["Survey", "Survey"], ["Open question", "Open question"]];
@@ -4342,7 +4339,7 @@ const ART_FOR = { Prediction: "scorer", Quiz: "quiz", Photo: "photo", Video: "pl
 function newMissionDraft() {
   return { type: "Prediction", title: "Who will be man of the match against Granby?", brief: "Pick your man of the match before kick-off. Get it right and your points double.", pts: 40, tone: "kestrel",
     options: "Dario Lenk\nRuben Sølvik\nKofi Brannagh\nJonah Weller", mult: 2, q: "Who scored Aldermoor's first goal at The Weir?", a1: "Arthur Penhallow", a2: "Bill Corran", a3: "Fred Ashdown", a4: "Harry Tull", right: "1",
-    check: "club", oq: "What's the best away day you've had with Aldermoor?", feature: "100", where: "the matchday programme", start: isoDay(NOW), end: isoDay(new Date(NOW.getTime() + 6 * 864e5)), who: "all", publish: "now" };
+    check: "club", oq: "What's the best away day you've had with Aldermoor?", feature: "0", where: "the matchday program", start: isoDay(NOW), end: isoDay(new Date(NOW.getTime() + 6 * 864e5)), who: "all", publish: "now" };
 }
 function draftMission(d) {
   const m = { id: "pv", type: d.type, group: { Prediction: "matchday", Quiz: "quiz", Photo: "photo" }[d.type] || "community", title: d.title || "Untitled mission", pts: Math.max(0, parseInt(d.pts, 10) || 0), tone: d.tone, art: ART_FOR[d.type], meta: d.type === "Prediction" ? "Closes at kick-off" : `Until ${dayLabel(d.end)}`, brief: d.brief || "", custom: 1 };
@@ -4355,11 +4352,11 @@ function draftMission(d) {
 function missionForm(d) {
   const t = d.type;
   let extra = "";
-  if (t === "Prediction") extra = `<h3>What members predict</h3>${fld("Answers, one per line", `<textarea name="options">${esc(d.options)}</textarea>`, "Score predictions are created for each fixture on their own.")}
+  if (t === "Prediction") extra = `<h3>What members predict</h3>${fld("Answers, one per line", `<textarea name="options">${esc(d.options)}</textarea>`, "You add each fixture once; predictions open and close on their own at kick-off.")}
     ${fld("Bonus when they are right", sel("mult", [["2", "Points doubled (×2)"], ["3", "Points tripled (×3)"]], d.mult), "You set the right answer in Predictions and results after the match.")}`;
   else if (t === "Quiz") extra = `<h3>Question</h3>${fld("Question", inp("q", d.q))}<div class="adm-row">${[1, 2, 3, 4].map((i) => fld(`Answer ${i}`, inp("a" + i, d["a" + i]))).join("")}</div>${fld("Right answer", sel("right", [["1", "Answer 1"], ["2", "Answer 2"], ["3", "Answer 3"], ["4", "Answer 4"]], d.right))}`;
   else if (t === "Open question") extra = `<h3>Question</h3>${fld("What members answer", inp("oq", d.oq, 'maxlength="120"'), "Members write up to 280 characters. You read them in Missions, Open questions.")}
-    <div class="adm-row">${fld("Bonus for answers you feature", sel("feature", [["0", "No bonus"], ["50", "+50"], ["100", "+100"], ["200", "+200"]], d.feature))}${fld("Where featured answers go", inp("where", d.where))}</div>`;
+    <div class="adm-row">${fld("Where featured answers go", inp("where", d.where))}</div>`;
   else if (t === "Vote" || t === "Survey") extra = `<h3>Choices</h3>${fld("One per line", `<textarea name="options">${esc(d.options)}</textarea>`)}`;
   else if (t === "Photo" || t === "Social post" || t === "Video") extra = fld(t === "Video" ? "Video" : "Who checks it", t === "Video" ? `<span class="drop">${icon("upload")}<span><b>Upload a video or paste a link</b>MP4 or a YouTube link</span></span>` : sel("check", [["club", "The club checks each one"], ["auto", t === "Social post" ? "Checked on its own through members' linked accounts" : "Accepted on its own"]], d.check));
   return `${fld("Type", optRow("type", MTYPES, t))}
@@ -4599,7 +4596,7 @@ function battleForm(d) {
     <div class="adm-row">${fld("Team 1", `<div style="display:flex;gap:8px"><input type="color" name="ac" value="${d.ac}" style="width:44px;height:40px;padding:2px;border-radius:9px;flex:none">${inp("an", d.an)}</div>`)}
       ${fld("Team 2", `<div style="display:flex;gap:8px"><input type="color" name="bc" value="${d.bc}" style="width:44px;height:40px;padding:2px;border-radius:9px;flex:none">${inp("bn", d.bn)}</div>`)}</div>
     <div class="adm-row">${fld("Starts", inp("start", d.start, 'type="date"'))}${fld("Ends", inp("end", d.end, 'type="date"'))}</div>
-    ${fld("How members join", sel("join", Object.entries(JOIN_RULES), d.join), "Members can join until the last day. One side per member.")}
+    ${fld("How members join", `<input value="${JOIN_RULES.choose}" disabled>`, "Members can join until the last day. One side per member.")}
     ${fld("What counts", sel("counts", Object.entries(COUNTS), d.counts))}
     ${fld("Prize for the winning side", inp("prize", d.prize))}`;
 }
@@ -4706,8 +4703,8 @@ function admAnswers() {
 function setAnswer(i, status) {
   const a = ANSWERS[i], m = MISSIONS.find((x) => x.id === a.mid), was = a.status, bonus = m.open.feature || 0;
   a.status = status;
-  if (a.me && bonus) {
-    if (status === "featured" && !state.featured.has(m.id)) { state.featured.add(m.id); state.balance += bonus; state.earned += bonus; state.news = `The club featured your answer to "${m.title}". +${bonus} ${word()}.`; }
+  if (a.me) {
+    if (status === "featured" && !state.featured.has(m.id)) { state.featured.add(m.id); state.balance += bonus; state.earned += bonus; state.news = `The club featured your answer to "${m.title}".${bonus ? ` +${bonus} ${word()}.` : ""}`; }
     else if (was === "featured" && status !== "featured" && state.featured.has(m.id)) { state.featured.delete(m.id); state.balance -= bonus; state.earned -= bonus; state.news = null; }
   }
   rerenderAdminInPlace();

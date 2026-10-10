@@ -2145,14 +2145,14 @@ const EXTRA_ROWS = [
 ];
 function admMissions() {
   const tab = state.atab.missions || 0;
-  const h = admHead("Missions", "The setlist: everything fans do to earn notes. City missions are created for every date on their own.", `<button class="adm-btn primary" data-act="newMission">${icon("plus")}New mission</button>`) + admTabs("missions");
+  const h = admHead("Missions", "The setlist: everything fans do to earn notes. Each date has its own check-in QR, setlist call and city missions, scheduled ahead to open on show day.", `<button class="adm-btn primary" data-act="newMission">${icon("plus")}New mission</button>`) + admTabs("missions");
   if (tab === 1) return h + admCalls();
   if (tab === 2) return h + admCheckin();
   if (tab === 3) return h + admAnswers();
   const rows = [...MISSIONS.map((m) => ({ m, title: m.title, type: m.type || MTYPE[m.id] || "Social post", city: m.city ? city(m.city).city : "Anywhere", pts: m.pts, when: m.show ? dayNum(NEXT.date) : m.when || "Now", status: m.show ? "show" : "live", n: (DONE_SINCE[m.id] || 0) + (state.done.has(m.id) ? 1 : 0) })), ...EXTRA_ROWS];
   return h + `<div class="acard"><div class="scroll-x"><table class="atable"><thead><tr><th>Mission</th><th>Type</th><th>City</th><th class="r">${BRAND.word.replace(/^./, (c) => c.toUpperCase())}</th><th>When</th><th class="r">Done by</th><th>Status</th></tr></thead>
     <tbody>${rows.map((r) => `<tr class="${r.m && r.m.fresh ? "fresh" : ""}"><td class="wrap"><b>${esc(r.title)}</b>${r.m ? `<br><span class="sub">${esc(r.m.meta)}</span>` : ""}</td><td>${esc(r.type)}</td><td>${esc(r.city)}</td><td class="r">${r.pts}</td><td>${esc(r.when)}</td><td class="r">${r.n ? fmt(r.n) : "–"}</td><td><span class="st ${stl(r.status)[0]}">${stl(r.status)[1]}</span></td></tr>`).join("")}</tbody></table></div></div>
-    <div class="acard"><h2>Mission types on this plan</h2><p class="sub">Social post, video, photo, check-in, setlist call, vote, quiz, open question, referral. Every date gets its check-in, setlist photo and bring-a-friend missions on its own; city missions open on show day.</p></div>`;
+    <div class="acard"><h2>Mission types on this plan</h2><p class="sub">Social post, video, photo, check-in, setlist call, vote, quiz, open question, referral. Each date has its own check-in QR, setlist call and city missions, scheduled ahead to open on show day.</p></div>`;
 }
 
 /* Setlist calls: the music world's predictions */
@@ -2447,7 +2447,7 @@ function seasonBoard() {
 /* ---------------------------------------------------------------- Tour */
 function admTour() {
   const tab = state.atab.tour || 0;
-  const h = admHead("Tour", "Twelve dates. Each one gets its own check-in QR, setlist call and city missions on its own.", `<button class="adm-btn" data-act="tourCsv">${icon("download")}Download, CSV</button>`) + admTabs("tour");
+  const h = admHead("Tour", "Twelve dates. Each date has its own check-in QR, setlist call and city missions, scheduled ahead to open on show day.", `<button class="adm-btn" data-act="tourCsv">${icon("download")}Download, CSV</button>`) + admTabs("tour");
   if (tab === 1) {
     const P = played(), max = Math.max(...P.map((c) => c.views)), tot = (k) => P.reduce((a, c) => a + c[k], 0);
     return h + `<div class="acard"><h2>Played so far</h2><p class="sub">A post counts for the city when it answers one of that date’s missions. Views counted for 30 days, so recent cities are still growing.</p>

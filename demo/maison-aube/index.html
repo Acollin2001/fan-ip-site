@@ -2136,7 +2136,7 @@ setInterval(() => {
 
 /* ================================================================ Brand admin */
 /* 30 days of views on members' posts, oldest first. Givre coffrets shipped 3 days ago. */
-const DAILY = Array.from({ length: 30 }, (_, i) => Math.round(176000 + i * 3900 + ((i + 2) % 7 >= 5 ? 61000 : 0) + (i >= 27 ? 120000 * (i - 26) : 0) + ((i * 7919) % 23000)));
+const DAILY = Array.from({ length: 30 }, (_, i) => Math.round(175858 + i * 3900 + ((i + 2) % 7 >= 5 ? 61000 : 0) + (i >= 27 ? 120000 * (i - 26) : 0) + ((i * 7919) % 23000)));
 const DAY_LABELS = DAILY.map((_, i) => dayNum(addDays(i - 29)));
 const PERIODS = { "7d": ["Last 7 days", 7], "30d": ["Last 30 days", 30], all: ["Since launch", 0] };
 const LAUNCH_FACTOR = 7.6; /* the program launched in March 2024; all-time is about 7.6 months of the last 30 days */

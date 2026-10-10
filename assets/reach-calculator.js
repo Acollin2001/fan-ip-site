@@ -26,6 +26,7 @@ function init(form) {
       door = localStorage.getItem("fanip.door");
     } catch {}
   }
+  if (!/^(sport|artist|brand|other)$/.test(door || "")) door = null;
   const niche = form.querySelector(`[data-for="${door}"]`);
   const start = document.querySelector("[data-rc-start]");
   if (start && /^(sport|artist|brand)$/.test(door || "")) start.href += `?for=${door}`;
@@ -99,8 +100,9 @@ function init(form) {
 
   function render() {
     const { members, share, posts, views, cpm } = values;
-    const postsMonth = (members * share) / 100 * posts;
-    const viewsMonth = postsMonth * views;
+    // Each step of the working line uses the number it shows, so the sum can be checked by hand.
+    const postsMonth = Math.round((members * share) / 100 * posts * 100) / 100;
+    const viewsMonth = Math.round(postsMonth * views);
     const valueMonth = (viewsMonth / 1000) * cpm;
 
     out("views-m").textContent = big(viewsMonth);
@@ -110,8 +112,8 @@ function init(form) {
     out("views-y").textContent = big(viewsMonth * 12);
     out("value-y").textContent = euro(valueMonth * 12);
     out("math").textContent =
-      `${int(members)} members × ${num(share)}% × ${num(posts)} ${posts === 1 ? "post" : "posts"} = ${about(postsMonth)} ${Math.round(postsMonth) === 1 ? "post" : "posts"} a month. ` +
-      `${int(postsMonth)} × ${int(views)} views = ${int(viewsMonth)} views. ` +
+      `${int(members)} ${members === 1 ? "member" : "members"} × ${num(share)}% × ${num(posts)} ${posts === 1 ? "post" : "posts"} = ${num(postsMonth)} ${postsMonth === 1 ? "post" : "posts"} a month. ` +
+      `${num(postsMonth)} × ${int(views)} views = ${int(viewsMonth)} views. ` +
       `${int(viewsMonth)} ÷ 1,000 × ${euro(cpm)} = ${euro(valueMonth)}.`;
 
     const lit = Math.min(100, Math.round(share));
@@ -176,9 +178,6 @@ function int(n) {
 }
 function num(n) {
   return nf2.format(n);
-}
-function about(n) {
-  return Number.isInteger(Math.round(n * 100) / 100) ? int(n) : `about ${int(n)}`;
 }
 function big(n) {
   for (const [size, word] of [[1e9, "billion"], [1e6, "million"]]) {

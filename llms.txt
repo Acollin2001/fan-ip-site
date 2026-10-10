@@ -13,7 +13,7 @@ People also describe what FAN/IP does as: a fan engagement platform, a fan club 
 - [Platform](https://fan-ip.com/platform.html): all fifty features in plain words (missions, predictions, check-ins, seasons, sprints, streaks, team battles, collection, rewards, creator tools, white-label, back office), with a playable member season
 - [Approach](https://fan-ip.com/approach.html): the ten principles behind the product
 - [Compare](https://fan-ip.com/compare.html): FAN/IP next to shop loyalty apps, community platforms, fan-token apps, group chats and building it yourself
-- [Reach calculator](https://fan-ip.com/reach-calculator.html): estimate the views members' posts bring each month and their media value (views ÷ 1,000 × CPM, starting from a typical price for the niche: €7 sport, €5 music, €8 brands; the same sum as in the FAN/IP admin)
+- [Reach calculator](https://fan-ip.com/reach-calculator.html): estimate the views members' posts bring each month and their media value (views ÷ 1,000 × CPM, starting from a typical price for the niche: €7 sport, €5 music, €8 brands, €6 otherwise; the same sum as in the FAN/IP admin)
 - [FAQ](https://fan-ip.com/faq.html): plain answers about the platform, who it is for, how it works and what it costs
 - [Book a demo](https://fan-ip.com/book-a-demo.html): 30-minute video call, shown live on demo data
 - [About](https://fan-ip.com/about.html): what FAN/IP is, who it is for, what it costs, where it runs and who is behind it
@@ -28,10 +28,10 @@ After "why", the home page asks "Where do your fans gather?" (Sport, Artists and
 
 ## Pricing (euros, excluding VAT)
 
-- Starter: €99 a month or €990 a year, no setup fee, up to 150 active members a month, leaderboard included, 7-day free trial, sign up online at https://app.fan-ip.com/start
-- Club: €490 a month, setup €1,250, up to 1,500 active members a month
-- Season: €1,290 a month, setup €2,500, up to 10,000 active members a month
-- Signature: from €2,900 a month, setup from €5,000, more than 10,000 active members a month
+- Starter: €99 a month or €990 a year, no set-up fee, up to 150 active members a month, leaderboard included, 7-day free trial, sign up online at https://app.fan-ip.com/start
+- Club: €490 a month, set-up €1,250, up to 1,500 active members a month
+- Season: €1,290 a month, set-up €2,500, up to 10,000 active members a month
+- Signature: from €2,900 a month, set-up from €5,000, more than 10,000 active members a month
 - Club, Season and Signature are billed monthly on a 12-month term. An active member is someone who did something in the community this month.
 
 ## Demos (fictional names and data, clickable, all on the Season plan)

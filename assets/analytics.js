@@ -14,14 +14,19 @@
   // already carries: screen and window size, time zone, language. Not sent.
   var DEVICE = /^\$(initial_)?(screen_|viewport_|timezone|browser_language)/;
 
-  // Every event leaves without device details, and with addresses cut at "?"
+  // Ad click IDs that Google, Meta, TikTok and others add to links (fbclid on
+  // every link out of Instagram): identifiers, so never sent. Campaign labels
+  // (utm_source and the like) are kept; the privacy policy names them.
+  var CLICK_ID = /(^|_)(gclid|gclsrc|gad_source|gad_campaignid|dclid|gbraid|wbraid|fbclid|msclkid|twclid|li_fat_id|igshid|ttclid|rdt_cid|irclid|epik|qclid|sccid|mc_cid|mc_eid|_kx)$/;
+
+  // Every event leaves without device details or click IDs, and with addresses cut at "?"
   // and "#": the reach calculator can put the numbers typed into its address.
   function clean(ev) {
     if (!ev) return ev;
     [ev.properties, ev.$set, ev.$set_once].forEach(function (p) {
       if (!p) return;
       Object.keys(p).forEach(function (k) {
-        if (DEVICE.test(k)) delete p[k];
+        if (DEVICE.test(k) || CLICK_ID.test(k)) delete p[k];
         else if (typeof p[k] === "string" && /^https?:\/\//.test(p[k])) p[k] = p[k].split(/[?#]/)[0];
       });
     });
@@ -46,6 +51,7 @@
     advanced_disable_flags: true,
     capture_exceptions: false,
     respect_dnt: true,
+    mask_personal_data_properties: true,
     before_send: clean
   }]];
   stub.capture = function () { stub.push(["capture"].concat([].slice.call(arguments))); };

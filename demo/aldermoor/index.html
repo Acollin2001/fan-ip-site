@@ -112,7 +112,7 @@ img, svg { max-width: 100%; }
 .demo-logo i { font-style: normal; color: var(--fx-gold); }
 .demo-name { min-width: 0; font-size: 0.875rem; color: var(--fx-ink-2); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 @media (max-width: 1100px) { .demo-name { display: none; } }
-.demo-controls { display: flex; gap: 12px; margin-left: auto; align-items: center; }
+.demo-controls { display: flex; gap: 12px; margin-left: auto; align-items: center; min-width: 0; }
 .seg {
   display: inline-flex;
   padding: 3px;
@@ -133,7 +133,7 @@ img, svg { max-width: 100%; }
 }
 .seg button[aria-pressed="true"] { background: var(--fx-ink); color: #fff; }
 .seg button:disabled { opacity: 0.4; cursor: not-allowed; }
-.demo-note { font-size: 0.75rem; color: var(--fx-ink-2); white-space: nowrap; }
+.demo-note { flex: 0 1 auto; min-width: 0; max-width: 64ch; font-size: 0.75rem; line-height: 1.3; color: var(--fx-ink-2); text-align: right; text-wrap: balance; }
 
 .stage-body {
   min-height: 0;
@@ -297,6 +297,7 @@ img, svg { max-width: 100%; }
   overscroll-behavior: contain;
 }
 .view-inner { display: flex; flex-direction: column; gap: 34px; max-width: 1180px; margin-inline: auto; }
+.foot-note { max-width: 1180px; margin: 34px auto 0; padding-top: 16px; border-top: 1px solid var(--line); font-size: 0.75rem; line-height: 1.45; color: var(--ink-3); text-align: center; }
 
 .tabbar {
   position: absolute;
@@ -930,9 +931,9 @@ img, svg { max-width: 100%; }
 .adm-btn.primary { background: var(--fx-ink); color: #fff; border-color: var(--fx-ink); }
 .adm-btn svg { width: 16px; height: 16px; }
 .kpis { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px; }
-.kpi { padding: 16px 18px; border-radius: 14px; background: var(--fx-surface); border: 1px solid var(--fx-line); min-width: 0; }
+.kpi { padding: 16px 18px; border-radius: 14px; background: var(--fx-surface); border: 1px solid var(--fx-line); min-width: 0; container-type: inline-size; }
 .kpi span { display: block; color: var(--fx-ink-2); font-size: 0.8125rem; }
-.kpi b { display: block; margin-top: 6px; font-family: var(--fx-display); font-weight: 600; font-size: 1.75rem; line-height: 1; font-variant-numeric: tabular-nums; }
+.kpi b { display: block; margin-top: 6px; font-family: var(--fx-display); font-weight: 600; font-size: clamp(1.25rem, 17cqi, 1.75rem); line-height: 1; font-variant-numeric: tabular-nums; white-space: nowrap; }
 .kpi small { display: block; margin-top: 6px; font-size: 0.75rem; color: var(--good); font-weight: 500; }
 .acard { padding: 18px 20px; border-radius: 14px; background: var(--fx-surface); border: 1px solid var(--fx-line); min-width: 0; }
 .acard h2 { margin: 0; font-size: 1rem; font-weight: 600; }
@@ -1611,6 +1612,7 @@ button.bd-row:hover .bd-title { color: var(--flood); }
 .app[data-style="reel"] { --ground: var(--moor); --r-card: 4px; }
 .app[data-style="reel"] .view { container-type: size; }
 .app[data-style="reel"] .view:has(> .sh-reel) { padding: 0; scroll-snap-type: y mandatory; }
+.app[data-style="reel"] .view > .foot-note { scroll-snap-align: end; margin: 0 auto; padding: 18px var(--gutter) calc(96px + var(--home-ind, 0px)); border-top: 0; color: var(--wing-soft); }
 .app[data-style="reel"] :is(.view-inner > header, .h-sec, .lede, .view-inner > .meta, .tier, .tier-steps, .tier-steps .on, .link) { color: #fff; }
 .app[data-style="reel"] .lede { color: rgba(255, 255, 255, 0.85); }
 .app[data-style="reel"] .bar > span { background: var(--flood); }
@@ -2073,7 +2075,7 @@ button.bd-row:hover .bd-title { color: var(--flood); }
   <header class="demo-bar">
     <div class="demo-brand"><span class="demo-logo">FAN<i>/</i>IP</span><span class="demo-name">Season demo, Aldermoor Athletic</span></div>
     <div class="demo-controls">
-      <span class="demo-note">Fictional club, illustrative figures</span>
+      <span class="demo-note">Fictional club, illustrative figures; a few screens show features on our roadmap</span>
       <label class="style-pick"><span>Style</span><select id="styleSel" aria-label="Style of the member app"></select></label>
       <div class="seg" role="group" aria-label="View"><button data-act="view" data-v="member" aria-pressed="true">Member app</button><button data-act="view" data-v="admin" aria-pressed="false">Club admin</button></div>
       <div class="seg seg-device" role="group" aria-label="Screen"><button data-act="device" data-d="phone" aria-pressed="false">Phone</button><button data-act="device" data-d="laptop" aria-pressed="true">Laptop</button></div>
@@ -3537,7 +3539,7 @@ function renderMember(scrollTop = true) {
     });
   }
   const view = $("#view"), keep = view.scrollTop;
-  view.innerHTML = SCREENS[state.tab]();
+  view.innerHTML = SCREENS[state.tab]() + screenFoot();
   view.scrollTop = scrollTop ? 0 : keep;
   enhance(view);
   if (state.tab === "home") state.dealt = true;
@@ -3545,6 +3547,7 @@ function renderMember(scrollTop = true) {
   maybeBadgeToast();
 }
 
+const screenFoot = () => `<p class="foot-note">Aldermoor is a fictional club. Every name and figure here is illustrative; a few screens show features on our roadmap. A FAN/IP demo.</p>`;
 function enhance(root) {
   requestAnimationFrame(() => requestAnimationFrame(() => {
     root.querySelectorAll("[data-fill]").forEach((el) => el.style.setProperty("--fill", el.dataset.fill + "%"));
@@ -4721,7 +4724,7 @@ function csvDownload(rows, name) {
 /* ---------------------------------------------------------------- Results */
 const SEASON_DAYS = 91;
 const SEASON_START = new Date(NOW.getTime() - (SEASON_DAYS - 1) * 864e5);
-const big = (n) => n >= 1e6 ? (n / 1e6).toFixed(1) + "M" : n >= 1e4 ? Math.round(n / 1e3) + "k" : fmt(n);
+const big = (n) => n >= 1e6 ? (n / 1e6).toFixed(n >= 1e8 ? 1 : 2).replace(/\.?0+$/, "") + "M" : n >= 1e4 ? Math.round(n / 1e3) + "k" : fmt(n);
 const eur = (n) => "€" + fmt(n);
 /* Media value: views on members' posts, priced at the ad price per 1,000 views (CPM) the club sets. €7 is a usual sport CPM. */
 const mediaValue = (views) => (views / 1000) * state.cpm;

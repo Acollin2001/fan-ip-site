@@ -1069,7 +1069,7 @@ function refreshShell() {
   const fresh = document.createElement("div"); fresh.innerHTML = shell();
   $$("[data-shell]").forEach((el) => { const src = fresh.querySelector(`[data-shell="${el.dataset.shell}"]`); if (src) el.innerHTML = src.innerHTML; });
 }
-const screenFoot = () => `<p class="foot-note">${esc(BRAND.name)} is a fictional ${BRAND.kind}. Every name and figure here is illustrative. Powered by FAN/IP.</p>`;
+const screenFoot = () => `<p class="foot-note">${esc(BRAND.name)} is a fictional ${BRAND.kind}. Every name and figure here is illustrative. A FAN/IP demo.</p>`;
 
 /* ---------------------------------------------------------------- presenter */
 function setView(v) {
@@ -1311,7 +1311,7 @@ function openForm(form, draft, { title, sub, cta, act }) {
   openDrawer({ title, sub, body: F.form(state.draft), preview: F.preview ? F.preview(state.draft) : "", footer: `<button class="adm-btn" data-act="dclose">Cancel</button><button class="adm-btn primary" data-act="${act}">${cta}</button>` });
 }
 
-const INVITE_FORM = { form: (d) => `${fld("Name", inp("name", d.name, 'maxlength="60" placeholder="First and last name"'))}${fld("Work email", inp("email", d.email, 'type="email" placeholder="name@company.example"'))}${fld("Role", optRow("role", [["Editor", "Editor"], ["Moderator", "Moderator"], ["Deliveries", "Deliveries"], ["Read only", "Read only"]], d.role), "Owners can change a role at any time.")}` };
+const INVITE_FORM = { form: (d) => `${fld("Name", inp("name", d.name, 'maxlength="60" placeholder="First and last name"'))}${fld("Work email", inp("email", d.email, 'type="email" placeholder="name@company.example"'))}${fld("Role", optRow("role", [["Admin", "Admin"], ["Moderator", "Moderator"]], d.role), "Admin: everything, including billing and the team. Moderator: posts, answers and members.")}` };
 
 /* QR code as an inline SVG */
 function qrSVG(text, colour = "#1d1f24") {
@@ -1407,7 +1407,7 @@ function kitAction(act, el) {
     case "kitLogo": s.logo = el.dataset.k; kitApply(); rerenderAdminInPlace(); return true;
     case "kitReset": kitInit(); kitApply(); rerenderAdminInPlace(); admToast(BRANDKIT.resetToast); return true;
     case "module": { const n = el.dataset.n, on = el.getAttribute("aria-checked") !== "true"; el.setAttribute("aria-checked", on); if (on) state.modOff.delete(n); else state.modOff.add(n); admToast(`${n} ${on ? "switched on" : "switched off"} for members`); return true; }
-    case "invite": openForm("invite", { name: "", email: "", role: "Editor" }, { title: "Invite someone", sub: "They get an email with a link to set their password. Two-factor sign-in is required.", cta: "Send the invitation", act: "sendInvite" }); return true;
+    case "invite": openForm("invite", { name: "", email: "", role: "Moderator" }, { title: "Invite someone", sub: "They get an email with a link to set their password. Two-step sign-in is required for every administrator.", cta: "Send the invitation", act: "sendInvite" }); return true;
     case "sendInvite": {
       const d = state.draft;
       if (!d.name.trim() || !/^\S+@\S+\.\S+$/.test(d.email.trim())) { admToast("Add a name and a valid email first"); return true; }
@@ -1445,7 +1445,7 @@ function logoMark(cls = "") {
 
 /* ---------------------------------------------------------------- Account */
 function accountPage({ domain, active, renews, sub }) {
-  const roles = [["Owner", "Everything, including billing and the team"], ["Editor", "Missions, rewards, brand and season"], ["Moderator", "Posts, answers and members"], ["Deliveries", "Winners & deliveries only"], ["Read only", "Results and exports"]];
+  const roles = [["Admin", "Everything, including billing and the team"], ["Moderator", "Posts, answers and members"]];
   return admHead("Account", sub) + `
     <div class="adm-grid">
       <div class="acard"><div class="acard-top"><div><h2>Team</h2><p class="sub">Unlimited seats on Season. Each person sees what their role allows.</p></div><button class="adm-btn sm" data-act="invite">${icon("plus")}Invite someone</button></div>
@@ -1453,11 +1453,11 @@ function accountPage({ domain, active, renews, sub }) {
         <tbody>${TEAM.map(([n, j, r, l]) => `<tr><td><span class="who"><i>${initials(n)}</i>${esc(n)}</span></td><td class="wrap">${esc(j)}</td><td>${r}</td><td>${l === "Invitation sent" ? `<span class="st sched">${l}</span>` : l}</td></tr>`).join("")}</tbody></table></div></div>
       <div class="acard"><h2>Plan</h2><p class="sub">Season. Every program module, unlimited team seats and your own domain.</p>
         <div class="usage"><div><span>Active members this month</span><b>${fmt(active)} of 10,000</b></div><span class="bar-a"><i style="width:${(active / 100).toFixed(1)}%"></i></span><small class="sub">Members who used the app at least once this month. Sign-ups who never come back are not counted.</small></div>
-        <dl class="bs-words" style="margin-top:14px"><dt>Price</dt><dd>€1,290 a month, excluding VAT</dd><dt>Term</dt><dd>12 months, renews ${renews}</dd><dt>Invoices</dt><dd>Monthly, by email, paid by bank transfer</dd><dt>Support</dt><dd>Reply within one business day</dd></dl></div>
+        <dl class="bs-words" style="margin-top:14px"><dt>Price</dt><dd>€1,290 a month, excluding VAT</dd><dt>Term</dt><dd>12 months, renews ${renews}</dd><dt>Invoices</dt><dd>Monthly, by card</dd><dt>Support</dt><dd>Reply within one business day</dd></dl></div>
     </div>
     <div class="adm-row">
       <div class="acard"><h2>Roles</h2><div class="scroll-x"><table class="atable"><tbody>${roles.map(([r, w]) => `<tr><td><b style="font-weight:500">${r}</b></td><td class="wrap">${w}</td></tr>`).join("")}</tbody></table></div></div>
-      <div class="acard"><h2>Security and data</h2><dl class="bs-words" style="margin-top:12px"><dt>Team sign-in</dt><dd>Two-factor, required for everyone</dd><dt>${aud() === "fans" ? "Fans" : "Members"} sign in</dt><dd>Email link, Apple or Google</dd><dt>Domain</dt><dd>${domain}</dd><dt>Data</dt><dd>Hosted in the EU, exports on request</dd><dt>${aud() === "fans" ? "Fan" : "Member"} data</dt><dd>Deleted 30 days after a ${aud() === "fans" ? "fan" : "member"} leaves</dd></dl></div>
+      <div class="acard"><h2>Security and data</h2><dl class="bs-words" style="margin-top:12px"><dt>Team sign-in</dt><dd>Two-step</dd><dt>${aud() === "fans" ? "Fans" : "Members"} sign in</dt><dd>Email and password</dd><dt>Domain</dt><dd>${domain}</dd><dt>Data</dt><dd>Hosted in the EU, exports on request</dd><dt>${aud() === "fans" ? "Fan" : "Member"} data</dt><dd>Deleted 30 days after a ${aud() === "fans" ? "fan" : "member"} leaves</dd></dl></div>
     </div>`;
 }
 
@@ -1576,7 +1576,7 @@ const RITUELS = [
     steps: ["Film the opening in one take. No need to edit.", "Post it on your own account and tag @maisonaube.", "Paste the link here."] },
   { id: "review15", kind: "review15", type: "Review", title: "A review in 15 seconds", pts: 150, art: "phone", tone: "lin", meta: "One product, three prompts", herb: "bergamot", tag: "#AubeEn15",
     brief: "One product, fifteen seconds, your own words. We give you three prompts and a timer; you post it on your account." },
-  { id: "friend", kind: "friend", type: "Friends", title: "Tag a friend who needs this", pts: 100, art: "duo", tone: "sauge", meta: "+300 more when they join", herb: "calendula",
+  { id: "friend", kind: "friend", type: "Friends", title: "Tag a friend who needs this", pts: 100, art: "duo", tone: "sauge", meta: "+300 more after their first ritual", herb: "calendula",
     brief: "Think of the friend whose skin needs a little care this winter. Pick the product, send your link, and they get 15% off their first order." },
   { id: "mist", kind: "post", type: "Photo", title: "Brume d'Iris on your shelf", pts: 120, art: "mist", tone: "rose", meta: "One photo, any network", tag: "#RituelAube",
     brief: "Show us where your Brume d'Iris lives: bathroom shelf, desk, gym bag. Natural light is all it needs.",
@@ -1892,7 +1892,7 @@ function screenProfile() {
       <section class="sec"><div class="sec-head"><h2 class="h-sec">My posts</h2><span class="meta">Views counted for 30 days</span></div>
         <div class="myposts">${state.posts.map((p) => `<div class="mypost ${p.fresh ? "fresh" : ""}"><span class="nt">${NET_SHORT[p.net]}</span><span class="tx"><b>${esc(p.title)}</b><span>${p.fresh ? "Posted just now, views are coming in" : `${p.ago} days ago, ${fmt(p.likes)} likes`}</span></span><span class="vw"><b class="num">${fmt(p.views)}</b><span>views</span></span></div>`).join("")}</div></section>
       <section class="sec"><div class="sec-head"><h2 class="h-sec">Bring a friend</h2></div>
-        <div class="panel"><p class="note">Your friends get 15% off their first order. You get 300 ${BRAND.word} when they join.</p>
+        <div class="panel"><p class="note">Your friends get 15% off their first order. You get 300 ${BRAND.word} when their first ritual is approved.</p>
           <div class="ref"><code>${ME.code}</code><button class="btn btn-line btn-sm" data-act="copy" data-copy="${ME.code}">${icon("copy")}Copy</button></div></div>
         <div class="panel"><b style="font-weight:600">Linked accounts</b><p class="note">So we can find your posts and count their views. We never post for you.</p>
           <div class="linked"><div><span class="nt">IG</span>Instagram, ${ME.handle}<span class="ok">Linked</span></div><div><span class="nt">TT</span>TikTok, ${ME.handle}<span class="ok">Linked</span></div><div><span class="nt">YT</span>YouTube Shorts<button class="link" style="margin-left:auto" data-act="linkyt">Link</button></div></div></div>
@@ -2070,13 +2070,13 @@ function onAction(act, el) {
       const nm = ($("#friendName").value || "").trim() || "your friend";
       const r = ritual("friend"), before = complete("friend", el);
       state.friendName = nm;
-      $("#friendZone").innerHTML = successHtml(r, before, `Link sent to ${esc(nm)}. 300 more ${BRAND.word} when they join.`) + `<div class="demo-hint"><span>Demo: skip to the day ${esc(nm)} joins</span><button class="btn btn-line btn-sm" data-act="friendjoins">${esc(nm)} joins</button></div>`;
+      $("#friendZone").innerHTML = successHtml(r, before, `Link sent to ${esc(nm)}. 300 more ${BRAND.word} when their first ritual is approved.`) + `<div class="demo-hint"><span>Demo: skip to the day ${esc(nm)} joins and their first ritual is approved</span><button class="btn btn-line btn-sm" data-act="friendjoins">${esc(nm)} joins</button></div>`;
       renderMember(false);
       return;
     }
     case "friendjoins": {
       if (state.friendJoined) return; state.friendJoined = true; el.disabled = true;
-      award(300, el, `${state.friendName === "your friend" ? "Your friend" : state.friendName} joined le Jardin. +300 ${BRAND.word}`);
+      award(300, el, `${state.friendName === "your friend" ? "Your friend" : state.friendName} joined le Jardin, first ritual approved. +300 ${BRAND.word}`);
       setTimeout(() => renderMember(false), 1200);
       return;
     }
@@ -2421,7 +2421,7 @@ function giftForm(d) {
     ${fld("Title", inp("title", d.title, 'maxlength="60"'))}
     <div class="adm-row">${fld(`Cost in ${BRAND.word}`, inp("cost", d.cost, 'type="number" min="1" step="50"'))}${d.kind === "digital" ? fld("Stock", `<input value="Unlimited" disabled>`) : fld("Stock", inp("stock", d.stock, 'type="number" min="0" placeholder="Unlimited"'))}</div>
     ${fld("How members get it", optRow("how", DELIV_FOR[d.kind], d.how))}
-    ${d.how === "file" ? `<label class="drop">${icon("upload")}<span><b>Upload the file members get</b>PDF, image, audio, any file up to 50 MB</span><input type="file" name="rfile" hidden></label>` : d.how === "code" ? fld("Code", inp("code", d.code || "JARDIN-20"), "Or upload a list of single-use codes as a CSV.") : ""}
+    ${d.how === "file" ? `<label class="drop">${icon("upload")}<span><b>Upload the file members get</b>PDF, image, audio or video, up to 10 MB</span><input type="file" name="rfile" hidden></label>` : d.how === "code" ? fld("Code", inp("code", d.code || "JARDIN-20"), "Or upload a list of single-use codes as a CSV.") : ""}
     ${fld("Picture", optRow("art", GARTS, d.art))}
     ${fld("Card colour", optRow("tone", RTONES, d.tone))}`;
 }
@@ -2718,7 +2718,7 @@ function admBrand() {
 }
 
 /* ---------------------------------------------------------------- Account */
-const TEAM = [["Hélène Duval", "Head of community", "Owner", "Today"], ["Malik Saïdi", "Content and social", "Editor", "Today"], ["Agathe Mercier", "Customer care", "Moderator", "Yesterday"], ["Julien Roche", "Logistics, Paris", "Deliveries", "Today"]];
+const TEAM = [["Hélène Duval", "Head of community", "Admin", "Today"], ["Malik Saïdi", "Content and social", "Admin", "Today"], ["Agathe Mercier", "Customer care", "Moderator", "Yesterday"], ["Julien Roche", "Logistics, Paris", "Moderator", "Today"]];
 const admAccount = () => accountPage({ domain: "jardin.maison-aube.example", active: 8480, renews: dayLabel(isoDay(addDays(163))), sub: "Plan, team, billing and security." });
 
 /* ---------------------------------------------------------------- forms, actions */

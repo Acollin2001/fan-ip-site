@@ -10,7 +10,7 @@ People also describe what FAN/IP does as: a fan engagement platform, a fan club 
 
 - [Home](https://fan-ip.com/): getting talked about without an ad budget, how it works in three steps, what fans' posts are worth, who it is for, white-label demo, plans
 - [Pricing](https://fan-ip.com/pricing.html): the four plans, the full comparison table and the pricing rules
-- [Platform](https://fan-ip.com/platform.html): all fifty features in plain words (missions, predictions, check-ins, seasons, sprints, streaks, team battles, collection, rewards, creator tools, white-label, back office), with a playable member season
+- [Platform](https://fan-ip.com/platform.html): all fifty features in plain words (missions, predictions, check-ins, seasons, sprints, streaks, team battles, collection, rewards, creator tools, white-label, back office), with links to the live demos
 - [Approach](https://fan-ip.com/approach.html): the ten principles behind the product
 - [Compare](https://fan-ip.com/compare.html): FAN/IP next to shop loyalty apps, community platforms, fan-token apps, group chats and building it yourself
 - [Reach calculator](https://fan-ip.com/reach-calculator.html): estimate the views members' posts bring each month and their media value (views ÷ 1,000 × CPM, starting from a typical price for the niche: €7 sport, €5 music, €8 brands, €6 otherwise; the same sum as in the FAN/IP admin)

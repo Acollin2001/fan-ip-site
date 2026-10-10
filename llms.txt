@@ -15,6 +15,7 @@ People also describe what FAN/IP does as: a fan engagement platform, a fan club 
 - [Compare](https://fan-ip.com/compare.html): FAN/IP next to shop loyalty apps, community platforms, fan-token apps, group chats and building it yourself
 - [Reach calculator](https://fan-ip.com/reach-calculator.html): estimate the views members' posts bring each month and their media value (views ÷ 1,000 × CPM, starting from a typical price for the niche: €7 sport, €5 music, €8 brands, €6 otherwise; the same sum as in the FAN/IP admin)
 - [FAQ](https://fan-ip.com/faq.html): plain answers about the platform, who it is for, how it works and what it costs
+- [Glossary](https://fan-ip.com/glossary.html): earned media value, CPM, views per post, potential reach, UGC, white-label fan club app, fan loyalty program, brand advocacy, active member, mission, season, team battle and sponsor quest, each defined in a sentence or two
 - [Book a demo](https://fan-ip.com/book-a-demo.html): 30-minute video call, shown live on demo data
 - [About](https://fan-ip.com/about.html): what FAN/IP is, who it is for, what it costs, where it runs and who is behind it
 
@@ -49,6 +50,14 @@ After "why", the home page asks "Where do your fans gather?" (Sport, Artists and
 - Can a sports club show sponsors what fans' posts are worth? Yes, with a sponsor quest and a private report for the sponsor.
 - What does it cost? From €99 a month (Starter, self-serve, 7-day free trial); Club €490, Season €1,290, Signature from €2,900 a month, excluding VAT. Fans never pay.
 - Languages: English, French, German, Spanish. Works in any phone browser and installs on the home screen with notifications.
+
+## How FAN/IP values fans' posts
+
+- Media value of a post = views ÷ 1,000 × CPM. Example: a post seen 900 times at a €6 CPM is worth €5.40.
+- CPM (price of 1,000 ad views) starts from a typical European price for the niche: €7 sport, €5 music and creators, €8 brands, €6 otherwise. Each brand can set its own.
+- Views, not followers: the figure the network reports for each post. Estimates on the site start from 900 views a post on average; inside the product each post's measured views are used.
+- Potential reach (followers of the accounts that posted) is reported next to views and never used to compute value.
+- Left out of the value: shares, comments, saves, new members and sales that follow a post.
 
 ## Optional
 

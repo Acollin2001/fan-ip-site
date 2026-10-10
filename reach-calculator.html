@@ -27,17 +27,58 @@
   <link rel="apple-touch-icon" href="./apple-touch-icon.png">
   <script type="application/ld+json">
   {
-  "@context": "https://schema.org",
-  "@type": "WebPage",
-  "@id": "https://fan-ip.com/reach-calculator.html#page",
-  "url": "https://fan-ip.com/reach-calculator.html",
-  "name": "Reach calculator: what your fans’ posts are worth · FAN/IP",
-  "description": "Put in your community’s numbers and see roughly how many views members’ posts bring each month, and what the same views would cost as ads.",
-  "inLanguage": "en",
-  "isPartOf": {
-    "@id": "https://fan-ip.com/#website"
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebPage",
+        "@id": "https://fan-ip.com/reach-calculator.html#page",
+        "url": "https://fan-ip.com/reach-calculator.html",
+        "name": "Reach calculator: what your fans’ posts are worth · FAN/IP",
+        "description": "Put in your community’s numbers and see roughly how many views members’ posts bring each month, and what the same views would cost as ads.",
+        "inLanguage": "en-GB",
+        "isPartOf": {
+          "@id": "https://fan-ip.com/#website"
+        },
+        "dateModified": "2026-10-10",
+        "breadcrumb": {
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            {
+              "@type": "ListItem",
+              "position": 1,
+              "name": "FAN/IP",
+              "item": "https://fan-ip.com/"
+            },
+            {
+              "@type": "ListItem",
+              "position": 2,
+              "name": "Reach calculator",
+              "item": "https://fan-ip.com/reach-calculator.html"
+            }
+          ]
+        }
+      },
+      {
+        "@type": "WebApplication",
+        "@id": "https://fan-ip.com/reach-calculator.html#calculator",
+        "name": "FAN/IP reach calculator",
+        "url": "https://fan-ip.com/reach-calculator.html",
+        "applicationCategory": "BusinessApplication",
+        "operatingSystem": "Any (runs in the browser)",
+        "isAccessibleForFree": true,
+        "inLanguage": "en-GB",
+        "description": "Estimates the monthly views of fans' posts about a brand and their media value: members × share who post × posts each × views per post, then views ÷ 1,000 × CPM. Starts from 900 views a post and a typical CPM for the niche (€7 sport, €5 music and creators, €8 brands, €6 otherwise).",
+        "offers": {
+          "@type": "Offer",
+          "price": "0",
+          "priceCurrency": "EUR"
+        },
+        "publisher": {
+          "@id": "https://fan-ip.com/#organization"
+        }
+      }
+    ]
   }
-}
   </script>
   <script>document.documentElement.classList.add("js")</script>
   <link rel="preload" href="./assets/ClashDisplay-500-BPdWq--j.woff2" as="font" type="font/woff2" crossorigin>
@@ -172,7 +213,7 @@
         <div class="pg-section__head">
           <p class="pg-num">How we count</p>
           <h2 id="how-title" class="pg-section__title t-h2">The same sum as in the product.</h2>
-          <p class="pg-section__lead t-lead">Media value is what the same views would have cost as paid posts: views ÷ 1,000 × your CPM.</p>
+          <p class="pg-section__lead t-lead">Media value is what the same views would have cost as paid posts: views ÷ 1,000 × your CPM. The words are defined in the <a href="glossary.html">glossary</a>.</p>
         </div>
         <ul class="rc-list" role="list">
           <li>
@@ -221,6 +262,7 @@
         <a href="reach-calculator.html">Reach calculator</a>
         <a href="pricing.html">Pricing</a>
         <a href="faq.html">FAQ</a>
+        <a href="glossary.html">Glossary</a>
         <a href="book-a-demo.html">Book a demo</a>
       </nav>
       <nav class="foot-for t-small" aria-label="Built for">

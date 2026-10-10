@@ -90,17 +90,28 @@ ${items}
 `;
 }
 
+const CRUMB = { "brands.html": "Brands", "sport.html": "Sport and esports", "artists.html": "Artists and creators" };
+
 function jsonLd(html, page, url) {
   return swap(html, /<script type="application\/ld\+json">\n([\s\S]*?)\n  <\/script>/, (_, body) => {
     const data = JSON.parse(body);
     const web = data["@graph"].find((n) => n["@type"] === "WebPage");
     if (!web) throw new Error("not found: WebPage in JSON-LD");
-    Object.assign(web, { "@id": `${url}#webpage`, url, name: page.title, description: page.description });
+    Object.assign(web, {
+      "@id": `${url}#webpage`, url, name: page.title, description: page.description,
+      breadcrumb: {
+        "@type": "BreadcrumbList",
+        itemListElement: [
+          { "@type": "ListItem", position: 1, name: "FAN/IP", item: "https://fan-ip.com/" },
+          { "@type": "ListItem", position: 2, name: CRUMB[page.file], item: url },
+        ],
+      },
+    });
     data["@graph"].push({
       "@type": "FAQPage",
       "@id": `${url}#faq`,
       url,
-      inLanguage: "en",
+      inLanguage: "en-GB",
       isPartOf: { "@id": "https://fan-ip.com/#website" },
       mainEntity: page.faq.map((f) => ({
         "@type": "Question",

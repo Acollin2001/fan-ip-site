@@ -2359,10 +2359,10 @@ function admWins() {
 }
 
 /* ---------------------------------------------------------------- Season */
-const JOIN_RULES = { choose: "Fans pick a side", city: "By home city", random: "Drawn at random" };
-const COUNTS = { all: "All XP earned", posts: "XP from posts only", checkin: "Check-ins only" };
+const JOIN_RULES = { choose: "Fans pick a side" };
+const COUNTS = { all: "All XP earned", posts: "XP from posts only", checkin: "Check-ins only" };
 const BATTLES = [
-  { id: "ns", name: "North v South, the last week", a: { name: "North", colour: "#2bb3a3", pts: 0, members: 0 }, b: { name: "South", colour: "#f0412f", pts: 0, members: 0 }, start: isoDay(addDays(9)), end: isoDay(city("par").date), join: "city", counts: "all", prize: "The winning side's top 20 get the Paris setlist, printed and signed" },
+  { id: "ns", name: "North v South, the last week", a: { name: "North", colour: "#2bb3a3", pts: 0, members: 0 }, b: { name: "South", colour: "#f0412f", pts: 0, members: 0 }, start: isoDay(addDays(9)), end: isoDay(city("par").date), join: "choose", counts: "all", prize: "The winning side's top 20 get the Paris setlist, printed and signed" },
   { id: "fest", name: "Summer festivals: Tide v Stage red", a: { name: "Tide", colour: "#2bb3a3", pts: 412880, members: 2140 }, b: { name: "Stage red", colour: "#f0412f", pts: 398140, members: 2010 }, start: isoDay(addDays(-112)), end: isoDay(addDays(-61)), join: "choose", counts: "all", prize: "Tide won: a signed festival wristband for its top 20" },
 ];
 const battleStatus = (b) => (isoDay(NOW) < b.start ? "upcoming" : isoDay(NOW) > b.end ? "ended" : "live");
@@ -2401,7 +2401,7 @@ function battleForm(d) {
     <div class="adm-row">${fld("Side 1", `<div style="display:flex;gap:8px"><input type="color" name="ac" value="${d.ac}" style="width:44px;height:40px;padding:2px;border-radius:9px;flex:none">${inp("an", d.an)}</div>`)}
       ${fld("Side 2", `<div style="display:flex;gap:8px"><input type="color" name="bc" value="${d.bc}" style="width:44px;height:40px;padding:2px;border-radius:9px;flex:none">${inp("bn", d.bn)}</div>`)}</div>
     <div class="adm-row">${fld("Starts", inp("start", d.start, 'type="date"'))}${fld("Ends", inp("end", d.end, 'type="date"'))}</div>
-    ${fld("How fans join", sel("join", Object.entries(JOIN_RULES), d.join), "Fans can join until the last day. One side each.")}
+    ${fld("How fans join", `<input value="${JOIN_RULES.choose}" disabled>`, "Fans can join until the last day. One side each.")}
     ${fld("What counts", sel("counts", Object.entries(COUNTS), d.counts))}
     ${fld("Prize for the winning side", inp("prize", d.prize))}`;
 }

@@ -884,6 +884,7 @@ img, svg { max-width: 100%; }
 
 .success { display: flex; flex-direction: column; align-items: center; gap: 10px; text-align: center; padding: 6px 0; }
 .success .big { font-family: var(--f-display); font-weight: 900; font-size: 4.5rem; line-height: 0.85; color: var(--kestrel); }
+.success .big-unit { margin-top: -4px; font-weight: 700; font-size: 0.8125rem; color: var(--ink-2); }
 .code-box { display: flex; justify-content: center; align-items: center; gap: 10px; flex-wrap: wrap; }
 .code-box code { font-family: var(--f-display); font-weight: 800; font-size: 1.75rem; letter-spacing: 0.06em; padding: 8px 16px; border-radius: 12px; background: var(--paper); box-shadow: inset 0 0 0 1.5px var(--line); }
 .note { font-size: 0.8125rem; color: var(--ink-2); }
@@ -892,8 +893,7 @@ img, svg { max-width: 100%; }
 .toast {
   position: absolute; left: 50%; bottom: 96px; z-index: 30; transform: translate(-50%, 20px); opacity: 0;
   padding: 12px 18px; border-radius: 999px; background: var(--moor); color: #fff; font-weight: 600; font-size: 0.875rem;
-  box-shadow: var(--shadow-lift); transition: opacity 0.25s, transform 0.35s var(--ease-spring); pointer-events: none; white-space: nowrap; max-width: 90%;
-  overflow: hidden; text-overflow: ellipsis;
+  box-shadow: var(--shadow-lift); transition: opacity 0.25s, transform 0.35s var(--ease-spring); pointer-events: none; width: max-content; max-width: 90%; text-align: center;
 }
 .toast.show { opacity: 1; transform: translate(-50%, 0); }
 @container dev (min-width: 820px) { .toast { bottom: 32px; } }
@@ -2328,7 +2328,7 @@ const MISSIONS = [
   { id: "post", type: "Social post", group: "share", share: 1, title: "Post your matchday photo, tag @aldermoor and @weirbankmotors", pts: 120, tone: "kestrel", art: "post", meta: "Instagram or TikTok, until Sunday", sponsor: "Weirbank Motors",
     bonus: ["+100 over 5,000 views"], tags: ["@aldermoor", "@weirbankmotors"],
     steps: ["Take a photo at The Weir on Saturday: the stand, the pitch, your mates.", "Post it on Instagram or TikTok and tag @aldermoor and @weirbankmotors.", "Tap below. Your linked account confirms the post on its own."],
-    brief: "Your photo puts the club in front of everyone who follows you. Playing earns 120 points, and 100 more if your post passes 5,000 views. The ten most-viewed go on the big screen at the next home match." },
+    brief: "Your photo puts the club in front of everyone who follows you. Playing earns 120 XP and 120 points, and 100 more of each if your post passes 5,000 views. The ten most-viewed go on the big screen at the next home match." },
   { id: "story", type: "Story", group: "share", share: 1, title: "Share a story from the stands", pts: 60, tone: "moor", art: "story", meta: "Instagram or TikTok story, on matchday", tags: ["@aldermoor", "#UpTheKestrels"],
     steps: ["On matchday, film a few seconds from your seat: the walk-out, a chant, the view.", "Share it as a story and tag @aldermoor. Add #UpTheKestrels if you like.", "Tap below. Views count while the story is up."],
     brief: "Ten seconds from your seat shows your friends what a Saturday at The Weir feels like. Stories disappear after a day; your linked account counts the views while it's up." },
@@ -2336,15 +2336,15 @@ const MISSIONS = [
     brief: "Send a photo of your scarf held high, home or away. The best ten go on the big screen at half-time on Saturday." },
   { id: "predict", type: "Prediction", group: "matchday", title: "Predict the score v Granby Rovers", pts: 50, tone: "kestrel", art: "predict", meta: "Closes at kick-off",
     bonus: () => [`×${state.mult.result} right result`, `×${state.mult.exact} exact score`],
-    get brief() { const w = (n) => ({ 2: "double", 3: "triple" }[n] || `go ×${n}`); return `Call the score before kick-off. Playing earns 50 points. Get the result right and they ${w(state.mult.result)} to ${50 * state.mult.result}; nail the exact score and they ${w(state.mult.exact)} to ${50 * state.mult.exact}.`; } },
+    get brief() { const w = (n) => ({ 2: "double", 3: "triple" }[n] || `go ×${n}`); return `Call the score before kick-off. Playing earns 50 XP and 50 points. Get the result right and both ${w(state.mult.result)} to ${50 * state.mult.result}; nail the exact score and both ${w(state.mult.exact)} to ${50 * state.mult.exact}.`; } },
   { id: "scorer", type: "Prediction", group: "matchday", title: "Who scores first against Granby?", pts: 30, tone: "wing", art: "scorer", meta: "Closes at kick-off",
     bonus: ["×2 if you're right"], options: ["Dario Lenk", "Ayo Fenwick", "Ellis Varga", "Ruben Sølvik", "Anyone else"],
-    brief: "Pick the first Aldermoor scorer. Playing earns 30 points, and they double to 60 if your player scores first." },
+    brief: "Pick the first Aldermoor scorer. Playing earns 30 XP and 30 points, and both double to 60 if your player scores first." },
   { id: "checkin", type: "Check-in", group: "matchday", title: "Check in at The Weir", pts: 100, tone: "moor", art: "stadium", meta: "Opens 13:00 on matchday",
     brief: "Tap in when you are inside the ground. Every home check-in adds a matchday pack of three stickers to your Collection." },
   { id: "first", type: "Open question", group: "community", title: "Your first match at The Weir", pts: 40, tone: "buff", art: "speech", meta: "Best answers go in the programme",
     open: { q: "Who took you, who did we play, and what stuck with you?", feature: 100, where: "the Matchday 10 programme and on the big screen" }, bonus: ["+100 if the club features it"],
-    brief: "No right or wrong answer, just a few lines. The club picks its favourites for the Matchday 10 programme and the big screen, and each one featured earns 100 bonus points." },
+    brief: "No right or wrong answer, just a few lines. The club picks its favourites for the Matchday 10 programme and the big screen, and each one featured earns 100 more XP and 100 more points." },
   { id: "preview", type: "Video", group: "community", title: "Watch the gaffer's Granby preview", pts: 40, tone: "moor", art: "play", meta: "4 min",
     brief: "The manager on Granby's pressing game and who is back from injury." },
   { id: "mate", type: "Referral", group: "community", title: "Bring a mate to their first match", pts: 250, tone: "buff", art: "mates", meta: "After their first mission",
@@ -2430,7 +2430,7 @@ function openBody(m) {
   const feat = state.featured.has(m.id);
   return `<figure class="answer mine"><blockquote>${esc(mine)}</blockquote><figcaption><span class="avatar sm">${initials(ME.name)}</span>You, ${ME.handle}</figcaption></figure>
     ${feat ? `<div class="outcome"><b>+${m.open.feature}</b><span>The club featured your answer. It goes in ${esc(m.open.where)}.</span></div>`
-      : `<div class="success"><span class="big num">+${m.pts}</span><p>Sent to the club.${m.open.feature ? ` If they feature it, you get ${m.open.feature} more.` : ""}</p></div>`}${wall}`;
+      : `<div class="success"><span class="big num">+${m.pts}</span><span class="big-unit">XP · ${word()}</span><p>Sent to the club.${m.open.feature ? ` If they feature it, you get ${m.open.feature} more.` : ""}</p></div>`}${wall}`;
 }
 
 /* ---------------------------------------------------------------- swapping doubles */
@@ -2467,7 +2467,7 @@ function doublesPanel() {
   return `<div class="panel doubles"><div class="panel-top"><span class="panel-kicker">Your doubles</span><button class="link" data-act="goswaps">Go to the swap table</button></div>
     ${ids.length ? `<div class="dbl-list">${ids.map((id) => `<div class="dbl">${miniSt(id)}<span class="swap-txt"><b>${esc(stLabel(id))}</b><span class="meta">${state.spares[id]} spare</span></span><button class="btn btn-ghost btn-sm" data-act="tradein" data-id="${id}">Trade in, +10</button></div>`).join("")}</div>`
       : `<p class="panel-body">No doubles right now. They land here when a pack gives you a card you already have.</p>`}
-    <p class="note" style="margin-top:10px">Swap a double with another member for a card you're missing, or trade it in for 10 ${word()}.</p></div>`;
+    <p class="note" style="margin-top:10px">Swap a double with another member for a card you're missing, or trade it in for 10 XP and 10 ${word()}.</p></div>`;
 }
 function swapSheet(i) {
   const o = OFFERS[i], give = o.wants.find((w) => state.spares[w] > 0);
@@ -2529,7 +2529,7 @@ function seasonSection() {
   const p = predStats();
   const views = MY_POSTS.reduce((n, x) => n + x.views, 0);
   const tiles = [
-    [fmt(SP()), `${word()} this season`], [String(58 + doneNow.length), "missions done"],
+    [fmt(SP()), "XP this season"], [String(58 + doneNow.length), "missions done"],
     [`${state.checkedIn ? 8 : 7} of 8`, "home matchdays"], [`${p.right} of ${p.played}`, `right results, ${p.exact} exact`],
     [big(views), `views on your ${MY_POSTS.length} posts`], [`${state.owned.size} of ${albumTotal()}`, "cards collected"],
   ];
@@ -2538,7 +2538,7 @@ function seasonSection() {
     const months = [["Jul", 240], ["Aug", 1180], ["Sep", 1860], ["Oct", 200 + state.earned]];
     const max = Math.max(...months.map((m) => m[1]));
     const log = [...doneNow.map((m) => ["Today", m.title, m.pts]), ...MY_LOG];
-    body = `<div class="month-bars" role="img" aria-label="${word()} earned each month">${months.map(([m, v]) => `<div><span class="num">${fmt(v)}</span><i style="height:${Math.max(6, Math.round((v / max) * 100))}%"></i><b>${m}</b></div>`).join("")}</div>
+    body = `<div class="month-bars" role="img" aria-label="XP earned each month">${months.map(([m, v]) => `<div><span class="num">${fmt(v)}</span><i style="height:${Math.max(6, Math.round((v / max) * 100))}%"></i><b>${m}</b></div>`).join("")}</div>
       <ol class="act-list">${log.slice(0, 8).map(([d, w, v]) => `<li><time>${d}</time><span>${esc(w)}</span><b class="num">+${v}</b></li>`).join("")}</ol>`;
   } else if (t === "predictions") {
     const live = state.predicted ? [{ md: "Matchday 9", vs: "v Granby Rovers", mine: state.predicted, ft: state.result, k: state.result && state.settled ? state.settled.mine : null }] : [];
@@ -2596,7 +2596,7 @@ const BADGES = [
   { id: "mate", name: "Bring a mate", glyph: "+1", big: 1, bg: "#c9421b", fg: "#f0e2c4", how: "Three mates join with your code and get their first mission approved.", prog: () => [1, 3] },
   { id: "scarves", name: "Scarves up", glyph: "5", big: 1, bg: "#7d9ab6", fg: "#17263a", how: "Five photos approved by the club.", prog: () => [2 + (state.done.has("scarf") ? 1 : 0), 5] },
   { id: "voice", name: "Terrace voice", glyph: "50", big: 1, bg: "#f0e2c4", fg: "#213550", how: "Fifty messages in The Terrace.", prog: () => [Math.min(50, 31 + state.chat.length), 50] },
-  { id: "top50", name: "Top 50", glyph: "50", big: 1, bg: "#ffd24d", fg: "#c9421b", how: `Finish the season in the top 50. The cut is ${fmt(TOP50_CUT)} points today.`, prog: () => [Math.min(SP(), TOP50_CUT), TOP50_CUT] },
+  { id: "top50", name: "Top 50", glyph: "50", big: 1, bg: "#ffd24d", fg: "#c9421b", how: `Finish the season in the top 50. The cut is ${fmt(TOP50_CUT)} XP today.`, prog: () => [Math.min(SP(), TOP50_CUT), TOP50_CUT] },
   { id: "battle", name: "Battle won", glyph: "W", big: 1, bg: "#2f7d4f", fg: "#ffffff", how: "Be on the winning side of a team battle.", prog: () => [0, 1] },
   { id: "early", name: "Early bird", glyph: "13:00", bg: "#213550", fg: "#ffd24d", how: "Check in before 14:00 at five home matches.", prog: () => [3, 5] },
   { id: "screen", name: "Big screen", glyph: "HT", big: 1, bg: "#c9421b", fg: "#ffffff", how: "Your photo on the big screen at half-time.", prog: () => [0, 1] },
@@ -2614,7 +2614,7 @@ const MONTH_NAME = NOW.toLocaleDateString("en-GB", { month: "long" });
 const isoDay = (d) => `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`;
 const dayLabel = (iso) => new Date(iso + "T12:00:00").toLocaleDateString("en-GB", { day: "numeric", month: "short" });
 const JOIN_RULES = { choose: "Members pick a side", seat: "By seat block", random: "Drawn at random when they join" };
-const COUNTS = { all: "Every point earned", checkins: "Home check-ins", missions: "Mission points only" };
+const COUNTS = { all: "All XP earned", checkins: "Home check-ins", missions: "XP from missions only" };
 const BATTLES = [
   { id: "stands", name: "North Stand v Riverside End", a: { name: "North Stand", colour: "#c9421b", pts: 48210, members: 4126 }, b: { name: "Riverside End", colour: "#7d9ab6", pts: 45870, members: 3984 },
     start: isoDay(new Date(NOW.getFullYear(), NOW.getMonth(), 1)), end: isoDay(new Date(NOW.getFullYear(), NOW.getMonth() + 1, 0)), join: "choose", counts: "all", prize: "200 free seats on the away-day coach to Granby, for the winning stand", prizeLine: "The winning stand gets 200 free seats on the away-day coach to Granby." },
@@ -2642,7 +2642,7 @@ const ORDERS = [
 /* ---------------------------------------------------------------- state */
 const state = {
   view: "member", device: window.innerWidth >= 1180 ? "laptop" : "phone",
-  tab: "home", balance: 3480, word: "points",
+  tab: "home", balance: 1240, word: "points",
   done: new Set(), predicted: null, score: [2, 1], matchday: false, checkedIn: false,
   packs: 1, packRound: 0,
   owned: new Set([
@@ -2664,8 +2664,10 @@ const state = {
 const word = () => state.word;
 const tierOf = (b) => [...TIERS].reverse().find((t) => b >= t.at);
 const nextTier = (b) => TIERS.find((t) => t.at > b);
-/* Season points: what the table and the tiers count. Spending on rewards never lowers them. */
+/* Season XP: what the table and the tiers count, back to 0 each season. state.balance is the points to spend:
+   every approved action adds the same amount to both, spending only lowers the points. */
 const SP = () => 3480 + state.earned;
+const xpPts = (n) => `+${fmt(n)} XP · +${fmt(n)} ${word()}`;
 function myRank() {
   const above = NEAR.filter((n) => n[1] > SP()).length;
   return 209 + above;
@@ -2747,7 +2749,7 @@ function tierBlock() {
   const n = nextTier(SP()), t = tierOf(SP());
   const pct = n ? Math.round(((SP() - t.at) / (n.at - t.at)) * 100) : 100;
   return `<div class="tier">
-    <div class="tier-row"><span>${n ? `<b class="num">${fmt(n.at - SP())}</b> ${word()} to ${n.name}` : "Top tier reached"}</span><span class="meta">${pct}%</span></div>
+    <div class="tier-row"><span>${n ? `<b class="num">${fmt(n.at - SP())}</b> XP to ${n.name}` : "Top tier reached"}</span><span class="meta">${pct}%</span></div>
     <div class="bar" role="progressbar" aria-valuenow="${pct}" aria-valuemin="0" aria-valuemax="100" aria-label="Progress to ${n ? n.name : t.name}"><span data-fill="${pct}"></span></div>
     <div class="tier-steps">${TIERS.map((x) => `<span class="${x.name === t.name ? "on" : ""}">${x.name}</span>`).join("")}</div>
   </div>`;
@@ -2781,7 +2783,7 @@ function predictAction() {
   let title, sub, pts = "";
   if (res) {
     title = `Full time ${res[0]}–${res[1]}${pred ? `. You said ${pred[0]}–${pred[1]}` : ""}`;
-    sub = !pred ? "Predictions are closed" : st.mine === "exact" ? "Exact score, points tripled" : st.mine === "result" ? "Right result, points doubled" : "Not this time. You kept your 50";
+    sub = !pred ? "Predictions are closed" : st.mine === "exact" ? "Exact score, XP and points tripled" : st.mine === "result" ? "Right result, XP and points doubled" : "Not this time. You kept your 50";
     pts = pred ? `+${50 * { exact: state.mult.exact, result: state.mult.result, miss: 1 }[st.mine]}` : "";
   } else if (pred) { title = `You said ${pred[0]}–${pred[1]}`; sub = `Locked in. ×${state.mult.result} if right, ×${state.mult.exact} if exact`; }
   else { title = "Predict the score"; sub = `×${state.mult.result} right result, ×${state.mult.exact} exact score`; pts = "+50"; }
@@ -2798,7 +2800,7 @@ function missionCard(m, i, opts = {}) {
   return `<${tag} class="card" ${opts.still ? "" : `data-act="mission" data-id="${m.id}"`} ${done ? "data-done" : ""}>
     <span class="card-art" data-tone="${m.tone}">
       ${missionArt(m.art)}
-      <span class="card-val num">+${m.pts}<small>${word()}</small></span>
+      <span class="card-val num">+${m.pts}<small>XP · ${word()}</small></span>
       <span class="card-kind">${esc(m.type)}</span>
       ${m.bonus && !done ? `<span class="card-bonus">${bonusOf(m).map((b) => `<span>${esc(b)}</span>`).join("")}</span>` : ""}
       ${done ? `<span class="card-done">${icon("check")}${!opts.past && m.type === "Prediction" && !(m.custom ? m.answer : state.result) ? "Locked in" : "Collected"}</span>` : ""}
@@ -2838,12 +2840,12 @@ function battleScore(b, side) {
   const mine = state.joined[b.id] === side ? Math.max(0, state.earned - (state.joinEarned[b.id] || 0)) : 0;
   return b[side].pts + mine;
 }
-const countsLine = (b) => ({ all: `Every ${word().replace(/s$/, "")} you earn after joining counts for your side.`, checkins: "Every home check-in after joining counts for your side.", missions: `${word().replace(/^./, (c) => c.toUpperCase())} from missions count for your side.` }[b.counts]);
+const countsLine = (b) => ({ all: "All the XP you earn after joining counts for your side.", checkins: "Every home check-in after joining counts for your side.", missions: "XP from missions counts for your side." }[b.counts]);
 function joinBlock(b) {
   const mine = state.joined[b.id];
   if (mine) {
     const from = Math.max(0, state.earned - (state.joinEarned[b.id] || 0));
-    return `<div class="battle-you"><i style="background:${b[mine].colour}"></i><span>You're in <b>${esc(b[mine].name)}</b>. ${from ? `${fmt(from)} ${word()} from you so far.` : `Earn ${word()} to push your side.`}</span></div>`;
+    return `<div class="battle-you"><i style="background:${b[mine].colour}"></i><span>You're in <b>${esc(b[mine].name)}</b>. ${from ? `${fmt(from)} XP from you so far.` : "Earn XP to push your side."}</span></div>`;
   }
   if (b.join === "seat") return `<div class="battle-you"><i style="background:${b.a.colour}"></i><span>Your seat is in block F, so you play for <b>${esc(b.a.name)}</b>.</span><button class="btn btn-primary btn-sm" style="margin-left:auto" data-act="join" data-id="${b.id}" data-side="a">Join</button></div>`;
   if (b.join === "random") return `<div class="battle-join" style="grid-template-columns:1fr"><button class="btn btn-primary" data-act="join" data-id="${b.id}" data-side="random">Join and get drawn into a side</button></div>`;
@@ -2878,7 +2880,7 @@ function battleSheet(id) {
       <li><span><b>Earn as usual.</b> ${countsLine(b)}</span></li>
       <li><span><b>The side with the most wins.</b> Final scores on ${dayLabel(b.end)}. ${esc(prizeLine(b))}</span></li>
     </ol>
-    <div class="contrib panel">${["a", "b"].map((k) => `<div><h4><span class="team-dot" style="background:${b[k].colour}"></span>${esc(b[k].name)}</h4><p class="meta" style="margin:2px 0 0">${fmt(battleScore(b, k))} ${word()}, ${fmt(b[k].members + (state.joined[b.id] === k ? 1 : 0))} members</p><ol>${(b.custom ? [] : tops[k]).map((n) => `<li>${n}</li>`).join("")}${state.joined[b.id] === k ? `<li><b>You</b></li>` : ""}</ol></div>`).join("")}</div>
+    <div class="contrib panel">${["a", "b"].map((k) => `<div><h4><span class="team-dot" style="background:${b[k].colour}"></span>${esc(b[k].name)}</h4><p class="meta" style="margin:2px 0 0">${fmt(battleScore(b, k))} XP, ${fmt(b[k].members + (state.joined[b.id] === k ? 1 : 0))} members</p><ol>${(b.custom ? [] : tops[k]).map((n) => `<li>${n}</li>`).join("")}${state.joined[b.id] === k ? `<li><b>You</b></li>` : ""}</ol></div>`).join("")}</div>
     ${joinBlock(b)}`);
 }
 
@@ -2943,7 +2945,7 @@ function screenMissions() {
   const open = openMissions();
   return `<div class="view-inner">
     <header><h1 class="h-page">Missions</h1>
-    <p class="lede">${open.length} open this week, worth ${fmt(open.reduce((s, m) => s + m.pts, 0))} ${word()}. New ones are dealt every Monday and on matchday.</p></header>
+    <p class="lede">${open.length} open this week, worth ${fmt(open.reduce((s, m) => s + m.pts, 0))} XP and as many ${word()}. New ones are dealt every Monday and on matchday.</p></header>
     <div class="chips" role="group" aria-label="Filter missions">${filters.map(([k, l]) => `<button class="chip" data-act="filter" data-f="${k}" aria-pressed="${f === k}">${l}</button>`).join("")}</div>
     <div class="grid-cards">${list.map((m, i) => missionCard(m, i)).join("")}</div>
     <section class="sec" aria-labelledby="h-past"><div class="sec-head"><h2 class="h-sec" id="h-past">Collected this month</h2></div>
@@ -2990,7 +2992,7 @@ function tableRows() {
   }
   if (mode === "month") {
     return MONTH.map((r, i) => row(r, i + 1)).join("") + `<tr class="gap"><td colspan="5">···</td></tr>` +
-      `<tr class="me"><td class="pos">96<span class="mv up">▲ 31</span></td><td><span class="mem"><span class="avatar sm">${initials(ME.name)}</span><b>You, ${ME.handle}</b></span></td><td class="hide-sm r tnum">2</td><td class="hide-sm">${formDots(2)}</td><td class="r ptsc num">${fmt(state.balance - 3480 + 640)}</td></tr>`;
+      `<tr class="me"><td class="pos">96<span class="mv up">▲ 31</span></td><td><span class="mem"><span class="avatar sm">${initials(ME.name)}</span><b>You, ${ME.handle}</b></span></td><td class="hide-sm r tnum">2</td><td class="hide-sm">${formDots(2)}</td><td class="r ptsc num">${fmt(SP() - 3480 + 640)}</td></tr>`;
   }
   const rank = myRank();
   const above = NEAR.filter((n) => n[1] > SP());
@@ -3024,12 +3026,12 @@ function meCard() {
     <div class="me-top"><span class="avatar">${initials(ME.name)}</span><span><b>${ME.handle}</b><span>${ME.name}, ${tierOf(SP()).name}</span></span>
       <span class="me-rank"><b class="num">${ordinal(rank)}</b><span>of ${fmt(of)}, ${move}</span></span></div>
     <div class="me-stats">
-      <div><b class="num">${fmt(pts)}</b><span>${word()}${m === "month" ? ` in ${MONTH_NAME}` : ""}</span></div>
+      <div><b class="num">${fmt(pts)}</b><span>XP${m === "month" ? ` in ${MONTH_NAME}` : " this season"}</span></div>
       <div><b class="num">${m === "group" ? `${rank}/${of}` : `Top ${top}%`}</b><span>${m === "group" ? "in your group" : "of all members"}</span></div>
       <div><b class="num">${state.checkedIn ? 8 : 7}/8</b><span>matchdays played</span></div>
       <div><b class="num">${BADGES.filter(badgeEarned).length}/24</b><span>badges</span></div>
     </div>
-    <div class="me-next"><span>${next[0] > 0 ? `<b class="num">${fmt(next[0])}</b> ${word()} ${next[1]}` : next[1]}</span><div class="bar"><span data-fill="${Math.min(100, Math.round(next[2] * 100))}"></span></div><button class="btn btn-onDark btn-sm" data-act="findme">Find me in the table</button></div>
+    <div class="me-next"><span>${next[0] > 0 ? `<b class="num">${fmt(next[0])}</b> XP ${next[1]}` : next[1]}</span><div class="bar"><span data-fill="${Math.min(100, Math.round(next[2] * 100))}"></span></div><button class="btn btn-onDark btn-sm" data-act="findme">Find me in the table</button></div>
   </section>`;
 }
 
@@ -3037,21 +3039,22 @@ function screenTable() {
   const m = state.table;
   const pod = m === "group" ? null : m === "month" ? MONTH : TOP;
   return `<div class="view-inner">
-    <header><h1 class="h-page">League table</h1><p class="lede">Ranked by ${word()} earned in the 2026/27 season. ${fmt(18406)} members in the league.</p></header>
+    <header><h1 class="h-page">League table</h1><p class="lede">Ranked by XP earned in the 2026/27 season. ${fmt(18406)} members in the league.</p></header>
     ${meCard()}
     <div class="chips" role="group" aria-label="Table">${[["season", "Season"], ["month", MONTH_NAME], ["group", "The Riverside lot"]].map(([k, l]) => `<button class="chip" data-act="tablemode" data-m="${k}" aria-pressed="${m === k}">${l}</button>`).join("")}</div>
     <div class="table-wrap">
       <div class="sec">
-        ${pod ? `<div class="podium">${[1, 0, 2].map((i) => `<div class="pod p${i + 1}"><span class="pos">${i + 1}</span><span class="avatar">${initials(pod[i][0])}</span><span class="who">${pod[i][0]}</span><span class="pts num">${fmt(pod[i][1])} <small>${word()}</small></span></div>`).join("")}</div>`
+        ${pod ? `<div class="podium">${[1, 0, 2].map((i) => `<div class="pod p${i + 1}"><span class="pos">${i + 1}</span><span class="avatar">${initials(pod[i][0])}</span><span class="who">${pod[i][0]}</span><span class="pts num">${fmt(pod[i][1])} <small>XP</small></span></div>`).join("")}</div>`
           : `<div class="panel"><span class="panel-kicker">Private group, 5 members</span><h3 class="panel-title">The Riverside lot</h3><p class="panel-body">Your mates from block F. Only you five see this table.</p></div>`}
         <table class="ltable">
-          <thead><tr><th>Pos</th><th>Member</th><th class="hide-sm r">Played</th><th class="hide-sm">Form</th><th class="r">${word().replace(/^./, (c) => c.toUpperCase())}</th></tr></thead>
+          <thead><tr><th>Pos</th><th>Member</th><th class="hide-sm r">Played</th><th class="hide-sm">Form</th><th class="r">XP</th></tr></thead>
           <tbody>${tableRows()}</tbody>
         </table>
       </div>
       <div class="sec">${liveBattles().map((b) => battle(b)).join("")}
         <div class="panel"><span class="panel-kicker">How the table works</span>
-          <p class="panel-body" style="margin-top:8px">Played counts home matchdays you checked in at. Form shows the last five. The top 50 at the end of the season are invited to the end-of-season dinner with the squad.</p></div>
+          <p class="panel-body" style="margin-top:8px">Played counts home matchdays you checked in at. Form shows the last five. The top 50 at the end of the season are invited to the end-of-season dinner with the squad.</p>
+          <p class="panel-body" style="margin-top:8px">Every approved mission earns the same number of XP and ${word()}. XP ranks you here and starts again at 0 next season; ${word()} are yours to spend in Rewards and never reset.</p></div>
       </div>
     </div>
   </div>`;
@@ -3161,7 +3164,7 @@ const TYPE_CODE = { "Social post": "Post", Story: "Story", Photo: "Photo", Predi
 const nextReward = () => REWARDS.filter((r) => r.cost > state.balance).sort((a, b) => a.cost - b.cost)[0];
 const bestReady = () => REWARDS.filter((r) => r.cost <= state.balance).sort((a, b) => b.cost - a.cost)[0];
 const hello = () => `${greeting()}, ${ME.first}.`;
-const toNext = () => { const n = nextTier(SP()); return n ? `${fmt(n.at - SP())} ${word()} to ${n.name}` : "Top tier reached"; };
+const toNext = () => { const n = nextTier(SP()); return n ? `${fmt(n.at - SP())} XP to ${n.name}` : "Top tier reached"; };
 const homeExtras = () => `<div class="duo">${battle()}${sharedGoal()}</div>${giveaway()}`;
 const lc1 = (t) => t.replace(/^Seat on/, "a seat on").replace(/^[A-Z](?=[a-z])/, (c) => c.toLowerCase());
 const pctTo = (cost) => Math.min(100, Math.round((state.balance / cost) * 100));
@@ -3190,7 +3193,7 @@ function homeMetro() {
   const st = (cls, label, sub = "", attrs = "") => `<li class="mt-st ${cls}" ${attrs}><span class="mt-mark" aria-hidden="true"></span><span class="mt-lbl"><b>${label}</b>${sub ? `<span>${sub}</span>` : ""}</span></li>`;
   const stations = [
     st("mt-term mt-past", `On the Kestrels line since ${ME.since}`, `Member ${ME.member}`),
-    ...past.map(([d, w, v]) => st("mt-past", esc(w), `+${v} ${word()}, ${d}`)),
+    ...past.map(([d, w, v]) => st("mt-past", esc(w), `${xpPts(v)}, ${d}`)),
     ready ? st("mt-x mt-past mt-ready", esc(ready.title), `${fmt(ready.cost)} ${word()}. Change here: it's yours to redeem`, `data-act="tab" data-tab="rewards" role="button" tabindex="0"`) : "",
     `<li class="mt-st mt-you"><span class="mt-mark" aria-hidden="true"></span><span class="mt-lbl"><span class="mt-here">You are here</span><b class="num"><span data-balance>${fmt(state.balance)}</span> <small>${word()}</small></b><span>${esc(tierOf(SP()).name)}, ${toNext()}</span></span></li>`,
     ...ahead.map((a) => a.k === "stop"
@@ -3209,7 +3212,7 @@ function homeMetro() {
         <ul>
           <li><i class="k-line"></i><span><b>Kestrels line</b>Your season, one station per mission</span></li>
           <li><i class="k-x"></i><span><b>Reward lines</b>Change where you can afford one</span></li>
-          <li><i class="k-stop"></i><span><b>Station</b>An open mission and what it pays</span></li>
+          <li><i class="k-stop"></i><span><b>Station</b>An open mission and what it pays, in XP and ${word()}</span></li>
           <li><i class="k-you"></i><span><b>You are here</b><span class="num">${fmt(state.balance)}</span> ${word()}</span></li>
         </ul>
         <div class="mt-dep"><span class="mt-dep-k">Next departure</span><b>Matchday 9 v Granby Rovers</b><span>${KO_LABEL}, 15:00, The Weir</span>
@@ -3249,13 +3252,13 @@ function homeBoard() {
       </div>
       <div class="bd-main">
         <section class="bd-panel" aria-labelledby="h-hand">
-          <div class="bd-head"><span id="h-hand">Your missions</span><span>${word()}</span></div>
-          <div class="bd-cols" aria-hidden="true"><span>Type</span><span>Mission</span><span>${word()}</span></div>
+          <div class="bd-head"><span id="h-hand">Your missions</span><span>XP · ${word()}</span></div>
+          <div class="bd-cols" aria-hidden="true"><span>Type</span><span>Mission</span><span>XP · ${word()}</span></div>
           ${rows}
           <button class="bd-more" data-act="tab" data-tab="missions">All missions</button>
         </section>
         <section class="bd-panel" aria-label="Recent activity">
-          <div class="bd-head"><span>Arrived</span><span>${word()}</span></div>
+          <div class="bd-head"><span>Arrived</span><span>XP · ${word()}</span></div>
           ${MY_LOG.slice(0, 4).map(([dd, w, v]) => `<div class="bd-row bd-log"><span class="bd-code">${esc(dd.toUpperCase())}</span><span class="bd-title">${esc(w)}</span><span class="bd-pts">${flaps("+" + v, "sm")}</span></div>`).join("")}
         </section>
       </div>
@@ -3271,7 +3274,7 @@ function dialRing() {
   const r = nextReward(), lit = r ? Math.round((state.balance / r.cost) * 60) : 60;
   const ticks = Array.from({ length: 60 }, (_, i) => { const a = (i / 60) * Math.PI * 2 - Math.PI / 2; const r1 = 148, r2 = i % 5 ? 156 : 160; return `<line x1="${(170 + r1 * Math.cos(a)).toFixed(1)}" y1="${(170 + r1 * Math.sin(a)).toFixed(1)}" x2="${(170 + r2 * Math.cos(a)).toFixed(1)}" y2="${(170 + r2 * Math.sin(a)).toFixed(1)}" class="${i < lit ? "on" : ""}"/>`; }).join("");
   const raw = state.dialIdx || 0;
-  const chips = list.map((m, i) => { const a = ((i - raw) / n) * 360; return `<button class="dl-chip ${i === sel ? "on" : ""}" style="--a:${a}deg" data-act="dialto" data-i="${i}" aria-label="${esc(m.title)}, ${m.pts} ${word()}"><span class="num">+${m.pts}</span></button>`; }).join("");
+  const chips = list.map((m, i) => { const a = ((i - raw) / n) * 360; return `<button class="dl-chip ${i === sel ? "on" : ""}" style="--a:${a}deg" data-act="dialto" data-i="${i}" aria-label="${esc(m.title)}, ${m.pts} XP and ${m.pts} ${word()}"><span class="num">+${m.pts}</span></button>`; }).join("");
   const m = list[sel];
   return { sel, m, html: `<div class="dl-dial" style="--n:${n}">
       <svg class="dl-ticks" viewBox="0 0 340 340" aria-hidden="true"><circle cx="170" cy="170" r="128" class="dl-track"/>${ticks}</svg>
@@ -3284,7 +3287,7 @@ function dialFocus(m) {
   if (!m) return `<p class="panel-body">Nothing open right now.</p>`;
   return `<span class="panel-kicker">At the top of the dial</span><h2 class="panel-title">${esc(m.title)}</h2>
     <p class="panel-body">${esc(m.type)}${m.sponsor ? `, with ${esc(m.sponsor)}` : ""}. ${esc(m.meta)}.</p>
-    <div class="dl-go"><span class="dl-pts num">+${m.pts}<small> ${word()}</small></span><button class="btn btn-primary" data-act="mission" data-id="${m.id}">Open the mission</button></div>`;
+    <div class="dl-go"><span class="dl-pts num">+${m.pts}<small> XP · ${word()}</small></span><button class="btn btn-primary" data-act="mission" data-id="${m.id}">Open the mission</button></div>`;
 }
 function homeDial() {
   const ring = dialRing();
@@ -3322,7 +3325,7 @@ function homeCalendar() {
         <div class="cl-page ${state.calTorn ? "fresh" : ""}">
           <div class="cl-top"><span>${now.toLocaleDateString("en-GB", { month: "long" })}</span><span>${now.getFullYear()}</span></div>
           <div class="cl-day"><span class="cl-wd">${now.toLocaleDateString("en-GB", { weekday: "long" })}</span><b class="cl-num num">${now.getDate()}</b><span class="cl-word">${word1}</span></div>
-          ${today ? `<button class="cl-task" data-act="mission" data-id="${today.id}"><span class="cl-type">${esc(today.type)}${today.sponsor ? `, with ${esc(today.sponsor)}` : ""}</span><b>${esc(today.title)}</b><span class="cl-pts num">+${today.pts} ${word()}</span></button>` : `<p class="cl-task">Everything is done for today.</p>`}
+          ${today ? `<button class="cl-task" data-act="mission" data-id="${today.id}"><span class="cl-type">${esc(today.type)}${today.sponsor ? `, with ${esc(today.sponsor)}` : ""}</span><b>${esc(today.title)}</b><span class="cl-pts num">${xpPts(today.pts)}</span></button>` : `<p class="cl-task">Everything is done for today.</p>`}
           <div class="cl-foot"><span><b class="num" data-balance>${fmt(state.balance)}</b> ${word()}</span><button class="cl-tear" data-act="calTear" ${open.length > 1 ? "" : "disabled"}>Tear off</button></div>
         </div>
       </section>
@@ -3330,7 +3333,7 @@ function homeCalendar() {
         <div class="sec-head"><h2 class="h-sec" id="cl-n">Your missions</h2><button class="link" data-act="tab" data-tab="missions">All missions</button></div>
         <div class="cl-sheets">${rest.map((m) => `<button class="cl-sheet ${reach && reach.m === m ? "reach" : ""}" data-act="mission" data-id="${m.id}"><b class="num">+${m.pts}</b><span>${esc(m.title)}</span>${reach && reach.m === m ? `<small>This page gets you ${esc(lc1(reach.r.title))}</small>` : `<small>${esc(m.type)}</small>`}</button>`).join("")}</div>
         <div class="cl-date" role="group" aria-label="Next home match"><span class="cl-mini"><span>${ko.toLocaleDateString("en-GB", { month: "short" })}</span><b class="num">${ko.getDate()}</b><span>${ko.toLocaleDateString("en-GB", { weekday: "short" })}</span></span>
-          <span><b>Matchday 9: Aldermoor v Granby Rovers</b><span class="meta">15:00 at The Weir. Check-in opens at 13:00, +100 ${word()}.</span></span></div>
+          <span><b>Matchday 9: Aldermoor v Granby Rovers</b><span class="meta">15:00 at The Weir. Check-in opens at 13:00, ${xpPts(100)}.</span></span></div>
       </section>
     </div>
     ${homeExtras()}
@@ -3369,8 +3372,8 @@ function homeRiso() {
       <span class="rs-disc" aria-hidden="true"></span>
       <span class="rs-kicker">Aldermoor Athletic, season 2026/27. Printed for ${esc(ME.name)}</span>
       <h1 class="rs-h1">${hello()}</h1>
-      <div class="rs-fig"><b class="num" data-text="${fmt(state.balance)}"><span data-balance>${fmt(state.balance)}</span></b><span>${word()}</span></div>
-      <p class="rs-line">${toNext()}. ${myRank()}th in the table.</p>
+      <div class="rs-fig"><b class="num" data-text="${fmt(SP())}"><span>${fmt(SP())}</span></b><span>XP</span></div>
+      <p class="rs-line">${toNext()}. ${myRank()}th in the table. <span class="num" data-balance>${fmt(state.balance)}</span> ${word()} to spend.</p>
     </section>
     <section class="sec rs-list" aria-labelledby="h-hand"><div class="sec-head"><h2 class="h-sec" id="h-hand">Your missions</h2><button class="link" data-act="tab" data-tab="missions">All missions</button></div>
       ${open.map((m, i) => `<button class="rs-row" data-act="mission" data-id="${m.id}"><span class="rs-n num">0${i + 1}</span><span class="rs-plate">${missionArt(m.art)}</span><span class="rs-t"><b>${esc(m.title)}</b><span>${esc(m.type)}, ${esc(m.meta)}</span></span><span class="rs-pts num">+${m.pts}</span></button>`).join("")}
@@ -3395,7 +3398,7 @@ function homeReel() {
       <span class="rl-kicker">${esc(m.type)}${m.sponsor ? `, with ${esc(m.sponsor)}` : ""}</span>
       <h2 class="rl-title" style="--fs:${fit(m.title)}">${esc(m.title)}</h2>
       <div class="rl-art" aria-hidden="true">${missionArt(m.art)}</div>
-      <div class="rl-foot"><span class="rl-pts num">+${m.pts}<small>${word()}</small></span><button class="btn rl-btn" data-act="mission" data-id="${m.id}">Play</button></div></section>`).join("")}
+      <div class="rl-foot"><span class="rl-pts num">+${m.pts}<small>XP · ${word()}</small></span><button class="btn rl-btn" data-act="mission" data-id="${m.id}">Play</button></div></section>`).join("")}
     <section class="rl-screen" data-tone="kestrel" aria-label="Rewards"><span class="rl-count">${open.length + 2} / ${open.length + 2}</span>
       <span class="rl-kicker">Next reward</span>
       ${rw ? `<h2 class="rl-title" style="--fs:${fit(rw.title)}">${esc(rw.title)}</h2><p class="rl-sub">${fmt(rw.cost - state.balance)} ${word()} to go</p>` : `<h2 class="rl-title">Every reward is in reach</h2>`}
@@ -3408,7 +3411,7 @@ function homeDirect() {
   const open = openMissions().slice(0, 4);
   const club = (t, extra = "") => `<div class="dm dm-club"><span class="dm-av" aria-hidden="true">${crest()}</span><div class="dm-b">${t}${extra}</div></div>`;
   const me = (t) => `<div class="dm dm-me"><div class="dm-b">${t}</div></div>`;
-  const receipt = (t, v) => `<div class="dm-receipt"><span>${t}</span><b class="num">+${v} ${word()}</b></div>`;
+  const receipt = (t, v) => `<div class="dm-receipt"><span>${t}</span><b class="num">${xpPts(v)}</b></div>`;
   const [d, h] = clockParts();
   const threads = [["Aldermoor Athletic", "Your missions for the week", 3, 1], ["Matchday 9 chat", "Kieran: If Lenk starts I'm calling 3–1", 12], ["The Riverside lot", "Ola: coach at 09:30?", 2], ["Swap table", "Eva has #9 Lenk", 0], ["Weirbank Motors", "Post your matchday photo", 1]];
   return `<div class="view-inner sh sh-direct">
@@ -3420,8 +3423,8 @@ function homeDirect() {
         ${me("Checked in at The Weir. Get in!")}${receipt("Check-in, Matchday 8", 100)}
         ${me("2–0 v Tarrow Vale, called it.")}${receipt("Exact score, ×3", 150)}
         <div class="dr-day"><span>Today</span></div>
-        ${club(`<p><b>${hello()}</b> You're on <span class="num" data-balance>${fmt(state.balance)}</span> ${word()}, ${myRank()}th in the table. ${toNext()}.</p>`)}
-        ${club(`<p>Granby Rovers come to The Weir on ${KO_LABEL}, 15:00. That's in ${d ? `${d} day${d === 1 ? "" : "s"} and ` : ""}${h} hour${h === 1 ? "" : "s"}. This week's missions:</p>`, `<div class="dm-cards">${open.map((m) => `<button class="dm-card" data-act="mission" data-id="${m.id}"><span class="dm-art" data-tone="${m.tone}">${missionArt(m.art)}</span><span class="dm-t"><b>${esc(m.title)}</b><span>${esc(m.type)}, +${m.pts} ${word()}</span></span><span class="dm-go">Reply</span></button>`).join("")}</div>`)}
+        ${club(`<p><b>${hello()}</b> You're on ${fmt(SP())} XP, ${myRank()}th in the table, with <span class="num" data-balance>${fmt(state.balance)}</span> ${word()} to spend. ${toNext()}.</p>`)}
+        ${club(`<p>Granby Rovers come to The Weir on ${KO_LABEL}, 15:00. That's in ${d ? `${d} day${d === 1 ? "" : "s"} and ` : ""}${h} hour${h === 1 ? "" : "s"}. This week's missions:</p>`, `<div class="dm-cards">${open.map((m) => `<button class="dm-card" data-act="mission" data-id="${m.id}"><span class="dm-art" data-tone="${m.tone}">${missionArt(m.art)}</span><span class="dm-t"><b>${esc(m.title)}</b><span>${esc(m.type)}, ${xpPts(m.pts)}</span></span><span class="dm-go">Reply</span></button>`).join("")}</div>`)}
         ${club(`<p>Share yours and tag <b>@weirbankmotors</b>: the ten most-viewed go on the big screen.</p>`)}
         <div class="dr-typing" aria-label="Aldermoor Athletic is typing"><i></i><i></i><i></i></div>
         <div class="dr-quick" role="group" aria-label="Quick replies"><button data-act="mission" data-id="post">Post my photo</button><button data-act="mission" data-id="predict">Predict the score</button><button data-act="tab" data-tab="rewards">Show my rewards</button><button data-act="tab" data-tab="table">Where am I?</button></div>
@@ -3448,7 +3451,7 @@ function homeArena() {
       <h1 class="ar-h1">${greeting()}, ${esc(ME.first)}.<br>Granby are coming.</h1>
       <div class="ar-board" role="group" aria-label="Scoreboard">
         <div class="ar-teams"><span class="ar-team">${crest()}<b>ALD</b></span><span class="ar-ko num">${state.matchday ? "15:00" : `${d}d ${String(h).padStart(2, "0")}h ${String(mi).padStart(2, "0")}m`}</span><span class="ar-team"><b>GRA</b>${rivalCrest()}</span></div>
-        <div class="ar-me"><span>Your ${word()}</span><b class="num" data-balance>${fmt(state.balance)}</b><span>${myRank()}th of ${fmt(18406)}</span></div>
+        <div class="ar-me"><span>Season XP</span><b class="num">${fmt(SP())}</b><span>${myRank()}th of ${fmt(18406)}</span></div>
       </div>
       <div class="ar-acts">${predictAction()}<button class="md-action" data-act="mission" data-id="checkin"><span class="ic">${icon(state.checkedIn ? "check" : "pin")}</span><span class="tx"><b>${state.checkedIn ? "Checked in" : "Check in at The Weir"}</b><span>${state.checkedIn ? "Enjoy the match" : "Opens 13:00 on matchday"}</span></span><span class="pts">${state.checkedIn ? "" : "+100"}</span></button></div>
     </section>
@@ -3486,7 +3489,7 @@ function homeMagazine() {
       <figure class="mg-fig">${pic}<figcaption>The Weir, home since 1923. Granby Rovers visit on ${KO_LABEL}.</figcaption></figure>
       <div class="mg-story"><span class="mg-kick">${greeting()}, ${esc(ME.first)}</span>
         <h1 class="mg-h" id="mg-h">Granby at The Weir, and your week in seven missions</h1>
-        <p class="mg-deck">You stand at <b class="num" data-balance>${fmt(state.balance)}</b> ${word()}, ${myRank()}th in the table. ${toNext()}.</p>
+        <p class="mg-deck">You stand at <b class="num">${fmt(SP())}</b> XP, ${myRank()}th in the table, with <span class="num" data-balance>${fmt(state.balance)}</span> ${word()} to spend. ${toNext()}.</p>
         <button class="btn btn-dark" data-act="mission" data-id="post">Start with your matchday photo</button></div>
     </section>
     <div class="mg-cols">
@@ -3504,11 +3507,11 @@ function homeMagazine() {
 function homeStage() {
   const open = openMissions().slice(0, 6);
   return `<div class="view-inner sh sh-stage">
-    <section class="sg-hero" aria-label="Your ${word()}">
+    <section class="sg-hero" aria-label="Your season XP">
       <span class="sg-beams" aria-hidden="true"><i></i><i></i><i></i></span><span class="sg-floor" aria-hidden="true"></span>
       <span class="sg-kicker">${hello()}</span>
       <h1 class="sg-h1">Your season, <br>in the spotlight</h1>
-      <div class="sg-fig"><b class="num" data-balance>${fmt(state.balance)}</b><span>${word()}<br>${esc(tierOf(SP()).name)}</span></div>
+      <div class="sg-fig"><b class="num">${fmt(SP())}</b><span>XP<br>${esc(tierOf(SP()).name)}</span></div>
       <div class="sg-tier">${tierBlock()}</div>
       <button class="btn sg-btn" data-act="tab" data-tab="missions">See tonight's missions</button>
     </section>
@@ -3598,7 +3601,7 @@ function award(amount, fromEl, msg) {
     countTo(before, state.balance);
     target && target.classList.remove("bump"); void (target && target.offsetWidth); target && target.classList.add("bump");
     const r = myRank();
-    toast(msg || (r < beforeRank ? `+${amount} ${word()}. You climbed to ${ordinal(r)} in the table` : `+${amount} ${word()}`));
+    toast(msg || (r < beforeRank ? `${xpPts(amount)}. You climbed to ${ordinal(r)} in the table` : xpPts(amount)));
   };
   if (reduceMotion || !fromEl || !target) return finish();
   const a = app.getBoundingClientRect(), s = fromEl.getBoundingClientRect(), t = target.getBoundingClientRect();
@@ -3635,15 +3638,15 @@ function missionSheet(id) {
   else if (id === "checkin") body = checkinBody();
   else if (m.share) body = shareBody(m);
   else if (id === "quiz") body = done ? doneBody(m) : `<p style="font-weight:700;font-size:1.0625rem">In which year did Aldermoor play their first match at The Weir?</p><div class="quiz">${["1911", "1923", "1937", "1958"].map((y) => `<button data-act="quiz" data-y="${y}">${y}</button>`).join("")}</div>`;
-  else if (id === "scarf") body = done ? `<div class="demo-hint">${icon("clock")}Sent to the club. Your points land once it's checked, usually within a day.</div>` : `<ol class="steps"><li>Hold your scarf up, inside the ground or anywhere with a bit of Aldermoor in shot.</li><li>Choose the photo. The club checks it within a day.</li></ol><label class="btn btn-primary btn-block" for="scarfFile">${icon("plus")}Choose a photo</label><input id="scarfFile" type="file" accept="image/*" data-act="photo" hidden>`;
+  else if (id === "scarf") body = done ? `<div class="demo-hint">${icon("clock")}Sent to the club. Your XP and points land once it's checked, usually within a day.</div>` : `<ol class="steps"><li>Hold your scarf up, inside the ground or anywhere with a bit of Aldermoor in shot.</li><li>Choose the photo. The club checks it within a day.</li></ol><label class="btn btn-primary btn-block" for="scarfFile">${icon("plus")}Choose a photo</label><input id="scarfFile" type="file" accept="image/*" data-act="photo" hidden>`;
   else if (id === "potm") body = done ? doneBody(m) : `<div class="quiz">${["Ellis Varga", "Clara Voss", "Noé Castell", "Maya Achebe"].map((n) => `<button data-act="potm" data-n="${n}" style="font-size:1rem">${n}</button>`).join("")}</div>`;
   else if (id === "preview") body = done ? doneBody(m) : `<div class="matchday" style="aspect-ratio:16/9;justify-content:center;align-items:center"><button class="btn btn-flood" data-act="watch">Play the preview</button><div class="bar" style="width:70%;background:rgba(255,255,255,.15)" id="watchBar"><span data-fill="0" style="background:var(--flood)"></span></div></div>`;
   else if (id === "mate") body = `<div class="ref-code" style="justify-content:center"><code>AAFC-JESS-17</code><button class="btn btn-ghost btn-sm" data-act="copy" data-t="AAFC-JESS-17">${icon("copy")}Copy code</button></div><p class="note" style="text-align:center">Points arrive when your mate's first mission is approved.</p>`;
   openSheet(`${id === "predict" || id === "checkin" ? "" : `<div class="sheet-card">${missionCard(m, 0, { still: true })}</div>`}<h2>${esc(m.title)}</h2>${m.sponsor ? `<p class="presented">With ${esc(m.sponsor)}</p>` : ""}<p class="note">${esc(m.brief)}</p>${body}`);
 }
 function outcomeHtml(kind, pts) {
-  return kind === "miss" ? `<div class="outcome miss"><b>+${pts}</b><span>Not this time. You keep the points for playing.</span></div>`
-    : `<div class="outcome"><b>+${pts}</b><span>${kind === "exact" ? `Exact score. Points multiplied by ${state.mult.exact}.` : kind === "result" ? `Right result. Points multiplied by ${state.mult.result}.` : "You called it. Points doubled."}</span></div>`;
+  return kind === "miss" ? `<div class="outcome miss"><b>+${pts}</b><span>Not this time. You keep the XP and points for playing.</span></div>`
+    : `<div class="outcome"><b>+${pts}</b><span>${kind === "exact" ? `Exact score. XP and points multiplied by ${state.mult.exact}.` : kind === "result" ? `Right result. XP and points multiplied by ${state.mult.result}.` : "You called it. XP and points doubled."}</span></div>`;
 }
 function customBody(m) {
   if (m.open) return openBody(m);
@@ -3656,7 +3659,7 @@ function customBody(m) {
     const pick = state.picks[m.id], isPred = m.type === "Prediction";
     if (!pick) return `<div class="pick-list">${m.options.map((o) => `<button data-act="pick" data-id="${m.id}" data-o="${esc(o)}">${esc(o)}</button>`).join("")}</div>${isPred ? `<p class="note">${esc(bonusOf(m).join(", "))}. You can't change your pick once it's locked in.</p>` : ""}`;
     const list = `<div class="pick-list">${m.options.map((o) => `<button disabled aria-pressed="${o === pick}">${esc(o)}${o === pick ? "<small>Your pick</small>" : ""}</button>`).join("")}</div>`;
-    if (!isPred) return list + `<div class="success"><span class="big num">+${m.pts}</span><p>Thanks, your vote is in.</p></div>`;
+    if (!isPred) return list + `<div class="success"><span class="big num">+${m.pts}</span><span class="big-unit">XP · ${word()}</span><p>Thanks, your vote is in.</p></div>`;
     const settled = m.id === "scorer" ? state.settled && state.settled.picks.scorer : m.answer ? (m.answer === pick ? "right" : "miss") : null;
     if (settled) return list + outcomeHtml(settled === "right" ? "right" : "miss", settled === "right" ? m.pts * (m.mult || 2) : m.pts);
     return list + `<p class="note">Locked in. ${esc(bonusOf(m).join(", "))}: the bonus lands when the club confirms the answer.</p>`;
@@ -3667,13 +3670,13 @@ function customBody(m) {
   return `<button class="btn btn-primary btn-block" data-act="cdone" data-id="${m.id}">${m.type === "Social post" ? "I've posted it" : m.type === "Video" ? "Watch now" : "Done"}</button>${m.type === "Social post" ? `<p class="note">Your linked account confirms the post on its own.</p>` : ""}`;
 }
 function shareBody(m) {
-  if (state.done.has(m.id)) return `<div class="success"><span class="big num">+${m.pts}</span><p>Linked. Your account confirms the post on its own${m.id === "post" ? ", and the 100 bonus points land if it passes 5,000 views." : "."}</p></div>`;
+  if (state.done.has(m.id)) return `<div class="success"><span class="big num">+${m.pts}</span><span class="big-unit">XP · ${word()}</span><p>Linked. Your account confirms the post on its own${m.id === "post" ? ", and the 100 bonus XP and points land if it passes 5,000 views." : "."}</p></div>`;
   return `<ol class="steps">${m.steps.map((s) => `<li>${esc(s)}</li>`).join("")}</ol>
     <div class="tag-copy">${m.tags.map((t) => `<button class="btn btn-ghost btn-sm" data-act="copy" data-t="${esc(t)}">${icon("copy")}${esc(t)}</button>`).join("")}</div>
     <button class="btn btn-primary btn-block" data-act="cdone" data-id="${m.id}">I've posted it</button>
     <p class="note">Counted through your linked Instagram or TikTok account for 30 days.</p>`;
 }
-const doneBody = (m) => `<div class="success"><span class="big num">+${m.pts}</span><p>Collected. That card is yours.</p></div>`;
+const doneBody = (m) => `<div class="success"><span class="big num">+${m.pts}</span><span class="big-unit">XP · ${word()}</span><p>Collected. That card is yours.</p></div>`;
 
 function predictBody() {
   if (!state.predicted && state.result) return `<div class="demo-hint">Predictions closed at kick-off. Full time was ${state.result[0]}–${state.result[1]}.</div>`;
@@ -3697,7 +3700,7 @@ function predictBody() {
 }
 
 function checkinBody() {
-  if (state.checkedIn) return `<div class="success"><span class="big num">+100</span><p>You're in. Enjoy the match, and open your new pack in Collection.</p><button class="btn btn-dark" data-act="gopack">Open the pack</button></div>`;
+  if (state.checkedIn) return `<div class="success"><span class="big num">+100</span><span class="big-unit">XP · ${word()}</span><p>You're in. Enjoy the match, and open your new pack in Collection.</p><button class="btn btn-dark" data-act="gopack">Open the pack</button></div>`;
   if (state.matchday) return `<div class="demo-hint" style="border-style:solid;border-color:var(--good)">${icon("pin")}You're at The Weir. Check-in is open until half-time.</div><button class="btn btn-primary btn-block" data-act="checkin">Check in now</button>`;
   return `<button class="btn btn-primary btn-block" disabled>${icon("lock")}Opens at 13:00 on ${KO_LABEL}</button>
     <div class="demo-hint"><span>For this demo, jump to Saturday at 14:10.</span><button class="btn btn-ghost btn-sm" data-act="simulate">Go to matchday</button></div>`;
@@ -3725,7 +3728,7 @@ function tearPack(btn) {
     items.forEach((it) => state.owned.add(it.s.id));
     state.justIn = items.find((x) => x.isNew)?.s.id || null;
     const dupes = items.filter((x) => !x.isNew).length;
-    if (dupes) setTimeout(() => award(dupes * 10, stage.querySelector(".tag.dupe"), `+${dupes * 10} ${word()} for the double`), reduceMotion ? 0 : 1500);
+    if (dupes) setTimeout(() => award(dupes * 10, stage.querySelector(".tag.dupe"), `${xpPts(dupes * 10)} for the double`), reduceMotion ? 0 : 1500);
   };
   if (reduceMotion) reveal(); else { btn.classList.add("tear"); setTimeout(reveal, 520); }
 }
@@ -3839,7 +3842,7 @@ document.addEventListener("click", (e) => {
     case "potm": {
       state.done.add("potm"); state.potm = el.dataset.n;
       el.parentElement.querySelectorAll("button").forEach((b) => (b.disabled = true));
-      el.classList.add("right"); award(20, el, `Vote counted for ${el.dataset.n}. +20 ${word()}`); renderMember(false);
+      el.classList.add("right"); award(20, el, `Vote counted for ${el.dataset.n}. ${xpPts(20)}`); renderMember(false);
       break;
     }
     case "watch": {
@@ -3887,7 +3890,7 @@ document.addEventListener("click", (e) => {
       if (side === "random") side = b.a.members <= b.b.members ? "a" : "b";
       state.joined[b.id] = side; state.joinEarned[b.id] = state.earned;
       b[side].members += 0;
-      toast(el.dataset.side === "random" ? `You've been drawn into ${b[side].name}` : `You're in ${b[side].name}. Every ${word().replace(/s$/, "")} counts now`);
+      toast(el.dataset.side === "random" ? `You've been drawn into ${b[side].name}` : `You're in ${b[side].name}. Your XP counts for it now`);
       const sheetOpen = $("#sheetLayer").classList.contains("open");
       renderMember(false); if (sheetOpen) battleSheet(b.id);
       break;
@@ -3900,7 +3903,7 @@ document.addEventListener("click", (e) => {
     case "pick": {
       const m = MISSIONS.find((x) => x.id === el.dataset.id);
       state.picks[m.id] = el.dataset.o; state.done.add(m.id);
-      missionSheet(m.id); award(m.pts, $("#sheet .pick-list"), m.type === "Prediction" ? `Locked in: ${el.dataset.o}. +${m.pts} ${word()}` : null); renderMember(false);
+      missionSheet(m.id); award(m.pts, $("#sheet .pick-list"), m.type === "Prediction" ? `Locked in: ${el.dataset.o}. ${xpPts(m.pts)}` : null); renderMember(false);
       break;
     }
     case "cquiz": {
@@ -3916,7 +3919,7 @@ document.addEventListener("click", (e) => {
       if (v.length < 3) { box.focus(); toast("Write a few words first"); break; }
       state.answers[m.id] = v; state.done.add(m.id);
       ANSWERS.unshift({ mid: m.id, who: ME.name, handle: ME.handle, t: v, when: "Just now", status: "new", me: 1 });
-      missionSheet(m.id); award(m.pts, $("#sheet .success"), `Answer sent. +${m.pts} ${word()}`); renderMember(false);
+      missionSheet(m.id); award(m.pts, $("#sheet .success"), `Answer sent. ${xpPts(m.pts)}`); renderMember(false);
       break;
     }
     case "swap": swapSheet(+el.dataset.i); break;
@@ -3933,7 +3936,7 @@ document.addEventListener("click", (e) => {
     case "postOffer": postOffer(); break;
     case "tradein": {
       const id = el.dataset.id; state.spares[id]--;
-      award(10, el, `Traded in ${stLabel(id)}. +10 ${word()}`); renderMember(false);
+      award(10, el, `Traded in ${stLabel(id)}. ${xpPts(10)}`); renderMember(false);
       break;
     }
     case "goswaps": closeSheet(); state.tab = "terrace"; renderMember(); setTimeout(() => { const v = $("#view"), t = $("#swaps"); if (v && t) v.scrollTo({ top: t.getBoundingClientRect().top - v.getBoundingClientRect().top + v.scrollTop - 16, behavior: reduceMotion ? "auto" : "smooth" }); }, 60); break;
@@ -4031,7 +4034,7 @@ document.addEventListener("click", (e) => {
     case "setAnswer": {
       const m = MISSIONS.find((x) => x.id === el.dataset.id);
       m.answer = $(`select[name="ans-${m.id}"]`).value;
-      if (state.picks[m.id] === m.answer) { const x = m.pts * ((m.mult || 2) - 1); state.balance += x; state.earned += x; state.news = `${m.title}: you called it. +${x} ${word()}.`; }
+      if (state.picks[m.id] === m.answer) { const x = m.pts * ((m.mult || 2) - 1); state.balance += x; state.earned += x; state.news = `${m.title}: you called it. ${xpPts(x)}.`; }
       rerenderAdminInPlace(); admToast("Answer confirmed. Bonuses paid");
       break;
     }
@@ -4295,7 +4298,7 @@ function admToday() {
     ["13:00", "Check-in opens at The Weir", "QR at the turnstiles, until half-time"],
     ["14:00", "Matchday chat opens", "Two moderators on shift"],
     ["15:00", "Predictions close", "Automatic at kick-off"],
-    ["16:55", "Enter the full-time result", "Prediction points are paid straight after"],
+    ["16:55", "Enter the full-time result", "Prediction XP and points are paid straight after"],
   ];
   const prep = ORDERS.filter((o) => ["To prepare", "To book"].includes(o.status)).length;
   const todo = [
@@ -4324,14 +4327,14 @@ const EXTRA_ROWS = [
 const FAKE_DONE = { post: 1860, story: 1310, scarf: 1420, predict: 6140, scorer: 4302, checkin: 0, first: 1278, preview: 4870, mate: 212 };
 function admMissions() {
   const tab = state.atab.missions || 0;
-  const head = admHead("Missions", "Everything members do to earn points. One button creates every type.", `<button class="adm-btn primary" data-act="newMission">${icon("plus")}New mission</button>`) + admTabs("missions");
+  const head = admHead("Missions", "Everything members do to earn XP and points. One button creates every type.", `<button class="adm-btn primary" data-act="newMission">${icon("plus")}New mission</button>`) + admTabs("missions");
   if (tab === 1) return head + admPredictions();
   if (tab === 2) return head + admCheckins();
   if (tab === 3) return head + admAnswers();
   const live = MISSIONS.map((m) => ({ m, title: m.title, type: m.type, pts: m.pts, when: m.group === "matchday" ? "Matchday 9" : m.when || "This week", status: "live", n: (FAKE_DONE[m.id] ?? 0) + (state.done.has(m.id) ? 1 : 0) }));
   const rows = [...live, ...EXTRA_ROWS];
   const lab = { live: "Live", sched: "Scheduled", draft: "Draft" };
-  return head + `<div class="acard scroll-x"><table class="atable"><thead><tr><th>Mission</th><th>Type</th><th class="r">Points</th><th>Bonus</th><th>When</th><th class="r">Done by</th><th>Status</th></tr></thead>
+  return head + `<div class="acard scroll-x"><table class="atable"><thead><tr><th>Mission</th><th>Type</th><th class="r">XP · points</th><th>Bonus</th><th>When</th><th class="r">Done by</th><th>Status</th></tr></thead>
     <tbody>${rows.map((r) => `<tr class="${r.m && r.m.fresh ? "fresh" : ""}"><td class="wrap">${esc(r.title)}</td><td>${esc(r.type)}</td><td class="r">${r.pts}</td><td>${r.m && r.m.bonus ? esc(bonusOf(r.m).join(", ")) : "–"}</td><td>${esc(r.when)}</td><td class="r">${r.n != null ? fmt(r.n) : "–"}</td><td><span class="st ${r.status}">${lab[r.status]}</span></td></tr>`).join("")}</tbody></table></div>
     <div class="acard"><h2>Mission types on this plan</h2><p class="sub">Prediction, check-in, quiz, open question, photo, video, vote, referral, social post, survey, sponsor quest. Score predictions are created for every fixture on their own.</p></div>`;
 }
@@ -4340,7 +4343,7 @@ const MTYPES = [["Prediction", "Prediction"], ["Quiz", "Quiz"], ["Photo", "Photo
 const TONES = [["kestrel", "Kestrel"], ["moor", "Moor"], ["wing", "Wing"], ["buff", "Buff"]];
 const ART_FOR = { Prediction: "scorer", Quiz: "quiz", Photo: "photo", Video: "play", Vote: "vote", "Social post": "custom", Referral: "mates", Survey: "vote", "Open question": "speech" };
 function newMissionDraft() {
-  return { type: "Prediction", title: "Who will be man of the match against Granby?", brief: "Pick your man of the match before kick-off. Get it right and your points double.", pts: 40, tone: "kestrel",
+  return { type: "Prediction", title: "Who will be man of the match against Granby?", brief: "Pick your man of the match before kick-off. Get it right and your XP and points double.", pts: 40, tone: "kestrel",
     options: "Dario Lenk\nRuben Sølvik\nKofi Brannagh\nJonah Weller", mult: 2, q: "Who scored Aldermoor's first goal at The Weir?", a1: "Arthur Penhallow", a2: "Bill Corran", a3: "Fred Ashdown", a4: "Harry Tull", right: "1",
     check: "club", oq: "What's the best away day you've had with Aldermoor?", feature: "100", where: "the matchday programme", start: isoDay(NOW), end: isoDay(new Date(NOW.getTime() + 6 * 864e5)), who: "all", publish: "now" };
 }
@@ -4365,7 +4368,7 @@ function missionForm(d) {
   return `${fld("Type", optRow("type", MTYPES, t))}
     ${fld("Title", inp("title", d.title, 'maxlength="70"'))}
     ${fld("What members read", `<textarea name="brief">${esc(d.brief)}</textarea>`)}
-    <div class="adm-row">${fld("Points", inp("pts", d.pts, 'type="number" min="0" step="5"'))}${fld("Card colour", optRow("tone", TONES, d.tone))}</div>
+    <div class="adm-row">${fld("XP and points", inp("pts", d.pts, 'type="number" min="0" step="5"'), "Members earn the same number of each.")}${fld("Card colour", optRow("tone", TONES, d.tone))}</div>
     ${extra}
     <h3>When and for whom</h3>
     <div class="adm-row">${fld("Starts", inp("start", d.start, 'type="date"'))}${fld("Ends", inp("end", d.end, 'type="date"'))}</div>
@@ -4411,7 +4414,7 @@ function settlePredictions(h, a, scorer) {
   const bits = [];
   if (out.mine) bits.push(out.mine === "exact" ? "your exact score paid ×" + state.mult.exact : out.mine === "result" ? "right result, ×" + state.mult.result : "your score missed");
   if (out.picks.scorer) bits.push(out.picks.scorer === "right" ? "first scorer right" : "first scorer missed");
-  state.news = `Full time: Aldermoor ${h}–${a} Granby.${bits.length ? " " + bits.join(", ").replace(/^./, (c) => c.toUpperCase()) + "." : ""}${extra ? ` +${extra} ${word()}.` : ""}`;
+  state.news = `Full time: Aldermoor ${h}–${a} Granby.${bits.length ? " " + bits.join(", ").replace(/^./, (c) => c.toUpperCase()) + "." : ""}${extra ? ` ${xpPts(extra)}.` : ""}`;
 }
 function settleStats(h, a) {
   const total = 6140 + (state.predicted ? 1 : 0);
@@ -4430,18 +4433,18 @@ function admPredictions() {
   const st = res ? settleStats(res[0], res[1]) : null;
   const customs = MISSIONS.filter((m) => m.custom && m.type === "Prediction");
   return `<div class="adm-grid">
-    <div class="acard"><h2>Aldermoor v Granby Rovers</h2><p class="sub">Matchday 9, ${KO_LABEL}, 15:00. ${res ? "Result confirmed, points paid." : "Enter the full-time score to settle every prediction at once."}</p>
+    <div class="acard"><h2>Aldermoor v Granby Rovers</h2><p class="sub">Matchday 9, ${KO_LABEL}, 15:00. ${res ? "Result confirmed, XP and points paid." : "Enter the full-time score to settle every prediction at once."}</p>
       <div class="scorebox">
         <div class="side">${crest()}<b>Aldermoor</b><div class="ascore"><button data-act="ascore" data-s="0" data-d="-1" aria-label="One less" ${res ? "disabled" : ""}>−</button><output>${res ? res[0] : h}</output><button data-act="ascore" data-s="0" data-d="1" aria-label="One more" ${res ? "disabled" : ""}>+</button></div></div>
         <div class="side">${rivalCrest()}<b>Granby Rovers</b><div class="ascore"><button data-act="ascore" data-s="1" data-d="-1" aria-label="One less" ${res ? "disabled" : ""}>−</button><output>${res ? res[1] : a}</output><button data-act="ascore" data-s="1" data-d="1" aria-label="One more" ${res ? "disabled" : ""}>+</button></div></div>
       </div>
       <div class="adm-row" style="margin-top:12px">${fld("First Aldermoor scorer", res ? `<input value="${esc(state.scorer)}" disabled>` : sel("ascorer", scorers.map((x) => [x, x]), state.ascorer))}
         <div class="afield"><span>&nbsp;</span>${res ? `<button class="adm-btn" data-act="resetResult">Correct the result</button>` : `<button class="adm-btn primary" data-act="settle">${icon("whistle")}Confirm full time</button>`}</div></div>
-      ${st ? `<div class="settle"><div><b>${fmt(st.total)}</b><span>predictions settled</span></div><div><b>${fmt(st.exact)}</b><span>exact score, ×${state.mult.exact}</span></div><div><b>${fmt(st.right)}</b><span>right result, ×${state.mult.result}</span></div><div><b>${fmt(st.paid)}</b><span>${word()} paid</span></div></div>
-        <div class="callout ok" style="margin-top:12px">Members got a push with their points. ${state.predicted ? `Jess Calloway said ${state.predicted[0]}–${state.predicted[1]}: ${{ exact: "exact score", result: "right result", miss: "missed" }[state.settled.mine]}.` : ""}</div>` : ""}
+      ${st ? `<div class="settle"><div><b>${fmt(st.total)}</b><span>predictions settled</span></div><div><b>${fmt(st.exact)}</b><span>exact score, ×${state.mult.exact}</span></div><div><b>${fmt(st.right)}</b><span>right result, ×${state.mult.result}</span></div><div><b>${fmt(st.paid)}</b><span>XP and ${word()} paid</span></div></div>
+        <div class="callout ok" style="margin-top:12px">Members got a push with their XP and points. ${state.predicted ? `Jess Calloway said ${state.predicted[0]}–${state.predicted[1]}: ${{ exact: "exact score", result: "right result", miss: "missed" }[state.settled.mine]}.` : ""}</div>` : ""}
     </div>
     <div class="acard"><h2>Bonus for score predictions</h2><p class="sub">Shown on every prediction card, so members know what they play for.</p>
-      <div class="aform" style="margin-top:12px">${fld("Taking part", `<input value="50 ${word()}" disabled>`)}
+      <div class="aform" style="margin-top:12px">${fld("Taking part", `<input value="50 XP · 50 ${word()}" disabled>`)}
         ${fld("Right result", sel("multResult", [["2", "Points doubled (×2)"], ["3", "Points tripled (×3)"]], state.mult.result))}
         ${fld("Exact score", sel("multExact", [["3", "Points tripled (×3)"], ["4", "Points ×4"], ["5", "Points ×5"]], state.mult.exact))}</div></div>
   </div>
@@ -4476,7 +4479,7 @@ async function downloadQR() {
   g.font = '800 96px "Big Shoulders Display", sans-serif'; g.textAlign = "center";
   g.fillText("SCAN TO CHECK IN", S / 2, S + 90);
   g.font = '500 40px "Archivo", sans-serif'; g.fillStyle = "#4a5a6f";
-  g.fillText(`Aldermoor v Granby Rovers, ${KO_LABEL}. ${state.mult ? "" : ""}+100 ${word()} and a matchday pack`, S / 2, S + 170);
+  g.fillText(`Aldermoor v Granby Rovers, ${KO_LABEL}. ${state.mult ? "" : ""}+100 XP, 100 ${word()} and a matchday pack`, S / 2, S + 170);
   cv.toBlob((b) => saveBlob(b, "aldermoor-check-in-qr.png"));
 }
 function admCheckins() {
@@ -4494,7 +4497,7 @@ function admCheckins() {
         <div class="adm-row">${fld("Opens", `<input type="time" name="ciOpens" value="${state.ci.opens}">`)}${fld("Closes", sel("ciCloses", [["ht", "At half-time"], ["ft", "At full time"], ["1730", "At 17:30"]], state.ci.closes))}</div>
         ${fld("Where", `<input name="ciWhere" value="${esc(state.ci.where)}">`, "Members' phones check they are this close to the ground.")}
         ${fld("How members check in", optRow("ciMode", [["qr", "Scan the QR"], ["loc", "Location only"], ["both", "QR and location"]], state.checkinMode))}
-        ${fld("What they get", `<input value="100 ${word()} and a matchday pack of 3 cards" disabled>`)}
+        ${fld("What they get", `<input value="100 XP, 100 ${word()} and a matchday pack of 3 cards" disabled>`)}
       </div></div>
   </div>`;
 }
@@ -4579,8 +4582,8 @@ function admSeason() {
   const btn = tab === 0 ? `<button class="adm-btn primary" data-act="newBattle">${icon("plus")}New team battle</button>` : tab === 1 ? `<button class="adm-btn primary" data-act="newCard">${icon("plus")}Add a card</button>` : "";
   const head = admHead("Season", "What you set once a season. Each part shows only if its module is on.", btn) + admTabs("season");
   if (tab === 1) return head + admCollection();
-  if (tab === 2) return head + `<div class="acard"><h2>League table</h2><p class="sub">Members are ranked by ${word()} earned this season.</p>
-    <dl class="bs-words" style="margin-top:14px"><dt>Season</dt><dd>1 Aug to 31 May, resets on 1 August</dd><dt>Monthly table</dt><dd>On, resets on the 1st</dd><dt>Private groups</dt><dd>On, up to 12 members each</dd><dt>End of season</dt><dd>Top 50 invited to the dinner with the squad</dd><dt>Tiers</dt><dd>Academy 0, First team 2,000, Captain 5,000, Club legend 10,000</dd></dl></div>`;
+  if (tab === 2) return head + `<div class="acard"><h2>League table</h2><p class="sub">Members are ranked by XP earned this season. Every approved action earns the same number of XP and ${word()}.</p>
+    <dl class="bs-words" style="margin-top:14px"><dt>Season</dt><dd>1 Aug to 31 May, XP back to 0 on 1 August</dd><dt>${word().replace(/^./, (c) => c.toUpperCase())}</dt><dd>Never reset, spent in Rewards</dd><dt>Monthly table</dt><dd>On, resets on the 1st</dd><dt>Private groups</dt><dd>On, up to 12 members each</dd><dt>End of season</dt><dd>Top 50 invited to the dinner with the squad</dd><dt>Tiers</dt><dd>Academy 0, First team 2,000, Captain 5,000, Club legend 10,000 XP</dd></dl></div>`;
   const stl = { live: ["live", "Live"], upcoming: ["sched", "Starts " ], ended: ["draft", "Ended"] };
   return head + `<div class="acard scroll-x"><table class="atable"><thead><tr><th>Battle</th><th>Teams and score</th><th>Dates</th><th>How members join</th><th>Counts</th><th>Status</th></tr></thead>
     <tbody>${BATTLES.map((b) => { const s = battleStatus(b); return `<tr class="${b.fresh ? "fresh" : ""}"><td class="wrap"><b style="font-weight:500">${esc(b.name)}</b><br><span class="sub">${esc(b.prize)}</span></td>
@@ -4619,14 +4622,14 @@ function createBattle() {
 function admCollection() {
   const pages = Object.entries(ALBUM).filter(([, l]) => l.length);
   return `<div class="adm-grid">
-    <div class="acard"><h2>2026/27 album</h2><p class="sub">${albumTotal()} cards. Members get a pack of 3 at every home check-in. Doubles trade in for 10 ${word()}.</p>
+    <div class="acard"><h2>2026/27 album</h2><p class="sub">${albumTotal()} cards. Members get a pack of 3 at every home check-in. Doubles trade in for 10 XP and 10 ${word()}.</p>
       <div class="album-pages">${pages.map(([k, l]) => `<div><b>${PAGE_NAMES[k]}</b><span>${l.length} cards</span></div>`).join("")}</div>
       ${ALBUM.specials.length ? `<div class="card-strip">${ALBUM.specials.map((s) => `<div class="sticker has">${stickerArt(s, "specials")}</div>`).join("")}</div>` : ""}</div>
     <div class="acard"><div class="module" style="padding:0;border:0"><span class="mi">${icon("collection")}</span><span><b>Club-designed cards</b><span>Optional. Upload your own designs</span></span><button class="toggle" role="switch" aria-checked="true" aria-label="Club-designed cards" data-act="module" data-n="Club-designed cards"></button></div>
       <p class="sub" style="margin-top:12px">Players, kits, moments from the season, a sponsor's limited edition: any picture becomes a card in your colours. Set how rare it is and how members get it.</p>
       <div class="adm-actions" style="margin-top:12px"><button class="adm-btn primary" data-act="newCard">${icon("plus")}Add a card</button></div></div>
   </div>
-  <div class="acard"><h2>Packs</h2><div class="adm-row3" style="margin-top:12px">${fld("Cards per pack", `<input value="3" type="number" min="1" max="6">`)}${fld("Packs per home check-in", `<input value="1" type="number" min="0" max="3">`)}${fld(`A double is worth`, `<input value="10 ${word()}">`)}</div></div>`;
+  <div class="acard"><h2>Packs</h2><div class="adm-row3" style="margin-top:12px">${fld("Cards per pack", `<input value="3" type="number" min="1" max="6">`)}${fld("Packs per home check-in", `<input value="1" type="number" min="0" max="3">`)}${fld(`A double is worth`, `<input value="10 XP · 10 ${word()}">`)}</div></div>`;
 }
 async function sampleCardImage() {
   const W = 600, H = 800, cv = document.createElement("canvas"); cv.width = W; cv.height = H;
@@ -4678,7 +4681,7 @@ function admMembers() {
   const rows = all.filter((r) => r[0].toLowerCase().includes(q));
   return admHead("Members", `${fmt(18406)} members in total. Search, message or adjust points.`) + `
     <div class="acard"><div class="afield" style="max-width:320px"><input name="mq" value="${esc(state.mq || "")}" placeholder="Search by name" aria-label="Search members"></div>
-    <div class="scroll-x"><table class="atable"><thead><tr><th>Member</th><th>Tier</th><th class="r">${word().replace(/^./, (c) => c.toUpperCase())}</th><th class="r">Matchdays</th><th>Last seen</th></tr></thead>
+    <div class="scroll-x"><table class="atable"><thead><tr><th>Member</th><th>Tier</th><th class="r">Season XP</th><th class="r">Matchdays</th><th>Last seen</th></tr></thead>
     <tbody>${rows.map((r, i) => `<tr><td><span class="who"><i>${initials(r[0])}</i>${esc(r[0])}${r[0] === ME.name ? ` <span class="sub">${ME.handle}</span>` : ""}</span></td><td>${tierOf(r[1]).name}</td><td class="r">${fmt(r[1])}</td><td class="r">${r[2]} of 8</td><td>${["Today", "Today", "Yesterday", "2 days ago"][i % 4]}</td></tr>`).join("")}</tbody></table></div></div>`;
 }
 /* Open questions: the club reads answers and features the best */
@@ -4691,7 +4694,7 @@ function admAnswers() {
     const feat = base.featured + list.filter((a) => a.status === "featured").length;
     const order = { new: 0, featured: 1, hidden: 2 };
     const rows = [...list].sort((a, b) => (b.me ? 1 : 0) - (a.me ? 1 : 0) || order[a.status] - order[b.status]);
-    return `<div class="acard"><div class="acard-top"><div><h2>${esc(m.open.q)}</h2><p class="sub">${esc(m.title)}. ${fmt(base.total + list.length)} answers, ${feat} featured${m.open.feature ? `, +${m.open.feature} ${word()} for each one featured` : ""}.</p></div>
+    return `<div class="acard"><div class="acard-top"><div><h2>${esc(m.open.q)}</h2><p class="sub">${esc(m.title)}. ${fmt(base.total + list.length)} answers, ${feat} featured${m.open.feature ? `, +${m.open.feature} XP and ${word()} for each one featured` : ""}.</p></div>
         <div class="adm-actions"><button class="adm-btn" data-act="answersCsv" data-id="${m.id}">${icon("download")}Featured answers, CSV</button></div></div>
       ${rows.length ? `<div class="ans-list">${rows.map((a) => { const i = ANSWERS.indexOf(a); return `<div class="ans ${a.status}">
         <span class="who"><i>${initials(a.who)}</i><span><b>${esc(a.who)}</b> <span class="sub">${esc(a.handle)}, ${a.when}</span></span></span>
@@ -4707,11 +4710,11 @@ function setAnswer(i, status) {
   const a = ANSWERS[i], m = MISSIONS.find((x) => x.id === a.mid), was = a.status, bonus = m.open.feature || 0;
   a.status = status;
   if (a.me && bonus) {
-    if (status === "featured" && !state.featured.has(m.id)) { state.featured.add(m.id); state.balance += bonus; state.earned += bonus; state.news = `The club featured your answer to "${m.title}". +${bonus} ${word()}.`; }
+    if (status === "featured" && !state.featured.has(m.id)) { state.featured.add(m.id); state.balance += bonus; state.earned += bonus; state.news = `The club featured your answer to "${m.title}". ${xpPts(bonus)}.`; }
     else if (was === "featured" && status !== "featured" && state.featured.has(m.id)) { state.featured.delete(m.id); state.balance -= bonus; state.earned -= bonus; state.news = null; }
   }
   rerenderAdminInPlace();
-  admToast(status === "featured" ? `${a.me ? "Jess" : a.who.split(" ")[0]}'s answer is featured${bonus ? `, +${bonus} ${word()} sent` : ""}` : status === "hidden" ? "Hidden from members" : "Back with the others", a.me && status === "featured" ? "profile" : null);
+  admToast(status === "featured" ? `${a.me ? "Jess" : a.who.split(" ")[0]}'s answer is featured${bonus ? `, ${xpPts(bonus)} sent` : ""}` : status === "hidden" ? "Hidden from members" : "Back with the others", a.me && status === "featured" ? "profile" : null);
 }
 function csvDownload(rows, name) {
   const csv = rows.map((r) => r.map((c) => `"${String(c).replace(/"/g, '""')}"`).join(",")).join("\n");
@@ -4949,13 +4952,13 @@ function styleThumb(k) {
   const c = state.colours, K = c.kestrel, M = c.moor, W = c.wing, B = c.buff, F = c.flood;
   const bd = 'font-family="Big Shoulders Display, sans-serif" font-weight="900"';
   const t = {
-    reel: `<rect width="160" height="84" fill="${K}"/><text x="12" y="62" ${bd} font-size="46" fill="#fff">3,480</text>`,
+    reel: `<rect width="160" height="84" fill="${K}"/><text x="12" y="62" ${bd} font-size="46" fill="#fff">1,240</text>`,
     metro: `<rect width="160" height="84" fill="#f7f7f5"/><path d="M14 46h132" stroke="${K}" stroke-width="6" stroke-linecap="round"/>${[20, 58, 98, 140].map((x, i) => `<circle cx="${x}" cy="46" r="${i === 1 ? 8 : 6}" fill="#fff" stroke="${i < 2 ? K : M}" stroke-width="3"/>`).join("")}<rect x="12" y="62" width="40" height="5" rx="2" fill="${M}" opacity=".5"/><rect x="84" y="24" width="50" height="5" rx="2" fill="${M}" opacity=".5"/>`,
     riso: `<rect width="160" height="84" fill="#f3eee3"/><defs><pattern id="ht" width="5" height="5" patternUnits="userSpaceOnUse"><circle cx="2.5" cy="2.5" r="1.6" fill="${K}"/></pattern></defs><circle cx="104" cy="40" r="30" fill="url(#ht)"/><circle cx="96" cy="44" r="22" fill="${W}" opacity=".55" style="mix-blend-mode:multiply"/><text x="12" y="64" ${bd} font-size="30" fill="${M}">3,480</text>`,
-    board: `<rect width="160" height="84" fill="#11161d"/>${[0, 1, 2, 3].map((i) => `<rect x="${14 + i * 34}" y="18" width="30" height="40" rx="3" fill="#1d2531"/><path d="M${14 + i * 34} 38h30" stroke="#11161d" stroke-width="2"/><text x="${29 + i * 34}" y="50" text-anchor="middle" ${bd} font-size="28" fill="${F}">${"3480"[i]}</text>`).join("")}<rect x="14" y="66" width="80" height="5" rx="2" fill="#334052"/>`,
+    board: `<rect width="160" height="84" fill="#11161d"/>${[0, 1, 2, 3].map((i) => `<rect x="${14 + i * 34}" y="18" width="30" height="40" rx="3" fill="#1d2531"/><path d="M${14 + i * 34} 38h30" stroke="#11161d" stroke-width="2"/><text x="${29 + i * 34}" y="50" text-anchor="middle" ${bd} font-size="28" fill="${F}">${"1240"[i]}</text>`).join("")}<rect x="14" y="66" width="80" height="5" rx="2" fill="#334052"/>`,
     calendar: `<rect width="160" height="84" fill="#f4f2ed"/><rect x="14" y="10" width="62" height="64" rx="3" fill="#fff" stroke="#ddd"/><rect x="14" y="10" width="62" height="14" fill="${K}"/><text x="45" y="62" text-anchor="middle" font-family="Clash Display, sans-serif" font-weight="600" font-size="32" fill="${M}">27</text><rect x="88" y="16" width="58" height="6" rx="2" fill="${M}" opacity=".6"/><rect x="88" y="30" width="44" height="6" rx="2" fill="${M}" opacity=".3"/><rect x="88" y="44" width="52" height="6" rx="2" fill="${M}" opacity=".3"/>`,
     album: `<rect width="160" height="84" fill="#e6e9ee"/><rect x="14" y="14" width="56" height="34" rx="6" fill="${K}"/><rect x="58" y="14" width="12" height="34" fill="${M}"/><g transform="rotate(-8 100 70)"><rect x="80" y="34" width="22" height="30" rx="3" fill="#fff"/></g><rect x="100" y="30" width="22" height="30" rx="3" fill="#fff"/><g transform="rotate(8 130 70)"><rect x="124" y="34" width="22" height="30" rx="3" fill="#fff"/></g>`,
-    dial: `<rect width="160" height="84" fill="#eceff3"/><circle cx="80" cy="46" r="28" fill="none" stroke="#d3d9e1" stroke-width="8"/><path d="M80 18a28 28 0 0 1 26 38" fill="none" stroke="${K}" stroke-width="8" stroke-linecap="round"/><text x="80" y="53" text-anchor="middle" ${bd} font-size="20" fill="${M}">3,480</text>`,
+    dial: `<rect width="160" height="84" fill="#eceff3"/><circle cx="80" cy="46" r="28" fill="none" stroke="#d3d9e1" stroke-width="8"/><path d="M80 18a28 28 0 0 1 26 38" fill="none" stroke="${K}" stroke-width="8" stroke-linecap="round"/><text x="80" y="53" text-anchor="middle" ${bd} font-size="20" fill="${M}">1,240</text>`,
     print: `<rect width="160" height="84" fill="#ece6d8"/><path d="M6 20q74 14 148 0" fill="none" stroke="${M}" stroke-width="1.5"/>${[18, 62, 106].map((x, i) => `<g transform="rotate(${[-4, 3, -2][i]} ${x + 18} 46)"><rect x="${x}" y="22" width="36" height="48" fill="#fffdf7" stroke="#c9bfa8"/><rect x="${x + 5}" y="28" width="26" height="22" fill="${[K, W, B][i]}"/></g><rect x="${x + 15}" y="17" width="6" height="10" fill="${M}"/>`).join("")}`,
     arena: `<rect width="160" height="84" fill="${M}"/><rect x="12" y="14" width="136" height="24" rx="3" fill="#0d141f"/><text x="80" y="33" text-anchor="middle" ${bd} font-size="18" fill="${F}">ALD 2 – 1 GRA</text><rect x="12" y="46" width="64" height="26" rx="4" fill="${K}"/><rect x="84" y="46" width="64" height="26" rx="4" fill="#213550"/>`,
     poster: `<rect width="160" height="84" fill="${B}"/><text x="8" y="70" ${bd} font-size="74" fill="${K}">GO</text><rect x="104" y="14" width="44" height="56" fill="${M}"/>`,

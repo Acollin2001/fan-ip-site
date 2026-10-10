@@ -222,7 +222,7 @@ export const PAGES = {
     product: {
       titleHtml: "Three steps.<br>Your supporters do the rest.",
       step2: "Supporters post from their own accounts. Each approved post earns points, a higher level and rewards.",
-      step3: "Every post and its views, in a report you can send to your sponsor.",
+      step3: "Every post and its views in your admin, and a private report with the totals for your sponsor.",
       caption: "Illustrative values. Each club names and sets its own challenges, levels and rewards, sponsors included. ",
     },
     resultTitle: "What you and your sponsor see.",

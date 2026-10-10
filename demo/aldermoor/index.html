@@ -2028,8 +2028,8 @@ button.bd-row:hover .bd-title { color: var(--flood); }
 .sp-tile b { font-family: var(--fx-display); font-weight: 600; font-size: 1.5rem; line-height: 1.05; font-variant-numeric: tabular-nums; letter-spacing: -0.01em; }
 .sp-tile span { font-size: 0.8125rem; color: var(--fx-ink); font-weight: 500; line-height: 1.3; }
 .sp-tile small { font-size: 0.75rem; color: var(--fx-ink-2); line-height: 1.3; }
-.sp-tile.hero { grid-column: 1 / -1; background: #1d1f24; color: #fff; }
-.sp-tile.hero b { font-size: 2.25rem; color: #f3e7c8; }
+.sp-tile.hero { grid-column: 1 / -1; background: #1d1f24; color: #fff; container-type: inline-size; }
+.sp-tile.hero b { font-size: clamp(1.5rem, 19cqi, 2.25rem); color: #f3e7c8; white-space: nowrap; }
 .sp-tile.hero span { color: #fff; }
 .sp-tile.hero small { color: #c9ccd3; }
 .sp-bars { display: grid; gap: 10px; }
@@ -2041,6 +2041,9 @@ button.bd-row:hover .bd-title { color: var(--flood); }
 .sp-bar:first-of-type .track i { background: #b8913a; }
 .sp-bar b { font-weight: 600; font-variant-numeric: tabular-nums; min-width: 72px; text-align: right; }
 @container dev (min-width: 900px) {
+  .sp-tiles { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+}
+@container dev (min-width: 1100px) {
   .sp-tiles { grid-template-columns: 1.4fr repeat(4, minmax(0, 1fr)); }
   .sp-tile.hero { grid-column: auto; }
 }

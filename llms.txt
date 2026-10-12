@@ -16,6 +16,8 @@ People also describe what FAN/IP does as: a fan engagement platform, a fan club 
 - [Reach calculator](https://fan-ip.com/reach-calculator.html): estimate the views members' posts bring each month and their media value (views ÷ 1,000 × CPM, starting from a typical price for the niche: €7 sport, €5 music, €8 brands, €6 otherwise; the same sum as in the FAN/IP admin)
 - [FAQ](https://fan-ip.com/faq.html): plain answers about the platform, who it is for, how it works and what it costs
 - [Glossary](https://fan-ip.com/glossary.html): earned media value, CPM, views per post, potential reach, UGC, white-label fan club app, fan loyalty program, brand advocacy, active member, mission, season, team battle and sponsor quest, each defined in a sentence or two
+- [Your first month](https://fan-ip.com/first-month.html): day 1, week 1, month 1 and season end after sign-up: what the brand does, what FAN/IP does, and what changes on each plan (Starter is self-serve online; Club, Season and Signature are set up with the brand). Also in French: https://fan-ip.com/fr/first-month.html
+- [What's new](https://fan-ip.com/whats-new.html): what went live in FAN/IP each month, dated; only live features, no future items
 - [Book a demo](https://fan-ip.com/book-a-demo.html): 30-minute video call, shown live on demo data
 - [About](https://fan-ip.com/about.html): what FAN/IP is, who it is for, what it costs, where it runs and who is behind it
 

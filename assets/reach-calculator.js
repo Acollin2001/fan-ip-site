@@ -120,10 +120,17 @@ function init(form) {
     // The plan that fits the members typed, and a demo link that carries the estimate to the booking form.
     const [plan, limit] = PLANS.find(([, max]) => members <= max) || ["Signature", Infinity];
     out("plan").replaceChildren(
-      `For ${int(members)} ${members === 1 ? "member" : "members"}, `,
+      `For ${int(members)} active ${members === 1 ? "member" : "members"}, `,
       Object.assign(document.createElement("a"), { href: `pricing.html#${plan.toLowerCase()}-name`, textContent: plan }),
       limit === Infinity ? " fits: more than 10,000 active members a month." : ` fits: up to ${int(limit)} active members a month.`,
     );
+    // Starter is signed up online; the bigger plans start with a demo, the trial stays a text link.
+    if (start && book) {
+      const demoFirst = plan !== "Starter";
+      start.className = demoFirst ? "rc-copy rc-start" : "btn btn--primary rc-start";
+      book.className = demoFirst ? "btn btn--primary rc-book" : "rc-copy rc-book";
+      if (start.parentNode.firstElementChild !== (demoFirst ? book : start)) start.parentNode.prepend(demoFirst ? book : start, " ");
+    }
     if (book) book.href = `book-a-demo.html?${new URLSearchParams({ members, share, posts, views, cpm, value: Math.round(valueMonth) })}`;
 
     const lit = Math.min(100, Math.round(share));

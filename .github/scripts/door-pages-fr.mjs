@@ -142,15 +142,15 @@ export const PAGES_FR = {
     file: "sport.html",
     title: "App d’engagement des fans pour clubs et esport · FAN/IP",
     description:
-      "Donnez des preuves à vos sponsors : vos supporters publient, le sponsor reçoit un rapport privé : posts, vues, valeur média. Dès 99 € par mois.",
-    ogTitle: "FAN/IP pour le sport · Donnez des preuves à vos sponsors.",
+      "Une app de supporters à votre nom. Les fans publient et gagnent des récompenses, vos sponsors voient la portée. Sport et esport, dès 99 € par mois.",
+    ogTitle: "FAN/IP pour le sport · Des supporters qui publient. Des sponsors qui le voient.",
     valueLine: "Dès 99 € par mois. Chaque post, ses vues et sa valeur média, avec un rapport privé pour votre sponsor.",
     demoFirst: true,
     planNote:
       "Les quêtes sponsor et les pronostics de match arrivent avec Club, les batailles d’équipes et les objectifs communs avec Season. Avec Starter, vous pouvez essayer les missions, les check-ins par QR code, les récompenses et le classement.",
-    h1Html: 'Donnez des preuves<br><span class="hero-promise__gold">à vos sponsors.</span>',
+    h1Html: 'Des supporters qui publient.<br><span class="hero-promise__gold">Des sponsors qui le voient.</span>',
     lead:
-      "Vos supporters publient depuis la tribune avec le sponsor dans le cadre, au nom de votre club, et gagnent des points. Votre sponsor reçoit un rapport privé : les posts, leurs vues et ce que valent ces vues.",
+      "Une app de supporters au nom de votre club. Les fans publient depuis la tribune, gagnent des points et montent de niveau. Quand un sponsor rejoint une mission, il reçoit un rapport privé : les posts, leurs vues et ce qu’elles valent.",
     tickerLabel: "Pour les clubs de football, de basket, de hockey sur glace, de handball et de cyclisme, les équipes esport et les salles gaming.",
     ticker: ["clubs de football", "équipes esport", "clubs de basket", "équipes de hockey sur glace", "clubs cyclistes", "salles gaming", "clubs de handball", "clubs de rugby", "clubs de volley", "clubs de running"],
 
@@ -164,21 +164,16 @@ export const PAGES_FR = {
         ["Identifier le club", "Et le sponsor"],
         ["Amener un pote", "Au prochain match à domicile"],
       ],
-      outcome: "Des preuves que vos sponsors peuvent voir.",
+      outcome: "Une portée que vos sponsors peuvent voir.",
       note: "Vos supporters filment déjà chaque but. Donnez-leur des points pour ça, mettez le sponsor dans le cadre et montrez-lui les vues.",
     },
 
     world: {
       kicker: "FAN/IP pour le sport et l’esport",
-      title: "Des preuves pour vos sponsors, faites par vos supporters.",
+      title: "L’engagement des fans, visible par vos sponsors.",
       lead:
         "Vos supporters filment déjà le but et publient le score. FAN/IP leur donne une app de supporters avec votre écusson, des points pour chaque publication et une raison d’amener un pote au prochain match à domicile.",
       cols: [
-        {
-          h: "Le rapport sponsor",
-          pHtml:
-            "Associez le nom d’un sponsor à une série de missions. Les supporters publient avec le sponsor dans le cadre, et le sponsor reçoit un lien privé sur son téléphone : membres qui ont participé, publications, vues et valeur média à 7 € les 1 000 vues, un tarif que vous pouvez modifier. De quoi montrer bien plus qu’un logo sur un maillot au moment du renouvellement.",
-        },
         {
           h: "Pour qui",
           pHtml:
@@ -197,22 +192,27 @@ export const PAGES_FR = {
           after:
             "Les points mènent à la boutique de récompenses : un maillot dédicacé, ou un maillot supporter en édition limitée pour tout le monde une fois l’objectif collectif atteint.",
         },
+        {
+          h: "Le rapport sponsor",
+          pHtml:
+            "De temps en temps, associez le nom d’un sponsor à une mission. Les supporters publient avec le sponsor dans le cadre, et le sponsor reçoit un lien privé sur son téléphone : membres qui ont participé, publications, vues et valeur média à 7 € les 1 000 vues, un tarif que vous pouvez modifier. De quoi montrer bien plus qu’un logo sur un maillot au moment du renouvellement.",
+        },
       ],
       footHtml:
-        'Ouvrez <a href="../demo/aldermoor/?view=sponsor" hreflang="en">le rapport sponsor de la démo Aldermoor</a>, un club de football fictif, ou lisez <a href="../sample-report.html" hreflang="en">un exemple de rapport sponsor</a>.',
+        'Voyez une saison complète à <a href="../demo/aldermoor/" hreflang="en">Aldermoor</a>, un club de football fictif, avec <a href="../demo/aldermoor/?view=sponsor" hreflang="en">son rapport sponsor</a>, ou lisez <a href="../sample-report.html" hreflang="en">un exemple de rapport sponsor</a>.',
     },
 
     faqTitle: "Les questions des clubs.",
     faq: [
       {
-        q: "Comment montrer aux sponsors ce que valent les fans ?",
-        aHtml:
-          'Lancez une quête sponsor. Les supporters publient des photos de match avec le sponsor dans le cadre, et le sponsor reçoit un lien privé vers son rapport : membres qui ont participé, publications, vues et valeur média au prix des 1 000 vues que vous fixez. La <a href="../demo/aldermoor/?view=sponsor" hreflang="en">démo Aldermoor</a> en montre un.',
-      },
-      {
         q: "Qu’est-ce qu’une app de supporters ?",
         aHtml:
           "Une app où les supporters rejoignent la communauté du club, réalisent des missions, gagnent des points et débloquent des récompenses. Avec FAN/IP, elle porte le nom et les couleurs de votre club, et les fans l’ouvrent dans leur navigateur, sans rien télécharger.",
+      },
+      {
+        q: "Comment montrer aux sponsors ce que valent les fans ?",
+        aHtml:
+          'Lancez une quête sponsor. Les supporters publient des photos de match avec le sponsor dans le cadre, et le sponsor reçoit un lien privé vers son rapport : membres qui ont participé, publications, vues et valeur média au prix des 1 000 vues que vous fixez. La <a href="../demo/aldermoor/?view=sponsor" hreflang="en">démo Aldermoor</a> en montre un.',
       },
       {
         q: "Est-ce que ça marche pour les équipes esport et les salles gaming ?",
@@ -237,7 +237,7 @@ export const PAGES_FR = {
       step3: "Chaque publication et ses vues dans votre admin, et un rapport privé avec les totaux pour votre sponsor.",
       caption: "Valeurs indicatives. Chaque club nomme et règle ses propres défis, niveaux et récompenses, sponsors compris. ",
     },
-    resultTitle: "Ce que voit votre sponsor.",
+    resultTitle: "Ce que vous et votre sponsor voyez.",
     resultCaptionHtml:
       'Écrans de la démo Aldermoor : un club fictif, des chiffres indicatifs. La valeur média correspond à ce que les mêmes vues coûteraient en publicité, à 7 € les 1 000 vues pour le sport. Vous fixez votre propre tarif. <a href="../reach-calculator.html?for=sport" hreflang="en" data-calc-link>Calculez vos chiffres</a> · <a href="../sample-report.html" hreflang="en">Voir un exemple de rapport sponsor</a>',
     demosLead:
@@ -256,7 +256,7 @@ export const PAGES_FR = {
     tryLead:
       "Saisissez le nom de votre club : nous ouvrons votre club de supporters en Starter, gratuit pendant 7 jours, avec un aperçu en direct pendant que vous le configurez. Rien n’est créé tant que vous n’avez pas terminé.",
     tryPlaceholder: "Nom du club ou de l’équipe",
-    closeLead: "Offrez à vos sponsors plus qu’un logo sur un maillot.",
+    closeLead: "Construisez un club de supporters dont on a envie de faire partie.",
     footSentence: "FAN/IP fait parler des clubs et des équipes par leurs propres supporters.",
   },
 

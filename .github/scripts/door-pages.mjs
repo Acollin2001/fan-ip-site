@@ -4,6 +4,8 @@
 // its own way. build-doors.mjs reads this file; edit here, then run
 //   node .github/scripts/build-doors.mjs
 // Fields ending in "Html" may hold links and <br>; the others are plain text.
+// valueLine is the last line of the first screen (price and value); planNote
+// sits in the page's pricing block. demoFirst makes Book a demo the main button.
 // Facts only: plans, limits and the three fictional demos. No clients, no
 // figures beyond the demos, no testimonials.
 
@@ -14,6 +16,7 @@ export const PAGES = {
     description:
       "A loyalty program that rewards customers for posting about your brand. You see every post, its views and its media value. From €99 a month.",
     ogTitle: "FAN/IP for brands · Customers who post about you.",
+    valueLine: "From €99 a month. Every post, its views and what they would have cost as ads.",
     planNote:
       "Collectibles, giveaways and PR packages come with Club, community goals with Season. On Starter you can try photo and video missions, polls, quizzes, referrals, rewards and the leaderboard.",
     h1Html: 'Customers who post<br><span class="hero-promise__gold">about you.</span>',
@@ -134,6 +137,8 @@ export const PAGES = {
     description:
       "A supporters club app under your club’s name. Fans post, earn points and rewards, and your sponsors see the reach. For sport and esports. From €99 a month.",
     ogTitle: "FAN/IP for sport · Supporters who post. Sponsors who see it.",
+    valueLine: "From €99 a month. Every post, its views and its media value, with a private report for your sponsor.",
+    demoFirst: true,
     planNote:
       "Sponsor quests and match predictions come with Club, team battles and community goals with Season. On Starter you can try missions, QR check-ins, rewards and the leaderboard.",
     h1Html: 'Supporters who post.<br><span class="hero-promise__gold">Sponsors who see it.</span>',
@@ -254,6 +259,7 @@ export const PAGES = {
     description:
       "Fans post after every show, earn points and unlock rewards you choose. You see the views of their posts, show by show. Your own fan club, your name.",
     ogTitle: "FAN/IP for artists · Fans who post after every show.",
+    valueLine: "From €99 a month. Every post your fans make, its views and its media value.",
     planNote:
       "Open questions, mission roads and giveaways come with Club, community goals with Season. On Starter you can try photo and video missions, polls, quizzes, QR check-ins, rewards and the leaderboard.",
     h1Html: 'Fans who post<br><span class="hero-promise__gold">after every show.</span>',

@@ -23,6 +23,7 @@ export const PAGES_FR = {
     description:
       "Un programme de fidélité qui récompense vos clients quand ils publient sur votre marque. Chaque post, ses vues, sa valeur média. Dès 99 € par mois.",
     ogTitle: "FAN/IP pour les marques · Des clients qui parlent de vous.",
+    valueLine: "Dès 99 € par mois. Chaque post, ses vues et ce qu’il aurait coûté en publicité.",
     planNote:
       "Objets à collectionner, jeux-concours et colis presse arrivent avec Club, les objectifs communs avec Season. Avec Starter, vous pouvez essayer les missions photo et vidéo, les sondages, les quiz, le parrainage, les récompenses et le classement.",
     h1Html: 'Des clients qui parlent<br><span class="hero-promise__gold">de vous.</span>',
@@ -143,6 +144,8 @@ export const PAGES_FR = {
     description:
       "Une app de supporters à votre nom. Les fans publient et gagnent des récompenses, vos sponsors voient la portée. Sport et esport, dès 99 € par mois.",
     ogTitle: "FAN/IP pour le sport · Des supporters qui publient. Des sponsors qui le voient.",
+    valueLine: "Dès 99 € par mois. Chaque post, ses vues et sa valeur média, avec un rapport privé pour votre sponsor.",
+    demoFirst: true,
     planNote:
       "Les quêtes sponsor et les pronostics de match arrivent avec Club, les batailles d’équipes et les objectifs communs avec Season. Avec Starter, vous pouvez essayer les missions, les check-ins par QR code, les récompenses et le classement.",
     h1Html: 'Des supporters qui publient.<br><span class="hero-promise__gold">Des sponsors qui le voient.</span>',
@@ -263,6 +266,7 @@ export const PAGES_FR = {
     description:
       "Vos fans publient après chaque concert, gagnent des points et vos récompenses. Vous voyez les vues de leurs posts, concert par concert. Votre fan club.",
     ogTitle: "FAN/IP pour les artistes · Des fans qui publient après chaque concert.",
+    valueLine: "Dès 99 € par mois. Chaque post de vos fans, ses vues et sa valeur média.",
     planNote:
       "Questions ouvertes, parcours de missions et jeux-concours arrivent avec Club, les objectifs communs avec Season. Avec Starter, vous pouvez essayer les missions photo et vidéo, les sondages, les quiz, les check-ins par QR code, les récompenses et le classement.",
     h1Html: 'Des fans qui publient<br><span class="hero-promise__gold">après chaque concert.</span>',

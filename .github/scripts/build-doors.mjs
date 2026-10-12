@@ -187,11 +187,13 @@ for (const [key, page] of Object.entries(pages)) {
   h = swap(h, /(<section id="top"[^>]*?)aria-labelledby="hero-title"/, `$1aria-labelledby="door-title"`);
   h = swap(h, /<p class="hero-promise">[\s\S]*?<\/p>/, `<h1 id="door-title" class="hero-promise">${page.h1Html}</h1>`);
   h = swap(h, /<p class="hero-lead t-lead">[\s\S]*?<\/p>/, `<p class="hero-lead t-lead">${esc(page.lead)}</p>`);
-  h = swap(h, /<div class="hero-actions">[\s\S]*?<\/div>/, `<div class="hero-actions">
-          <a class="btn btn--primary" href="https://app.fan-ip.com/start?for=${key}" data-start-link>${ui.trial}</a>
-          <a class="hero-link" href="book-a-demo.html">${ui.demo}</a>
-        </div>
-        <p class="hero-plan t-small">${esc(page.planNote)}</p>`);
+  const trial = (cls) => `<a class="${cls}" href="https://app.fan-ip.com/start?for=${key}" data-start-link>${ui.trial}</a>`;
+  const demo = (cls) => `<a class="${cls}" href="book-a-demo.html">${ui.demo}</a>`;
+  h = swap(h, /<div class="hero-actions">[\s\S]*?<\/div>/, `<p class="hero-plan hero-value t-body">${esc(page.valueLine)}</p>
+        <div class="hero-actions">
+          ${page.demoFirst ? demo("btn btn--primary") : trial("btn btn--primary")}
+          ${page.demoFirst ? trial("hero-link") : demo("hero-link")}
+        </div>`);
   h = swap(h, /(<div class="door">\s*<p class="sr-only">)[^<]*(<\/p>)/, `$1${esc(page.tickerLabel)}$2`);
   h = swap(h, /<div class="door-ticker__track">[\s\S]*?<\/ul><\/div>/, ticker(page.ticker));
 
@@ -250,7 +252,7 @@ ${w.oldLines.map((l) => `          <p class="why-line t-body">${esc(l)}</p>`).jo
 
   // Prices: this world's lines, this world's "which plan".
   const pr = page.pricing;
-  h = swap(h, /(<p class="price-lead t-lead">)[^<]*(<\/p>)/, `$1${esc(pr.lead)}$2`);
+  h = swap(h, /(<p class="price-lead t-lead">)[^<]*(<\/p>)/, `$1${esc(pr.lead)}<span class="price-plans">${esc(page.planNote)}</span>$2`);
   let n = 0;
   h = swap(h, /(<p class="plan-for t-body">)[^<]*(<\/p>)/g, (_, a, b) => `${a}${esc(pr.planFor[n++])}${b}`);
   if (n !== pr.planFor.length) throw new Error(`${dir}${page.file}: ${n} plan lines in ${source}, ${pr.planFor.length} in its door pages file`);

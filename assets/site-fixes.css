@@ -99,6 +99,8 @@ html[data-door="sport"] .plan-pick__list [data-for="sport"] b,html[data-door="ar
   .hero-lead{grid-column:8 / -1;grid-row:1;margin:0;max-inline-size:26em}
   .hero-actions{grid-column:8 / -1;grid-row:2;margin-block-start:var(--s5)}
   .hero-plan{grid-column:8 / -1;grid-row:3}
+  .hero-plan.hero-value{grid-row:2;margin-block-start:var(--s4)}
+  .hero-value + .hero-actions{grid-row:3}
 }
 @media (max-width: 1023px){
   .hero-promise{font-size:clamp(1.875rem,6.4vw,2.75rem);line-height:1.04;max-inline-size:none}
@@ -262,3 +264,5 @@ h1.hero-promise{text-wrap:balance}
 
 /* "Why": the hover hints next to each verb need room; in a narrow window with a mouse they pushed the column off screen. */
 @media (hover: hover) and (pointer: fine) and (max-width: 767px){ .why-verbs .why-hint{display:none} }
+.hero-plan.hero-value{color:var(--ivory)}
+.price-plans{display:block;margin-block-start:var(--s3);font-size:1.0625rem;line-height:1.55}

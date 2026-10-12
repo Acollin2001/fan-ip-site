@@ -224,7 +224,10 @@ h1.hero-promise{text-wrap:balance}
 
 /* Platform, "What members see": the mission title sits on the dark card, so it
    takes the card's light text colour (it inherited the page's ink before). */
-.pv-card .pv-title{color:var(--ivory)}
+.pv-card,.pv-card .pv-title{color:var(--ivory)}
+.pv-card{--on-gold:var(--ink)}
+.pv-road li.is-locked .pv-road__t{opacity:1}
+.pv-road li{justify-items:start}
 
 /* Pricing in one line above the cards (home and Pricing), so a phone reader
    sees all four prices before scrolling through the cards. */

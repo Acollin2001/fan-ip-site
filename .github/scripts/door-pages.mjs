@@ -104,7 +104,7 @@ export const PAGES = {
 
     product: {
       titleHtml: "Three steps.<br>Your customers do the rest.",
-      step2: "Customers share from their own accounts. Each approved post earns them XP for their level and points for the shop.",
+      step2: "Customers share from their own accounts. Each post earns them XP for their level as soon as they send it, and points for the shop once you approve it.",
       step3: "Every post, its views and its media value, next to what your gifts cost.",
       caption: "Illustrative values. You name and set your own missions, levels and rewards. ",
     },
@@ -116,7 +116,7 @@ export const PAGES = {
     worldLead: "This page is for brands. Pick another world to see its own page.",
     pricing: {
       lead:
-        "Start on Starter at €99 a month, free for 7 days, then move up as your community grows. We count active members: customers who did something this month.",
+        "Start on Starter at €99 a month, free for 7 days, then move up as your community grows. We count active members: customers who sent a mission in the last 90 days.",
       planFor: [
         "For a brand starting its fan club. Sign up online and set it up yourself.",
         "For a brand launching its first customer community.",
@@ -220,13 +220,13 @@ export const PAGES = {
       {
         q: "Which plan suits a club?",
         aHtml:
-          'Season, at €1,290 a month for up to 10,000 active members, covers a full season with sponsors on board. A smaller club can start on Club at €490, or try Starter at €99 a month, free for 7 days. <a href="pricing.html">Compare the plans</a>.',
+          'Most clubs start on Club, at €490 a month for up to 1,500 active members. Season, at €1,290 a month, suits a club where several sponsors run quests all season. A small club or team can try Starter at €99 a month, free for 7 days. <a href="pricing.html">Compare the plans</a>.',
       },
     ],
 
     product: {
       titleHtml: "Three steps.<br>Your supporters do the rest.",
-      step2: "Supporters post from their own accounts. Each approved post earns them XP for their level and points for the shop.",
+      step2: "Supporters post from their own accounts. Each post earns them XP for their level as soon as they send it, and points for the shop once you approve it.",
       step3: "Every post and its views in your admin, and a private report with the totals for your sponsor.",
       caption: "Illustrative values. Each club names and sets its own challenges, levels and rewards, sponsors included. ",
     },
@@ -238,11 +238,11 @@ export const PAGES = {
     worldLead: "This page is for clubs, teams and esports. Pick another world to see its own page.",
     pricing: {
       lead:
-        "Season covers a whole season with your sponsors on board. A smaller club or esports team can start on Starter at €99 a month. We count active members, not dormant sign-ups.",
+        "Most clubs start on Club; Season once several sponsors run quests all season. A small club or esports team can start on Starter at €99 a month. We count active members: supporters who sent a mission in the last 90 days.",
       planFor: [
         "For a small club or team. Sign up online and set it up yourself.",
-        "For a club launching its supporters club.",
-        "For a club with sponsors to report to.",
+        "Where most clubs start: a supporters club and sponsor quests.",
+        "For a club where several sponsors run quests all season.",
         "For large clubs and groups with several teams.",
       ],
     },
@@ -346,7 +346,7 @@ export const PAGES = {
 
     product: {
       titleHtml: "Three steps.<br>Your fans post after the show.",
-      step2: "Fans post from their own accounts. Each approved post earns them XP for their level and points for the shop.",
+      step2: "Fans post from their own accounts. Each post earns them XP for their level as soon as they send it, and points for the shop once you approve it.",
       step3: "Every post and its views, show by show.",
       caption: "Illustrative values. You name and set your own missions, levels and rewards, tour by tour. ",
     },
@@ -358,7 +358,7 @@ export const PAGES = {
     worldLead: "This page is for artists and creators. Pick another world to see its own page.",
     pricing: {
       lead:
-        "Start on Starter at €99 a month for a first fan club, or Club for a first tour. We count active members: fans who did something this month.",
+        "Start on Starter at €99 a month for a first fan club, or Club for a first tour. We count active members: fans who sent a mission in the last 90 days.",
       planFor: [
         "For an artist starting a fan club. Sign up online and set it up yourself.",
         "For a first tour with a fan club.",

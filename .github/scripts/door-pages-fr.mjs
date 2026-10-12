@@ -111,7 +111,7 @@ export const PAGES_FR = {
 
     product: {
       titleHtml: "Trois étapes.<br>Vos clients font le reste.",
-      step2: "Les clients partagent depuis leurs propres comptes. Chaque publication validée leur rapporte de l’XP pour leur niveau et des points pour la boutique.",
+      step2: "Les clients partagent depuis leurs propres comptes. Chaque publication leur rapporte de l’XP pour leur niveau dès l’envoi, et des points pour la boutique une fois validée.",
       step3: "Chaque publication, ses vues et sa valeur média, à côté de ce que vos cadeaux vous coûtent.",
       caption: "Valeurs indicatives. Vous nommez et réglez vos propres missions, niveaux et récompenses. ",
     },
@@ -123,7 +123,7 @@ export const PAGES_FR = {
     worldLead: "Cette page s’adresse aux marques. Choisissez un autre univers pour voir sa page.",
     pricing: {
       lead:
-        "Commencez avec Starter à 99 € par mois, gratuit pendant 7 jours, puis passez à la formule supérieure à mesure que votre communauté grandit. Nous comptons les membres actifs : les clients qui ont fait quelque chose ce mois-ci.",
+        "Commencez avec Starter à 99 € par mois, gratuit pendant 7 jours, puis passez à la formule supérieure à mesure que votre communauté grandit. Nous comptons les membres actifs : les clients qui ont envoyé une mission ces 90 derniers jours.",
       planFor: [
         "Pour une marque qui lance son fan club. Inscrivez-vous en ligne et configurez tout vous-même.",
         "Pour une marque qui lance sa première communauté de clients.",
@@ -227,13 +227,13 @@ export const PAGES_FR = {
       {
         q: "Quelle formule pour un club ?",
         aHtml:
-          'Season, à 1 290 € par mois jusqu’à 10 000 membres actifs, couvre une saison complète avec des sponsors à bord. Un club plus petit peut commencer avec Club à 490 €, ou essayer Starter à 99 € par mois, gratuit pendant 7 jours. <a href="pricing.html">Comparer les formules</a>.',
+          'La plupart des clubs commencent avec Club, à 490 € par mois jusqu’à 1 500 membres actifs. Season, à 1 290 € par mois, convient à un club dont plusieurs sponsors mènent des quêtes toute la saison. Un petit club ou une équipe peut essayer Starter à 99 € par mois, gratuit pendant 7 jours. <a href="pricing.html">Comparer les formules</a>.',
       },
     ],
 
     product: {
       titleHtml: "Trois étapes.<br>Vos supporters font le reste.",
-      step2: "Les supporters publient depuis leurs propres comptes. Chaque publication validée leur rapporte de l’XP pour leur niveau et des points pour la boutique.",
+      step2: "Les supporters publient depuis leurs propres comptes. Chaque publication leur rapporte de l’XP pour leur niveau dès l’envoi, et des points pour la boutique une fois validée.",
       step3: "Chaque publication et ses vues dans votre admin, et un rapport privé avec les totaux pour votre sponsor.",
       caption: "Valeurs indicatives. Chaque club nomme et règle ses propres défis, niveaux et récompenses, sponsors compris. ",
     },
@@ -245,11 +245,11 @@ export const PAGES_FR = {
     worldLead: "Cette page s’adresse aux clubs, aux équipes et à l’esport. Choisissez un autre univers pour voir sa page.",
     pricing: {
       lead:
-        "Season couvre une saison entière avec vos sponsors à bord. Un club plus petit ou une équipe esport peut commencer avec Starter à 99 € par mois. Nous comptons les membres actifs, pas les inscrits dormants.",
+        "La plupart des clubs commencent avec Club ; Season quand plusieurs sponsors mènent des quêtes toute la saison. Un petit club ou une équipe esport peut commencer avec Starter à 99 € par mois. Nous comptons les membres actifs : les supporters qui ont envoyé une mission ces 90 derniers jours.",
       planFor: [
         "Pour un petit club ou une petite équipe. Inscrivez-vous en ligne et configurez tout vous-même.",
-        "Pour un club qui lance son club de supporters.",
-        "Pour un club qui rend des comptes à ses sponsors.",
+        "Là où la plupart des clubs commencent : un club de supporters et des quêtes sponsor.",
+        "Pour un club dont plusieurs sponsors mènent des quêtes toute la saison.",
         "Pour les grands clubs et les groupes qui ont plusieurs équipes.",
       ],
     },
@@ -353,7 +353,7 @@ export const PAGES_FR = {
 
     product: {
       titleHtml: "Trois étapes.<br>Vos fans publient après le concert.",
-      step2: "Les fans publient depuis leurs propres comptes. Chaque publication validée leur rapporte de l’XP pour leur niveau et des points pour la boutique.",
+      step2: "Les fans publient depuis leurs propres comptes. Chaque publication leur rapporte de l’XP pour leur niveau dès l’envoi, et des points pour la boutique une fois validée.",
       step3: "Chaque publication et ses vues, concert par concert.",
       caption: "Valeurs indicatives. Vous nommez et réglez vos propres missions, niveaux et récompenses, tournée après tournée. ",
     },
@@ -365,7 +365,7 @@ export const PAGES_FR = {
     worldLead: "Cette page s’adresse aux artistes et aux créateurs. Choisissez un autre univers pour voir sa page.",
     pricing: {
       lead:
-        "Commencez avec Starter à 99 € par mois pour un premier fan club, ou Club pour une première tournée. Nous comptons les membres actifs : les fans qui ont fait quelque chose ce mois-ci.",
+        "Commencez avec Starter à 99 € par mois pour un premier fan club, ou Club pour une première tournée. Nous comptons les membres actifs : les fans qui ont envoyé une mission ces 90 derniers jours.",
       planFor: [
         "Pour un artiste qui lance son fan club. Inscrivez-vous en ligne et configurez tout vous-même.",
         "Pour une première tournée avec un fan club.",

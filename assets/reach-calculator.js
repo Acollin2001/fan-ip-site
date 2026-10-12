@@ -122,7 +122,7 @@ function init(form) {
     out("plan").replaceChildren(
       `For ${int(members)} active ${members === 1 ? "member" : "members"}, `,
       Object.assign(document.createElement("a"), { href: `pricing.html#${plan.toLowerCase()}-name`, textContent: plan }),
-      limit === Infinity ? " fits: more than 10,000 active members a month." : ` fits: up to ${int(limit)} active members a month.`,
+      limit === Infinity ? " fits: more than 10,000 active members." : ` fits: up to ${int(limit)} active members.`,
     );
     // Starter is signed up online; the bigger plans start with a demo, the trial stays a text link.
     if (start && book) {

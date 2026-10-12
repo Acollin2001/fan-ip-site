@@ -31,11 +31,11 @@ After "why", the home page asks "Where do your fans gather?" (Sport, Artists and
 
 ## Pricing (euros, excluding VAT)
 
-- Starter: €99 a month or €990 a year, no set-up fee, up to 150 active members a month, leaderboard included, 7-day free trial, sign up online at https://app.fan-ip.com/start
-- Club: €490 a month, set-up €1,250, up to 1,500 active members a month
-- Season: €1,290 a month, set-up €2,500, up to 10,000 active members a month
-- Signature: from €2,900 a month, set-up from €5,000, more than 10,000 active members a month
-- Club, Season and Signature are billed monthly on a 12-month term. An active member is someone who did something in the community this month.
+- Starter: €99 a month or €990 a year, no set-up fee, up to 150 active members, leaderboard included, 7-day free trial, sign up online at https://app.fan-ip.com/start
+- Club: €490 a month, set-up €1,250, up to 1,500 active members
+- Season: €1,290 a month, set-up €2,500, up to 10,000 active members
+- Signature: from €2,900 a month, set-up from €5,000, more than 10,000 active members
+- Club, Season and Signature are billed monthly on a 12-month term. An active member is a member who sent at least one mission in the last 90 days, approved or not.
 
 ## Demos (fictional names and data, clickable, all on the Season plan)
 

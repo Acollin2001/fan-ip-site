@@ -61,3 +61,5 @@ html:not(.js) .rc-ones{display:none}
 .rc-niche__b{min-block-size:40px;padding:0 var(--s3);border:1px solid var(--rule);border-radius:999px;background:none;color:var(--fg);font:600 .875rem/1 var(--font-body);cursor:pointer}
 .rc-niche__b:hover{border-color:var(--fg)}
 .rc-niche__b:focus-visible{outline:2px solid var(--focus);outline-offset:2px}
+.rc-actions{display:flex;flex-wrap:wrap;align-items:center;gap:var(--s3);margin-block-start:var(--s4)}
+.rc-actions .rc-copy{margin:0}

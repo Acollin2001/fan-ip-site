@@ -135,15 +135,15 @@ export const PAGES = {
     file: "sport.html",
     title: "Fan engagement app for clubs and esports teams · FAN/IP",
     description:
-      "A supporters club app under your club’s name. Fans post, earn points and rewards, and your sponsors see the reach. For sport and esports. From €99 a month.",
-    ogTitle: "FAN/IP for sport · Supporters who post. Sponsors who see it.",
+      "Give your sponsors proof: supporters post from the stands, and your sponsor gets a private report of posts, views and media value. From €99 a month.",
+    ogTitle: "FAN/IP for sport · Give your sponsors proof.",
     valueLine: "From €99 a month. Every post, its views and its media value, with a private report for your sponsor.",
     demoFirst: true,
     planNote:
       "Sponsor quests and match predictions come with Club, team battles and community goals with Season. On Starter you can try missions, QR check-ins, rewards and the leaderboard.",
-    h1Html: 'Supporters who post.<br><span class="hero-promise__gold">Sponsors who see it.</span>',
+    h1Html: 'Give your sponsors<br><span class="hero-promise__gold">proof.</span>',
     lead:
-      "A supporters club app under your club’s name. Fans post from the stands, earn points and climb the levels. Your sponsors get a report of how many people saw it.",
+      "Your supporters post from the stands with the sponsor in the picture, under your club’s name, and earn points for it. Your sponsor gets a private report: the posts, their views and what those views are worth.",
     tickerLabel: "For football, basketball, ice hockey, handball and cycling clubs, esports teams and gaming venues.",
     ticker: ["football clubs", "esports teams", "basketball clubs", "ice hockey teams", "cycling clubs", "gaming venues", "handball clubs", "rugby clubs", "volleyball clubs", "running clubs"],
 
@@ -157,16 +157,21 @@ export const PAGES = {
         ["Tag the club", "And the sponsor"],
         ["Bring a mate", "To the next home game"],
       ],
-      outcome: "Reach your sponsors can see.",
+      outcome: "Proof your sponsors can see.",
       note: "Your supporters already film every goal. Give them points for it, put the sponsor in the picture and show the sponsor the views.",
     },
 
     world: {
       kicker: "FAN/IP for sport and esports",
-      title: "Fan engagement your sponsors can see.",
+      title: "Sponsor proof, made by your supporters.",
       lead:
         "Your supporters already film the goal and post the score. FAN/IP gives them a supporters club app with your crest on it, points for every post and a reason to bring a mate to the next home game.",
       cols: [
+        {
+          h: "The sponsor report",
+          pHtml:
+            "Put a sponsor’s name on a set of missions. Supporters post with the sponsor in view, and the sponsor gets a private link on its phone: members who took part, posts, views and media value at €7 per 1,000 views, a rate you can change. More to show at renewal time than a logo on a shirt.",
+        },
         {
           h: "Who it’s for",
           pHtml:
@@ -185,27 +190,22 @@ export const PAGES = {
           after:
             "Points lead to the rewards shop: a signed shirt, or a limited supporters’ shirt for everyone once the community goal is reached.",
         },
-        {
-          h: "The sponsor report",
-          pHtml:
-            "Put a sponsor’s name on a set of missions. Supporters post with the sponsor in view, and the sponsor gets a private link on its phone: members who took part, posts, views, the followers of the supporters who posted and media value at €7 per 1,000 views, a rate you can change. More to show at renewal time than a logo on a shirt.",
-        },
       ],
       footHtml:
-        'See a full season at <a href="demo/aldermoor/">Aldermoor</a>, a fictional football club, sponsor report included.',
+        'Open <a href="demo/aldermoor/?view=sponsor">the sponsor report in the Aldermoor demo</a>, a fictional football club, or read <a href="sample-report.html">a sample sponsor report</a>.',
     },
 
     faqTitle: "Questions from clubs.",
     faq: [
       {
+        q: "How do we show sponsors what the fans are worth?",
+        aHtml:
+          'Run a sponsor quest. Supporters post matchday photos with the sponsor in view, and the sponsor gets a private report link: members who took part, posts, views and media value at the price per 1,000 views you set. The <a href="demo/aldermoor/?view=sponsor">Aldermoor demo</a> shows one.',
+      },
+      {
         q: "What is a supporters club app?",
         aHtml:
           "An app where supporters join the club’s community, complete missions, earn points and unlock rewards. With FAN/IP it carries your club’s name and colours, and fans open it in their browser, with nothing to download.",
-      },
-      {
-        q: "How do we show sponsors what the fans are worth?",
-        aHtml:
-          'Run a sponsor quest. Supporters post matchday photos with the sponsor in view, and the sponsor gets a private report link: members who took part, posts, views and media value at the price per 1,000 views you set. The <a href="demo/aldermoor/">Aldermoor demo</a> shows one.',
       },
       {
         q: "Does it work for esports teams and gaming venues?",
@@ -230,7 +230,7 @@ export const PAGES = {
       step3: "Every post and its views in your admin, and a private report with the totals for your sponsor.",
       caption: "Illustrative values. Each club names and sets its own challenges, levels and rewards, sponsors included. ",
     },
-    resultTitle: "What you and your sponsor see.",
+    resultTitle: "What your sponsor sees.",
     resultCaptionHtml:
       'Screens from the Aldermoor demo: a fictional club, illustrative figures. Media value is what the same views would cost as ads, at €7 per 1,000 views for sport. You set your own. <a href="reach-calculator.html?for=sport" data-calc-link>Work out your numbers</a> · <a href="sample-report.html">See a sample sponsor report</a>',
     demosLead:
@@ -249,7 +249,7 @@ export const PAGES = {
     tryLead:
       "Type your club’s name and we open your supporters club in Starter, free for 7 days, with a live preview as you set it up. Nothing is created until you finish.",
     tryPlaceholder: "Your club or team name",
-    closeLead: "Build a supporters club people want to be part of.",
+    closeLead: "Give your sponsors more than a logo on a shirt.",
     footSentence: "FAN/IP gets clubs and teams talked about by their own supporters.",
   },
 

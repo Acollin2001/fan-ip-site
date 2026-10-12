@@ -256,7 +256,6 @@ img, svg { max-width: 100%; }
 }
 .club-word small { display: block; font-family: var(--f-text); font-weight: 500; font-size: 0.6875rem; letter-spacing: 0; color: var(--ink-3); margin-top: 3px; }
 .points-chip {
-  margin-left: auto;
   display: inline-flex;
   align-items: baseline;
   gap: 5px;
@@ -271,6 +270,17 @@ img, svg { max-width: 100%; }
 .points-chip b { font-family: var(--f-display); font-weight: 800; font-size: 1.125rem; line-height: 1; letter-spacing: 0.01em; }
 .points-chip span { font-size: 0.75rem; opacity: 0.8; }
 .points-chip.bump { animation: bump 0.5s var(--ease-spring); }
+/* The "!" on the points total: shown while points from a post wait for approval. Tap it to see how many. */
+.pts-wrap { position: relative; display: inline-flex; }
+.pts-wrap.pts-top { margin-left: auto; }
+.pts-wrap.pts-rail { display: grid; }
+.pend-dot { position: absolute; top: -7px; right: -7px; z-index: 2; width: 22px; height: 22px; padding: 0; display: grid; place-items: center; border-radius: 50%; border: 2px solid #fff; background: #ffd34d; color: #2a1f00; font: 800 0.8125rem/1 system-ui, -apple-system, "Segoe UI", sans-serif; cursor: pointer; box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25); }
+.pend-dot::after { content: ""; position: absolute; inset: -6px; }
+.pend-dot[hidden] { display: none; }
+.pend-dot:focus-visible { outline: 2px solid #1a56db; outline-offset: 2px; }
+/* "Soon": a screen or a figure that shows a feature on the roadmap. Its own colours, so it reads on every style and in the admin. */
+.soon-tag { display: inline-block; vertical-align: middle; margin-left: 6px; padding: 1px 7px; border-radius: 999px; background: #fff3c8; color: #4f3b00; border: 1px solid #b8962e; font: 700 0.6875rem/1.45 "Archivo", system-ui, sans-serif; letter-spacing: 0.02em; text-transform: none; font-style: normal; white-space: nowrap; }
+.soon-tag.soon-h { font-size: 0.75rem; vertical-align: 0.4em; }
 @keyframes bump { 40% { transform: scale(1.12); } }
 .avatar {
   flex: none;
@@ -2344,7 +2354,7 @@ const MISSIONS = [
   { id: "predict", type: "Prediction", group: "matchday", title: "Predict the score v Granby Rovers", pts: 50, tone: "kestrel", art: "predict", meta: "Closes at kick-off",
     bonus: () => [`×${state.mult.result} right result`, `×${state.mult.exact} exact score`],
     get brief() { const w = (n) => ({ 2: "double", 3: "triple" }[n] || `go ×${n}`); return `Call the score before kick-off. Playing earns 50 XP and 50 points. Get the result right and both ${w(state.mult.result)} to ${50 * state.mult.result}; nail the exact score and both ${w(state.mult.exact)} to ${50 * state.mult.exact}.`; } },
-  { id: "scorer", type: "Prediction", group: "matchday", title: "Who scores first against Granby?", pts: 30, tone: "wing", art: "scorer", meta: "Closes at kick-off",
+  { id: "scorer", soon: 1, type: "Prediction", group: "matchday", title: "Who scores first against Granby?", pts: 30, tone: "wing", art: "scorer", meta: "Closes at kick-off",
     bonus: ["×2 if you're right"], options: ["Dario Lenk", "Ayo Fenwick", "Ellis Varga", "Ruben Sølvik", "Anyone else"],
     brief: "Pick the first Aldermoor scorer. Playing earns 30 XP and 30 points, and both double to 60 if your player scores first." },
   { id: "checkin", type: "Check-in", group: "matchday", title: "Check in at The Weir", pts: 100, tone: "moor", art: "stadium", meta: "Opens 13:00 on matchday",
@@ -2424,7 +2434,7 @@ const ANSWERS = [
   { mid: "first", who: "Priya Lowe", handle: "@northstand_priya", t: "First date with my now-wife. She supports Granby. We've agreed never to talk about the score.", when: "Yesterday", status: "featured" },
   { mid: "first", who: "Den Whitcombe", handle: "@olderthanthecrest", t: "1962, standing on a crate Dad brought from the allotment. You could see the river from the terrace back then.", when: "Yesterday", status: "new" },
 ];
-const ANSWER_BASE = { first: { total: 1272, featured: 3 } };
+const ANSWER_BASE = { first: { total: 1030, featured: 3 } };
 
 function openBody(m) {
   const mine = state.answers[m.id];
@@ -2517,9 +2527,9 @@ const MY_PREDS = [
   { md: "Matchday 6", vs: "v Ashcombe Albion", mine: [3, 1], ft: [2, 0], k: "result" },
 ];
 const MY_POSTS = [
-  { net: "TikTok", m: "Film your Derby Day chant", when: "Aug", views: 61200, likes: 5380, comments: 212, shares: 340 },
-  { net: "Instagram", m: "Away end at Holbrook", when: "13 Sep", views: 8940, likes: 731, comments: 38, shares: 22 },
-  { net: "Instagram", m: "Kit launch: wear it, post it", when: "Aug", views: 12400, likes: 1120, comments: 64, shares: 41 },
+  { net: "Instagram", m: "Your matchday photo with the Weirbank car at The Weir", when: "Sep", views: 4860, likes: 412, comments: 17, shares: 24 },
+  { net: "Instagram", m: "Away end at Holbrook", when: "13 Sep", views: 1920, likes: 148, comments: 8, shares: 5 },
+  { net: "Instagram", m: "Kit launch: wear it, post it", when: "Aug", views: 2340, likes: 196, comments: 11, shares: 9 },
 ];
 const MY_LOG = [
   ["20 Sep", "Checked in at The Weir", 100], ["20 Sep", "Exact score v Tarrow Vale, 2–0", 150], ["13 Sep", "Photo: away end at Holbrook", 80],
@@ -2601,9 +2611,9 @@ const BADGES = [
   { id: "album", name: "Full album", glyph: "36", big: 1, bg: "#f0e2c4", fg: "#c9421b", how: "Complete the 2026/27 album.", prog: () => [state.owned.size, 36] },
   { id: "xi", name: "First XI", glyph: "XI", big: 1, bg: "#213550", fg: "#ffffff", how: "Eleven missions in one week.", prog: () => [Math.min(11, 4 + state.done.size), 11] },
   { id: "mate", name: "Bring a mate", glyph: "+1", big: 1, bg: "#c9421b", fg: "#f0e2c4", how: "Three mates join with your code and get their first mission approved.", prog: () => [1, 3] },
-  { id: "scarves", name: "Scarves up", glyph: "5", big: 1, bg: "#7d9ab6", fg: "#17263a", how: "Five photos approved by the club.", prog: () => [2 + (state.done.has("scarf") ? 1 : 0), 5] },
+  { id: "scarves", name: "Scarves up", glyph: "5", big: 1, bg: "#7d9ab6", fg: "#17263a", how: "Send five matchday photos.", prog: () => [2 + (state.done.has("scarf") ? 1 : 0), 5] },
   { id: "voice", name: "Terrace voice", glyph: "50", big: 1, bg: "#f0e2c4", fg: "#213550", how: "Fifty messages in The Terrace.", prog: () => [Math.min(50, 31 + state.chat.length), 50] },
-  { id: "top50", name: "Top 50", glyph: "50", big: 1, bg: "#ffd24d", fg: "#c9421b", how: `Finish the season in the top 50. The cut is ${fmt(TOP50_CUT)} XP today.`, prog: () => [Math.min(SP(), TOP50_CUT), TOP50_CUT] },
+  { id: "top50", name: "Top 50", glyph: "50", big: 1, bg: "#ffd24d", fg: "#c9421b", how: `Break into the top 50 of the league table. The cut is ${fmt(TOP50_CUT)} XP today.`, prog: () => [Math.min(SP(), TOP50_CUT), TOP50_CUT] },
   { id: "battle", name: "Battle won", glyph: "W", big: 1, bg: "#2f7d4f", fg: "#ffffff", how: "Be on the winning side of a team battle.", prog: () => [0, 1] },
   { id: "early", name: "Early bird", glyph: "13:00", bg: "#213550", fg: "#ffd24d", how: "Check in before 14:00 at five home matches.", prog: () => [3, 5] },
   { id: "screen", name: "Big screen", glyph: "HT", big: 1, bg: "#c9421b", fg: "#ffffff", how: "Your photo on the big screen at half-time.", prog: () => [0, 1] },
@@ -2623,9 +2633,9 @@ const dayLabel = (iso) => new Date(iso + "T12:00:00").toLocaleDateString("en-GB"
 const JOIN_RULES = { choose: "Members pick a side" };
 const COUNTS = { all: "All XP earned", checkins: "Home check-ins", missions: "XP from missions only" };
 const BATTLES = [
-  { id: "stands", name: "North Stand v Riverside End", a: { name: "North Stand", colour: "#c9421b", pts: 48210, members: 4126 }, b: { name: "Riverside End", colour: "#7d9ab6", pts: 45870, members: 3984 },
+  { id: "stands", name: "North Stand v Riverside End", a: { name: "North Stand", colour: "#c9421b", pts: 48210, members: 1236 }, b: { name: "Riverside End", colour: "#7d9ab6", pts: 45870, members: 1174 },
     start: isoDay(new Date(NOW.getFullYear(), NOW.getMonth(), 1)), end: isoDay(new Date(NOW.getFullYear(), NOW.getMonth() + 1, 0)), join: "choose", counts: "all", prize: "200 free seats on the away-day coach to Granby, for the winning stand", prizeLine: "The winning stand gets 200 free seats on the away-day coach to Granby." },
-  { id: "kits", name: "Home kit v Away kit", a: { name: "Home kit", colour: "#c9421b", pts: 39104, members: 3710 }, b: { name: "Away kit", colour: "#17263a", pts: 41322, members: 3655 },
+  { id: "kits", name: "Home kit v Away kit", a: { name: "Home kit", colour: "#c9421b", pts: 39104, members: 1102 }, b: { name: "Away kit", colour: "#17263a", pts: 41322, members: 1068 },
     start: isoDay(new Date(NOW.getFullYear(), NOW.getMonth() - 1, 1)), end: isoDay(new Date(NOW.getFullYear(), NOW.getMonth(), 0)), join: "choose", counts: "missions", prize: "A morning at the training ground for the top 10 on the winning side", prizeLine: "The top 10 on the winning side get a morning at the training ground.", past: 1 },
 ];
 const battleStatus = (b) => b.past ? "ended" : isoDay(NOW) < b.start ? "upcoming" : isoDay(NOW) > b.end ? "ended" : "live";
@@ -2666,13 +2676,15 @@ const state = {
   atab: {}, aresult: [2, 1], ascorer: "Dario Lenk", mult: { result: 2, exact: 3 }, picks: {}, scorer: null,
   ci: { opens: "13:00", closes: "ht", where: "The Weir, within 300 m of the ground" }, colours: null, mq: "", drawn: null, news: null, badgeFresh: null,
   answers: {}, featured: new Set(), spares: { "men-11": 2, "men-5": 1, "women-8": 1, "club-C2": 1 }, offer: null, swapsDone: 0, stab: "activity",
+  pending: 0, approved: new Set(),
   cpm: 7, rperiod: "season", rfrom: "", rto: "", rsponsor: "all", rsort: "value", psort: "views", rmore: false,
 };
 const word = () => state.word;
 const tierOf = (b) => [...TIERS].reverse().find((t) => b >= t.at);
 const nextTier = (b) => TIERS.find((t) => t.at > b);
-/* Season XP: what the table and the tiers count, back to 0 each season. state.balance is the points to spend:
-   every approved action adds the same amount to both, spending only lowers the points. */
+/* Season XP: what the table and the tiers count, back to 0 each season. state.balance is the points to spend, kept for good.
+   Sending a mission adds its XP at once; the same number of points follows once the post is approved (state.pending until then).
+   Spending only lowers the points. */
 const SP = () => 3480 + state.earned;
 const xpPts = (n) => `+${fmt(n)} XP · +${fmt(n)} ${word()}`;
 function myRank() {
@@ -2709,13 +2721,13 @@ function shell() {
     <button class="club-lockup" data-act="tab" data-tab="home">${crest()}<span class="club-word">Aldermoor<small>Athletic, the Kestrels</small></span></button>
     <nav class="rail-nav">${rail.map(([k, l]) => `<button data-act="tab" data-tab="${k}" ${state.tab === k ? 'aria-current="page"' : ""}>${icon(k === "profile" ? "user" : k)}${l}${k === "missions" ? `<span class="count">${openMissions().length}</span>` : ""}${k === "collection" && state.packs ? `<span class="count">${state.packs} pack</span>` : ""}</button>`).join("")}</nav>
     <div class="rail-foot">
-      <button class="rail-points" data-act="tab" data-tab="rewards" id="railPoints"><b data-balance class="num">${fmt(state.balance)}</b><span>${word()}</span></button>
+      <span class="pts-wrap pts-rail"><button class="rail-points" data-act="tab" data-tab="rewards" id="railPoints"><b data-balance class="num">${fmt(state.balance)}</b><span>${word()}</span></button>${pendDot()}</span>
       <button class="rail-me" data-act="tab" data-tab="profile"><span class="avatar">${initials(ME.name)}</span><span class="who"><b>${ME.name}</b><span>${tierOf(SP()).name}, member since ${ME.since}</span></span></button>
     </div>
   </aside>
   <header class="topbar">
     <button class="club-lockup" data-act="tab" data-tab="home">${crest()}<span class="club-word">Aldermoor<small>The Kestrels</small></span></button>
-    <button class="points-chip" data-act="tab" data-tab="rewards" id="chipPoints"><b data-balance class="num">${fmt(state.balance)}</b><span>${word()}</span></button>
+    <span class="pts-wrap pts-top"><button class="points-chip" data-act="tab" data-tab="rewards" id="chipPoints"><b data-balance class="num">${fmt(state.balance)}</b><span>${word()}</span></button>${pendDot()}</span>
     <button class="avatar" data-act="tab" data-tab="profile" aria-label="My club">${initials(ME.name)}</button>
   </header>
   <main class="view" id="view" tabindex="-1"></main>
@@ -2812,7 +2824,7 @@ function missionCard(m, i, opts = {}) {
       ${m.bonus && !done ? `<span class="card-bonus">${bonusOf(m).map((b) => `<span>${esc(b)}</span>`).join("")}</span>` : ""}
       ${done ? `<span class="card-done">${icon("check")}${!opts.past && m.type === "Prediction" && !(m.custom ? m.answer : state.result) ? "Locked in" : "Collected"}</span>` : ""}
     </span>
-    <span class="card-text"><span class="card-title">${esc(m.title)}</span><span class="card-meta">${esc(m.meta)}</span></span>
+    <span class="card-text"><span class="card-title">${esc(m.title)}</span><span class="card-meta">${esc(m.meta)}${m.soon ? soon() : ""}</span></span>
   </${tag}>`;
 }
 
@@ -2890,7 +2902,7 @@ function battleSheet(id) {
 }
 
 function sharedGoal() {
-  const have = 9412 + (state.checkedIn ? 1 : 0), goal = 12000;
+  const have = 8046 + (state.checkedIn ? 1 : 0), goal = 12000;
   const on = Math.round((have / goal) * 96);
   return `<div class="panel">
     <span class="panel-kicker">Shared goal, all members</span>
@@ -2938,7 +2950,7 @@ function giveaway() {
   return `<div class="panel giveaway">
     <div><span class="panel-kicker">Giveaway, draw on Friday at 18:00</span>
     <h3 class="panel-title">Walk out with the team at Matchday 11</h3>
-    <p class="panel-body" style="color:var(--ink-2)">For members' children aged 6 to 11. One entry per member, ${fmt(1384)} entries so far.</p></div>
+    <p class="panel-body" style="color:var(--ink-2)">For a member's child: walk out with the team before kick-off. One entry per member, ${fmt(412)} entries so far, three drawn at random.</p></div>
     <button class="btn ${state.entered ? "btn-ghost" : "btn-dark"}" data-act="enter" ${state.entered ? "disabled" : ""}>${state.entered ? `${icon("check")}You're in the draw` : `Enter for 200 ${word()}`}</button>
   </div>`;
 }
@@ -2966,7 +2978,7 @@ function screenCollection() {
   const pageHave = list.filter((s) => state.owned.has(s.id)).length;
   return `<div class="view-inner">
     <div class="album-head">
-      <header><h1 class="h-page">Collection</h1>
+      <header><h1 class="h-page">Collection ${soon("soon-h")}</h1>
         <div class="album-progress" style="margin-top:14px">
           <div class="tier-row"><span><b class="num">${have}</b> of ${total} stickers in the 2026/27 album</span><span class="meta">${Math.round((have / total) * 100)}%</span></div>
           <div class="bar"><span data-fill="${Math.round((have / total) * 100)}"></span></div>
@@ -3015,11 +3027,11 @@ function meCard() {
   const m = state.table;
   let rank, of, pts, move, next;
   if (m === "season") {
-    rank = myRank(); of = 18406; pts = SP(); move = "▲ 14 this week";
+    rank = myRank(); of = ACTIVE_90; pts = SP(); move = "▲ 14 this week";
     const above = NEAR.filter((n) => n[1] > SP()).slice(-1)[0];
     next = above ? [above[1] - SP() + 1, `to pass ${above[0]}`, SP() / (above[1] + 1)] : [TOP50_CUT - SP(), "to reach the top 50", SP() / TOP50_CUT];
   } else if (m === "month") {
-    pts = SP() - 3480 + 640; rank = pts > MONTH[4][1] ? MONTH.filter((r) => r[1] > pts).length + 1 : 96; of = 18406; move = "▲ 31 this week";
+    pts = SP() - 3480 + 640; rank = pts > MONTH[4][1] ? MONTH.filter((r) => r[1] > pts).length + 1 : 96; of = 2980; move = "▲ 31 this week";
     next = rank > 5 ? [MONTH[4][1] - pts + 1, "to reach the top 5 this month", pts / (MONTH[4][1] + 1)] : [0, "You're in the top 5 this month", 1];
   } else {
     rank = groupRank(); of = GROUP.length + 1; pts = SP(); move = "Private table";
@@ -3044,9 +3056,9 @@ function screenTable() {
   const m = state.table;
   const pod = m === "group" ? null : m === "month" ? MONTH : TOP;
   return `<div class="view-inner">
-    <header><h1 class="h-page">League table</h1><p class="lede">Ranked by XP earned in the 2026/27 season. ${fmt(18406)} members in the league.</p></header>
+    <header><h1 class="h-page">League table</h1><p class="lede">Ranked by XP earned in the 2026/27 season. ${fmt(ACTIVE_90)} members in the league.</p></header>
     ${meCard()}
-    <div class="chips" role="group" aria-label="Table">${[["season", "Season"], ["month", MONTH_NAME], ["group", "The Riverside lot"]].map(([k, l]) => `<button class="chip" data-act="tablemode" data-m="${k}" aria-pressed="${m === k}">${l}</button>`).join("")}</div>
+    <div class="chips" role="group" aria-label="Table">${[["season", "Season"], ["month", MONTH_NAME], ["group", "The Riverside lot"]].map(([k, l]) => `<button class="chip" data-act="tablemode" data-m="${k}" aria-pressed="${m === k}">${l}${k === "month" ? soon() : ""}</button>`).join("")}</div>
     <div class="table-wrap">
       <div class="sec">
         ${pod ? `<div class="podium">${[1, 0, 2].map((i) => `<div class="pod p${i + 1}"><span class="pos">${i + 1}</span><span class="avatar">${initials(pod[i][0])}</span><span class="who">${pod[i][0]}</span><span class="pts num">${fmt(pod[i][1])} <small>XP</small></span></div>`).join("")}</div>`
@@ -3059,7 +3071,7 @@ function screenTable() {
       <div class="sec">${liveBattles().map((b) => battle(b)).join("")}
         <div class="panel"><span class="panel-kicker">How the table works</span>
           <p class="panel-body" style="margin-top:8px">Played counts home matchdays you checked in at. Form shows the last five. The top 50 at the end of the season are invited to the end-of-season dinner with the squad.</p>
-          <p class="panel-body" style="margin-top:8px">Every approved mission earns the same number of XP and ${word()}. XP ranks you here and starts again at 0 next season; ${word()} are yours to spend in Rewards and never reset.</p></div>
+          <p class="panel-body" style="margin-top:8px">Sending a mission earns its XP straight away; the same number of ${word()} follow once the club approves your post. If the club turns a post down, its XP comes off again and you get a message saying why. XP ranks you here and starts again at 0 next season; ${word()} are yours to spend in Rewards and are kept for good. The season's final table is confirmed once every post has been checked.</p></div>
       </div>
     </div>
   </div>`;
@@ -3103,7 +3115,7 @@ function screenTerrace() {
         ${swapPanel()}
         <div class="panel"><span class="panel-kicker">Question from the club</span><h3 class="panel-title">Who should be Lenk's vice-captain this season?</h3>
           <div class="poll">${poll.map(([n, p]) => `<button data-act="poll" data-n="${n}" aria-pressed="${state.voted === n}" style="--fill:${state.voted ? p + (state.voted === n ? 1 : 0) : 0}%"><span>${n}</span>${state.voted ? `<span class="pc">${p + (state.voted === n ? 1 : 0)}%</span>` : ""}</button>`).join("")}</div>
-          <p class="note" style="margin-top:10px">${state.voted ? `${fmt(3211)} members voted. The manager reads the result on Friday.` : "Vote to see what other members think."}</p>
+          <p class="note" style="margin-top:10px">${state.voted ? `${fmt(1846)} members voted. The manager reads the result on Friday.` : "Vote to see what other members think."}</p>
         </div>
         ${sharedGoal()}
       </div>
@@ -3116,7 +3128,7 @@ const badgeIcon = (b) => badgeArt(badgeEarned(b) ? b : { ...b, ...LOCKED });
 function badgesSheet() {
   const got = BADGES.filter(badgeEarned), todo = BADGES.filter((b) => !badgeEarned(b))
     .map((b) => ({ b, p: b.prog() })).sort((x, y) => y.p[0] / y.p[1] - x.p[0] / x.p[1]);
-  openSheet(`<h2>Badges</h2><p class="note">${got.length} of ${BADGES.length} earned. Badges stay on your card for good, and the club can add new ones during the season.</p>
+  openSheet(`<h2>Badges</h2><p class="note">${got.length} of ${BADGES.length} earned. A badge is yours the moment you reach it, and stays on your card for good. The club can add new ones during the season.</p>
     <h3 class="h-sec" style="font-size:1.375rem">Earned</h3>
     <div class="badge-sheet-grid">${got.map((b) => `<div class="badge">${badgeArt(b)}<span>${b.name}</span></div>`).join("")}</div>
     <h3 class="h-sec" style="font-size:1.375rem">Still to earn, closest first</h3>
@@ -3456,7 +3468,7 @@ function homeArena() {
       <h1 class="ar-h1">${greeting()}, ${esc(ME.first)}.<br>Granby are coming.</h1>
       <div class="ar-board" role="group" aria-label="Scoreboard">
         <div class="ar-teams"><span class="ar-team">${crest()}<b>ALD</b></span><span class="ar-ko num">${state.matchday ? "15:00" : `${d}d ${String(h).padStart(2, "0")}h ${String(mi).padStart(2, "0")}m`}</span><span class="ar-team"><b>GRA</b>${rivalCrest()}</span></div>
-        <div class="ar-me"><span>Season XP</span><b class="num">${fmt(SP())}</b><span>${myRank()}th of ${fmt(18406)}</span></div>
+        <div class="ar-me"><span>Season XP</span><b class="num">${fmt(SP())}</b><span>${myRank()}th of ${fmt(ACTIVE_90)}</span></div>
       </div>
       <div class="ar-acts">${predictAction()}<button class="md-action" data-act="mission" data-id="checkin"><span class="ic">${icon(state.checkedIn ? "check" : "pin")}</span><span class="tx"><b>${state.checkedIn ? "Checked in" : "Check in at The Weir"}</b><span>${state.checkedIn ? "Enjoy the match" : "Opens 13:00 on matchday"}</span></span><span class="pts">${state.checkedIn ? "" : "+100"}</span></button></div>
     </section>
@@ -3598,9 +3610,27 @@ function countTo(from, to) {
   requestAnimationFrame(step);
 }
 
-function award(amount, fromEl, msg) {
+/* A mission that asks for a post: its XP now, its points once the post is approved. */
+function awardPending(m, fromEl, auto) {
+  state.pending += m.pts;
+  award(m.pts, fromEl, `+${fmt(m.pts)} XP now · ${fmt(m.pts)} ${word()} pending until it's approved`, true);
+  syncPending();
+  if (auto) setTimeout(() => approve(m), 5000);
+}
+function approve(m) {
+  if (state.approved.has(m.id)) return;
+  state.approved.add(m.id); state.pending = Math.max(0, state.pending - m.pts); syncPending();
+  const before = state.balance; state.balance += m.pts;
+  countTo(before, state.balance);
+  const target = [$("#chipPoints"), $("#railPoints")].find((el) => el && el.offsetParent !== null);
+  if (target) { target.classList.remove("bump"); void target.offsetWidth; target.classList.add("bump"); }
+  if (state.view === "member") { toast(`Your post is approved: +${fmt(m.pts)} ${word()}`); if ($("#sheetLayer").classList.contains("open") && $("#sheet .success")) missionSheet(m.id); }
+  else state.news = `Your post is approved: +${fmt(m.pts)} ${word()}`;
+}
+function award(amount, fromEl, msg, xpOnly) {
   const before = state.balance, beforeRank = myRank();
-  state.balance += amount; state.earned += amount;
+  if (!xpOnly) state.balance += amount;
+  state.earned += amount;
   const app = $("#app");
   const target = [$("#chipPoints"), $("#railPoints")].find((el) => el && el.offsetParent !== null);
   const finish = () => {
@@ -3609,7 +3639,7 @@ function award(amount, fromEl, msg) {
     const r = myRank();
     toast(msg || (r < beforeRank ? `${xpPts(amount)}. You climbed to ${ordinal(r)} in the table` : xpPts(amount)));
   };
-  if (reduceMotion || !fromEl || !target) return finish();
+  if (reduceMotion || !fromEl || !target || xpOnly) return finish();
   const a = app.getBoundingClientRect(), s = fromEl.getBoundingClientRect(), t = target.getBoundingClientRect();
   const fly = document.createElement("div"); fly.className = "fly num"; fly.textContent = `+${amount}`;
   app.appendChild(fly);
@@ -3644,11 +3674,11 @@ function missionSheet(id) {
   else if (id === "checkin") body = checkinBody();
   else if (m.share) body = shareBody(m);
   else if (id === "quiz") body = done ? doneBody(m) : `<p style="font-weight:700;font-size:1.0625rem">In which year did Aldermoor play their first match at The Weir?</p><div class="quiz">${["1911", "1923", "1937", "1958"].map((y) => `<button data-act="quiz" data-y="${y}">${y}</button>`).join("")}</div>`;
-  else if (id === "scarf") body = done ? `<div class="demo-hint">${icon("clock")}Sent to the club. Your XP and points land once it's checked, usually within a day.</div>` : `<ol class="steps"><li>Hold your scarf up, inside the ground or anywhere with a bit of Aldermoor in shot.</li><li>Choose the photo. The club checks it within a day.</li></ol><label class="btn btn-primary btn-block" for="scarfFile">${icon("plus")}Choose a photo</label><input id="scarfFile" type="file" accept="image/*" data-act="photo" hidden>`;
+  else if (id === "scarf") body = done ? `<div class="success"><span class="big num">+${m.pts}</span><span class="big-unit">XP now</span><p>Sent to the club. Your ${m.pts} ${word()} are pending until the club checks the photo, usually within a day.</p></div>` : `<ol class="steps"><li>Hold your scarf up, inside the ground or anywhere with a bit of Aldermoor in shot.</li><li>Choose the photo. The club checks it within a day.</li></ol><label class="btn btn-primary btn-block" for="scarfFile">${icon("plus")}Choose a photo</label><input id="scarfFile" type="file" accept="image/*" data-act="photo" hidden>`;
   else if (id === "potm") body = done ? doneBody(m) : `<div class="quiz">${["Ellis Varga", "Clara Voss", "Noé Castell", "Maya Achebe"].map((n) => `<button data-act="potm" data-n="${n}" style="font-size:1rem">${n}</button>`).join("")}</div>`;
   else if (id === "preview") body = done ? doneBody(m) : `<div class="matchday" style="aspect-ratio:16/9;justify-content:center;align-items:center"><button class="btn btn-flood" data-act="watch">Play the preview</button><div class="bar" style="width:70%;background:rgba(255,255,255,.15)" id="watchBar"><span data-fill="0" style="background:var(--flood)"></span></div></div>`;
   else if (id === "mate") body = `<div class="ref-code" style="justify-content:center"><code>AAFC-JESS-17</code><button class="btn btn-ghost btn-sm" data-act="copy" data-t="AAFC-JESS-17">${icon("copy")}Copy code</button></div><p class="note" style="text-align:center">Points arrive when your mate's first mission is approved.</p>`;
-  openSheet(`${id === "predict" || id === "checkin" ? "" : `<div class="sheet-card">${missionCard(m, 0, { still: true })}</div>`}<h2>${esc(m.title)}</h2>${m.sponsor ? `<p class="presented">With ${esc(m.sponsor)}</p>` : ""}<p class="note">${esc(m.brief)}</p>${body}`);
+  openSheet(`${id === "predict" || id === "checkin" ? "" : `<div class="sheet-card">${missionCard(m, 0, { still: true })}</div>`}<h2>${esc(m.title)}${m.soon ? soon("soon-h") : ""}</h2>${m.sponsor ? `<p class="presented">With ${esc(m.sponsor)}</p>` : ""}<p class="note">${esc(m.brief)}</p>${body}`);
 }
 function outcomeHtml(kind, pts) {
   return kind === "miss" ? `<div class="outcome miss"><b>+${pts}</b><span>Not this time. You keep the XP and points for playing.</span></div>`
@@ -3670,13 +3700,14 @@ function customBody(m) {
     if (settled) return list + outcomeHtml(settled === "right" ? "right" : "miss", settled === "right" ? m.pts * (m.mult || 2) : m.pts);
     return list + `<p class="note">Locked in. ${esc(bonusOf(m).join(", "))}: the bonus lands when the club confirms the answer.</p>`;
   }
+  if (done && (m.type === "Photo" || m.type === "Social post")) return `<div class="success"><span class="big num">+${m.pts}</span><span class="big-unit">${state.approved.has(m.id) ? `XP · ${word()}` : "XP now"}</span><p>${state.approved.has(m.id) ? `Approved. Your ${m.pts} ${word()} are in.` : `Sent. Your ${m.pts} ${word()} are pending until the club approves it.`}</p></div>`;
   if (done) return doneBody(m);
   if (m.type === "Photo") return `<label class="btn btn-primary btn-block" for="cFile">${icon("plus")}Choose a photo</label><input id="cFile" type="file" accept="image/*" data-act="cphoto" data-id="${m.id}" hidden>`;
   if (m.type === "Referral") return `<div class="ref-code" style="justify-content:center"><code>AAFC-JESS-17</code><button class="btn btn-ghost btn-sm" data-act="copy" data-t="AAFC-JESS-17">${icon("copy")}Copy code</button></div>`;
   return `<button class="btn btn-primary btn-block" data-act="cdone" data-id="${m.id}">${m.type === "Social post" ? "I've posted it" : m.type === "Video" ? "Watch now" : "Done"}</button>${m.type === "Social post" ? `<p class="note">Your linked account confirms the post on its own.</p>` : ""}`;
 }
 function shareBody(m) {
-  if (state.done.has(m.id)) return `<div class="success"><span class="big num">+${m.pts}</span><span class="big-unit">XP · ${word()}</span><p>Linked. Your account confirms the post on its own${m.id === "post" ? ", and the 100 bonus XP and points land if it passes 5,000 views." : "."}</p></div>`;
+  if (state.done.has(m.id)) return `<div class="success"><span class="big num">+${m.pts}</span><span class="big-unit">${state.approved.has(m.id) ? `XP · ${word()}` : "XP now"}</span><p>${state.approved.has(m.id) ? `Approved. Your ${m.pts} ${word()} are in` : `Sent. Your ${m.pts} ${word()} are pending until your linked account confirms the post`}${m.id === "post" ? ", and 100 bonus XP and points follow if it passes 5,000 views." : "."}</p></div>`;
   return `<ol class="steps">${m.steps.map((s) => `<li>${esc(s)}</li>`).join("")}</ol>
     <div class="tag-copy">${m.tags.map((t) => `<button class="btn btn-ghost btn-sm" data-act="copy" data-t="${esc(t)}">${icon("copy")}${esc(t)}</button>`).join("")}</div>
     <button class="btn btn-primary btn-block" data-act="cdone" data-id="${m.id}">I've posted it</button>
@@ -3691,7 +3722,7 @@ function predictBody() {
     const dist = [["2–1", 31], ["1–0", 18], ["2–0", 14], ["1–1", 12], ["3–1", 9]];
     const mine = `${h}–${a}`;
     return `<div class="score"><div class="score-side">${crest()}<b>Aldermoor</b></div><div class="stepper"><output>${h}</output><span class="score-dash">–</span><output>${a}</output></div><div class="score-side">${rivalCrest()}<b>Granby</b></div></div>
-      <p style="font-weight:700">Locked in. Here's what ${fmt(6140)} members said so far.</p>
+      <p style="font-weight:700">Locked in. Here's what ${fmt(2870)} members said so far.</p>
       <div class="dist">${dist.map(([s, p]) => `<div class="dist-row ${s === mine ? "mine" : ""}"><b>${s}</b><div class="bar"><span data-fill="${p}"></span></div><span class="r">${p}%</span></div>`).join("")}</div>
       ${state.result ? outcomeHtml(state.settled.mine, 50 * { exact: state.mult.exact, result: state.mult.result, miss: 1 }[state.settled.mine]) : `<div class="rules"><div><b>50</b><span>for playing, paid now</span></div><div><b>${50 * state.mult.result}</b><span>right result, ×${state.mult.result}</span></div><div class="hot"><b>${50 * state.mult.exact}</b><span>exact score, ×${state.mult.exact}</span></div></div><p class="note">The bonus lands as soon as the club confirms the full-time score.</p>`}`;
   }
@@ -3814,6 +3845,7 @@ document.addEventListener("click", (e) => {
   const act = el.dataset.act;
   switch (act) {
     case "tab": closeSheet(); state.tab = el.dataset.tab; renderMember(); break;
+    case "pending": toast(pendLabel()); break;
     case "flip": el.setAttribute("aria-pressed", el.getAttribute("aria-pressed") === "true" ? "false" : "true"); break;
     case "mission": missionSheet(el.dataset.id); break;
     case "close": closeSheet(); break;
@@ -3966,7 +3998,7 @@ document.addEventListener("click", (e) => {
     case "rmission": missionDetail(el.dataset.id); break;
     case "rsponsor": state.rsponsor = el.dataset.s; state.atab.results = 1; renderAdmin(); $("#adm-main").scrollTop = 0; break;
     case "rcsv": resultsCSV(el); break;
-    case "cdone": { const m = MISSIONS.find((x) => x.id === el.dataset.id); state.done.add(m.id); missionSheet(m.id); award(m.pts, $("#sheet .success")); renderMember(false); break; }
+    case "cdone": { const m = MISSIONS.find((x) => x.id === el.dataset.id); state.done.add(m.id); missionSheet(m.id); if (m.share || m.type === "Social post") awardPending(m, $("#sheet .success"), true); else award(m.pts, $("#sheet .success")); renderMember(false); break; }
     case "enter": {
       if (state.balance < 200) return;
       const before = state.balance; state.balance -= 200; state.entered = true; countTo(before, state.balance);
@@ -4062,11 +4094,11 @@ document.addEventListener("change", (e) => {
   if (t.id === "styleSel") { setStyle(t.value); if (state.view !== "member") setView("member"); return; }
   if (t.matches('[data-act="photo"]') && t.files.length) {
     state.done.add("scarf");
-    missionSheet("scarf"); renderMember(false); toast("Photo sent to the club");
+    missionSheet("scarf"); awardPending(MISSIONS.find((x) => x.id === "scarf"), $("#sheet .success")); renderMember(false);
   }
   if (t.dataset.act === "cphoto" && t.files.length) {
     const m = MISSIONS.find((x) => x.id === t.dataset.id);
-    state.done.add(m.id); missionSheet(m.id); renderMember(false); toast("Photo sent to the club");
+    state.done.add(m.id); missionSheet(m.id); awardPending(m, $("#sheet .success")); renderMember(false);
   }
   if (state.draft && t.type === "file" && t.files.length) {
     const file = t.files[0];
@@ -4158,28 +4190,29 @@ setInterval(() => {
 }, 20000);
 
 /* Club admin: the neutral FAN/IP interface, with the club's crest only. */
-const WEEKS = [3860, 4130, 5110, 4380, 5840, 4640, 6230, 5190, 6560, 5580, 7120, 5950, 7740];
+const WEEKS = [1320, 1410, 1750, 1500, 2000, 1590, 2130, 1780, 2240, 1910, 2440, 2040, 2650];
+const CHART_MAX = 3000;
 const MATCH_WEEKS = new Set([2, 4, 6, 8, 10, 12]);
 
 const NARROW_CHART = window.matchMedia("(max-width: 560px)");
 const chartW = () => (NARROW_CHART.matches ? 340 : 640); /* phones: a narrower drawing, so the type stays readable */
 function chartSVG(shade) {
   const W = chartW(), H = 220, L = 44, R = 16, T = 14, B = 30;
-  const max = 10000;
+  const max = CHART_MAX;
   const x = (i) => L + (i * (W - L - R)) / (WEEKS.length - 1);
   const y = (v) => T + (1 - v / max) * (H - T - B);
   const line = WEEKS.map((v, i) => `${i ? "L" : "M"}${x(i).toFixed(1)} ${y(v).toFixed(1)}`).join("");
   const area = `${line}L${x(WEEKS.length - 1)} ${y(0)}L${x(0)} ${y(0)}Z`;
-  const grid = [0, 2500, 5000, 7500, 10000].map((v) => `<line x1="${L}" x2="${W - R}" y1="${y(v)}" y2="${y(v)}" stroke="#e3e5ea"/><text x="${L - 8}" y="${y(v) + 4}" text-anchor="end" font-size="11" fill="#5b606b">${v ? v / 1000 + "k" : "0"}</text>`).join("");
+  const grid = [0, 1000, 2000, 3000].map((v) => `<line x1="${L}" x2="${W - R}" y1="${y(v)}" y2="${y(v)}" stroke="#e3e5ea"/><text x="${L - 8}" y="${y(v) + 4}" text-anchor="end" font-size="11" fill="#5b606b">${v ? v / 1000 + "k" : "0"}</text>`).join("");
   const xl = WEEKS.map((_, i) => (i % (W < 400 ? 4 : 2) === 0 ? `<text x="${x(i)}" y="${H - 8}" text-anchor="middle" font-size="11" fill="#5b606b">Wk ${i + 1}</text>` : "")).join("");
   const last = WEEKS.length - 1;
-  return `<svg viewBox="0 0 ${W} ${H}" role="img" text-rendering="geometricPrecision" style="letter-spacing:0;white-space:nowrap" aria-label="Weekly active members, season weeks 1 to 13, rising from 3,860 to 7,740">
+  return `<svg viewBox="0 0 ${W} ${H}" role="img" text-rendering="geometricPrecision" style="letter-spacing:0;white-space:nowrap" aria-label="Members who sent a mission each week, season weeks 1 to 13, rising from 1,320 to 2,650">
     ${shade ? `<rect x="${x(shade[0]) - 8}" y="${T}" width="${x(shade[1]) - x(shade[0]) + 16}" height="${H - T - B}" rx="4" fill="#c9421b" fill-opacity=".08"/>` : ""}${grid}${xl}
     <path d="${area}" fill="#1d1f24" fill-opacity=".06"/>
     <path d="${line}" fill="none" stroke="#1d1f24" stroke-width="2" stroke-linejoin="round"/>
     ${[...MATCH_WEEKS].map((i) => `<circle cx="${x(i)}" cy="${y(WEEKS[i])}" r="3" fill="#1d1f24"/>`).join("")}
     <circle cx="${x(last)}" cy="${y(WEEKS[last])}" r="5" fill="#1d1f24" stroke="#fff" stroke-width="2"/>
-    <text x="${x(last) - 8}" y="${y(WEEKS[last]) - 10}" text-anchor="end" font-size="12" font-weight="600" fill="#1d1f24">7,740</text>
+    <text x="${x(last) - 8}" y="${y(WEEKS[last]) - 10}" text-anchor="end" font-size="12" font-weight="600" fill="#1d1f24">2,650</text>
     <line id="chX" x1="0" x2="0" y1="${T}" y2="${H - B}" stroke="#1d1f24" stroke-opacity=".25" opacity="0"/>
     <rect x="${L}" y="${T}" width="${W - L - R}" height="${H - T - B}" fill="transparent" id="chHit"/>
   </svg><div class="tip" id="chTip"></div>`;
@@ -4194,9 +4227,9 @@ function bindChart() {
     const px = ((e.clientX - r.left) / r.width) * W;
     const i = Math.max(0, Math.min(WEEKS.length - 1, Math.round(((px - L) / (W - L - R)) * (WEEKS.length - 1))));
     const cx = L + (i * (W - L - R)) / (WEEKS.length - 1);
-    const cy = T + (1 - WEEKS[i] / 16000) * (H - T - B);
+    const cy = T + (1 - WEEKS[i] / CHART_MAX) * (H - T - B);
     xl.setAttribute("x1", cx); xl.setAttribute("x2", cx); xl.setAttribute("opacity", 1);
-    tip.innerHTML = `<b>Week ${i + 1}</b>, ${WEEKS[i].toLocaleString("en-GB")} active${MATCH_WEEKS.has(i) ? ", home match" : ""}`;
+    tip.innerHTML = `<b>Week ${i + 1}</b>, ${WEEKS[i].toLocaleString("en-GB")} members sent a mission${MATCH_WEEKS.has(i) ? ", home match" : ""}`;
     tip.style.left = (cx / W) * 100 + "%"; tip.style.top = (cy / H) * r.height + "px"; tip.style.opacity = 1;
   });
   hit.addEventListener("pointerleave", () => { tip.style.opacity = 0; xl.setAttribute("opacity", 0); });
@@ -4291,12 +4324,13 @@ function crestImage(colour) {
 }
 
 /* ---------------------------------------------------------------- Today */
+const SEASON_T = () => rTotals(RM.map(rmStats));
 function admToday() {
   const kpis = [
-    ["Earned media value, season", eur(rTotals(1).value), `46.1M views on members' posts, at a ${cpmLabel()} CPM`],
-    ["Active members this month", "9,300", "+16% on last month"],
-    ["Home check-ins this season", "9,412", "78% of the Fill The Weir goal"],
-    ["Missions completed this week", "41,280", "+9% on last week"],
+    ["Earned media value, season", eur(SEASON_T().value), `${big(SEASON_T().views)} views on members' posts, at a ${cpmLabel()} CPM`],
+    ["Active members (last 90 days)", fmt(ACTIVE_90), "Sent at least one mission"],
+    ["Home check-ins this season", "8,046", "67% of the Fill The Weir goal"],
+    ["Missions completed this week", "6,480", "+9% on last week"],
   ];
   const plan = [
     ["09:00", "Push: prediction reminder", "Members who haven't predicted yet"],
@@ -4316,7 +4350,7 @@ function admToday() {
   return admHead("Today", "Aldermoor Athletic, season 2026/27. Illustrative figures.", `<button class="adm-btn primary" data-act="newMission">${icon("plus")}New mission</button>`) + `
     <div class="kpis">${kpis.map(([l, v, s]) => `<div class="kpi"><span>${l}</span><b>${v}</b><small>${s}</small></div>`).join("")}</div>
     <div class="adm-grid">
-      <div class="acard"><h2>Weekly active members</h2><p class="sub">Dots mark home matchdays</p><div class="chart">${chartSVG()}</div></div>
+      <div class="acard"><h2>Members who sent a mission, each week</h2><p class="sub">Dots mark home matchdays</p><div class="chart">${chartSVG()}</div></div>
       <div class="acard"><h2>Saturday, Matchday 9</h2><p class="sub">Runs on its own once scheduled</p>
         <ol class="timeline">${plan.map(([t, b, s]) => `<li><time>${t}</time><span class="dot"></span><span class="tl"><b>${b}</b><span>${s}</span></span></li>`).join("")}</ol></div>
     </div>
@@ -4329,7 +4363,7 @@ const EXTRA_ROWS = [
   { title: "Away end at Granby", type: "Photo", pts: 80, when: "Sat 18 Oct", status: "sched" },
   { title: "Christmas jumper day", type: "Photo", pts: 60, when: "Draft", status: "draft" },
 ];
-const FAKE_DONE = { post: 1860, story: 1310, scarf: 1420, predict: 6140, scorer: 4302, checkin: 0, first: 1278, preview: 4870, mate: 212 };
+const FAKE_DONE = { post: 920, story: 560, scarf: 700, predict: 2870, scorer: 2140, checkin: 0, first: 1036, preview: 1980, mate: 96 };
 function admMissions() {
   const tab = state.atab.missions || 0;
   const head = admHead("Missions", "Everything members do to earn XP and points. One button creates every type.", `<button class="adm-btn primary" data-act="newMission">${icon("plus")}New mission</button>`) + admTabs("missions");
@@ -4443,7 +4477,7 @@ function admPredictions() {
         <div class="side">${crest()}<b>Aldermoor</b><div class="ascore"><button data-act="ascore" data-s="0" data-d="-1" aria-label="One less" ${res ? "disabled" : ""}>−</button><output>${res ? res[0] : h}</output><button data-act="ascore" data-s="0" data-d="1" aria-label="One more" ${res ? "disabled" : ""}>+</button></div></div>
         <div class="side">${rivalCrest()}<b>Granby Rovers</b><div class="ascore"><button data-act="ascore" data-s="1" data-d="-1" aria-label="One less" ${res ? "disabled" : ""}>−</button><output>${res ? res[1] : a}</output><button data-act="ascore" data-s="1" data-d="1" aria-label="One more" ${res ? "disabled" : ""}>+</button></div></div>
       </div>
-      <div class="adm-row" style="margin-top:12px">${fld("First Aldermoor scorer", res ? `<input value="${esc(state.scorer)}" disabled>` : sel("ascorer", scorers.map((x) => [x, x]), state.ascorer))}
+      <div class="adm-row" style="margin-top:12px">${fld("First Aldermoor scorer " + soon(), res ? `<input value="${esc(state.scorer)}" disabled>` : sel("ascorer", scorers.map((x) => [x, x]), state.ascorer))}
         <div class="afield"><span>&nbsp;</span>${res ? `<button class="adm-btn" data-act="resetResult">Correct the result</button>` : `<button class="adm-btn primary" data-act="settle">${icon("whistle")}Confirm full time</button>`}</div></div>
       ${st ? `<div class="settle"><div><b>${fmt(st.total)}</b><span>predictions settled</span></div><div><b>${fmt(st.exact)}</b><span>exact score, ×${state.mult.exact}</span></div><div><b>${fmt(st.right)}</b><span>right result, ×${state.mult.result}</span></div><div><b>${fmt(st.paid)}</b><span>XP and ${word()} paid</span></div></div>
         <div class="callout ok" style="margin-top:12px">Members got a push with their XP and points. ${state.predicted ? `Jess Calloway said ${state.predicted[0]}–${state.predicted[1]}: ${{ exact: "exact score", result: "right result", miss: "missed" }[state.settled.mine]}.` : ""}</div>` : ""}
@@ -4494,7 +4528,7 @@ function admCheckins() {
       <div class="qr-box"><div class="qr">${qrSVG(checkinURL())}</div>
         <div style="display:grid;gap:8px;min-width:0;flex:1">
           <span class="st ${open ? "live" : "sched"}" style="justify-self:start">${open ? "Open now" : `Opens ${state.ci.opens} on ${KO_LABEL}`}</span>
-          <b style="font-family:var(--fx-display);font-weight:600;font-size:1.75rem;font-variant-numeric:tabular-nums">${open ? fmt(3912 + (state.checkedIn ? 1 : 0)) : "0"}</b><span class="sub" style="margin:0">checked in so far</span>
+          <b style="font-family:var(--fx-display);font-weight:600;font-size:1.75rem;font-variant-numeric:tabular-nums">${open ? fmt(1612 + (state.checkedIn ? 1 : 0)) : "0"}</b><span class="sub" style="margin:0">checked in so far</span>
           <div class="adm-actions"><button class="adm-btn" data-act="qrpng">${icon("download")}Download the QR code</button>${open ? "" : `<button class="adm-btn" data-act="openCheckin">Open check-in now</button>`}</div>
         </div></div></div>
     <div class="acard"><h2>Rules</h2><p class="sub">Set once, used for every home match</p>
@@ -4508,14 +4542,14 @@ function admCheckins() {
 }
 
 /* ---------------------------------------------------------------- Rewards */
-const REDEEMED = { wall: 1982, scarf: 412, shop: 1310, film: 655, pen: 9, coach: 36, pass: 4, shirt: 7, train: 2 };
+const REDEEMED = { wall: 740, scarf: 152, shop: 486, film: 238, pen: 9, coach: 36, pass: 4, shirt: 7, train: 2 };
 function admRewards() {
   const kindL = (r) => r.kind === "digital" ? `Digital: ${{ download: "file", code: "code", unlock: "film or link" }[r.delivery]}` : r.kind === "physical" ? (r.delivery === "post" ? "Posted" : "Collect at the shop") : "Experience";
   return admHead("Rewards", "What members win or swap their points for.", `<button class="adm-btn primary" data-act="newReward">${icon("plus")}New reward</button>`) + `
     <div class="acard scroll-x"><table class="atable"><thead><tr><th>Reward</th><th>Kind</th><th class="r">Cost</th><th class="r">Stock</th><th class="r">Redeemed</th><th>Delivery</th></tr></thead>
     <tbody>${REWARDS.map((r) => `<tr class="${r.fresh ? "fresh" : ""}"><td class="wrap">${esc(r.title)}</td><td>${kindL(r)}</td><td class="r">${fmt(r.cost)}</td><td class="r">${r.stock == null ? "Unlimited" : r.stock}</td><td class="r">${fmt((REDEEMED[r.id] || 0) + ORDERS.filter((o) => o.me && o.rid === r.id).length)}</td><td>${r.kind === "digital" ? `<span class="st live">Instant</span>` : `<button class="adm-link" data-act="adm" data-p="wins">Winners & deliveries</button>`}</td></tr>`).join("")}</tbody></table></div>
     <div class="adm-grid">
-      <div class="acard"><h2>Giveaway: walk out with the team at Matchday 11</h2><p class="sub">For members' children aged 6 to 11. One entry per member, 200 ${word()}. ${fmt(1384 + (state.entered ? 1 : 0))} entries.</p>
+      <div class="acard"><h2>Giveaway: walk out with the team at Matchday 11</h2><p class="sub">For a member's child: walk out with the team before kick-off. One entry per member, 200 ${word()}. ${fmt(412 + (state.entered ? 1 : 0))} entries; three are drawn at random.</p>
         ${state.drawn ? `<div class="callout ok" style="margin-top:12px">Drawn: ${state.drawn.join(", ")}. They are in Winners & deliveries.</div>` : `<div class="adm-actions" style="margin-top:12px"><button class="adm-btn primary" data-act="draw">Draw 3 winners now</button></div>`}</div>
       <div class="acard"><h2>How digital rewards work</h2><p class="sub">Members get the file, the code or the film the moment they redeem. Nothing to send, and the delivery is logged in Winners & deliveries.</p></div>
     </div>`;
@@ -4565,7 +4599,7 @@ function admWins() {
       <div class="kpi"><span>To prepare or book</span><b>${n("prep")}</b><small style="color:var(--fx-ink-2)">Oldest from 29 Sep</small></div>
       <div class="kpi"><span>On the way</span><b>${n("way")}</b><small style="color:var(--fx-ink-2)">Posted, ready or booked</small></div>
       <div class="kpi"><span>Delivered this season</span><b>${fmt(131 + n("done"))}</b><small>Physical and experiences</small></div>
-      <div class="kpi"><span>Digital, delivered instantly</span><b>${fmt(3947 + ORDERS.filter((o) => o.status === "Delivered instantly").length)}</b><small>Files, codes and films</small></div>
+      <div class="kpi"><span>Digital, delivered instantly</span><b>${fmt(1464 + ORDERS.filter((o) => o.status === "Delivered instantly").length)}</b><small>Files, codes and films</small></div>
     </div>
     <div class="acard">
       <div class="opt-row">${[["all", "All"], ["prep", "To prepare"], ["way", "On the way"], ["done", "Done"]].map(([k, l]) => `<button class="opt" data-act="olist" data-f="${k}" aria-pressed="${f === k}">${l}</button>`).join("")}</div>
@@ -4587,8 +4621,8 @@ function admSeason() {
   const btn = tab === 0 ? `<button class="adm-btn primary" data-act="newBattle">${icon("plus")}New team battle</button>` : tab === 1 ? `<button class="adm-btn primary" data-act="newCard">${icon("plus")}Add a card</button>` : "";
   const head = admHead("Season", "What you set once a season. Each part shows only if its module is on.", btn) + admTabs("season");
   if (tab === 1) return head + admCollection();
-  if (tab === 2) return head + `<div class="acard"><h2>League table</h2><p class="sub">Members are ranked by XP earned this season. Every approved action earns the same number of XP and ${word()}.</p>
-    <dl class="bs-words" style="margin-top:14px"><dt>Season</dt><dd>1 Aug to 31 May, XP back to 0 on 1 August</dd><dt>${word().replace(/^./, (c) => c.toUpperCase())}</dt><dd>Never reset, spent in Rewards</dd><dt>Monthly table</dt><dd>On, resets on the 1st</dd><dt>Private groups</dt><dd>On, up to 12 members each</dd><dt>End of season</dt><dd>Top 50 invited to the dinner with the squad</dd><dt>Tiers</dt><dd>Academy 0, First team 2,000, Captain 5,000, Club legend 10,000 XP</dd></dl></div>`;
+  if (tab === 2) return head + `<div class="acard"><h2>League table</h2><p class="sub">Members are ranked by XP earned this season. Sending a mission earns its XP at once; the same number of ${word()} follow when the post is approved. If a post is turned down, its XP comes off again and the member gets a message with your reason. The final table is confirmed once every post of the season has been checked.</p>
+    <dl class="bs-words" style="margin-top:14px"><dt>Season</dt><dd>1 Aug to 31 May, XP back to 0 on 1 August</dd><dt>${word().replace(/^./, (c) => c.toUpperCase())}</dt><dd>Kept for good, spent in Rewards</dd><dt>Monthly table</dt><dd>On, resets on the 1st ${soon()}</dd><dt>Private groups</dt><dd>On, up to 12 members each</dd><dt>End of season</dt><dd>Top 50 invited to the dinner with the squad</dd><dt>Tiers</dt><dd>Academy 0, First team 2,000, Captain 5,000, Club legend 10,000 XP</dd></dl></div>`;
   const stl = { live: ["live", "Live"], upcoming: ["sched", "Starts " ], ended: ["draft", "Ended"] };
   return head + `<div class="acard scroll-x"><table class="atable"><thead><tr><th>Battle</th><th>Teams and score</th><th>Dates</th><th>How members join</th><th>Counts</th><th>Status</th></tr></thead>
     <tbody>${BATTLES.map((b) => { const s = battleStatus(b); return `<tr class="${b.fresh ? "fresh" : ""}"><td class="wrap"><b style="font-weight:500">${esc(b.name)}</b><br><span class="sub">${esc(b.prize)}</span></td>
@@ -4627,7 +4661,7 @@ function createBattle() {
 function admCollection() {
   const pages = Object.entries(ALBUM).filter(([, l]) => l.length);
   return `<div class="adm-grid">
-    <div class="acard"><h2>2026/27 album</h2><p class="sub">${albumTotal()} cards. Members get a pack of 3 at every home check-in. Doubles trade in for 10 XP and 10 ${word()}.</p>
+    <div class="acard"><h2>2026/27 album ${soon()}</h2><p class="sub">${albumTotal()} cards. Members get a pack of 3 at every home check-in. Doubles trade in for 10 XP and 10 ${word()}.</p>
       <div class="album-pages">${pages.map(([k, l]) => `<div><b>${PAGE_NAMES[k]}</b><span>${l.length} cards</span></div>`).join("")}</div>
       ${ALBUM.specials.length ? `<div class="card-strip">${ALBUM.specials.map((s) => `<div class="sticker has">${stickerArt(s, "specials")}</div>`).join("")}</div>` : ""}</div>
     <div class="acard"><div class="module" style="padding:0;border:0"><span class="mi">${icon("collection")}</span><span><b>Club-designed cards</b><span>Optional. Upload your own designs</span></span><button class="toggle" role="switch" aria-checked="true" aria-label="Club-designed cards" data-act="module" data-n="Club-designed cards"></button></div>
@@ -4684,7 +4718,7 @@ function admMembers() {
   const all = [...TOP.map((r) => [r[0], r[1], r[3]]), ...NEAR.map((r) => [r[0], r[1], r[2]]), [ME.name, SP(), state.checkedIn ? 8 : 7]].sort((a, b) => b[1] - a[1]);
   const q = (state.mq || "").toLowerCase();
   const rows = all.filter((r) => r[0].toLowerCase().includes(q));
-  return admHead("Members", `${fmt(18406)} members in total. Search, message or adjust points.`) + `
+  return admHead("Members", `${fmt(7350)} members in total, ${fmt(ACTIVE_90)} active in the last 90 days. Search, message or adjust points.`) + `
     <div class="acard"><div class="afield" style="max-width:320px"><input name="mq" value="${esc(state.mq || "")}" placeholder="Search by name" aria-label="Search members"></div>
     <div class="scroll-x"><table class="atable"><thead><tr><th>Member</th><th>Tier</th><th class="r">Season XP</th><th class="r">Matchdays</th><th>Last seen</th></tr></thead>
     <tbody>${rows.map((r, i) => `<tr><td><span class="who"><i>${initials(r[0])}</i>${esc(r[0])}${r[0] === ME.name ? ` <span class="sub">${ME.handle}</span>` : ""}</span></td><td>${tierOf(r[1]).name}</td><td class="r">${fmt(r[1])}</td><td class="r">${r[2]} of 8</td><td>${["Today", "Today", "Yesterday", "2 days ago"][i % 4]}</td></tr>`).join("")}</tbody></table></div></div>`;
@@ -4739,30 +4773,45 @@ function cpmBox() {
     <small>The CPM: what 1,000 views cost in paid social. €7 is a usual price for sport. Change it to the rate you pay and every value on this page follows.</small></div>`;
 }
 const pct = (a, b) => b ? (a / b * 100).toFixed(1) + "%" : "–";
-/* network, posts, views, like rate, comment rate, share rate (season so far) */
-const NETS = [["Instagram", 3150, 23.8e6, 0.074, 0.0042, 0.0051], ["TikTok", 1860, 17.6e6, 0.088, 0.0036, 0.0064], ["YouTube Shorts", 1402, 4.7e6, 0.041, 0.0021, 0.0017]];
 const SPONSOR_LOOK = { "Weirbank Motors": ["WM", "#17263a", "#ffd24d"], "Corran Lane Bakery": ["CL", "#f0e2c4", "#a33213"] };
-/* Missions with their totals. ago = days since it started. net = share of views per network. */
+/* Missions with their totals. ago = days since it started. net = share of posts and views per network (Instagram, TikTok, YouTube Shorts).
+   Every total on the Results pages is the sum of these rows, so missions, networks, periods and sponsors always add up.
+   Views a post stay between 900 and 1,500. */
 const RM = [
-  { id: "post", title: "Post your matchday photo, tag @aldermoor and @weirbankmotors", type: "Social post", sponsor: "Weirbank Motors", ago: 1, done: 1860, seen: 12210, posts: 1860, views: 1.71e6, nm: 118, er: 1.15, net: [0.55, 0.38, 0.07] },
-  { id: "story", title: "Share a story from the stands", type: "Story", ago: 1, done: 1310, seen: 11480, posts: 1310, views: 1.31e6, nm: 41, net: [0.72, 0.24, 0.04] },
-  { id: "scarf", title: "Scarves up: show us yours", type: "Photo", sponsor: "Weirbank Motors", ago: 3, done: 1420, seen: 12940, posts: 1180, views: 2.94e6, nm: 214, er: 1.1, net: [0.62, 0.27, 0.11] },
-  { id: "first", title: "Your first match at The Weir", type: "Open question", ago: 2, done: 1278, seen: 9310, posts: 0, views: 0, nm: 0, extra: () => [["Answers featured", String(ANSWER_BASE.first.featured + ANSWERS.filter((a) => a.mid === "first" && a.status === "featured").length)], ["Average answer", "38 words"]] },
-  { id: "predict", title: "Predict the score v Granby Rovers", type: "Prediction", ago: 4, done: 6140, seen: 15020, posts: 820, views: 1.12e6, nm: 61, net: [0.48, 0.38, 0.14] },
-  { id: "quiz", title: "The Weir history quiz", type: "Quiz", sponsor: "Corran Lane Bakery", ago: 9, done: 5233, seen: 13480, posts: 0, views: 0, nm: 0, extra: [["Right first time", "64%"], ["Average time", "21 s"]] },
-  { id: "md8", title: "Matchday 8 check-in", type: "Check-in", ago: 12, done: 3804, seen: 14100, posts: 960, views: 2.31e6, nm: 88 },
-  { id: "away", title: "Away end at Holbrook", type: "Photo", ago: 19, done: 640, seen: 8820, posts: 590, views: 1.86e6, nm: 97 },
-  { id: "kit", title: "New home kit quiz", type: "Quiz", ago: 21, done: 4911, seen: 12650, posts: 0, views: 0, nm: 0, extra: [["Right first time", "71%"]] },
-  { id: "chant", title: "Film your Derby Day chant", type: "Social post", sponsor: "Weirbank Motors", ago: 36, done: 2150, seen: 11870, posts: 2150, views: 9.42e6, nm: 512, er: 1.25, net: [0.31, 0.58, 0.11] },
-  { id: "fill", title: "Fill The Weir: bring a mate", type: "Referral", sponsor: "Corran Lane Bakery", ago: 48, done: 1305, seen: 10200, posts: 410, views: 0.88e6, nm: 1305 },
-  { id: "kitlaunch", title: "Kit launch: wear it, post it", type: "Social post", ago: 64, done: 1890, seen: 9900, posts: 1890, views: 6.71e6, nm: 340 },
+  { id: "post", title: "Post your matchday photo, tag @aldermoor and @weirbankmotors", type: "Social post", sponsor: "Weirbank Motors", ago: 1, done: 920, posts: 920, views: 0.97e6, nm: 46, er: 1.15, net: [0.55, 0.38, 0.07] },
+  { id: "story", title: "Share a story from the stands", type: "Story", ago: 1, done: 560, posts: 560, views: 0.53e6, nm: 12, net: [0.72, 0.24, 0.04] },
+  { id: "scarf", title: "Scarves up: show us yours", type: "Photo", sponsor: "Weirbank Motors", ago: 3, done: 700, posts: 590, views: 0.62e6, nm: 58, er: 1.1, net: [0.62, 0.27, 0.11] },
+  { id: "first", title: "Your first match at The Weir", type: "Open question", ago: 2, done: 1036, posts: 0, views: 0, nm: 0, extra: () => [["Answers featured", String(ANSWER_BASE.first.featured + ANSWERS.filter((a) => a.mid === "first" && a.status === "featured").length)], ["Average answer", "38 words"]] },
+  { id: "predict", title: "Predict the score v Granby Rovers", type: "Prediction", ago: 4, done: 2870, posts: 240, views: 0.24e6, nm: 16, net: [0.48, 0.38, 0.14] },
+  { id: "quiz", title: "The Weir history quiz", type: "Quiz", sponsor: "Corran Lane Bakery", ago: 9, done: 2460, posts: 0, views: 0, nm: 0, extra: [["Right first time", "64%"], ["Average time", "21 s"]] },
+  { id: "md8", title: "Matchday 8 check-in", type: "Check-in", ago: 12, done: 1580, posts: 300, views: 0.33e6, nm: 27, net: [0.58, 0.31, 0.11] },
+  { id: "away", title: "Away end at Holbrook", type: "Photo", ago: 19, done: 270, posts: 250, views: 0.29e6, nm: 22, net: [0.64, 0.28, 0.08] },
+  { id: "kit", title: "New home kit quiz", type: "Quiz", ago: 21, done: 2210, posts: 0, views: 0, nm: 0, extra: [["Right first time", "71%"]] },
+  { id: "car", title: "Your matchday photo with the Weirbank car at The Weir", type: "Social post", sponsor: "Weirbank Motors", ago: 36, done: 1150, posts: 1150, views: 1.31e6, nm: 184, er: 1.2, net: [0.62, 0.3, 0.08] },
+  { id: "fill", title: "Fill The Weir: bring a mate", type: "Referral", sponsor: "Corran Lane Bakery", ago: 48, done: 420, posts: 130, views: 0.13e6, nm: 420, net: [0.6, 0.32, 0.08] },
+  { id: "kitlaunch", title: "Kit launch: wear it, post it", type: "Social post", ago: 64, done: 1020, posts: 1020, views: 1.12e6, nm: 121, net: [0.5, 0.4, 0.1] },
 ];
 const POSTERS = ["@weirend_mags", "@kestrel_kev", "@aldermoor_abi", "@scarfsup_sian", "@ola.collects", "@northstand_priya", "@tomhalloran", "@riverside_km", "@olderthanthecrest", "@holbrook_away"];
-const NET_NAMES = NETS.map((n) => n[0]);
-/* Potential reach: followers of the accounts that posted. 3,870 members posted this season, 2,400 followers on average.
-   A mission's share follows its posts, so missions and sponsors add up to the season figure. */
-const POSTERS_SEASON = 3870, FOLLOWERS_AVG = 2400;
-const SEASON_POSTS = NETS.reduce((a, n) => a + n[1], 0);
+const NET_NAMES = ["Instagram", "TikTok", "YouTube Shorts"];
+/* Whole numbers per network: posts by the unit, views by the thousand (so media value is whole euros); the last network takes the rest. */
+function splitInt(total, shares, unit = 1) {
+  const n = Math.round(total / unit), out = shares.slice(0, -1).map((x) => Math.round(n * x));
+  return [...out, n - out.reduce((a, b) => a + b, 0)].map((x) => x * unit);
+}
+/* Active members: members who sent at least one mission in the last 90 days, approved or refused. */
+const ACTIVE_90 = 4120;
+/* Members counted once across several missions. A member can take part in more than one, so a set counts each person once:
+   the biggest mission, plus the members of the others who weren't in it yet. The keen members do most missions, so the
+   overlap grows with the set, and no set passes the 4,120 active members. */
+const uniqueOf = (vals) => {
+  const d = vals.filter((v) => v > 0); if (!d.length) return 0;
+  const m = Math.max(...d), rest = d.reduce((a, b) => a + b, 0) - m, room = ACTIVE_90 - m;
+  return room > 0 ? Math.round(m + room * (1 - Math.exp((-0.5 * rest) / room))) : m;
+};
+const peopleIn = (rows) => uniqueOf(rows.map((r) => r.done));
+const postersIn = (rows) => uniqueOf(rows.map((r) => r.posts));
+/* Potential reach: followers of the accounts that posted, each account once. 3,100 followers on average. */
+const FOLLOWERS_AVG = 3100;
 const rmDate = (r) => new Date(NOW.getTime() - r.ago * 864e5);
 
 function rPeriod() {
@@ -4783,13 +4832,25 @@ function rmStats(r) {
   const er = r.er || 1, v = r.views || 0;
   const done = r.done + (state.done.has(r.id) ? 1 : 0);
   const likes = v * 0.077 * er, comments = v * 0.0039 * er, shares = v * 0.0055 * er;
-  return { ...r, done, likes, comments, shares, eng: likes + comments + shares, value: mediaValue(v), reach: ((r.posts || 0) * POSTERS_SEASON * FOLLOWERS_AVG) / SEASON_POSTS, rate: done / r.seen };
+  return { ...r, done, likes, comments, shares, eng: likes + comments + shares, value: mediaValue(v), reach: (r.posts || 0) * FOLLOWERS_AVG };
 }
-function rTotals(f) {
-  const nets = NETS.map(([name, posts, views, lr, cr, sr]) => { const v = views * f; return { name, posts: posts * f, views: v, likes: v * lr, comments: v * cr, shares: v * sr, value: mediaValue(v) }; });
-  const sum = (k) => nets.reduce((a, x) => a + x[k], 0);
-  return { nets, posts: sum("posts"), views: sum("views"), likes: sum("likes"), comments: sum("comments"), shares: sum("shares"), value: sum("value") };
+/* Totals of a list of missions (rmStats rows), network by network. */
+function rTotals(list) {
+  const nets = NET_NAMES.map((name) => ({ name, posts: 0, views: 0, likes: 0, comments: 0, shares: 0 }));
+  list.filter((r) => r.views).forEach((r) => {
+    const p = splitInt(r.posts, r.net), v = splitInt(r.views, r.net, 1000);
+    nets.forEach((n, i) => { n.posts += p[i]; n.views += v[i]; n.likes += (r.likes * v[i]) / r.views; n.comments += (r.comments * v[i]) / r.views; n.shares += (r.shares * v[i]) / r.views; });
+  });
+  nets.forEach((n) => (n.value = mediaValue(n.views)));
+  const sum = (k) => list.reduce((a, r) => a + (r[k] || 0), 0);
+  const posters = postersIn(list);
+  return { nets, posts: sum("posts"), views: sum("views"), likes: sum("likes"), comments: sum("comments"), shares: sum("shares"), value: mediaValue(sum("views")), nm: sum("nm"), posters, reach: posters * FOLLOWERS_AVG };
 }
+/* The "!" next to the points total, while points from a post wait for approval. */
+const pendLabel = () => `${fmt(state.pending)} ${word()} pending approval`;
+const pendDot = () => `<button class="pend-dot" data-act="pending" aria-label="${pendLabel()}" ${state.pending ? "" : "hidden"}>!</button>`;
+function syncPending() { document.querySelectorAll(".pend-dot").forEach((d) => { d.hidden = !state.pending; d.setAttribute("aria-label", pendLabel()); }); }
+const soon = (cls = "") => `<span class="soon-tag ${cls}">Soon</span>`;
 const kpi = (l, v, s) => `<div class="kpi"><span>${l}</span><b>${v}</b>${s ? `<small>${s}</small>` : ""}</div>`;
 const mini = (l, v, s = "") => `<div class="mkpi"><span>${l}</span><b>${v}</b>${s ? `<small>${s}</small>` : ""}</div>`;
 
@@ -4798,14 +4859,10 @@ function periodBar() {
   return `<div class="period"><div class="opt-row" role="group" aria-label="Period">${opts.map(([v, l]) => `<button type="button" class="opt" data-act="rperiod" data-v="${v}" aria-pressed="${state.rperiod === v}">${l}</button>`).join("")}</div>
     ${state.rperiod === "custom" ? `<div class="period-dates aform">${fld("From", `<input type="date" name="rfrom" value="${state.rfrom}" min="${isoDay(SEASON_START)}" max="${isoDay(NOW)}">`)}${fld("To", `<input type="date" name="rto" value="${state.rto}" min="${isoDay(SEASON_START)}" max="${isoDay(NOW)}">`)}</div>` : ""}</div>`;
 }
-/* Members who took part in several missions: a member can take part in more than one, so a total counts each person once.
-   Weirbank Motors' three missions had 2,150, 1,860 and 1,420 taking part: 3,240 different members. Other sets follow the
-   same overlap: the biggest mission, plus a third of the others. */
-const peopleIn = (rows) => { if (!rows.length) return 0; const d = rows.map((r) => r.done), max = Math.max(...d), rest = d.reduce((a, b) => a + b, 0) - max; return Math.round(max + (rest * 1090) / 3280); };
 function sponsorsIn(list) {
   const out = {};
-  list.filter((r) => r.sponsor).forEach((r) => { const s = out[r.sponsor] || (out[r.sponsor] = { name: r.sponsor, n: 0, done: 0, views: 0, eng: 0, value: 0, reach: 0, nm: 0, rows: [] }); s.n++; s.rows.push(r); ["done", "views", "eng", "value", "reach", "nm"].forEach((k) => (s[k] += r[k])); });
-  return Object.values(out).map((s) => ({ ...s, people: peopleIn(s.rows) }));
+  list.filter((r) => r.sponsor).forEach((r) => { const s = out[r.sponsor] || (out[r.sponsor] = { name: r.sponsor, n: 0, done: 0, posts: 0, views: 0, eng: 0, nm: 0, rows: [] }); s.n++; s.rows.push(r); ["done", "posts", "views", "eng", "nm"].forEach((k) => (s[k] += r[k])); });
+  return Object.values(out).map((s) => ({ ...s, value: mediaValue(s.views), people: peopleIn(s.rows), posters: postersIn(s.rows), reach: postersIn(s.rows) * FOLLOWERS_AVG }));
 }
 const sponsorMono = (s) => { const [m, bg, fg] = SPONSOR_LOOK[s] || ["", "#eee", "#333"]; return `<span class="sp-mono" style="background:${bg};color:${fg}">${m}</span>`; };
 
@@ -4817,30 +4874,30 @@ function admResults() {
   return head + resultsOverview();
 }
 function resultsOverview() {
-  const P = rPeriod(), T = rTotals(P.f);
+  const P = rPeriod(), list = RM.filter(inPeriod).map(rmStats), T = rTotals(list);
   const eng = T.likes + T.comments + T.shares;
-  const list = RM.filter(inPeriod).map(rmStats);
   const top = [...list].sort((a, b) => b.value - a.value || b.done - a.done).slice(0, 5);
   const sps = sponsorsIn(list);
   const w0 = Math.max(0, Math.min(12, Math.floor((P.from - SEASON_START) / (7 * 864e5))));
   return `<div class="kpis">
       ${kpi("Earned media value", eur(T.value), `Views on members' posts at a ${cpmLabel()} CPM`)}
-      ${kpi("Views on members' posts", big(T.views), `From ${fmt(T.posts)} posts by ${fmt(POSTERS_SEASON * P.f)} members`)}
+      ${kpi("Views on members' posts", big(T.views), `From ${fmt(T.posts)} posts by ${fmt(T.posters)} members`)}
       ${kpi("Likes, comments and shares", big(eng), `${pct(eng, T.views)} of views`)}
-      ${kpi("New members from members' posts", fmt(2310 * P.f), "Joined through a post or a member's code")}
+      ${kpi("New members from members' posts", fmt(T.nm), "Joined through a post or a member's code")}
     </div>
     <details class="more" ${state.rmore ? "open" : ""}><summary data-act="rmore">${state.rmore ? "Hide the detail" : "Show every number for this period"}</summary>
-      <div class="mkpis">${mini("Posts", fmt(T.posts))}${mini("Members who posted", fmt(POSTERS_SEASON * P.f))}${mini("Potential reach", big(POSTERS_SEASON * P.f * FOLLOWERS_AVG), "followers of the accounts that posted")}${mini("Average views a post", fmt(T.views / T.posts))}${mini("Likes", big(T.likes))}${mini("Comments", big(T.comments))}${mini("Shares", big(T.shares))}${mini("Missions completed", big(372400 * P.f))}${mini("Home check-ins", fmt(9412 * P.f))}${mini("Rewards redeemed", fmt(4419 * P.f))}${mini("Active members", fmt(P.f < 0.2 ? 9300 : P.f < 0.5 ? 9500 : 9700), "used the app at least once")}</div>
+      <div class="mkpis">${mini("Posts", fmt(T.posts))}${mini("Members who posted", fmt(T.posters), "each counted once")}${mini("Potential reach " + soon(), big(T.reach), "followers of the accounts that posted")}${mini("Average views a post", T.posts ? fmt(T.views / T.posts) : "–")}${mini("Likes", big(T.likes))}${mini("Comments", big(T.comments))}${mini("Shares", big(T.shares))}${mini("Missions completed", fmt(61300 * P.f))}${mini("Home check-ins", fmt(8046 * P.f))}${mini("Rewards redeemed", fmt(1674 * P.f))}${mini("Active members (last 90 days)", fmt(ACTIVE_90), "sent at least one mission")}</div>
     </details>
     ${cpmBox()}
     <div class="adm-grid">
-      <div class="acard"><h2>Weekly active members</h2><p class="sub">${P.f < 1 ? "The shaded weeks are the period you picked" : "Dots mark home matchdays"}</p><div class="chart">${chartSVG(P.f < 1 ? [w0, 12] : null)}</div></div>
+      <div class="acard"><h2>Members who sent a mission, each week</h2><p class="sub">${P.f < 1 ? "The shaded weeks are the period you picked" : "Dots mark home matchdays"}</p><div class="chart">${chartSVG(P.f < 1 ? [w0, 12] : null)}</div></div>
       <div class="acard"><h2>Sponsors</h2><p class="sub">Their missions in this period. Open one for its report and a private link to send them.</p>
         ${sps.length ? `<div class="sp-list">${sps.map((s) => `<button class="sp-row" data-act="rsponsor" data-s="${esc(s.name)}">${sponsorMono(s.name)}<span><b>${esc(s.name)}</b><span class="sub">${s.n} mission${s.n > 1 ? "s" : ""}, ${fmt(s.people)} members took part${s.value ? ", " + eur(s.value) + " media value" : ""}</span></span><span class="go">Report</span></button>`).join("")}</div>` : `<p class="sub" style="margin-top:10px">No sponsored mission in this period.</p>`}</div>
     </div>
-    <div class="acard"><h2>Where members talk about the club</h2><p class="sub">${P.label}, checked through members' linked accounts</p>
+    <div class="acard"><h2>Where members talk about the club</h2><p class="sub">${P.label}: posts for the missions started in this period, checked through members' linked accounts</p>
       <div class="scroll-x"><table class="atable tight"><thead><tr><th>Network</th><th class="r">Posts</th><th class="r">Views</th><th class="r">Likes</th><th class="r">Comments</th><th class="r">Shares</th><th class="r">Engagement</th><th class="r">Media value</th></tr></thead>
-      <tbody>${T.nets.map((n) => `<tr><td>${n.name}</td><td class="r">${fmt(n.posts)}</td><td class="r">${big(n.views)}</td><td class="r">${big(n.likes)}</td><td class="r">${big(n.comments)}</td><td class="r">${big(n.shares)}</td><td class="r">${pct(n.likes + n.comments + n.shares, n.views)}</td><td class="r">${eur(n.value)}</td></tr>`).join("")}</tbody></table></div></div>
+      <tbody>${T.nets.map((n) => `<tr><td>${n.name}</td><td class="r">${fmt(n.posts)}</td><td class="r">${big(n.views)}</td><td class="r">${big(n.likes)}</td><td class="r">${big(n.comments)}</td><td class="r">${big(n.shares)}</td><td class="r">${pct(n.likes + n.comments + n.shares, n.views)}</td><td class="r">${eur(n.value)}</td></tr>`).join("")}</tbody>
+      <tfoot><tr><td>All</td><td class="r">${fmt(T.posts)}</td><td class="r">${big(T.views)}</td><td class="r">${big(T.likes)}</td><td class="r">${big(T.comments)}</td><td class="r">${big(T.shares)}</td><td class="r">${pct(eng, T.views)}</td><td class="r">${eur(T.value)}</td></tr></tfoot></table></div></div>
     <div class="acard"><div class="acard-top"><div><h2>Missions that did the most</h2><p class="sub">Started in this period. Open one for its full detail.</p></div><button class="adm-btn" data-act="atab" data-p="results" data-i="1">See all missions</button></div>
       ${top.length ? `<div class="scroll-x"><table class="atable tight"><thead><tr><th>Mission</th><th class="r">Done by</th><th class="r">Views</th><th class="r">Likes, comments, shares</th><th class="r">Media value</th></tr></thead>
       <tbody>${top.map((r) => `<tr class="click" data-act="rmission" data-id="${r.id}"><td class="wrap"><b>${esc(r.title)}</b><br><span class="sub">${r.type}${r.sponsor ? `, with ${r.sponsor}` : ""}</span></td><td class="r">${fmt(r.done)}</td><td class="r">${r.views ? big(r.views) : "–"}</td><td class="r">${r.views ? big(r.eng) : "–"}</td><td class="r">${r.value ? eur(r.value) : "–"}</td></tr>`).join("")}</tbody></table></div>` : `<p class="sub" style="margin-top:10px">No mission started in this period.</p>`}</div>`;
@@ -4856,7 +4913,7 @@ function sponsorCard(sp, list) {
       ${tile(sp.value ? eur(sp.value) : "–", "Media value", sp.value ? `Views of members' posts at a ${cpmLabel()} CPM` : "No public post asked for", "hero")}
       ${tile(sp.views ? big(sp.views) : "–", "Views of members' posts", sp.views ? `${big(sp.eng)} likes, comments and shares` : "")}
       ${tile(fmt(sp.people), "Members who took part", sp.n > 1 ? "Each member counted once" : "")}
-      ${tile(sp.reach ? big(sp.reach) : "–", "Potential reach", sp.reach ? "Followers of the accounts that posted" : "")}
+      ${tile(sp.reach ? big(sp.reach) : "–", "Potential reach " + soon(), sp.reach ? `Followers of the ${fmt(sp.posters)} accounts that posted` : "")}
       ${tile(fmt(sp.nm), "New members who joined through it")}
     </div>
     ${sp.value ? `<div class="sp-bars" role="img" aria-label="Media value by mission"><h3>Media value by mission</h3>${rows.map((r) => `<div class="sp-bar"><span class="t">${esc(r.title)}</span><span class="track"><i style="width:${Math.max(2, (r.value / maxV) * 100).toFixed(1)}%"></i></span><b>${r.value ? eur(r.value) : "–"}</b></div>`).join("")}</div>` : ""}
@@ -4874,16 +4931,16 @@ function resultsMissions() {
   return `${sp ? sponsorCard(sp, list) : ""}
     <div class="acard">
       <div class="filters aform">${fld("Sponsor", sel("rsponsor", [["all", "All missions"], ...sponsorNames.map((n) => [n, n]), ["none", "Missions without a sponsor"]], s))}${fld("Sort by", sel("rsort", [["value", "Media value"], ["views", "Views"], ["eng", "Likes, comments and shares"], ["done", "Members who took part"], ["nm", "New members"]], state.rsort))}</div>
-      ${list.length ? `<div class="scroll-x"><table class="atable wide"><thead><tr><th>Mission</th><th class="r">Done by</th><th class="r">Of those who saw it</th><th class="r">Posts</th><th class="r">Views</th><th class="r">Likes</th><th class="r">Comments</th><th class="r">Shares</th><th class="r">Value</th><th class="r">New members</th></tr></thead>
-      <tbody>${list.map((r) => `<tr class="click" data-act="rmission" data-id="${r.id}"><td class="wrap"><b>${esc(r.title)}</b><br><span class="sub">${r.type}, ${dayLabel(isoDay(rmDate(r)))}${r.sponsor ? `, with ${r.sponsor}` : ""}</span></td><td class="r">${fmt(r.done)}</td><td class="r">${pct(r.done, r.seen)}</td><td class="r">${r.posts ? fmt(r.posts) : "–"}</td><td class="r">${r.views ? big(r.views) : "–"}</td><td class="r">${r.views ? big(r.likes) : "–"}</td><td class="r">${r.views ? big(r.comments) : "–"}</td><td class="r">${r.views ? big(r.shares) : "–"}</td><td class="r">${r.value ? eur(r.value) : "–"}</td><td class="r">${r.nm ? fmt(r.nm) : "–"}</td></tr>`).join("")}</tbody>
-      <tfoot><tr><td>${list.length} mission${list.length > 1 ? "s" : ""}</td><td class="r">${sp ? fmt(sp.people) : ""}</td><td></td><td class="r">${fmt(tot("posts"))}</td><td class="r">${big(tot("views"))}</td><td class="r">${big(tot("likes"))}</td><td class="r">${big(tot("comments"))}</td><td class="r">${big(tot("shares"))}</td><td class="r">${eur(tot("value"))}</td><td class="r">${fmt(tot("nm"))}</td></tr></tfoot></table></div>${sp && list.length > 1 ? `<p class="sub" style="margin-top:10px">Done by, in total: ${fmt(sp.people)} members, each counted once. A member can take part in several missions.</p>` : ""}`
+      ${list.length ? `<div class="scroll-x"><table class="atable wide"><thead><tr><th>Mission</th><th class="r">Done by</th><th class="r">Posts</th><th class="r">Views</th><th class="r">Likes</th><th class="r">Comments</th><th class="r">Shares</th><th class="r">Value</th><th class="r">New members</th></tr></thead>
+      <tbody>${list.map((r) => `<tr class="click" data-act="rmission" data-id="${r.id}"><td class="wrap"><b>${esc(r.title)}</b><br><span class="sub">${r.type}, ${dayLabel(isoDay(rmDate(r)))}${r.sponsor ? `, with ${r.sponsor}` : ""}</span></td><td class="r">${fmt(r.done)}</td><td class="r">${r.posts ? fmt(r.posts) : "–"}</td><td class="r">${r.views ? big(r.views) : "–"}</td><td class="r">${r.views ? big(r.likes) : "–"}</td><td class="r">${r.views ? big(r.comments) : "–"}</td><td class="r">${r.views ? big(r.shares) : "–"}</td><td class="r">${r.value ? eur(r.value) : "–"}</td><td class="r">${r.nm ? fmt(r.nm) : "–"}</td></tr>`).join("")}</tbody>
+      <tfoot><tr><td>${list.length} mission${list.length > 1 ? "s" : ""}</td><td class="r">${fmt(peopleIn(list))}</td><td class="r">${fmt(tot("posts"))}</td><td class="r">${big(tot("views"))}</td><td class="r">${big(tot("likes"))}</td><td class="r">${big(tot("comments"))}</td><td class="r">${big(tot("shares"))}</td><td class="r">${eur(tot("value"))}</td><td class="r">${fmt(tot("nm"))}</td></tr></tfoot></table></div>${list.length > 1 ? `<p class="sub" style="margin-top:10px">Done by, in total: ${fmt(peopleIn(list))} members, each counted once. A member can take part in several missions.</p>` : ""}`
         : `<p class="sub" style="margin-top:12px">No mission matches. Try a longer period.</p>`}
     </div>`;
 }
 function postsFor(list) {
   const out = [];
-  list.filter((r) => r.views).forEach((r, i) => [0.071, 0.046, 0.029].forEach((sh, j) => {
-    const v = r.views * sh * (1 - ((i + j) % 3) * 0.08), net = NET_NAMES[(r.net ? [0, 1, 0] : [1, 0, 2])[j]];
+  list.filter((r) => r.views).forEach((r, i) => [11.5, 7.2, 4.6].forEach((x, j) => {
+    const v = Math.round((r.views / r.posts) * x * (1 - ((i + j) % 3) * 0.08)), net = NET_NAMES[[0, 1, 0][j]];
     out.push({ who: POSTERS[(i * 3 + j) % POSTERS.length], net, r, ago: Math.max(0, r.ago - j), views: v, likes: v * (net === "TikTok" ? 0.088 : 0.074) * (r.er || 1), comments: v * 0.004, shares: v * 0.0058 });
   }));
   return out;
@@ -4912,11 +4969,11 @@ function dayBars(r) {
 function missionDetail(id) {
   const r = rmStats(RM.find((x) => x.id === id));
   const tiers = [["Academy", 38], ["First team", 41], ["Captain", 17], ["Club legend", 4]].map(([t, p], i) => [t, p + ((r.ago + i * 3) % 5) - 2]);
-  const split = r.net || [0.55, 0.32, 0.13];
-  const nets = NET_NAMES.map((n, i) => { const v = r.views * split[i]; return { n, posts: r.posts * split[i], v, likes: r.likes * split[i], comments: r.comments * split[i], shares: r.shares * split[i] }; });
+  const split = r.net || [0.55, 0.32, 0.13], pp = splitInt(r.posts, split), vv = splitInt(r.views, split, 1000);
+  const nets = NET_NAMES.map((n, i) => ({ n, posts: pp[i], v: vv[i], likes: r.views ? (r.likes * vv[i]) / r.views : 0, comments: r.views ? (r.comments * vv[i]) / r.views : 0, shares: r.views ? (r.shares * vv[i]) / r.views : 0 }));
   const posts = postsFor([r]).sort((a, b) => b.views - a.views);
   const body = `${r.sponsor ? `<div class="sp-inline">${sponsorMono(r.sponsor)}<span>Sponsored by <b>${esc(r.sponsor)}</b>.</span></div>` : ""}
-    <div class="mkpis">${mini("Members who took part", fmt(r.done), `${pct(r.done, r.seen)} of the ${fmt(r.seen)} who saw it`)}${r.views ? mini("Posts", fmt(r.posts)) + mini("Views", big(r.views)) + mini("Likes", big(r.likes)) + mini("Comments", fmt(r.comments)) + mini("Shares", fmt(r.shares)) + mini("Media value", eur(r.value), `at a ${cpmLabel()} CPM`) + mini("Potential reach", big(r.reach), "followers of the accounts that posted") : ""}${r.nm ? mini("New members", fmt(r.nm)) : ""}${(typeof r.extra === "function" ? r.extra() : r.extra || []).map(([l, v]) => mini(l, v)).join("")}</div>
+    <div class="mkpis">${mini("Members who took part", fmt(r.done))}${r.views ? mini("Posts", fmt(r.posts)) + mini("Views", big(r.views), `${fmt(r.views / r.posts)} a post`) + mini("Likes", big(r.likes)) + mini("Comments", fmt(r.comments)) + mini("Shares", fmt(r.shares)) + mini("Media value", eur(r.value), `at a ${cpmLabel()} CPM`) + mini("Potential reach " + soon(), big(r.reach), "followers of the accounts that posted") : ""}${r.nm ? mini("New members", fmt(r.nm)) : ""}${(typeof r.extra === "function" ? r.extra() : r.extra || []).map(([l, v]) => mini(l, v)).join("")}</div>
     ${r.views ? `<h3>Posts each day</h3><div class="chart">${dayBars(r)}</div>
     <h3>By network</h3><div class="scroll-x"><table class="atable tight"><thead><tr><th>Network</th><th class="r">Posts</th><th class="r">Views</th><th class="r">Likes</th><th class="r">Comments</th><th class="r">Shares</th></tr></thead>
       <tbody>${nets.map((x) => `<tr><td>${x.n}</td><td class="r">${fmt(x.posts)}</td><td class="r">${big(x.v)}</td><td class="r">${big(x.likes)}</td><td class="r">${fmt(x.comments)}</td><td class="r">${fmt(x.shares)}</td></tr>`).join("")}</tbody></table></div>
@@ -4928,20 +4985,22 @@ function missionDetail(id) {
   openDrawer({ title: esc(r.title), sub: `${r.type}, started ${dayLabel(isoDay(rmDate(r)))}`, body,
     footer: `<button class="adm-btn" data-act="dclose">Close</button>${r.sponsor ? `<button class="adm-btn primary" data-act="splink" data-s="${esc(r.sponsor)}">${icon("copy")}Copy the sponsor's private link</button>` : ""}<button class="adm-btn${r.sponsor ? "" : " primary"}" data-act="rcsv" data-id="${r.id}">${icon("download")}${r.sponsor ? "Report for " + esc(r.sponsor) : "This mission"}, CSV</button>` });
 }
-const RCOLS = ["Mission", "Type", "Sponsor", "Started", "Done by", "Saw it", "Posts", "Views", "Likes", "Comments", "Shares", "Media value (EUR)", "New members"];
-const rcols = () => RCOLS.map((c, i) => (i === 11 ? `Media value (EUR, at a ${cpmLabel()} CPM)` : c));
-const rcsvRow = (r) => [r.title, r.type, r.sponsor || "", isoDay(rmDate(r)), r.done, r.seen, r.posts, Math.round(r.views), Math.round(r.likes), Math.round(r.comments), Math.round(r.shares), Math.round(r.value), r.nm];
+const RCOLS = ["Mission", "Type", "Sponsor", "Started", "Done by", "Posts", "Views", "Likes", "Comments", "Shares", "Media value (EUR)", "New members"];
+const rcols = () => RCOLS.map((c, i) => (i === 10 ? `Media value (EUR, at a ${cpmLabel()} CPM)` : c));
+const rcsvRow = (r) => [r.title, r.type, r.sponsor || "", isoDay(rmDate(r)), r.done, r.posts, Math.round(r.views), Math.round(r.likes), Math.round(r.comments), Math.round(r.shares), Math.round(r.value), r.nm];
 function resultsCSV(el) {
   const slug = (s) => s.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
   if (el.dataset.id) {
     const r = rmStats(RM.find((x) => x.id === el.dataset.id));
     const split = r.net || [0.55, 0.32, 0.13];
-    csvDownload([rcols(), rcsvRow(r), [], ["Network", "Posts", "Views", "Likes", "Comments", "Shares"], ...NET_NAMES.map((n, i) => [n, Math.round(r.posts * split[i]), Math.round(r.views * split[i]), Math.round(r.likes * split[i]), Math.round(r.comments * split[i]), Math.round(r.shares * split[i])])], `aldermoor-${slug(r.title)}.csv`);
+    const pp = splitInt(r.posts, split), vv = splitInt(r.views, split, 1000);
+    csvDownload([rcols(), rcsvRow(r), [], ["Network", "Posts", "Views", "Likes", "Comments", "Shares"], ...NET_NAMES.map((n, i) => [n, pp[i], vv[i], Math.round(r.views ? (r.likes * vv[i]) / r.views : 0), Math.round(r.views ? (r.comments * vv[i]) / r.views : 0), Math.round(r.views ? (r.shares * vv[i]) / r.views : 0)])], `aldermoor-${slug(r.title)}.csv`);
     return;
   }
   let list = RM.filter(inPeriod).map(rmStats);
   if (el.dataset.s) list = list.filter((r) => r.sponsor === el.dataset.s);
-  csvDownload([["Period", rPeriod().label], [], rcols(), ...list.map(rcsvRow)], `aldermoor-results-${el.dataset.s ? slug(el.dataset.s) : "missions"}.csv`);
+  const tot = (k) => Math.round(list.reduce((a, r) => a + r[k], 0));
+  csvDownload([["Period", rPeriod().label], [], rcols(), ...list.map(rcsvRow), ["Total, each member counted once", "", "", "", peopleIn(list), tot("posts"), tot("views"), tot("likes"), tot("comments"), tot("shares"), Math.round(mediaValue(tot("views"))), tot("nm")]], `aldermoor-results-${el.dataset.s ? slug(el.dataset.s) : "missions"}.csv`);
 }
 function admAccount() {
   const team = [["Megan Hale", "Head of supporter experience", "Admin"], ["Rafi Dorsey", "Content and social", "Admin"], ["Sana Iqbal", "Club shop", "Moderator"], ["Tom Ferris", "Matchday operations", "Moderator"]];
@@ -5091,6 +5150,11 @@ renderMember();
 const hashStyle = (location.hash.match(/style=([a-z]+)/) || [])[1];
 if (hashStyle) setStyle(hashStyle);
 if (location.hash === "#admin") setView("admin");
+/* For emails to clubs: demo/aldermoor/?view=sponsor (or #sponsor) opens Club admin on the Weirbank Motors sponsor report. */
+if (new URLSearchParams(location.search).get("view") === "sponsor" || location.hash === "#sponsor") {
+  state.admin = "results"; state.atab.results = 1; state.rsponsor = "Weirbank Motors"; state.rperiod = "season";
+  setView("admin");
+}
 if (location.hash === "#checkin") { state.matchday = true; renderMember(false); missionSheet("checkin"); }
 
 </script>

@@ -298,6 +298,7 @@ img, svg { max-width: 100%; }
 }
 .view-inner { display: flex; flex-direction: column; gap: 34px; max-width: 1180px; margin-inline: auto; }
 .foot-note { max-width: 1180px; margin: 34px auto 0; padding-top: 16px; border-top: 1px solid var(--line); font-size: 0.75rem; line-height: 1.45; color: var(--ink-3); text-align: center; }
+.foot-note a { color: inherit; text-decoration: underline; text-underline-offset: 2px; }
 
 .tabbar {
   position: absolute;
@@ -3551,7 +3552,7 @@ function renderMember(scrollTop = true) {
   maybeBadgeToast();
 }
 
-const screenFoot = () => `<p class="foot-note">Aldermoor is a fictional club. Every name and figure here is illustrative; a few screens show features on our roadmap. A FAN/IP demo.</p>`;
+const screenFoot = () => `<p class="foot-note">Aldermoor is a fictional club. Every name and figure here is illustrative; a few screens show features on <a href="../../whats-new.html">our roadmap</a>. A FAN/IP demo.</p>`;
 function enhance(root) {
   requestAnimationFrame(() => requestAnimationFrame(() => {
     root.querySelectorAll("[data-fill]").forEach((el) => el.style.setProperty("--fill", el.dataset.fill + "%"));

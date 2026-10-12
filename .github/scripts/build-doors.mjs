@@ -43,7 +43,7 @@ const LOCALES = [
 ];
 
 const esc = (t) => String(t).replace(/&/g, "&amp;").replace(/"/g, "&quot;").replace(/</g, "&lt;");
-const plain = (html) => html.replace(/<[^>]+>/g, "").replace(/\s+/g, " ").trim();
+const plain = (html) => html.replace(/<[^>]+>/g, "").replace(/[ \t\r\n]+/g, " ").trim();
 
 function swap(html, re, fn) {
   const m = html.match(re);

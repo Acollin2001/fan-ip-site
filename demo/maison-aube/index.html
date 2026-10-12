@@ -498,6 +498,7 @@ label.drop svg { width: 22px; height: 22px; flex: none; }
 .link { border: 0; background: none; padding: 4px 0; color: var(--rose-deep); font-weight: 600; font-size: 0.875rem; cursor: pointer; text-decoration: underline; text-underline-offset: 4px; text-decoration-color: color-mix(in srgb, var(--rose) 45%, transparent); white-space: nowrap; }
 .meta { color: var(--ink-3); font-size: 0.8125rem; }
 .foot-note { margin: 0; padding-top: 18px; border-top: 1px solid var(--line); font-size: 0.75rem; color: var(--ink-3); text-align: center; }
+.foot-note a { color: inherit; text-decoration: underline; text-underline-offset: 2px; }
 @container dev (min-width: 820px) { .h-page { font-size: 4rem; } .h-sec { font-size: 2rem; } }
 .btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 48px; padding: 0 22px; border: 0; border-radius: calc(999px * var(--rk, 1)); font-weight: 600; font-size: 0.9375rem; cursor: pointer; transition: transform 0.15s, background 0.2s; text-align: center; }
 .btn:active { transform: scale(0.97); }
@@ -1070,7 +1071,7 @@ function refreshShell() {
   const fresh = document.createElement("div"); fresh.innerHTML = shell();
   $$("[data-shell]").forEach((el) => { const src = fresh.querySelector(`[data-shell="${el.dataset.shell}"]`); if (src) el.innerHTML = src.innerHTML; });
 }
-const screenFoot = () => `<p class="foot-note">${esc(BRAND.name)} is a fictional ${BRAND.kind}. Every name and figure here is illustrative; a few screens show features on our roadmap. A FAN/IP demo.</p>`;
+const screenFoot = () => `<p class="foot-note">${esc(BRAND.name)} is a fictional ${BRAND.kind}. Every name and figure here is illustrative; a few screens show features on <a href="../../whats-new.html">our roadmap</a>. A FAN/IP demo.</p>`;
 
 /* ---------------------------------------------------------------- presenter */
 function setView(v) {

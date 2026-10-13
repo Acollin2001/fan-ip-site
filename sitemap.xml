@@ -67,6 +67,13 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://fan-ip.com/first-month.html"/>
   </url>
   <url>
+    <loc>https://fan-ip.com/contact.html</loc>
+    <lastmod>2026-10-13</lastmod>
+    <xhtml:link rel="alternate" hreflang="en-GB" href="https://fan-ip.com/contact.html"/>
+    <xhtml:link rel="alternate" hreflang="fr-FR" href="https://fan-ip.com/fr/contact.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://fan-ip.com/contact.html"/>
+  </url>
+  <url>
     <loc>https://fan-ip.com/whats-new.html</loc>
     <lastmod>2026-10-12</lastmod>
   </url>
@@ -141,6 +148,13 @@
     <xhtml:link rel="alternate" hreflang="en-GB" href="https://fan-ip.com/first-month.html"/>
     <xhtml:link rel="alternate" hreflang="fr-FR" href="https://fan-ip.com/fr/first-month.html"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://fan-ip.com/first-month.html"/>
+  </url>
+  <url>
+    <loc>https://fan-ip.com/fr/contact.html</loc>
+    <lastmod>2026-10-13</lastmod>
+    <xhtml:link rel="alternate" hreflang="en-GB" href="https://fan-ip.com/contact.html"/>
+    <xhtml:link rel="alternate" hreflang="fr-FR" href="https://fan-ip.com/fr/contact.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://fan-ip.com/contact.html"/>
   </url>
   <url>
     <loc>https://fan-ip.com/fr/brands.html</loc>

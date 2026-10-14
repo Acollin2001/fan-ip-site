@@ -128,7 +128,7 @@ export const PAGES_FR = {
         "Pour une marque qui lance son fan club. Inscrivez-vous en ligne et configurez tout vous-même.",
         "Pour une marque qui lance sa première communauté de clients.",
         "Pour les marques qui ont une vraie base de fans et des drops réguliers.",
-        "Pour les grandes communautés et les groupes multimarques.",
+        "L’offre des groupes : plusieurs marques ou pays sous un même contrat, chaque espace sur devis.",
       ],
     },
     tryLead:
@@ -250,7 +250,7 @@ export const PAGES_FR = {
         "Pour un petit club ou une petite équipe. Inscrivez-vous en ligne et configurez tout vous-même.",
         "Là où la plupart des clubs commencent : un club de supporters et des quêtes sponsor.",
         "Pour un club dont plusieurs sponsors mènent des quêtes toute la saison.",
-        "Pour les grands clubs et les groupes qui ont plusieurs équipes.",
+        "L’offre des groupes : plusieurs clubs, équipes ou sections sous un même contrat, chaque espace sur devis.",
       ],
     },
     tryLead:
@@ -370,7 +370,7 @@ export const PAGES_FR = {
         "Pour un artiste qui lance son fan club. Inscrivez-vous en ligne et configurez tout vous-même.",
         "Pour une première tournée avec un fan club.",
         "Pour les artistes et les festivals qui ont une vraie base de fans.",
-        "Pour les labels, les festivals et les grandes communautés de fans.",
+        "L’offre des groupes : un label ou un festival avec plusieurs artistes ou événements, chaque espace sur devis.",
       ],
     },
     tryLead:

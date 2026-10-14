@@ -121,7 +121,7 @@ export const PAGES = {
         "For a brand starting its fan club. Sign up online and set it up yourself.",
         "For a brand launching its first customer community.",
         "For brands with a real fan base and regular drops.",
-        "For large communities and multi-brand groups.",
+        "The group offer: several brands or countries on one contract, each space on quote.",
       ],
     },
     tryLead:
@@ -243,7 +243,7 @@ export const PAGES = {
         "For a small club or team. Sign up online and set it up yourself.",
         "Where most clubs start: a supporters club and sponsor quests.",
         "For a club where several sponsors run quests all season.",
-        "For large clubs and groups with several teams.",
+        "The group offer: several clubs, teams or sections on one contract, each space on quote.",
       ],
     },
     tryLead:
@@ -363,7 +363,7 @@ export const PAGES = {
         "For an artist starting a fan club. Sign up online and set it up yourself.",
         "For a first tour with a fan club.",
         "For artists and festivals with a real fan base.",
-        "For labels, festivals and large fan bases.",
+        "The group offer: a label or festival with several artists or events, each space on quote.",
       ],
     },
     tryLead:

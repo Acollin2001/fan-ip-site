@@ -30,7 +30,7 @@ After "why", the home page asks "Where do your fans gather?" (Sport, Artists and
 - [Sport and esports](https://fan-ip.com/sport.html): sports clubs, esports teams and gaming venues; supporters post, and sponsors see the reach
 - [Artists and creators](https://fan-ip.com/artists.html): bands, DJs, rappers, festivals, podcasters and video creators
 
-## Pricing (euros, no VAT charged: small business, § 19 UStG)
+## Pricing (euros, no VAT charged (§ 19 UStG): small business, § 19 UStG)
 
 - Starter: €99 a month or €990 a year, no set-up fee, up to 150 active members, leaderboard included, 7-day free trial, sign up online at https://app.fan-ip.com/start
 - Club: €490 a month, set-up €1,250, up to 1,500 active members
@@ -52,7 +52,7 @@ After "why", the home page asks "Where do your fans gather?" (Sport, Artists and
 - How is it different from a loyalty program? Loyalty programs mostly reward purchases; FAN/IP rewards posts, referrals, event check-ins and quizzes, and values the reach of posts (views ÷ 1,000 × the CPM the brand chooses, starting from the typical price for the niche: €7 sport, €5 music and creators, €8 brands, €6 otherwise). It can run next to an existing loyalty program.
 - How is it different from an influencer platform? It works with the many people who already like the brand, not a few paid creators.
 - Can a sports club show sponsors what fans' posts are worth? Yes, with a sponsor quest and a private report for the sponsor.
-- What does it cost? From €99 a month (Starter, self-serve, 7-day free trial); Club €490, Season €1,290, Signature from €2,900 a month, with no VAT charged. Fans never pay.
+- What does it cost? From €99 a month (Starter, self-serve, 7-day free trial); Club €490, Season €1,290, Signature from €2,900 a month, with no VAT charged (§ 19 UStG). Fans never pay.
 - Languages: English, French, German, Spanish. Works in any phone browser and installs on the home screen with notifications.
 
 ## How FAN/IP values fans' posts

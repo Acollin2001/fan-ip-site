@@ -1,6 +1,8 @@
 // Visit statistics for fan-ip.com, with PostHog Cloud EU (servers in Frankfurt).
-// Cookieless: nothing is stored on the visitor's device, so no cookie banner is
-// needed (§ 25 TDDDG). Visits are counted with a daily anonymous hash computed by
+// Cookieless: nothing is stored on the visitor's device. Whether it may run
+// without consent (§ 25 TDDDG) is NOT confirmed yet: the question is with our
+// lawyer, and KEY stays empty until the answer is yes and the PostHog data
+// processing agreement is signed. Visits are counted with a daily anonymous hash computed by
 // PostHog's servers; no session recordings, no heatmaps, no personal profiles.
 // Until KEY is filled in, this file does nothing. It only runs on fan-ip.com, so
 // local previews never count as visits.

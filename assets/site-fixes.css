@@ -241,6 +241,14 @@ h1.hero-promise{text-wrap:balance}
 /* World pages: which plan the page's features come with, under the hero
    buttons, so a Starter trial does not look for sponsor quests in vain. */
 .hero-plan{margin-block-start:var(--s4);max-inline-size:52ch;color:var(--ivory-muted)}
+/* From 1024px the lead, buttons and plan note sit above the big headline, pinned
+   to it from below. In a short window (1280x800, 1440x780) or with the longer
+   French texts they grew up into the ticker; now the hero grows taller instead,
+   and the headline stays at the bottom. */
+@media (min-width: 1024px){
+  .hero:has(.hero-plan){display:flex;flex-direction:column;justify-content:flex-end;padding-block:calc(var(--header-h) + 96px) calc(var(--hero-bottom) + var(--h1-h) + 48px)}
+  .hero:has(.hero-plan) .hero-lead-block{position:relative;inset:auto;margin-inline:var(--margin)}
+}
 
 /* Pricing questions: five short answers under the plans, folded. */
 .plan-faq{margin-block-start:var(--s6);display:grid;gap:var(--s2)}

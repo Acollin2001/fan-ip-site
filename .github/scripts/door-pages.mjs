@@ -104,7 +104,7 @@ export const PAGES = {
 
     product: {
       titleHtml: "Three steps.<br>Your customers do the rest.",
-      step2: "Customers share from their own accounts. Each approved post earns points, levels and rewards.",
+      step2: "Customers share from their own accounts. Each post earns them XP for their level as soon as they send it, and points for the shop once you approve it.",
       step3: "Every post, its views and its media value, next to what your gifts cost.",
       caption: "Illustrative values. You name and set your own missions, levels and rewards. ",
     },
@@ -116,12 +116,12 @@ export const PAGES = {
     worldLead: "This page is for brands. Pick another world to see its own page.",
     pricing: {
       lead:
-        "Start on Starter at €99 a month, free for 7 days, then move up as your community grows. We count active members: customers who did something this month.",
+        "Start on Starter at €99 a month, free for 7 days, then move up as your community grows. We count active members: customers who sent a mission in the last 90 days.",
       planFor: [
         "For a brand starting its fan club. Sign up online and set it up yourself.",
         "For a brand launching its first customer community.",
         "For brands with a real fan base and regular drops.",
-        "For large communities and multi-brand groups.",
+        "The group offer: several brands or countries on one contract, each space on quote.",
       ],
     },
     tryLead:
@@ -143,7 +143,7 @@ export const PAGES = {
       "Sponsor quests and match predictions come with Club, team battles and community goals with Season. On Starter you can try missions, QR check-ins, rewards and the leaderboard.",
     h1Html: 'Supporters who post.<br><span class="hero-promise__gold">Sponsors who see it.</span>',
     lead:
-      "A supporters club app under your club’s name. Fans post from the stands, earn points and climb the levels. Your sponsors get a report of how many people saw it.",
+      "A supporters club app under your club’s name. Fans post from the stands, earn points and climb the levels. When a sponsor joins a mission, it gets a private report of the posts, their views and what they are worth.",
     tickerLabel: "For football, basketball, ice hockey, handball and cycling clubs, esports teams and gaming venues.",
     ticker: ["football clubs", "esports teams", "basketball clubs", "ice hockey teams", "cycling clubs", "gaming venues", "handball clubs", "rugby clubs", "volleyball clubs", "running clubs"],
 
@@ -188,11 +188,11 @@ export const PAGES = {
         {
           h: "The sponsor report",
           pHtml:
-            "Put a sponsor’s name on a set of missions. Supporters post with the sponsor in view, and the sponsor gets a private link on its phone: members who took part, posts, views, the followers of the supporters who posted and media value at €7 per 1,000 views, a rate you can change. More to show at renewal time than a logo on a shirt.",
+            "Now and then, put a sponsor’s name on a mission. Supporters post with the sponsor in view, and the sponsor gets a private link on its phone: members who took part, posts, views and media value at €7 per 1,000 views, a rate you can change. More to show at renewal time than a logo on a shirt.",
         },
       ],
       footHtml:
-        'See a full season at <a href="demo/aldermoor/">Aldermoor</a>, a fictional football club, sponsor report included.',
+        'See a full season at <a href="demo/aldermoor/">Aldermoor</a>, a fictional football club, with <a href="demo/aldermoor/?view=sponsor">its sponsor report</a>, or read <a href="sample-report.html">a sample sponsor report</a>.',
     },
 
     faqTitle: "Questions from clubs.",
@@ -205,7 +205,7 @@ export const PAGES = {
       {
         q: "How do we show sponsors what the fans are worth?",
         aHtml:
-          'Run a sponsor quest. Supporters post matchday photos with the sponsor in view, and the sponsor gets a private report link: members who took part, posts, views and media value at the price per 1,000 views you set. The <a href="demo/aldermoor/">Aldermoor demo</a> shows one.',
+          'Run a sponsor quest. Supporters post matchday photos with the sponsor in view, and the sponsor gets a private report link: members who took part, posts, views and media value at the price per 1,000 views you set. The <a href="demo/aldermoor/?view=sponsor">Aldermoor demo</a> shows one.',
       },
       {
         q: "Does it work for esports teams and gaming venues?",
@@ -220,30 +220,30 @@ export const PAGES = {
       {
         q: "Which plan suits a club?",
         aHtml:
-          'Season, at €1,290 a month for up to 10,000 active members, covers a full season with sponsors on board. A smaller club can start on Club at €490, or try Starter at €99 a month, free for 7 days. <a href="pricing.html">Compare the plans</a>.',
+          'Most clubs start on Club, at €490 a month for up to 1,500 active members. Season, at €1,290 a month, suits a club where several sponsors run quests all season. A small club or team can try Starter at €99 a month, free for 7 days. <a href="pricing.html">Compare the plans</a>.',
       },
     ],
 
     product: {
       titleHtml: "Three steps.<br>Your supporters do the rest.",
-      step2: "Supporters post from their own accounts. Each approved post earns points, a higher level and rewards.",
+      step2: "Supporters post from their own accounts. Each post earns them XP for their level as soon as they send it, and points for the shop once you approve it.",
       step3: "Every post and its views in your admin, and a private report with the totals for your sponsor.",
       caption: "Illustrative values. Each club names and sets its own challenges, levels and rewards, sponsors included. ",
     },
     resultTitle: "What you and your sponsor see.",
     resultCaptionHtml:
-      'Screens from the Aldermoor demo: a fictional club, illustrative figures. Media value is what the same views would cost as ads, at €7 per 1,000 views for sport. You set your own. <a href="reach-calculator.html?for=sport" data-calc-link>Work out your numbers</a>',
+      'Screens from the Aldermoor demo: a fictional club, illustrative figures. Media value is what the same views would cost as ads, at €7 per 1,000 views for sport. You set your own. <a href="reach-calculator.html?for=sport" data-calc-link>Work out your numbers</a> · <a href="sample-report.html">See a sample sponsor report</a>',
     demosLead:
       "Your crest, your colours, your words. Supporters see the club, not us. Open the Aldermoor demo and play it as a supporter, then as the club.",
     worldLead: "This page is for clubs, teams and esports. Pick another world to see its own page.",
     pricing: {
       lead:
-        "Season covers a whole season with your sponsors on board. A smaller club or esports team can start on Starter at €99 a month. We count active members, not dormant sign-ups.",
+        "Most clubs start on Club; Season once several sponsors run quests all season. A small club or esports team can start on Starter at €99 a month. We count active members: supporters who sent a mission in the last 90 days.",
       planFor: [
         "For a small club or team. Sign up online and set it up yourself.",
-        "For a club launching its supporters club.",
-        "For a club with sponsors to report to.",
-        "For large clubs and groups with several teams.",
+        "Where most clubs start: a supporters club and sponsor quests.",
+        "For a club where several sponsors run quests all season.",
+        "The group offer: several clubs, teams or sections on one contract, each space on quote.",
       ],
     },
     tryLead:
@@ -346,7 +346,7 @@ export const PAGES = {
 
     product: {
       titleHtml: "Three steps.<br>Your fans post after the show.",
-      step2: "Fans post from their own accounts. Each approved post earns points, levels and rewards.",
+      step2: "Fans post from their own accounts. Each post earns them XP for their level as soon as they send it, and points for the shop once you approve it.",
       step3: "Every post and its views, show by show.",
       caption: "Illustrative values. You name and set your own missions, levels and rewards, tour by tour. ",
     },
@@ -358,12 +358,12 @@ export const PAGES = {
     worldLead: "This page is for artists and creators. Pick another world to see its own page.",
     pricing: {
       lead:
-        "Start on Starter at €99 a month for a first fan club, or Club for a first tour. We count active members: fans who did something this month.",
+        "Start on Starter at €99 a month for a first fan club, or Club for a first tour. We count active members: fans who sent a mission in the last 90 days.",
       planFor: [
         "For an artist starting a fan club. Sign up online and set it up yourself.",
         "For a first tour with a fan club.",
         "For artists and festivals with a real fan base.",
-        "For labels, festivals and large fan bases.",
+        "The group offer: a label or festival with several artists or events, each space on quote.",
       ],
     },
     tryLead:

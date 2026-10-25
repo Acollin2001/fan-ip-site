@@ -1,0 +1,22 @@
+/* One fan, two seasons: what happens to season XP, points and level (IE9) */
+.sl{grid-column:1 / -1;margin:var(--s8) 0 0;color:var(--fg)}
+.sl-title{font-family:var(--font-display);font-weight:500;font-size:clamp(1.5rem,2.2vw,2rem);line-height:1.1;letter-spacing:-.015em}
+.sl-lead{max-width:44rem;margin-block-start:var(--s3);font-size:1.0625rem;line-height:1.5;color:var(--muted)}
+.sl-track{display:grid;grid-auto-flow:column;grid-auto-columns:min(82%,22rem);gap:var(--s4);margin:var(--s5) 0 0;padding:0 0 var(--s3);list-style:none;overflow-x:auto;scroll-snap-type:x mandatory;overscroll-behavior-x:contain}
+.sl-track:focus-visible{outline:2px solid var(--focus,var(--gold));outline-offset:4px}
+.sl-card{scroll-snap-align:start;display:grid;grid-template-rows:auto auto 1fr auto;padding:var(--s5);background:var(--plate);border:1px solid var(--gold);color:var(--ivory)}
+.sl-step{font:500 .875rem/1.25rem var(--font-body);color:var(--ivory-muted)}
+.sl-what{margin-block-start:var(--s2);font-family:var(--font-display);font-weight:500;font-size:1.375rem;line-height:1.15}
+.sl-stats{display:grid;gap:var(--s2);margin:var(--s4) 0 0;align-content:start}
+.sl-stats div{display:flex;justify-content:space-between;align-items:baseline;gap:var(--s3);padding-block-start:var(--s2);border-block-start:1px solid color-mix(in srgb,var(--ivory) 22%,transparent)}
+.sl-stats dt{flex:none;font-size:1rem;color:var(--ivory-muted)}
+.sl-stats dd{min-width:0}
+.sl-stats dd{margin:0;font-family:var(--font-display);font-weight:600;font-size:1.5rem;line-height:1;letter-spacing:-.02em;text-align:end}
+.sl-stats .is-new dd{color:var(--gold)}
+.sl-tag{display:block;margin-block-start:.25rem;font:500 .8125rem/1.2 var(--font-body);letter-spacing:0;color:var(--ivory-muted)}
+.sl-note{margin-block-start:var(--s4);font-size:1rem;line-height:1.5;color:var(--ivory-muted)}
+.sl-cap{margin-block-start:var(--s3);font-size:.9375rem;line-height:1.45;color:var(--muted)}
+@media (min-width:820px){
+  .sl-track{grid-auto-flow:row;grid-template-columns:repeat(3,minmax(0,1fr));overflow:visible;padding:0}
+}
+@media (prefers-reduced-motion:no-preference){.sl-track{scroll-behavior:smooth}}

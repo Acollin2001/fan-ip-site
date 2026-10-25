@@ -1,0 +1,68 @@
+/* EN / FR language switch (Oct 2026). One copy sits in the header bar from
+   600px up, another in the mobile menu, so phones reach it from "Menu".
+   The current language is marked with aria-current="page". */
+.lang-switch{display:flex;align-items:center;gap:2px}
+.lang-switch a{display:inline-flex;align-items:center;justify-content:center;min-inline-size:44px;min-block-size:44px;padding-inline:8px;border-radius:var(--r-btn);font:600 .875rem/1 var(--font-body);letter-spacing:.04em;text-decoration:none;color:var(--fg)}
+.lang-switch a:hover{text-decoration:underline;text-underline-offset:.25em}
+.lang-switch a[aria-current]{color:var(--gold);text-decoration:underline;text-decoration-thickness:2px;text-underline-offset:.35em}
+.lang-switch a:focus-visible{outline:2px solid var(--signal);outline-offset:2px}
+
+/* Header bar: wordmark, nav, switch, button. */
+@media (max-width: 599px){
+  .lang-switch--bar{display:none}
+}
+@media (min-width: 600px) and (max-width: 1023px){
+  .site-header__bar:has(> .lang-switch--bar){grid-template-columns:1fr auto auto auto}
+}
+@media (min-width: 1024px){
+  .site-header__bar:has(> .lang-switch--bar){column-gap:24px}
+  .lang-switch--menu{display:none}
+}
+
+/* Phones, French: "Réserver une démo" is longer than "Book a demo". The
+   wordmark gives back its spare width, and under 390px the button shows
+   "Démo" (its accessible name stays "Réserver une démo"). */
+.cta-short{display:none}
+@media (max-width: 419px){
+  :lang(fr) .site-header .logo-slot{inline-size:auto}
+  :lang(fr) .site-header__bar{column-gap:10px}
+  :lang(fr) .site-header__cta{padding-inline:10px}
+}
+@media (max-width: 389px){
+  .site-header__cta .cta-long{position:absolute;inline-size:1px;block-size:1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap}
+  .site-header__cta .cta-short{display:inline}
+}
+
+/* In the mobile menu, under the links, before the button. */
+.lang-switch--menu{margin-block:var(--s5) auto;gap:var(--s2)}
+.lang-switch--menu a{font-size:1rem;border:1px solid var(--rule-dark)}
+.lang-switch--menu a[aria-current]{border-color:var(--gold)}
+
+/* French spacing: the site's fonts have no narrow no-break space (U+202F,
+   as in "1 500" or "prêt ?"), so browsers took one from a system font,
+   sometimes almost zero wide. This blank glyph fills that one character.
+   Same descriptors as each face in style.css, so the two join up.
+   Built by .github/scripts/make-nnbsp-font.py. */
+@font-face{font-family:"Clash Display";src:url(./nnbsp.woff2) format("woff2");font-weight:400;font-style:normal;font-display:swap;unicode-range:U+202F}
+@font-face{font-family:"Clash Display";src:url(./nnbsp.woff2) format("woff2");font-weight:500;font-style:normal;font-display:swap;unicode-range:U+202F}
+@font-face{font-family:"Clash Display";src:url(./nnbsp.woff2) format("woff2");font-weight:600;font-style:normal;font-display:swap;unicode-range:U+202F}
+@font-face{font-family:"General Sans";src:url(./nnbsp.woff2) format("woff2");font-weight:400;font-style:normal;font-display:swap;unicode-range:U+202F}
+@font-face{font-family:"General Sans";src:url(./nnbsp.woff2) format("woff2");font-weight:500;font-style:normal;font-display:swap;unicode-range:U+202F}
+@font-face{font-family:"General Sans";src:url(./nnbsp.woff2) format("woff2");font-weight:600;font-style:normal;font-display:swap;unicode-range:U+202F}
+
+/* Starter card, desktop: the button gets a column of its own, as wide as
+   its label, so it never sits on the last line of the list (it did at
+   1024px in English, and at most widths in French, which runs longer). */
+@media (min-width: 1024px){
+  .starter{grid-template-columns:minmax(0,4fr) minmax(0,6fr) auto}
+  .starter-head{grid-column:1}
+  .starter-body{grid-column:2}
+  .starter-cta{grid-column:3}
+}
+
+/* Words that CSS writes, in French. */
+:lang(fr) .world-card[aria-pressed="true"]:after{content:"Votre univers"}
+
+/* French pages: a small "EN" tag on every link that leads to a page in
+   English (the language switch excepted), so nobody lands there unwarned. */
+:lang(fr) a[hreflang="en"]:not([data-lang])::after{content:"EN";display:inline-block;margin-inline-start:.35em;padding:.1em .3em;border:1px solid currentColor;border-radius:3px;font:600 .625rem/1 var(--font-body);letter-spacing:.06em;vertical-align:.15em;text-decoration:none;align-self:flex-start;justify-self:start;flex:none}

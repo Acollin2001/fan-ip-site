@@ -108,6 +108,9 @@ img, svg { max-width: 100%; }
 }
 .toast { position: absolute; left: 50%; bottom: calc(96px + var(--home-ind, 0px)); z-index: 30; transform: translate(-50%, 20px); opacity: 0; padding: 12px 18px; border-radius: var(--r-toast, 999px); background: var(--toast-bg, var(--ink)); color: var(--toast-fg, #fff); font-weight: 600; font-size: 0.875rem; box-shadow: var(--shadow-lift); transition: opacity 0.25s, transform 0.35s var(--ease-spring); pointer-events: none; max-width: calc(100% - 32px); width: max-content; text-align: center; }
 .toast.show { opacity: 1; transform: translate(-50%, 0); }
+/* "Soon": a screen or a figure that shows a feature on the roadmap. Its own colours, so it reads on every look and in the admin. */
+.soon-tag { display: inline-block; vertical-align: middle; margin-left: 6px; padding: 1px 7px; border-radius: 999px; background: #fff3c8; color: #4f3b00; border: 1px solid #b8962e; font: 700 0.6875rem/1.45 system-ui, -apple-system, "Segoe UI", sans-serif; letter-spacing: 0.02em; text-transform: none; font-style: normal; white-space: nowrap; }
+.soon-tag.soon-h { font-size: 0.75rem; vertical-align: 0.4em; }
 .sheet-layer.open ~ .toast { bottom: auto; top: calc(16px + var(--notch, 0px)); transform: translate(-50%, -10px); }
 .sheet-layer.open ~ .toast.show { transform: translate(-50%, 0); }
 @container dev (min-width: 820px) { .toast { bottom: 32px; } }
@@ -459,7 +462,15 @@ label.drop svg { width: 22px; height: 22px; flex: none; }
 .wordmark span { font-family: var(--f-display); font-weight: 400; font-size: 1.3rem; letter-spacing: 0.01em; line-height: 1; white-space: nowrap; }
 .wordmark small { display: block; font-family: var(--f-text); font-size: 0.625rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--ink-3); margin-top: 4px; }
 .nav { display: none; }
-.petals { margin-left: auto; display: inline-flex; align-items: center; gap: 7px; padding: 7px 13px 7px 9px; border-radius: calc(999px * var(--rk, 1)); border: 1px solid var(--line); background: var(--paper); color: var(--cypres); cursor: pointer; white-space: nowrap; }
+/* The "!" on the points total: shown while points from a post wait for approval. Tap it to see how many. */
+.pts-wrap { position: relative; display: inline-flex; }
+.pts-wrap.pts-top { margin-left: auto; }
+.pts-wrap.pts-rail { display: grid; }
+.pend-dot { position: absolute; top: -7px; right: -7px; z-index: 2; width: 22px; height: 22px; padding: 0; display: grid; place-items: center; border-radius: 50%; border: 2px solid #fff; background: #ffd34d; color: #2a1f00; font: 800 0.8125rem/1 system-ui, -apple-system, "Segoe UI", sans-serif; cursor: pointer; box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25); }
+.pend-dot::after { content: ""; position: absolute; inset: -6px; }
+.pend-dot[hidden] { display: none; }
+.pend-dot:focus-visible { outline: 2px solid #1a56db; outline-offset: 2px; }
+.petals { display: inline-flex; align-items: center; gap: 7px; padding: 7px 13px 7px 9px; border-radius: calc(999px * var(--rk, 1)); border: 1px solid var(--line); background: var(--paper); color: var(--cypres); cursor: pointer; white-space: nowrap; }
 .petals svg { width: 18px; height: 18px; color: var(--rose); }
 .petals b { font-family: var(--f-display); font-weight: 500; font-size: 1.05rem; line-height: 1; }
 .petals span { font-size: 0.75rem; color: var(--ink-2); }
@@ -481,7 +492,7 @@ label.drop svg { width: 22px; height: 22px; flex: none; }
   .nav button[aria-current="page"] { color: var(--cypres); }
   .nav button[aria-current="page"]::after { content: ""; position: absolute; left: 12px; right: 12px; bottom: 0; height: 2px; background: var(--rose); }
   .nav .n { display: inline-block; margin-left: 6px; min-width: 18px; padding: 0 5px; border-radius: calc(999px * var(--rk, 1)); background: var(--petale); color: var(--rose-deep); font-size: 0.6875rem; font-weight: 700; line-height: 18px; text-align: center; }
-  .petals { margin-left: 0; }
+  .pts-wrap.pts-top { margin-left: 0; }
   .tabs { display: none; }
   .view { padding: 44px 48px 72px; }
   .view-inner { gap: 56px; }
@@ -498,6 +509,7 @@ label.drop svg { width: 22px; height: 22px; flex: none; }
 .link { border: 0; background: none; padding: 4px 0; color: var(--rose-deep); font-weight: 600; font-size: 0.875rem; cursor: pointer; text-decoration: underline; text-underline-offset: 4px; text-decoration-color: color-mix(in srgb, var(--rose) 45%, transparent); white-space: nowrap; }
 .meta { color: var(--ink-3); font-size: 0.8125rem; }
 .foot-note { margin: 0; padding-top: 18px; border-top: 1px solid var(--line); font-size: 0.75rem; color: var(--ink-3); text-align: center; }
+.foot-note a { color: inherit; text-decoration: underline; text-underline-offset: 2px; }
 @container dev (min-width: 820px) { .h-page { font-size: 4rem; } .h-sec { font-size: 2rem; } }
 .btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 48px; padding: 0 22px; border: 0; border-radius: calc(999px * var(--rk, 1)); font-weight: 600; font-size: 0.9375rem; cursor: pointer; transition: transform 0.15s, background 0.2s; text-align: center; }
 .btn:active { transform: scale(0.97); }
@@ -602,9 +614,9 @@ label.drop svg { width: 22px; height: 22px; flex: none; }
 .rcard:hover .rcard-art { transform: translateY(-4px); }
 .rcard-art svg.art { width: 78%; height: auto; margin-bottom: 4%; }
 .rcard-no { position: absolute; top: 18%; left: 0; right: 0; text-align: center; font-family: var(--f-display); font-size: 0.8125rem; color: var(--tone-fg); }
-.rcard-pts { position: absolute; right: 8px; bottom: 8px; display: grid; place-items: center; width: 54px; height: 54px; border-radius: 50%; background: var(--paper); color: var(--rose-deep); box-shadow: 0 6px 14px -8px rgba(36,48,42,0.6); text-align: center; line-height: 1; }
+.rcard-pts { position: absolute; right: 8px; bottom: 8px; display: grid; place-items: center; width: 72px; height: 72px; border-radius: 50%; background: var(--paper); color: var(--rose-deep); box-shadow: 0 6px 14px -8px rgba(36,48,42,0.6); text-align: center; line-height: 1; }
 .rcard-pts b { font-family: var(--f-display); font-weight: 500; font-size: 1.05rem; }
-.rcard-pts small { display: block; font-size: 0.5625rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; margin-top: 2px; color: var(--ink-3); }
+.rcard-pts small { display: block; font-size: 0.5625rem; font-weight: 700; letter-spacing: 0.01em; white-space: nowrap; margin-top: 3px; color: var(--ink-3); }
 .rcard-text { display: flex; flex-direction: column; gap: 3px; padding: 12px 2px 0; }
 .rcard-type { font-size: 0.6875rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--rose-deep); }
 .rcard-title { font-family: var(--f-display); font-weight: 400; font-size: 1.12rem; line-height: 1.18; }
@@ -810,6 +822,7 @@ label.drop svg { width: 22px; height: 22px; flex: none; }
 .checking { display: flex; align-items: center; gap: 12px; padding: 16px; border-radius: calc(6px * var(--rk, 1)); background: var(--paper); font-size: 0.9375rem; color: var(--ink-2); }
 .success { display: flex; flex-direction: column; align-items: center; gap: 10px; text-align: center; padding: 4px 0; }
 .success .big { font-family: var(--f-display); font-weight: 300; font-size: 4.2rem; line-height: 0.9; color: var(--rose-deep); }
+.success .big-unit { margin-top: -4px; font-size: 0.8125rem; color: var(--ink-2); }
 .success p { max-width: 40ch; color: var(--ink-2); }
 .pressed-row { display: flex; align-items: center; gap: 14px; padding: 12px 14px; border-radius: calc(6px * var(--rk, 1)); background: var(--lin); font-size: 0.875rem; text-align: left; }
 .pressed-row .mini { width: 46px; flex: none; background: var(--paper); padding: 3px; box-shadow: 0 4px 10px -6px rgba(36,48,42,0.5); transform: rotate(-4deg); }
@@ -997,18 +1010,20 @@ function countTo(from, to) {
   };
   requestAnimationFrame(step);
 }
-function award(amount, fromEl, msg) {
+/* Sending a mission adds its XP at once. For a post, the same number of points follows once the post is approved. */
+function award(amount, fromEl, msg, xpOnly) {
   const before = state.balance, beforeRank = myRank();
-  state.balance += amount; state.earned += amount;
+  if (!xpOnly) state.balance += amount;
+  state.earned += amount;
   const app = $("#app");
   const target = $$("[data-points-target]").find((el) => el.offsetParent !== null);
   const finish = () => {
     countTo(before, state.balance);
     if (target) { target.classList.remove("bump"); void target.offsetWidth; target.classList.add("bump"); }
     const r = myRank();
-    toast(msg || (r < beforeRank ? `+${fmt(amount)} ${BRAND.word}. You moved up to ${ordinal(r)} in ${BRAND.boardName}` : `+${fmt(amount)} ${BRAND.word}`));
+    toast(msg || (r < beforeRank ? `${xpPts(amount)}. You moved up to ${ordinal(r)} in ${BRAND.boardName}` : xpPts(amount)));
   };
-  if (reduceMotion || !fromEl || !target || !fromEl.getBoundingClientRect().width) return finish();
+  if (reduceMotion || !fromEl || !target || xpOnly || !fromEl.getBoundingClientRect().width) return finish();
   const a = app.getBoundingClientRect(), s = fromEl.getBoundingClientRect(), t = target.getBoundingClientRect();
   const fly = document.createElement("div"); fly.className = "fly num"; fly.textContent = `+${fmt(amount)}`;
   app.appendChild(fly);
@@ -1069,7 +1084,7 @@ function refreshShell() {
   const fresh = document.createElement("div"); fresh.innerHTML = shell();
   $$("[data-shell]").forEach((el) => { const src = fresh.querySelector(`[data-shell="${el.dataset.shell}"]`); if (src) el.innerHTML = src.innerHTML; });
 }
-const screenFoot = () => `<p class="foot-note">${esc(BRAND.name)} is a fictional ${BRAND.kind}. Every name and figure here is illustrative; a few screens show features on our roadmap. A FAN/IP demo.</p>`;
+const screenFoot = () => `<p class="foot-note">${esc(BRAND.name)} is a fictional ${BRAND.kind}. Every name and figure here is illustrative; a few screens show features on <a href="../../whats-new.html">our roadmap</a>. A FAN/IP demo.</p>`;
 
 /* ---------------------------------------------------------------- presenter */
 function setView(v) {
@@ -1229,6 +1244,7 @@ document.addEventListener("click", (e) => {
     case "device": return setDevice(el.dataset.d);
     case "close": return closeSheet();
     case "tab": closeSheet(); state.tab = el.dataset.tab; return renderMember();
+    case "pending": return toast(pendLabel());
     case "flip": return el.setAttribute("aria-pressed", el.getAttribute("aria-pressed") === "true" ? "false" : "true");
     case "adm": closeDrawer(); state.admin = el.dataset.p; if (el.dataset.i) state.atab[el.dataset.p] = +el.dataset.i; renderAdmin(); $("#adm-main").scrollTop = 0; return;
     case "atab": state.atab[el.dataset.p] = +el.dataset.i; return rerenderAdminInPlace();
@@ -1394,7 +1410,7 @@ function admAppearance() {
     </div>`;
 }
 function admModules() {
-  return `<p class="sub" style="margin:0">The Season plan includes every module, for up to 10,000 active members a month. A module switched off disappears from the menu and from the ${aud(1)}.</p>
+  return `<p class="sub" style="margin:0">The Season plan includes every module, for up to 10,000 active members. A module switched off disappears from the menu and from the ${aud(1)}.</p>
     <div class="modules">${MODULES.map(([n, ic, s, p, i]) => `<div class="module"><span class="mi">${icon(ic)}</span><span><b>${n}</b><span>${s}</span>${p ? `<br><button class="adm-link" data-act="adm" data-p="${p}" data-i="${i || 0}">Settings</button>` : ""}</span><button class="toggle" role="switch" aria-checked="${!state.modOff.has(n)}" aria-label="${n}" data-act="module" data-n="${n}"></button></div>`).join("")}</div>`;
 }
 /* Brand-page and shared admin actions. Returns true when it handled the click. */
@@ -1452,8 +1468,8 @@ function accountPage({ domain, active, renews, sub }) {
         <div class="scroll-x"><table class="atable"><thead><tr><th>Name</th><th>Job</th><th>Role</th><th>Last active</th></tr></thead>
         <tbody>${TEAM.map(([n, j, r, l]) => `<tr><td><span class="who"><i>${initials(n)}</i>${esc(n)}</span></td><td class="wrap">${esc(j)}</td><td>${r}</td><td>${l === "Invitation sent" ? `<span class="st sched">${l}</span>` : l}</td></tr>`).join("")}</tbody></table></div></div>
       <div class="acard"><h2>Plan</h2><p class="sub">Season. Every program module, unlimited team seats and your own domain.</p>
-        <div class="usage"><div><span>Active members this month</span><b>${fmt(active)} of 10,000</b></div><span class="bar-a"><i style="width:${(active / 100).toFixed(1)}%"></i></span><small class="sub">Members who used the app at least once this month. Sign-ups who never come back are not counted.</small></div>
-        <dl class="bs-words" style="margin-top:14px"><dt>Price</dt><dd>€1,290 a month, excluding VAT</dd><dt>Term</dt><dd>12 months, renews ${renews}</dd><dt>Invoices</dt><dd>Monthly, by card</dd><dt>Support</dt><dd>Reply within one business day</dd></dl></div>
+        <div class="usage"><div><span>Active members (last 90 days)</span><b>${fmt(active)} of 10,000</b></div><span class="bar-a"><i style="width:${(active / 100).toFixed(1)}%"></i></span><small class="sub">Members who sent at least one mission in the last 90 days, approved or refused. After 90 days without one, a member counts as inactive; the account is kept.</small></div>
+        <dl class="bs-words" style="margin-top:14px"><dt>Price</dt><dd>€1,290 a month, no VAT charged (§ 19 UStG)</dd><dt>Term</dt><dd>12 months, renews ${renews}</dd><dt>Invoices</dt><dd>Monthly, by card</dd><dt>Support</dt><dd>Reply within one business day</dd></dl></div>
     </div>
     <div class="adm-row">
       <div class="acard"><h2>Roles</h2><table class="atable"><tbody>${roles.map(([r, w]) => `<tr><td><b style="font-weight:500">${r}</b></td><td class="wrap">${w}</td></tr>`).join("")}</tbody></table></div>
@@ -1467,6 +1483,9 @@ function accountPage({ domain, active, renews, sub }) {
    house, its products, members, handles and figures. Artwork is drawn in SVG
    below, so the page needs no photos and makes no network request. */
 const BRAND = { name: "Maison Aube", kind: "brand", word: "petals", boardName: "the leaderboard" };
+/* Sending a ritual earns its season XP at once (tiers, the leaderboard; back to 0 each season); the same number of petals to spend follows
+   once the post is approved, and petals are kept for good. */
+const xpPts = (n) => `+${fmt(n)} XP · +${fmt(n)} ${BRAND.word}`;
 const ME = { name: "Inès Ferrand", first: "Inès", handle: "@ines.ferrand", no: "02417", since: "March 2024", code: "INES-AUBE", city: "Lyon" };
 const TIERS = [
   { id: "graine", name: "Graine", en: "seed", at: 0, gift: "A 5 ml sample of your choice, on joining" },
@@ -1570,7 +1589,7 @@ const MONTH = NOW.toLocaleDateString("en-GB", { month: "long" });
 const RITUELS = [
   { id: "routine", kind: "post", type: "Routine", title: "Your evening routine in three steps", pts: 200, art: "serum", tone: "rose", meta: "Reel or TikTok, about 30 s", herb: "camomile", tag: "#RituelAube",
     brief: "Film three gestures, one product each, with the Maison Aube products you really use. Your own bathroom and your own light; no filter needed.",
-    steps: ["Film three short shots: cleanse, treat, seal.", "Post it on your own account and tag @maisonaube.", "Paste the link here. We check it and the petals land."] },
+    steps: ["Film three short shots: cleanse, treat, seal.", "Post it on your own account and tag @maisonaube.", "Paste the link here. We check it and the XP and petals land."] },
   { id: "unbox", kind: "post", type: "Unboxing", title: "Unbox your Givre coffret on camera", pts: 250, art: "coffret", tone: "cypres", meta: "Your coffret arrived yesterday", herb: "pine", tag: "#GivreAube",
     brief: "First reactions are the best ones. Open your Givre coffret on camera, tissue and all, and tell us which piece you reach for first.",
     steps: ["Film the opening in one take. No need to edit.", "Post it on your own account and tag @maisonaube.", "Paste the link here."] },
@@ -1622,27 +1641,27 @@ const GIFTS = [
 ];
 const HOW = { post: "Sent to your address in 3 working days", code: "Code shown straight away", unlock: "On your account straight away", book: "We email you within 48 hours to pick a date" };
 const MY_POSTS = [
-  { title: "Morning mist, your way", net: "Instagram", ago: 3, views: 4812, likes: 377 },
-  { title: "Your favourite gesture on video", net: "TikTok", ago: 6, views: 12940, likes: 1104 },
-  { title: "Sérum Rosée in 15 seconds", net: "TikTok", ago: 21, views: 18233, likes: 1520 },
-  { title: "Evening routine, summer edit", net: "Instagram", ago: 47, views: 6371, likes: 498 },
+  { title: "Morning mist, your way", net: "Instagram", ago: 3, views: 1640, likes: 128 },
+  { title: "Your favourite gesture on video", net: "TikTok", ago: 6, views: 3120, likes: 268 },
+  { title: "Sérum Rosée in 15 seconds", net: "TikTok", ago: 21, views: 2860, likes: 238 },
+  { title: "Evening routine, summer edit", net: "Instagram", ago: 47, views: 1510, likes: 117 },
 ];
 const TOP = [
-  ["Camille Roussel", "@camille.rsl", 5120, 14, 312000], ["Yasmine Belkadi", "@yas.skin", 4870, 12, 288000], ["Léa Fontaine", "@lea.fnt", 4410, 11, 241000],
-  ["Margaux Dubreuil", "@margaux.db", 3980, 10, 198000], ["Sofia Marchand", "@sofia.mrc", 3720, 9, 176000], ["Anaïs Lambert", "@anais.lbt", 3510, 9, 150000],
-  ["Chloé Navarro", "@chloe.nav", 3390, 8, 141000], ["Nora Haddad", "@nora.hdd", 3240, 8, 133000],
+  ["Camille Roussel", "@camille.rsl", 5120, 14, 24000], ["Yasmine Belkadi", "@yas.skin", 4870, 12, 21000], ["Léa Fontaine", "@lea.fnt", 4410, 11, 18500],
+  ["Margaux Dubreuil", "@margaux.db", 3980, 10, 16000], ["Sofia Marchand", "@sofia.mrc", 3720, 9, 14500], ["Anaïs Lambert", "@anais.lbt", 3510, 9, 13200],
+  ["Chloé Navarro", "@chloe.nav", 3390, 8, 12000], ["Nora Haddad", "@nora.hdd", 3240, 8, 11200],
 ];
-const NEAR = [["Julie Perrin", "@julie.prn", 1610, 4, 41000], ["Emma Collet", "@emmacollet", 1480, 4, 33000], ["Sarah Benoît", "@sarah.bnt", 1320, 3, 30000], ["Manon Giraud", "@manon.grd", 1190, 3, 27000]];
-const BELOW = [["Clara Vasseur", "@clara.vss", 1080, 3, 22000], ["Zoé Martin", "@zoe.mrtn", 990, 2, 19000]];
+const NEAR = [["Julie Perrin", "@julie.prn", 1610, 4, 5600], ["Emma Collet", "@emmacollet", 1480, 4, 4900], ["Sarah Benoît", "@sarah.bnt", 1320, 3, 3900], ["Manon Giraud", "@manon.grd", 1190, 3, 3500]];
+const BELOW = [["Clara Vasseur", "@clara.vss", 1080, 3, 3300], ["Zoé Martin", "@zoe.mrtn", 990, 2, 2400]];
 const WALL = [
-  { who: "@camille.rsl", rit: "Evening routine", net: "TikTok", views: 48200, video: 1 },
-  { who: "@lea.fnt", rit: "Brume d'Iris on the shelf", net: "Instagram", views: 9300 },
-  { who: "@yas.skin", rit: "Givre unboxing", net: "TikTok", views: 61500, video: 1 },
-  { who: "@margaux.db", rit: "Baume Nuit, one month in", net: "Instagram", views: 7100 },
-  { who: "@sofia.mrc", rit: "Givre unboxing", net: "Instagram", views: 22800, video: 1 },
-  { who: "@nora.hdd", rit: "Brume d'Iris on the shelf", net: "Instagram", views: 5400 },
-  { who: "@chloe.nav", rit: "A review in 15 seconds", net: "YouTube Shorts", views: 14600, video: 1 },
-  { who: "@anais.lbt", rit: "December's candle", net: "Instagram", views: 3900 },
+  { who: "@camille.rsl", rit: "Evening routine", net: "TikTok", views: 7400, video: 1 },
+  { who: "@lea.fnt", rit: "Brume d'Iris on the shelf", net: "Instagram", views: 2100 },
+  { who: "@yas.skin", rit: "Givre unboxing", net: "TikTok", views: 9800, video: 1 },
+  { who: "@margaux.db", rit: "Baume Nuit, one month in", net: "Instagram", views: 1800 },
+  { who: "@sofia.mrc", rit: "Givre unboxing", net: "Instagram", views: 4600, video: 1 },
+  { who: "@nora.hdd", rit: "Brume d'Iris on the shelf", net: "Instagram", views: 1500 },
+  { who: "@chloe.nav", rit: "A review in 15 seconds", net: "YouTube Shorts", views: 3300, video: 1 },
+  { who: "@anais.lbt", rit: "December's candle", net: "Instagram", views: 1200 },
 ];
 const POLL = [["Lyon", 2140], ["Bordeaux", 1730], ["Lille", 1360]];
 const NOTES3 = [["fig", "Figue verte", "Green fig leaf, milky and bright", 3120], ["drift", "Bois flotté", "Driftwood, salt and pale cedar", 2480], ["tea", "Thé fumé", "Smoked black tea and a little honey", 2610]];
@@ -1651,13 +1670,15 @@ const QUIZ = { q: "In Sérum Rosée, which ingredient holds water in the skin?",
 
 /* ---------------------------------------------------------------- state */
 const state = {
+  pending: 0, approved: new Set(),
   view: "member", device: window.innerWidth >= 1180 ? "laptop" : "phone", tab: "home",
   balance: 1840, earned: 0, life: 3360, monthBase: 1120,
   done: new Set(), pressed: new Set(PLATES.filter((p) => !p.unlock).map((p) => p.id)), just: null,
   posts: MY_POSTS.map((p) => ({ ...p })), filter: "all", gfilter: "all", redeemed: [], vote: null, poll: null,
-  goal: 7412, reminder: false, friendJoined: false, net: "Instagram", link: "", product: "serum",
+  goal: 1480, reminder: false, friendJoined: false, net: "Instagram", link: "", product: "serum",
   cpm: 8, admin: "overview", atab: {}, period: "30d", psort: "views", draft: null, news: null, orders: null,
 };
+/* life: season XP so far (tiers). monthBase: XP earned this month (the leaderboard). balance: petals to spend. */
 const SP = () => state.life + state.earned;
 const tierOf = (n) => [...TIERS].reverse().find((t) => n >= t.at);
 const nextTier = (n) => TIERS.find((t) => t.at > n);
@@ -1666,7 +1687,7 @@ function myRank() { return 31 + [...NEAR, ...BELOW].filter((n) => n[2] > monthPt
 const ritual = (id) => RITUELS.find((r) => r.id === id);
 const openRituels = () => RITUELS.filter((r) => !state.done.has(r.id));
 const plateFor = (rid) => PLATES.find((p) => p.unlock === rid);
-const goalPct = () => Math.min(100, Math.round((state.goal / 10000) * 100));
+const goalPct = () => Math.min(100, Math.round((state.goal / 2500) * 100));
 
 /* ---------------------------------------------------------------- shell */
 const TABS = [["home", "Today", "home"], ["rituels", "Rituels", "rit"], ["herbier", "Herbier", "herb"], ["bouquet", "Leaderboard", "bouq"], ["gifts", "Gifts", "gift"]];
@@ -1682,7 +1703,7 @@ function shell() {
   <header class="top">
     <button class="wordmark" data-act="tab" data-tab="home">${brandMark()}<span>Maison Aube<small>Le Jardin</small></span></button>
     <nav class="nav" aria-label="Le Jardin" data-shell="nav">${nav.map(([k, l]) => `<button data-act="tab" data-tab="${k}" ${state.tab === k ? 'aria-current="page"' : ""}>${l}${k === "rituels" ? `<span class="n">${openRituels().length}</span>` : ""}</button>`).join("")}</nav>
-    <button class="petals" data-act="tab" data-tab="gifts" data-points-target aria-label="Your petals">${petalIcon()}<b data-balance class="num">${fmt(state.balance)}</b><span data-shell="word">${BRAND.word}</span></button>
+    <span class="pts-wrap pts-top"><button class="petals" data-act="tab" data-tab="gifts" data-points-target aria-label="Your petals">${petalIcon()}<b data-balance class="num">${fmt(state.balance)}</b><span data-shell="word">${BRAND.word}</span></button>${pendDot()}</span>
     <button class="me-btn" data-act="tab" data-tab="profile" aria-label="My jardin">${initials(ME.name)}</button>
   </header>
   <main class="view" id="view" tabindex="-1"></main>
@@ -1721,7 +1742,7 @@ function tierPath() {
   const within = n ? (SP() - t.at) / (n.at - t.at) : 1;
   const p = Math.min(1, (idx + within) / 3);
   return `<div class="tierpath">
-    <div class="tp-row"><span>${n ? `<b class="num">${fmt(n.at - SP())}</b> ${BRAND.word} to ${n.name}` : "You are in the Jardin secret"}</span><span class="meta">${fmt(SP())} earned in all</span></div>
+    <div class="tp-row"><span>${n ? `<b class="num">${fmt(n.at - SP())}</b> XP to ${n.name}` : "You are in the Jardin secret"}</span><span class="meta">${fmt(SP())} XP this season</span></div>
     <div class="tp-steps" style="--p:${p.toFixed(3)}">${TIERS.map((x, i) => `<span class="tp-step ${i <= idx ? "on" : ""} ${i === idx ? "cur" : ""}"><i>${tierGlyph(x.id)}</i>${x.name}</span>`).join("")}</div>
   </div>`;
 }
@@ -1748,18 +1769,18 @@ function ritualCard(r, i = 0, opts = {}) {
   const done = state.done.has(r.id) && !opts.still;
   return `<button class="rcard" ${opts.still ? "" : `data-act="ritual" data-id="${r.id}"`} data-tone="${r.tone}" ${done ? "data-done" : ""}>
     <span class="rcard-art">${productArt(r.art, TONE[r.tone])}<span class="rcard-no">N° ${String(RITUELS.indexOf(r) + 1 || i + 1).padStart(2, "0")}</span>
-      ${done ? `<span class="rcard-done">${icon("check")}Done</span>` : `<span class="rcard-pts"><span><b>+${r.pts}</b><small>${BRAND.word}</small></span></span>`}</span>
+      ${done ? `<span class="rcard-done">${icon("check")}Done</span>` : `<span class="rcard-pts"><span><b>+${r.pts}</b><small>XP · ${BRAND.word}</small></span></span>`}</span>
     <span class="rcard-text"><span class="rcard-type">${r.type}</span><span class="rcard-title">${esc(r.title)}</span><span class="rcard-meta">${esc(r.meta)}</span></span>
   </button>`;
 }
 function goalBlock(compact) {
-  const n = goalPct(), on = Math.floor((state.goal / 10000) * 40), mine = state.goalMine || 0;
+  const n = goalPct(), on = Math.floor((state.goal / 2500) * 40), mine = state.goalMine || 0;
   return `<section class="goal" aria-labelledby="goalT">
     <div>
       <span class="eyebrow">The whole Jardin, together</span>
-      <h3 id="goalT">10,000 rituals in ${MONTH} open Aube Rose</h3>
-      <p>Every ritual posted by any member counts. At 10,000, a limited edition opens to the Jardin: 1,000 numbered compacts of Aube Rose solid perfume, 72 hours before the shop.</p>
-      <div class="goal-num"><b class="num">${fmt(state.goal)}</b><span>of 10,000, ${n}%${mine ? `. ${mine} of them yours` : ""}</span></div>
+      <h3 id="goalT">2,500 rituals in ${MONTH} open Aube Rose</h3>
+      <p>Every ritual posted by any member counts. At 2,500, a limited edition opens to the Jardin: 1,000 numbered compacts of Aube Rose solid perfume, 72 hours before the shop.</p>
+      <div class="goal-num"><b class="num">${fmt(state.goal)}</b><span>of 2,500, ${n}%${mine ? `. ${mine} of them yours` : ""}</span></div>
       ${compact ? `<button class="link" data-act="tab" data-tab="jardin" style="margin-top:8px">Open le Jardin</button>` : ""}
     </div>
     <div class="petal-field" role="img" aria-label="${n}% of the goal">${Array.from({ length: 40 }, (_, i) => `<span class="${i < on ? "on" : ""} ${i >= on - Math.min(mine, 1) && i < on && mine ? "new" : ""}">${petalShape()}</span>`).join("")}</div>
@@ -1786,7 +1807,7 @@ function screenHome() {
   const n = nextTier(SP()), fleur = SP() >= 4000;
   const lede = fleur
     ? `You're a Fleur member now, so Givre opens to you on <b>${dayShort(DROP_EARLY)}</b>, two days before everyone.`
-    : `Givre opens to Fleur members on <b>${dayShort(DROP_EARLY)}</b>. You're <b>${fmt(n.at - SP())} ${BRAND.word}</b> from Fleur: two rituals would get you in early.`;
+    : `Givre opens to Fleur members on <b>${dayShort(DROP_EARLY)}</b>. You're <b>${fmt(n.at - SP())} XP</b> from Fleur: two rituals would get you in early.`;
   const reach = GIFTS.filter((g) => g.cost <= state.balance + 600).slice(0, 3);
   const row = openRituels().slice(0, 4);
   return `<header class="hello-row"><div><span class="eyebrow">Le Jardin, ${dayShort(NOW)}</span><h1 class="h-page">${greeting()}, ${ME.first}.</h1><p class="lede">${lede}</p></div></header>
@@ -1805,13 +1826,13 @@ const inFilter = (r, f) => f === "all" || (f === "post" && r.kind === "post") ||
 function screenRituels() {
   const list = RITUELS.filter((r) => inFilter(r, state.filter));
   return `<header><span class="eyebrow">Rituels</span><h1 class="h-page">Share it your way. We count every view.</h1>
-      <p class="lede">Each ritual is something you post on your own account. Paste the link, we check it, and the petals land. Up to three a day.</p></header>
+      <p class="lede">Each ritual is something you post on your own account. Paste the link, we check it, and the XP and petals land. Up to three a day.</p></header>
     <section class="sec">
       <div class="chips" role="group" aria-label="Filter">${FILTERS.map(([k, l]) => `<button class="chip" data-act="filter" data-f="${k}" aria-pressed="${state.filter === k}">${l}</button>`).join("")}</div>
       <div class="grid-r">${list.map((r, i) => ritualCard(r, i)).join("")}</div>
     </section>
     <section class="sec"><div class="sec-head"><h2 class="h-sec">Done this month</h2><span class="meta">${PAST.length + state.done.size} rituels</span></div>
-      <div class="myposts">${[...[...state.done].map((id) => ({ title: ritual(id).title, pts: ritual(id).pts, when: 0 })), ...PAST].map((p) => `<div class="mypost"><span class="nt">${p.net ? NET_SHORT[p.net] : icon("check")}</span><span class="tx"><b>${esc(p.title)}</b><span>${p.when ? dayShort(addDays(p.when)) : "Today"}</span></span><span class="vw"><b>+${p.pts}</b><span>${BRAND.word}</span></span></div>`).join("")}</div>
+      <div class="myposts">${[...[...state.done].map((id) => ({ title: ritual(id).title, pts: ritual(id).pts, when: 0 })), ...PAST].map((p) => `<div class="mypost"><span class="nt">${p.net ? NET_SHORT[p.net] : icon("check")}</span><span class="tx"><b>${esc(p.title)}</b><span>${p.when ? dayShort(addDays(p.when)) : "Today"}</span></span><span class="vw"><b>+${p.pts}</b><span>XP · ${BRAND.word}</span></span></div>`).join("")}</div>
     </section>`;
 }
 function plateHtml(p, i) {
@@ -1824,7 +1845,7 @@ function plateHtml(p, i) {
 }
 function screenHerbier() {
   const n = state.pressed.size, pc = Math.round((n / 12) * 100);
-  return `<header class="herb-head"><div><span class="eyebrow">The Herbier</span><h1 class="h-page">Twelve plants, pressed one ritual at a time.</h1>
+  return `<header class="herb-head"><div><span class="eyebrow">The Herbier</span><h1 class="h-page">Twelve plants, pressed one ritual at a time. ${soon("soon-h")}</h1>
       <p class="lede">Every plant in our formulas has a plate. Some come with a ritual, one only with Givre. Press all twelve before 31 December and we send you a framed print of your Herbier.</p></div>
       <div class="herb-prog"><div class="tp-row"><span><b class="num">${n}</b> of 12 pressed</span><span class="meta">${pc}%</span></div><div class="bar"><span data-fill="${pc}"></span></div></div></header>
     <div class="herbier">${PLATES.map(plateHtml).join("")}</div>`;
@@ -1836,23 +1857,23 @@ function boardRows() {
   const start = 30;
   const row = (r, pos) => `<tr class="${r.me ? "me" : ""}" ${r.me ? 'id="meRow"' : ""}><td class="pos">${pos}</td><td><span class="mem"><i>${initials(r.name)}</i><b>${r.me ? "You" : esc(r.name)}</b></span></td><td class="r hide-sm">${r.posts}</td><td class="r hide-sm">${big(r.views)}</td><td class="r pv num">${fmt(r.pts)}</td></tr>`;
   const top = TOP.map(([name, handle, pts, posts, views], i) => row({ name, handle, pts, posts, views }, i + 1)).join("");
-  return `<table class="ltable"><thead><tr><th>#</th><th>Member</th><th class="r hide-sm">Posts</th><th class="r hide-sm">Views</th><th class="r">${BRAND.word}</th></tr></thead><tbody>
+  return `<table class="ltable"><thead><tr><th>#</th><th>Member</th><th class="r hide-sm">Posts</th><th class="r hide-sm">Views</th><th class="r">XP</th></tr></thead><tbody>
     ${top}<tr class="gap"><td colspan="5">···</td></tr>${all.map((r, i) => row(r, start + i + 1)).join("")}</tbody></table>`;
 }
 function screenBouquet() {
   const p = TOP.slice(0, 3);
-  const pod = (x, i) => `<div class="pod p${i + 1}"><span class="pos">${i + 1}</span><span class="av">${initials(x[0])}</span><span class="who">${esc(x[0])}</span><span class="pts num">${fmt(x[2])} <small>${BRAND.word}</small></span></div>`;
+  const pod = (x, i) => `<div class="pod p${i + 1}"><span class="pos">${i + 1}</span><span class="av">${initials(x[0])}</span><span class="who">${esc(x[0])}</span><span class="pts num">${fmt(x[2])} <small>XP</small></span></div>`;
   const myV = state.posts.filter((x) => x.ago <= 31).reduce((a, x) => a + x.views, 0);
-  return `<header><span class="eyebrow">Leaderboard, ${MONTH}</span><h1 class="h-page">The members whose rituals travelled furthest.</h1>
-      <p class="lede">${BRAND.word[0].toUpperCase() + BRAND.word.slice(1)} earned this month. It starts again on the 1st, so anyone can make the top three.</p></header>
+  return `<header><span class="eyebrow">Leaderboard, ${MONTH}</span>${soon()}<h1 class="h-page">The members whose rituals travelled furthest.</h1>
+      <p class="lede">XP earned this month. It starts again on the 1st, so anyone can make the top three.</p></header>
     <div class="podium">${pod(p[1], 1)}${pod(p[0], 0)}${pod(p[2], 2)}</div>
     <div class="board-wrap">
       <section class="sec">${boardRows()}</section>
       <aside class="sec">
-        <div class="me-card" style="gap:14px"><div class="me-top"><span class="av">${initials(ME.name)}</span><span><b>${ordinal(myRank())}</b><span>${fmt(monthPts())} ${BRAND.word} this month, ${big(myV)} views on your posts</span></span></div>
-          <div class="bar" style="background:rgba(255,255,255,.14)"><span data-fill="${Math.round((monthPts() / 3240) * 100)}"></span></div><span style="font-size:.8125rem;color:var(--sauge-soft)">${fmt(3240 - monthPts())} ${BRAND.word} from the top eight</span></div>
+        <div class="me-card" style="gap:14px"><div class="me-top"><span class="av">${initials(ME.name)}</span><span><b>${ordinal(myRank())}</b><span>${fmt(monthPts())} XP this month, ${big(myV)} views on your posts</span></span></div>
+          <div class="bar" style="background:rgba(255,255,255,.14)"><span data-fill="${Math.round((monthPts() / 3240) * 100)}"></span></div><span style="font-size:.8125rem;color:var(--sauge-soft)">${fmt(3240 - monthPts())} XP from the top eight</span></div>
         <div class="prize"><span class="eyebrow">What's at the top</span><b>Top three: a day at the atelier in Grasse.</b><p>Train down, lunch in the garden, an afternoon with our perfumers. Top twenty: the Givre coffret, sent home.</p></div>
-        <p class="note">Only ${BRAND.word} earned from rituels count here. Spending them on gifts never moves you down.</p>
+        <p class="note">Every ritual earns the same number of XP and ${BRAND.word}: the XP as soon as you send it, the ${BRAND.word} once your post is approved. If a post is turned down, its XP comes off again and you get a message saying why. Only XP from rituels counts here; ${BRAND.word} are yours to keep, and spending them on gifts never moves you down.</p>
       </aside>
     </div>`;
 }
@@ -1870,7 +1891,7 @@ function screenGifts() {
 function screenJardin() {
   const tot = POLL.reduce((a, p) => a + p[1], 0) + (state.poll ? 1 : 0);
   const mine = state.posts.filter((p) => p.fresh);
-  return `<header><span class="eyebrow">Le Jardin, the community</span><h1 class="h-page">23,642 members, one garden.</h1><p class="lede">What members posted this week, the goal everyone is filling, and a word from the lab.</p></header>
+  return `<header><span class="eyebrow">Le Jardin, the community</span><h1 class="h-page">12,480 members, one garden.</h1><p class="lede">What members posted this week, the goal everyone is filling, and a word from the lab.</p></header>
     ${goalBlock(false)}
     <div class="jardin-grid">
       <section class="sec"><div class="sec-head"><h2 class="h-sec">From the Jardin this week</h2><span class="meta">Members' own posts</span></div>
@@ -1906,7 +1927,7 @@ function afterRender() {
 
 /* ---------------------------------------------------------------- sheets */
 function ritualHead(r) {
-  return `<span class="eyebrow">${r.type}, +${r.pts} ${BRAND.word}</span><h2>${esc(r.title)}</h2>`;
+  return `<span class="eyebrow">${r.type}, ${xpPts(r.pts)}</span><h2>${esc(r.title)}</h2>`;
 }
 function ritualSheet(id) {
   const r = ritual(id); if (!r) return;
@@ -1928,11 +1949,11 @@ function sampleLink() {
   const id = Math.random().toString(36).slice(2, 13);
   return { Instagram: `https://www.instagram.com/reel/${id}/`, TikTok: `https://www.tiktok.com/${ME.handle}/video/74${Math.floor(1e15 + Math.random() * 8e15)}`, "YouTube Shorts": `https://youtube.com/shorts/${id}` }[state.net];
 }
-function successHtml(r, tierBefore, extra = "") {
+function successHtml(r, tierBefore, extra = "", pending = false) {
   const plate = r.herb ? PLATES.find((p) => p.id === r.herb) : null;
   const t = tierOf(SP());
   const up = t.id !== tierBefore.id ? `<div class="tierup"><div class="flower">${botanical("rose")}</div><span class="eyebrow">New tier</span><h2 style="padding:0">You've reached ${t.name}</h2><p class="note">${t.gift}. Givre now opens to you on ${dayShort(DROP_EARLY)}.</p></div>` : "";
-  return `<div class="success"><span class="big num">+${r.pts}</span><p>${extra || `${BRAND.word[0].toUpperCase() + BRAND.word.slice(1)} added. The Jardin is ${fmt(state.goal)} rituals closer to Aube Rose.`}</p></div>
+  return `<div class="success"><span class="big num">+${r.pts}</span><span class="big-unit">${pending ? "XP now" : `XP · ${BRAND.word}`}</span><p>${extra || `XP and ${BRAND.word} added. The Jardin is ${fmt(state.goal)} rituals closer to Aube Rose.`}${pending ? ` Your ${r.pts} ${BRAND.word} are pending until the team approves the post.` : ""}</p></div>
     ${plate ? `<div class="pressed-row"><span class="mini">${botanical(plate.id)}</span><span><b>${plate.name}</b> is pressed into your Herbier. ${state.pressed.size} of 12.</span></div>` : ""}${up}
     <div style="display:grid;gap:8px">${plate ? `<button class="btn btn-dark" data-act="tab" data-tab="herbier">See my Herbier</button>` : ""}<button class="btn ${plate ? "btn-line" : "btn-dark"}" data-act="close">Back to my rituals</button></div>`;
 }
@@ -1941,8 +1962,20 @@ function complete(id, fromEl, opts = {}) {
   state.done.add(id);
   if (r.herb) { state.pressed.add(r.herb); state.just = r.herb; }
   if (["post", "review15"].includes(r.kind)) { state.goal += 1; state.goalMine = (state.goalMine || 0) + 1; }
-  award(r.pts, fromEl, opts.msg);
+  if (opts.pending) {
+    state.pending += r.pts;
+    award(r.pts, fromEl, opts.msg || `+${fmt(r.pts)} XP now · ${fmt(r.pts)} ${BRAND.word} pending until it's approved`, true);
+    syncPending();
+    setTimeout(() => approve(r), 5000);
+  } else award(r.pts, fromEl, opts.msg);
   return before;
+}
+function approve(r) {
+  if (state.approved.has(r.id)) return;
+  state.approved.add(r.id); state.pending = Math.max(0, state.pending - r.pts); syncPending();
+  const before = state.balance; state.balance += r.pts; countTo(before, state.balance);
+  const msg = `Your post is approved: +${fmt(r.pts)} ${BRAND.word}`;
+  if (state.view === "member") toast(msg); else state.news = msg;
 }
 function review15Body(r) {
   const prods = [["serum", "Sérum Rosée"], ["jar", "Baume Nuit"], ["mist", "Brume d'Iris"]];
@@ -1981,7 +2014,7 @@ function writtenBody(r) {
 function remindBody(r) {
   const fleur = SP() >= 4000;
   return `<p>${esc(r.brief)}</p>
-    <div class="sum"><div><span>Opens to Fleur members</span><b>${dayShort(DROP_EARLY)}, 10:00</b></div><div><span>Opens to everyone</span><b>${dayShort(DROP_PUBLIC)}, 10:00</b></div><div><span>You</span><b>${fleur ? "Fleur, you're in early" : `${fmt(4000 - SP())} ${BRAND.word} from Fleur`}</b></div></div>
+    <div class="sum"><div><span>Opens to Fleur members</span><b>${dayShort(DROP_EARLY)}, 10:00</b></div><div><span>Opens to everyone</span><b>${dayShort(DROP_PUBLIC)}, 10:00</b></div><div><span>You</span><b>${fleur ? "Fleur, you're in early" : `${fmt(4000 - SP())} XP from Fleur`}</b></div></div>
     <button class="btn btn-dark btn-block" data-act="remindme">${icon("bell")}Remind me</button>`;
 }
 function plateSheet(id) {
@@ -2017,10 +2050,10 @@ function onAction(act, el) {
         z.innerHTML = `<div class="found"><span class="nt">${NET_SHORT[state.net]}</span><span><b>Found it: ${state.net}, ${ME.handle}</b><ul><li>Tags @maisonaube</li><li>${r.tag} in the caption</li><li>Public, posted a few minutes ago</li></ul></span></div>`;
         setTimeout(() => {
           state.posts.unshift({ title: r.title, net: state.net, ago: 0, views: 940, likes: 72, fresh: 1 });
-          const before = complete(r.id, $("#postZone .nt"));
+          const before = complete(r.id, $("#postZone .nt"), { pending: true });
           state.link = "";
           const sh = $("#sheet");
-          sh.insertAdjacentHTML("beforeend", successHtml(r, before, `Petals added. Your post already has 312 views; we keep counting for 30 days.`));
+          sh.insertAdjacentHTML("beforeend", successHtml(r, before, `Found. Your post already has 312 views; we keep counting for 30 days.`, true));
           sh.scrollTo({ top: sh.scrollHeight, behavior: reduceMotion ? "auto" : "smooth" });
           renderMember(false);
         }, reduceMotion ? 0 : 700);
@@ -2059,8 +2092,8 @@ function onAction(act, el) {
       z.innerHTML = `<div class="checking"><span class="spin"></span>Looking for your review on ${state.net}…</div>`;
       setTimeout(() => {
         state.posts.unshift({ title: "A review in 15 seconds", net: state.net, ago: 0, views: 910, likes: 71, fresh: 1 });
-        const before = complete("review15", z);
-        z.outerHTML = successHtml(r, before, "Found and counted. Fifteen seconds well spent.");
+        const before = complete("review15", z, { pending: true });
+        z.outerHTML = successHtml(r, before, "Found. Fifteen seconds well spent.", true);
         renderMember(false);
       }, reduceMotion ? 0 : 1300);
       return;
@@ -2120,7 +2153,7 @@ function onAction(act, el) {
       orders().unshift({ who: ME.name, gift: g.id, status: STATUSES[g.how][0], date: 0, fresh: 1 });
       renderMember(false); return;
     }
-    case "poll": if (state.poll) return; state.poll = el.dataset.c; award(10, el, `Vote counted for ${el.dataset.c}. +10 ${BRAND.word}`); return renderMember(false);
+    case "poll": if (state.poll) return; state.poll = el.dataset.c; award(10, el, `Vote counted for ${el.dataset.c}. ${xpPts(10)}`); return renderMember(false);
     case "linkyt": return toast("In the real app this opens YouTube to link your account");
   }
 }
@@ -2133,7 +2166,12 @@ setInterval(() => {
 
 /* ================================================================ Brand admin */
 /* 30 days of views on members' posts, oldest first. Givre coffrets shipped 3 days ago. */
-const DAILY = Array.from({ length: 30 }, (_, i) => Math.round(175858 + i * 3900 + ((i + 2) % 7 >= 5 ? 61000 : 0) + (i >= 27 ? 120000 * (i - 26) : 0) + ((i * 7919) % 23000)));
+const DAILY = (() => {
+  const raw = Array.from({ length: 30 }, (_, i) => 175858 + i * 3900 + ((i + 2) % 7 >= 5 ? 61000 : 0) + (i >= 27 ? 120000 * (i - 26) : 0) + ((i * 7919) % 23000));
+  const k = 2070000 / raw.reduce((a, b) => a + b, 0), out = raw.map((v) => Math.round((v * k) / 125) * 125);
+  out[29] += 2070000 - out.reduce((a, b) => a + b, 0);
+  return out;
+})();
 const DAY_LABELS = DAILY.map((_, i) => dayNum(addDays(i - 29)));
 const PERIODS = { "7d": ["Last 7 days", 7], "30d": ["Last 30 days", 30], all: ["Since launch", 0] };
 const LAUNCH_FACTOR = 7.6; /* the program launched in March 2024; all-time is about 7.6 months of the last 30 days */
@@ -2144,25 +2182,47 @@ function periodViews() {
 }
 const pf = () => periodViews() / DAILY.reduce((a, b) => a + b, 0);
 /* network, share of posts, share of views, like rate, comment rate, share rate */
-const NETS = [["Instagram", 0.55, 0.51, 0.071, 0.0041, 0.0049], ["TikTok", 0.33, 0.41, 0.086, 0.0035, 0.0068], ["YouTube Shorts", 0.12, 0.08, 0.039, 0.002, 0.0016]];
-const POSTS_30 = 3120;
+const NETS = [["Instagram", 0.56, 0.52, 0.071, 0.0041, 0.0049], ["TikTok", 0.34, 0.39, 0.086, 0.0035, 0.0068], ["YouTube Shorts", 0.1, 0.09, 0.039, 0.002, 0.0016]];
+const POSTS_30 = 1800;
+/* Whole numbers by largest remainder, so the parts always add up to the total. */
+function splitLR(total, shares, unit = 1) {
+  const n = Math.round(total / unit), raw = shares.map((x) => x * n), fl = raw.map(Math.floor);
+  const rest = n - fl.reduce((a, b) => a + b, 0);
+  raw.map((x, i) => [x - fl[i], i]).sort((a, b) => b[0] - a[0]).slice(0, rest).forEach(([, i]) => fl[i]++);
+  return fl.map((x) => x * unit);
+}
 /* Ritual results over the last 30 days */
 const RS = [
-  { id: "routine", done: 1240, posts: 1120, vshare: 0.38, joined: 610, seen: 7920 },
-  { id: "unbox", done: 702, posts: 690, vshare: 0.29, joined: 540, seen: 3110 },
-  { id: "review15", done: 455, posts: 441, vshare: 0.15, joined: 260, seen: 7340 },
-  { id: "mist", done: 398, posts: 384, vshare: 0.08, joined: 120, seen: 6980 },
-  { id: "friend", done: 920, posts: 0, vshare: 0, joined: 214, seen: 7610, note: "920 links sent, 214 friends joined" },
-  { id: "written", done: 530, posts: 0, vshare: 0, joined: 0, seen: 5240 },
-  { id: "candle", done: 8210, posts: 0, vshare: 0, joined: 0, seen: 8410, note: "Figue verte leads with 38%" },
-  { id: "label", done: 4980, posts: 0, vshare: 0, joined: 0, seen: 8120, note: "71% right first time" },
-  { id: "remind", done: 7340, posts: 0, vshare: 0, joined: 0, seen: 8360, note: "7,340 reminders for the Givre drop" },
+/* v30: views in the last 30 days. Posts and views add up to the 1,800 posts and 2.07M views of the period; views a post stay
+   between 900 and 1,500. */
+  { id: "routine", done: 760, posts: 690, v30: 760000, joined: 120 },
+  { id: "unbox", done: 520, posts: 505, v30: 690000, joined: 110 },
+  { id: "review15", done: 330, posts: 318, v30: 330000, joined: 50 },
+  { id: "mist", done: 300, posts: 287, v30: 290000, joined: 30 },
+  { id: "friend", done: 510, posts: 0, v30: 0, joined: 96, note: "510 links sent, 96 friends joined" },
+  { id: "written", done: 290, posts: 0, v30: 0, joined: 0 },
+  { id: "candle", done: 3960, posts: 0, v30: 0, joined: 0, note: "Figue verte leads with 38%" },
+  { id: "label", done: 2410, posts: 0, v30: 0, joined: 0, note: "71% right first time" },
+  { id: "remind", done: 3540, posts: 0, v30: 0, joined: 0, note: "3,540 reminders for the Givre drop" },
 ];
-const OTHER_POST_VIEWS = 0.1; /* views from rituels that have since ended */
-/* Potential reach: followers of the accounts that posted. 1,486 members posted in the last 30 days, 2,100 followers on average.
-   A ritual's share follows its posts, so rituels add up to the total. */
-const POSTERS_30 = 1486, FOLLOWERS_AVG = 2100;
-const reachOf = (posts) => (posts * POSTERS_30 * FOLLOWERS_AVG) / POSTS_30;
+const VIEWS_30 = RS.reduce((a, s) => a + s.v30, 0);
+/* Active members: members who sent at least one ritual in the last 90 days, approved or refused. */
+const ACTIVE_90 = 4600;
+/* Members counted once across several rituels: the biggest ritual, plus the members of the others who weren't in it yet.
+   The keen members do most rituels, so the overlap grows with the set, and no set passes the active members. */
+const uniqueOf = (vals) => {
+  const d = vals.filter((v) => v > 0); if (!d.length) return 0;
+  const m = Math.max(...d), rest = d.reduce((a, b) => a + b, 0) - m, room = ACTIVE_90 - m;
+  return room > 0 ? Math.round(m + room * (1 - Math.exp((-0.5 * rest) / room))) : m;
+};
+/* Potential reach: followers of the accounts that posted, each account once. 3,000 followers on average. */
+const POSTERS_30 = uniqueOf(RS.map((s) => s.posts)), FOLLOWERS_AVG = 3000;
+const reachOf = (posts) => posts * FOLLOWERS_AVG;
+/* The "!" next to the points total, while points from a post wait for approval. */
+const pendLabel = () => `${fmt(state.pending)} ${BRAND.word} pending approval`;
+const pendDot = () => `<button class="pend-dot" data-act="pending" aria-label="${pendLabel()}" ${state.pending ? "" : "hidden"}>!</button>`;
+function syncPending() { document.querySelectorAll(".pend-dot").forEach((d) => { d.hidden = !state.pending; d.setAttribute("aria-label", pendLabel()); }); }
+const soon = (cls = "") => `<span class="soon-tag ${cls}">Soon</span>`;
 const HANDLES = ["@camille.rsl", "@yas.skin", "@lea.fnt", "@margaux.db", "@sofia.mrc", "@anais.lbt", "@chloe.nav", "@nora.hdd", "@julie.prn", "@emmacollet", "@sarah.bnt", "@manon.grd", "@clara.vss", "@zoe.mrtn", "@lou.bernard", "@elise.rnd", "@ambre.ctl", "@juliette.fx"];
 function seeded(n) { let s = n * 9301 + 49297; return () => ((s = (s * 9301 + 49297) % 233280) / 233280); }
 const POSTLIST = (() => {
@@ -2171,15 +2231,15 @@ const POSTLIST = (() => {
   for (let i = 0; i < 36; i++) {
     const rid = rits[Math.floor(rnd() * (i < 10 ? 2 : 4))], ni = rnd() < 0.5 ? 0 : rnd() < 0.85 ? 1 : 2;
     const ago = rid === "unbox" ? Math.floor(rnd() * 3) : Math.floor(rnd() * 28);
-    const views = Math.round((rid === "unbox" ? 22000 : 6000) * Math.pow(rnd() * 1.6 + 0.2, 2.2) + 900);
+    const views = Math.round((rid === "unbox" ? 6000 : 2400) * Math.pow(rnd() * 1.6 + 0.2, 2.2) + 1200);
     const n = NETS[ni];
-    out.push({ who: HANDLES[i % HANDLES.length], rid, net: n[0], ago, views, likes: views * n[3], comments: views * n[4], shares: views * n[5], joined: Math.round(views / 2600) });
+    out.push({ who: HANDLES[i % HANDLES.length], rid, net: n[0], ago, views, likes: views * n[3], comments: views * n[4], shares: views * n[5], joined: Math.round(views / 6000) });
   }
   return out;
 })();
 const ORIGIN = [["Insert card in the parcel", 31], ["A member's post or code", 24], ["Instagram profile link", 17], ["Newsletter", 12], ["Paris boutique", 9], ["Website checkout", 7]];
 const CITIES = [["Paris", 28], ["Lyon", 9], ["Bordeaux", 6], ["Marseille", 6], ["Brussels", 5], ["Geneva", 4], ["Lille", 4], ["Nantes", 4], ["Elsewhere", 34]];
-const TIER_COUNTS = [14210, 6980, 2140, 312];
+const TIER_COUNTS = [7420, 3690, 1210, 160];
 
 /* ---------------------------------------------------------------- deliveries */
 Object.assign(HOW, { pickup: "Collect it at the Paris boutique", file: "Download straight away" });
@@ -2210,9 +2270,11 @@ function periodBar() {
 }
 function totals() {
   const v = periodViews(), f = pf();
-  const nets = NETS.map(([name, ps, vs, lr, cr, sr]) => ({ name, posts: POSTS_30 * ps * f, views: v * vs, likes: v * vs * lr, comments: v * vs * cr, shares: v * vs * sr }));
+  const pv = splitLR(v, NETS.map((n) => n[2]), 125), pp = splitLR(Math.round(POSTS_30 * f), NETS.map((n) => n[1]));
+  const nets = NETS.map(([name, , , lr, cr, sr], i) => ({ name, posts: pp[i], views: pv[i], likes: pv[i] * lr, comments: pv[i] * cr, shares: pv[i] * sr }));
   const sum = (k) => nets.reduce((a, n) => a + n[k], 0);
-  return { f, views: v, nets, posts: sum("posts"), likes: sum("likes"), comments: sum("comments"), shares: sum("shares") };
+  const posters = uniqueOf(RS.map((s) => Math.round(s.posts * f)));
+  return { f, views: v, nets, posts: sum("posts"), likes: sum("likes"), comments: sum("comments"), shares: sum("shares"), posters };
 }
 
 Object.assign(state, {
@@ -2224,8 +2286,8 @@ Object.assign(state, {
 function admToday() {
   const T = totals();
   const plan = [
-    ["Today", "Givre reminder ritual is live", "7,340 members have asked for a reminder"],
-    [dayShort(DROP_EARLY).slice(0, 3), "Givre opens to Fleur and Jardin secret", "10:00, 2,452 members, 48 hours early"],
+    ["Today", "Givre reminder ritual is live", "3,540 members have asked for a reminder"],
+    [dayShort(DROP_EARLY).slice(0, 3), "Givre opens to Fleur and Jardin secret", `10:00, ${fmt(TIER_COUNTS[2] + TIER_COUNTS[3])} members, 48 hours early`],
     [dayShort(DROP_PUBLIC).slice(0, 3), "Givre opens to everyone", "Unboxing ritual stays open for 3 weeks"],
     ["Sun", "Candle vote closes", "Winner announced in le Jardin at 19:00"],
   ];
@@ -2234,17 +2296,17 @@ function admToday() {
     ["wins", 0, `${toSend()} gifts to send or book`, "Winners & deliveries"],
     ["missions", 3, `${fmt(24 + revList().filter((r) => r.status === "new").length)} new answers to read`, "Reviews and answers"],
     ["missions", 1, state.candleClosed ? `Candle vote closed: ${state.candleClosed}` : "Candle vote closes on Sunday: Figue verte leads with 38%", "Votes and quizzes"],
-    ["season", 0, `Aube Rose goal at ${goalPct()}%, ${fmt(10000 - state.goal)} rituals to go`, "Season"],
+    ["season", 0, `Aube Rose goal at ${goalPct()}%, ${fmt(2500 - state.goal)} rituals to go`, "Season"],
   ];
   return admHead("Today", `Maison Aube, le Jardin. ${PERIODS[state.period][0]}. Illustrative figures.`, `<button class="adm-btn primary" data-act="newRitual">${icon("plus")}New mission</button>`) + `
     <div class="kpis">
       ${kpi("Earned media value", eur(mediaValue(T.views)), `${big(T.views)} views on members' posts, at a ${cpmLabel()} CPM`)}
-      ${kpi("Active members this month", "8,480", "+9% on last month")}
-      ${kpi("Members who posted", fmt(1486 * T.f), `${pct(1486, 8480)} of active members`)}
-      ${kpi("New members from posts", fmt(2310 * T.f), "Joined through a post or a member's link")}
+      ${kpi("Active members (last 90 days)", fmt(ACTIVE_90), "Sent at least one ritual")}
+      ${kpi("Members who posted", fmt(T.posters), `${pct(Math.min(T.posters, ACTIVE_90), ACTIVE_90)} of active members`)}
+      ${kpi("New members from posts", fmt(ritualRows().reduce((a, x) => a + x.joined, 0)), "Joined through a post or a member's link")}
     </div>
     <div class="adm-grid">
-      <div class="acard"><h2>Views on members' posts, per day</h2><p class="sub">Last 30 days. The jump is the Givre coffret arriving at members' homes.</p>${lineChart({ id: "daily", data: DAILY, labels: DAY_LABELS, max: 800000, aria: "Daily views on members' posts over the last 30 days", tipFor: (i) => `<b>${DAY_LABELS[i]}</b>, ${fmt(DAILY[i])} views`, color: "#1d1f24" })}</div>
+      <div class="acard"><h2>Views on members' posts, per day</h2><p class="sub">Last 30 days. The jump is the Givre coffret arriving at members' homes.</p>${lineChart({ id: "daily", data: DAILY, labels: DAY_LABELS, max: 200000, aria: "Daily views on members' posts over the last 30 days", tipFor: (i) => `<b>${DAY_LABELS[i]}</b>, ${fmt(DAILY[i])} views`, color: "#1d1f24" })}</div>
       <div class="acard"><h2>This week, Givre</h2><p class="sub">Scheduled, runs on its own</p>
         <ol class="timeline">${plan.map(([t, b, s]) => `<li><time>${t}</time><span class="dot"></span><span class="tl"><b>${b}</b><span>${s}</span></span></li>`).join("")}</ol></div>
     </div>
@@ -2263,7 +2325,7 @@ function admMissions() {
   if (tab === 2) return h + admCheckin();
   if (tab === 3) return h + admReviews();
   const rows = RITUELS.map((r) => { const s = RS.find((x) => x.id === r.id) || { done: 0, posts: 0 }; return { r, s }; });
-  return h + `<div class="acard"><div class="scroll-x"><table class="atable"><thead><tr><th>Ritual</th><th>Type</th><th class="r">Petals</th><th>When</th><th class="r">Done by, 30 days</th><th class="r">Posts</th><th class="r">Plate</th><th>Status</th></tr></thead>
+  return h + `<div class="acard"><div class="scroll-x"><table class="atable"><thead><tr><th>Ritual</th><th>Type</th><th class="r">XP · petals</th><th>When</th><th class="r">Done by, 30 days</th><th class="r">Posts</th><th class="r">Plate</th><th>Status</th></tr></thead>
     <tbody>${rows.map(({ r, s }) => `<tr class="${r.fresh ? "fresh" : ""}"><td class="wrap"><b>${esc(r.title)}</b><br><span class="sub">${esc(r.meta)}</span></td><td>${r.type}</td><td class="r">${r.pts}</td><td>${r.when || "Now"}</td><td class="r">${s.done || state.done.has(r.id) ? fmt(s.done + (state.done.has(r.id) ? 1 : 0)) : "–"}</td><td class="r">${s.posts ? fmt(s.posts) : "–"}</td><td class="r">${r.herb ? PLATES.find((p) => p.id === r.herb).name : "–"}</td><td><span class="st live">Live</span></td></tr>`).join("")}
       ${EXTRA_ROWS.map((x) => `<tr><td class="wrap"><b>${esc(x.title)}</b></td><td>${x.type}</td><td class="r">${x.pts}</td><td>${x.when}</td><td class="r">–</td><td class="r">–</td><td class="r">–</td><td><span class="st ${stl(x.status)[0]}">${stl(x.status)[1]}</span></td></tr>`).join("")}</tbody></table></div></div>
     <div class="acard"><h2>Mission types on this plan</h2><p class="sub">Post, photo, video, 15-second review, vote, quiz, open question, bring a friend, drop reminder, boutique check-in. Up to three rituels a day per member. Posts must be public and tag @maisonaube; views are counted for 30 days and a post can earn once.</p></div>`;
@@ -2276,18 +2338,18 @@ function admVotes() {
   const ptot = POLL.reduce((a, p) => a + p[1], 0) + (state.poll ? 1 : 0), pmax = Math.max(...POLL.map((p) => p[1]));
   const customs = RITUELS.filter((r) => r.gen === "vote" || r.gen === "quiz");
   return `<div class="adm-grid">
-    <div class="acard"><div class="acard-top"><div><h2>Vote: December's candle</h2><p class="sub">${fmt(ntot)} votes, +30 ${BRAND.word} each. Closes on Sunday at 19:00. The winning note is poured in the Grasse atelier.</p></div>
+    <div class="acard"><div class="acard-top"><div><h2>Vote: December's candle</h2><p class="sub">${fmt(ntot)} votes, +30 XP and ${BRAND.word} each. Closes on Sunday at 19:00. The winning note is poured in the Grasse atelier.</p></div>
         ${state.candleClosed ? `<span class="st live">Closed: ${esc(state.candleClosed)}</span>` : `<button class="adm-btn" data-act="closeCandle">Close and announce</button>`}</div>
       <div class="vote-bars">${notes.map(([k, l, d, n]) => `<div class="${n === nmax ? "lead" : ""}"><span>${l} <span class="sub">${d}</span></span><b>${fmt(n)}, ${pct(n, ntot)}</b><span class="bar-a"><i style="width:${((n / nmax) * 100).toFixed(1)}%"></i></span></div>`).join("")}</div>
       ${state.candleClosed ? `<div class="callout ok" style="margin-top:12px">Announced in le Jardin. Members who voted ${esc(state.candleClosed)} get first access to the candle.</div>` : ""}</div>
-    <div class="acard"><h2>Petals for votes and quizzes</h2><p class="sub">Shown on every card, so members know what they play for.</p>
-      <div class="aform" style="margin-top:12px">${fld("A vote", `<input value="30 ${esc(BRAND.word)}" disabled>`)}${fld("A quiz, right first time", `<input value="60 ${esc(BRAND.word)}" disabled>`)}
-        ${fld("A wrong answer", sel("quizWrong", [["none", "They try again until they get it"], ["half", "Half the petals for trying"]], state.quizWrong))}</div></div>
+    <div class="acard"><h2>XP and petals for votes and quizzes</h2><p class="sub">Shown on every card, so members know what they play for.</p>
+      <div class="aform" style="margin-top:12px">${fld("A vote", `<input value="30 XP · 30 ${esc(BRAND.word)}" disabled>`)}${fld("A quiz, right first time", `<input value="60 XP · 60 ${esc(BRAND.word)}" disabled>`)}
+        ${fld("A wrong answer", sel("quizWrong", [["none", "They try again until they get it"], ["half", "Half the XP and petals for trying"]], state.quizWrong))}</div></div>
   </div>
   <div class="adm-row">
-    <div class="acard"><h2>Quiz: read the label, Sérum Rosée</h2><p class="sub">${fmt(4980)} members played. 71% right first time. Average time, 18 s.</p>
+    <div class="acard"><h2>Quiz: read the label, Sérum Rosée</h2><p class="sub">${fmt(2410)} members played. 71% right first time. Average time, 18 s.</p>
       <div class="vote-bars">${QUIZ_SPLIT.map(([l, p], i) => `<div class="${i ? "" : "lead"}"><span>${l}${i ? "" : ' <span class="sub">right answer</span>'}</span><b>${p}%</b><span class="bar-a"><i style="width:${(p / 71) * 100}%"></i></span></div>`).join("")}</div></div>
-    <div class="acard"><h2>Question of the week: the next workshop</h2><p class="sub">${fmt(ptot)} votes, +10 ${BRAND.word} each. Results on Friday.</p>
+    <div class="acard"><h2>Question of the week: the next workshop</h2><p class="sub">${fmt(ptot)} votes, +10 XP and ${BRAND.word} each. Results on Friday.</p>
       <div class="vote-bars">${POLL.map(([c, v]) => { const n = v + (state.poll === c ? 1 : 0); return `<div class="${v === pmax ? "lead" : ""}"><span>${c}</span><b>${fmt(n)}, ${pct(n, ptot)}</b><span class="bar-a"><i style="width:${((n / pmax) * 100).toFixed(1)}%"></i></span></div>`; }).join("")}</div></div>
   </div>
   ${customs.length ? `<div class="acard"><h2>Your other votes and quizzes</h2><div class="scroll-x"><table class="atable"><tbody>${customs.map((r) => `<tr><td class="wrap">${esc(r.title)}</td><td>${r.gen === "vote" ? "Vote" : "Quiz"}</td><td class="r">${state.done.has(r.id) ? "1 answer so far" : "No answers yet"}</td></tr>`).join("")}</tbody></table></div></div>` : ""}`;
@@ -2297,7 +2359,7 @@ function admVotes() {
 const CHECKIN_URL = "https://jardin.maison-aube.example/checkin/paris-boutique";
 function admCheckin() {
   return `<div class="adm-grid">
-    <div class="acard"><h2>Paris boutique</h2><p class="sub">The QR sits by the till. Members scan it when they visit and get 100 ${BRAND.word}, once a month.</p>
+    <div class="acard"><h2>Paris boutique</h2><p class="sub">The QR sits by the till. Members scan it when they visit and get 100 XP and 100 ${BRAND.word}, once a month.</p>
       <div class="qr-box"><span class="qr">${qrSVG(CHECKIN_URL)}</span>
         <div style="display:grid;gap:8px;min-width:0;flex:1 1 220px"><span class="st live" style="justify-self:start">Open during opening hours</span>
           <b style="font-family:var(--fx-display);font-weight:600;font-size:1.75rem;font-variant-numeric:tabular-nums">1,126</b><span class="sub" style="margin:0">check-ins this month, 412 of them by members who ordered online first</span>
@@ -2328,7 +2390,7 @@ function admReviews() {
   const order = { new: 0, featured: 1, hidden: 2 };
   const rows = [...list].sort((a, b) => (b.me ? 1 : 0) - (a.me ? 1 : 0) || order[a.status] - order[b.status]);
   const opens = RITUELS.filter((r) => r.gen === "open");
-  return `<div class="acard"><div class="acard-top"><div><h2>Tell us about a product you've used for a month</h2><p class="sub">${fmt(530 + (state.review ? 1 : 0))} answers in the last 30 days. Nothing is published on its own; feature the best ones. ${feat} featured.</p></div>
+  return `<div class="acard"><div class="acard-top"><div><h2>Tell us about a product you've used for a month</h2><p class="sub">${fmt(290 + (state.review ? 1 : 0))} answers in the last 30 days. Nothing is published on its own; feature the best ones. ${feat} featured.</p></div>
       <div class="adm-actions"><button class="adm-btn" data-act="reviewsCsv">${icon("download")}Featured answers, CSV</button></div></div>
     <div class="ans-list">${rows.map((a) => { const i = a.me ? -1 : REVIEWS.indexOf(a); return `<div class="ans ${a.status}">
       <span class="who"><i>${initials(a.who)}</i><span><b>${esc(a.who)}</b> <span class="sub">${esc(a.handle)}, ${a.when}, ${a.product}</span></span></span>
@@ -2336,7 +2398,7 @@ function admReviews() {
       <div class="adm-actions">${a.status === "featured" ? `<span class="st live">Featured</span><button class="adm-btn ghost" data-act="rev" data-i="${i}" data-s="new">Undo</button>`
         : a.status === "hidden" ? `<span class="st">Hidden</span><button class="adm-btn ghost" data-act="rev" data-i="${i}" data-s="new">Show again</button>`
         : `<button class="adm-btn primary" data-act="rev" data-i="${i}" data-s="featured">Feature it</button><button class="adm-btn ghost" data-act="rev" data-i="${i}" data-s="hidden">Hide</button>`}</div></div>`; }).join("")}</div>
-    <p class="sub" style="margin-top:12px">Showing the latest. The other ${fmt(530 - REVIEWS.length)} are in the CSV.</p></div>
+    <p class="sub" style="margin-top:12px">Showing the latest. The other ${fmt(290 - REVIEWS.length)} are in the CSV.</p></div>
     ${opens.map((x) => `<div class="acard"><h2>${esc(x.title)}</h2><p class="sub">${state.done.has(x.id) ? "1 answer so far: yours, in the member app." : "No answers yet. They appear here as members send them."}</p></div>`).join("")}`;
 }
 function setRev(i, status) {
@@ -2366,7 +2428,7 @@ function ritualForm(d) {
   return `${fld("Type", optRow("type", RTYPES, t))}
     ${fld("Title", inp("title", d.title, 'maxlength="60"'))}
     ${fld("What members read", `<textarea name="brief">${esc(d.brief)}</textarea>`)}
-    <div class="adm-row">${fld("Petals", inp("pts", d.pts, 'type="number" min="0" step="5"'))}${fld("Line under the title", inp("meta", d.meta, 'maxlength="40"'))}</div>
+    <div class="adm-row">${fld("XP and petals", inp("pts", d.pts, 'type="number" min="0" step="5"'))}${fld("Line under the title", inp("meta", d.meta, 'maxlength="40"'))}</div>
     ${extra}
     <div class="afield"><span>Picture</span>${optRow("art", RARTS, d.art)}</div>
     <div class="afield"><span>Colour</span>${optRow("tone", RTONES, d.tone)}</div>
@@ -2440,8 +2502,8 @@ function admWins() {
     <div class="kpis">
       ${kpi("To send or book", fmt(n("prep")), `Oldest from ${dayNum(addDays(-2))}`, true)}
       ${kpi("On the way", fmt(n("way")), "In the workshop, posted or booked", true)}
-      ${kpi("Delivered, 30 days", fmt(1214 + all.filter((o) => ["Delivered", "Done", "Collected"].includes(o.status)).length), "Products and moments")}
-      ${kpi("Digital, delivered instantly", fmt(698 + all.filter((o) => o.status === "Delivered instantly").length), "Codes and early access")}
+      ${kpi("Delivered, 30 days", fmt(330 + all.filter((o) => ["Delivered", "Done", "Collected"].includes(o.status)).length), "Products and moments")}
+      ${kpi("Digital, delivered instantly", fmt(280 + all.filter((o) => o.status === "Delivered instantly").length), "Codes and early access")}
     </div>
     <div class="acard">
       <div class="opt-row">${[["all", "All"], ["prep", "To send"], ["way", "On the way"], ["done", "Done"]].map(([k, l]) => `<button class="opt" data-act="olist" data-f="${k}" aria-pressed="${f === k}">${l}</button>`).join("")}</div>
@@ -2454,14 +2516,14 @@ function admWins() {
 
 /* ---------------------------------------------------------------- Season */
 const JOIN_RULES = { choose: "Members pick a side" };
-const COUNTS = { all: "Every petal earned", posts: "Petals from posts only", reviews: "Reviews only" };
+const COUNTS = { all: "All XP earned", posts: "XP from posts only", reviews: "Reviews only" };
 const nextMonth = new Date(NOW.getFullYear(), NOW.getMonth() + 1, 1), nextMonthEnd = new Date(NOW.getFullYear(), NOW.getMonth() + 2, 0);
 const BATTLES = [
   { id: "gr", name: "Team Givre v Team Rose", a: { name: "Givre", colour: "#8b9b83", pts: 0, members: 0 }, b: { name: "Rose", colour: "#c26f63", pts: 0, members: 0 }, start: isoDay(nextMonth), end: isoDay(nextMonthEnd), join: "choose", counts: "all", prize: "The winning side's top 50 get the Aube Rose compact first" },
   { id: "me", name: "Morning v Evening routines", a: { name: "Morning", colour: "#b5843a", pts: 286400, members: 1840 }, b: { name: "Evening", colour: "#24302a", pts: 301250, members: 1912 }, start: isoDay(addDays(-62)), end: isoDay(addDays(-32)), join: "choose", counts: "posts", prize: "Evening won: a Baume Nuit for each of its top 50" },
 ];
 const battleStatus = (b) => (isoDay(NOW) < b.start ? "upcoming" : isoDay(NOW) > b.end ? "ended" : "live");
-const PLATE_HAVE = { rose: 23642, iris: 12480, neroli: 6310, fig: 9020, tea: 4180, lavender: 9432, oat: 3840, camomile: 1240, bergamot: 455, calendula: 920, vetiver: 530, pine: 702 };
+const PLATE_HAVE = { rose: 12480, iris: 6590, neroli: 3330, fig: 4760, tea: 2210, lavender: 4980, oat: 2030, camomile: 650, bergamot: 240, calendula: 490, vetiver: 280, pine: 370 };
 const NEW_PLATES = [];
 function admSeason() {
   const tab = state.atab.season || 0;
@@ -2473,10 +2535,10 @@ function admSeason() {
   const n = goalPct();
   return h + `<div class="adm-grid">
       <div class="acard"><h2>Aube Rose, ${MONTH}</h2><p class="sub">Rituals posted by any member this month. Everyone sees the same progress.</p>
-        <div class="goal-adm"><div class="kpis" style="grid-template-columns:repeat(3,minmax(0,1fr))">${kpi("Posted", fmt(state.goal), `${n}% of 10,000`)}${kpi("To go", fmt(10000 - state.goal), `${Math.max(1, Math.ceil((10000 - state.goal) / 310))} days at this pace`, true)}${kpi("Members who helped", "3,904", "Since the 1st", true)}</div>
+        <div class="goal-adm"><div class="kpis" style="grid-template-columns:repeat(3,minmax(0,1fr))">${kpi("Posted", fmt(state.goal), `${n}% of 2,500`)}${kpi("To go", fmt(2500 - state.goal), `${Math.max(1, Math.ceil((2500 - state.goal) / 60))} days at this pace`, true)}${kpi("Members who helped", "1,140", "Since the 1st", true)}</div>
           <span class="bar-a"><i style="width:${n}%"></i></span>
-          <div class="adm-actions"><button class="adm-btn" data-act="goalsim">Simulate a busy Sunday evening (+640)</button>${memberLink("jardin", "See it in le Jardin")}</div></div></div>
-      <div class="acard"><h2>Settings</h2><div class="aform" style="margin-top:12px">${fld("Target", inp("gt", "10,000", "disabled"))}${fld("What counts", inp("gc", "Rituels with a post, from any member", "disabled"))}${fld("Unlocks", inp("gu", "Aube Rose solid perfume, 1,000 numbered compacts", "disabled"))}${fld("Ends", inp("ge", `Last day of ${MONTH}`, "disabled"))}</div></div>
+          <div class="adm-actions"><button class="adm-btn" data-act="goalsim">Simulate a busy Sunday evening (+240)</button>${memberLink("jardin", "See it in le Jardin")}</div></div></div>
+      <div class="acard"><h2>Settings</h2><div class="aform" style="margin-top:12px">${fld("Target", inp("gt", "2,500", "disabled"))}${fld("What counts", inp("gc", "Rituels with a post, from any member", "disabled"))}${fld("Unlocks", inp("gu", "Aube Rose solid perfume, 1,000 numbered compacts", "disabled"))}${fld("Ends", inp("ge", `Last day of ${MONTH}`, "disabled"))}</div></div>
     </div>`;
 }
 function seasonBattles() {
@@ -2484,7 +2546,7 @@ function seasonBattles() {
     <tbody>${BATTLES.map((b) => { const s = battleStatus(b); return `<tr class="${b.fresh ? "fresh" : ""}"><td class="wrap"><b style="font-weight:500">${esc(b.name)}</b><br><span class="sub">${esc(b.prize)}</span></td>
       <td class="wrap"><span class="team-dot" style="background:${b.a.colour}"></span>${esc(b.a.name)} ${b.a.pts ? fmt(b.a.pts) : ""}<br><span class="team-dot" style="background:${b.b.colour}"></span>${esc(b.b.name)} ${b.b.pts ? fmt(b.b.pts) : ""}</td>
       <td>${dayLabel(b.start)} to ${dayLabel(b.end)}</td><td class="wrap">${JOIN_RULES[b.join]}</td><td class="wrap">${COUNTS[b.counts]}</td><td><span class="st ${s === "live" ? "live" : s === "upcoming" ? "sched" : "draft"}">${s === "upcoming" ? "Starts " + dayLabel(b.start) : s === "live" ? "Live" : "Ended"}</span></td></tr>`; }).join("")}</tbody></table></div></div>
-    <div class="acard"><h2>How a battle works</h2><p class="sub">Two sides, a start and an end. Members join a side in the app and every ${BRAND.word.replace(/s$/, "")} they earn counts for it. Le Jardin sees the score live, on Today and on the leaderboard.</p></div>`;
+    <div class="acard"><h2>How a battle works</h2><p class="sub">Two sides, a start and an end. Members join a side in the app and all the XP they earn counts for it. Le Jardin sees the score live, on Today and on the leaderboard.</p></div>`;
 }
 function battleCard(b) {
   const a = b.a.pts, c = b.b.pts, t = a + c;
@@ -2513,7 +2575,7 @@ function createBattle() {
 function seasonHerbier() {
   const how = (p) => (p.unlock ? `With "${ritual(p.unlock).title}"` : p.from);
   return `<div class="acard"><h2>The Herbier</h2><p class="sub">Twelve plates, one for each plant in the formulas. Some come with a ritual, one only with Givre. Members who press all twelve before 31 December get a framed print of their Herbier.</p>
-      <div class="album-pages"><div><b>12</b><span>plates this season</span></div><div><b>9,870</b><span>plates pressed this month</span></div><div><b>38</b><span>members with all twelve</span></div><div><b>1</b><span>limited plate, with Givre</span></div></div></div>
+      <div class="album-pages"><div><b>12</b><span>plates this season</span></div><div><b>3,940</b><span>plates pressed this month</span></div><div><b>38</b><span>members with all twelve</span></div><div><b>1</b><span>limited plate, with Givre</span></div></div></div>
     <div class="acard"><h2>Plates</h2><div class="scroll-x"><table class="atable"><thead><tr><th>Plate</th><th>How members get it</th><th class="r">Members who have it</th><th>Status</th></tr></thead>
       <tbody>${[...NEW_PLATES, ...PLATES].map((p) => `<tr class="${p.fresh ? "fresh" : ""}"><td><b>${esc(p.name)}</b> <span class="sub">${esc(p.latin)}</span></td><td class="wrap">${esc(p.fresh ? p.howL : how(p))}${p.lim ? `, limited to ${p.lim}` : ""}</td><td class="r">${p.fresh ? "–" : fmt(PLATE_HAVE[p.id] + (state.pressed.has(p.id) && p.unlock ? 1 : 0))}</td><td>${p.fresh ? `<span class="st sched">Next season</span>` : `<span class="st live">In the Herbier</span>`}</td></tr>`).join("")}</tbody></table></div></div>`;
 }
@@ -2530,56 +2592,57 @@ function createPlate() {
   closeDrawer(); rerenderAdminInPlace(); admToast(`${d.name} is ready. It joins the Herbier when the next season opens`);
 }
 function seasonBoard() {
-  return `<div class="adm-grid"><div class="acard"><h2>Leaderboard, ${MONTH}</h2><p class="sub">Members are ranked by ${BRAND.word} earned from rituels this month.</p>
-      <dl class="bs-words" style="margin-top:14px"><dt>Period</dt><dd>Monthly, starts again on the 1st</dd><dt>Top three</dt><dd>A day at the atelier in Grasse</dd><dt>Top twenty</dt><dd>The Givre coffret, sent home</dd><dt>Spending</dt><dd>Choosing gifts never moves a member down</dd><dt>Tiers</dt><dd>${TIERS.map((t) => `${t.name} ${fmt(t.at)}`).join(", ")}</dd></dl>
+  return `<div class="adm-grid"><div class="acard"><h2>Leaderboard, ${MONTH} ${soon()}</h2><p class="sub">Members are ranked by XP earned from rituels this month. Sending a ritual earns its XP at once; the same number of ${BRAND.word} follow once the post is approved. If a post is turned down, its XP comes off again and the member gets a message with your reason. The final table is confirmed once every post has been checked.</p>
+      <dl class="bs-words" style="margin-top:14px"><dt>Period</dt><dd>Monthly, starts again on the 1st</dd><dt>Top three</dt><dd>A day at the atelier in Grasse</dd><dt>Top twenty</dt><dd>The Givre coffret, sent home</dd><dt>Spending</dt><dd>Gifts spend ${BRAND.word} only, never XP, so choosing them never moves a member down</dd><dt>Tiers</dt><dd>${TIERS.map((t) => `${t.name} ${fmt(t.at)}`).join(", ")} XP, back to 0 each season</dd></dl>
       <div class="adm-actions" style="margin-top:14px">${memberLink("bouquet", "See the leaderboard in the app")}</div></div>
-    <div class="acard"><h2>Top 8 right now</h2><div class="scroll-x"><table class="atable"><thead><tr><th>#</th><th>Member</th><th class="r">Posts</th><th class="r">${BRAND.word.replace(/^./, (c) => c.toUpperCase())}</th></tr></thead>
+    <div class="acard"><h2>Top 8 right now</h2><div class="scroll-x"><table class="atable"><thead><tr><th>#</th><th>Member</th><th class="r">Posts</th><th class="r">XP</th></tr></thead>
       <tbody>${TOP.map(([n, , p, posts], i) => `<tr><td>${i + 1}</td><td><span class="who"><i>${initials(n)}</i>${esc(n)}</span></td><td class="r">${posts}</td><td class="r">${fmt(p)}</td></tr>`).join("")}</tbody></table></div></div></div>`;
 }
 
 /* ---------------------------------------------------------------- Members */
 function admMembers() {
   const tab = state.atab.members || 0;
-  const head = admHead("Members", "23,642 members in total. Where they come from, their tiers, and each one's record.", memberLink("profile", "Open a member's view")) + admTabs("members");
+  const head = admHead("Members", "12,480 members in total, 4,600 active in the last 90 days. Where they come from, their tiers, and each one's record.", memberLink("profile", "Open a member's view")) + admTabs("members");
   if (tab === 2) {
     const all = [...TOP, ...NEAR, ...BELOW, [ME.name, ME.handle, monthPts(), state.posts.filter((p) => p.ago <= 31).length, state.posts.reduce((a, p) => a + p.views, 0)]].sort((a, b) => b[2] - a[2]);
     const q = (state.mq || "").toLowerCase(), rows = all.filter((r) => (r[0] + r[1]).toLowerCase().includes(q));
     return head + `<div class="acard"><div class="afield" style="max-width:320px"><input name="mq" value="${esc(state.mq || "")}" placeholder="Search by name or handle" aria-label="Search members"></div>
-      <div class="scroll-x"><table class="atable"><thead><tr><th>Member</th><th>Tier</th><th class="r">${BRAND.word.replace(/^./, (c) => c.toUpperCase())}, this month</th><th class="r">Posts</th><th class="r">Views on posts</th><th>Last seen</th></tr></thead>
+      <div class="scroll-x"><table class="atable"><thead><tr><th>Member</th><th>Tier</th><th class="r">XP, this month</th><th class="r">Posts</th><th class="r">Views on posts</th><th>Last seen</th></tr></thead>
       <tbody>${rows.map((r, i) => `<tr><td><span class="who"><i>${initials(r[0])}</i>${esc(r[0])} <span class="sub">${r[1]}</span></span></td><td>${tierOf(r[0] === ME.name ? SP() : r[2] * 2.2).name}</td><td class="r">${fmt(r[2])}</td><td class="r">${r[3]}</td><td class="r">${big(r[4])}</td><td>${["Today", "Today", "Yesterday", "3 days ago"][i % 4]}</td></tr>`).join("") || `<tr><td colspan="6">No member matches.</td></tr>`}</tbody></table></div></div>`;
   }
-  if (tab === 1) return head + `<div class="adm-grid"><div class="acard"><h2>Tiers</h2><p class="sub">Lifetime petals</p><div class="splits">${TIERS.map((t, i) => `<div><span>${t.name}</span><span class="bar-a"><i style="width:${(TIER_COUNTS[i] / TIER_COUNTS[0]) * 100}%"></i></span><b>${fmt(TIER_COUNTS[i])}</b></div>`).join("")}</div></div>
-    <div class="acard"><h2>Tier rules</h2><div class="splits">${TIERS.map((t) => `<div><span>${t.name}</span><span style="font-size:.8125rem">${t.gift}</span><b>${fmt(t.at)}</b></div>`).join("")}</div></div></div>
+  if (tab === 1) return head + `<div class="adm-grid"><div class="acard"><h2>Tiers</h2><p class="sub">By season XP, back to 0 each season</p><div class="splits">${TIERS.map((t, i) => `<div><span>${t.name}</span><span class="bar-a"><i style="width:${(TIER_COUNTS[i] / TIER_COUNTS[0]) * 100}%"></i></span><b>${fmt(TIER_COUNTS[i])}</b></div>`).join("")}</div></div>
+    <div class="acard"><h2>Tier rules</h2><div class="splits">${TIERS.map((t) => `<div><span>${t.name}</span><span style="font-size:.8125rem">${t.gift}</span><b>${fmt(t.at)} XP</b></div>`).join("")}</div></div></div>
     <div class="acard"><h2>Members who posted the most this month</h2><div class="scroll-x"><table class="atable"><thead><tr><th>Member</th><th class="r">Posts</th><th class="r">Views</th><th class="r">Media value</th><th>Joined through</th></tr></thead><tbody>${TOP.map(([n, h, , p, v], i) => `<tr><td><span class="who"><i>${initials(n)}</i>${n} <span class="sub">${h}</span></span></td><td class="r">${p}</td><td class="r">${big(v)}</td><td class="r">${eur(mediaValue(v))}</td><td>${ORIGIN[i % ORIGIN.length][0]}</td></tr>`).join("")}</tbody></table></div></div>`;
-  return head + `<div class="kpis">${kpi("Members, in total", "23,642", "+1,904 this month")}${kpi("Active this month", "8,480", "36% of members")}${kpi("Joined through a member's post", "2,310", "This month")}${kpi("Linked a social account", "71%", "Needed to earn on posts", true)}</div>
+  return head + `<div class="kpis">${kpi("Members, in total", "12,480", "+780 this month")}${kpi("Active (last 90 days)", fmt(ACTIVE_90), "Sent at least one ritual")}${kpi("Joined through a member's post", fmt(RS.reduce((a, s) => a + s.joined, 0)), "Last 30 days")}${kpi("Linked a social account", "71%", "Needed to earn on posts", true)}</div>
     <div class="adm-row">
       <div class="acard"><h2>How they joined</h2><p class="sub">First touch, this year</p><div class="splits">${ORIGIN.map(([l, v]) => `<div><span>${l}</span><span class="bar-a"><i style="width:${(v / 31) * 100}%"></i></span><b>${v}%</b></div>`).join("")}</div></div>
       <div class="acard"><h2>Where they live</h2><p class="sub">From the delivery address</p><div class="splits">${CITIES.map(([l, v]) => `<div><span>${l}</span><span class="bar-a"><i style="width:${(v / 34) * 100}%"></i></span><b>${v}%</b></div>`).join("")}</div></div>
     </div>
-    <div class="acard"><h2>From a post to a member</h2><p class="sub">Last 30 days: what members' posts bring back</p><div class="mkpis">${mini("Members' posts", fmt(POSTS_30))}${mini("Members who posted", fmt(POSTERS_30))}${mini("Views on members' posts", big(DAILY.reduce((a, b) => a + b, 0)))}${mini("Potential reach", big(POSTERS_30 * FOLLOWERS_AVG))}${mini("Joined le Jardin from a post", "2,310")}</div></div>`;
+    <div class="acard"><h2>From a post to a member</h2><p class="sub">Last 30 days: what members' posts bring back</p><div class="mkpis">${mini("Members' posts", fmt(POSTS_30))}${mini("Members who posted", fmt(POSTERS_30))}${mini("Views on members' posts", big(DAILY.reduce((a, b) => a + b, 0)))}${mini("Potential reach " + soon(), big(POSTERS_30 * FOLLOWERS_AVG))}${mini("Joined le Jardin from a post", fmt(RS.reduce((a, s) => a + s.joined, 0)))}</div></div>`;
 }
 
 /* ---------------------------------------------------------------- Results */
+/* Each ritual's share of the period's posts and views, in whole numbers, so the rituels add up to the networks and the total. */
 function ritualRows() {
-  const T = totals(), postViews = T.views * (1 - OTHER_POST_VIEWS);
-  return RS.map((s) => { const r = ritual(s.id); const v = postViews * s.vshare; const lk = v * 0.075, cm = v * 0.0038, sh = v * 0.0056; return { ...s, r, views: v, posts: s.posts * T.f, done: s.done * T.f + (state.done.has(s.id) ? 1 : 0), joined: s.joined * T.f, likes: lk, comments: cm, shares: sh, eng: lk + cm + sh, value: mediaValue(v) }; });
+  const T = totals(), rv = splitLR(T.views, RS.map((s) => s.v30 / VIEWS_30), 125), rp = splitLR(T.posts, RS.map((s) => s.posts / POSTS_30));
+  return RS.map((s, i) => { const r = ritual(s.id); const v = rv[i]; const k = T.views ? v / T.views : 0, lk = T.likes * k, cm = T.comments * k, sh = T.shares * k; return { ...s, r, views: v, posts: rp[i], done: Math.round(s.done * T.f) + (state.done.has(s.id) ? 1 : 0), joined: Math.round(s.joined * T.f), likes: lk, comments: cm, shares: sh, eng: lk + cm + sh, value: mediaValue(v) }; });
 }
 function admResults() {
   const tab = state.atab.results || 0;
   const h = admHead("Results", "What le Jardin brings in. The top line stays simple: open any ritual for the detail.", `<button class="adm-btn" data-act="csv">${icon("download")}Download, CSV</button>`) + admTabs("results") + periodBar();
   if (tab === 1) return h + resultsMissions();
   if (tab === 2) return h + resultsPosts();
-  const T = totals(), paid = mediaValue(T.views), eng = T.likes + T.comments + T.shares, posters = POSTERS_30 * T.f;
+  const T = totals(), paid = mediaValue(T.views), eng = T.likes + T.comments + T.shares, posters = T.posters;
   const byR = ritualRows().filter((x) => x.views).sort((a, b) => b.views - a.views);
   const top = ritualRows().filter((x) => x.views).sort((a, b) => b.views - a.views).slice(0, 5);
   return h + `<div class="kpis">
       ${kpi("Earned media value", eur(paid), `Views on members' posts at a ${cpmLabel()} CPM`)}
       ${kpi("Views on members' posts", big(T.views), `From ${fmt(T.posts)} posts by ${fmt(posters)} members`)}
       ${kpi("Likes, comments and shares", big(eng), `${pct(eng, T.views)} of views`)}
-      ${kpi("New members from posts", fmt(2310 * T.f), "Joined through a post or a member's link")}
+      ${kpi("New members from posts", fmt(ritualRows().reduce((a, x) => a + x.joined, 0)), "Joined through a post or a member's link")}
     </div>
     <details class="more" ${state.rmore ? "open" : ""}><summary data-act="rmore">${state.rmore ? "Hide the detail" : "Show every number for this period"}</summary>
-      <div class="mkpis">${mini("Posts", fmt(T.posts))}${mini("Members who posted", fmt(posters))}${mini("Average views a post", fmt(T.views / T.posts))}${mini("Likes", big(T.likes))}${mini("Comments", big(T.comments))}${mini("Shares", big(T.shares))}${mini("Rituals completed", fmt(24800 * T.f))}${mini("Gifts redeemed", fmt(1457 * T.f))}${mini("Boutique check-ins", fmt(1126 * T.f))}${mini("Active members", "8,480")}</div>
+      <div class="mkpis">${mini("Posts", fmt(T.posts))}${mini("Members who posted", fmt(posters), "each counted once")}${mini("Average views a post", fmt(T.views / T.posts))}${mini("Likes", big(T.likes))}${mini("Comments", big(T.comments))}${mini("Shares", big(T.shares))}${mini("Rituals completed", fmt(9600 * T.f))}${mini("Gifts redeemed", fmt(610 * T.f))}${mini("Boutique check-ins", fmt(1126 * T.f))}${mini("Active members (last 90 days)", fmt(ACTIVE_90), "sent at least one ritual")}</div>
     </details>
     ${cpmBox()}
     <div class="vh">
@@ -2587,10 +2650,10 @@ function admResults() {
         <div class="vh-cols" role="img" aria-label="Media value by ritual: ${byR.map((x) => `${x.r.type} ${eur(x.value)}`).join(", ")}">${byR.map((x) => `<span><i style="height:${((x.views / byR[0].views) * 62).toFixed(1)}px"></i><em>${x.r.type}</em></span>`).join("")}</div></div>
       <div class="vh-tile"><b>${fmt(T.posts)}</b><span>Members' posts</span><small>By ${fmt(posters)} members</small></div>
       <div class="vh-tile"><b>${big(T.views)}</b><span>Views of members' posts</span><small>${fmt(T.views / T.posts)} a post on average</small></div>
-      <div class="vh-tile"><b>${big(posters * FOLLOWERS_AVG)}</b><span>Potential reach</span><small>Followers of the accounts that posted</small></div>
+      <div class="vh-tile"><b>${big(posters * FOLLOWERS_AVG)}</b><span>Potential reach ${soon()}</span><small>Followers of the ${fmt(posters)} accounts that posted</small></div>
     </div>
     <div class="adm-grid">
-      <div class="acard"><h2>Views on members' posts, per day</h2><p class="sub">Last 30 days</p>${lineChart({ id: "rdaily", data: DAILY, labels: DAY_LABELS, max: 800000, aria: "Daily views on members' posts over the last 30 days", tipFor: (i) => `<b>${DAY_LABELS[i]}</b>, ${fmt(DAILY[i])} views` })}</div>
+      <div class="acard"><h2>Views on members' posts, per day</h2><p class="sub">Last 30 days</p>${lineChart({ id: "rdaily", data: DAILY, labels: DAY_LABELS, max: 200000, aria: "Daily views on members' posts over the last 30 days", tipFor: (i) => `<b>${DAY_LABELS[i]}</b>, ${fmt(DAILY[i])} views` })}</div>
       <div class="acard"><h2>How we count it</h2><p class="sub" style="line-height:1.55">Views on public posts that tag @maisonaube, from members' linked accounts, counted for 30 days after posting. Value = views ÷ 1,000 × your CPM. Posts the team rejects are taken out.</p><div class="callout ok" style="margin-top:12px">At ${cpmLabel()}, ${big(T.views)} views would cost ${eur(paid)} in paid social.</div></div>
     </div>
     <div class="acard"><h2>Where members post</h2><p class="sub">${PERIODS[state.period][0]}, checked through members' linked accounts</p>
@@ -2606,9 +2669,9 @@ function resultsMissions() {
   const tot = (k) => rows.reduce((a, r) => a + r[k], 0);
   return `<div class="acard"><div class="acard-top"><div><h2>By ritual</h2><p class="sub">Which asks travel furthest. Rituels without a post still bring reviews, votes and new members.</p></div>
       <div class="filters aform">${fld("Sort by", sel("rsort", [["value", "Media value"], ["views", "Views"], ["eng", "Likes, comments and shares"], ["done", "Members who took part"], ["joined", "New members"]], state.rsort))}</div></div>
-    <div class="scroll-x"><table class="atable"><thead><tr><th>Ritual</th><th class="r">Done by</th><th class="r">Of those who saw it</th><th class="r">Posts</th><th class="r">Views</th><th class="r">Views a post</th><th class="r">Likes, comments, shares</th><th class="r">Media value</th><th class="r">New members</th></tr></thead>
-    <tbody>${rows.map((x) => `<tr class="click" data-act="rmission" data-id="${x.id}"><td class="wrap"><b>${esc(x.r.title)}</b><br><span class="sub">${x.r.type}${x.note ? `, ${x.note}` : ""}</span></td><td class="r">${fmt(x.done)}</td><td class="r">${pct(x.done, x.seen * Math.max(totals().f, 0.2))}</td><td class="r">${x.posts ? fmt(x.posts) : "–"}</td><td class="r">${x.views ? big(x.views) : "–"}</td><td class="r">${x.posts ? fmt(x.views / x.posts) : "–"}</td><td class="r">${x.views ? big(x.eng) : "–"}</td><td class="r">${x.views ? eur(x.value) : "–"}</td><td class="r">${x.joined ? fmt(x.joined) : "–"}</td></tr>`).join("")}</tbody>
-    <tfoot><tr><td>${rows.length} rituels</td><td class="r">${fmt(tot("done"))}</td><td></td><td class="r">${fmt(tot("posts"))}</td><td class="r">${big(tot("views"))}</td><td></td><td class="r">${big(tot("eng"))}</td><td class="r">${eur(tot("value"))}</td><td class="r">${fmt(tot("joined"))}</td></tr></tfoot></table></div></div>`;
+    <div class="scroll-x"><table class="atable"><thead><tr><th>Ritual</th><th class="r">Done by</th><th class="r">Posts</th><th class="r">Views</th><th class="r">Views a post</th><th class="r">Likes, comments, shares</th><th class="r">Media value</th><th class="r">New members</th></tr></thead>
+    <tbody>${rows.map((x) => `<tr class="click" data-act="rmission" data-id="${x.id}"><td class="wrap"><b>${esc(x.r.title)}</b><br><span class="sub">${x.r.type}${x.note ? `, ${x.note}` : ""}</span></td><td class="r">${fmt(x.done)}</td><td class="r">${x.posts ? fmt(x.posts) : "–"}</td><td class="r">${x.views ? big(x.views) : "–"}</td><td class="r">${x.posts ? fmt(x.views / x.posts) : "–"}</td><td class="r">${x.views ? big(x.eng) : "–"}</td><td class="r">${x.views ? eur(x.value) : "–"}</td><td class="r">${x.joined ? fmt(x.joined) : "–"}</td></tr>`).join("")}</tbody>
+    <tfoot><tr><td>${rows.length} rituels</td><td class="r">${fmt(uniqueOf(rows.map((x) => x.done)))}</td><td class="r">${fmt(tot("posts"))}</td><td class="r">${big(tot("views"))}</td><td></td><td class="r">${big(tot("eng"))}</td><td class="r">${eur(tot("value"))}</td><td class="r">${fmt(tot("joined"))}</td></tr></tfoot></table></div><p class="sub" style="margin-top:10px">Done by, in total: ${fmt(uniqueOf(rows.map((x) => x.done)))} members, each counted once. A member can take part in several rituels.</p></div>`;
 }
 function resultsPosts() {
   const days = state.period === "7d" ? 7 : 99;
@@ -2625,10 +2688,10 @@ function ritualDetail(id) {
   const tiers = [["Graine", 46], ["Bouton", 33], ["Fleur", 17], ["Jardin secret", 4]].map(([t, p], i) => [t, p + ((id.length + i * 3) % 5) - 2]);
   const posts = POSTLIST.filter((p) => p.rid === id).sort((a, b) => b.views - a.views).slice(0, 5);
   const T = totals();
-  const body = `<div class="mkpis">${mini("Members who took part", fmt(x.done))}${mini("Of those who saw it", pct(x.done, x.seen * Math.max(T.f, 0.2)))}${x.views ? mini("Posts", fmt(x.posts)) + mini("Views", big(x.views)) + mini("Likes", big(x.likes)) + mini("Comments", fmt(x.comments)) + mini("Shares", fmt(x.shares)) + mini("Media value", eur(x.value)) + mini("Potential reach", big(reachOf(x.posts))) : ""}${x.joined ? mini("New members", fmt(x.joined)) : ""}</div>
+  const body = `<div class="mkpis">${mini("Members who took part", fmt(x.done))}${x.views ? mini("Posts", fmt(x.posts)) + mini("Views", big(x.views), `${fmt(x.views / x.posts)} a post`) + mini("Likes", big(x.likes)) + mini("Comments", fmt(x.comments)) + mini("Shares", fmt(x.shares)) + mini("Media value", eur(x.value)) + mini("Potential reach " + soon(), big(reachOf(x.posts)), "followers of the accounts that posted") : ""}${x.joined ? mini("New members", fmt(x.joined)) : ""}</div>
     ${x.note ? `<p class="sub" style="margin-top:12px">${x.note}.</p>` : ""}
     ${x.views ? `<h3 style="font-size:.875rem;margin:18px 0 0">By network</h3><div class="scroll-x"><table class="atable"><thead><tr><th>Network</th><th class="r">Views</th><th class="r">Share</th><th class="r">Media value</th></tr></thead>
-      <tbody>${NETS.map(([n, , vs]) => `<tr><td>${n}</td><td class="r">${big(x.views * vs)}</td><td class="r">${Math.round(vs * 100)}%</td><td class="r">${eur(mediaValue(x.views * vs))}</td></tr>`).join("")}</tbody></table></div>
+      <tbody>${(() => { const xv = splitLR(x.views, NETS.map((n) => n[2]), 125); return NETS.map(([n, , vs], i) => `<tr><td>${n}</td><td class="r">${big(xv[i])}</td><td class="r">${Math.round(vs * 100)}%</td><td class="r">${eur(mediaValue(xv[i]))}</td></tr>`).join(""); })()}</tbody></table></div>
     ${posts.length ? `<h3 style="font-size:.875rem;margin:18px 0 0">Best posts</h3><div class="scroll-x"><table class="atable"><thead><tr><th>Member</th><th>Network</th><th class="r">Views</th><th class="r">Likes</th><th class="r">Joined via it</th></tr></thead><tbody>${posts.map((p) => `<tr><td>${p.who}</td><td>${p.net}</td><td class="r">${fmt(p.views)}</td><td class="r">${fmt(p.likes)}</td><td class="r">${p.joined}</td></tr>`).join("")}</tbody></table></div>` : ""}`
     : `<p class="sub" style="margin-top:14px">This ritual doesn't ask for a public post, so what counts is who took part and what it brought back.</p>`}
     <h3 style="font-size:.875rem;margin:18px 0 0">Who took part</h3><div class="splits">${tiers.map(([t, p]) => `<div><span>${t}</span><span class="bar-a"><i style="width:${p}%"></i></span><b>${p}%</b></div>`).join("")}</div>`;
@@ -2704,7 +2767,7 @@ const MODULES = [
   ["Rituels", "missions", "Posts, reviews, photos and more", "missions", 0], ["Votes and quizzes", "list", "Notes, workshops, the label", "missions", 1], ["Boutique check-in", "qr", "QR at the till and at events", "missions", 2],
   ["Reviews and answers", "chat", "Read them, feature the best", "missions", 3], ["Gifts", "gift", "Products, codes, moments", "rewards"], ["Tier gifts", "star", "Sent on reaching a tier", "rewards"],
   ["Giveaways", "ticket", "Draws with entry rules", "rewards"], ["Community goal", "users", "One target for everyone", "season", 0], ["Team battles", "swords", "Sides, dates, join rules", "season", 1],
-  ["Herbier", "collection", "A plate for each ingredient", "season", 2], ["Leaderboard", "table", "Monthly, by petals", "season", 3], ["Referrals", "route", "Codes and links"],
+  ["Herbier", "collection", "A plate for each ingredient", "season", 2], ["Leaderboard", "table", "Monthly, by XP", "season", 3], ["Referrals", "route", "Codes and links"],
   ["Drops", "calendar", "Early access by tier"], ["Push and email", "bell", "Scheduled with drops"],
 ];
 function admBrand() {
@@ -2715,7 +2778,7 @@ function admBrand() {
 
 /* ---------------------------------------------------------------- Account */
 const TEAM = [["Hélène Duval", "Head of community", "Admin", "Today"], ["Malik Saïdi", "Content and social", "Admin", "Today"], ["Agathe Mercier", "Customer care", "Moderator", "Yesterday"], ["Julien Roche", "Logistics, Paris", "Moderator", "Today"]];
-const admAccount = () => accountPage({ domain: "jardin.maison-aube.example", active: 8480, renews: dayLabel(isoDay(addDays(163))), sub: "Plan, team, billing and security." });
+const admAccount = () => accountPage({ domain: "jardin.maison-aube.example", active: ACTIVE_90, renews: dayLabel(isoDay(addDays(163))), sub: "Plan, team, billing and security." });
 
 /* ---------------------------------------------------------------- forms, actions */
 const FORMS = {
@@ -2739,7 +2802,7 @@ function onAdminAction(act, el) {
     case "newCard": if (state.admin !== "season" || state.atab.season !== 2) { state.admin = "season"; state.atab.season = 2; renderAdmin(); } return openForm("plate", { name: "Mimosa", latin: "Acacia dealbata", rid: "routine", lim: "", img: null }, { title: "Add a plate", sub: "A new plant for the Herbier, drawn in the house's line.", cta: "Add the plate", act: "createPlate" });
     case "createPlate": return createPlate();
     case "closeCandle": { const w = NOTES3.map(([k, l, , v]) => [l, v + (state.vote === k ? 1 : 0)]).sort((a, b) => b[1] - a[1])[0][0]; state.candleClosed = w; state.news = `${w} wins: it's December's candle.`; rerenderAdminInPlace(); return admToast(`${w} is December's candle. Announced in le Jardin`, "jardin"); }
-    case "qrpng": downloadQRPng(CHECKIN_URL, "SCAN TO CHECK IN", `Maison Aube, Paris boutique. +100 ${BRAND.word} once a month`, "maison-aube-boutique-check-in-qr.png"); return admToast("QR code downloaded, ready to print");
+    case "qrpng": downloadQRPng(CHECKIN_URL, "SCAN TO CHECK IN", `Maison Aube, Paris boutique. +100 XP and ${BRAND.word} once a month`, "maison-aube-boutique-check-in-qr.png"); return admToast("QR code downloaded, ready to print");
     case "aopt": { const n = el.dataset.name, v = el.dataset.v; if (n === "ciMode") state.ci.mode = v; else state[n] = v; return rerenderAdminInPlace(); }
     case "rev": return setRev(+el.dataset.i, el.dataset.s);
     case "reviewsCsv": csvDownload([["Member", "Handle", "Product", "Answer"], ...revList().filter((a) => a.status === "featured").map((a) => [a.who, a.handle, a.product, a.t])], "maison-aube-featured-answers.csv"); return admToast("CSV downloaded");
@@ -2763,7 +2826,7 @@ function onAdminAction(act, el) {
       const rows = [["member", "ritual", "network", "days_ago", "views", "likes", "comments", "joined_via_post", `media_value_eur_cpm_${state.cpm}`], ...POSTLIST.map((p) => [p.who, ritual(p.rid).title, p.net, p.ago, p.views, Math.round(p.likes), Math.round(p.comments), p.joined, mediaValue(p.views).toFixed(2)])];
       csvDownload(rows, "maison-aube-posts.csv"); return admToast("CSV downloaded");
     }
-    case "goalsim": state.goal = Math.min(10000, state.goal + 640); rerenderAdminInPlace(); return admToast(`+640 rituals. ${goalPct()}% of the goal.`, "jardin");
+    case "goalsim": state.goal = Math.min(2500, state.goal + 240); rerenderAdminInPlace(); return admToast(`+240 rituals. ${goalPct()}% of the goal.`, "jardin");
   }
 }
 function onChange(t) {
@@ -2800,7 +2863,7 @@ function genAction(act, el) {
     el.classList.add(right ? "right" : "wrong");
     if (right && !state.done.has(r.id)) { el.parentElement.querySelectorAll("button").forEach((b) => (b.disabled = true)); complete(r.id, el); renderMember(false); }
     else if (!right) {
-      if (state.quizWrong === "half" && !state.done.has(r.id)) { el.parentElement.querySelectorAll("button").forEach((b) => (b.disabled = true)); el.parentElement.querySelectorAll("button")[r.quiz.right].classList.add("right"); state.done.add(r.id); const half = Math.round(r.pts / 2); award(half, el, `+${half} ${BRAND.word} for trying`); renderMember(false); }
+      if (state.quizWrong === "half" && !state.done.has(r.id)) { el.parentElement.querySelectorAll("button").forEach((b) => (b.disabled = true)); el.parentElement.querySelectorAll("button")[r.quiz.right].classList.add("right"); state.done.add(r.id); const half = Math.round(r.pts / 2); award(half, el, `${xpPts(half)} for trying`); renderMember(false); }
       else setTimeout(() => el.classList.remove("wrong"), 400);
     }
     return;

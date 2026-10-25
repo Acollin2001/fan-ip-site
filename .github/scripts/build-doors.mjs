@@ -1,23 +1,49 @@
-// Writes brands.html, sport.html and artists.html from index.html. Each page
+// Writes brands.html, sport.html and artists.html from index.html, and the
+// French fr/brands.html, fr/sport.html and fr/artists.html from fr/index.html
+// (words in door-pages-fr.mjs and DOORS_FR in assets/doors.js). Each page
 // keeps the home page's design and sections, so changes to index.html flow
 // through, but speaks to its own world: its own h1 and intro under the big
 // "Turn fandom into impact.", a world section, a world FAQ (with FAQPage
 // JSON-LD), and the home sections in that world's words. The words live in
 // door-pages.mjs; the live slots (mission card, step 1) in assets/doors.js.
-// Run after any change to index.html, door-pages.mjs or the DOORS texts:
+// French texts are typeset with .github/scripts/typo_fr.py (no-break spaces).
+// Run after any change to index.html, fr/index.html, door-pages.mjs,
+// door-pages-fr.mjs or the DOORS / DOORS_FR texts:
 //   node .github/scripts/build-doors.mjs
 // It stops with "not found" if a piece of index.html it rewrites has moved.
 import { readFileSync, writeFileSync } from "node:fs";
 import { PAGES } from "./door-pages.mjs";
+import { PAGES_FR, UI_FR } from "./door-pages-fr.mjs";
 
 const root = new URL("../../", import.meta.url);
 const read = (f) => readFileSync(new URL(f, root), "utf8");
 const js = read("assets/doors.js");
-const DOORS = Function(`return ${js.slice(js.indexOf("{", js.indexOf("var DOORS")), js.indexOf("\n  };", js.indexOf("var DOORS")) + 4)}`)();
-const index = read("index.html");
+const readVar = (name) => {
+  const at = js.indexOf(`var ${name} =`);
+  if (at < 0) throw new Error(`not found: var ${name} in assets/doors.js`);
+  return Function(`return ${js.slice(js.indexOf("{", at), js.indexOf("\n  };", at) + 4)}`)();
+};
+
+// One run per language: the home page it starts from, where it writes, the
+// words of each world and the few words the build itself writes.
+const LOCALES = [
+  {
+    lang: "en-GB", inLanguage: "en-GB", dir: "", source: "index.html", pages: PAGES, doors: readVar("DOORS"),
+    crumbs: { "brands.html": "Brands", "sport.html": "Sport and esports", "artists.html": "Artists and creators" },
+    ui: {
+      trial: "Start my free trial",
+      demo: "Book a demo",
+      faqMoreHtml: 'More answers, for every world, in the <a href="faq.html">full FAQ</a>.',
+    },
+  },
+  {
+    lang: "fr", inLanguage: "fr-FR", dir: "fr/", source: "fr/index.html", pages: PAGES_FR, doors: readVar("DOORS_FR"), ui: UI_FR,
+    crumbs: { "brands.html": "Marques", "sport.html": "Sport et esport", "artists.html": "Artistes et créateurs" },
+  },
+];
 
 const esc = (t) => String(t).replace(/&/g, "&amp;").replace(/"/g, "&quot;").replace(/</g, "&lt;");
-const plain = (html) => html.replace(/<[^>]+>/g, "").replace(/\s+/g, " ").trim();
+const plain = (html) => html.replace(/<[^>]+>/g, "").replace(/[ \t\r\n]+/g, " ").trim();
 
 function swap(html, re, fn) {
   const m = html.match(re);
@@ -67,7 +93,7 @@ ${cols}
 `;
 }
 
-function faqSection(page) {
+function faqSection(page, ui) {
   const items = page.faq
     .map((f, i) => `          <div class="dq-item">
             <h3 class="dq-q" id="dq-${i + 1}">${esc(f.q)}</h3>
@@ -79,7 +105,7 @@ function faqSection(page) {
       <div class="container dq-grid">
         <div class="dq-head">
           <h2 id="dq-title" class="dq-title t-h2">${esc(page.faqTitle)}</h2>
-          <p class="dq-more t-body">More answers, for every world, in the <a href="faq.html">full FAQ</a>.</p>
+          <p class="dq-more t-body">${ui.faqMoreHtml}</p>
         </div>
         <div class="dq-list">
 ${items}
@@ -90,9 +116,7 @@ ${items}
 `;
 }
 
-const CRUMB = { "brands.html": "Brands", "sport.html": "Sport and esports", "artists.html": "Artists and creators" };
-
-function jsonLd(html, page, url) {
+function jsonLd(html, page, url, { inLanguage, home, crumbs }) {
   return swap(html, /<script type="application\/ld\+json">\n([\s\S]*?)\n  <\/script>/, (_, body) => {
     const data = JSON.parse(body);
     const web = data["@graph"].find((n) => n["@type"] === "WebPage");
@@ -102,8 +126,8 @@ function jsonLd(html, page, url) {
       breadcrumb: {
         "@type": "BreadcrumbList",
         itemListElement: [
-          { "@type": "ListItem", position: 1, name: "FAN/IP", item: "https://fan-ip.com/" },
-          { "@type": "ListItem", position: 2, name: CRUMB[page.file], item: url },
+          { "@type": "ListItem", position: 1, name: "FAN/IP", item: home },
+          { "@type": "ListItem", position: 2, name: crumbs[page.file], item: url },
         ],
       },
     });
@@ -111,7 +135,7 @@ function jsonLd(html, page, url) {
       "@type": "FAQPage",
       "@id": `${url}#faq`,
       url,
-      inLanguage: "en-GB",
+      inLanguage,
       isPartOf: { "@id": "https://fan-ip.com/#website" },
       mainEntity: page.faq.map((f) => ({
         "@type": "Question",
@@ -124,17 +148,19 @@ function jsonLd(html, page, url) {
   });
 }
 
-for (const [key, page] of Object.entries(PAGES)) {
+for (const { lang, inLanguage, dir, source, pages, doors: DOORS, ui, crumbs } of LOCALES) {
+const index = read(source);
+for (const [key, page] of Object.entries(pages)) {
   const d = DOORS[key];
   if (!d) throw new Error(`no DOORS entry for ${key}`);
   for (const [field, max] of [["title", 60], ["description", 155]]) {
-    if (page[field].length > max) throw new Error(`${page.file}: ${field} is ${page[field].length} characters (max ${max})`);
+    if (page[field].length > max) throw new Error(`${dir}${page.file}: ${field} is ${page[field].length} characters (max ${max})`);
   }
-  const url = `https://fan-ip.com/${page.file}`;
+  const url = `https://fan-ip.com/${dir}${page.file}`;
   let h = index;
 
   // Head: title, description, social cards, canonical, JSON-LD with the FAQ.
-  h = swap(h, /<html lang="en-GB">/, `<html lang="en-GB" data-door="${key}">`);
+  h = swap(h, new RegExp(`<html lang="${lang}">`), `<html lang="${lang}" data-door="${key}">`);
   h = swap(h, /<title>[^<]*<\/title>/, `<title>${esc(page.title)}</title>`);
   h = swap(h, /<meta name="description" content="[^"]*">/, `<meta name="description" content="${esc(page.description)}">`);
   h = swap(h, /<meta property="og:title" content="[^"]*">/, `<meta property="og:title" content="${esc(page.ogTitle)}">`);
@@ -143,16 +169,26 @@ for (const [key, page] of Object.entries(PAGES)) {
   h = swap(h, /<meta name="twitter:description" content="[^"]*">/, `<meta name="twitter:description" content="${esc(page.description)}">`);
   h = swap(h, /<meta property="og:url" content="[^"]*">/, `<meta property="og:url" content="${url}">`);
   h = swap(h, /<link rel="canonical" href="[^"]*">/, `<link rel="canonical" href="${url}">`);
-  h = jsonLd(h, page, url);
+  h = jsonLd(h, page, url, { inLanguage, home: `https://fan-ip.com/${dir}`, crumbs });
+
+  // The same page in the other language: hreflang links and the EN / FR switch.
+  const alt = { "en-GB": `https://fan-ip.com/${page.file}`, "fr-FR": `https://fan-ip.com/fr/${page.file}`, "x-default": `https://fan-ip.com/${page.file}` };
+  for (const [hl, href] of Object.entries(alt)) {
+    h = swap(h, new RegExp(`<link rel="alternate" hreflang="${hl}" href="[^"]*">`), `<link rel="alternate" hreflang="${hl}" href="${href}">`);
+  }
+  const twin = dir === "" ? { en: page.file, fr: `fr/${page.file}` } : { en: `../${page.file}`, fr: page.file };
+  for (const [l, href] of Object.entries(twin)) {
+    h = swap(h, new RegExp(`<a href="[^"]*"( lang="${l}" hreflang="[^"]*" data-lang="${l}")`, "g"), `<a href="${href}"$1`);
+  }
 
   // Hero: "Turn fandom into impact." stays big, as the brand line; the
   // world's promise becomes the h1, with its own lead and a trial button.
-  h = swap(h, /<h1 id="hero-title" class="([^"]*)">([\s\S]*?)<\/h1>/, (_, cls, inner) => `<p id="hero-title" class="${cls}">${inner}</p>`);
+  h = swap(h, /<h1 id="hero-title" class="([^"]*)"([^>]*)>([\s\S]*?)<\/h1>/, (_, cls, attrs, inner) => `<p id="hero-title" class="${cls}"${attrs}>${inner}</p>`);
   h = swap(h, /(<section id="top"[^>]*?)aria-labelledby="hero-title"/, `$1aria-labelledby="door-title"`);
   h = swap(h, /<p class="hero-promise">[\s\S]*?<\/p>/, `<h1 id="door-title" class="hero-promise">${page.h1Html}</h1>`);
   h = swap(h, /<p class="hero-lead t-lead">[\s\S]*?<\/p>/, `<p class="hero-lead t-lead">${esc(page.lead)}</p>`);
-  const trial = (cls) => `<a class="${cls}" href="https://app.fan-ip.com/start?for=${key}" data-start-link>Start my free trial</a>`;
-  const demo = (cls) => `<a class="${cls}" href="book-a-demo.html">Book a demo</a>`;
+  const trial = (cls) => `<a class="${cls}" href="https://app.fan-ip.com/start?for=${key}" data-start-link>${ui.trial}</a>`;
+  const demo = (cls) => `<a class="${cls}" href="book-a-demo.html">${ui.demo}</a>`;
   h = swap(h, /<div class="hero-actions">[\s\S]*?<\/div>/, `<p class="hero-plan hero-value t-body">${esc(page.valueLine)}</p>
         <div class="hero-actions">
           ${page.demoFirst ? demo("btn btn--primary") : trial("btn btn--primary")}
@@ -212,25 +248,26 @@ ${w.oldLines.map((l) => `          <p class="why-line t-body">${esc(l)}</p>`).jo
   h = swap(h, new RegExp(`data-door-pick="${key}" aria-pressed="false"`), `data-door-pick="${key}" aria-pressed="true"`);
   let picker;
   [h, picker] = cut(h, /[ \t]*(?:<!--[^\n]*-->\n[ \t]*)?<section id="world"[\s\S]*?<\/section>\n[ \t]*<a class="world-chip"[\s\S]*?<\/a>\n/);
-  h = swap(h, sectionRe("pricing"), (m) => faqSection(page) + picker + "\n" + m);
+  h = swap(h, sectionRe("pricing"), (m) => faqSection(page, ui) + picker + "\n" + m);
 
   // Prices: this world's lines, this world's "which plan".
   const pr = page.pricing;
   h = swap(h, /(<p class="price-lead t-lead">)[^<]*(<\/p>)/, `$1${esc(pr.lead)}<span class="price-plans">${esc(page.planNote)}</span>$2`);
   let n = 0;
   h = swap(h, /(<p class="plan-for t-body">)[^<]*(<\/p>)/g, (_, a, b) => `${a}${esc(pr.planFor[n++])}${b}`);
-  if (n !== pr.planFor.length) throw new Error(`${page.file}: ${n} plan lines in index.html, ${pr.planFor.length} in door-pages.mjs`);
+  if (n !== pr.planFor.length) throw new Error(`${dir}${page.file}: ${n} plan lines in ${source}, ${pr.planFor.length} in its door pages file`);
   h = swap(h, /[ \t]*<li data-for="(\w+)"><b>[\s\S]*?<\/li>\n/g, (m, k) => (k === key ? m : ""));
   h = swap(h, /href="https:\/\/app\.fan-ip\.com\/start" data-start-link/, `href="https://app.fan-ip.com/start?for=${key}" data-start-link`);
 
   // See it with your name, the closing line and the footer.
   h = swap(h, /(<p class="ytry-lead t-body">)[^<]*(<\/p>)/, `$1${esc(page.tryLead)}$2`);
   h = swap(h, /(id="door-name"[^>]*placeholder=")[^"]*"/, `$1${esc(page.tryPlaceholder)}"`);
-  h = swap(h, /<a data-for="(\w+)" href="[^"]*">[^<]*<\/a>/g, (m, k) => (k === key ? m : ""));
+  h = swap(h, /<a data-for="(\w+)" href="[^"]*"(?: hreflang="en")?>[^<]*<\/a>/g, (m, k) => (k === key ? m : ""));
   h = swap(h, /(<p class="close-lead t-lead">)[^<]*(<\/p>)/, `$1${esc(page.closeLead)}$2`);
   h = swap(h, /(<p class="foot-sentence t-body">)[^<]*(<\/p>)/, `$1${esc(page.footSentence)}$2`);
 
-  if ((h.match(/<h1[\s>]/g) || []).length !== 1) throw new Error(`${page.file}: not exactly one h1`);
-  writeFileSync(new URL(page.file, root), h);
-  console.log(`wrote ${page.file} (title ${page.title.length}, description ${page.description.length} characters)`);
+  if ((h.match(/<h1[\s>]/g) || []).length !== 1) throw new Error(`${dir}${page.file}: not exactly one h1`);
+  writeFileSync(new URL(dir + page.file, root), h);
+  console.log(`wrote ${dir}${page.file} (title ${page.title.length}, description ${page.description.length} characters)`);
+}
 }

@@ -341,7 +341,7 @@ function pe() {
       v = Math.round(m * b),
       R = (f, n) => (E.querySelector(`[data-m="${f}"]`).textContent = n);
     (R("media", B((p / 1e3) * T)),
-      R("media-sub", `${k(p)} views on members' posts, at €${T} per 1,000`));
+      R("media-sub", `What ${k(p)} views would have cost as ads, at €${T} per 1,000`));
   }
   (E.addEventListener("input", S),
     E.addEventListener("submit", (b) => b.preventDefault()),
@@ -361,11 +361,8 @@ function he() {
       S.setAttribute("aria-pressed", String(S === d)),
     );
     const m = y.querySelector(".fx-detail");
-    ((m.querySelector(".fx-detail__name").innerHTML =
-      d.firstChild.textContent +
-      (d.hasAttribute("data-soon")
-        ? ' <span class="tag">Rolling out</span>'
-        : "")),
+    ((m.querySelector(".fx-detail__name").textContent =
+      d.firstChild.textContent),
       (m.querySelector(".fx-detail__text").textContent =
         d.querySelector(".fx-desc").textContent));
   }

@@ -34,7 +34,7 @@
     "name": "Privacy policy · FAN/IP",
     "description": "Privacy policy of the FAN/IP website (GDPR, BDSG, § 25 TDDDG): no cookies without your consent, what is processed and your rights.",
     "inLanguage": "en-GB",
-    "dateModified": "2026-10-25",
+    "dateModified": "2026-11-01",
     "isPartOf": {
       "@id": "https://fan-ip.com/#website"
     },
@@ -97,7 +97,7 @@
       <div class="container doc-head__inner">
         <h1 id="doc-title" class="doc-title">Privacy policy</h1>
         <p class="doc-lead t-lead">No cookies and no advertising tracking without your consent. Here is what is processed, and what you can ask for.</p>
-        <p class="doc-date t-small">Last updated: <time datetime="2026-10-25">25 October 2026</time></p>
+        <p class="doc-date t-small">Last updated: <time datetime="2026-11-01">1 November 2026</time></p>
       </div>
     </section>
 
@@ -141,10 +141,10 @@
           <section id="not" aria-labelledby="not-title">
             <h2 id="not-title">What the site does not do</h2>
             <ul>
-              <li>It sets no cookies and loads no advertising tool (see <a href="#measurement">Measurement and advertising</a>).</li>
+              <li>It sets no cookies and loads no advertising tool. Visits are measured only if you say yes (see <a href="#measurement">Measurement and advertising</a>).</li>
               <li>It has no social-media plugins, and it never shares your data for advertising without your consent.</li>
-              <li>It sends no request to a third party: pages, styles, scripts and fonts are all served from the site’s own address. The exception is the booking calendar on the Book a demo page, only once you click to show it (see <a href="#booking">Booking a demo</a>).</li>
-              <li>It has no accounts of its own. The places you can type are: the “see it with your name” box, which sends the name you type to the FAN/IP app (app.fan-ip.com) only when you press the button, to open your trial there; the reach calculator, whose numbers never leave your browser (they go into the page address only when you click “Copy a link to these numbers”); and the Calendly booking calendar, if you choose to use it.</li>
+              <li>It sends no request to a third party: pages, styles, scripts and fonts are all served from the site’s own address. The exceptions, each only after you agree, are visit measurement (see <a href="#measurement">Measurement and advertising</a>) and the booking calendar on the Book a demo page (see <a href="#booking">Booking a demo</a>).</li>
+              <li>It has no accounts of its own. The places you can type are: the “see it with your name” box, which sends the name you type to the FAN/IP app (app.fan-ip.com) only when you press the button, to open your trial there; the reach calculator, whose numbers never leave your browser (they go into the page address only when you click “Copy a link to these numbers”, and a replay of a visit to such a link could show that address, if you said yes to visit measurement); and the Calendly booking calendar, if you choose to use it.</li>
             </ul>
           </section>
 
@@ -222,7 +222,19 @@
 
           <section id="measurement" aria-labelledby="measurement-title">
             <h2 id="measurement-title">Measurement and advertising</h2>
-            <p>Not used at present. The site loads no analytics or advertising tool and shows no cookie banner. If one is switched on later, this section will name it and say what it collects, and it will load only after you accept it in a cookie banner where “Reject all” is one click.</p>
+            <p>With your consent only, the site measures visits with PostHog (PostHog Inc.), on its EU servers in Frankfurt, Germany. A small card asks you on your first visit, on the site and on our demo pages. “Yes” and “No” are one click each. Until you say yes, PostHog is not loaded and nothing is sent to it. The site uses no advertising tool.</p>
+            <dl class="doc-facts">
+              <dt>Data</dt>
+              <dd>Pages visited, the site you came from, your clicks and scrolling, the steps reached in the booking calendar (times shown, time picked, booking confirmed, never what you type), browser, device type, screen size and approximate country, and a recording of your visit that we can replay: what appears on the page, mouse movements, clicks and scrolling. Everything you type into a field is hidden in the recording. Page addresses in the statistics are cut before any “?” or “#”. Campaign labels in a link (utm_source, utm_medium, utm_campaign, utm_term, utm_content) are recorded; click identifiers that advertising networks add to links (such as fbclid or gclid) are removed before sending. Your IP address is used to work out your approximate country and is then discarded.</dd>
+              <dt>Purpose</dt>
+              <dd>See how the site and our demos are used, and improve them. A personal demo has its own private link, sent to one person or company, so we may be able to tell that a visit to it comes from them.</dd>
+              <dt>Legal basis</dt>
+              <dd>Your consent (Article 6(1)(a) GDPR, § 25(1) TDDDG). You can withdraw it at any time with “Cookie settings” at the bottom of the page, or “Visit measurement” in the corner of a demo. This stops the measurement from then on and clears what it kept on your device. We keep your choice for 6 months, then ask again.</dd>
+              <dt>Retention</dt>
+              <dd>{{TO CHECK after the PostHog account is set: statistics up to one year, recordings N days}}</dd>
+              <dt>Provider</dt>
+              <dd>PostHog processes this data on our behalf under a data processing agreement (Article 28 GDPR).</dd>
+            </dl>
           </section>
 
           <section id="recipients" aria-labelledby="recipients-title">
@@ -231,6 +243,7 @@
               <li>Alexis Collin, who handles demo requests in person.</li>
               <li>Our technical providers, only for what they do for us: the host, GitHub, Inc. (technical logs), and our email provider, OVHcloud (OVH SAS, France) (the emails you send us).</li>
               <li>Calendly and Google, if you use the booking calendar (see <a href="#booking">Booking a demo</a>).</li>
+              <li>PostHog Inc., if you say yes to visit measurement, stored in the EU (see <a href="#measurement">Measurement and advertising</a>).</li>
             </ul>
             <p>We do not sell your data, rent it out or share it for advertising.</p>
           </section>
@@ -239,6 +252,7 @@
             <h2 id="transfers-title">Transfers outside the EU</h2>
             <p>The host, GitHub, Inc., is a company based in the United States. The technical data described above is therefore processed in the United States, under the conditions GitHub sets out in its own privacy statement.</p>
             <p>Emails you send us are stored by OVHcloud in its data centres in France, within the EU. We do not transfer them outside the EU.</p>
+            <p>If you say yes to visit measurement, the data is stored by PostHog on its servers in Frankfurt, Germany, within the EU. PostHog Inc. is a company based in the United States. {{TO CHECK in the signed PostHog DPA: what covers any access from the United States}}</p>
             <p>If you use the booking calendar, Calendly and Google may process your data in the United States. Calendly LLC and Google LLC are certified under the EU-US Data Privacy Framework (see <a href="#booking">Booking a demo</a>).</p>
           </section>
 
@@ -268,7 +282,7 @@
 
           <section id="cookies" aria-labelledby="cookies-title">
             <h2 id="cookies-title">Cookies and your device</h2>
-            <p>The site sets no cookies and stores two things on your device. In your browser’s local storage: the world you pick (sport, artists or brands, key “fanip.door”), so the pages speak to it; clearing the site’s data in your browser deletes it. In the layouts gallery, in session storage: a note that a Print layout’s opening animation has already played, so it does not play again on every visit to that page; it is deleted when you close the tab. Neither leaves your browser, and both are strictly necessary for what you asked for (§ 25(2) no. 2 TDDDG). The Calendly booking calendar is loaded only if you click to show it, and that click is your consent to what Calendly does on your device (see <a href="#booking">Booking a demo</a>). What your browser keeps on its own to display the pages, such as its cache, is strictly necessary for the service you asked for (§ 25(2) no. 2 TDDDG).</p>
+            <p>The site sets no cookies and stores two things on your device. In your browser’s local storage: the world you pick (sport, artists or brands, key “fanip.door”), so the pages speak to it; clearing the site’s data in your browser deletes it. In the layouts gallery, in session storage: a note that a Print layout’s opening animation has already played, so it does not play again on every visit to that page; it is deleted when you close the tab. Neither leaves your browser, and both are strictly necessary for what you asked for (§ 25(2) no. 2 TDDDG). If you say yes or no to visit measurement, your choice is kept in local storage (key “fanip-consent”) so you are not asked again, which is also necessary (§ 25(2) no. 2 TDDDG). Only if you say yes, PostHog keeps a random visitor identifier and session details in local and session storage (keys starting “ph_”); this rests on your consent and is cleared if you withdraw it. The Calendly booking calendar is loaded only if you click to show it, and that click is your consent to what Calendly does on your device (see <a href="#booking">Booking a demo</a>). What your browser keeps on its own to display the pages, such as its cache, is strictly necessary for the service you asked for (§ 25(2) no. 2 TDDDG).</p>
           </section>
 
           <section id="changes" aria-labelledby="changes-title">

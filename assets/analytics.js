@@ -3,10 +3,9 @@
 // the visitor says yes (§ 25 TDDDG). After a yes it records pages, clicks and a
 // replay of the visit, with typed text hidden. It sets no cookie: PostHog keeps
 // its id in the browser's storage, and a no or a change of mind clears it.
-// Until KEY is filled in, this file does nothing on fan-ip.com. In a local preview
-// the card shows so it can be checked, but PostHog never loads.
+// In a local preview the card shows so it can be checked, but PostHog never loads.
 (function () {
-  var KEY = ""; // PostHog project token: public by design, starts with "phc_"
+  var KEY = "phc_orBRoF7ixDMTJkdzGjNZMRJ7DNfdjBpy9kLwwZBSwGoa"; // PostHog project token: public by design, starts with "phc_"
   var HOST = "https://eu.i.posthog.com";
 
   var LIVE = /(^|\.)fan-ip\.com$/.test(location.hostname);

@@ -7,6 +7,8 @@
 // .github/scripts/build-doors.mjs, already set to their world in the HTML
 // (html[data-door]) and written for it: their own h1, world section and FAQ.
 // On those pages, picking another world opens that world's page.
+// The French pages (fr/, html lang="fr") use DOORS_FR and French status
+// lines; build-doors.mjs reads both DOORS and DOORS_FR.
 (function () {
   var DOORS = {
     brand: {
@@ -52,9 +54,59 @@
       world: "aube"
     }
   };
+  var DOORS_FR = {
+    brand: {
+      name: "Marques",
+      who: "aux marques",
+      hash: "brands",
+      page: "brands.html",
+      adapt: "Exemples pour une marque. Vos missions, vos mots et vos récompenses, c’est vous qui les fixez.",
+      step1: "Créez une mission : un unboxing, votre routine, un ami qui en a besoin. Vous choisissez les points et les récompenses.",
+      vigTitle: "Publiez votre unboxing",
+      vigText: "Une photo sur votre fil. Identifiez la marque.",
+      vigPoints: "+50",
+      reachTitle: "Un seul post d’unboxing",
+      vigGoal: "Un coffret cadeau en édition limitée pour chaque membre",
+      world: "aube"
+    },
+    sport: {
+      name: "Sport",
+      who: "aux clubs, aux équipes et à l’esport",
+      hash: "sport",
+      page: "sport.html",
+      adapt: "Exemples pour un club ou une équipe. Vos défis, vos mots et vos récompenses, c’est vous qui les fixez, sponsors compris.",
+      step1: "Lancez un défi : une photo de match, un coup de projecteur sur votre sponsor, un pote amené au prochain match à domicile. Vous choisissez les points et les récompenses.",
+      vigTitle: "Photo du match",
+      vigText: "Depuis la tribune. Identifiez le club et le sponsor.",
+      vigPoints: "+60",
+      reachTitle: "Un seul post de match",
+      vigGoal: "Un maillot supporter en édition limitée pour chaque membre",
+      world: "az"
+    },
+    artist: {
+      name: "Artistes et créateurs",
+      who: "aux artistes et aux créateurs",
+      hash: "artists",
+      page: "artists.html",
+      adapt: "Exemples pour un artiste. Vos missions, vos mots et vos récompenses, c’est vous qui les fixez.",
+      step1: "Créez une mission : une photo de la setlist, le nouveau single en story, un ami amené au concert. Vous choisissez les points et les récompenses.",
+      vigTitle: "Publiez la photo de votre setlist",
+      vigText: "Depuis le concert. Identifiez la ville et l’artiste.",
+      vigPoints: "+50",
+      reachTitle: "Un seul post de setlist",
+      vigGoal: "Une affiche de tournée dédicacée pour chaque membre",
+      world: "aube"
+    }
+  };
+  var root = document.documentElement;
+  var FR = /^fr\b/i.test(root.getAttribute("lang") || "");
+  if (FR) DOORS = DOORS_FR;
+  // The status line under the world picker, in the page's language.
+  var SAY = FR
+    ? { now: "La suite de la page s’adresse maintenant ", see: "Voir comment ça marche", read: "Voir la page dédiée " }
+    : { now: "The page below now speaks to ", see: "See how it works", read: "Read the page for " };
   var TEXT_SLOTS = ["step1", "vigTitle", "vigText", "vigPoints", "reachTitle", "vigGoal"];
   var KEY = "fanip.door";
-  var root = document.documentElement;
   // Set on brands.html, sport.html and artists.html: the page is that world.
   var fixedDoor = DOORS[root.getAttribute("data-door")] ? root.getAttribute("data-door") : "";
   var still = window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -90,8 +142,9 @@
     document.querySelectorAll("[data-start-link]").forEach(function (link) {
       link.setAttribute("href", "https://app.fan-ip.com/start" + (d ? "?for=" + door : ""));
     });
+    // Keeps the link's own path: reach-calculator.html, or ../ from fr/.
     document.querySelectorAll("[data-calc-link]").forEach(function (link) {
-      link.setAttribute("href", "reach-calculator.html" + (d ? "?for=" + door : ""));
+      link.setAttribute("href", link.getAttribute("href").split("?")[0] + (d ? "?for=" + door : ""));
     });
     var name = document.getElementById("door-name");
     if (name && name.form) name.form.setAttribute("data-door", d ? door : "");
@@ -102,15 +155,15 @@
     if (status) {
       status.textContent = "";
       if (d && !fixedDoor) {
-        status.appendChild(document.createTextNode("The page below now speaks to " + d.who + ". "));
+        status.appendChild(document.createTextNode(SAY.now + d.who + ". "));
         var go = document.createElement("a");
         go.href = "#product";
-        go.textContent = "See how it works";
+        go.textContent = SAY.see;
         status.appendChild(go);
         status.appendChild(document.createTextNode(" · "));
         var more = document.createElement("a");
         more.href = d.page;
-        more.textContent = "Read the page for " + d.who;
+        more.textContent = SAY.read + d.who;
         status.appendChild(more);
       }
     }

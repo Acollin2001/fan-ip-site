@@ -10,6 +10,7 @@ function init(form) {
   const out = (k) => document.querySelector(`[data-o="${k}"]`);
   const ones = document.querySelector("[data-ones]");
   const copy = document.querySelector("[data-copy]");
+  const book = document.querySelector("[data-rc-book]");
   const values = { ...defaults };
 
   // 100 small "1"s, one per member out of 100. Posting members light up in a
@@ -116,6 +117,22 @@ function init(form) {
       `${num(postsMonth)} × ${int(views)} views = ${int(viewsMonth)} views. ` +
       `${int(viewsMonth)} ÷ 1,000 × ${euro(cpm)} = ${euro(valueMonth)}.`;
 
+    // The plan that fits the members typed, and a demo link that carries the estimate to the booking form.
+    const [plan, limit] = PLANS.find(([, max]) => members <= max) || ["Signature", Infinity];
+    out("plan").replaceChildren(
+      `For ${int(members)} active ${members === 1 ? "member" : "members"}, `,
+      Object.assign(document.createElement("a"), { href: `pricing.html#${plan.toLowerCase()}-name`, textContent: plan }),
+      limit === Infinity ? " fits: more than 10,000 active members." : ` fits: up to ${int(limit)} active members.`,
+    );
+    // Starter is signed up online; the bigger plans start with a demo, the trial stays a text link.
+    if (start && book) {
+      const demoFirst = plan !== "Starter";
+      start.className = demoFirst ? "rc-copy rc-start" : "btn btn--primary rc-start";
+      book.className = demoFirst ? "btn btn--primary rc-book" : "rc-copy rc-book";
+      if (start.parentNode.firstElementChild !== (demoFirst ? book : start)) start.parentNode.prepend(demoFirst ? book : start, " ");
+    }
+    if (book) book.href = `book-a-demo.html?${new URLSearchParams({ members, share, posts, views, cpm, value: Math.round(valueMonth) })}`;
+
     const lit = Math.min(100, Math.round(share));
     order.forEach((cell, i) => cells[cell].classList.toggle("is-on", i < lit));
     out("crowd").textContent = crowd(share);
@@ -169,6 +186,8 @@ function init(form) {
 function size(el) {
   el.style.inlineSize = `${Math.max(2, el.value.length) + 0.4}ch`;
 }
+
+const PLANS = [["Starter", 150], ["Club", 1500], ["Season", 10000]];
 
 const nf0 = new Intl.NumberFormat("en-GB", { maximumFractionDigits: 0 });
 const nf2 = new Intl.NumberFormat("en-GB", { maximumFractionDigits: 2 });

@@ -1,6 +1,6 @@
 # FAN/IP
 
-> FAN/IP gets brands talked about without an ad budget. It gives a brand its own fan club, under the brand's name: fans post about the brand on their own accounts, earn points, move up levels and unlock rewards, and the brand sees how many people those posts reached and what the same views would have cost as ads. Tagline: "Turn fandom into impact."
+> FAN/IP gets brands talked about without an ad budget. It gives a brand its own fan club, under the brand's name: fans post about the brand on their own accounts, earn season XP to move up levels and points to spend on rewards, and the brand sees how many people those posts reached and what the same views would have cost as ads. Tagline: "Turn fandom into impact."
 
 FAN/IP is for brands, for sport and esports (clubs, teams, gaming venues) and for artists and creators (bands, labels, festivals, podcasters, video creators). At sign-up the brand says which one it is and starts with words and six ready missions for it. It works in three steps: the brand creates missions; fans take part and earn points; the brand's team approves posts, hands out rewards and follows the results. Each brand has its own name, colours, words, missions and rewards; FAN/IP runs behind it. FAN/IP is run by Alexis Collin in Cologne, Germany; members' data is hosted in the EU (Frankfurt). Contact: contact@fan-ip.com.
 
@@ -16,6 +16,9 @@ People also describe what FAN/IP does as: a fan engagement platform, a fan club 
 - [Reach calculator](https://fan-ip.com/reach-calculator.html): estimate the views members' posts bring each month and their media value (views ÷ 1,000 × CPM, starting from a typical price for the niche: €7 sport, €5 music, €8 brands, €6 otherwise; the same sum as in the FAN/IP admin)
 - [FAQ](https://fan-ip.com/faq.html): plain answers about the platform, who it is for, how it works and what it costs
 - [Glossary](https://fan-ip.com/glossary.html): earned media value, CPM, views per post, potential reach, UGC, white-label fan club app, fan loyalty program, brand advocacy, active member, mission, season, team battle and sponsor quest, each defined in a sentence or two
+- [Your first month](https://fan-ip.com/first-month.html): day 1, week 1, month 1 and season end after sign-up: what the brand does, what FAN/IP does, and what changes on each plan (Starter is self-serve online; Club, Season and Signature are set up with the brand). Also in French: https://fan-ip.com/fr/first-month.html
+- [Contact](https://fan-ip.com/contact.html): a form to write to FAN/IP; answers come by email. Also contact@fan-ip.com.
+- [What's new](https://fan-ip.com/whats-new.html): what went live in FAN/IP each month, dated; only live features, no future items
 - [Book a demo](https://fan-ip.com/book-a-demo.html): 30-minute video call, shown live on demo data
 - [About](https://fan-ip.com/about.html): what FAN/IP is, who it is for, what it costs, where it runs and who is behind it
 
@@ -27,13 +30,14 @@ After "why", the home page asks "Where do your fans gather?" (Sport, Artists and
 - [Sport and esports](https://fan-ip.com/sport.html): sports clubs, esports teams and gaming venues; supporters post, and sponsors see the reach
 - [Artists and creators](https://fan-ip.com/artists.html): bands, DJs, rappers, festivals, podcasters and video creators
 
-## Pricing (euros, excluding VAT)
+## Pricing (euros, no VAT charged (§ 19 UStG): small business, § 19 UStG)
 
-- Starter: €99 a month or €990 a year, no set-up fee, up to 150 active members a month, leaderboard included, 7-day free trial, sign up online at https://app.fan-ip.com/start
-- Club: €490 a month, set-up €1,250, up to 1,500 active members a month
-- Season: €1,290 a month, set-up €2,500, up to 10,000 active members a month
-- Signature: from €2,900 a month, set-up from €5,000, more than 10,000 active members a month
-- Club, Season and Signature are billed monthly on a 12-month term. An active member is someone who did something in the community this month.
+- Starter: €99 a month or €990 a year, no set-up fee, up to 150 active members, leaderboard included, 7-day free trial, sign up online at https://app.fan-ip.com/start
+- Club: €490 a month, set-up €1,250, up to 1,500 active members
+- Season: €1,290 a month, set-up €2,500, up to 10,000 active members
+- Signature: from €2,900 a month, set-up from €5,000, more than 10,000 active members. The group offer: several brands, clubs or countries on one contract, each space priced on quote.
+- Club's 1,500 and Season's 10,000 active members are soft limits: nobody is blocked; above them two months in a row, the plan above applies from the next renewal.
+- Club, Season and Signature are billed monthly on a 12-month term. An active member is a member who sent at least one mission in the last 90 days, approved or not.
 
 ## Demos (fictional names and data, clickable, all on the Season plan)
 
@@ -48,7 +52,7 @@ After "why", the home page asks "Where do your fans gather?" (Sport, Artists and
 - How is it different from a loyalty program? Loyalty programs mostly reward purchases; FAN/IP rewards posts, referrals, event check-ins and quizzes, and values the reach of posts (views ÷ 1,000 × the CPM the brand chooses, starting from the typical price for the niche: €7 sport, €5 music and creators, €8 brands, €6 otherwise). It can run next to an existing loyalty program.
 - How is it different from an influencer platform? It works with the many people who already like the brand, not a few paid creators.
 - Can a sports club show sponsors what fans' posts are worth? Yes, with a sponsor quest and a private report for the sponsor.
-- What does it cost? From €99 a month (Starter, self-serve, 7-day free trial); Club €490, Season €1,290, Signature from €2,900 a month, excluding VAT. Fans never pay.
+- What does it cost? From €99 a month (Starter, self-serve, 7-day free trial); Club €490, Season €1,290, Signature from €2,900 a month, with no VAT charged (§ 19 UStG). Fans never pay.
 - Languages: English, French, German, Spanish. Works in any phone browser and installs on the home screen with notifications.
 
 ## How FAN/IP values fans' posts
@@ -56,7 +60,7 @@ After "why", the home page asks "Where do your fans gather?" (Sport, Artists and
 - Media value of a post = views ÷ 1,000 × CPM. Example: a post seen 900 times at a €6 CPM is worth €5.40.
 - CPM (price of 1,000 ad views) starts from a typical European price for the niche: €7 sport, €5 music and creators, €8 brands, €6 otherwise. Each brand can set its own.
 - Views, not followers: the figure the network reports for each post. Estimates on the site start from 900 views a post on average; inside the product each post's measured views are used.
-- Potential reach (followers of the accounts that posted) is reported next to views and never used to compute value.
+- Potential reach (followers of the accounts that posted) is on the roadmap: it will be shown next to views and never used to compute value.
 - Left out of the value: shares, comments, saves, new members and sales that follow a post.
 
 ## Optional

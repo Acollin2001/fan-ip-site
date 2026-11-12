@@ -1,0 +1,6 @@
+Contact: mailto:contact@fan-ip.com
+Contact: https://fan-ip.com/contact.html
+Expires: 2027-10-15T23:00:00.000Z
+Preferred-Languages: en, fr, de
+Canonical: https://fan-ip.com/.well-known/security.txt
+# We answer security reports within 5 working days.

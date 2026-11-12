@@ -108,6 +108,9 @@ img, svg { max-width: 100%; }
 }
 .toast { position: absolute; left: 50%; bottom: calc(96px + var(--home-ind, 0px)); z-index: 30; transform: translate(-50%, 20px); opacity: 0; padding: 12px 18px; border-radius: var(--r-toast, 999px); background: var(--toast-bg, var(--ink)); color: var(--toast-fg, #fff); font-weight: 600; font-size: 0.875rem; box-shadow: var(--shadow-lift); transition: opacity 0.25s, transform 0.35s var(--ease-spring); pointer-events: none; max-width: calc(100% - 32px); width: max-content; text-align: center; }
 .toast.show { opacity: 1; transform: translate(-50%, 0); }
+/* "Soon": a screen or a figure that shows a feature on the roadmap. Its own colours, so it reads on every look and in the admin. */
+.soon-tag { display: inline-block; vertical-align: middle; margin-left: 6px; padding: 1px 7px; border-radius: 999px; background: #fff3c8; color: #4f3b00; border: 1px solid #b8962e; font: 700 0.6875rem/1.45 system-ui, -apple-system, "Segoe UI", sans-serif; letter-spacing: 0.02em; text-transform: none; font-style: normal; white-space: nowrap; }
+.soon-tag.soon-h { font-size: 0.75rem; vertical-align: 0.4em; }
 .sheet-layer.open ~ .toast { bottom: auto; top: calc(16px + var(--notch, 0px)); transform: translate(-50%, -10px); }
 .sheet-layer.open ~ .toast.show { transform: translate(-50%, 0); }
 @container dev (min-width: 820px) { .toast { bottom: 32px; } }
@@ -469,7 +472,15 @@ label.drop svg { width: 22px; height: 22px; flex: none; }
 .top { display: flex; align-items: center; gap: 10px; padding: calc(12px + var(--notch, 0px)) var(--gutter) 12px; background: var(--nuit-0); z-index: 3; min-width: 0; }
 .wm { border: 0; background: none; padding: 0; color: var(--ink); cursor: pointer; text-align: left; font-family: var(--f-display); font-weight: 800; font-size: 1.05rem; line-height: 0.9; letter-spacing: 0.02em; text-transform: uppercase; }
 .wm small { display: block; font-family: var(--f-mono); font-weight: 400; font-size: 0.625rem; letter-spacing: 0.06em; text-transform: none; color: var(--maree); margin-top: 5px; }
-.notes { margin-left: auto; display: inline-flex; align-items: baseline; gap: 6px; padding: 8px 14px; border-radius: calc(6px * var(--rk, 1)); border: 0; background: var(--rouge-text); color: #fff; cursor: pointer; white-space: nowrap; }
+/* The "!" on the points total: shown while points from a post wait for approval. Tap it to see how many. */
+.pts-wrap { position: relative; display: inline-flex; }
+.pts-wrap.pts-top { margin-left: auto; }
+.pts-wrap.pts-rail { display: grid; }
+.pend-dot { position: absolute; top: -7px; right: -7px; z-index: 2; width: 22px; height: 22px; padding: 0; display: grid; place-items: center; border-radius: 50%; border: 2px solid #fff; background: #ffd34d; color: #2a1f00; font: 800 0.8125rem/1 system-ui, -apple-system, "Segoe UI", sans-serif; cursor: pointer; box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25); }
+.pend-dot::after { content: ""; position: absolute; inset: -6px; }
+.pend-dot[hidden] { display: none; }
+.pend-dot:focus-visible { outline: 2px solid #1a56db; outline-offset: 2px; }
+.notes { display: inline-flex; align-items: baseline; gap: 6px; padding: 8px 14px; border-radius: calc(6px * var(--rk, 1)); border: 0; background: var(--rouge-text); color: #fff; cursor: pointer; white-space: nowrap; }
 .notes b { font-family: var(--f-display); font-weight: 800; font-size: 1.05rem; line-height: 1; }
 .notes span { font-family: var(--f-mono); font-size: 0.6875rem; }
 .me-btn { flex: none; width: 36px; height: 36px; border-radius: 50%; border: 1.5px solid var(--maree); background: none; color: var(--ink); font-weight: 700; font-size: 0.75rem; cursor: pointer; }
@@ -516,6 +527,7 @@ label.drop svg { width: 22px; height: 22px; flex: none; }
 .link { border: 0; background: none; padding: 4px 0; color: var(--maree); font-family: var(--f-mono); font-size: 0.8125rem; cursor: pointer; text-decoration: underline; text-underline-offset: 4px; white-space: nowrap; }
 .meta { color: var(--ink-3); font-size: 0.8125rem; }
 .foot-note { margin: 0; padding-top: 16px; border-top: 1px dashed var(--line); font-family: var(--f-mono); font-size: 0.6875rem; color: var(--ink-3); text-align: center; }
+.foot-note a { color: inherit; text-decoration: underline; text-underline-offset: 2px; }
 @container dev (min-width: 820px) { .h-page { font-size: 3.8rem; } .h-sec { font-size: 1.6rem; } }
 .btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 48px; padding: 0 22px; border: 0; border-radius: calc(6px * var(--rk, 1)); font-weight: 700; font-size: 0.9375rem; cursor: pointer; transition: transform 0.15s, background 0.2s; text-align: center; }
 .btn:active { transform: scale(0.97); }
@@ -858,6 +870,7 @@ label.drop svg { width: 22px; height: 22px; flex: none; }
 .checking { display: flex; align-items: center; gap: 12px; padding: 16px; border-radius: calc(8px * var(--rk, 1)); background: var(--scene-2); font-family: var(--f-mono); font-size: 0.8125rem; color: var(--ink-2); }
 .success { display: flex; flex-direction: column; align-items: center; gap: 10px; text-align: center; padding: 4px 0; }
 .success .big { font-family: var(--f-display); font-weight: 800; font-size: 4.2rem; line-height: 0.9; color: var(--rouge); }
+.success .big-unit { margin-top: -4px; font-family: var(--f-mono); font-size: 0.75rem; color: var(--ink-2); }
 .success p { max-width: 40ch; color: var(--ink-2); }
 .got-row { display: flex; align-items: center; gap: 14px; padding: 12px 14px; border-radius: calc(8px * var(--rk, 1)); background: var(--sel); color: var(--nuit); font-size: 0.875rem; text-align: left; }
 .got-row .mini { flex: none; width: 54px; height: 40px; display: grid; grid-template-columns: 6px 1fr; border-radius: calc(4px * var(--rk, 1)); overflow: hidden; background: var(--sel-2); }
@@ -1029,18 +1042,20 @@ function countTo(from, to) {
   };
   requestAnimationFrame(step);
 }
-function award(amount, fromEl, msg) {
+/* Sending a mission adds its XP at once. For a post, the same number of points follows once the post is approved. */
+function award(amount, fromEl, msg, xpOnly) {
   const before = state.balance, beforeRank = myRank();
-  state.balance += amount; state.earned += amount;
+  if (!xpOnly) state.balance += amount;
+  state.earned += amount;
   const app = $("#app");
   const target = $$("[data-points-target]").find((el) => el.offsetParent !== null);
   const finish = () => {
     countTo(before, state.balance);
     if (target) { target.classList.remove("bump"); void target.offsetWidth; target.classList.add("bump"); }
     const r = myRank();
-    toast(msg || (r < beforeRank ? `+${fmt(amount)} ${BRAND.word}. You moved up to ${ordinal(r)} in ${BRAND.boardName}` : `+${fmt(amount)} ${BRAND.word}`));
+    toast(msg || (r < beforeRank ? `${xpPts(amount)}. You moved up to ${ordinal(r)} in ${BRAND.boardName}` : xpPts(amount)));
   };
-  if (reduceMotion || !fromEl || !target || !fromEl.getBoundingClientRect().width) return finish();
+  if (reduceMotion || !fromEl || !target || xpOnly || !fromEl.getBoundingClientRect().width) return finish();
   const a = app.getBoundingClientRect(), s = fromEl.getBoundingClientRect(), t = target.getBoundingClientRect();
   const fly = document.createElement("div"); fly.className = "fly num"; fly.textContent = `+${fmt(amount)}`;
   app.appendChild(fly);
@@ -1101,7 +1116,7 @@ function refreshShell() {
   const fresh = document.createElement("div"); fresh.innerHTML = shell();
   $$("[data-shell]").forEach((el) => { const src = fresh.querySelector(`[data-shell="${el.dataset.shell}"]`); if (src) el.innerHTML = src.innerHTML; });
 }
-const screenFoot = () => `<p class="foot-note">${esc(BRAND.name)} is a fictional ${BRAND.kind}. Every name and figure here is illustrative; a few screens show features on our roadmap. A FAN/IP demo.</p>`;
+const screenFoot = () => `<p class="foot-note">${esc(BRAND.name)} is a fictional ${BRAND.kind}. Every name and figure here is illustrative; a few screens show features on <a href="../../whats-new.html">our roadmap</a>. A FAN/IP demo.</p>`;
 
 /* ---------------------------------------------------------------- presenter */
 function setView(v) {
@@ -1261,6 +1276,7 @@ document.addEventListener("click", (e) => {
     case "device": return setDevice(el.dataset.d);
     case "close": return closeSheet();
     case "tab": closeSheet(); state.tab = el.dataset.tab; return renderMember();
+    case "pending": return toast(pendLabel());
     case "flip": return el.setAttribute("aria-pressed", el.getAttribute("aria-pressed") === "true" ? "false" : "true");
     case "adm": closeDrawer(); state.admin = el.dataset.p; if (el.dataset.i) state.atab[el.dataset.p] = +el.dataset.i; renderAdmin(); $("#adm-main").scrollTop = 0; return;
     case "atab": state.atab[el.dataset.p] = +el.dataset.i; return rerenderAdminInPlace();
@@ -1419,7 +1435,7 @@ function admAppearance() {
     </div>`;
 }
 function admModules() {
-  return `<p class="sub" style="margin:0">The Season plan includes every module, for up to 10,000 active members a month. A module switched off disappears from the menu and from the ${aud(1)}.</p>
+  return `<p class="sub" style="margin:0">The Season plan includes every module, for up to 10,000 active members. A module switched off disappears from the menu and from the ${aud(1)}.</p>
     <div class="modules">${MODULES.map(([n, ic, s, p, i]) => `<div class="module"><span class="mi">${icon(ic)}</span><span><b>${n}</b><span>${s}</span>${p ? `<br><button class="adm-link" data-act="adm" data-p="${p}" data-i="${i || 0}">Settings</button>` : ""}</span><button class="toggle" role="switch" aria-checked="${!state.modOff.has(n)}" aria-label="${n}" data-act="module" data-n="${n}"></button></div>`).join("")}</div>`;
 }
 /* Brand-page and shared admin actions. Returns true when it handled the click. */
@@ -1477,8 +1493,8 @@ function accountPage({ domain, active, renews, sub }) {
         <div class="scroll-x"><table class="atable"><thead><tr><th>Name</th><th>Job</th><th>Role</th><th>Last active</th></tr></thead>
         <tbody>${TEAM.map(([n, j, r, l]) => `<tr><td><span class="who"><i>${initials(n)}</i>${esc(n)}</span></td><td class="wrap">${esc(j)}</td><td>${r}</td><td>${l === "Invitation sent" ? `<span class="st sched">${l}</span>` : l}</td></tr>`).join("")}</tbody></table></div></div>
       <div class="acard"><h2>Plan</h2><p class="sub">Season. Every program module, unlimited team seats and your own domain.</p>
-        <div class="usage"><div><span>Active members this month</span><b>${fmt(active)} of 10,000</b></div><span class="bar-a"><i style="width:${(active / 100).toFixed(1)}%"></i></span><small class="sub">Members who used the app at least once this month. Sign-ups who never come back are not counted.</small></div>
-        <dl class="bs-words" style="margin-top:14px"><dt>Price</dt><dd>€1,290 a month, excluding VAT</dd><dt>Term</dt><dd>12 months, renews ${renews}</dd><dt>Invoices</dt><dd>Monthly, by card</dd><dt>Support</dt><dd>Reply within one business day</dd></dl></div>
+        <div class="usage"><div><span>Active members (last 90 days)</span><b>${fmt(active)} of 10,000</b></div><span class="bar-a"><i style="width:${(active / 100).toFixed(1)}%"></i></span><small class="sub">Members who sent at least one mission in the last 90 days, approved or refused. After 90 days without one, a member counts as inactive; the account is kept.</small></div>
+        <dl class="bs-words" style="margin-top:14px"><dt>Price</dt><dd>€1,290 a month, no VAT charged (§ 19 UStG)</dd><dt>Term</dt><dd>12 months, renews ${renews}</dd><dt>Invoices</dt><dd>Monthly, by card</dd><dt>Support</dt><dd>Reply within one business day</dd></dl></div>
     </div>
     <div class="adm-row">
       <div class="acard"><h2>Roles</h2><table class="atable"><tbody>${roles.map(([r, w]) => `<tr><td><b style="font-weight:500">${r}</b></td><td class="wrap">${w}</td></tr>`).join("")}</tbody></table></div>
@@ -1492,6 +1508,9 @@ function accountPage({ domain, active, renews, sub }) {
    singer, her songs and lyrics, the fans, their handles and every figure.
    Artwork is drawn in SVG below; the QR codes are generated on the page. */
 const BRAND = { name: "Ilsa Morrow", kind: "artist", word: "notes", boardName: "the Front Row race" };
+/* Sending a mission earns its season XP at once (tiers, the race; back to 0 each season); the same number of notes to spend follows once
+   the post is approved, and notes are kept for good. */
+const xpPts = (n) => `+${fmt(n)} XP · +${fmt(n)} ${BRAND.word}`;
 const ME = { name: "Maëlle Kerbrat", first: "Maëlle", handle: "@maelle.kb", no: "0731", since: "2023", city: "Nantes", code: "MAELLE-BAND" };
 const TIERS = [
   { id: "listener", name: "Listener", at: 0, perk: "The Band app, the setlist and the tour" },
@@ -1545,12 +1564,12 @@ const LOCK = { lock: true };
 /* ---------------------------------------------------------------- data */
 const C = (id, city, d, x, y, s) => ({ id, city, date: addDays(d, 20, 0), d, x, y, ...s });
 const TOUR = [
-  C("bru", "Brussels", -12, 0.66, 0.08, { ci: 612, posts: 840, views: 1.42e6, joined: 310, cap: 2000 }),
-  C("lil", "Lille", -10, 0.55, 0.12, { ci: 540, posts: 702, views: 1.1e6, joined: 262, cap: 1800 }),
-  C("ren", "Rennes", -7, 0.2, 0.4, { ci: 701, posts: 911, views: 1.63e6, joined: 344, cap: 1800 }),
-  C("nan", "Nantes", -5, 0.22, 0.53, { ci: 980, posts: 1320, views: 2.31e6, joined: 498, cap: 2500 }),
-  C("bdx", "Bordeaux", -3, 0.29, 0.75, { ci: 820, posts: 1044, views: 1.88e6, joined: 401, cap: 2200 }),
-  C("tls", "Toulouse", -1, 0.42, 0.89, { ci: 655, posts: 738, views: 0.97e6, joined: 296, cap: 1800 }),
+  C("bru", "Brussels", -12, 0.66, 0.08, { ci: 612, posts: 520, views: 0.6e6, joined: 180, cap: 2000 }),
+  C("lil", "Lille", -10, 0.55, 0.12, { ci: 540, posts: 450, views: 0.5e6, joined: 150, cap: 1800 }),
+  C("ren", "Rennes", -7, 0.2, 0.4, { ci: 701, posts: 590, views: 0.72e6, joined: 205, cap: 1800 }),
+  C("nan", "Nantes", -5, 0.22, 0.53, { ci: 980, posts: 820, views: 1.04e6, joined: 290, cap: 2500 }),
+  C("bdx", "Bordeaux", -3, 0.29, 0.75, { ci: 820, posts: 680, views: 0.84e6, joined: 240, cap: 2200 }),
+  C("tls", "Toulouse", -1, 0.42, 0.89, { ci: 655, posts: 470, views: 0.49e6, joined: 170, cap: 1800 }),
   C("lyo", "Lyon", 2, 0.66, 0.6, { ci: 0, posts: 0, views: 0, joined: 0, cap: 2400, pre: 1180 }),
   C("gva", "Geneva", 4, 0.8, 0.51, { pre: 610, cap: 1500 }),
   C("mrs", "Marseille", 7, 0.7, 0.9, { pre: 820, cap: 2200 }),
@@ -1594,27 +1613,27 @@ const MERCH = [
 ];
 const HOW = { post: "Posted to you within a week", code: "Code shown straight away", unlock: "Plays straight away", book: "The team emails you to fix the date" };
 const MY_POSTS = [
-  { title: "Bordeaux: setlist photo", net: "Instagram", city: "Bordeaux", ago: 3, views: 6120, likes: 512 },
-  { title: "Sing 'Phare' in one take", net: "TikTok", city: "", ago: 6, views: 31480, likes: 2904 },
-  { title: "Nantes: the stand at doors", net: "Instagram", city: "Nantes", ago: 5, views: 3870, likes: 288 },
-  { title: "Merch fit, summer dates", net: "TikTok", city: "", ago: 58, views: 9940, likes: 811 },
+  { title: "Bordeaux: setlist photo", net: "Instagram", city: "Bordeaux", ago: 3, views: 2140, likes: 168 },
+  { title: "Sing 'Phare' in one take", net: "TikTok", city: "", ago: 6, views: 5820, likes: 531 },
+  { title: "Nantes: the stand at doors", net: "Instagram", city: "Nantes", ago: 5, views: 1460, likes: 109 },
+  { title: "Merch fit, summer dates", net: "TikTok", city: "", ago: 58, views: 2380, likes: 204 },
 ];
 const TOP = [
-  ["Inès Ould-Ali", "@ines.oa", "Paris", 4980, 2.1e5], ["Jonas Peeters", "@jonaspeet", "Brussels", 4720, 1.9e5], ["Lou Garnier-Roy", "@lou.gr", "Rennes", 4510, 1.62e5],
-  ["Sam Okonjo", "@sam.okj", "Lille", 4300, 1.4e5], ["Clémence Vidal", "@clem.vdl", "Bordeaux", 4120, 1.32e5], ["Noé Brunet", "@noe.brn", "Lyon", 3980, 1.18e5],
-  ["Aya Benali", "@aya.bnl", "Marseille", 3860, 1.1e5], ["Pauline Morel", "@pau.mrl", "Nantes", 3700, 9.8e4], ["Hugo Lefèvre", "@hugolfv", "Toulouse", 3560, 9.1e4], ["Rosa Almeida", "@rosa.alm", "Geneva", 3420, 8.7e4],
+  ["Inès Ould-Ali", "@ines.oa", "Paris", 4980, 3.2e4], ["Jonas Peeters", "@jonaspeet", "Brussels", 4720, 2.9e4], ["Lou Garnier-Roy", "@lou.gr", "Rennes", 4510, 2.5e4],
+  ["Sam Okonjo", "@sam.okj", "Lille", 4300, 2.1e4], ["Clémence Vidal", "@clem.vdl", "Bordeaux", 4120, 2e4], ["Noé Brunet", "@noe.brn", "Lyon", 3980, 1.8e4],
+  ["Aya Benali", "@aya.bnl", "Marseille", 3860, 1.7e4], ["Pauline Morel", "@pau.mrl", "Nantes", 3700, 1.5e4], ["Hugo Lefèvre", "@hugolfv", "Toulouse", 3560, 1.4e4], ["Rosa Almeida", "@rosa.alm", "Geneva", 3420, 1.3e4],
 ];
-const NEAR = [["Théo Marchal", "@theo.mrc", "Lyon", 2310, 4.1e4], ["Elsa Moreau", "@elsamoreau", "Paris", 2190, 3.6e4], ["Bastien Roux", "@bastroux", "Nantes", 2050, 3.3e4], ["Lina Haddad", "@lina.hdd", "Lille", 1980, 3e4]];
-const BELOW = [["Victor Blanc", "@vic.blanc", "Bordeaux", 1870, 2.6e4], ["Jade Fontaine", "@jade.ftn", "Strasbourg", 1790, 2.2e4]];
+const NEAR = [["Théo Marchal", "@theo.mrc", "Lyon", 2310, 6200], ["Elsa Moreau", "@elsamoreau", "Paris", 2190, 5400], ["Bastien Roux", "@bastroux", "Nantes", 2050, 5000], ["Lina Haddad", "@lina.hdd", "Lille", 1980, 4500]];
+const BELOW = [["Victor Blanc", "@vic.blanc", "Bordeaux", 1870, 3900], ["Jade Fontaine", "@jade.ftn", "Strasbourg", 1790, 3300]];
 const FEED = [
-  { who: "@jonaspeet", city: "Brussels", net: "TikTok", views: 88400, k: "stage", t: "Chorus from row two" },
-  { who: "@lou.gr", city: "Rennes", net: "Instagram", views: 12100, k: "setlist", t: "Setlist photo" },
-  { who: "@pau.mrl", city: "Nantes", net: "TikTok", views: 41700, k: "tee", t: "Merch fit" },
-  { who: "@clem.vdl", city: "Bordeaux", net: "Instagram", views: 9300, k: "marquee", t: "Outside, before doors" },
-  { who: "@hugolfv", city: "Toulouse", net: "YouTube Shorts", views: 22600, k: "stage", t: "'Sel', last song" },
-  { who: "@sam.okj", city: "Lille", net: "Instagram", views: 7800, k: "vinyl", t: "Signed at the stand" },
-  { who: "@ines.oa", city: "Paris", net: "TikTok", views: 64200, k: "stand", t: "Queue for the stand" },
-  { who: "@aya.bnl", city: "Brussels", net: "Instagram", views: 5600, k: "setlist", t: "Setlist photo" },
+  { who: "@jonaspeet", city: "Brussels", net: "TikTok", views: 14800, k: "stage", t: "Chorus from row two" },
+  { who: "@lou.gr", city: "Rennes", net: "Instagram", views: 3100, k: "setlist", t: "Setlist photo" },
+  { who: "@pau.mrl", city: "Nantes", net: "TikTok", views: 9700, k: "tee", t: "Merch fit" },
+  { who: "@clem.vdl", city: "Bordeaux", net: "Instagram", views: 2600, k: "marquee", t: "Outside, before doors" },
+  { who: "@hugolfv", city: "Toulouse", net: "YouTube Shorts", views: 6200, k: "stage", t: "'Sel', last song" },
+  { who: "@sam.okj", city: "Lille", net: "Instagram", views: 2100, k: "vinyl", t: "Signed at the stand" },
+  { who: "@ines.oa", city: "Paris", net: "TikTok", views: 11400, k: "stand", t: "Queue for the stand" },
+  { who: "@aya.bnl", city: "Brussels", net: "Instagram", views: 1900, k: "setlist", t: "Setlist photo" },
 ];
 const ANSWERS = [
   ["Noé Brunet", "'Sel', in a car park in Valence, waiting for my sister to finish work."],
@@ -1624,13 +1643,15 @@ const ANSWERS = [
 
 /* ---------------------------------------------------------------- state */
 const state = {
+  pending: 0, approved: new Set(),
   view: "member", device: window.innerWidth >= 1180 ? "laptop" : "phone", tab: "home",
   balance: 2140, earned: 0, life: 3620, monthBase: 1890,
   done: new Set(), got: new Set(["ren", "nan", "bdx"]), just: null, showNight: false,
   posts: MY_POSTS.map((p) => ({ ...p })), filter: "all", mfilter: "all", redeemed: [], vote: null, poll: null, answer: null,
-  goal: 38240, friendJoined: false, net: "TikTok", link: "", pickCity: "lyo",
+  goal: 15320, friendJoined: false, net: "TikTok", link: "", pickCity: "lyo",
   cpm: 5, admin: "overview", atab: {}, tcity: "all", draft: null, news: null, orders: null, live: 0,
 };
+/* life: season XP so far (tiers). monthBase: XP earned since the tour started (the race). balance: notes to spend. */
 const SP = () => state.life + state.earned;
 const tierOf = (n) => [...TIERS].reverse().find((t) => n >= t.at);
 const nextTier = (n) => TIERS.find((t) => t.at > n);
@@ -1639,7 +1660,7 @@ function myRank() { return 27 + [...NEAR, ...BELOW].filter((n) => n[3] > monthPt
 const mission = (id) => MISSIONS.find((m) => m.id === id);
 const locked = (m) => m.show && !state.showNight;
 const openMissions = () => MISSIONS.filter((m) => !state.done.has(m.id));
-const goalPct = () => Math.min(100, Math.round((state.goal / 50000) * 100));
+const goalPct = () => Math.min(100, Math.round((state.goal / 20000) * 100));
 const greeting = () => { const h = new Date().getHours(); return h < 12 ? "Morning" : h < 18 ? "Afternoon" : "Evening"; };
 
 /* ---------------------------------------------------------------- shell */
@@ -1659,13 +1680,13 @@ function shell() {
     <button class="wm" data-act="tab" data-tab="home">${wmMark()}Ilsa<br>Morrow<small>The Band, Marée haute tour</small></button>
     <nav class="rail-nav" data-shell="rail">${rail.map(([k, l], i) => `<button data-act="tab" data-tab="${k}" ${state.tab === k ? 'aria-current="page"' : ""}><i>${String(i + 1).padStart(2, "0")}</i>${l}${k === "setlist" ? `<span class="n">${openMissions().length}</span>` : k === "tour" ? `<span class="n">${state.got.size}/12</span>` : ""}</button>`).join("")}</nav>
     <div class="rail-foot">
-      <button class="rail-notes" data-act="tab" data-tab="merch" data-points-target><b data-balance class="num">${fmt(state.balance)}</b><span>${BRAND.word}</span></button>
+      <span class="pts-wrap pts-rail"><button class="rail-notes" data-act="tab" data-tab="merch" data-points-target><b data-balance class="num">${fmt(state.balance)}</b><span>${BRAND.word}</span></button>${pendDot()}</span>
       <button class="rail-me" data-act="tab" data-tab="me"><span class="me-btn" style="display:grid;place-items:center">${initials(ME.name)}</span><span data-shell="me"><b>${ME.name}</b>${tierOf(SP()).name}, since ${ME.since}</span></button>
     </div>
   </aside>
   <header class="top">
     <button class="wm" data-act="tab" data-tab="home">${wmMark()}Ilsa Morrow<small>The Band</small></button>
-    <button class="notes" data-act="tab" data-tab="merch" data-points-target><b data-balance class="num">${fmt(state.balance)}</b><span data-shell="word">${BRAND.word}</span></button>
+    <span class="pts-wrap pts-top"><button class="notes" data-act="tab" data-tab="merch" data-points-target><b data-balance class="num">${fmt(state.balance)}</b><span data-shell="word">${BRAND.word}</span></button>${pendDot()}</span>
     <button class="me-btn" data-act="tab" data-tab="me" aria-label="Me">${initials(ME.name)}</button>
   </header>
   <main class="view" id="view" tabindex="-1"></main>
@@ -1693,7 +1714,7 @@ function bandPass() {
 }
 function tierBlock() {
   const n = nextTier(SP()), t = tierOf(SP());
-  return `<div class="tier"><div class="tier-row"><span>${n ? `<b class="num">${fmt(n.at - SP())}</b> ${BRAND.word} to ${n.name}` : "Top tier"}</span><span class="meta mono">${n ? n.perk.split(",")[0] : ""}</span></div>
+  return `<div class="tier"><div class="tier-row"><span>${n ? `<b class="num">${fmt(n.at - SP())}</b> XP to ${n.name}` : "Top tier"}</span><span class="meta mono">${n ? n.perk.split(",")[0] : ""}</span></div>
     <div class="tier-steps">${TIERS.map((x) => `<span class="${SP() >= x.at ? "on" : ""}">${x.name}</span>`).join("")}</div></div>`;
 }
 function nextShow() {
@@ -1731,17 +1752,17 @@ function setlistRow(m, i, top) {
   return `<button class="sl-row${top ? " is-top" : ""}" data-act="mission" data-id="${m.id}" ${done ? "data-done" : ""} ${lk ? "data-locked" : ""}>
     <span class="sl-no">${String(i + 1).padStart(2, "0")}</span>
     <span class="sl-t"><b>${esc(m.title)}</b><span>${m.city ? `<span class="city">${city(m.city).city.toUpperCase()}</span>` : ""}${esc(m.meta)}</span></span>
-    <span class="sl-pts">${done ? "done" : `+${m.pts}<small>${lk ? "on show day" : BRAND.word}</small>`}</span></button>`;
+    <span class="sl-pts">${done ? "done" : `+${m.pts}<small>${lk ? "on show day" : `XP · ${BRAND.word}`}</small>`}</span></button>`;
 }
 function tideGoal(compact) {
-  const n = goalPct(), open = state.goal >= 50000;
+  const n = goalPct(), open = state.goal >= 20000;
   const wave = `<svg viewBox="0 0 400 18" preserveAspectRatio="none" aria-hidden="true"><path d="M0 10c25-8 50 8 100 0s75-8 100 0 50 8 100 0 75-8 100 0V18H0z" fill="${K.tideD}"/></svg>`;
   return `<section class="tidegoal" style="--lvl:${Math.max(8, n * 0.9)}%" aria-labelledby="tgT">
     <div class="water">${wave}</div>
     <div><span class="kicker">The whole Band, together</span>
-      <h3 id="tgT">High tide: 50,000 missions</h3>
-      <p>Every mission any of us finishes raises the water. At 50,000, the acoustic take of 'Marée haute', recorded in Ilsa's kitchen and never released, opens to the whole Band.</p>
-      <div class="tg-num"><b class="num">${fmt(state.goal)}</b><span>of 50,000, ${n}%${state.goalMine ? `, ${state.goalMine} of them yours` : ""}</span></div>
+      <h3 id="tgT">High tide: 20,000 missions</h3>
+      <p>Every mission any of us finishes raises the water. At 20,000, the acoustic take of 'Marée haute', recorded in Ilsa's kitchen and never released, opens to the whole Band.</p>
+      <div class="tg-num"><b class="num">${fmt(state.goal)}</b><span>of 20,000, ${n}%${state.goalMine ? `, ${state.goalMine} of them yours` : ""}</span></div>
       ${compact ? `<button class="link" data-act="tab" data-tab="band" style="margin-top:6px">Open the Band</button>` : ""}</div>
     <div class="player ${open ? "open" : ""}"><button class="pl" ${open ? 'data-act="play"' : "disabled"} aria-label="${open ? "Play" : "Locked"}">${icon(open ? "play" : "lock")}</button><span class="wave">${Array.from({ length: 30 }, (_, i) => `<i style="height:${20 + Math.abs(Math.sin(i * 1.7)) * 75}%"></i>`).join("")}</span><span class="tx">${open ? "4:12" : "Locked"}</span></div>
   </section>`;
@@ -1761,7 +1782,7 @@ function itemCard(g, opts = {}) {
 function screenHome() {
   const n = nextTier(SP());
   const lede = state.showNight ? `It's show night in <b>Lyon</b>. Check in at the merch stand and post the setlist after the encore.`
-    : `Ilsa plays <b>Lyon on ${dayShort(NEXT.date)}</b>. You're ${ordinal(myRank())} in the Front Row race, and ${fmt(n ? n.at - SP() : 0)} ${BRAND.word} from ${n ? n.name : "the top"}.`;
+    : `Ilsa plays <b>Lyon on ${dayShort(NEXT.date)}</b>. You're ${ordinal(myRank())} in the Front Row race, and ${fmt(n ? n.at - SP() : 0)} XP from ${n ? n.name : "the top"}.`;
   return `<header><span class="kicker">${greeting().toUpperCase()}, ${dayShort(NOW).toUpperCase()}</span><h1 class="h-page">Next stop, <em>Lyon.</em></h1><p class="lede">${lede}</p></header>
     <div class="tonight">
       <div class="sec">${bandPass()}<span class="flip-hint">${icon("flip")}Tap the pass for your QR code</span>${tierBlock()}</div>
@@ -1789,7 +1810,7 @@ function slGroups(list) {
 function screenSetlist() {
   const list = MISSIONS.filter((m) => state.filter === "all" || (state.filter === "lyo" ? m.city === "lyo" : !m.city || m.city !== "lyo"));
   return `<header><span class="kicker">THE SETLIST</span><h1 class="h-page">Play it your way, <em>post it loud.</em></h1>
-      <p class="lede">Each mission is something you do and share on your own account. Paste the link, we check it, the notes land. Up to three a day, plus whatever the show brings.</p></header>
+      <p class="lede">Each mission is something you do and share on your own account. Paste the link, we check it, the XP and notes land. Up to three a day, plus whatever the show brings.</p></header>
     <div class="chips" role="group" aria-label="Filter">${MFILT.map(([k, l]) => `<button class="chip" data-act="filter" data-f="${k}" aria-pressed="${state.filter === k}">${l}</button>`).join("")}</div>
     <div class="setlist-wrap">
       <div class="setlist"><div class="sl-head"><b>Marée haute tour</b><span>${NEXT.city.toUpperCase()}, ${dayNum(NEXT.date).toUpperCase()}</span></div>${slGroups(list)}</div>
@@ -1804,7 +1825,7 @@ function stubHtml(c, i) {
 }
 function screenTour() {
   const n = state.got.size;
-  return `<header class="tour-head"><div><span class="kicker">THE TOUR, CITY BY CITY</span><h1 class="h-page">Twelve cities. <em>${n}</em> are yours.</h1>
+  return `<header class="tour-head"><div><span class="kicker">THE TOUR, CITY BY CITY</span><h1 class="h-page">Twelve cities. <em>${n}</em> are yours.${soon("soon-h")}</h1>
       <p class="lede">Check in at the merch stand, or post from the show, and the city goes on your tour. Five cities: a signed tour poster. All twelve: your name in the tour book.</p></div>
       <div class="tour-prog"><div class="tier-row"><span><b>${n}</b> of 12 cities</span><span class="meta mono">${n >= 5 ? "Poster unlocked" : `${5 - n} to the poster`}</span></div><div class="bar"><span data-fill="${Math.round((n / 12) * 100)}"></span></div></div></header>
     ${routeMap(true)}
@@ -1815,21 +1836,21 @@ function boardRows() {
   const rest = [...NEAR, ...BELOW].map(([name, , c, pts, views]) => ({ name, city: c, pts, views }));
   const all = [...rest, me].sort((a, b) => b.pts - a.pts);
   const row = (r, pos, cls = "") => `<tr class="${r.me ? "me" : ""} ${cls}"><td class="pos">${String(pos).padStart(2, "0")}</td><td><span class="mem"><i>${initials(r.name)}</i><b>${r.me ? "You" : esc(r.name)}</b></span></td><td class="hide-sm mono" style="font-size:.75rem">${r.city}</td><td class="r hide-sm mono" style="font-size:.75rem">${big(r.views)}</td><td class="r pv num">${fmt(r.pts)}</td></tr>`;
-  return `<table class="ltable"><thead><tr><th>#</th><th>Fan</th><th class="hide-sm">Home show</th><th class="r hide-sm">Views</th><th class="r">${BRAND.word}</th></tr></thead><tbody>
+  return `<table class="ltable"><thead><tr><th>#</th><th>Fan</th><th class="hide-sm">Home show</th><th class="r hide-sm">Views</th><th class="r">XP</th></tr></thead><tbody>
     ${TOP.map(([name, , c, pts, views], i) => row({ name, city: c, pts, views }, i + 1, i === 9 ? "front cut" : "front")).join("")}<tr class="gap"><td colspan="5">···</td></tr>${all.map((r, i) => row(r, 27 + i)).join("")}</tbody></table>`;
 }
 function screenFront() {
   const t = TOP;
   const r = (x, i) => `<div class="riser r${i + 1}"><span class="av">${initials(x[0])}</span><span class="who">${esc(x[0])}</span><span class="pts">${fmt(x[3])}</span><span class="block">${i + 1}</span></div>`;
   return `<header><span class="kicker">THE FRONT ROW RACE</span><h1 class="h-page">Ten fans, <em>front row,</em> Paris.</h1>
-      <p class="lede">${BRAND.word[0].toUpperCase() + BRAND.word.slice(1)} earned since the tour started. When the race closes on ${dayShort(FRONT_CUTOFF)}, the top ten stand at the barrier for the last night in Paris.</p></header>
+      <p class="lede">Ranked by XP earned since the tour started. When the race closes on ${dayShort(FRONT_CUTOFF)}, the top ten stand at the barrier for the last night in Paris.</p></header>
     <div class="risers">${r(t[1], 1)}${r(t[0], 0)}${r(t[2], 2)}</div>
     <div class="board-wrap"><section class="sec">${boardRows()}</section>
       <aside class="sec">
-        <div class="me-card"><div class="me-top"><span class="av">${initials(ME.name)}</span><span><b>${ordinal(myRank())}</b><span>${fmt(monthPts())} ${BRAND.word} on this tour</span></span></div>
-          <div class="bar"><span data-fill="${Math.round((monthPts() / 3420) * 100)}"></span></div><span class="mono" style="font-size:.75rem;color:var(--ink-2)">${fmt(3420 - monthPts())} ${BRAND.word} behind 10th place</span></div>
+        <div class="me-card"><div class="me-top"><span class="av">${initials(ME.name)}</span><span><b>${ordinal(myRank())}</b><span>${fmt(monthPts())} XP on this tour</span></span></div>
+          <div class="bar"><span data-fill="${Math.round((monthPts() / 3420) * 100)}"></span></div><span class="mono" style="font-size:.75rem;color:var(--ink-2)">${fmt(3420 - monthPts())} XP behind 10th place</span></div>
         <div class="prize"><span class="kicker">THE PRIZE</span><b>Front row, Paris, ${dayShort(city("par").date)}</b><p>Ten places at the barrier, entry before doors, and the setlist from that night split between you.</p></div>
-        <p class="note">Spending ${BRAND.word} at the merch table never moves you down the race.</p>
+        <p class="note">Every mission earns the same number of XP and ${BRAND.word}: the XP as soon as you send it, the ${BRAND.word} once your post is approved. If a post is turned down, its XP comes off again and you get a message saying why. ${BRAND.word.replace(/^./, (c) => c.toUpperCase())} are yours to keep; spending them at the merch table never lowers your XP, so it never moves you down the race.</p>
       </aside></div>`;
 }
 const MERCHF = [["all", "Everything"], ["reach", "Within reach"], ["digital", "Digital"], ["post", "In the post"], ["moments", "Moments"]];
@@ -1843,7 +1864,7 @@ function screenMerch() {
 function screenBand() {
   const tot = ENCORES.length;
   const mine = state.posts.filter((p) => p.fresh);
-  return `<header><span class="kicker">THE BAND</span><h1 class="h-page">31,980 of us, <em>one tide.</em></h1><p class="lede">What the Band posted from the tour, the goal we're all filling, and a word from Ilsa.</p></header>
+  return `<header><span class="kicker">THE BAND</span><h1 class="h-page">14,260 of us, <em>one tide.</em></h1><p class="lede">What the Band posted from the tour, the goal we're all filling, and a word from Ilsa.</p></header>
     ${tideGoal(false)}
     <div class="band-grid">
       <section class="sec"><div class="sec-head"><h2 class="h-sec">From the tour</h2><span class="meta mono">Fans' own posts</span></div>
@@ -1851,7 +1872,7 @@ function screenBand() {
         ${FEED.map((f, i) => `<article class="post"><div class="post-art">${scene(f.k, i)}<span class="net">${NET_SHORT[f.net]}</span><span class="cty">${f.city.toUpperCase()}</span><span class="views">${icon("eye")}${big(f.views)}</span></div><div class="post-text"><b>${f.who}</b><span>${f.t}</span></div></article>`).join("")}</div></section>
       <aside class="sec">
         <div class="memo"><span class="from">FROM ILSA, TOUR BUS, ${dayNum(addDays(-1)).toUpperCase()}</span><p>Toulouse sang the second chorus louder than I did. I stopped and let you. Lyon, you've been warned.</p><span class="sig">Ilsa</span></div>
-        <div class="panel"><span class="kicker">Encore for Geneva</span><p class="note" style="margin:6px 0 10px">Vote in the setlist: it's a mission, +30 ${BRAND.word}.</p><button class="btn btn-line btn-sm" data-act="mission" data-id="encore">${state.vote ? "See the results" : "Vote now"}</button></div>
+        <div class="panel"><span class="kicker">Encore for Geneva</span><p class="note" style="margin:6px 0 10px">Vote in the setlist: it's a mission, ${xpPts(30)}.</p><button class="btn btn-line btn-sm" data-act="mission" data-id="encore">${state.vote ? "See the results" : "Vote now"}</button></div>
         <div class="sec"><span class="kicker">Your first Ilsa song</span><div class="answers">${state.answer ? `<figure class="answer mine"><blockquote>${esc(state.answer)}</blockquote><figcaption>You, just now</figcaption></figure>` : ""}${ANSWERS.map(([w, t]) => `<figure class="answer"><blockquote>${esc(t)}</blockquote><figcaption>${w}</figcaption></figure>`).join("")}</div></div>
       </aside>
     </div>`;
@@ -1874,7 +1895,7 @@ const SCREENS = { home: screenHome, setlist: screenSetlist, tour: screenTour, fr
 function afterRender() { if (state.just) { const j = state.just; setTimeout(() => { if (state.just === j) state.just = null; }, 1200); } }
 
 /* ---------------------------------------------------------------- sheets */
-const head = (m) => `<span class="kicker">${m.city ? city(m.city).city.toUpperCase() + ", " : ""}+${m.pts} ${BRAND.word.toUpperCase()}</span><h2>${esc(m.title)}</h2>`;
+const head = (m) => `<span class="kicker">${m.city ? city(m.city).city.toUpperCase() + ", " : ""}+${m.pts} XP · ${BRAND.word.toUpperCase()}</span><h2>${esc(m.title)}</h2>`;
 function missionSheet(id) {
   const m = mission(id); if (!m) return;
   if (state.done.has(id) && m.kind !== "vote") return openSheet(head(m) + `<div class="success"><p>Played. ${m.city && state.got.has(m.city) ? `${city(m.city).city} is on your tour.` : "Counted."}</p><button class="btn btn-red" data-act="close">Close</button></div>`);
@@ -1893,16 +1914,28 @@ function sampleLink() {
   const id = Math.random().toString(36).slice(2, 13);
   return { Instagram: `https://www.instagram.com/p/${id}/`, TikTok: `https://www.tiktok.com/${ME.handle}/video/74${Math.floor(1e15 + Math.random() * 8e15)}`, "YouTube Shorts": `https://youtube.com/shorts/${id}` }[state.net];
 }
-function successHtml(m, before, line, extra = "") {
+function successHtml(m, before, line, extra = "", pending = false) {
   const t = tierOf(SP());
   const up = t.id !== before.id ? `<div class="tierup"><span class="mono" style="font-size:.6875rem">NEW TIER</span><b>You're ${t.name} now</b><span style="font-size:.875rem">${t.perk}.</span></div>` : "";
-  return `<div class="success"><span class="big num">+${m.pts}</span><p>${line}</p></div>${extra}${up}<button class="btn btn-red btn-block" data-act="close">Back to the Band</button>`;
+  return `<div class="success"><span class="big num">+${m.pts}</span><span class="big-unit">${pending ? "XP now" : `XP · ${BRAND.word}`}</span><p>${line}${pending ? ` Your ${m.pts} ${BRAND.word} are pending until the team approves the post.` : ""}</p></div>${extra}${up}<button class="btn btn-red btn-block" data-act="close">Back to the Band</button>`;
 }
-function complete(id, fromEl, msg) {
+function complete(id, fromEl, msg, pending) {
   const m = mission(id), before = tierOf(SP());
   state.done.add(id); state.goal += 1; state.goalMine = (state.goalMine || 0) + 1;
-  award(m.pts, fromEl, msg);
+  if (pending) {
+    state.pending += m.pts;
+    award(m.pts, fromEl, msg || `+${fmt(m.pts)} XP now · ${fmt(m.pts)} ${BRAND.word} pending until it's approved`, true);
+    syncPending();
+    setTimeout(() => approve(m), 5000);
+  } else award(m.pts, fromEl, msg);
   return before;
+}
+function approve(m) {
+  if (state.approved.has(m.id)) return;
+  state.approved.add(m.id); state.pending = Math.max(0, state.pending - m.pts); syncPending();
+  const before = state.balance; state.balance += m.pts; countTo(before, state.balance);
+  const msg = `Your post is approved: +${fmt(m.pts)} ${BRAND.word}`;
+  if (state.view === "member") toast(msg); else state.news = msg;
 }
 function singBody(m) {
   return `<p>${esc(m.brief)}</p>
@@ -1971,11 +2004,11 @@ function onAction(act, el) {
         z.innerHTML = `<div class="found"><span class="nt">${NET_SHORT[state.net]}</span><span><b>Found: ${state.net}, ${ME.handle}</b><ul><li>Tags @ilsamorrow</li><li>${m.tag} in the caption</li><li>Public, posted minutes ago${m.city ? `, near the venue` : ""}</li></ul></span></div>`;
         setTimeout(() => {
           state.posts.unshift({ title: m.title, net: state.net, city: m.city ? city(m.city).city : "", ago: 0, views: 930, likes: 109, fresh: 1, kind: m.id === "fit" ? "tee" : "setlist" });
-          const before = complete(m.id, $("#postZone .nt"));
+          const before = complete(m.id, $("#postZone .nt"), null, true);
           let extra = "";
           if (m.city && !state.got.has(m.city)) { state.got.add(m.city); state.just = m.city; extra = gotRow(m.city); }
           state.link = "";
-          const sh = $("#sheet"); sh.insertAdjacentHTML("beforeend", successHtml(m, before, "Counted. Your post has 264 views already; we keep counting for 30 days.", extra));
+          const sh = $("#sheet"); sh.insertAdjacentHTML("beforeend", successHtml(m, before, "Found. Your post has 264 views already; we keep counting for 30 days.", extra, true));
           sh.scrollTo({ top: sh.scrollHeight, behavior: reduceMotion ? "auto" : "smooth" });
           renderMember(false);
         }, reduceMotion ? 0 : 700);
@@ -2010,8 +2043,8 @@ function onAction(act, el) {
       z.innerHTML = `<div class="checking"><span class="spin"></span>Looking for your video on ${state.net}...</div>`;
       setTimeout(() => {
         state.posts.unshift({ title: "Sing the chorus of 'Marée haute'", net: state.net, city: "", ago: 0, views: 1240, likes: 175, fresh: 1, kind: "stage" });
-        const before = complete("sing", z);
-        z.outerHTML = successHtml(m, before, "Found and counted. Ilsa hears these on the bus.");
+        const before = complete("sing", z, null, true);
+        z.outerHTML = successHtml(m, before, "Found. Ilsa hears these on the bus.", "", true);
         renderMember(false);
       }, reduceMotion ? 0 : 1300);
       return;
@@ -2021,7 +2054,7 @@ function onAction(act, el) {
       setTimeout(() => {
         const m = mission("merch");
         state.got.add("lyo"); state.just = "lyo";
-        const before = complete("merch", $("#scanner"), `Lyon is on your tour. +150 ${BRAND.word}`);
+        const before = complete("merch", $("#scanner"), `Lyon is on your tour. ${xpPts(150)}`);
         $("#scanner").outerHTML = "";
         $("#ciZone").outerHTML = successHtml(m, before, "Checked in at the stand. Have a good night, Lyon.", gotRow("lyo"));
         renderMember(false);
@@ -2041,7 +2074,7 @@ function onAction(act, el) {
       el.classList.add(right ? "right" : "wrong");
       const m = mission("lyric");
       if (right) { el.parentElement.insertAdjacentHTML("afterend", `<p class="note">"...on se retrouve où la mer monte." Right first time.</p>`); complete("lyric", el); }
-      else { el.parentElement.querySelectorAll("button")[QUIZ.right].classList.add("right"); el.parentElement.insertAdjacentHTML("afterend", `<p class="note">It's "monte". Half the ${BRAND.word} for trying.</p>`); state.done.add("lyric"); award(30, el, `+30 ${BRAND.word} for trying`); }
+      else { el.parentElement.querySelectorAll("button")[QUIZ.right].classList.add("right"); el.parentElement.insertAdjacentHTML("afterend", `<p class="note">It's "monte". Half the XP and ${BRAND.word} for trying.</p>`); state.done.add("lyric"); award(30, el, `${xpPts(30)} for trying`); }
       return renderMember(false);
     }
     case "vote": { if (state.vote) return; state.vote = el.dataset.k; openSheet(head(mission("encore")) + voteBody()); complete("encore", $("#sheet .poll [aria-pressed=true]")); return renderMember(false); }
@@ -2070,17 +2103,34 @@ setInterval(() => {
 }, 20000);
 
 /* ================================================================ Artist admin */
-/* Views on fans' posts per day, last 30 days. The tour started 12 days ago. */
-const DAILY = Array.from({ length: 30 }, (_, i) => {
-  const d = i - 29;
-  const echo = TOUR.filter((c) => c.d < 0 && c.d <= d).reduce((a, c) => { const k = d - c.d, w = (c.views || 1e6) / 1.6e6; return a + w * (k === 0 ? 110000 : 340000 * Math.pow(0.6, k - 1)); }, 0);
-  return Math.round(38000 + i * 900 + ((i * 7919) % 12000) + echo);
-});
+/* Views on fans' posts per day, last 30 days. The tour started 12 days ago. Each show's views so far are spread over the days
+   since that show (they peak the day after), so the tour days add up to the cities' views; the rest is older posts. */
+/* Views per day: each show's views spread from show night on, plus a small floor of older posts. Scaled so the 30 days add up
+   exactly to the views of the shows played (the tour total), in whole views. */
+const DAILY = (() => {
+  const raw = Array.from({ length: 30 }, (_, i) => 2500 + ((i * 7919) % 2000));
+  const base = raw.reduce((a, b) => a + b, 0), total = TOUR.filter((c) => c.d < 0).reduce((a, c) => a + c.views, 0);
+  TOUR.filter((c) => c.d < 0).forEach((c) => {
+    const w = Array.from({ length: 1 - c.d }, (_, k) => (k === 0 ? 0.5 : Math.pow(0.6, k - 1))), s = w.reduce((a, b) => a + b, 0);
+    w.forEach((x, k) => (raw[29 + c.d + k] += ((c.views * (total - base)) / total) * (x / s)));
+  });
+  const out = raw.map(Math.floor);
+  let rest = total - out.reduce((a, b) => a + b, 0);
+  raw.map((v, i) => [v - out[i], i]).sort((a, b) => b[0] - a[0]).forEach(([, i]) => { if (rest > 0) { out[i]++; rest--; } });
+  return out;
+})();
 const DAY_LABELS = DAILY.map((_, i) => dayNum(addDays(i - 29)));
 const SHOW_MARKS = DAILY.map((_, i) => i).filter((i) => TOUR.some((c) => c.d === i - 29));
 /* network, share of posts, share of views, like rate, comment rate, share rate */
 const NETS = [["TikTok", 0.47, 0.57, 0.09, 0.0038, 0.0066], ["Instagram", 0.41, 0.33, 0.072, 0.0043, 0.005], ["YouTube Shorts", 0.12, 0.1, 0.042, 0.0021, 0.0017]];
 const played = () => TOUR.filter((c) => c.d < 0);
+/* Active fans: fans who sent at least one mission in the last 90 days, approved or refused. */
+const ACTIVE_90 = 4460;
+/* The "!" next to the points total, while points from a post wait for approval. */
+const pendLabel = () => `${fmt(state.pending)} ${BRAND.word} pending approval`;
+const pendDot = () => `<button class="pend-dot" data-act="pending" aria-label="${pendLabel()}" ${state.pending ? "" : "hidden"}>!</button>`;
+function syncPending() { document.querySelectorAll(".pend-dot").forEach((d) => { d.hidden = !state.pending; d.setAttribute("aria-label", pendLabel()); }); }
+const soon = (cls = "") => `<span class="soon-tag ${cls}">Soon</span>`;
 const tourTot = (k) => played().reduce((a, c) => a + (c[k] || 0), 0) + (k === "ci" && state.done.has("merch") ? 1 : 0) + (k === "ci" ? state.live : 0);
 
 /* ---------------------------------------------------------------- deliveries */
@@ -2120,17 +2170,17 @@ function admToday() {
     ["missions", 1, state.opener ? `Toulouse opener confirmed: '${state.opener}'` : `Confirm what opened Toulouse: ${fmt(OPENER_CALLS)} fans called it`, "Setlist calls and votes"],
     ["missions", 3, `${fmt(41 + ansList().filter((a) => a.status === "new").length)} new answers to read`, "Open questions"],
     ["missions", 2, "Print the Lyon check-in QR for the stand", "Check-ins"],
-    ["season", 3, `Front Row race closes ${dayShort(FRONT_CUTOFF)}: 10th place is on 3,420 ${BRAND.word}`, "Season"],
+    ["season", 3, `Front Row race closes ${dayShort(FRONT_CUTOFF)}: 10th place is on 3,420 XP`, "Season"],
   ];
   return admHead("Today", "Ilsa Morrow, the Band. Marée haute tour so far: 6 of 12 dates. Illustrative figures.", `<button class="adm-btn primary" data-act="newMission">${icon("plus")}New mission</button>`) + `
     <div class="kpis">
       ${kpi("Media value, tour so far", eur(mediaValue(views)), `${big(views)} views on fans' posts, at a ${cpmLabel()} CPM`)}
-      ${kpi("Active fans this month", "9,200", "+12% on last month")}
+      ${kpi("Active fans (last 90 days)", fmt(ACTIVE_90), "Sent at least one mission")}
       ${kpi("Merch-stand check-ins", fmt(tourTot("ci")), `${pct(tourTot("ci"), played().reduce((a, c) => a + c.cap, 0))} of the tickets sold`)}
       ${kpi("New Band members on tour", fmt(tourTot("joined")), "Joined at a show or from a fan's post")}
     </div>
     <div class="adm-grid">
-      <div class="acard"><h2>Views on fans' posts, per day</h2><p class="sub">Dots mark show nights. Views peak the day after each show.</p>${lineChart({ id: "daily", data: DAILY, labels: DAY_LABELS, max: 800000, marks: SHOW_MARKS, aria: "Daily views on fans' posts, last 30 days", tipFor: (i) => { const c = TOUR.find((x) => x.d === i - 29); return `<b>${DAY_LABELS[i]}</b>, ${fmt(DAILY[i])} views${c ? `, ${c.city} show` : ""}`; } })}</div>
+      <div class="acard"><h2>Views on fans' posts, per day</h2><p class="sub">Dots mark show nights. Views peak the day after each show.</p>${lineChart({ id: "daily", data: DAILY, labels: DAY_LABELS, max: 600000, marks: SHOW_MARKS, aria: "Daily views on fans' posts, last 30 days", tipFor: (i) => { const c = TOUR.find((x) => x.d === i - 29); return `<b>${DAY_LABELS[i]}</b>, ${fmt(DAILY[i])} views${c ? `, ${c.city} show` : ""}`; } })}</div>
       <div class="acard"><h2>Lyon, ${dayShort(NEXT.date)}</h2><p class="sub">Scheduled, runs on its own</p><ol class="timeline">${plan.map(([t, b, s]) => `<li><time>${t}</time><span class="dot"></span><span class="tl"><b>${b}</b><span>${s}</span></span></li>`).join("")}</ol></div>
     </div>
     <div class="acard"><h2>Things to do</h2><div class="todo">${todo.map(([p, i, t, w]) => `<button data-act="adm" data-p="${p}" data-i="${i}"><span>${t}</span><small>${w}</small></button>`).join("")}</div></div>`;
@@ -2145,12 +2195,12 @@ const EXTRA_ROWS = [
 ];
 function admMissions() {
   const tab = state.atab.missions || 0;
-  const h = admHead("Missions", "The setlist: everything fans do to earn notes. Each date has its own check-in QR, setlist call and city missions, scheduled ahead to open on show day.", `<button class="adm-btn primary" data-act="newMission">${icon("plus")}New mission</button>`) + admTabs("missions");
+  const h = admHead("Missions", "The setlist: everything fans do to earn XP and notes. Each date has its own check-in QR, setlist call and city missions, scheduled ahead to open on show day.", `<button class="adm-btn primary" data-act="newMission">${icon("plus")}New mission</button>`) + admTabs("missions");
   if (tab === 1) return h + admCalls();
   if (tab === 2) return h + admCheckin();
   if (tab === 3) return h + admAnswers();
   const rows = [...MISSIONS.map((m) => ({ m, title: m.title, type: m.type || MTYPE[m.id] || "Social post", city: m.city ? city(m.city).city : "Anywhere", pts: m.pts, when: m.show ? dayNum(NEXT.date) : m.when || "Now", status: m.show ? "show" : "live", n: (DONE_SINCE[m.id] || 0) + (state.done.has(m.id) ? 1 : 0) })), ...EXTRA_ROWS];
-  return h + `<div class="acard"><div class="scroll-x"><table class="atable"><thead><tr><th>Mission</th><th>Type</th><th>City</th><th class="r">${BRAND.word.replace(/^./, (c) => c.toUpperCase())}</th><th>When</th><th class="r">Done by</th><th>Status</th></tr></thead>
+  return h + `<div class="acard"><div class="scroll-x"><table class="atable"><thead><tr><th>Mission</th><th>Type</th><th>City</th><th class="r">XP · ${BRAND.word}</th><th>When</th><th class="r">Done by</th><th>Status</th></tr></thead>
     <tbody>${rows.map((r) => `<tr class="${r.m && r.m.fresh ? "fresh" : ""}"><td class="wrap"><b>${esc(r.title)}</b>${r.m ? `<br><span class="sub">${esc(r.m.meta)}</span>` : ""}</td><td>${esc(r.type)}</td><td>${esc(r.city)}</td><td class="r">${r.pts}</td><td>${esc(r.when)}</td><td class="r">${r.n ? fmt(r.n) : "–"}</td><td><span class="st ${stl(r.status)[0]}">${stl(r.status)[1]}</span></td></tr>`).join("")}</tbody></table></div></div>
     <div class="acard"><h2>Mission types on this plan</h2><p class="sub">Social post, video, photo, check-in, setlist call, vote, quiz, open question, referral. Each date has its own check-in QR, setlist call and city missions, scheduled ahead to open on show day.</p></div>`;
 }
@@ -2169,18 +2219,18 @@ function admCalls() {
   const enc = ENCORES.map(([k, l, s]) => [k, l, s, ENC_BASE[k] + (state.vote === k ? 1 : 0)]), etot = enc.reduce((a, x) => a + x[3], 0), emax = Math.max(...enc.map((x) => x[3]));
   const customs = MISSIONS.filter((m) => m.call);
   return `<div class="adm-grid">
-    <div class="acard"><h2>Toulouse: call the opener</h2><p class="sub">${dayShort(city("tls").date)}. Fans called the first song before doors. ${res ? "Answer confirmed, notes paid." : "Confirm what Ilsa opened with and every call is settled at once."}</p>
+    <div class="acard"><h2>Toulouse: call the opener</h2><p class="sub">${dayShort(city("tls").date)}. Fans called the first song before doors. ${res ? "Answer confirmed, XP and notes paid." : "Confirm what Ilsa opened with and every call is settled at once."}</p>
       <div class="vote-bars">${SONGS.map((s) => `<div class="${res === s ? "lead" : ""}"><span>${s}</span><b>${fmt(OPENER_CALLS * OPENER_SPLIT[s])} calls</b><span class="bar-a"><i style="width:${((OPENER_SPLIT[s] / 0.34) * 100).toFixed(1)}%"></i></span></div>`).join("")}</div>
       <div class="adm-row" style="margin-top:14px">${fld("Song that opened Toulouse", res ? `<input value="${esc(res)}" disabled>` : sel("openerPick", SONGS.map((s) => [s, s]), state.openerPick))}
         <div class="afield"><span>&nbsp;</span>${res ? `<button class="adm-btn" data-act="resetOpener">Correct the answer</button>` : `<button class="adm-btn primary" data-act="settleOpener">${icon("check")}Confirm the opener</button>`}</div></div>
-      ${st ? `<div class="settle"><div><b>${fmt(st.total)}</b><span>calls settled</span></div><div><b>${fmt(st.right)}</b><span>right, ×${state.mult.opener}</span></div><div><b>${fmt(st.wrong)}</b><span>missed, 20 ${BRAND.word} each</span></div><div><b>${fmt(st.paid)}</b><span>${BRAND.word} paid</span></div></div>
-        <div class="callout ok" style="margin-top:12px">Fans got a push with their ${BRAND.word}. The ${fmt(st.right)} who called '${esc(res)}' are on the Front Row race already.</div>` : ""}</div>
+      ${st ? `<div class="settle"><div><b>${fmt(st.total)}</b><span>calls settled</span></div><div><b>${fmt(st.right)}</b><span>right, ×${state.mult.opener}</span></div><div><b>${fmt(st.wrong)}</b><span>missed, 20 XP and ${BRAND.word} each</span></div><div><b>${fmt(st.paid)}</b><span>XP and ${BRAND.word} paid</span></div></div>
+        <div class="callout ok" style="margin-top:12px">Fans got a push with their XP and ${BRAND.word}. The ${fmt(st.right)} who called '${esc(res)}' are on the Front Row race already.</div>` : ""}</div>
     <div class="acard"><h2>Bonus for setlist calls</h2><p class="sub">Shown on every call, so fans know what they play for.</p>
-      <div class="aform" style="margin-top:12px">${fld("Taking part", `<input value="20 ${BRAND.word}" disabled>`)}
-        ${fld("Right opener", sel("multOpener", [["2", "Notes doubled (×2)"], ["3", "Notes tripled (×3)"], ["5", "Notes ×5"]], state.mult.opener))}
-        ${fld("Right encore", sel("multEncore", [["2", "Notes doubled (×2)"], ["3", "Notes tripled (×3)"]], state.mult.encore))}</div></div>
+      <div class="aform" style="margin-top:12px">${fld("Taking part", `<input value="20 XP · 20 ${BRAND.word}" disabled>`)}
+        ${fld("Right opener", sel("multOpener", [["2", "Doubled (×2)"], ["3", "Tripled (×3)"], ["5", "×5"]], state.mult.opener))}
+        ${fld("Right encore", sel("multEncore", [["2", "Doubled (×2)"], ["3", "Tripled (×3)"]], state.mult.encore))}</div></div>
   </div>
-  <div class="acard"><div class="acard-top"><div><h2>Vote: the encore for Geneva</h2><p class="sub">${fmt(etot)} votes, +30 ${BRAND.word} each. Closes the day before the show, ${dayShort(addDays(city("gva").d - 1))}. The winner closes the Geneva show.</p></div>
+  <div class="acard"><div class="acard-top"><div><h2>Vote: the encore for Geneva</h2><p class="sub">${fmt(etot)} votes, +30 XP and ${BRAND.word} each. Closes the day before the show, ${dayShort(addDays(city("gva").d - 1))}. The winner closes the Geneva show.</p></div>
       ${state.encoreClosed ? `<span class="st live">Closed: '${esc(state.encoreClosed)}' wins</span>` : `<button class="adm-btn" data-act="closeEncore">Close the vote now</button>`}</div>
     <div class="vote-bars">${enc.map(([k, l, s, n]) => `<div class="${n === emax ? "lead" : ""}"><span>${l} <span class="sub">${s}</span></span><b>${fmt(n)}, ${pct(n, etot)}</b><span class="bar-a"><i style="width:${((n / emax) * 100).toFixed(1)}%"></i></span></div>`).join("")}</div></div>
   ${customs.length ? `<div class="acard"><h2>Your other calls</h2><p class="sub">Set the right answer and fans who called it get their bonus.</p>
@@ -2201,7 +2251,7 @@ function admCheckin() {
         <div class="adm-row">${fld("Opens", `<input type="time" name="ciOpens" value="${state.ci.opens}">`)}${fld("Closes", sel("ciCloses", [["curfew", "At curfew, 23:30"], ["encore", "After the encore"], ["midnight", "At midnight"]], state.ci.closes))}</div>
         ${fld("How close to the venue", sel("ciWhere", [["100", "Within 100 m"], ["200", "Within 200 m"], ["500", "Within 500 m"]], state.ci.where), "Fans' phones check they are this close.")}
         <div class="afield"><span>How fans check in</span>${optRowA("ciMode", [["qr", "Scan the QR"], ["loc", "Location only"], ["both", "QR and location"]], state.ci.mode)}</div>
-        ${fld("What they get", `<input value="150 ${esc(BRAND.word)} and the city on their tour" disabled>`)}</div></div>
+        ${fld("What they get", `<input value="150 XP, 150 ${esc(BRAND.word)} and the city on their tour" disabled>`)}</div></div>
   </div>
   <div class="acard"><h2>Last six shows</h2><div class="scroll-x"><table class="atable"><thead><tr><th>City</th><th>Date</th><th class="r">Checked in</th><th class="r">Of tickets</th><th class="r">Joined the Band there</th></tr></thead>
     <tbody>${played().map((x) => `<tr><td><b>${x.city}</b></td><td>${dayNum(x.date)}</td><td class="r">${fmt(x.ci)}</td><td class="r">${pct(x.ci, x.cap)}</td><td class="r">${fmt(x.joined)}</td></tr>`).join("")}</tbody></table></div></div>`;
@@ -2251,7 +2301,7 @@ function setAns(i, status) {
 /* New mission */
 const MTYPES = [["Social post", "Social post"], ["Photo", "Photo"], ["Video", "Video"], ["Setlist call", "Setlist call"], ["Vote", "Vote"], ["Quiz", "Quiz"], ["Open question", "Open question"]];
 function newMissionDraft() {
-  return { type: "Setlist call", title: "Lyon: call the encore", brief: "Pick the song Ilsa closes Lyon with. Call it right and your notes are tripled.", pts: 40, meta: "Closes at doors", city: "lyo",
+  return { type: "Setlist call", title: "Lyon: call the encore", brief: "Pick the song Ilsa closes Lyon with. Call it right and your XP and notes are tripled.", pts: 40, meta: "Closes at doors", city: "lyo",
     options: "Phare\nSel\nLes quais à 4 h\nBasse mer", mult: "3", q: "Which song did Ilsa write on the ferry to Belle-Île?", a1: "Phare", a2: "Sel", a3: "Basse mer", a4: "Les quais à 4 h", right: "1",
     start: isoDay(NOW), end: isoDay(addDays(2)), who: "all", publish: "now" };
 }
@@ -2259,7 +2309,7 @@ const draftM = (d) => ({ id: "draft", title: d.title || "Untitled mission", pts:
 function missionForm(d) {
   const t = d.type;
   let extra = "";
-  if (t === "Setlist call") extra = `<h3 style="margin:4px 0 0;font-size:.875rem">What fans call</h3>${fld("Songs, one per line", `<textarea name="options">${esc(d.options)}</textarea>`)}${fld("Bonus when they are right", sel("mult", [["2", "Notes doubled (×2)"], ["3", "Notes tripled (×3)"], ["5", "Notes ×5"]], d.mult), "You confirm the right song after the show, in Setlist calls and votes.")}`;
+  if (t === "Setlist call") extra = `<h3 style="margin:4px 0 0;font-size:.875rem">What fans call</h3>${fld("Songs, one per line", `<textarea name="options">${esc(d.options)}</textarea>`)}${fld("Bonus when they are right", sel("mult", [["2", "Doubled (×2)"], ["3", "Tripled (×3)"], ["5", "×5"]], d.mult), "You confirm the right song after the show, in Setlist calls and votes.")}`;
   else if (t === "Vote") extra = `${fld("Choices, one per line", `<textarea name="options">${esc(d.options)}</textarea>`)}`;
   else if (t === "Quiz") extra = `${fld("Question", inp("q", d.q))}<div class="adm-row">${[1, 2, 3, 4].map((i) => fld(`Answer ${i}`, inp("a" + i, d["a" + i]))).join("")}</div>${fld("Right answer", sel("right", [["1", "Answer 1"], ["2", "Answer 2"], ["3", "Answer 3"], ["4", "Answer 4"]], d.right))}`;
   else if (t === "Open question") extra = `<p class="sub" style="margin:0">Fans write up to 280 characters. You read them in Missions, Open questions, and feature the best.</p>`;
@@ -2267,7 +2317,7 @@ function missionForm(d) {
   return `${fld("Type", optRow("type", MTYPES, t))}
     ${fld("Title", inp("title", d.title, 'maxlength="60"'))}
     ${fld("What fans read", `<textarea name="brief">${esc(d.brief)}</textarea>`)}
-    <div class="adm-row">${fld(BRAND.word.replace(/^./, (c) => c.toUpperCase()), inp("pts", d.pts, 'type="number" min="0" step="5"'))}${fld("Line under the title", inp("meta", d.meta, 'maxlength="40"'))}</div>
+    <div class="adm-row">${fld(`XP and ${BRAND.word}`, inp("pts", d.pts, 'type="number" min="0" step="5"'))}${fld("Line under the title", inp("meta", d.meta, 'maxlength="40"'))}</div>
     <div class="afield"><span>City</span>${optRow("city", [["any", "Anywhere"], ...TOUR.filter((c) => c.d >= 0).map((c) => [c.id, c.city])], d.city)}</div>
     ${extra}
     <div class="adm-row">${fld("Starts", inp("start", d.start, 'type="date"'))}${fld("Ends", inp("end", d.end, 'type="date"'))}</div>
@@ -2304,11 +2354,11 @@ function admRewards() {
     <div class="acard"><div class="scroll-x"><table class="atable"><thead><tr><th>Reward</th><th>Kind</th><th class="r">Cost</th><th class="r">Stock</th><th class="r">Redeemed on tour</th><th>Delivery</th></tr></thead>
     <tbody>${MERCH.map((g) => `<tr class="${g.fresh ? "fresh" : ""}"><td class="wrap"><b>${esc(g.title)}</b></td><td>${kindL(g)}</td><td class="r">${fmt(g.cost)}</td><td class="r">${g.stock == null ? "Unlimited" : g.stock}</td><td class="r">${fmt((REDEEMED[g.id] || 0) + state.redeemed.filter((r) => r.id === g.id).length)}</td><td>${kindOf(g.how) === "digital" ? `<span class="st live">Instant</span>` : `<button class="adm-link" data-act="adm" data-p="wins">Winners & deliveries</button>`}</td></tr>`).join("")}</tbody></table></div></div>
     <div class="adm-grid">
-      <div class="acard"><h2>Giveaway: two places at the Paris soundcheck</h2><p class="sub">One entry per fan, 100 ${BRAND.word}. Draw on ${dayShort(addDays(12))}. ${fmt(1384 + (state.entered ? 1 : 0))} entries.</p>
+      <div class="acard"><h2>Giveaway: two places at the Paris soundcheck</h2><p class="sub">One entry per fan, 100 ${BRAND.word}. Draw on ${dayShort(addDays(12))}. ${fmt(960 + (state.entered ? 1 : 0))} entries.</p>
         ${state.drawn ? `<div class="callout ok" style="margin-top:12px">Drawn: ${state.drawn.join(" and ")}. They are in Winners & deliveries.</div>` : `<div class="adm-actions" style="margin-top:12px"><button class="adm-btn primary" data-act="draw">Draw 2 winners now</button></div>`}</div>
       <div class="acard"><h2>How digital rewards work</h2><p class="sub">Fans get the track, the code or the file the moment they redeem. Nothing to send, and the delivery is logged in Winners & deliveries.</p></div>
     </div>
-    <div class="acard"><h2>Tier perks</h2><p class="sub">Sent on their own when a fan reaches the tier</p><div class="splits">${TIERS.map((t) => `<div><span>${t.name}</span><span style="font-size:.8125rem">${t.perk}</span><b>${fmt(t.at)}</b></div>`).join("")}</div></div>`;
+    <div class="acard"><h2>Tier perks</h2><p class="sub">Sent on their own when a fan reaches the tier</p><div class="splits">${TIERS.map((t) => `<div><span>${t.name}</span><span style="font-size:.8125rem">${t.perk}</span><b>${fmt(t.at)} XP</b></div>`).join("")}</div></div>`;
 }
 const RARTS = [["memo", "Voice memo"], ["tee", "Tee"], ["poster", "Poster"], ["setlist", "Setlist"], ["vinyl", "Vinyl"], ["mic", "Mic"], ["pass", "Pass"], ["phone", "Phone"]];
 const RTONES = [["tide", "Tide"], ["red", "Stage red"], ["sel", "Salt"], ["night", "Night"]];
@@ -2343,7 +2393,7 @@ function admWins() {
       ${kpi("To send, prepare or book", fmt(n("prep")), `Oldest from ${dayNum(addDays(-2))}`, true)}
       ${kpi("On the way", fmt(n("way")), "Posted, ready or booked", true)}
       ${kpi("Delivered on this tour", fmt(86 + all.filter((o) => ["Delivered", "Done", "Collected"].includes(o.status)).length), "Physical and experiences")}
-      ${kpi("Digital, delivered instantly", fmt(3290 + all.filter((o) => o.status === "Delivered instantly").length), "Tracks, codes and files")}
+      ${kpi("Digital, delivered instantly", fmt(1240 + all.filter((o) => o.status === "Delivered instantly").length), "Tracks, codes and files")}
     </div>
     <div class="acard">
       <div class="opt-row">${[["all", "All"], ["prep", "To send"], ["way", "On the way"], ["done", "Done"]].map(([k, l]) => `<button class="opt" data-act="olist" data-f="${k}" aria-pressed="${f === k}">${l}</button>`).join("")}</div>
@@ -2356,7 +2406,7 @@ function admWins() {
 
 /* ---------------------------------------------------------------- Season */
 const JOIN_RULES = { choose: "Fans pick a side" };
-const COUNTS = { all: "Every note earned", posts: "Notes from posts only", checkin: "Check-ins only" };
+const COUNTS = { all: "All XP earned", posts: "XP from posts only", checkin: "Check-ins only" };
 const BATTLES = [
   { id: "ns", name: "North v South, the last week", a: { name: "North", colour: "#2bb3a3", pts: 0, members: 0 }, b: { name: "South", colour: "#f0412f", pts: 0, members: 0 }, start: isoDay(addDays(9)), end: isoDay(city("par").date), join: "choose", counts: "all", prize: "The winning side's top 20 get the Paris setlist, printed and signed" },
   { id: "fest", name: "Summer festivals: Tide v Stage red", a: { name: "Tide", colour: "#2bb3a3", pts: 412880, members: 2140 }, b: { name: "Stage red", colour: "#f0412f", pts: 398140, members: 2010 }, start: isoDay(addDays(-112)), end: isoDay(addDays(-61)), join: "choose", counts: "all", prize: "Tide won: a signed festival wristband for its top 20" },
@@ -2372,16 +2422,16 @@ function admSeason() {
   if (tab === 3) return h + seasonBoard();
   const n = goalPct();
   return h + `<div class="adm-grid"><div class="acard"><h2>High tide</h2><p class="sub">Missions done by any fan since the tour was announced. Everyone sees the water rise.</p>
-      <div class="goal-adm"><div class="kpis" style="grid-template-columns:repeat(3,minmax(0,1fr))">${kpi("Done", fmt(state.goal), `${n}% of 50,000`)}${kpi("To go", fmt(50000 - state.goal), "About 9 days at tour pace", true)}${kpi("Fans who helped", "12,904", "So far", true)}</div>
-        <span class="bar-a"><i style="width:${n}%"></i></span><div class="adm-actions"><button class="adm-btn" data-act="goalsim">Simulate a show weekend (+4,000)</button>${memberLink("band", "See it in the Band")}</div></div></div>
-    <div class="acard"><h2>Settings</h2><div class="aform" style="margin-top:12px">${fld("Target", inp("gt", "50,000 missions", "disabled"))}${fld("What counts", inp("gc", "Any mission, by any fan", "disabled"))}${fld("Unlocks", inp("gu", "'Marée haute', acoustic kitchen take", "disabled"))}${fld("For", inp("gf", "Every Band member, to stream in the app", "disabled"))}</div></div></div>`;
+      <div class="goal-adm"><div class="kpis" style="grid-template-columns:repeat(3,minmax(0,1fr))">${kpi("Done", fmt(state.goal), `${n}% of 20,000`)}${kpi("To go", fmt(20000 - state.goal), "About 4 days at tour pace", true)}${kpi("Fans who helped", "3,980", "So far", true)}</div>
+        <span class="bar-a"><i style="width:${n}%"></i></span><div class="adm-actions"><button class="adm-btn" data-act="goalsim">Simulate a show weekend (+1,600)</button>${memberLink("band", "See it in the Band")}</div></div></div>
+    <div class="acard"><h2>Settings</h2><div class="aform" style="margin-top:12px">${fld("Target", inp("gt", "20,000 missions", "disabled"))}${fld("What counts", inp("gc", "Any mission, by any fan", "disabled"))}${fld("Unlocks", inp("gu", "'Marée haute', acoustic kitchen take", "disabled"))}${fld("For", inp("gf", "Every Band member, to stream in the app", "disabled"))}</div></div></div>`;
 }
 function seasonBattles() {
   return `<div class="acard"><div class="scroll-x"><table class="atable"><thead><tr><th>Battle</th><th>Sides and score</th><th>Dates</th><th>How fans join</th><th>Counts</th><th>Status</th></tr></thead>
     <tbody>${BATTLES.map((b) => { const s = battleStatus(b); return `<tr class="${b.fresh ? "fresh" : ""}"><td class="wrap"><b style="font-weight:500">${esc(b.name)}</b><br><span class="sub">${esc(b.prize)}</span></td>
       <td class="wrap"><span class="team-dot" style="background:${b.a.colour}"></span>${esc(b.a.name)} ${b.a.pts ? fmt(b.a.pts) : ""}<br><span class="team-dot" style="background:${b.b.colour}"></span>${esc(b.b.name)} ${b.b.pts ? fmt(b.b.pts) : ""}</td>
       <td>${dayLabel(b.start)} to ${dayLabel(b.end)}</td><td class="wrap">${JOIN_RULES[b.join]}</td><td class="wrap">${COUNTS[b.counts]}</td><td><span class="st ${s === "live" ? "live" : s === "upcoming" ? "sched" : "draft"}">${s === "upcoming" ? "Starts " + dayLabel(b.start) : s === "live" ? "Live" : "Ended"}</span></td></tr>`; }).join("")}</tbody></table></div></div>
-    <div class="acard"><h2>How a battle works</h2><p class="sub">Two sides, a start and an end. Fans join a side in the app and every ${BRAND.word.replace(/s$/, "")} they earn counts for it. The Band sees the score live, on Tonight and in the Front Row race.</p></div>`;
+    <div class="acard"><h2>How a battle works</h2><p class="sub">Two sides, a start and an end. Fans join a side in the app and all the XP they earn counts for it. The Band sees the score live, on Tonight and in the Front Row race.</p></div>`;
 }
 function battleCard(b) {
   const a = b.a.pts, c = b.b.pts, t = a + c;
@@ -2411,7 +2461,7 @@ function seasonCollection() {
   const P = played(), have = (c) => c.ci + Math.round(c.posts * 0.3);
   return `<div class="adm-grid">
     <div class="acard"><h2>The tour, city by city</h2><p class="sub">12 cities. A city goes on a fan's tour when they ${state.collectBy === "both" ? "check in at the stand or post from the show" : "check in at the stand"}. ${state.poster} cities: a signed tour poster. All twelve: their name in the tour book.</p>
-      <div class="album-pages"><div><b>${P.length} of 12</b><span>cities played</span></div><div><b>6,212</b><span>fans with a city or more</span></div><div><b>148</b><span>fans with 5 cities, poster sent</span></div><div><b>${BONUS_CARDS.length}</b><span>bonus card${BONUS_CARDS.length === 1 ? "" : "s"}</span></div></div>
+      <div class="album-pages"><div><b>${P.length} of 12</b><span>cities played</span></div><div><b>3,560</b><span>fans with a city or more</span></div><div><b>148</b><span>fans with 5 cities, poster sent</span></div><div><b>${BONUS_CARDS.length}</b><span>bonus card${BONUS_CARDS.length === 1 ? "" : "s"}</span></div></div>
       ${BONUS_CARDS.length ? `<div class="card-strip">${BONUS_CARDS.map((c) => `<div style="width:92px;flex:none">${cardArt(c)}</div>`).join("")}</div>` : ""}</div>
     <div class="acard"><h2>Rules</h2><div class="aform" style="margin-top:12px">${fld("Cities for the signed poster", sel("poster", [["4", "4 cities"], ["5", "5 cities"], ["6", "6 cities"]], state.poster))}
       <div class="afield"><span>A city counts with</span>${optRowA("collectBy", [["both", "A check-in or a post"], ["ci", "A check-in only"]], state.collectBy)}</div>
@@ -2437,10 +2487,10 @@ function createCard() {
   admToast(d.how === "all" ? `${d.name} is in every fan's tour collection` : d.how === "checkin" ? `${d.name} now comes with merch-stand check-ins` : `${d.name} is ready to give as a mission reward`);
 }
 function seasonBoard() {
-  return `<div class="adm-grid"><div class="acard"><h2>The Front Row race</h2><p class="sub">Fans are ranked by ${BRAND.word} earned since the tour started.</p>
-      <dl class="bs-words" style="margin-top:14px"><dt>Race</dt><dd>From the first date to ${dayShort(FRONT_CUTOFF)}, 23:59</dd><dt>Prize</dt><dd>Top 10: the barrier in Paris, entry before doors, the setlist from that night</dd><dt>Spending</dt><dd>Never moves a fan down the race</dd><dt>Ties</dt><dd>The fan who got there first stays ahead</dd><dt>Tiers</dt><dd>${TIERS.map((t) => `${t.name} ${fmt(t.at)}`).join(", ")}</dd></dl>
+  return `<div class="adm-grid"><div class="acard"><h2>The Front Row race</h2><p class="sub">Fans are ranked by XP earned since the tour started. Sending a mission earns its XP at once; the same number of ${BRAND.word} follow once the post is approved. If a post is turned down, its XP comes off again and the fan gets a message with your reason. The final race is confirmed once every post has been checked.</p>
+      <dl class="bs-words" style="margin-top:14px"><dt>Race</dt><dd>From the first date to ${dayShort(FRONT_CUTOFF)}, 23:59</dd><dt>Prize</dt><dd>Top 10: the barrier in Paris, entry before doors, the setlist from that night</dd><dt>Spending</dt><dd>Spends ${BRAND.word} only, never XP, so it never moves a fan down the race</dd><dt>Ties</dt><dd>The fan who got there first stays ahead</dd><dt>Tiers</dt><dd>${TIERS.map((t) => `${t.name} ${fmt(t.at)}`).join(", ")} XP, back to 0 each season</dd></dl>
       <div class="adm-actions" style="margin-top:14px">${memberLink("front", "See the race in the app")}</div></div>
-    <div class="acard"><h2>Top 10 right now</h2><div class="scroll-x"><table class="atable tight"><thead><tr><th>#</th><th>Fan</th><th>Home show</th><th class="r">${BRAND.word.replace(/^./, (c) => c.toUpperCase())}</th></tr></thead>
+    <div class="acard"><h2>Top 10 right now</h2><div class="scroll-x"><table class="atable tight"><thead><tr><th>#</th><th>Fan</th><th>Home show</th><th class="r">XP</th></tr></thead>
       <tbody>${TOP.map(([n, , c, p], i) => `<tr><td>${i + 1}</td><td><span class="who"><i>${initials(n)}</i>${esc(n)}</span></td><td>${c}</td><td class="r">${fmt(p)}</td></tr>`).join("")}</tbody></table></div></div></div>`;
 }
 
@@ -2465,40 +2515,47 @@ function admTour() {
 /* ---------------------------------------------------------------- Members */
 function admMembers() {
   const tab = state.atab.members || 0;
-  const h = admHead("Members", "31,980 fans in the Band. Where they joined, where they go to shows, and each one's record.") + admTabs("members");
+  const h = admHead("Members", "14,260 fans in the Band. Where they joined, where they go to shows, and each one's record.") + admTabs("members");
   if (tab === 1) {
     const all = [...TOP.map((r) => [r[0], r[1], r[2], r[3], r[4]]), ...NEAR, ...BELOW, [ME.name, ME.handle, ME.city, monthPts(), state.posts.reduce((a, p) => a + p.views, 0)]].sort((a, b) => b[3] - a[3]);
     const q = (state.mq || "").toLowerCase(), rows = all.filter((r) => (r[0] + r[1] + r[2]).toLowerCase().includes(q));
     return h + `<div class="acard"><div class="afield" style="max-width:320px"><input name="mq" value="${esc(state.mq || "")}" placeholder="Search by name, handle or city" aria-label="Search fans"></div>
-      <div class="scroll-x"><table class="atable"><thead><tr><th>Fan</th><th>Tier</th><th>Home show</th><th class="r">${BRAND.word.replace(/^./, (c) => c.toUpperCase())}, this tour</th><th class="r">Views on posts</th><th>Last seen</th></tr></thead>
+      <div class="scroll-x"><table class="atable"><thead><tr><th>Fan</th><th>Tier</th><th>Home show</th><th class="r">XP, this tour</th><th class="r">Views on posts</th><th>Last seen</th></tr></thead>
       <tbody>${rows.map((r, i) => `<tr><td><span class="who"><i>${initials(r[0])}</i>${esc(r[0])} <span class="sub">${r[1]}</span></span></td><td>${tierOf(r[0] === ME.name ? SP() : r[3] * 1.8).name}</td><td>${r[2]}</td><td class="r">${fmt(r[3])}</td><td class="r">${big(r[4])}</td><td>${["Today", "Today", "Yesterday", "2 days ago"][i % 4]}</td></tr>`).join("") || `<tr><td colspan="6">No fan matches.</td></tr>`}</tbody></table></div></div>`;
   }
   const P = played();
-  return h + `<div class="kpis">${kpi("Band members, in total", "31,980", `+${fmt(tourTot("joined"))} since the tour started`)}${kpi("Active this month", "9,200", "29% of the Band")}${kpi("Linked a social account", "68%", "Needed to earn on posts", true)}${kpi("Came to 2 shows or more", "1,148", "On this tour", true)}</div>
-    <div class="adm-row"><div class="acard"><h2>Joined on this tour, by city</h2><p class="sub">QR at the stand, or a fan's post from that show</p><div class="splits">${P.map((c) => `<div><span>${c.city}</span><span class="bar-a"><i style="width:${(c.joined / 498) * 100}%"></i></span><b>${fmt(c.joined)}</b></div>`).join("")}</div></div>
+  return h + `<div class="kpis">${kpi("Band members, in total", "14,260", `+${fmt(tourTot("joined"))} since the tour started`)}${kpi("Active (last 90 days)", fmt(ACTIVE_90), "Sent at least one mission")}${kpi("Linked a social account", "68%", "Needed to earn on posts", true)}${kpi("Came to 2 shows or more", "640", "On this tour", true)}</div>
+    <div class="adm-row"><div class="acard"><h2>Joined on this tour, by city</h2><p class="sub">QR at the stand, or a fan's post from that show</p><div class="splits">${P.map((c) => `<div><span>${c.city}</span><span class="bar-a"><i style="width:${(c.joined / 290) * 100}%"></i></span><b>${fmt(c.joined)}</b></div>`).join("")}</div></div>
       <div class="acard"><h2>How they joined</h2><p class="sub">All members</p><div class="splits">${[["QR at a merch stand", 34], ["A fan's post or link", 27], ["Link in Ilsa's profile", 21], ["Ticket confirmation email", 12], ["Newsletter", 6]].map(([l, v]) => `<div><span>${l}</span><span class="bar-a"><i style="width:${(v / 34) * 100}%"></i></span><b>${v}%</b></div>`).join("")}</div></div></div>`;
 }
 
 /* ---------------------------------------------------------------- Results */
-/* Missions with their totals on this tour. Posts and views add up to the tour's 5,555 posts and 9.3M views. */
+/* Missions with their totals on this tour. Posts and views add up to the cities' 3,530 posts and 4.19M views.
+   net = share of posts and views per network (TikTok, Instagram, YouTube Shorts). Views a post stay between 900 and 1,500. */
 const RM = [
-  { id: "barrier", short: "Barrier", label: "Barrier song", title: "From the barrier: film one song", type: "Video", ago: 12, done: 1260, seen: 4308, posts: 1260, views: 2.69e6, nm: 230, net: [0.66, 0.24, 0.1] },
-  { id: "sing", short: "Chorus", label: "Chorus", title: "Sing the chorus of 'Marée haute'", type: "Video", ago: 20, done: 1420, seen: 8960, posts: 1420, views: 2.48e6, nm: 190, net: [0.61, 0.27, 0.12] },
-  { id: "setlist", short: "Setlist", label: "Setlist photo", title: "Setlist photo, after the encore", type: "Social post", ago: 12, done: 1030, seen: 4308, posts: 1030, views: 1.21e6, nm: 110, net: [0.38, 0.55, 0.07] },
-  { id: "phare", short: "Phare", label: "Phare", title: "Sing 'Phare' in one take", type: "Video", ago: 6, done: 320, seen: 7420, posts: 320, views: 1.16e6, nm: 150, net: [0.72, 0.18, 0.1] },
-  { id: "fit", short: "Tee", label: "Tour tee", title: "Merch fit: the tour tee, your way", type: "Photo", ago: 15, done: 980, seen: 8310, posts: 980, views: 1.06e6, nm: 120, net: [0.44, 0.49, 0.07] },
-  { id: "doors", short: "Queue", label: "Queue at doors", title: "The queue at doors", type: "Photo", ago: 12, done: 545, seen: 4308, posts: 545, views: 0.71e6, nm: 70, net: [0.41, 0.52, 0.07] },
-  { id: "merch", title: "Check in at the merch stand", type: "Check-in", ago: 12, done: 4308, seen: 9040, posts: 0, views: 0, nm: 1029, extra: [["Of tickets sold", pct(4308, 12100)], ["Average a show", "718"]] },
-  { id: "friend", title: "Bring a friend to the show", type: "Referral", ago: 12, done: 960, seen: 8120, posts: 0, views: 0, nm: 212, extra: [["Links sent", "960"], ["Friends who joined", "212"]] },
-  { id: "lyric", title: "Finish the line", type: "Quiz", ago: 9, done: 7240, seen: 9020, posts: 0, views: 0, nm: 0, extra: [["Right first time", "64%"], ["Average time", "14 s"]] },
-  { id: "encore", title: "Pick the encore for Geneva", type: "Vote", ago: 4, done: 8641, seen: 9110, posts: 0, views: 0, nm: 0, extra: () => [["Leading", "'Les quais à 4 h'"], ["Votes", fmt(8640 + (state.vote ? 1 : 0))]] },
-  { id: "first", title: "Your first Ilsa song, in one line", type: "Open question", ago: 8, done: 2210, seen: 8640, posts: 0, views: 0, nm: 0, extra: () => [["Answers featured", String(ansList().filter((a) => a.status === "featured").length)], ["Average answer", "17 words"]] },
+  { id: "barrier", short: "Barrier", label: "Barrier song", title: "From the barrier: film one song", type: "Video", ago: 12, done: 820, posts: 820, views: 1.13e6, nm: 95, net: [0.66, 0.24, 0.1] },
+  { id: "sing", short: "Chorus", label: "Chorus", title: "Sing the chorus of 'Marée haute'", type: "Video", ago: 20, done: 880, posts: 880, views: 1.02e6, nm: 80, net: [0.61, 0.27, 0.12] },
+  { id: "setlist", short: "Setlist", label: "Setlist photo", title: "Setlist photo, after the encore", type: "Social post", ago: 12, done: 640, posts: 640, views: 0.7e6, nm: 55, net: [0.38, 0.55, 0.07] },
+  { id: "phare", short: "Phare", label: "Phare", title: "Sing 'Phare' in one take", type: "Video", ago: 6, done: 210, posts: 210, views: 0.29e6, nm: 40, net: [0.72, 0.18, 0.1] },
+  { id: "fit", short: "Tee", label: "Tour tee", title: "Merch fit: the tour tee, your way", type: "Photo", ago: 15, done: 610, posts: 610, views: 0.66e6, nm: 45, net: [0.44, 0.49, 0.07] },
+  { id: "doors", short: "Queue", label: "Queue at doors", title: "The queue at doors", type: "Photo", ago: 12, done: 370, posts: 370, views: 0.39e6, nm: 25, net: [0.41, 0.52, 0.07] },
+  { id: "merch", title: "Check in at the merch stand", type: "Check-in", ago: 12, done: 3560, posts: 0, views: 0, nm: 775, extra: [["Check-ins", "4,308"], ["Of tickets sold", pct(4308, 12100)], ["Average a show", "718"]] },
+  { id: "friend", title: "Bring a friend to the show", type: "Referral", ago: 12, done: 520, posts: 0, views: 0, nm: 120, extra: [["Links sent", "520"], ["Friends who joined", "120"]] },
+  { id: "lyric", title: "Finish the line", type: "Quiz", ago: 9, done: 3180, posts: 0, views: 0, nm: 0, extra: [["Right first time", "64%"], ["Average time", "14 s"]] },
+  { id: "encore", title: "Pick the encore for Geneva", type: "Vote", ago: 4, done: 3641, posts: 0, views: 0, nm: 0, extra: () => [["Leading", "'Les quais à 4 h'"], ["Votes", fmt(3640 + (state.vote ? 1 : 0))]] },
+  { id: "first", title: "Your first Ilsa song, in one line", type: "Open question", ago: 8, done: 1120, posts: 0, views: 0, nm: 0, extra: () => [["Answers featured", String(ansList().filter((a) => a.status === "featured").length)], ["Average answer", "17 words"]] },
 ];
 const NET_NAMES = NETS.map((n) => n[0]);
-/* Potential reach: followers of the accounts that posted. 3,412 fans posted on tour, 1,840 followers on average.
-   A mission's share follows its posts, so missions add up to the tour figure. */
-const POSTERS_N = 3412, FOLLOWERS_AVG = 1840;
-const reachOf = (posts) => (posts * POSTERS_N * FOLLOWERS_AVG) / tourTot("posts");
+/* Fans counted once across several missions: the biggest mission, plus the fans of the others who weren't in it yet.
+   The keen fans do most missions, so the overlap grows with the set, and no set passes the active fans. */
+const uniqueOf = (vals) => {
+  const d = vals.filter((v) => v > 0); if (!d.length) return 0;
+  const m = Math.max(...d), rest = d.reduce((a, b) => a + b, 0) - m, room = ACTIVE_90 - m;
+  return room > 0 ? Math.round(m + room * (1 - Math.exp((-0.5 * rest) / room))) : m;
+};
+/* Potential reach: followers of the accounts that posted, each account once. 3,300 followers on average. */
+const POSTERS_N = uniqueOf(RM.map((r) => r.posts)), FOLLOWERS_AVG = 3300;
+const reachOf = (posts) => posts * FOLLOWERS_AVG;
 const POSTERS = ["@jonaspeet", "@lou.gr", "@pau.mrl", "@clem.vdl", "@hugolfv", "@sam.okj", "@ines.oa", "@aya.bnl", "@theo.mrc", "@elsamoreau", "@bastroux", "@lina.hdd", "@vic.blanc", "@jade.ftn", "@noe.brn", "@rosa.alm"];
 const RATE = Object.fromEntries(NETS.map(([n, , , l, c, s]) => [n, [l, c, s]]));
 const POSTLIST = (() => {
@@ -2506,14 +2563,21 @@ const POSTLIST = (() => {
   const mids = ["barrier", "sing", "setlist", "fit", "doors", "phare"];
   return Array.from({ length: 40 }, (_, i) => {
     const c = played()[Math.floor(rnd() * 6)], n = NETS[rnd() < 0.55 ? 0 : rnd() < 0.85 ? 1 : 2][0];
-    const views = Math.round(4000 + Math.pow(rnd(), 2.4) * 90000), r = RATE[n];
+    const views = Math.round(1800 + Math.pow(rnd(), 2.4) * 16000), r = RATE[n];
     return { who: POSTERS[i % POSTERS.length], city: c.city, net: n, mid: mids[Math.floor(rnd() * mids.length)], views, likes: views * r[0], comments: views * r[1], shares: views * r[2], ago: -c.d + Math.floor(rnd() * 2) };
   });
 })();
-const rmStats = (r) => { const v = r.views, net = r.net || [0.58, 0.33, 0.09]; const lk = NETS.reduce((a, n, i) => a + v * net[i] * n[3], 0), cm = NETS.reduce((a, n, i) => a + v * net[i] * n[4], 0), sh = NETS.reduce((a, n, i) => a + v * net[i] * n[5], 0); const done = r.done + (state.done.has(r.id) ? 1 : 0); return { ...r, done, likes: lk, comments: cm, shares: sh, eng: lk + cm + sh, value: mediaValue(v), rate: done / r.seen }; };
+const rmStats = (r) => { const v = r.views, net = r.net || [0.58, 0.33, 0.09], vv = splitInt(v, net, 1000); const lk = NETS.reduce((a, n, i) => a + vv[i] * n[3], 0), cm = NETS.reduce((a, n, i) => a + vv[i] * n[4], 0), sh = NETS.reduce((a, n, i) => a + vv[i] * n[5], 0); const done = r.done + (state.done.has(r.id) ? 1 : 0); return { ...r, done, likes: lk, comments: cm, shares: sh, eng: lk + cm + sh, value: mediaValue(v) }; };
+/* Whole numbers per network: posts by the unit, views by the thousand; the last network takes the rest. */
+function splitInt(total, shares, unit = 1) {
+  const n = Math.round(total / unit), out = shares.slice(0, -1).map((x) => Math.round(n * x));
+  return [...out, n - out.reduce((a, b) => a + b, 0)].map((x) => x * unit);
+}
+/* Networks: the sum of each mission's posts and views on that network, so the networks add up to the missions. */
 function tourNets() {
-  const v = tourTot("views"), p = tourTot("posts");
-  return NETS.map(([name, ps, vs, lr, cr, sr]) => ({ name, posts: p * ps, views: v * vs, likes: v * vs * lr, comments: v * vs * cr, shares: v * vs * sr, value: mediaValue(v * vs) }));
+  const N = NETS.map(([name, , , lr, cr, sr]) => ({ name, posts: 0, views: 0, likes: 0, comments: 0, shares: 0, lr, cr, sr }));
+  RM.filter((r) => r.views).forEach((r) => { const p = splitInt(r.posts, r.net), v = splitInt(r.views, r.net, 1000); N.forEach((n, i) => { n.posts += p[i]; n.views += v[i]; n.likes += v[i] * n.lr; n.comments += v[i] * n.cr; n.shares += v[i] * n.sr; }); });
+  return N.map((n) => ({ ...n, value: mediaValue(n.views) }));
 }
 function admResults() {
   const tab = state.atab.results || 0;
@@ -2528,10 +2592,10 @@ function admResults() {
       ${kpi("Earned media value", eur(v), `Views on fans' posts at a ${cpmLabel()} CPM`)}
       ${kpi("Views on fans' posts", big(views), `From ${fmt(tourTot("posts"))} posts by ${fmt(POSTERS_N)} fans`)}
       ${kpi("Likes, comments and shares", big(eng), `${pct(eng, views)} of views`)}
-      ${kpi("New members from fans' posts", fmt(870), `Of the ${fmt(tourTot("joined"))} who joined on tour`)}
+      ${kpi("New members from fans' posts", fmt(RM.reduce((a, r) => a + (r.views ? r.nm : 0), 0)), `Of the ${fmt(tourTot("joined"))} who joined on tour`)}
     </div>
     <details class="more" ${state.rmore ? "open" : ""}><summary data-act="rmore">${state.rmore ? "Hide the detail" : "Show every number for the tour"}</summary>
-      <div class="mkpis">${mini("Posts", fmt(tourTot("posts")))}${mini("Fans who posted", fmt(POSTERS_N))}${mini("Average views a post", fmt(views / tourTot("posts")))}${mini("Likes", big(sum("likes")))}${mini("Comments", big(sum("comments")))}${mini("Shares", big(sum("shares")))}${mini("Missions completed", "41,860")}${mini("Merch-stand check-ins", fmt(tourTot("ci")))}${mini("Rewards redeemed", fmt(3423 + state.redeemed.length))}${mini("Active fans this month", "9,200")}</div>
+      <div class="mkpis">${mini("Posts", fmt(tourTot("posts")))}${mini("Fans who posted", fmt(POSTERS_N), "each counted once")}${mini("Average views a post", fmt(views / tourTot("posts")))}${mini("Likes", big(sum("likes")))}${mini("Comments", big(sum("comments")))}${mini("Shares", big(sum("shares")))}${mini("Missions completed", fmt(state.goal))}${mini("Merch-stand check-ins", fmt(tourTot("ci")))}${mini("Rewards redeemed", fmt(1380 + state.redeemed.length))}${mini("Active fans (last 90 days)", fmt(ACTIVE_90), "sent at least one mission")}</div>
     </details>
     ${cpmBox()}
     <div class="vh">
@@ -2539,15 +2603,16 @@ function admResults() {
         <div class="vh-cols" role="img" aria-label="Media value by mission: ${byM.map((r) => `${r.label} ${eur(r.value)}`).join(", ")}">${byM.map((r) => `<span><i style="height:${((r.views / byM[0].views) * 62).toFixed(1)}px"></i><em>${r.short}</em></span>`).join("")}</div></div>
       <div class="vh-tile"><b>${fmt(tourTot("posts"))}</b><span>Fans' posts</span><small>By ${fmt(POSTERS_N)} fans</small></div>
       <div class="vh-tile"><b>${big(views)}</b><span>Views of fans' posts</span><small>${fmt(views / tourTot("posts"))} a post on average</small></div>
-      <div class="vh-tile"><b>${big(POSTERS_N * FOLLOWERS_AVG)}</b><span>Potential reach</span><small>Followers of the accounts that posted</small></div>
+      <div class="vh-tile"><b>${big(POSTERS_N * FOLLOWERS_AVG)}</b><span>Potential reach ${soon()}</span><small>Followers of the ${fmt(POSTERS_N)} accounts that posted</small></div>
     </div>
     <div class="adm-grid">
-      <div class="acard"><h2>Views on fans' posts, per day</h2><p class="sub">Dots mark show nights</p>${lineChart({ id: "rdaily", data: DAILY, labels: DAY_LABELS, max: 800000, marks: SHOW_MARKS, aria: "Daily views on fans' posts, last 30 days", tipFor: (i) => `<b>${DAY_LABELS[i]}</b>, ${fmt(DAILY[i])} views` })}</div>
+      <div class="acard"><h2>Views on fans' posts, per day</h2><p class="sub">Dots mark show nights</p>${lineChart({ id: "rdaily", data: DAILY, labels: DAY_LABELS, max: 600000, marks: SHOW_MARKS, aria: "Daily views on fans' posts, last 30 days", tipFor: (i) => `<b>${DAY_LABELS[i]}</b>, ${fmt(DAILY[i])} views` })}</div>
       <div class="acard"><h2>Value by mission</h2><p class="sub">How we count it: views on public posts that tag @ilsamorrow, from fans' linked accounts, for 30 days. Value = views ÷ 1,000 × your CPM.</p><div class="splits">${byM.map((r) => `<div><span>${r.label}</span><span class="bar-a"><i style="width:${(r.views / byM[0].views) * 100}%"></i></span><b>${eur(r.value)}</b></div>`).join("")}</div></div>
     </div>
     <div class="acard"><h2>Where fans post</h2><p class="sub">Tour so far, checked through fans' linked accounts</p>
       <div class="scroll-x"><table class="atable"><thead><tr><th>Network</th><th class="r">Posts</th><th class="r">Views</th><th class="r">Likes</th><th class="r">Comments</th><th class="r">Shares</th><th class="r">Engagement</th><th class="r">Media value</th></tr></thead>
-      <tbody>${N.map((n) => `<tr><td>${n.name}</td><td class="r">${fmt(n.posts)}</td><td class="r">${big(n.views)}</td><td class="r">${big(n.likes)}</td><td class="r">${big(n.comments)}</td><td class="r">${big(n.shares)}</td><td class="r">${pct(n.likes + n.comments + n.shares, n.views)}</td><td class="r">${eur(n.value)}</td></tr>`).join("")}</tbody></table></div></div>
+      <tbody>${N.map((n) => `<tr><td>${n.name}</td><td class="r">${fmt(n.posts)}</td><td class="r">${big(n.views)}</td><td class="r">${big(n.likes)}</td><td class="r">${big(n.comments)}</td><td class="r">${big(n.shares)}</td><td class="r">${pct(n.likes + n.comments + n.shares, n.views)}</td><td class="r">${eur(n.value)}</td></tr>`).join("")}</tbody>
+      <tfoot><tr><td>All</td><td class="r">${fmt(sum("posts"))}</td><td class="r">${big(views)}</td><td class="r">${big(sum("likes"))}</td><td class="r">${big(sum("comments"))}</td><td class="r">${big(sum("shares"))}</td><td class="r">${pct(eng, views)}</td><td class="r">${eur(v)}</td></tr></tfoot></table></div></div>
     <div class="acard"><div class="acard-top"><div><h2>Missions that did the most</h2><p class="sub">Open one for its full detail</p></div><button class="adm-btn" data-act="atab" data-p="results" data-i="1">See all missions</button></div>
       <div class="scroll-x"><table class="atable"><thead><tr><th>Mission</th><th class="r">Done by</th><th class="r">Views</th><th class="r">Likes, comments, shares</th><th class="r">Media value</th></tr></thead>
       <tbody>${top.map((r) => `<tr class="click" data-act="rmission" data-id="${r.id}"><td class="wrap"><b>${esc(r.title)}</b><br><span class="sub">${r.type}</span></td><td class="r">${fmt(r.done)}</td><td class="r">${r.views ? big(r.views) : "–"}</td><td class="r">${r.views ? big(r.eng) : "–"}</td><td class="r">${r.value ? eur(r.value) : "–"}</td></tr>`).join("")}</tbody></table></div></div>`;
@@ -2557,9 +2622,9 @@ function resultsMissions() {
   const tot = (k) => list.reduce((a, r) => a + r[k], 0);
   return `<div class="acard"><div class="acard-top"><div><h2>By mission</h2><p class="sub">Tour so far. Missions without a post still bring check-ins, votes and new members.</p></div>
       <div class="filters aform">${fld("Sort by", sel("rsort", [["value", "Media value"], ["views", "Views"], ["eng", "Likes, comments and shares"], ["done", "Fans who took part"], ["nm", "New members"]], state.rsort))}</div></div>
-    <div class="scroll-x"><table class="atable"><thead><tr><th>Mission</th><th class="r">Done by</th><th class="r">Of those who saw it</th><th class="r">Posts</th><th class="r">Views</th><th class="r">Likes</th><th class="r">Comments</th><th class="r">Shares</th><th class="r">Value</th><th class="r">New members</th></tr></thead>
-    <tbody>${list.map((r) => `<tr class="click" data-act="rmission" data-id="${r.id}"><td class="wrap"><b>${esc(r.title)}</b><br><span class="sub">${r.type}, from ${dayNum(addDays(-r.ago))}</span></td><td class="r">${fmt(r.done)}</td><td class="r">${pct(r.done, r.seen)}</td><td class="r">${r.posts ? fmt(r.posts) : "–"}</td><td class="r">${r.views ? big(r.views) : "–"}</td><td class="r">${r.views ? big(r.likes) : "–"}</td><td class="r">${r.views ? big(r.comments) : "–"}</td><td class="r">${r.views ? big(r.shares) : "–"}</td><td class="r">${r.value ? eur(r.value) : "–"}</td><td class="r">${r.nm ? fmt(r.nm) : "–"}</td></tr>`).join("")}</tbody>
-    <tfoot><tr><td>${list.length} missions</td><td class="r">${fmt(tot("done"))}</td><td></td><td class="r">${fmt(tot("posts"))}</td><td class="r">${big(tot("views"))}</td><td class="r">${big(tot("likes"))}</td><td class="r">${big(tot("comments"))}</td><td class="r">${big(tot("shares"))}</td><td class="r">${eur(tot("value"))}</td><td class="r">${fmt(tot("nm"))}</td></tr></tfoot></table></div></div>`;
+    <div class="scroll-x"><table class="atable"><thead><tr><th>Mission</th><th class="r">Done by</th><th class="r">Posts</th><th class="r">Views</th><th class="r">Likes</th><th class="r">Comments</th><th class="r">Shares</th><th class="r">Value</th><th class="r">New members</th></tr></thead>
+    <tbody>${list.map((r) => `<tr class="click" data-act="rmission" data-id="${r.id}"><td class="wrap"><b>${esc(r.title)}</b><br><span class="sub">${r.type}, from ${dayNum(addDays(-r.ago))}</span></td><td class="r">${fmt(r.done)}</td><td class="r">${r.posts ? fmt(r.posts) : "–"}</td><td class="r">${r.views ? big(r.views) : "–"}</td><td class="r">${r.views ? big(r.likes) : "–"}</td><td class="r">${r.views ? big(r.comments) : "–"}</td><td class="r">${r.views ? big(r.shares) : "–"}</td><td class="r">${r.value ? eur(r.value) : "–"}</td><td class="r">${r.nm ? fmt(r.nm) : "–"}</td></tr>`).join("")}</tbody>
+    <tfoot><tr><td>${list.length} missions</td><td class="r">${fmt(uniqueOf(list.map((r) => r.done)))}</td><td class="r">${fmt(tot("posts"))}</td><td class="r">${big(tot("views"))}</td><td class="r">${big(tot("likes"))}</td><td class="r">${big(tot("comments"))}</td><td class="r">${big(tot("shares"))}</td><td class="r">${eur(tot("value"))}</td><td class="r">${fmt(tot("nm"))}</td></tr></tfoot></table></div><p class="sub" style="margin-top:10px">Done by, in total: ${fmt(uniqueOf(list.map((r) => r.done)))} fans, each counted once. A fan can take part in several missions.</p></div>`;
 }
 function resultsPosts() {
   const k = state.psort;
@@ -2582,10 +2647,11 @@ function missionDetail(id) {
   const r = rmStats(RM.find((x) => x.id === id));
   const tiers = [["Listener", 44], ["Singalong", 35], ["Encore", 17], ["Soundcheck", 4]].map(([t, p], i) => [t, p + ((r.ago + i * 3) % 5) - 2]);
   const split = r.net || [0.58, 0.33, 0.09];
-  const nets = NET_NAMES.map((n, i) => ({ n, posts: r.posts * split[i], v: r.views * split[i], likes: r.likes * split[i], comments: r.comments * split[i], shares: r.shares * split[i] }));
+  const pp = splitInt(r.posts, split), vv = splitInt(r.views, split, 1000);
+  const nets = NET_NAMES.map((n, i) => ({ n, posts: pp[i], v: vv[i], likes: vv[i] * NETS[i][3], comments: vv[i] * NETS[i][4], shares: vv[i] * NETS[i][5] }));
   const posts = POSTLIST.filter((p) => p.mid === id).sort((a, b) => b.views - a.views).slice(0, 5);
   const ex = typeof r.extra === "function" ? r.extra() : r.extra || [];
-  const body = `<div class="mkpis">${mini("Fans who took part", fmt(r.done))}${mini("Of those who saw it", pct(r.done, r.seen))}${r.views ? mini("Posts", fmt(r.posts)) + mini("Views", big(r.views)) + mini("Likes", big(r.likes)) + mini("Comments", fmt(r.comments)) + mini("Shares", fmt(r.shares)) + mini("Media value", eur(r.value)) + mini("Potential reach", big(reachOf(r.posts))) : ""}${r.nm ? mini("New members", fmt(r.nm)) : ""}${ex.map(([l, v]) => mini(l, v)).join("")}</div>
+  const body = `<div class="mkpis">${mini("Fans who took part", fmt(r.done))}${r.views ? mini("Posts", fmt(r.posts)) + mini("Views", big(r.views), `${fmt(r.views / r.posts)} a post`) + mini("Likes", big(r.likes)) + mini("Comments", fmt(r.comments)) + mini("Shares", fmt(r.shares)) + mini("Media value", eur(r.value)) + mini("Potential reach " + soon(), big(reachOf(r.posts)), "followers of the accounts that posted") : ""}${r.nm ? mini("New members", fmt(r.nm)) : ""}${ex.map(([l, v]) => mini(l, v)).join("")}</div>
     ${r.views ? `<h3 style="font-size:.875rem;margin:18px 0 0">Posts each day</h3><div class="chart">${dayBars(r)}</div>
     <h3 style="font-size:.875rem;margin:18px 0 0">By network</h3><div class="scroll-x"><table class="atable"><thead><tr><th>Network</th><th class="r">Posts</th><th class="r">Views</th><th class="r">Likes</th><th class="r">Comments</th><th class="r">Shares</th></tr></thead>
       <tbody>${nets.map((x) => `<tr><td>${x.n}</td><td class="r">${fmt(x.posts)}</td><td class="r">${big(x.v)}</td><td class="r">${big(x.likes)}</td><td class="r">${fmt(x.comments)}</td><td class="r">${fmt(x.shares)}</td></tr>`).join("")}</tbody></table></div>
@@ -2596,8 +2662,8 @@ function missionDetail(id) {
   openDrawer({ title: esc(r.title), sub: `${r.type}, from ${dayNum(addDays(-r.ago))}`, body, footer: `<button class="adm-btn" data-act="dclose">Close</button><button class="adm-btn primary" data-act="rcsv" data-id="${r.id}">${icon("download")}This mission, CSV</button>` });
 }
 function resultsCSV(el) {
-  const head = ["Mission", "Type", "Started", "Done by", "Saw it", "Posts", "Views", "Likes", "Comments", "Shares", `Media value (EUR, at a ${cpmLabel()} CPM)`, "New members"];
-  const row = (r) => [r.title, r.type, isoDay(addDays(-r.ago)), r.done, r.seen, r.posts, Math.round(r.views), Math.round(r.likes), Math.round(r.comments), Math.round(r.shares), Math.round(r.value), r.nm];
+  const head = ["Mission", "Type", "Started", "Done by", "Posts", "Views", "Likes", "Comments", "Shares", `Media value (EUR, at a ${cpmLabel()} CPM)`, "New members"];
+  const row = (r) => [r.title, r.type, isoDay(addDays(-r.ago)), r.done, r.posts, Math.round(r.views), Math.round(r.likes), Math.round(r.comments), Math.round(r.shares), Math.round(r.value), r.nm];
   const list = RM.map(rmStats).filter((r) => !el.dataset.id || r.id === el.dataset.id);
   csvDownload([head, ...list.map(row)], el.dataset.id ? `ilsa-morrow-${el.dataset.id}.csv` : "ilsa-morrow-results.csv");
   admToast("CSV downloaded");
@@ -2679,7 +2745,7 @@ function admBrand() {
 
 /* ---------------------------------------------------------------- Account */
 const TEAM = [["Camille Arnaud", "Manager", "Admin", "Today"], ["Yanis Belhadj", "Tour manager", "Admin", "Today"], ["Romane Petit", "Social and content", "Moderator", "Yesterday"], ["Lucas Moreau", "Merch, on the road", "Moderator", "Today"]];
-const admAccount = () => accountPage({ domain: "band.ilsamorrow.example", active: 9200, renews: dayLabel(isoDay(addDays(141))), sub: "Plan, team, billing and security." });
+const admAccount = () => accountPage({ domain: "band.ilsamorrow.example", active: ACTIVE_90, renews: dayLabel(isoDay(addDays(141))), sub: "Plan, team, billing and security." });
 
 /* ---------------------------------------------------------------- forms, actions */
 const FORMS = {
@@ -2705,11 +2771,11 @@ function onAdminAction(act, el) {
     case "closeEncore": { const w = ENCORES.map(([k, l]) => [l, ENC_BASE[k] + (state.vote === k ? 1 : 0)]).sort((a, b) => b[1] - a[1])[0][0]; state.encoreClosed = w; state.news = `The Band picked '${w}' to close Geneva.`; rerenderAdminInPlace(); return admToast(`Vote closed. '${w}' closes Geneva`, "band"); }
     case "setCall": {
       const m = MISSIONS.find((x) => x.id === el.dataset.id); m.answer = $(`select[name="ans-${m.id}"]`).value;
-      if (state.gv[m.id] != null && m.options[state.gv[m.id]] === m.answer) { const x = m.pts * ((m.mult || 2) - 1); state.balance += x; state.earned += x; state.news = `${m.title}: you called it. +${x} ${BRAND.word}.`; }
+      if (state.gv[m.id] != null && m.options[state.gv[m.id]] === m.answer) { const x = m.pts * ((m.mult || 2) - 1); state.balance += x; state.earned += x; state.news = `${m.title}: you called it. ${xpPts(x)}.`; }
       rerenderAdminInPlace(); return admToast("Answer confirmed. Bonuses paid");
     }
     case "opendoors": if (!state.showNight) { state.showNight = true; state.live = 412; } else state.live += 200; rerenderAdminInPlace(); return admToast(`${fmt(state.live)} fans checked in at Lyon so far`, "home");
-    case "qrpng": downloadQRPng(checkinURL("lyon"), "SCAN TO CHECK IN", `Ilsa Morrow, Lyon, ${dayShort(NEXT.date)}. +150 ${BRAND.word}`, "ilsa-morrow-lyon-check-in-qr.png"); return admToast("QR code downloaded, ready to print");
+    case "qrpng": downloadQRPng(checkinURL("lyon"), "SCAN TO CHECK IN", `Ilsa Morrow, Lyon, ${dayShort(NEXT.date)}. +150 XP and ${BRAND.word}`, "ilsa-morrow-lyon-check-in-qr.png"); return admToast("QR code downloaded, ready to print");
     case "aopt": { const n = el.dataset.name, v = el.dataset.v; if (n === "ciMode") state.ci.mode = v; else state[n] = v; return rerenderAdminInPlace(); }
     case "ans": return setAns(+el.dataset.i, el.dataset.s);
     case "answersCsv": csvDownload([["Fan", "Handle", "Answer"], ...ansList().filter((a) => a.status === "featured").map((a) => [a.who, a.handle, a.t])], "ilsa-morrow-featured-answers.csv"); return admToast("CSV downloaded");
@@ -2725,7 +2791,7 @@ function onAdminAction(act, el) {
     case "rcsv": return resultsCSV(el);
     case "rmission": return missionDetail(el.dataset.id);
     case "rmore": state.rmore = !state.rmore; return rerenderAdminInPlace();
-    case "goalsim": state.goal = Math.min(50000, state.goal + 4000); rerenderAdminInPlace(); return admToast(`High tide at ${goalPct()}%`, "band");
+    case "goalsim": state.goal = Math.min(20000, state.goal + 1600); rerenderAdminInPlace(); return admToast(`High tide at ${goalPct()}%`, "band");
   }
 }
 function onChange(t) {
@@ -2753,7 +2819,7 @@ function genBody(m) {
   if (m.gen === "vote") {
     const v = state.gv[m.id], w = m.options.map((_, i) => [38, 27, 20, 15, 11, 8][i] || 6), tw = w.reduce((a, b) => a + b, 0);
     return `<p>${esc(m.brief)}</p><div class="poll">${m.options.map((o, i) => { const p = Math.round((w[i] / tw) * 100); return `<button data-act="gvote" data-id="${m.id}" data-i="${i}" aria-pressed="${v === i}" ${v != null ? `data-fill="${p}" disabled` : ""}><span>${esc(o)}</span>${v != null ? `<span class="pc">${p}%</span>` : ""}</button>`; }).join("")}</div>
-      <p class="note">${v != null ? (m.call ? `Called. ×${m.mult} if you're right; the team confirms it after the show.` : "Counted.") : m.call ? `Get it right and your ${BRAND.word} are multiplied by ${m.mult}.` : "One vote each."}</p>`;
+      <p class="note">${v != null ? (m.call ? `Called. ×${m.mult} if you're right; the team confirms it after the show.` : "Counted.") : m.call ? `Get it right and your XP and ${BRAND.word} are multiplied by ${m.mult}.` : "One vote each."}</p>`;
   }
   if (m.gen === "quiz") return `<p>${esc(m.quiz.q)}</p><div class="quiz">${m.quiz.options.map((a, i) => `<button data-act="gquiz" data-id="${m.id}" data-i="${i}">${esc(a)}</button>`).join("")}</div>`;
   return `<p>${esc(m.brief)}</p><div class="linkbox"><label for="gans">Your answer</label><textarea id="gans" maxlength="280"></textarea></div><button class="btn btn-red btn-block" data-act="gsend" data-id="${m.id}">Send it</button>`;

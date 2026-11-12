@@ -10,8 +10,12 @@
   <meta property="og:site_name" content="FAN/IP">
   <meta property="og:url" content="https://fan-ip.com/sport.html">
   <link rel="canonical" href="https://fan-ip.com/sport.html">
+  <link rel="alternate" hreflang="en-GB" href="https://fan-ip.com/sport.html">
+  <link rel="alternate" hreflang="fr-FR" href="https://fan-ip.com/fr/sport.html">
+  <link rel="alternate" hreflang="x-default" href="https://fan-ip.com/sport.html">
   <meta property="og:type" content="website">
   <meta property="og:locale" content="en_GB">
+  <meta property="og:locale:alternate" content="fr_FR">
   <meta property="og:image" content="https://fan-ip.com/og-image.png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
@@ -116,7 +120,7 @@
             "name": "Starter",
             "price": "99",
             "priceCurrency": "EUR",
-            "description": "Per month, excluding VAT. Or €990 per year. No set-up fee. Up to 150 active members a month. Leaderboard included.",
+            "description": "Per month, no VAT charged (§ 19 UStG). Or €990 per year. No set-up fee. Up to 150 active members. Leaderboard included.",
             "url": "https://fan-ip.com/pricing.html"
           },
           {
@@ -124,7 +128,7 @@
             "name": "Club",
             "price": "490",
             "priceCurrency": "EUR",
-            "description": "Per month, excluding VAT, 12-month term. Set-up €1,250. Up to 1,500 active members a month.",
+            "description": "Per month, no VAT charged (§ 19 UStG), 12-month term. Set-up €1,250. Up to 1,500 active members.",
             "url": "https://fan-ip.com/pricing.html"
           },
           {
@@ -132,7 +136,7 @@
             "name": "Season",
             "price": "1290",
             "priceCurrency": "EUR",
-            "description": "Per month, excluding VAT, 12-month term. Set-up €2,500. Up to 10,000 active members a month.",
+            "description": "Per month, no VAT charged (§ 19 UStG), 12-month term. Set-up €2,500. Up to 10,000 active members.",
             "url": "https://fan-ip.com/pricing.html"
           },
           {
@@ -140,7 +144,7 @@
             "name": "Signature",
             "price": "2900",
             "priceCurrency": "EUR",
-            "description": "From, per month, excluding VAT, 12-month term. Set-up from €5,000. More than 10,000 active members a month.",
+            "description": "From, per month, no VAT charged (§ 19 UStG), 12-month term. Set-up from €5,000. More than 10,000 active members.",
             "url": "https://fan-ip.com/pricing.html"
           }
         ]
@@ -191,7 +195,7 @@
             "name": "Which plan suits a club?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "Season, at €1,290 a month for up to 10,000 active members, covers a full season with sponsors on board. A smaller club can start on Club at €490, or try Starter at €99 a month, free for 7 days. Compare the plans."
+              "text": "Most clubs start on Club, at €490 a month for up to 1,500 active members. Season, at €1,290 a month, suits a club where several sponsors run quests all season. A small club or team can try Starter at €99 a month, free for 7 days. Compare the plans."
             }
           }
         ]
@@ -210,6 +214,8 @@
   <link rel="stylesheet" href="./assets/home-refocus.css">
   <link rel="stylesheet" href="./assets/doors.css">
   <link rel="stylesheet" href="./assets/site-fixes.css">
+  <link rel="stylesheet" href="./assets/season-line.css">
+  <link rel="stylesheet" href="./assets/lang.css">
   <script src="./assets/doors.js" defer></script>
 </head>
 <body>
@@ -223,6 +229,10 @@
         <a href="platform.html">Platform</a>
         <a href="pricing.html">Pricing</a>
       </nav>
+      <nav class="lang-switch lang-switch--bar" aria-label="Language">
+        <a href="sport.html" lang="en" hreflang="en-GB" data-lang="en" aria-current="page">EN<span class="sr-only"> English</span></a>
+        <a href="fr/sport.html" lang="fr" hreflang="fr-FR" data-lang="fr">FR<span class="sr-only"> Français</span></a>
+      </nav>
       <a class="btn btn--primary site-header__cta" href="book-a-demo.html">Book a demo</a>
       <details class="menu">
         <summary class="menu__summary"><span class="menu__open">Menu</span><span class="menu__close">Close</span></summary>
@@ -231,6 +241,10 @@
             <a href="#product">How it works</a>
             <a href="platform.html">Platform</a>
             <a href="pricing.html">Pricing</a>
+          </nav>
+          <nav class="lang-switch lang-switch--menu" aria-label="Language">
+            <a href="sport.html" lang="en" hreflang="en-GB" data-lang="en" aria-current="page">EN<span class="sr-only"> English</span></a>
+            <a href="fr/sport.html" lang="fr" hreflang="fr-FR" data-lang="fr">FR<span class="sr-only"> Français</span></a>
           </nav>
           <a class="btn btn--primary menu__cta" href="book-a-demo.html">Book a demo</a>
         </div>
@@ -245,7 +259,7 @@
       <p id="hero-title" class="hero-h1 t-display-xl"><span class="hero-h1__w">Turn</span> fandom<br>into <span class="sr-only">impact.</span><span class="ones" aria-hidden="true"><span class="ones__i">ı<svg class="ones__tittle" viewBox="0 0 10 10" width="10" height="10" focusable="false"><path d="M5.6 1.3v7.4M5.6 1.3 2.9 4"/></svg></span>mpact.<span class="ones__lit"><span class="ones__i">ı</span>mpact.</span></span></p>
       <div class="hero-lead-block">
         <h1 id="door-title" class="hero-promise">Supporters who post.<br><span class="hero-promise__gold">Sponsors who see it.</span></h1>
-        <p class="hero-lead t-lead">A supporters club app under your club’s name. Fans post from the stands, earn points and climb the levels. Your sponsors get a report of how many people saw it.</p>
+        <p class="hero-lead t-lead">A supporters club app under your club’s name. Fans post from the stands, earn points and climb the levels. When a sponsor joins a mission, it gets a private report of the posts, their views and what they are worth.</p>
         <p class="hero-plan hero-value t-body">From €99 a month. Every post, its views and its media value, with a private report for your sponsor.</p>
         <div class="hero-actions">
           <a class="btn btn--primary" href="book-a-demo.html">Book a demo</a>
@@ -279,10 +293,10 @@
             </div>
             <div class="dw-col">
               <h3 class="dw-h"><span class="dw-n" aria-hidden="true">03</span>The sponsor report</h3>
-              <p class="dw-p t-body">Put a sponsor’s name on a set of missions. Supporters post with the sponsor in view, and the sponsor gets a private link on its phone: members who took part, posts, views, the followers of the supporters who posted and media value at €7 per 1,000 views, a rate you can change. More to show at renewal time than a logo on a shirt.</p>
+              <p class="dw-p t-body">Now and then, put a sponsor’s name on a mission. Supporters post with the sponsor in view, and the sponsor gets a private link on its phone: members who took part, posts, views and media value at €7 per 1,000 views, a rate you can change. More to show at renewal time than a logo on a shirt.</p>
             </div>
         </div>
-        <p class="dw-foot t-small">See a full season at <a href="demo/aldermoor/">Aldermoor</a>, a fictional football club, sponsor report included. <span aria-hidden="true">→</span></p>
+        <p class="dw-foot t-small">See a full season at <a href="demo/aldermoor/">Aldermoor</a>, a fictional football club, with <a href="demo/aldermoor/?view=sponsor">its sponsor report</a>, or read <a href="sample-report.html">a sample sponsor report</a>. <span aria-hidden="true">→</span></p>
       </div>
     </section>
 
@@ -316,13 +330,13 @@
         <p class="prod-adapt t-small" data-slot="adapt">Examples for a club or team. Your challenges, words and rewards are yours to set, sponsors included.</p>
         <ol class="steps3" role="list">
           <li><span class="steps3__n">1</span><h3 class="steps3__h">Give them a reason.</h3><p class="t-body" data-slot="step1" data-generic="Set a mission: a photo from the stands, an unboxing, a friend brought along. You choose the points and the rewards.">Set a challenge: a matchday photo, a shout-out for your sponsor, a mate brought to the next home game. You choose the points and the rewards.</p></li>
-          <li><span class="steps3__n">2</span><h3 class="steps3__h">They post to their own followers.</h3><p class="t-body">Supporters post from their own accounts. Each approved post earns points, a higher level and rewards.</p></li>
+          <li><span class="steps3__n">2</span><h3 class="steps3__h">They post to their own followers.</h3><p class="t-body">Supporters post from their own accounts. Each post earns them XP for their level as soon as they send it, and points for the shop once you approve it.</p></li>
           <li><span class="steps3__n">3</span><h3 class="steps3__h">You see the reach.</h3><p class="t-body">Every post and its views in your admin, and a private report with the totals for your sponsor.</p></li>
         </ol>
         <ol class="prod-journey">
           <li class="vig vig--mission">
             <p class="vig-label">Mission</p>
-            <div class="vig-value"><p class="vig-reward"><span class="vig-num" data-slot="vigPoints" data-generic="+50">+60</span> <span class="vig-unit">points</span></p></div>
+            <div class="vig-value"><p class="vig-reward"><span class="vig-num" data-slot="vigPoints" data-generic="+50">+60</span> <span class="vig-unit">XP · points</span></p></div>
             <p class="vig-title" data-slot="vigTitle" data-generic="Post your unboxing">Matchday photo</p>
             <p class="vig-text" data-slot="vigText" data-generic="One photo on your feed. Tag the brand.">From the stands. Tag the club and the sponsor.</p>
           </li>
@@ -337,7 +351,7 @@
               </div>
               <p class="vig-title">Level 3</p>
             </div>
-            <p class="vig-text">125 points to level 4.</p>
+            <p class="vig-text">125 XP to level 4.</p>
           </li>
           <li class="vig vig--reward">
             <p class="vig-label">Reach</p>
@@ -356,6 +370,43 @@
           </li>
         </ol>
         <p class="prod-caption t-small">Illustrative values. Each club names and sets its own challenges, levels and rewards, sponsors included. <a href="platform.html">See everything fans can do</a></p>
+        <figure class="sl" aria-labelledby="sl-title">
+          <h3 id="sl-title" class="sl-title">One fan, two seasons.</h3>
+          <p class="sl-lead">Season XP decides the ranking and starts again each season. Points are for the shop and never reset. The level a fan reaches stays with them.</p>
+          <ol class="sl-track" role="list" tabindex="0" aria-label="One fan over two seasons, in three steps">
+            <li class="sl-card">
+              <p class="sl-step">Season 1</p>
+              <p class="sl-what">Twelve posts sent and approved.</p>
+              <dl class="sl-stats">
+                <div class="is-new"><dt>Season XP</dt><dd>1,200</dd></div>
+                <div class="is-new"><dt>Points</dt><dd>1,200</dd></div>
+                <div class="is-new"><dt>Level</dt><dd>3</dd></div>
+              </dl>
+              <p class="sl-note">XP counts as soon as a post is sent. If you turn the post down, its XP comes off and the fan is told why. Points arrive once you approve it.</p>
+            </li>
+            <li class="sl-card">
+              <p class="sl-step">Season 1 · the shop</p>
+              <p class="sl-what">500 points spent in the shop.</p>
+              <dl class="sl-stats">
+                <div><dt>Season XP</dt><dd>1,200<span class="sl-tag">unchanged</span></dd></div>
+                <div class="is-new"><dt>Points</dt><dd>700</dd></div>
+                <div><dt>Level</dt><dd>3<span class="sl-tag">unchanged</span></dd></div>
+              </dl>
+              <p class="sl-note">Spending never touches XP, so the fan keeps their place in the ranking.</p>
+            </li>
+            <li class="sl-card">
+              <p class="sl-step">Season 2</p>
+              <p class="sl-what">A new season begins.</p>
+              <dl class="sl-stats">
+                <div class="is-new"><dt>Season XP</dt><dd>0<span class="sl-tag">new season</span></dd></div>
+                <div><dt>Points</dt><dd>700<span class="sl-tag">kept</span></dd></div>
+                <div><dt>Level</dt><dd>3<span class="sl-tag">kept</span></dd></div>
+              </dl>
+              <p class="sl-note">Everyone starts the ranking from zero. Points stay, and so do level 3 and its perks, all season.</p>
+            </li>
+          </ol>
+          <figcaption class="sl-cap">Illustrative values. Each brand names its XP, points and levels its own way.</figcaption>
+        </figure>
       </div>
     </section>
 
@@ -369,18 +420,18 @@
             <div class="rs-text">
               <p class="rs-k t-small">A club, for its sponsor Weirbank Motors · this season</p>
               <dl class="rs-stats">
-                <div><dt>Views of fans’ posts</dt><dd>14.07M</dd></div>
-                <div><dt>Members who took part</dt><dd>3,240</dd></div>
-                <div><dt>Potential reach, followers of the accounts that posted</dt><dd>7.52M</dd></div>
-                <div><dt>New members through the sponsor</dt><dd>844</dd></div>
+                <div><dt>Views of fans’ posts</dt><dd>2.9M</dd></div>
+                <div><dt>Members who took part</dt><dd>1,859</dd></div>
+                <div><dt>Potential reach, followers of the accounts that posted <span style="display:inline-block;margin-left:5px;padding:0 6px;border-radius:999px;background:#fff3c8;color:#4f3b00;font-size:0.75em;font-weight:700;line-height:1.5;vertical-align:1px">Soon</span></dt><dd>5.63M</dd></div>
+                <div><dt>New members through the sponsor</dt><dd>288</dd></div>
               </dl>
-              <p class="rs-sum" aria-label="14.07M views at €7 per 1,000 views is €98,490 of media value"><span class="rs-sum__n">14.07M <small>views</small></span><span class="rs-sum__op" aria-hidden="true">×</span><span class="rs-sum__n">€7 <small>per 1,000</small></span><span class="rs-sum__op" aria-hidden="true">=</span><span class="rs-sum__n rs-sum__n--total">€98,490 <small>media value</small></span></p>
+              <p class="rs-sum" aria-label="2.9M views at €7 per 1,000 views is €20,300 of media value"><span class="rs-sum__n">2.9M <small>views</small></span><span class="rs-sum__op" aria-hidden="true">×</span><span class="rs-sum__n">€7 <small>per 1,000</small></span><span class="rs-sum__op" aria-hidden="true">=</span><span class="rs-sum__n rs-sum__n--total">€20,300 <small>media value</small></span></p>
               <p class="rs-line">The sponsor gets this report through a private link.</p>
               <a class="rs-go" href="demo/aldermoor/">Open the club demo <span aria-hidden="true">→</span></a>
             </div>
           </li>
         </ul>
-        <p class="rs-caption t-small">Screens from the Aldermoor demo: a fictional club, illustrative figures. Media value is what the same views would cost as ads, at €7 per 1,000 views for sport. You set your own. <a href="reach-calculator.html?for=sport" data-calc-link>Work out your numbers</a></p>
+        <p class="rs-caption t-small">Screens from the Aldermoor demo: a fictional club, illustrative figures. Media value is what the same views would cost as ads, at €7 per 1,000 views for sport. You set your own. <a href="reach-calculator.html?for=sport" data-calc-link>Work out your numbers</a> · <a href="sample-report.html">See a sample sponsor report</a></p>
       </div>
     </section>
 
@@ -419,7 +470,7 @@
           </li>
         </ul>
         <p class="lv-swipe t-small" aria-hidden="true">Swipe for the other worlds →</p>
-        <p class="lv-caption t-small">Fictional names, illustrative figures. The three demos run on Season, our recommended plan; a few demo screens show features on our roadmap.</p>
+        <p class="lv-caption t-small">Fictional names, illustrative figures. The three demos run on Season, our recommended plan; a few demo screens show features on <a href="whats-new.html">our roadmap</a>.</p>
       </div>
     </section>
 
@@ -437,7 +488,7 @@
           </div>
           <div class="dq-item">
             <h3 class="dq-q" id="dq-2">How do we show sponsors what the fans are worth?</h3>
-            <p class="dq-a t-body">Run a sponsor quest. Supporters post matchday photos with the sponsor in view, and the sponsor gets a private report link: members who took part, posts, views and media value at the price per 1,000 views you set. The <a href="demo/aldermoor/">Aldermoor demo</a> shows one.</p>
+            <p class="dq-a t-body">Run a sponsor quest. Supporters post matchday photos with the sponsor in view, and the sponsor gets a private report link: members who took part, posts, views and media value at the price per 1,000 views you set. The <a href="demo/aldermoor/?view=sponsor">Aldermoor demo</a> shows one.</p>
           </div>
           <div class="dq-item">
             <h3 class="dq-q" id="dq-3">Does it work for esports teams and gaming venues?</h3>
@@ -449,7 +500,7 @@
           </div>
           <div class="dq-item">
             <h3 class="dq-q" id="dq-5">Which plan suits a club?</h3>
-            <p class="dq-a t-body">Season, at €1,290 a month for up to 10,000 active members, covers a full season with sponsors on board. A smaller club can start on Club at €490, or try Starter at €99 a month, free for 7 days. <a href="pricing.html">Compare the plans</a>.</p>
+            <p class="dq-a t-body">Most clubs start on Club, at €490 a month for up to 1,500 active members. Season, at €1,290 a month, suits a club where several sponsors run quests all season. A small club or team can try Starter at €99 a month, free for 7 days. <a href="pricing.html">Compare the plans</a>.</p>
           </div>
         </div>
       </div>
@@ -525,7 +576,7 @@
       <div class="container">
         <div class="price-head">
           <h2 id="pricing-title" class="price-title t-h2">Pay for the community that shows up.</h2>
-          <p class="price-lead t-lead">Season covers a whole season with your sponsors on board. A smaller club or esports team can start on Starter at €99 a month. We count active members, not dormant sign-ups.<span class="price-plans">Sponsor quests and match predictions come with Club, team battles and community goals with Season. On Starter you can try missions, QR check-ins, rewards and the leaderboard.</span></p>
+          <p class="price-lead t-lead">Most clubs start on Club; Season once several sponsors run quests all season. A small club or esports team can start on Starter at €99 a month. We count active members: supporters who sent a mission in the last 90 days.<span class="price-plans">Sponsor quests and match predictions come with Club, team battles and community goals with Season. On Starter you can try missions, QR check-ins, rewards and the leaderboard.</span></p>
         </div>
         <article class="starter" aria-labelledby="starter-name">
           <div class="starter-head">
@@ -536,8 +587,8 @@
           <div class="starter-body">
             <p class="plan-for t-body">For a small club or team. Sign up online and set it up yourself.</p>
             <ul class="plan-list" role="list">
-              <li>Up to 150 active members a month, then a waiting list</li>
-              <li>Missions, rewards and a leaderboard ranked by points</li>
+              <li>Up to 150 active members, then a waiting list</li>
+              <li>Missions, rewards and a leaderboard ranked by season XP</li>
               <li>Your colours, fonts and logo, on a FAN/IP subdomain</li>
               <li>Online guide and set-up emails; human support from Club</li>
             </ul>
@@ -548,10 +599,10 @@
           <li class="plan">
             <h3 class="plan-name">Club</h3>
             <p class="plan-price"><span class="plan-amount">€490</span> <span class="plan-per">/ month</span></p>
-            <p class="plan-setup t-small">Set-up €1,250</p>
-            <p class="plan-for t-body">For a club launching its supporters club.</p>
+            <p class="plan-setup t-small">Set-up €1,250: your space, domain and brand configured with you</p>
+            <p class="plan-for t-body">Where most clubs start: a supporters club and sponsor quests.</p>
             <ul class="plan-list" role="list">
-              <li>Up to 1,500 active members a month</li>
+              <li>Up to 1,500 active members</li>
               <li>3 team seats, with admin and moderator roles</li>
               <li>Your own subdomain or domain</li>
             </ul>
@@ -560,24 +611,24 @@
           <li class="plan plan--featured">
             <h3 class="plan-name">Season <span class="plan-badge">Recommended</span></h3>
             <p class="plan-price"><span class="plan-amount">€1,290</span> <span class="plan-per">/ month</span></p>
-            <p class="plan-setup t-small">Set-up €2,500</p>
-            <p class="plan-for t-body">For a club with sponsors to report to.</p>
+            <p class="plan-setup t-small">Set-up €2,500: a design workshop, your first season built by FAN/IP and your team trained</p>
+            <p class="plan-for t-body">For a club where several sponsors run quests all season.</p>
             <ul class="plan-list" role="list">
-              <li>Up to 10,000 active members a month</li>
+              <li>Up to 10,000 active members</li>
               <li>Community goals and team battles</li>
               <li>Shop and email tool set-up, done with you: reward codes and member lists ready for Shopify or Klaviyo</li>
-              <li>Design workshop: mission calendar, levels, rewards</li>
+              <li>A review every quarter, with your media value report</li>
             </ul>
             <a class="btn plan-cta" href="book-a-demo.html">Book a demo</a>
           </li>
           <li class="plan">
             <h3 class="plan-name">Signature</h3>
             <p class="plan-price"><span class="plan-from">From</span> <span class="plan-amount">€2,900</span> <span class="plan-per">/ month</span></p>
-            <p class="plan-setup t-small">Set-up from €5,000</p>
-            <p class="plan-for t-body">For large clubs and groups with several teams.</p>
+            <p class="plan-setup t-small">Set-up from €5,000, each space on quote</p>
+            <p class="plan-for t-body">The group offer: several clubs, teams or sections on one contract, each space on quote.</p>
             <ul class="plan-list" role="list">
-              <li>More than 10,000 active members a month</li>
-              <li>Several brands or countries on one contract</li>
+              <li>More than 10,000 active members</li>
+              <li>Each brand, club or country is its own space, priced on quote</li>
               <li>A member layout designed for your brand</li>
               <li>A named contact and a monthly results review</li>
             </ul>
@@ -587,11 +638,13 @@
         <div class="plan-pick" aria-labelledby="plan-pick-title">
           <h3 id="plan-pick-title" class="plan-pick__title">Which plan?</h3>
           <ul class="plan-pick__list" role="list">
-            <li data-for="sport"><b>Clubs and teams:</b> Season, for a whole season with your sponsors on board. A smaller club starts on Club.</li>
+            <li data-for="sport"><b>Clubs and teams:</b> most start on Club; Season once several sponsors run quests all season.</li>
+            <li><b>Groups:</b> several brands, clubs, sections or countries go on Signature, one contract, each space on quote.</li>
           </ul>
           <p class="plan-pick__note t-small">The three live demos run on Season. <a href="#white-label">Open them</a></p>
           <p class="plan-pick__note t-small">Works alongside your online shop and email tool, like Shopify or Klaviyo: reward codes export as spreadsheets, and member lists too from Club, with nothing to install. <a href="faq.html#integrations">How it works</a></p>
         </div>
+        <p class="price-notes t-small">Prices in euros, with no VAT charged (§ 19 UStG).</p>
         <p class="price-more"><a class="btn btn--line" href="pricing.html">Compare the plans</a></p>
       </div>
     </section>
@@ -650,7 +703,9 @@
         <a href="pricing.html">Pricing</a>
         <a href="faq.html">FAQ</a>
         <a href="glossary.html">Glossary</a>
+        <a href="whats-new.html">What’s new</a>
         <a href="book-a-demo.html">Book a demo</a>
+        <a href="contact.html">Contact</a>
       </nav>
       <nav class="foot-for t-small" aria-label="Built for">
         <span class="foot-for__lead">Built for</span>
@@ -665,6 +720,7 @@
           <a href="privacy.html">Privacy</a>
           <a href="data-deletion.html">Data deletion</a>
           <a href="terms.html">Terms</a>
+          <a href="security.html">Security</a>
           <button type="button" data-cookie-settings hidden>Cookie settings</button>
         </nav>
       </div>

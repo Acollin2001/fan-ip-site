@@ -279,8 +279,12 @@ img, svg { max-width: 100%; }
 .pend-dot[hidden] { display: none; }
 .pend-dot:focus-visible { outline: 2px solid #1a56db; outline-offset: 2px; }
 /* "Soon": a screen or a figure that shows a feature on the roadmap. Its own colours, so it reads on every style and in the admin. */
-.soon-tag { display: inline-block; vertical-align: middle; margin-left: 6px; padding: 1px 7px; border-radius: 999px; background: #fff3c8; color: #4f3b00; border: 1px solid #b8962e; font: 700 0.6875rem/1.45 "Archivo", system-ui, sans-serif; letter-spacing: 0.02em; text-transform: none; font-style: normal; white-space: nowrap; }
+/* Always inline, next to its label: a "card span { display: block }" rule must not push it to its own line. */
+.soon-tag { display: inline-block !important; vertical-align: middle; margin-left: 6px; padding: 1px 7px; border-radius: 999px; background: #fff3c8; color: #4f3b00; border: 1px solid #b8962e; font: 700 0.6875rem/1.45 "Archivo", system-ui, sans-serif; letter-spacing: 0.02em; text-transform: none; font-style: normal; white-space: nowrap; }
 .soon-tag.soon-h { font-size: 0.75rem; vertical-align: 0.4em; }
+/* In a figure tile the label and its tag wrap together: the tag sits next to the label when it fits, else flush left on the next line. */
+:is(.sp-tile, .mkpi, .vh-tile) > span:has(> .soon-tag) { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 6px; }
+:is(.sp-tile, .mkpi, .vh-tile) > span > .soon-tag { margin-left: 0; }
 @keyframes bump { 40% { transform: scale(1.12); } }
 .avatar {
   flex: none;
@@ -930,7 +934,7 @@ img, svg { max-width: 100%; }
 .adm-nav button { display: flex; align-items: center; gap: 10px; padding: 9px 10px; border: 0; border-radius: 9px; background: none; color: var(--fx-ink-2); font-weight: 500; text-align: left; cursor: pointer; }
 .adm-nav button svg { width: 18px; height: 18px; flex: none; }
 .adm-nav button:hover { background: var(--fx-soft); color: var(--fx-ink); }
-.adm-nav button[aria-current="page"] { background: var(--fx-soft); color: var(--fx-ink); box-shadow: inset 2px 0 0 var(--fx-ink); }
+.adm-nav button[aria-current="page"] { background: color-mix(in srgb, var(--fx-ink) 8%, var(--fx-surface)); color: var(--fx-ink); font-weight: 600; }
 .adm-side .fanip { margin-top: auto; font-family: var(--fx-display); font-weight: 600; font-size: 0.9375rem; color: var(--fx-ink-2); padding: 0 8px; }
 .adm-side .fanip i { font-style: normal; color: var(--fx-gold); }
 .adm-main { overflow-y: auto; padding: 28px 32px 48px; }

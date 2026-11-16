@@ -109,8 +109,12 @@ img, svg { max-width: 100%; }
 .toast { position: absolute; left: 50%; bottom: calc(96px + var(--home-ind, 0px)); z-index: 30; transform: translate(-50%, 20px); opacity: 0; padding: 12px 18px; border-radius: var(--r-toast, 999px); background: var(--toast-bg, var(--ink)); color: var(--toast-fg, #fff); font-weight: 600; font-size: 0.875rem; box-shadow: var(--shadow-lift); transition: opacity 0.25s, transform 0.35s var(--ease-spring); pointer-events: none; max-width: calc(100% - 32px); width: max-content; text-align: center; }
 .toast.show { opacity: 1; transform: translate(-50%, 0); }
 /* "Soon": a screen or a figure that shows a feature on the roadmap. Its own colours, so it reads on every look and in the admin. */
-.soon-tag { display: inline-block; vertical-align: middle; margin-left: 6px; padding: 1px 7px; border-radius: 999px; background: #fff3c8; color: #4f3b00; border: 1px solid #b8962e; font: 700 0.6875rem/1.45 system-ui, -apple-system, "Segoe UI", sans-serif; letter-spacing: 0.02em; text-transform: none; font-style: normal; white-space: nowrap; }
+/* Always inline, next to its label: a "card span { display: block }" rule must not push it to its own line. */
+.soon-tag { display: inline-block !important; vertical-align: middle; margin-left: 6px; padding: 1px 7px; border-radius: 999px; background: #fff3c8; color: #4f3b00; border: 1px solid #b8962e; font: 700 0.6875rem/1.45 system-ui, -apple-system, "Segoe UI", sans-serif; letter-spacing: 0.02em; text-transform: none; font-style: normal; white-space: nowrap; }
 .soon-tag.soon-h { font-size: 0.75rem; vertical-align: 0.4em; }
+/* In a figure tile the label and its tag wrap together: the tag sits next to the label when it fits, else flush left on the next line. */
+:is(.sp-tile, .mkpi, .vh-tile) > span:has(> .soon-tag) { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 6px; }
+:is(.sp-tile, .mkpi, .vh-tile) > span > .soon-tag { margin-left: 0; }
 .sheet-layer.open ~ .toast { bottom: auto; top: calc(16px + var(--notch, 0px)); transform: translate(-50%, -10px); }
 .sheet-layer.open ~ .toast.show { transform: translate(-50%, 0); }
 @container dev (min-width: 820px) { .toast { bottom: 32px; } }
@@ -132,7 +136,7 @@ img, svg { max-width: 100%; }
 .adm-nav button { display: flex; align-items: center; gap: 10px; padding: 9px 10px; border: 0; border-radius: 9px; background: none; color: var(--fx-ink-2); font-weight: 500; text-align: left; cursor: pointer; }
 .adm-nav button svg { width: 18px; height: 18px; flex: none; }
 .adm-nav button:hover { background: var(--fx-soft); color: var(--fx-ink); }
-.adm-nav button[aria-current="page"] { background: var(--fx-soft); color: var(--fx-ink); box-shadow: inset 2px 0 0 var(--fx-ink); }
+.adm-nav button[aria-current="page"] { background: color-mix(in srgb, var(--fx-ink) 8%, var(--fx-surface)); color: var(--fx-ink); font-weight: 600; }
 .adm-nav .badge-n { margin-left: auto; min-width: 20px; padding: 0 6px; border-radius: 999px; background: var(--fx-ink); color: #fff; font-size: 0.6875rem; line-height: 18px; text-align: center; }
 .adm-side .fanip { margin-top: auto; font-family: var(--fx-display); font-weight: 600; font-size: 0.9375rem; color: var(--fx-ink-2); padding: 0 8px; }
 .adm-side .fanip i { font-style: normal; color: var(--fx-gold); }
